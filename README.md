@@ -51,3 +51,23 @@ How AutoScrapper Works:
 
 Linux notes:
 - Default target window title is `Arc Raiders`. Override with `AUTOSCRAPPER_TARGET_APP` if needed.
+
+## Automated Data Updates
+
+This repo includes a scheduled GitHub Action that refreshes game data and default rules daily.
+
+- Workflow: `.github/workflows/daily-data-update.yml`
+- Schedule: daily at `14:00 UTC`
+- Output: updates snapshot data + `items_rules.default.json`, then opens/updates a PR on branch `bot/daily-data-update`
+- Report: attaches `artifacts/update-report.json` and uses `artifacts/update-report.md` as PR body
+
+The default rules are regenerated with this baseline:
+- all quests completed
+- workshop profile at level 2 for `scrappy`, `weapon_bench`, `equipment_bench`, `med_station`, `explosives_bench`, `utility_bench`, and `refiner`
+
+### Run updater locally
+
+- Real update (writes tracked files):
+  - `uv run python scripts/update_snapshot_and_defaults.py`
+- Dry run (no tracked file writes):
+  - `uv run python scripts/update_snapshot_and_defaults.py --dry-run`

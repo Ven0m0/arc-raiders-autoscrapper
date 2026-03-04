@@ -4,5 +4,5 @@
   "version": "autoscrapper-data-1",
   "itemCount": 525,
   "questCount": 80,
-  "hasPriceOverrides": true
+  "hasPriceOverrides": false
 }

@@ -220,3 +220,6 @@ AGENTS.md
 
 # AutoScrapper custom rules (user-specific)
 src/autoscrapper/items/items_rules.custom.json
+
+# Generated local update reports
+artifacts/

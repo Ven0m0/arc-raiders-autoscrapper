@@ -14,9 +14,6 @@ from .quest_overrides import apply_quest_overrides
 
 METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
 SUPABASE_URL = "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
-RAIDER_CACHE_DATA_BASE = os.environ.get(
-    "RAIDER_CACHE_DATA_BASE", "https://otdavies.github.io/RaiderCache/data"
-)
 
 SUPABASE_ANON_KEY = os.environ.get(
     "METAFORGE_SUPABASE_ANON_KEY",
@@ -252,24 +249,14 @@ def update_data_snapshot(data_dir: Optional[Path] = None) -> dict:
         json.dumps(quests_by_trader, indent=2), encoding="utf-8"
     )
 
-    price_overrides = None
-    try:
-        price_overrides = _fetch_json(f"{RAIDER_CACHE_DATA_BASE}/priceOverrides.json")
-        (data_dir / "price_overrides.json").write_text(
-            json.dumps(price_overrides, indent=2), encoding="utf-8"
-        )
-    except DownloadError:
-        pass
-
     metadata = {
         "lastUpdated": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "source": "https://metaforge.app/arc-raiders",
         "version": "autoscrapper-data-1",
         "itemCount": len(mapped_items),
         "questCount": len(mapped_quests),
-        "hasPriceOverrides": bool(
-            isinstance(price_overrides, dict) and price_overrides.get("overrides")
-        ),
+        # Kept for compatibility with older metadata consumers.
+        "hasPriceOverrides": False,
     }
     (data_dir / "metadata.json").write_text(
         json.dumps(metadata, indent=2), encoding="utf-8"

@@ -33,7 +33,6 @@ def load_game_data(data_dir: Optional[Path] = None) -> GameData:
     hideout_modules_path = data_dir / "static" / "hideout_modules.json"
     projects_path = data_dir / "static" / "projects.json"
     metadata_path = data_dir / "metadata.json"
-    price_overrides_path = data_dir / "price_overrides.json"
 
     if (
         not items_path.exists()
@@ -58,15 +57,7 @@ def load_game_data(data_dir: Optional[Path] = None) -> GameData:
         except json.JSONDecodeError:
             metadata = None
 
-    price_overrides: Optional[dict] = None
-    if price_overrides_path.exists():
-        try:
-            price_overrides = _read_json(price_overrides_path)
-        except json.JSONDecodeError:
-            price_overrides = None
-
-    items_with_overrides = _apply_price_overrides(items, price_overrides)
-    normalized_items = _normalize_items(items_with_overrides)
+    normalized_items = _normalize_items(items)
 
     return GameData(
         items=normalized_items,
@@ -80,22 +71,6 @@ def load_game_data(data_dir: Optional[Path] = None) -> GameData:
             "version": (metadata or {}).get("version", "0.0.0"),
         },
     )
-
-
-def _apply_price_overrides(
-    items: List[dict], price_overrides: Optional[dict]
-) -> List[dict]:
-    if not price_overrides or not isinstance(price_overrides.get("overrides"), dict):
-        return items
-    overrides = price_overrides.get("overrides", {})
-    out = []
-    for item in items:
-        override = overrides.get(item.get("id"))
-        if override and isinstance(override, dict) and "value" in override:
-            out.append({**item, "value": override["value"]})
-        else:
-            out.append(item)
-    return out
 
 
 def _normalize_items(items: List[dict]) -> List[dict]:

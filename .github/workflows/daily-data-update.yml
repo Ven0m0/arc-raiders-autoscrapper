@@ -1,0 +1,74 @@
+name: Daily Data Update
+
+on:
+  schedule:
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: daily-data-update
+  cancel-in-progress: false
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Update snapshot + default rules
+        run: |
+          uv run python scripts/update_snapshot_and_defaults.py \
+            --report-json artifacts/update-report.json \
+            --report-md artifacts/update-report.md
+
+      - name: Upload update report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-data-update-report
+          path: |
+            artifacts/update-report.json
+            artifacts/update-report.md
+
+      - name: Check for tracked changes
+        id: changes
+        run: |
+          if [[ -n "$(git status --porcelain -- src/autoscrapper/progress/data src/autoscrapper/items/items_rules.default.json)" ]]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create or update pull request
+        if: steps.changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: bot/daily-data-update
+          base: main
+          commit-message: chore(data): daily Metaforge snapshot + default rules
+          title: chore(data): daily Metaforge snapshot + default rules
+          body-path: artifacts/update-report.md
+          labels: automated,data-update
+          add-paths: |
+            src/autoscrapper/progress/data/items.json
+            src/autoscrapper/progress/data/quests.json
+            src/autoscrapper/progress/data/quests_by_trader.json
+            src/autoscrapper/progress/data/metadata.json
+            src/autoscrapper/items/items_rules.default.json
