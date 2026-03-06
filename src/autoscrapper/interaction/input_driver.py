@@ -42,6 +42,20 @@ if sys.platform == "win32":
             if interval > 0:
                 time.sleep(interval)
 
+    def dragTo(
+        start_x: int,
+        start_y: int,
+        end_x: int,
+        end_y: int,
+        duration: float = 0.15,
+    ) -> None:
+        _pydirectinput.moveTo(int(start_x), int(start_y), duration=0)
+        _pydirectinput.mouseDown(x=int(start_x), y=int(start_y), button="left")
+        try:
+            _pydirectinput.moveTo(int(end_x), int(end_y), duration=max(0.0, duration))
+        finally:
+            _pydirectinput.mouseUp(x=int(end_x), y=int(end_y), button="left")
+
 elif sys.platform.startswith("linux"):
     import threading
 
@@ -115,6 +129,34 @@ elif sys.platform.startswith("linux"):
             _MOUSE.scroll(0, step)
             if interval > 0:
                 time.sleep(interval)
+
+    def dragTo(
+        start_x: int,
+        start_y: int,
+        end_x: int,
+        end_y: int,
+        duration: float = 0.15,
+    ) -> None:
+        start = (int(start_x), int(start_y))
+        end = (int(end_x), int(end_y))
+        _MOUSE.position = start
+        _MOUSE.press(mouse.Button.left)
+        try:
+            if duration <= 0:
+                _MOUSE.position = end
+                return
+
+            sx, sy = start
+            ex, ey = end
+            steps = max(1, int(duration / 0.01))
+            sleep_time = duration / steps
+            for i in range(1, steps + 1):
+                nx = sx + (ex - sx) * (i / steps)
+                ny = sy + (ey - sy) * (i / steps)
+                _MOUSE.position = (int(nx), int(ny))
+                time.sleep(sleep_time)
+        finally:
+            _MOUSE.release(mouse.Button.left)
 
 else:
     raise RuntimeError(f"Unsupported platform for input driver: {sys.platform}")

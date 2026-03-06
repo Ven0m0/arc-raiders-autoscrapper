@@ -34,7 +34,7 @@ def _menu() -> int:
         print("Autoscrapper\n")
         print("  1) Scan inventory now")
         print("  2) Dry run scan (no clicks)")
-        print("  3) Edit / view rules")
+        print("  3) Edit / view Arc Raiders rules")
         print("  4) Edit game progress (coming soon)")
         print("  5) Scan configuration")
         print("  q) Quit\n")

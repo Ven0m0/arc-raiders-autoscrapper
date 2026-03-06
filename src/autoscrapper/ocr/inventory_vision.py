@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import difflib
 import re
 import time
 from dataclasses import dataclass
@@ -373,6 +374,7 @@ CONTEXT_MENU_PATTERNS = {
     "use",
     "obtained from",
     "used to craft",
+    "can be found in",
     "can be recycled",
     "cannot be recycled",
     "into crafting materials",
@@ -384,6 +386,7 @@ CONTEXT_MENU_PATTERNS = {
     "pulse mine, snap",
     "snap blast",
     "crafting materials",
+    "crafting material",
     "can be used",
     "used for",
     "required for",
@@ -403,6 +406,185 @@ def _is_context_menu_text(text: str) -> bool:
     for pattern in CONTEXT_MENU_PATTERNS:
         if pattern in text_lower:
             return True
+
+    # Normalized matching catches spacing/punctuation OCR noise for known phrases.
+    normalized = re.sub(r"[^a-z]", "", text_lower)
+    if normalized:
+        for pattern in CONTEXT_MENU_PATTERNS:
+            pattern_norm = re.sub(r"[^a-z]", "", pattern)
+            if pattern_norm and pattern_norm in normalized:
+                return True
+
+    # Tolerate OCR typos in action lines (e.g. "Mave te Backpack").
+    if "backpack" in text_lower and ("move" in text_lower or "mave" in text_lower):
+        return True
+    if "stash" in text_lower and ("move" in text_lower or "mave" in text_lower):
+        return True
+    return False
+
+
+_TITLE_FALSE_POSITIVE_WORDS = {
+    "a",
+    "an",
+    "and",
+    "are",
+    "be",
+    "can",
+    "crafted",
+    "enemy",
+    "for",
+    "found",
+    "from",
+    "health",
+    "in",
+    "into",
+    "is",
+    "items",
+    "of",
+    "on",
+    "that",
+    "the",
+    "to",
+    "used",
+    "utility",
+    "when",
+    "with",
+    "you",
+}
+
+
+def _is_sentence_like_text(text: str) -> bool:
+    """
+    Heuristic for body/tooltip text (mixed/lowercase sentence fragments).
+    """
+    if not text:
+        return False
+    compact = " ".join(text.split()).strip()
+    if not compact:
+        return False
+
+    letters = [ch for ch in compact if ch.isalpha()]
+    if not letters:
+        return False
+
+    lower_count = sum(ch.islower() for ch in letters)
+    upper_count = sum(ch.isupper() for ch in letters)
+    lower_ratio = lower_count / max(1, len(letters))
+
+    words = re.findall(r"[A-Za-z']+", compact)
+    lower_words = [w for w in words if any(ch.islower() for ch in w)]
+    stopword_hits = sum(1 for w in words if w.lower() in _TITLE_FALSE_POSITIVE_WORDS)
+
+    # Description lines are often longer and sentence-like, with many lowercase words.
+    if len(words) >= 5 and len(lower_words) >= 3 and lower_ratio >= 0.35:
+        return True
+    if len(words) >= 4 and stopword_hits >= 2 and lower_ratio >= 0.25:
+        return True
+    # Tooltip headers can be all-caps and still not be item names (e.g. CAN BE FOUND IN).
+    if len(words) >= 4 and stopword_hits >= 3:
+        return True
+    if compact.endswith((".", ",")) and lower_count >= 4 and upper_count <= lower_count:
+        return True
+    return False
+
+
+def _extract_best_uppercase_phrase(text: str) -> str:
+    """
+    Pull out the most title-like uppercase phrase from noisy OCR text.
+
+    Examples:
+      "ws LEAPER PULSE UNIT" -> "LEAPER PULSE UNIT"
+      "RY ge, - REMOTE RAIDER FLARE" -> "REMOTE RAIDER FLARE"
+    """
+    if not text:
+        return ""
+
+    # First try strict all-caps words (2+ chars) joined into a phrase.
+    matches = re.findall(
+        r"(?:\b[A-Z0-9][A-Z0-9&'+.-]{1,}\b(?:\s+\b[A-Z0-9][A-Z0-9&'+.-]{1,}\b)*)",
+        text,
+    )
+    if matches:
+        # Prefer longer phrases with at least one alphabetic character.
+        matches = [m.strip(" -.,:;!?") for m in matches]
+        matches = [m for m in matches if any(ch.isalpha() for ch in m)]
+        if matches:
+            return max(matches, key=lambda s: (len(s.split()), len(s)))
+
+    # Relaxed fallback: title case / uppercase words, but still avoid sentence fragments.
+    relaxed = re.findall(
+        r"(?:\b[A-Z][A-Za-z0-9&'+.-]+\b(?:\s+\b[A-Z][A-Za-z0-9&'+.-]+\b)*)",
+        text,
+    )
+    relaxed = [m.strip(" -.,:;!?") for m in relaxed]
+    relaxed = [m for m in relaxed if len(m) >= 4]
+    if relaxed:
+        return max(relaxed, key=lambda s: (len(s.split()), len(s)))
+    return ""
+
+
+def _is_low_quality_title_text(text: str) -> bool:
+    """
+    Reject obvious OCR junk that should be treated as unreadable.
+    """
+    cleaned = clean_ocr_text(text or "")
+    if not cleaned:
+        return True
+
+    if not any(ch.isalpha() for ch in cleaned):
+        return True
+
+    alpha_count = sum(ch.isalpha() for ch in cleaned)
+    if alpha_count < 3:
+        return True
+
+    words = re.findall(r"[A-Za-z0-9']+", cleaned)
+    alpha_words = [w for w in words if any(ch.isalpha() for ch in w)]
+    if not alpha_words:
+        return True
+
+    # Most ARC Raiders item titles are not tiny single words; treat very short singles as junk
+    # so OCR retries can try again (e.g. "IL", "FS", "ROD").
+    if len(alpha_words) == 1:
+        alpha_only = re.sub(r"[^A-Za-z]", "", alpha_words[0])
+        if len(alpha_only) <= 3:
+            return True
+
+    # Reject sequences like "i f i f" / "1 H".
+    if all(len(re.sub(r"[^A-Za-z]", "", w)) <= 1 for w in alpha_words):
+        return True
+
+    short_alpha_words = [
+        re.sub(r"[^A-Za-z]", "", w) for w in alpha_words if re.sub(r"[^A-Za-z]", "", w)
+    ]
+    if short_alpha_words:
+        short_count = sum(1 for w in short_alpha_words if len(w) <= 2)
+        if len(short_alpha_words) >= 3 and short_count >= max(2, len(short_alpha_words) - 1):
+            return True
+
+    letters = [ch for ch in cleaned if ch.isalpha()]
+    if letters:
+        lower_count = sum(ch.islower() for ch in letters)
+        upper_count = sum(ch.isupper() for ch in letters)
+        lower_ratio = lower_count / len(letters)
+
+        # Item titles are usually uppercase; mixed-case noise often indicates bad OCR.
+        if lower_count > 0 and upper_count > 0:
+            # "LGaSIGaST", "sumIDiFiER" style outputs.
+            transitions = 0
+            last = None
+            for ch in letters:
+                curr = "U" if ch.isupper() else "L"
+                if last is not None and curr != last:
+                    transitions += 1
+                last = curr
+            if transitions >= max(3, len(letters) // 3):
+                return True
+
+        # Short mixed/lowercase phrases are almost always junk in this UI.
+        if lower_ratio >= 0.2 and len(alpha_words) <= 3 and sum(len(w) for w in short_alpha_words) <= 14:
+            return True
+
     return False
 
 
@@ -446,7 +628,7 @@ def _extract_title_from_data(
     if not groups:
         return "", ""
 
-    def _group_score(indices: List[int]) -> float:
+    def _group_confidence(indices: List[int]) -> float:
         confs = []
         for idx in indices:
             try:
@@ -455,10 +637,19 @@ def _extract_title_from_data(
                 continue
         return sum(confs) / len(confs) if confs else -1.0
 
-    # Sort groups by score and try to find a valid title (not context menu text)
-    sorted_keys = sorted(groups.keys(), key=lambda k: _group_score(groups[k]), reverse=True)
+    def _group_center_y(indices: List[int]) -> float:
+        vals = []
+        for idx in indices:
+            try:
+                top = float(ocr_data["top"][idx])
+                h = float(ocr_data["height"][idx])
+                vals.append(top + h / 2.0)
+            except Exception:
+                continue
+        return sum(vals) / len(vals) if vals else float(image_height)
 
-    for key in sorted_keys:
+    candidates = []
+    for key, indices in groups.items():
         ordered_indices = sorted(groups[key])
         cleaned_parts = [
             clean_ocr_text(texts[i] or "") for i in ordered_indices if texts[i]
@@ -466,24 +657,58 @@ def _extract_title_from_data(
         raw_parts = [(texts[i] or "").strip() for i in ordered_indices if texts[i]]
         cleaned = " ".join(p for p in cleaned_parts if p).strip()
         raw = " ".join(p for p in raw_parts if p).strip()
+        conf = _group_confidence(indices)
+        center_y = _group_center_y(indices)
 
-        # Skip if this looks like context menu or description text
+        # Skip context menu / known description fragments.
         if _is_context_menu_text(cleaned) or _is_context_menu_text(raw):
             continue
+        if _is_sentence_like_text(raw) or _is_sentence_like_text(cleaned):
+            continue
 
-        if cleaned:  # Found a valid title
-            return cleaned, raw
+        phrase = _extract_best_uppercase_phrase(raw) or _extract_best_uppercase_phrase(cleaned)
+        phrase_clean = clean_ocr_text(phrase) if phrase else ""
 
-    # Fallback: if we found raw text but cleaning removed everything, try less aggressive cleaning
-    for key in sorted_keys:
-        ordered_indices = sorted(groups[key])
+        candidate_name = phrase_clean or cleaned
+        if not candidate_name:
+            continue
+        if _is_low_quality_title_text(candidate_name):
+            continue
+
+        # Score: prioritize top-most title-like text over raw OCR confidence.
+        top_score = 1.0 - min(1.0, center_y / max(1.0, cutoff))
+        upper_bonus = 1.0 if phrase_clean else 0.0
+        word_count = len(candidate_name.split())
+        length_penalty = 0.2 if word_count >= 6 else 0.0
+        score = (top_score * 4.0) + (upper_bonus * 3.0) + (max(-1.0, conf) / 100.0) - length_penalty
+
+        candidates.append((score, center_y, conf, candidate_name, raw))
+
+    if candidates:
+        # Highest score wins; tie-break by earlier line and then better confidence.
+        candidates.sort(key=lambda item: (-item[0], item[1], -item[2]))
+        _, _, _, candidate_name, candidate_raw = candidates[0]
+        return candidate_name, candidate_raw
+
+    # Fallback: return the top-most non-menu line with an extracted phrase, even if sentence-like.
+    fallback_candidates = []
+    for key, indices in groups.items():
+        ordered_indices = sorted(indices)
         raw_parts = [(texts[i] or "").strip() for i in ordered_indices if texts[i]]
         raw = " ".join(p for p in raw_parts if p).strip()
-        if raw and not _is_context_menu_text(raw):
-            # Extract just uppercase words (item names are typically all caps)
-            words = re.findall(r'[A-Z][A-Z0-9]+(?:\s+[A-Z][A-Z0-9]+)*', raw)
-            if words:
-                return words[0], raw
+        if not raw or _is_context_menu_text(raw):
+            continue
+        phrase = _extract_best_uppercase_phrase(raw)
+        if not phrase:
+            continue
+        if _is_low_quality_title_text(phrase):
+            continue
+        fallback_candidates.append((_group_center_y(indices), _group_confidence(indices), phrase, raw))
+
+    if fallback_candidates:
+        fallback_candidates.sort(key=lambda item: (item[0], -item[1]))
+        _, _, phrase, raw = fallback_candidates[0]
+        return clean_ocr_text(phrase), raw
 
     return "", ""
 
@@ -502,7 +727,7 @@ def _extract_action_line_bbox(
     for i in range(n):
         raw_text = texts[i] or ""
         cleaned = re.sub(r"[^a-z]", "", raw_text.lower())
-        if not cleaned or target not in cleaned:
+        if not cleaned:
             continue
         key = (
             int(ocr_data["page_num"][i]),
@@ -515,7 +740,7 @@ def _extract_action_line_bbox(
     if not groups:
         return None
 
-    def _group_score(indices: List[int]) -> float:
+    def _group_conf(indices: List[int]) -> float:
         confs = []
         for idx in indices:
             conf_str = ocr_data["conf"][idx]
@@ -525,7 +750,50 @@ def _extract_action_line_bbox(
                 continue
         return sum(confs) / len(confs) if confs else -1.0
 
-    best_key = max(groups.keys(), key=lambda k: _group_score(groups[k]))
+    def _target_match_score(indices: List[int]) -> float:
+        """
+        Score how likely a line contains the requested action label.
+        Supports minor OCR typos such as 'seIl' / 'recycie'.
+        """
+        norm_tokens: List[str] = []
+        for idx in sorted(indices):
+            raw = texts[idx] or ""
+            token = re.sub(r"[^a-z]", "", raw.lower())
+            if token:
+                norm_tokens.append(token)
+
+        if not norm_tokens:
+            return -1.0
+
+        best = 0.0
+        line_norm = "".join(norm_tokens)
+        if target in line_norm:
+            best = 1.0
+
+        for token in norm_tokens:
+            if target in token:
+                best = max(best, 1.0)
+                continue
+
+            # OCR commonly swaps l/i, c/e, etc.; ratio threshold keeps it conservative.
+            ratio = difflib.SequenceMatcher(None, token, target).ratio()
+            if token.startswith(target[:2]) or target.startswith(token[:2]):
+                ratio += 0.05
+            best = max(best, ratio)
+
+        return best
+
+    scored_groups: List[Tuple[float, float, Tuple[int, int, int, int]]] = []
+    for key, indices in groups.items():
+        match_score = _target_match_score(indices)
+        if match_score < 0.72:
+            continue
+        scored_groups.append((match_score, _group_conf(indices), key))
+
+    if not scored_groups:
+        return None
+
+    best_key = max(scored_groups, key=lambda item: (item[0], item[1]))[2]
     indices = groups[best_key]
     lefts = [int(ocr_data["left"][i]) for i in indices]
     tops = [int(ocr_data["top"][i]) for i in indices]
@@ -596,6 +864,19 @@ def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
     item_name, raw_item_text = _extract_title_from_data(data, processed.shape[0])
     sell_bbox = _extract_action_line_bbox(data, "sell")
     recycle_bbox = _extract_action_line_bbox(data, "recycle")
+
+    # Action labels sometimes OCR better on the raw image than thresholded output.
+    if sell_bbox is None or recycle_bbox is None:
+        try:
+            alt_data = image_to_data(infobox_bgr)
+        except Exception:
+            alt_data = None
+        if alt_data is not None:
+            if sell_bbox is None:
+                sell_bbox = _extract_action_line_bbox(alt_data, "sell")
+            if recycle_bbox is None:
+                recycle_bbox = _extract_action_line_bbox(alt_data, "recycle")
+
     return InfoboxOcrResult(
         item_name=item_name,
         raw_item_text=raw_item_text,

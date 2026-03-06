@@ -113,7 +113,7 @@ if (-not $uvExe) {
 
   $previousUvInstallDir = $env:UV_INSTALL_DIR
   $env:UV_INSTALL_DIR = $uvInstallDir
-  irm $uvInstallUrl | iex
+  Invoke-RestMethod $uvInstallUrl | Invoke-Expression
 
   if ($null -ne $previousUvInstallDir) {
     $env:UV_INSTALL_DIR = $previousUvInstallDir

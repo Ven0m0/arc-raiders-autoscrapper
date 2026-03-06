@@ -213,7 +213,7 @@ def _build_data_dict(iterator) -> Dict[str, List]:
     return data
 
 
-def image_to_string(image: np.ndarray) -> str:
+def image_to_string(image: np.ndarray, psm: PSM = PSM.SINGLE_BLOCK) -> str:
     """
     OCR the provided image and return raw UTF-8 text.
     """
@@ -221,13 +221,15 @@ def image_to_string(image: np.ndarray) -> str:
     pil_img = _as_pil_image(np.ascontiguousarray(image))
 
     with _api_lock:
+        api.SetPageSegMode(psm)
         api.SetImage(pil_img)
         text = api.GetUTF8Text() or ""
+        api.SetPageSegMode(PSM.SINGLE_BLOCK)
 
     return text
 
 
-def image_to_data(image: np.ndarray) -> Dict[str, List]:
+def image_to_data(image: np.ndarray, psm: PSM = PSM.SINGLE_BLOCK) -> Dict[str, List]:
     """
     OCR the provided image and return a dict shaped like pytesseract Output.DICT.
     """
@@ -235,9 +237,13 @@ def image_to_data(image: np.ndarray) -> Dict[str, List]:
     pil_img = _as_pil_image(np.ascontiguousarray(image))
 
     with _api_lock:
+        api.SetPageSegMode(psm)
         api.SetImage(pil_img)
         api.Recognize()
         iterator = api.GetIterator()
         if iterator is None:
+            api.SetPageSegMode(PSM.SINGLE_BLOCK)
             return _empty_data_dict()
-        return _build_data_dict(iterator)
+        result = _build_data_dict(iterator)
+        api.SetPageSegMode(PSM.SINGLE_BLOCK)
+        return result

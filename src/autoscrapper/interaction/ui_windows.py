@@ -44,6 +44,123 @@ SCROLL_SETTLE_DELAY = 0.05
 _MSS: Optional["MSSBase"] = None
 
 
+def _target_aliases(target_app: str) -> list[str]:
+    target = (target_app or "").strip().lower()
+    if not target:
+        return []
+    aliases = [target]
+    # Windows Phone Link often uses multiple process/window hosts.
+    if target in {"phone link", "phonelink", "phoneexperiencehost.exe"}:
+        aliases.extend(
+            [
+                "phone link",
+                "phoneexperiencehost.exe",
+                "yourphoneappproxy.exe",
+                "yourphone.exe",
+            ]
+        )
+    # De-duplicate while preserving order
+    seen: set[str] = set()
+    out: list[str] = []
+    for alias in aliases:
+        if alias not in seen:
+            seen.add(alias)
+            out.append(alias)
+    return out
+
+
+def _window_app_and_title(win: pwc.Window) -> Tuple[str, str]:
+    app = ""
+    title = ""
+    try:
+        app = (win.getAppName() or "").strip()
+    except Exception:
+        app = ""
+    try:
+        if hasattr(win, "title"):
+            title = (getattr(win, "title") or "").strip()
+        elif hasattr(win, "getTitle"):
+            title = (win.getTitle() or "").strip()
+    except Exception:
+        title = ""
+    return app, title
+
+
+def _window_matches_target(win: pwc.Window, target_app: str) -> bool:
+    aliases = _target_aliases(target_app)
+    if not aliases:
+        return False
+    app, title = _window_app_and_title(win)
+    app_lower = app.lower()
+    title_lower = title.lower()
+    return any(alias in app_lower or alias in title_lower for alias in aliases)
+
+
+def _activate_window_best_effort(win: pwc.Window) -> None:
+    """
+    Try to focus the window without failing the scan if activation is not supported.
+    Intentionally does NOT call win.restore() — that unmaximizes the window and
+    changes its size, corrupting all screen-coordinate calculations for the run.
+    """
+    try:
+        if hasattr(win, "activate"):
+            win.activate()
+            return
+    except Exception:
+        pass
+    try:
+        if hasattr(win, "focus"):
+            win.focus()
+    except Exception:
+        pass
+
+
+def _find_matching_window(target_app: str) -> Optional[pwc.Window]:
+    """
+    Search all windows for the requested app/title substring.
+    """
+    try:
+        windows = pwc.getAllWindows()
+    except Exception:
+        return None
+    matches: list[pwc.Window] = []
+    for win in windows or []:
+        try:
+            if not _window_matches_target(win, target_app):
+                continue
+            w = int(getattr(win, "width", 0) or 0)
+            h = int(getattr(win, "height", 0) or 0)
+            left = int(getattr(win, "left", 0) or 0)
+            top = int(getattr(win, "top", 0) or 0)
+            # Ignore tiny helper/sink windows and clearly hidden placeholders.
+            if w < 200 or h < 300:
+                continue
+            if left < -10000 or top < -10000:
+                continue
+            if _window_matches_target(win, target_app):
+                matches.append(win)
+        except Exception:
+            continue
+    if not matches:
+        return None
+    if len(matches) == 1:
+        return matches[0]
+
+    def _score(win: pwc.Window) -> tuple[int, float, float]:
+        try:
+            w = max(1.0, float(getattr(win, "width", 0) or 0))
+            h = max(1.0, float(getattr(win, "height", 0) or 0))
+        except Exception:
+            w, h = 1.0, 1.0
+        aspect = h / w  # phone mirror windows are usually tall
+        area = w * h
+        tall_bonus = 1 if aspect > 1.2 else 0
+        # Prefer tall windows first, then larger area, then taller aspect.
+        return (tall_bonus, area, aspect)
+
+    return max(matches, key=_score)
+
+
 def escape_pressed() -> bool:
     """
     Detect whether F12 is currently pressed (abort key).
@@ -68,24 +185,21 @@ def wait_for_target_window(
     Wait until the active window belongs to the target process.
     """
     start = time.monotonic()
-    target_lower = target_app.lower()
-
     while time.monotonic() - start < timeout:
         abort_if_escape_pressed()
         win = pwc.getActiveWindow()
-        if win is not None:
-            app = (win.getAppName() or "").lower()
-            title = ""
-            if hasattr(win, "title"):
-                title = getattr(win, "title") or ""
-            if not title and hasattr(win, "getTitle"):
-                try:
-                    title = win.getTitle() or ""
-                except Exception:
-                    title = ""
-            title_lower = title.lower()
-            if target_lower in app or (title_lower and target_lower in title_lower):
-                return win
+        if win is not None and _window_matches_target(win, target_app):
+            return win
+
+        # Fallback: find a matching window even if it is not active and try to focus it.
+        candidate = _find_matching_window(target_app)
+        if candidate is not None:
+            _activate_window_best_effort(candidate)
+            sleep_with_abort(min(0.15, poll_interval))
+            win_after = pwc.getActiveWindow()
+            if win_after is not None and _window_matches_target(win_after, target_app):
+                return win_after
+
         sleep_with_abort(poll_interval)
 
     raise TimeoutError(f"Timed out waiting for active window {target_app!r}")
@@ -250,6 +364,45 @@ def move_window_relative(
 ) -> None:
     move_absolute(
         int(window_left + x), int(window_top + y), duration=duration, pause=pause
+    )
+
+
+def drag_absolute(
+    start_x: int,
+    start_y: int,
+    end_x: int,
+    end_y: int,
+    duration: float = MOVE_DURATION,
+    pause: float = ACTION_DELAY,
+) -> None:
+    timed_action(
+        pdi.dragTo,
+        int(start_x),
+        int(start_y),
+        int(end_x),
+        int(end_y),
+        duration=max(0.0, float(duration)),
+    )
+    pause_action(pause)
+
+
+def drag_window_relative(
+    start_x: int,
+    start_y: int,
+    end_x: int,
+    end_y: int,
+    window_left: int,
+    window_top: int,
+    duration: float = MOVE_DURATION,
+    pause: float = ACTION_DELAY,
+) -> None:
+    drag_absolute(
+        int(window_left + start_x),
+        int(window_top + start_y),
+        int(window_left + end_x),
+        int(window_top + end_y),
+        duration=duration,
+        pause=pause,
     )
 
 
