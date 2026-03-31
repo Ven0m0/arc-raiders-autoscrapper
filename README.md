@@ -2,9 +2,9 @@
   <img src="https://github.com/user-attachments/assets/c1de27b2-4dd9-4d04-855a-b4faa4e9dd1a" alt="autoscrapper_logo4">
 </p>
 
-
-
 ## Arc Raiders Inventory Auto Scrapper
+
+[![Maintainability](https://qlty.sh/gh/Ven0m0/projects/arc-raiders-autoscrapper/maintainability.svg)](https://qlty.sh/gh/Ven0m0/projects/arc-raiders-autoscrapper)
 
 Automates Arc Raiders inventory actions (Sell/Recycle) using screen capture and Tesseract (OCR).
 
