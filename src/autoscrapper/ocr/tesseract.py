@@ -15,6 +15,7 @@ from tesserocr import PSM, PyTessBaseAPI, RIL, iterate_level
 _api_lock = threading.Lock()
 _api_init_lock = threading.Lock()
 _api: PyTessBaseAPI | None = None
+_api_line: PyTessBaseAPI | None = None
 _tessdata_dir: str | None = None
 _backend_info: "OcrBackendInfo | None" = None
 
@@ -66,9 +67,9 @@ def _candidate_tessdata_paths() -> list[Path]:
     return unique
 
 
-def _create_api() -> PyTessBaseAPI:
+def _create_api(*, psm: int = PSM.SINGLE_BLOCK) -> PyTessBaseAPI:
     """
-    Build a shared PyTessBaseAPI instance configured for English, single block.
+    Build a shared PyTessBaseAPI instance configured for English.
     """
     global _tessdata_dir
     errors: list[tuple[Path, Exception]] = []
@@ -79,7 +80,7 @@ def _create_api() -> PyTessBaseAPI:
             continue
         try:
             os.environ["TESSDATA_PREFIX"] = str(candidate)
-            api = PyTessBaseAPI(path=str(candidate), lang="eng", psm=PSM.SINGLE_BLOCK)
+            api = PyTessBaseAPI(path=str(candidate), lang="eng", psm=psm)
             _tessdata_dir = str(candidate)
             return api
         except Exception as exc:
@@ -125,11 +126,27 @@ def _get_api() -> PyTessBaseAPI:
     return _api
 
 
+def _get_api_line() -> PyTessBaseAPI:
+    """
+    Lazily initialize and return the shared single-line Tesseract API instance.
+    """
+    global _api_line
+    if _api_line is not None:
+        return _api_line
+
+    with _api_init_lock:
+        if _api_line is None:
+            _api_line = _create_api(psm=PSM.SINGLE_LINE)
+            _record_backend_info(_api_line)
+    return _api_line
+
+
 def initialize_ocr() -> OcrBackendInfo:
     """
     Force initialization so the OCR backend is ready before the first OCR call.
     """
     api = _get_api()
+    _get_api_line()
     _record_backend_info(api)
     if _backend_info is None:  # pragma: no cover - defensive
         raise RuntimeError("OCR backend initialized but metadata is missing.")
@@ -218,11 +235,11 @@ def _build_data_dict(iterator) -> Dict[str, List]:
     return data
 
 
-def image_to_string(image: np.ndarray) -> str:
+def image_to_string(image: np.ndarray, *, single_line: bool = False) -> str:
     """
     OCR the provided image and return raw UTF-8 text.
     """
-    api = _get_api()
+    api = _get_api_line() if single_line else _get_api()
     pil_img = _as_pil_image(np.ascontiguousarray(image))
 
     with _api_lock:
@@ -232,11 +249,11 @@ def image_to_string(image: np.ndarray) -> str:
     return text
 
 
-def image_to_data(image: np.ndarray) -> Dict[str, List]:
+def image_to_data(image: np.ndarray, *, single_line: bool = False) -> Dict[str, List]:
     """
     OCR the provided image and return a dict shaped like pytesseract Output.DICT.
     """
-    api = _get_api()
+    api = _get_api_line() if single_line else _get_api()
     pil_img = _as_pil_image(np.ascontiguousarray(image))
 
     with _api_lock:
