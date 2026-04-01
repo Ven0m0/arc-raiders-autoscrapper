@@ -632,6 +632,22 @@
     "recyclesInto": null
   },
   {
+    "id": "assessor-matrix",
+    "name": "Assessor Matrix",
+    "type": "Recyclable",
+    "rarity": "epic",
+    "value": 5000,
+    "weightKg": 0.5,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-03-31T10:07:17.014017+00:00",
+    "recipe": null,
+    "recyclesInto": {
+      "advanced-mechanical-components": 1,
+      "advanced-arc-powercell": 3
+    }
+  },
+  {
     "id": "assorted-seeds",
     "name": "Assorted Seeds",
     "type": "Nature",
@@ -1584,6 +1600,36 @@
     "recyclesInto": null
   },
   {
+    "id": "canto",
+    "name": "Canto",
+    "type": "Weapon",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 6.5,
+    "stackSize": 1,
+    "craftBench": "Gunsmith III",
+    "updatedAt": "2026-03-31T13:46:05.081627+00:00",
+    "recipe": {
+      "advanced-mechanical-components": 2,
+      "magnet": 5,
+      "medium-gun-parts": 3
+    },
+    "recyclesInto": null
+  },
+  {
+    "id": "canto-blueprint",
+    "name": "Canto Blueprint",
+    "type": "Blueprint",
+    "rarity": "legendary",
+    "value": 5000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-03-31T14:58:52.090181+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "cat-bed",
     "name": "Cat Bed",
     "type": "Trinket",
@@ -2318,6 +2364,38 @@
       "fabric": 8,
       "metal-parts": 1
     }
+  },
+  {
+    "id": "dolabra",
+    "name": "Dolabra",
+    "type": "Weapon",
+    "rarity": "legendary",
+    "value": 27500,
+    "weightKg": 8,
+    "stackSize": 1,
+    "craftBench": "Gunsmith III",
+    "updatedAt": "2026-03-31T12:54:38.870425+00:00",
+    "recipe": {
+      "shredder-gyro": 3,
+      "magnetic-accelerator": 3,
+      "vaporizer-regulator": 2
+    },
+    "recyclesInto": {
+      "magnetic-accelerator": 1
+    }
+  },
+  {
+    "id": "dolabra-blueprint",
+    "name": "Dolabra Blueprint",
+    "type": "Blueprint",
+    "rarity": "legendary",
+    "value": 5000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-03-31T14:59:20.034402+00:00",
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "doodly-duck",
@@ -7186,6 +7264,36 @@
     "recyclesInto": null
   },
   {
+    "id": "surge-coil",
+    "name": "Surge Coil",
+    "type": "Deployable",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": "Explosives Bench III",
+    "updatedAt": "2026-04-01T00:24:22.96087+00:00",
+    "recipe": {
+      "electrical-components": 1,
+      "sensors-recipe": 1,
+      "hornet-driver": 1
+    },
+    "recyclesInto": null
+  },
+  {
+    "id": "surge-coil-blueprint",
+    "name": "Surge Coil Blueprint",
+    "type": "Blueprint",
+    "rarity": "legendary",
+    "value": 5000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-04-01T00:24:55.953024+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "surge-shield-recharger",
     "name": "Surge Shield Recharger",
     "type": "Quick Use",
@@ -7851,6 +7959,22 @@
     "recyclesInto": {
       "metal-parts": 4,
       "simple-gun-parts": 5
+    }
+  },
+  {
+    "id": "vaporizer-regulator",
+    "name": "Vaporizer Regulator",
+    "type": "Recyclable",
+    "rarity": "epic",
+    "value": 6000,
+    "weightKg": 0.5,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-03-31T10:14:53.413604+00:00",
+    "recipe": null,
+    "recyclesInto": {
+      "advanced-electrical-components": 1,
+      "arc-circuitry": 2
     }
   },
   {

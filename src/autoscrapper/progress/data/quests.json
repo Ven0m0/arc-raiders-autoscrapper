@@ -1175,6 +1175,87 @@
     "sortOrder": 3891.485408941247
   },
   {
+    "id": "clamoring-for-attention",
+    "name": "Clamoring For Attention",
+    "objectives": [
+      "Use 3 Wires to repair and sound the emergency siren by the Warehouse Complex",
+      "Use a Battery to start the boom box in the Village",
+      "Sound any bus horn by the Checkpoint"
+    ],
+    "requirements": [
+      {
+        "id": "ea793a15-e441-40bd-aeee-07cd7fe5d6f2",
+        "item": {
+          "id": "wires-recipe",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/wires.webp",
+          "name": "Wires",
+          "rarity": "Uncommon",
+          "item_type": "Topside Material"
+        },
+        "item_id": "wires-recipe",
+        "quantity": 3
+      },
+      {
+        "id": "4f90d953-260d-4ba8-8fbb-508ac0cdc92d",
+        "item": {
+          "id": "battery",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/battery.webp",
+          "name": "Battery",
+          "rarity": "Uncommon",
+          "item_type": "Topside Material"
+        },
+        "item_id": "battery",
+        "quantity": 1
+      }
+    ],
+    "rewardItemIds": [
+      "lure-grenade",
+      "noisemaker",
+      "tagging-grenade"
+    ],
+    "rewards": [
+      {
+        "id": "ea4e7c86-730b-4956-b02f-48ce19b39a27",
+        "item": {
+          "id": "lure-grenade",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/lure-grenade.webp",
+          "name": "Lure Grenade",
+          "rarity": "Uncommon",
+          "item_type": "Quick Use"
+        },
+        "item_id": "lure-grenade",
+        "quantity": "5"
+      },
+      {
+        "id": "a269bb08-7057-4d88-9698-838201ccdefa",
+        "item": {
+          "id": "noisemaker",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/noisemaker.webp",
+          "name": "Noisemaker",
+          "rarity": "Common",
+          "item_type": "Quick Use"
+        },
+        "item_id": "noisemaker",
+        "quantity": "5"
+      },
+      {
+        "id": "6d4269cd-06c8-45c9-93dc-1373699d8ea1",
+        "item": {
+          "id": "tagging-grenade",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/tagging-grenade.webp",
+          "name": "Tagging Grenade",
+          "rarity": "Rare",
+          "item_type": "Quick Use"
+        },
+        "item_id": "tagging-grenade",
+        "quantity": "3"
+      }
+    ],
+    "trader": "Shani",
+    "xp": 0,
+    "sortOrder": 7655
+  },
+  {
     "id": "clearer-skies",
     "name": "Clearer Skies",
     "objectives": [
@@ -1675,6 +1756,24 @@
     "trader": "Shani",
     "xp": 0,
     "sortOrder": 1279.0611297924638
+  },
+  {
+    "id": "dust-on-the-wires",
+    "name": "Dust On The Wires",
+    "objectives": [
+      "IN ONE ROUND: Visit any Field Depot on the eastern side of the Spaceport",
+      "Use the Field Radio to transmit the scout group's last log to Shani",
+      "Interact with the interminal in the old Raider Tower north of the Maintenance Hangar",
+      "Find traces of the scout patrol near the Maintenance Hangar",
+      "Search the remains left by the scouts",
+      "Deliver the Scout Patrol Note to Shani"
+    ],
+    "requirements": [],
+    "rewardItemIds": [],
+    "rewards": [],
+    "trader": "Shani",
+    "xp": 0,
+    "sortOrder": 7663.565427516189
   },
   {
     "id": "echoes-of-victory-ridge",
@@ -4492,6 +4591,62 @@
     "trader": "Celeste",
     "xp": 0,
     "sortOrder": 3028.4876761730225
+  },
+  {
+    "id": "waking-the-grid",
+    "name": "Waking The Grid",
+    "objectives": [
+      "Activate the security sensors in one of the Guard Towers",
+      "Start the Security Control Center in the Departure Building",
+      "Search for any traces of a security breach in the Arrival Building Data Office"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "vita-shot",
+      "surge-shield-recharger",
+      "tactical-mk-3-revival"
+    ],
+    "rewards": [
+      {
+        "id": "efa11c09-9799-4e0e-80ec-f4ceaaeb3412",
+        "item": {
+          "id": "vita-shot",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/vita-shot.webp",
+          "name": "Vita Shot",
+          "rarity": "Rare",
+          "item_type": "Quick Use"
+        },
+        "item_id": "vita-shot",
+        "quantity": "3"
+      },
+      {
+        "id": "ad52d7f7-5ea0-45d8-ac5a-669c9a50c357",
+        "item": {
+          "id": "surge-shield-recharger",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/surge-shield-recharger.webp",
+          "name": "Surge Shield Recharger",
+          "rarity": "Rare",
+          "item_type": "Quick Use"
+        },
+        "item_id": "surge-shield-recharger",
+        "quantity": "5"
+      },
+      {
+        "id": "d2ba747f-f848-4971-9006-db2ba147310a",
+        "item": {
+          "id": "tactical-mk-3-revival",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/tactical-mk-3-revival.webp",
+          "name": "Tactical MK. 3 (Revival)",
+          "rarity": "Epic",
+          "item_type": "Augment"
+        },
+        "item_id": "tactical-mk-3-revival",
+        "quantity": "1"
+      }
+    ],
+    "trader": "Shani",
+    "xp": 0,
+    "sortOrder": 0
   },
   {
     "id": "water-troubles",

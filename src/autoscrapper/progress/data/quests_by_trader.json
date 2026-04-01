@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-30T15:11:35.081291Z",
+  "generatedAt": "2026-04-01T07:39:40.410616Z",
   "source": "quests.json",
   "traders": {
     "Celeste": [
@@ -193,6 +193,11 @@
     ],
     "Shani": [
       {
+        "id": "waking-the-grid",
+        "name": "Waking The Grid",
+        "sortOrder": 0
+      },
+      {
         "id": "picking-up-the-pieces",
         "name": "Picking Up The Pieces",
         "sortOrder": 83.77692521396251
@@ -321,6 +326,16 @@
         "id": "a-prime-specimen",
         "name": "A Prime Specimen",
         "sortOrder": 7209.777176880825
+      },
+      {
+        "id": "clamoring-for-attention",
+        "name": "Clamoring For Attention",
+        "sortOrder": 7655
+      },
+      {
+        "id": "dust-on-the-wires",
+        "name": "Dust On The Wires",
+        "sortOrder": 7663.565427516189
       },
       {
         "id": "a-dead-end",
