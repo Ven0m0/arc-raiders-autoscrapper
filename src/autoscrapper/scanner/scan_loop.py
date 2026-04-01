@@ -68,10 +68,9 @@ class _InfoboxCaptureResult:
 @dataclass(frozen=True)
 class _InfoboxReadResult:
     infobox_ocr: Optional[InfoboxOcrResult]
+    infobox_bgr: Optional[Any]
     item_name: str
     raw_item_text: str
-    sell_bbox_rel: Optional[Tuple[int, int, int, int]]
-    recycle_bbox_rel: Optional[Tuple[int, int, int, int]]
     preprocess_time: float
     ocr_time: float
 
@@ -331,20 +330,18 @@ class _ScanRunner:
         window_bgr = capture_result.window_bgr
 
         infobox_ocr: Optional[InfoboxOcrResult] = None
+        infobox_bgr: Optional[Any] = None
         item_name = ""
         raw_item_text = ""
-        sell_bbox_rel: Optional[Tuple[int, int, int, int]] = None
-        recycle_bbox_rel: Optional[Tuple[int, int, int, int]] = None
         preprocess_time = 0.0
         ocr_time = 0.0
 
         if infobox_rect is None or window_bgr is None:
             return _InfoboxReadResult(
                 infobox_ocr=infobox_ocr,
+                infobox_bgr=infobox_bgr,
                 item_name=item_name,
                 raw_item_text=raw_item_text,
-                sell_bbox_rel=sell_bbox_rel,
-                recycle_bbox_rel=recycle_bbox_rel,
                 preprocess_time=preprocess_time,
                 ocr_time=ocr_time,
             )
@@ -383,17 +380,14 @@ class _ScanRunner:
             ocr_time += infobox_ocr.ocr_time
             item_name = infobox_ocr.item_name
             raw_item_text = infobox_ocr.raw_item_text
-            sell_bbox_rel = infobox_ocr.sell_bbox
-            recycle_bbox_rel = infobox_ocr.recycle_bbox
             if item_name:
                 break
 
         return _InfoboxReadResult(
             infobox_ocr=infobox_ocr,
+            infobox_bgr=infobox_bgr,
             item_name=item_name,
             raw_item_text=raw_item_text,
-            sell_bbox_rel=sell_bbox_rel,
-            recycle_bbox_rel=recycle_bbox_rel,
             preprocess_time=preprocess_time,
             ocr_time=ocr_time,
         )
@@ -432,9 +426,8 @@ class _ScanRunner:
             item_name=ocr_result.item_name,
             actions=self.context.actions,
             infobox_rect=capture_result.infobox_rect,
+            infobox_bgr=ocr_result.infobox_bgr,
             infobox_ocr=ocr_result.infobox_ocr,
-            sell_bbox_rel=ocr_result.sell_bbox_rel,
-            recycle_bbox_rel=ocr_result.recycle_bbox_rel,
             context=self.action_context,
         )
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import re
 import time
 from dataclasses import dataclass
@@ -8,8 +9,10 @@ from typing import Dict, List, Literal, Optional, Tuple
 
 import cv2
 import numpy as np
+from rapidfuzz import fuzz, process
 
 from ..core.item_actions import clean_ocr_text
+from ..items import rules_store
 from .tesseract import image_to_data, image_to_string
 
 # Infobox visual characteristics
@@ -23,8 +26,10 @@ INFOBOX_CLOSE_DIVISOR = 150.0
 INFOBOX_EDGE_FRACTION = 0.55
 INFOBOX_MIN_AREA = 1000
 
-# Item title placement inside the infobox (relative to infobox size)
-TITLE_HEIGHT_REL = 0.18
+# Item title placement inside the infobox (relative to infobox size).
+# OCR only needs the top band; 22% matches the title area selected by the
+# existing top-of-infobox line filter in _extract_title_from_data.
+TITLE_HEIGHT_REL = 0.22
 
 # Confirmation buttons (window-normalized rectangles)
 SELL_CONFIRM_RECT_NORM = (0.5047, 0.6941, 0.1791, 0.0531)
@@ -35,14 +40,15 @@ RECYCLE_CONFIRM_RECT_NORM = (0.5058, 0.6274, 0.1777, 0.0544)
 INVENTORY_COUNT_RECT_NORM = (0.0734, 0.1583, 0.0380, 0.0231)
 
 _OCR_DEBUG_DIR: Optional[Path] = None
+_ITEM_NAMES: Optional[Tuple[str, ...]] = None
+_last_roi_hash: Optional[bytes] = None
+_last_ocr_result: Optional[Tuple[str, str]] = None
 
 
 @dataclass
 class InfoboxOcrResult:
     item_name: str
     raw_item_text: str
-    sell_bbox: Optional[Tuple[int, int, int, int]]
-    recycle_bbox: Optional[Tuple[int, int, int, int]]
     processed: np.ndarray
     preprocess_time: float
     ocr_time: float
@@ -483,6 +489,59 @@ def title_roi(infobox_rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, i
     return x, y, w, max(1, title_h)
 
 
+def _crop_title_strip(infobox_bgr: np.ndarray) -> np.ndarray:
+    if infobox_bgr.size == 0:
+        return infobox_bgr
+    title_h = max(1, int(round(infobox_bgr.shape[0] * TITLE_HEIGHT_REL)))
+    return infobox_bgr[:title_h, :]
+
+
+def _get_item_names() -> Tuple[str, ...]:
+    global _ITEM_NAMES
+    if _ITEM_NAMES is not None:
+        return _ITEM_NAMES
+
+    payload = rules_store.load_rules()
+    names: List[str] = []
+    seen: set[str] = set()
+    for entry in payload.get("items", []):
+        if not isinstance(entry, dict):
+            continue
+        name = entry.get("name")
+        if not isinstance(name, str):
+            continue
+        cleaned = clean_ocr_text(name)
+        key = cleaned.casefold()
+        if not cleaned or key in seen:
+            continue
+        seen.add(key)
+        names.append(cleaned)
+
+    _ITEM_NAMES = tuple(names)
+    return _ITEM_NAMES
+
+
+def match_item_name(raw: str, threshold: int = 75) -> str:
+    cleaned = clean_ocr_text(raw)
+    if not cleaned:
+        return ""
+
+    match = process.extractOne(
+        cleaned,
+        _get_item_names(),
+        scorer=fuzz.WRatio,
+        score_cutoff=threshold,
+    )
+    if match is None:
+        return cleaned
+    return str(match[0])
+
+
+def _hash_roi(image: np.ndarray) -> bytes:
+    contiguous = np.ascontiguousarray(image)
+    return hashlib.blake2b(contiguous.tobytes(), digest_size=16).digest()
+
+
 def rect_center(rect: Tuple[int, int, int, int]) -> Tuple[int, int]:
     """
     Center (cx, cy) of a rectangle.
@@ -674,13 +733,29 @@ def _extract_title_from_data(
 
     best_key = max(groups.keys(), key=lambda k: _group_score(groups[k]))
     ordered_indices = sorted(groups[best_key])
-    cleaned_parts = [
-        clean_ocr_text(texts[i] or "") for i in ordered_indices if texts[i]
-    ]
-    raw_parts = [(texts[i] or "").strip() for i in ordered_indices if texts[i]]
-    cleaned = " ".join(p for p in cleaned_parts if p).strip()
+    cleaned_parts = []
+    raw_parts = []
+    for i in ordered_indices:
+        if not texts[i]:
+            continue
+        raw_text = (texts[i] or "").strip()
+        raw_parts.append(raw_text)
+        cleaned = clean_ocr_text(raw_text)
+        if cleaned:
+            cleaned_parts.append(cleaned)
+
+    item_name = match_item_name(" ".join(p for p in cleaned_parts if p).strip())
     raw = " ".join(p for p in raw_parts if p).strip()
-    return cleaned, raw
+    return item_name, raw
+
+
+def _extract_cropped_title_from_data(
+    ocr_data: Dict[str, List], image_height: int
+) -> Tuple[str, str]:
+    """
+    Extract a title from OCR data that was already cropped to the title strip.
+    """
+    return _extract_title_from_data(ocr_data, image_height, top_fraction=1.0)
 
 
 def _extract_action_line_bbox(
@@ -758,44 +833,56 @@ def find_action_bbox_by_ocr(
 
 def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
     """
-    OCR the full infobox once to derive the title and action line positions.
+    OCR the infobox title strip once to derive the item title.
     """
+    global _last_ocr_result, _last_roi_hash
     preprocess_start = time.perf_counter()
     _save_debug_image("infobox_raw", infobox_bgr)
-    processed = preprocess_for_ocr(infobox_bgr)
+    title_strip_bgr = _crop_title_strip(infobox_bgr)
+    _save_debug_image("infobox_title_raw", title_strip_bgr)
+    processed = preprocess_for_ocr(title_strip_bgr)
     _save_debug_image("infobox_processed", processed)
     preprocess_time = time.perf_counter() - preprocess_start
+
+    roi_hash = _hash_roi(processed)
+    if _last_roi_hash == roi_hash and _last_ocr_result is not None:
+        item_name, raw_item_text = _last_ocr_result
+        return InfoboxOcrResult(
+            item_name=item_name,
+            raw_item_text=raw_item_text,
+            processed=processed,
+            preprocess_time=preprocess_time,
+            ocr_time=0.0,
+        )
 
     ocr_time = 0.0
     try:
         ocr_start = time.perf_counter()
-        data = image_to_data(processed)
+        data = image_to_data(processed, single_line=True)
         ocr_time = time.perf_counter() - ocr_start
     except Exception as exc:
         print(
-            f"[vision_ocr] ocr_backend image_to_data failed for full infobox; "
+            f"[vision_ocr] ocr_backend image_to_data failed for infobox title strip; "
             f"falling back to empty OCR result. error={exc}",
             flush=True,
         )
         return InfoboxOcrResult(
             item_name="",
             raw_item_text="",
-            sell_bbox=None,
-            recycle_bbox=None,
             processed=processed,
             preprocess_time=preprocess_time,
             ocr_time=ocr_time,
             ocr_failed=True,
         )
 
-    item_name, raw_item_text = _extract_title_from_data(data, processed.shape[0])
-    sell_bbox = _extract_action_line_bbox(data, "sell")
-    recycle_bbox = _extract_action_line_bbox(data, "recycle")
+    item_name, raw_item_text = _extract_cropped_title_from_data(
+        data, processed.shape[0]
+    )
+    _last_roi_hash = roi_hash
+    _last_ocr_result = (item_name, raw_item_text)
     return InfoboxOcrResult(
         item_name=item_name,
         raw_item_text=raw_item_text,
-        sell_bbox=sell_bbox,
-        recycle_bbox=recycle_bbox,
         processed=processed,
         preprocess_time=preprocess_time,
         ocr_time=ocr_time,
@@ -810,8 +897,8 @@ def ocr_item_name(roi_bgr: np.ndarray) -> str:
         return ""
 
     processed = preprocess_for_ocr(roi_bgr)
-    raw = image_to_string(processed)
-    return clean_ocr_text(raw)
+    raw = image_to_string(processed, single_line=True)
+    return match_item_name(raw)
 
 
 def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:
