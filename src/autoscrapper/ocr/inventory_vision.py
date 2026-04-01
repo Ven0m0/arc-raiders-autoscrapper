@@ -26,7 +26,9 @@ INFOBOX_CLOSE_DIVISOR = 150.0
 INFOBOX_EDGE_FRACTION = 0.55
 INFOBOX_MIN_AREA = 1000
 
-# Item title placement inside the infobox (relative to infobox size)
+# Item title placement inside the infobox (relative to infobox size).
+# OCR only needs the top band; 22% matches the title area selected by the
+# existing top-of-infobox line filter in _extract_title_from_data.
 TITLE_HEIGHT_REL = 0.22
 
 # Confirmation buttons (window-normalized rectangles)
@@ -732,17 +734,28 @@ def _extract_title_from_data(
     best_key = max(groups.keys(), key=lambda k: _group_score(groups[k]))
     ordered_indices = sorted(groups[best_key])
     cleaned_parts = []
-    raw_parts = [(texts[i] or "").strip() for i in ordered_indices if texts[i]]
+    raw_parts = []
     for i in ordered_indices:
         if not texts[i]:
             continue
-        cleaned = clean_ocr_text(texts[i] or "")
+        raw_text = (texts[i] or "").strip()
+        raw_parts.append(raw_text)
+        cleaned = clean_ocr_text(raw_text)
         if cleaned:
             cleaned_parts.append(cleaned)
 
-    cleaned = match_item_name(" ".join(p for p in cleaned_parts if p).strip())
+    item_name = match_item_name(" ".join(p for p in cleaned_parts if p).strip())
     raw = " ".join(p for p in raw_parts if p).strip()
-    return cleaned, raw
+    return item_name, raw
+
+
+def _extract_cropped_title_from_data(
+    ocr_data: Dict[str, List], image_height: int
+) -> Tuple[str, str]:
+    """
+    Extract a title from OCR data that was already cropped to the title strip.
+    """
+    return _extract_title_from_data(ocr_data, image_height, top_fraction=1.0)
 
 
 def _extract_action_line_bbox(
@@ -862,8 +875,8 @@ def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
             ocr_failed=True,
         )
 
-    item_name, raw_item_text = _extract_title_from_data(
-        data, processed.shape[0], top_fraction=1.0
+    item_name, raw_item_text = _extract_cropped_title_from_data(
+        data, processed.shape[0]
     )
     _last_roi_hash = roi_hash
     _last_ocr_result = (item_name, raw_item_text)
