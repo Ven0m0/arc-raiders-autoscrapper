@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -9,6 +10,11 @@ from typing import Any, Dict, Optional
 from .interaction.keybinds import DEFAULT_STOP_KEY, normalize_stop_key
 
 CONFIG_VERSION = 5
+
+_MAX_DELAY_MS = 5000
+_MAX_RETRY_COUNT = 10
+
+_log = logging.getLogger(__name__)
 APP_CONFIG_DIR_NAME = "AutoScrapper"
 CONFIG_FILE_NAME = "config.json"
 
@@ -70,11 +76,105 @@ def _coerce_non_negative_int(value: Any) -> Optional[int]:
     return None
 
 
+def _clamp_delay_ms(value: int, field_name: str) -> int:
+    if value > _MAX_DELAY_MS:
+        _log.warning(
+            "config: %s=%d exceeds maximum %d ms; clamping to %d",
+            field_name,
+            value,
+            _MAX_DELAY_MS,
+            _MAX_DELAY_MS,
+        )
+        return _MAX_DELAY_MS
+    return value
+
+
+def _clamp_retry_count(value: int, field_name: str) -> int:
+    if value > _MAX_RETRY_COUNT:
+        _log.warning(
+            "config: %s=%d exceeds maximum %d; clamping to %d",
+            field_name,
+            value,
+            _MAX_RETRY_COUNT,
+            _MAX_RETRY_COUNT,
+        )
+        return _MAX_RETRY_COUNT
+    return value
+
+
 def _raw_with_aliases(raw: Dict[str, Any], *keys: str) -> Any:
     for key in keys:
         if key in raw:
             return raw.get(key)
     return None
+
+
+# ---------------------------------------------------------------------------
+# Config version migration
+# ---------------------------------------------------------------------------
+
+
+def _migrate_v1_to_v2(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """Stub: no structural changes between v1 and v2."""
+    return payload
+
+
+def _migrate_v2_to_v3(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """Stub: no structural changes between v2 and v3."""
+    return payload
+
+
+def _migrate_v3_to_v4(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """Stub: no structural changes between v3 and v4."""
+    return payload
+
+
+def _migrate_v4_to_v5(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """Stub: no structural changes between v4 and v5."""
+    return payload
+
+
+_MIGRATIONS = {
+    1: _migrate_v1_to_v2,
+    2: _migrate_v2_to_v3,
+    3: _migrate_v3_to_v4,
+    4: _migrate_v4_to_v5,
+}
+
+
+def _migrate_config(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Walk the payload from its stored version up to CONFIG_VERSION,
+    applying each migration step in sequence.  Warns if the stored
+    version is unknown or ahead of the current code.
+    """
+    stored_version = payload.get("version")
+    if not isinstance(stored_version, int):
+        return payload
+
+    if stored_version > CONFIG_VERSION:
+        _log.warning(
+            "config: stored version %d is newer than current code version %d; "
+            "loading as-is — some settings may be ignored",
+            stored_version,
+            CONFIG_VERSION,
+        )
+        return payload
+
+    if stored_version < CONFIG_VERSION:
+        _log.warning(
+            "config: stored version %d is older than current version %d; "
+            "migrating automatically",
+            stored_version,
+            CONFIG_VERSION,
+        )
+        for from_version in range(stored_version, CONFIG_VERSION):
+            migrate_fn = _MIGRATIONS.get(from_version)
+            if migrate_fn is not None:
+                payload = migrate_fn(payload)
+        payload["version"] = CONFIG_VERSION
+
+    return payload
 
 
 def _load_config_dict() -> Dict[str, Any]:
@@ -86,7 +186,10 @@ def _load_config_dict() -> Dict[str, Any]:
     except (OSError, json.JSONDecodeError):
         return {}
 
-    return raw if isinstance(raw, dict) else {}
+    if not isinstance(raw, dict):
+        return {}
+
+    return _migrate_config(raw)
 
 
 def _save_config_dict(payload: Dict[str, Any]) -> None:
@@ -134,22 +237,35 @@ def _from_raw_scan_settings(raw: Any) -> ScanSettings:
     infobox_retries = _coerce_positive_int(infobox_retries_raw)
     if infobox_retries is None:
         infobox_retries = ScanSettings.infobox_retries
+    infobox_retries = _clamp_retry_count(infobox_retries, "infobox_retries")
 
     infobox_retry_interval_ms = _coerce_non_negative_int(infobox_retry_interval_ms_raw)
     if infobox_retry_interval_ms is None:
         infobox_retry_interval_ms = ScanSettings.infobox_retry_interval_ms
+    infobox_retry_interval_ms = _clamp_delay_ms(
+        infobox_retry_interval_ms, "infobox_retry_interval_ms"
+    )
 
     ocr_unreadable_retries = _coerce_non_negative_int(ocr_unreadable_retries_raw)
     if ocr_unreadable_retries is None:
         ocr_unreadable_retries = ScanSettings.ocr_unreadable_retries
+    ocr_unreadable_retries = _clamp_retry_count(
+        ocr_unreadable_retries, "ocr_unreadable_retries"
+    )
 
     ocr_retry_interval_ms = _coerce_non_negative_int(ocr_retry_interval_ms_raw)
     if ocr_retry_interval_ms is None:
         ocr_retry_interval_ms = ScanSettings.ocr_retry_interval_ms
+    ocr_retry_interval_ms = _clamp_delay_ms(
+        ocr_retry_interval_ms, "ocr_retry_interval_ms"
+    )
 
     input_action_delay_ms = _coerce_non_negative_int(input_action_delay_ms_raw)
     if input_action_delay_ms is None:
         input_action_delay_ms = ScanSettings.input_action_delay_ms
+    input_action_delay_ms = _clamp_delay_ms(
+        input_action_delay_ms, "input_action_delay_ms"
+    )
 
     cell_infobox_left_right_click_gap_ms = _coerce_non_negative_int(
         cell_infobox_left_right_click_gap_ms_raw
@@ -158,18 +274,27 @@ def _from_raw_scan_settings(raw: Any) -> ScanSettings:
         cell_infobox_left_right_click_gap_ms = (
             ScanSettings.cell_infobox_left_right_click_gap_ms
         )
+    cell_infobox_left_right_click_gap_ms = _clamp_delay_ms(
+        cell_infobox_left_right_click_gap_ms, "cell_infobox_left_right_click_gap_ms"
+    )
 
     item_infobox_settle_delay_ms = _coerce_non_negative_int(
         item_infobox_settle_delay_ms_raw
     )
     if item_infobox_settle_delay_ms is None:
         item_infobox_settle_delay_ms = ScanSettings.item_infobox_settle_delay_ms
+    item_infobox_settle_delay_ms = _clamp_delay_ms(
+        item_infobox_settle_delay_ms, "item_infobox_settle_delay_ms"
+    )
 
     post_sell_recycle_delay_ms = _coerce_non_negative_int(
         post_sell_recycle_delay_ms_raw
     )
     if post_sell_recycle_delay_ms is None:
         post_sell_recycle_delay_ms = ScanSettings.post_sell_recycle_delay_ms
+    post_sell_recycle_delay_ms = _clamp_delay_ms(
+        post_sell_recycle_delay_ms, "post_sell_recycle_delay_ms"
+    )
 
     return ScanSettings(
         stop_key=normalize_stop_key(stop_key_raw),

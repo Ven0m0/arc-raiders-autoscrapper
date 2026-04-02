@@ -19,6 +19,7 @@ from .tesseract import image_to_data, image_to_string
 INFOBOX_COLOR_BGR = np.array([236, 246, 253], dtype=np.uint8)  # #fdf6ec in BGR
 INFOBOX_TOLERANCE_MIN = 5
 INFOBOX_TOLERANCE_MAX = 30
+INFOBOX_TOLERANCE_MAX_WIDE = 50
 INFOBOX_TOLERANCE_PADDING = 2.0
 INFOBOX_CLOSE_KERNEL_MIN = 7
 INFOBOX_CLOSE_KERNEL_MAX = 15
@@ -141,14 +142,16 @@ def _odd(value: int) -> int:
 
 
 def _compute_auto_tolerance(
-    bgr_image: np.ndarray, target_bgr: np.ndarray
+    bgr_image: np.ndarray,
+    target_bgr: np.ndarray,
+    tolerance_max: int = INFOBOX_TOLERANCE_MAX,
 ) -> Tuple[int, float]:
     image_f = bgr_image.astype(np.float32)
     target_f = target_bgr.astype(np.float32)
     dist = np.linalg.norm(image_f - target_f, axis=2)
     min_dist = float(dist.min()) if dist.size else float("inf")
     tol = int(np.ceil(min_dist + INFOBOX_TOLERANCE_PADDING))
-    tol = int(np.clip(tol, INFOBOX_TOLERANCE_MIN, INFOBOX_TOLERANCE_MAX))
+    tol = int(np.clip(tol, INFOBOX_TOLERANCE_MIN, tolerance_max))
     return tol, min_dist
 
 
@@ -298,7 +301,10 @@ def _save_infobox_detection_debug_images(
     _save_debug_image("infobox_detect_overlay", overlay)
 
 
-def find_infobox_with_debug(bgr_image: np.ndarray) -> InfoboxDetectionResult:
+def find_infobox_with_debug(
+    bgr_image: np.ndarray,
+    tolerance_max: int = INFOBOX_TOLERANCE_MAX,
+) -> InfoboxDetectionResult:
     """
     Detect the infobox/context-menu panel using adaptive color tolerance and
     contour refinement. Returns the detected rect plus diagnostics.
@@ -328,7 +334,9 @@ def find_infobox_with_debug(bgr_image: np.ndarray) -> InfoboxDetectionResult:
         )
     )
 
-    tolerance, min_dist = _compute_auto_tolerance(bgr_image, INFOBOX_COLOR_BGR)
+    tolerance, min_dist = _compute_auto_tolerance(
+        bgr_image, INFOBOX_COLOR_BGR, tolerance_max
+    )
     color = INFOBOX_COLOR_BGR.astype(np.int16)
     lower = np.clip(color - tolerance, 0, 255).astype(np.uint8)
     upper = np.clip(color + tolerance, 0, 255).astype(np.uint8)
@@ -476,8 +484,16 @@ def find_infobox(bgr_image: np.ndarray) -> Optional[Tuple[int, int, int, int]]:
     """
     Backward-compatible wrapper returning only the detected infobox rectangle.
     Returns (x, y, w, h) relative to the provided image, or None if not found.
+    Retries once with a wider color tolerance to handle non-standard monitor
+    gamma or HDR before returning None.
     """
-    return find_infobox_with_debug(bgr_image).rect
+    result = find_infobox_with_debug(bgr_image)
+    if result.rect is not None:
+        return result.rect
+    wide_result = find_infobox_with_debug(
+        bgr_image, tolerance_max=INFOBOX_TOLERANCE_MAX_WIDE
+    )
+    return wide_result.rect
 
 
 def title_roi(infobox_rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
@@ -650,6 +666,7 @@ def recycle_confirm_button_center(
 
 
 def preprocess_for_ocr(roi_bgr: np.ndarray) -> np.ndarray:
+    roi_bgr = cv2.resize(roi_bgr, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
     gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
     _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     return binary
