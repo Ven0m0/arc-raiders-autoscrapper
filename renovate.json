@@ -47,6 +47,16 @@
   "postUpdateOptions": ["uvLockUpdate"],
   "packageRules": [
     {
+      "description": "Disable Docker digest pinning",
+      "matchDatasources": ["docker"],
+      "pinDigests": false
+    },
+    {
+      "description": "Disable GitHub Actions digest pinning",
+      "matchDepTypes": ["action"],
+      "pinDigests": false
+    },
+    {
       "description": "Require dashboard approval for 0.x major bumps",
       "matchCurrentVersion": "/^0/",
       "matchUpdateTypes": ["major"],
