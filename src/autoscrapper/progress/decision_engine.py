@@ -22,6 +22,10 @@ KEEP_ITEM_OVERRIDES = {
 }
 
 
+def _normalize_override_item_id(item_id: object) -> str:
+    return str(item_id or "").replace("_", "-")
+
+
 @dataclass(frozen=True)
 class DecisionReason:
     decision: str
@@ -85,11 +89,12 @@ class DecisionEngine:
         return final_decision
 
     def get_decision(self, item: dict, user_progress: dict) -> DecisionReason:
-        item_id = str(item.get("id", "")).replace("_", "-")
         item_type = str(item.get("type", "")).lower()
         rarity = str(item.get("rarity", "")).lower()
 
-        override_reasons = KEEP_ITEM_OVERRIDES.get(item_id)
+        override_reasons = KEEP_ITEM_OVERRIDES.get(
+            _normalize_override_item_id(item.get("id"))
+        )
         if override_reasons is not None:
             return self.finalize_decision(
                 item,
