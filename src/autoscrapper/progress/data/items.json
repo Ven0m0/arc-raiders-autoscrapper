@@ -1625,7 +1625,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-03-31T13:15:49.950805+00:00",
+    "updatedAt": "2026-04-01T12:44:55.585562+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2393,7 +2393,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-03-31T12:57:24.319189+00:00",
+    "updatedAt": "2026-04-01T12:49:21.428364+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7260,6 +7260,36 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "surge-coil",
+    "name": "Surge Coil",
+    "type": "Deployable",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": "Explosives Bench III",
+    "updatedAt": "2026-04-01T00:24:22.96087+00:00",
+    "recipe": {
+      "electrical-components": 1,
+      "sensors-recipe": 1,
+      "hornet-driver": 1
+    },
+    "recyclesInto": null
+  },
+  {
+    "id": "surge-coil-blueprint",
+    "name": "Surge Coil Blueprint",
+    "type": "Blueprint",
+    "rarity": "legendary",
+    "value": 5000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-04-01T00:24:55.953024+00:00",
     "recipe": null,
     "recyclesInto": null
   },

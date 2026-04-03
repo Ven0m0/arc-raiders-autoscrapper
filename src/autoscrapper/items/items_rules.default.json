@@ -1,12 +1,12 @@
 {
   "metadata": {
-    "generatedAt": "2026-03-31T14:53:23.149493Z",
+    "generatedAt": "2026-04-01T14:37:06.523036Z",
     "data": {
-      "lastUpdated": "2026-03-31T14:53:23.133520Z",
+      "lastUpdated": "2026-04-01T14:37:06.506272Z",
       "source": "https://metaforge.app/arc-raiders",
       "version": "autoscrapper-data-1"
     },
-    "itemCount": 540,
+    "itemCount": 542,
     "allQuestsCompleted": true
   },
   "items": [
@@ -1137,10 +1137,10 @@
       "id": "coins",
       "name": "Coins",
       "value": 0,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Currency item",
-        "Do not sell or recycle currency"
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -2516,7 +2516,7 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Used in 1 crafting recipes",
+        "Used in 2 crafting recipes",
         "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
@@ -4819,6 +4819,27 @@
       "analysis": [
         "No immediate use found",
         "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "surge-coil",
+      "name": "Surge Coil",
+      "value": 0,
+      "action": "keep",
+      "analysis": [
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "surge-coil-blueprint",
+      "name": "Surge Coil Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
       ]
     },
     {
