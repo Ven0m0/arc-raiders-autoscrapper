@@ -1,6 +1,96 @@
 repos:
+  # Ruff - Python linting and formatting
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.11.4
     hooks:
+      # Run linter and auto-fix issues
       - id: ruff
+        args:
+          - --fix
+          - --exit-non-zero-on-fix
+        stages: [pre-commit]
+      # Format code
       - id: ruff-format
+        stages: [pre-commit]
+
+  # Pyproject-fmt - Format pyproject.toml
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: v2.5.1
+    hooks:
+      - id: pyproject-fmt
+        stages: [pre-commit]
+
+  # Pre-commit hooks (official)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # General checks
+      - id: trailing-whitespace
+        stages: [pre-commit]
+      - id: end-of-file-fixer
+        stages: [pre-commit]
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+        stages: [pre-commit]
+      - id: check-json
+        stages: [pre-commit]
+      - id: check-toml
+        stages: [pre-commit]
+      - id: check-xml
+        stages: [pre-commit]
+
+      # Security checks
+      - id: detect-private-key
+        stages: [pre-commit]
+
+      # File checks
+      - id: check-added-large-files
+        args: [--maxkb=1000]
+        stages: [pre-commit]
+      - id: check-case-conflict
+        stages: [pre-commit]
+      - id: check-executables-have-shebangs
+        stages: [pre-commit]
+      - id: check-shebang-scripts-are-executable
+        stages: [pre-commit]
+      - id: forbid-submodules
+        stages: [pre-commit]
+
+  # Gitleaks - Secret scanning
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.2
+    hooks:
+      - id: gitleaks
+        stages: [pre-commit]
+
+  # Zizmor - GitHub Actions security analysis
+  - repo: https://github.com/woodruffw/zizmor-pre-commit
+    rev: v1.5.2
+    hooks:
+      - id: zizmor
+        stages: [pre-commit]
+
+  # Taplo - TOML linting and formatting
+  - repo: https://github.com/comkieffer/taplo-pre-commit
+    rev: v0.9.3
+    hooks:
+      - id: taplo-format
+        stages: [pre-commit]
+      - id: taplo-lint
+        stages: [pre-commit]
+
+  # Renovate config validator
+  - repo: https://github.com/renovatebot/pre-commit-hooks
+    rev: 39.227.1
+    hooks:
+      - id: renovate-config-validator
+        stages: [pre-commit]
+
+  # Shellcheck - Shell script linting
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        args: [-x, --severity=warning]
+        files: \.(sh|bash)$
+        stages: [pre-commit]
