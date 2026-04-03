@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "biomejs.biome", 
+    "oxc.oxc-vscode",
+    "detachhead.basedpyright",
+    "mads-hartmann.bash-ide-vscode",
+    "redhat.vscode-yaml",
+    "tombi-toml.tombi"
+  ]
+}
