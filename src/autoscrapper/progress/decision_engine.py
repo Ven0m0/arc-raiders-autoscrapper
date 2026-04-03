@@ -6,6 +6,25 @@ from typing import Dict, List, Optional
 from .recipe_utils import build_reverse_recipe_index
 from .weapon_grouping import WeaponGrouper
 
+KEEP_ITEM_OVERRIDES = {
+    "assorted-seeds": [
+        "Valuable currency item",
+        "Used for trading with Celeste",
+    ],
+    "chemicals": [
+        "Override: keep progression material",
+        "Manual default keep override",
+    ],
+    "crude-explosives": [
+        "Override: keep progression material",
+        "Manual default keep override",
+    ],
+}
+
+
+def _normalize_item_id(item_id: str | None) -> str:
+    return str(item_id or "").replace("_", "-")
+
 
 @dataclass(frozen=True)
 class DecisionReason:
@@ -73,15 +92,15 @@ class DecisionEngine:
         item_type = str(item.get("type", "")).lower()
         rarity = str(item.get("rarity", "")).lower()
 
-        if item.get("id") in {"assorted-seeds", "assorted_seeds"}:
+        override_reasons = KEEP_ITEM_OVERRIDES.get(
+            _normalize_item_id(item.get("id"))
+        )
+        if override_reasons is not None:
             return self.finalize_decision(
                 item,
                 DecisionReason(
                     decision="keep",
-                    reasons=[
-                        "Valuable currency item",
-                        "Used for trading with Celeste",
-                    ],
+                    reasons=override_reasons,
                 ),
             )
 
@@ -397,7 +416,7 @@ class DecisionEngine:
                 materials.append(f"{quantity}x {output_item.get('name')}")
                 try:
                     total_value += int(output_item.get("value", 0)) * int(quantity)
-                except TypeError, ValueError:
+                except (TypeError, ValueError):
                     continue
 
         return RecycleValue(
