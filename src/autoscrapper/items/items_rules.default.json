@@ -1137,10 +1137,10 @@
       "id": "coins",
       "name": "Coins",
       "value": 0,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Currency item",
+        "Do not sell or recycle currency"
       ]
     },
     {
