@@ -1,9 +1,11 @@
-param(
-  [ValidateSet("3.10", "3.11", "3.12", "3.13")]
-  [string]$PythonVersion = "3.13"
-)
+# AutoScrapper Windows Setup Script
+# Required: Python 3.14+
+# Usage: .\scripts\setup-windows.ps1
 
 $ErrorActionPreference = "Stop"
+
+# Python 3.14 is required
+$PythonVersion = "3.14"
 
 function Confirm-Step {
   param(
@@ -76,7 +78,7 @@ function Add-PathPrefix {
     [string]$Dir
   )
 
-  $dirNormalized = $Dir.Trim().TrimEnd('\\')
+  $dirNormalized = $Dir.Trim().TrimEnd('\')
   if (-not $dirNormalized) {
     return
   }
@@ -87,7 +89,7 @@ function Add-PathPrefix {
   }
 
   foreach ($part in $parts) {
-    if ($part.Trim().TrimEnd('\\') -ieq $dirNormalized) {
+    if ($part.Trim().TrimEnd('\') -ieq $dirNormalized) {
       return
     }
   }
@@ -159,9 +161,9 @@ if (-not $uvExe) {
   }
 }
 
-# 2) We recommend Python 3.13 but support Python 3.10 to 3.13
+# 2) Install Python 3.14 (required)
 Confirm-OrAbort (Confirm-Step `
-    -Title "Step 2: Install Python $PythonVersion" `
+    -Title "Step 2: Install Python $PythonVersion (required)" `
     -Commands @('& "' + $uvExe + '" python install ' + $PythonVersion) `
 )
 & $uvExe python install $PythonVersion
@@ -179,5 +181,6 @@ Confirm-OrAbort (Confirm-Step `
 )
 & $uvExe sync
 
-Write-Host "Setup finished. Run:"
+Write-Host ""
+Write-Host "Setup finished! Run the application with:"
 Write-Host "  uv run autoscrapper"

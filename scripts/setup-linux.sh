@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# AutoScrapper Linux Setup Script
+# Required: Python 3.14+
 set -euo pipefail
 
 abort() {
@@ -56,8 +58,11 @@ if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
   fi
 fi
 
+# Python 3.14 is required
+PYTHON_VERSION="3.14"
+
 # 1) System prerequisites
-# - build-essential/linux-headers: commonly needed when a dependency must compile (e.g., evdev via pynput)
+# - build-essential/linux-headers: needed when dependencies compile (e.g., evdev via pynput)
 # - tesseract/leptonica/pkg-config: required to build/link tesserocr on Linux
 KERNEL_HEADERS_PKG="linux-headers-$(uname -r)"
 print_step "Step 1: Install system prerequisites (apt)"
@@ -108,17 +113,8 @@ if ! command -v uv >/dev/null 2>&1; then
   exit 1
 fi
 
-# 3) We recommend Python 3.13 but support Python 3.10 to 3.13
-PYTHON_VERSION="${AUTOSCRAPPER_PYTHON_VERSION:-3.13}"
-case "$PYTHON_VERSION" in
-  3.10|3.11|3.12|3.13) ;;
-  *)
-    echo "ERROR: Unsupported Python version: ${PYTHON_VERSION} (supported: 3.10–3.13; 3.14 is not supported)."
-    exit 1
-    ;;
-esac
-
-print_step "Step 3: Install and pin Python ${PYTHON_VERSION} (uv)"
+# 3) Install Python 3.14 (required)
+print_step "Step 3: Install Python ${PYTHON_VERSION} (required)"
 echo "Command to run:"
 echo "  uv python install \"${PYTHON_VERSION}\""
 confirm_or_abort "Run: uv python install \"${PYTHON_VERSION}\"?"
@@ -136,5 +132,6 @@ echo "  uv sync"
 confirm_or_abort "Proceed with Step 4?"
 uv sync
 
-echo "Setup finished. Run:"
+echo ""
+echo "Setup finished! Run the application with:"
 echo "  uv run autoscrapper"
