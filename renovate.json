@@ -53,7 +53,7 @@
     },
     {
       "description": "Disable GitHub Actions digest pinning",
-      "matchDepTypes": ["action"],
+      "matchManagers": ["github-actions"],
       "pinDigests": false
     },
     {
