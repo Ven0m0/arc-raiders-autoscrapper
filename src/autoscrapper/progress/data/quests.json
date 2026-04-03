@@ -1763,7 +1763,7 @@
     "objectives": [
       "IN ONE ROUND: Visit any Field Depot on the eastern side of the Spaceport",
       "Use the Field Radio to transmit the scout group's last log to Shani",
-      "Interact with the terminal in the old Raider Tower north of the Maintenance Hangar",
+      "Interact with the interminal in the old Raider Tower north of the Maintenance Hangar",
       "Find traces of the scout patrol near the Maintenance Hangar",
       "Search the remains left by the scouts",
       "Deliver the Scout Patrol Note to Shani"
@@ -3939,7 +3939,7 @@
         "id": "dcdddc17-36f3-4c3a-b191-cefe886b4dee",
         "item": {
           "id": "faded-flush-aviator-color",
-          "icon": "https://cdn.metaforge.app/arc-raiders/icons/faded-flush-aviator-color.webp",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/.webp",
           "name": "Faded Flush (Aviator Color)",
           "rarity": "Common",
           "item_type": "Misc"
