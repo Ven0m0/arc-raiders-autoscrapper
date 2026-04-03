@@ -44,6 +44,7 @@ _OCR_DEBUG_DIR: Optional[Path] = None
 _ITEM_NAMES: Optional[Tuple[str, ...]] = None
 _last_roi_hash: Optional[bytes] = None
 _last_ocr_result: Optional[Tuple[str, str]] = None
+DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75
 
 
 @dataclass
@@ -53,7 +54,16 @@ class InfoboxOcrResult:
     processed: np.ndarray
     preprocess_time: float
     ocr_time: float
+    source: Literal["infobox", "context_menu"] = "infobox"
     ocr_failed: bool = False
+
+
+@dataclass(frozen=True)
+class ItemNameMatchResult:
+    cleaned_text: str
+    chosen_name: str
+    matched_name: str | None
+    threshold: int
 
 
 @dataclass
@@ -571,20 +581,46 @@ def _get_item_names() -> Tuple[str, ...]:
     return _ITEM_NAMES
 
 
-def match_item_name(raw: str, threshold: int = 75) -> str:
+def match_item_name_result(
+    raw: str, threshold: int | None = None
+) -> ItemNameMatchResult:
     cleaned = clean_ocr_text(raw)
+    resolved_threshold = (
+        DEFAULT_ITEM_NAME_MATCH_THRESHOLD if threshold is None else threshold
+    )
     if not cleaned:
-        return ""
+        return ItemNameMatchResult(
+            cleaned_text="",
+            chosen_name="",
+            matched_name=None,
+            threshold=resolved_threshold,
+        )
 
     match = process.extractOne(
         cleaned,
         _get_item_names(),
         scorer=fuzz.WRatio,
-        score_cutoff=threshold,
+        score_cutoff=resolved_threshold,
     )
     if match is None:
-        return cleaned
-    return str(match[0])
+        return ItemNameMatchResult(
+            cleaned_text=cleaned,
+            chosen_name=cleaned,
+            matched_name=None,
+            threshold=resolved_threshold,
+        )
+
+    matched_name = str(match[0])
+    return ItemNameMatchResult(
+        cleaned_text=cleaned,
+        chosen_name=matched_name,
+        matched_name=matched_name,
+        threshold=resolved_threshold,
+    )
+
+
+def match_item_name(raw: str, threshold: int | None = None) -> str:
+    return match_item_name_result(raw, threshold).chosen_name
 
 
 def _hash_roi(image: np.ndarray) -> bytes:
@@ -886,15 +922,12 @@ def find_action_bbox_by_ocr(
     return bbox, processed
 
 
-def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
+def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
     """
-    OCR the infobox title strip once to derive the item title.
+    OCR a pre-cropped infobox title strip to derive the item title.
     """
     global _last_ocr_result, _last_roi_hash
     preprocess_start = time.perf_counter()
-    _save_debug_image("infobox_raw", infobox_bgr)
-    title_strip_bgr = _crop_title_strip(infobox_bgr)
-    _save_debug_image("infobox_title_raw", title_strip_bgr)
     processed = preprocess_for_ocr(title_strip_bgr)
     _save_debug_image("infobox_processed", processed)
     preprocess_time = time.perf_counter() - preprocess_start
@@ -908,6 +941,7 @@ def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
             processed=processed,
             preprocess_time=preprocess_time,
             ocr_time=0.0,
+            source="infobox",
         )
 
     ocr_time = 0.0
@@ -927,6 +961,7 @@ def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
             processed=processed,
             preprocess_time=preprocess_time,
             ocr_time=ocr_time,
+            source="infobox",
             ocr_failed=True,
         )
 
@@ -941,7 +976,26 @@ def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
         processed=processed,
         preprocess_time=preprocess_time,
         ocr_time=ocr_time,
+        source="infobox",
     )
+
+
+def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
+    """
+    OCR the infobox title strip once to derive the item title.
+    """
+    _save_debug_image("infobox_raw", infobox_bgr)
+    title_strip_bgr = _crop_title_strip(infobox_bgr)
+    _save_debug_image("infobox_title_raw", title_strip_bgr)
+    return ocr_title_strip(title_strip_bgr)
+
+
+def build_skip_unlisted_corpus_image(
+    infobox_bgr: np.ndarray, *, context_menu_fallback: bool
+) -> np.ndarray:
+    if context_menu_fallback:
+        return np.ascontiguousarray(infobox_bgr.copy())
+    return np.ascontiguousarray(_crop_title_strip(infobox_bgr).copy())
 
 
 def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
@@ -980,6 +1034,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
             processed=processed,
             preprocess_time=preprocess_time,
             ocr_time=ocr_time,
+            source="context_menu",
             ocr_failed=True,
         )
 
@@ -1022,6 +1077,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
         processed=processed,
         preprocess_time=preprocess_time,
         ocr_time=ocr_time,
+        source="context_menu",
     )
 
 
