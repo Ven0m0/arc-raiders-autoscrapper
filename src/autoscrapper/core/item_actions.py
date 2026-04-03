@@ -109,8 +109,10 @@ def load_item_actions(path: Optional[Path] = None) -> ActionMap:
         if not isinstance(entry, dict):
             continue
         name = entry.get("name")
+        if not isinstance(name, str):
+            continue
         normalized_name = normalize_item_name(name)
-        if not isinstance(name, str) or not normalized_name:
+        if not normalized_name:
             continue
 
         action_value = entry.get("action")

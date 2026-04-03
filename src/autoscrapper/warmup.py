@@ -11,11 +11,15 @@ _WARMUP_STARTED = False
 _WARMUP_ERROR: Optional[str] = None
 
 _HEAVY_MODULES = (
+    # Only modules that do NOT transitively import tesserocr are safe to
+    # pre-import in a background thread.  tesserocr pulls in cysignals, which
+    # installs OS signal handlers and requires the main thread.
+    # Modules excluded for that reason:
+    #   autoscrapper.ocr.inventory_vision  (→ tesseract → tesserocr)
+    #   autoscrapper.scanner.scan_loop     (→ inventory_vision → tesserocr)
+    #   autoscrapper.scanner.engine        (→ scan_loop → tesserocr)
     "autoscrapper.core.item_actions",
     "autoscrapper.interaction.ui_windows",
-    "autoscrapper.ocr.inventory_vision",
-    "autoscrapper.scanner.scan_loop",
-    "autoscrapper.scanner.engine",
 )
 
 
@@ -42,9 +46,10 @@ def _run_background_warmup() -> None:
     try:
         for module_name in _HEAVY_MODULES:
             importlib.import_module(module_name)
-        from .ocr.tesseract import initialize_ocr
-
-        initialize_ocr()
+        # initialize_ocr() is intentionally NOT called here: tesserocr imports
+        # cysignals which installs signal handlers, and signal handlers can only
+        # be installed from the main thread.  OCR is lazily initialised on first
+        # use (on the main thread) via the _get_api() lock in tesseract.py.
     except Exception as exc:  # pragma: no cover - defensive warmup fallback
         _set_warmup_error(f"{type(exc).__name__}: {exc}")
     finally:

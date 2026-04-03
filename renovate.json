@@ -19,7 +19,6 @@
   "automerge": true,
   "automergeStrategy": "squash",
   "forkProcessing": "enabled",
-  "ignoreTests": false,
   "abandonmentThreshold": "2 years",
   "lockFileMaintenance": {
     "enabled": true,
@@ -100,7 +99,7 @@
       ],
       "datasourceTemplate": "github-releases",
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>[^\\s]+) depName=(?<depName>[^\\s]+)(?: version=(?<currentValue>[^\\s]+))?\\s+[A-Za-z0-9_]+_VERSION:\\s*['\"]?(?<currentValue>[^'\"\\s]+)['\"]?"
+        "# renovate: datasource=(?<datasource>[^\\s]+) depName=(?<depName>[^\\s]+)(?: version=[^\\s]+)?\\s+[A-Za-z0-9_]+_VERSION:\\s*['\"]?(?<currentValue>[^'\"\\s]+)['\"]?"
       ]
     }
   ]

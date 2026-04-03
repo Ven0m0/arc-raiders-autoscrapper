@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import time
 from datetime import datetime, timezone
@@ -11,6 +12,8 @@ from urllib.request import Request, urlopen
 
 from .data_loader import DATA_DIR
 from .quest_overrides import apply_quest_overrides
+
+_log = logging.getLogger(__name__)
 
 METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
 SUPABASE_URL = "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
@@ -221,8 +224,16 @@ def update_data_snapshot(data_dir: Optional[Path] = None) -> dict:
     metaforge_items = _fetch_all_items()
     metaforge_quests = _fetch_all_quests()
 
-    components = _fetch_supabase_all("arc_item_components")
-    recycle_components = _fetch_supabase_all("arc_item_recycle_components")
+    try:
+        components = _fetch_supabase_all("arc_item_components")
+    except DownloadError as exc:
+        _log.warning("Skipping crafting component data (Supabase unavailable): %s", exc)
+        components = []
+    try:
+        recycle_components = _fetch_supabase_all("arc_item_recycle_components")
+    except DownloadError as exc:
+        _log.warning("Skipping recycle component data (Supabase unavailable): %s", exc)
+        recycle_components = []
 
     crafting_map = _build_component_map(components)
     recycle_map = _build_component_map(recycle_components)

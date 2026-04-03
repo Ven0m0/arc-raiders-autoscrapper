@@ -6,11 +6,14 @@ resolution, and contours are used to allow partially visible cells
 when the grid is vertically offset ("carousel" effect).
 """
 
+import logging
 from dataclasses import dataclass
 from typing import Iterator, List, Tuple
 
 import cv2
 import numpy as np
+
+_log = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -127,6 +130,17 @@ class Grid:
         expected_size = _scaled_cell_size(window_width, window_height)
         detections = _detect_cells_by_contours(inv_bgr, expected_size)
 
+        expected_count = cls.ROWS * cls.COLS
+        if len(detections) < expected_count:
+            _, _, roi_w, roi_h = roi_rect
+            _log.warning(
+                "Detected %d cells inside the grid ROI (expected %d); "
+                "falling back to synthetic uniform grid.",
+                len(detections),
+                expected_count,
+            )
+            detections = _synthetic_grid(roi_w, roi_h)
+
         cells: List[Cell] = []
         roi_x, roi_y, _, _ = roi_rect
 
@@ -235,6 +249,43 @@ def grid_center_point(window_width: int, window_height: int) -> Tuple[int, int]:
 # ---------------------------------------------------------------------------
 # Detection
 # ---------------------------------------------------------------------------
+
+
+def _synthetic_grid(
+    roi_w: int,
+    roi_h: int,
+) -> List[dict]:
+    """
+    Build a uniform 4×5 grid of cells from the ROI dimensions.
+    Used as a fallback when contour detection finds fewer than the expected
+    number of cells (e.g. due to ROI misalignment or non-standard resolution).
+    Coordinates are ROI-relative; callers must add roi_x/roi_y themselves.
+    """
+    col_w = roi_w / GRID_COLS
+    row_h = roi_h / GRID_ROWS
+    cells: List[dict] = []
+    for row in range(GRID_ROWS):
+        for col in range(GRID_COLS):
+            x = int(round(col * col_w))
+            y = int(round(row * row_h))
+            w = int(round((col + 1) * col_w)) - x
+            h = int(round((row + 1) * row_h)) - y
+            pad_x = int(w * SHRINK_RATIO_X)
+            pad_y = int(h * SHRINK_RATIO_Y)
+            ix1 = x + pad_x
+            iy1 = y + pad_y
+            ix2 = x + w - pad_x
+            iy2 = y + h - pad_y
+            cells.append(
+                {
+                    "x": x,
+                    "y": y,
+                    "w": w,
+                    "h": h,
+                    "safe_bounds": (ix1, iy1, ix2, iy2),
+                }
+            )
+    return cells
 
 
 def _scaled_cell_size(window_width: int, window_height: int) -> int:
