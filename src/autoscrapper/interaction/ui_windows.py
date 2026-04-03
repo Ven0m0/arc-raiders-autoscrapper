@@ -228,7 +228,7 @@ def window_monitor_rect(win: pwc.Window) -> Tuple[int, int, int, int]:
     raise RuntimeError("Unable to map target window to a monitor via mss.")
 
 
-def _get_mss() -> MSSBase:
+def _get_mss() -> "MSSBase":
     """
     Lazily create a thread-local MSS instance for screen capture.
 
