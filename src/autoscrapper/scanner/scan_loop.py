@@ -323,7 +323,11 @@ class _ScanRunner:
         # context-menu UI). Crop a positional region near the clicked cell so
         # OCR can still extract the item name from the menu title.
         context_menu_fallback = False
-        if infobox_rect is None and window_bgr is not None and self._last_click_window_pos is not None:
+        if (
+            infobox_rect is None
+            and window_bgr is not None
+            and self._last_click_window_pos is not None
+        ):
             cx, cy = self._last_click_window_pos
             infobox_rect = find_context_menu_crop(window_bgr, cx, cy)
             if infobox_rect is not None:
