@@ -1005,7 +1005,9 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
     raw_item_text = ""
     for key in sorted(groups.keys(), key=lambda k: _line_top(groups[k])):
         indices = sorted(groups[key])
-        raw_parts = [(data["text"][i] or "").strip() for i in indices if data["text"][i]]
+        raw_parts = [
+            (data["text"][i] or "").strip() for i in indices if data["text"][i]
+        ]
         cleaned_parts = [clean_ocr_text(p) for p in raw_parts]
         line_text = " ".join(p for p in cleaned_parts if p).strip()
         matched = match_item_name(line_text)

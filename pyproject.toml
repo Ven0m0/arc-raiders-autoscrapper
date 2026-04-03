@@ -9,26 +9,23 @@ description = "Arc Raiders inventory autoscrapper"
 readme = "README.md"
 requires-python = ">=3.14.3,<3.15"
 dependencies = [
-    "mss",
-    "numpy",
-    "opencv-python-headless",
-    "Pillow",
-    "pydirectinput-rgx; sys_platform == 'win32'",
-    "pynput; sys_platform == 'linux'",
-    "pywinctl",
-    "rapidfuzz~=3.14.3",
-    "rich",
-    "textual",
-    "tessdata.fast-eng",
-    "tesserocr==2.10.0; sys_platform == 'linux'",
-    "tesserocr @ https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp314-cp314-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.14' and platform_machine == 'AMD64'",
+  "mss",
+  "numpy",
+  "opencv-python-headless",
+  "Pillow",
+  "pydirectinput-rgx; sys_platform == 'win32'",
+  "pynput; sys_platform == 'linux'",
+  "pywinctl",
+  "rapidfuzz~=3.14.3",
+  "rich",
+  "textual",
+  "tessdata.fast-eng",
+  "tesserocr==2.10.0; sys_platform == 'linux'",
+  "tesserocr @ https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp314-cp314-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.14' and platform_machine == 'AMD64'",
 ]
 
 [project.optional-dependencies]
-dev = [
-    "ruff",
-    "pre-commit",
-]
+dev = ["ruff", "pre-commit"]
 
 [project.scripts]
 autoscrapper = "autoscrapper.__main__:main"
@@ -37,7 +34,7 @@ autoscrapper = "autoscrapper.__main__:main"
 Homepage = "https://github.com/zappybiby/ArcRaiders-AutoScrapper"
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+package-dir = { "" = "src" }
 include-package-data = true
 
 [tool.setuptools.packages.find]
@@ -45,10 +42,10 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 autoscrapper = [
-    "items/items_rules.default.json",
-    "progress/data/*.json",
-    "progress/data/static/*.json",
-    "tui/*.tcss",
+  "items/items_rules.default.json",
+  "progress/data/*.json",
+  "progress/data/static/*.json",
+  "tui/*.tcss",
 ]
 
 [tool.ruff]
