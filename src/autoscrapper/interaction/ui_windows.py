@@ -5,7 +5,7 @@ import sys
 import threading
 import time
 from dataclasses import dataclass
-from typing import Optional, Tuple
+from typing import TYPE_CHECKING, Optional, Tuple
 
 import mss
 import numpy as np
@@ -14,6 +14,9 @@ import pywinctl as pwc
 from .inventory_grid import Cell
 from . import input_driver as pdi
 from .keybinds import DEFAULT_STOP_KEY
+
+if TYPE_CHECKING:
+    from mss.base import MSSBase
 
 
 # Target window
@@ -225,7 +228,7 @@ def window_monitor_rect(win: pwc.Window) -> Tuple[int, int, int, int]:
     raise RuntimeError("Unable to map target window to a monitor via mss.")
 
 
-def _get_mss() -> "MSSBase":
+def _get_mss() -> MSSBase:
     """
     Lazily create a thread-local MSS instance for screen capture.
 

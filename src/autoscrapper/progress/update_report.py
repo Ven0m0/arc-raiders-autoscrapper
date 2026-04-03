@@ -455,7 +455,7 @@ def build_markdown_summary(
     lines.append("")
     lines.append("## Quest Graph Coverage")
     missing_count = graph.get("questsMissingFromGraphCount", 0)
-    lines.append("- Missing quests in `quests_graph.json`: " f"`{missing_count}`")
+    lines.append(f"- Missing quests in `quests_graph.json`: `{missing_count}`")
     if isinstance(missing_count, int) and missing_count > 0:
         lines.append(":warning: Graph drift detected. Solver fallback may be used.")
         missing_quests = graph.get("questsMissingFromGraph")
@@ -466,14 +466,13 @@ def build_markdown_summary(
     lines.append("")
     lines.append("## Generation Baseline")
     lines.append(
-        "- `allQuestsCompleted`: " f"`{assumptions.get('allQuestsCompleted', False)}`"
+        f"- `allQuestsCompleted`: `{assumptions.get('allQuestsCompleted', False)}`"
     )
     lines.append(
-        "- Workshop profile: " f"`{assumptions.get('workshopProfile', 'unknown')}`"
+        f"- Workshop profile: `{assumptions.get('workshopProfile', 'unknown')}`"
     )
     lines.append(
-        "- Workshop IDs at level 2: "
-        f"`{', '.join(assumptions.get('workshopIds', []))}`"
+        f"- Workshop IDs at level 2: `{', '.join(assumptions.get('workshopIds', []))}`"
     )
     lines.append("- Report artifact: `artifacts/update-report.json`")
 
