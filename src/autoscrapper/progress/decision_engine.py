@@ -6,6 +6,25 @@ from typing import Dict, List, Optional
 from .recipe_utils import build_reverse_recipe_index
 from .weapon_grouping import WeaponGrouper
 
+KEEP_ITEM_OVERRIDES = {
+    "assorted-seeds": [
+        "Valuable currency item",
+        "Used for trading with Celeste",
+    ],
+    "assorted_seeds": [
+        "Valuable currency item",
+        "Used for trading with Celeste",
+    ],
+    "chemicals": [
+        "Override: keep progression material",
+        "Manual default keep override",
+    ],
+    "crude-explosives": [
+        "Override: keep progression material",
+        "Manual default keep override",
+    ],
+}
+
 
 @dataclass(frozen=True)
 class DecisionReason:
@@ -73,15 +92,13 @@ class DecisionEngine:
         item_type = str(item.get("type", "")).lower()
         rarity = str(item.get("rarity", "")).lower()
 
-        if item.get("id") in {"assorted-seeds", "assorted_seeds"}:
+        override_reasons = KEEP_ITEM_OVERRIDES.get(item.get("id"))
+        if override_reasons is not None:
             return self.finalize_decision(
                 item,
                 DecisionReason(
                     decision="keep",
-                    reasons=[
-                        "Valuable currency item",
-                        "Used for trading with Celeste",
-                    ],
+                    reasons=override_reasons,
                 ),
             )
 
