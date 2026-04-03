@@ -22,7 +22,7 @@ KEEP_ITEM_OVERRIDES = {
 }
 
 
-def _normalize_override_item_id(item_id: str | None) -> str:
+def _normalize_item_id(item_id: str | None) -> str:
     return str(item_id or "").replace("_", "-")
 
 
@@ -93,7 +93,7 @@ class DecisionEngine:
         rarity = str(item.get("rarity", "")).lower()
 
         override_reasons = KEEP_ITEM_OVERRIDES.get(
-            _normalize_override_item_id(item.get("id"))
+            _normalize_item_id(item.get("id"))
         )
         if override_reasons is not None:
             return self.finalize_decision(
