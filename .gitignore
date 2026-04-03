@@ -216,8 +216,8 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Local contributor docs (not tracked)
-AGENTS.md
 .claude/
+!.claude/settings.json
 .vscode/
 misplaced_files_2026-02-26_pokemon_go/
 .omc/
