@@ -71,7 +71,7 @@ repos:
         stages: [pre-commit]
 
   # Taplo - TOML linting and formatting
-  - repo: https://github.com/comkieffer/taplo-pre-commit
+  - repo: https://github.com/ComPWA/mirrors-taplo
     rev: v0.9.3
     hooks:
       - id: taplo-format
