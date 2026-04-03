@@ -29,10 +29,6 @@
   "prConcurrentLimit": 5,
   "prHourlyLimit": 0,
   "rangeStrategy": "bump",
-  "uv": {
-    "enabled": true,
-    "fileMatch": ["pyproject.toml", "uv.lock"]
-  },
   "pep621": {
     "enabled": true
   },
