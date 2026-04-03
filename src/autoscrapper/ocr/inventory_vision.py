@@ -496,6 +496,40 @@ def find_infobox(bgr_image: np.ndarray) -> Optional[Tuple[int, int, int, int]]:
     return wide_result.rect
 
 
+# Positional fallback crop for the dark context-menu UI (post game-update).
+# The context menu opens to the RIGHT of the right-clicked cell and its top
+# aligns roughly with the cell centre.  These offsets (relative to the cell
+# centre in window coords) give a generous crop anchored to that region.
+_CONTEXT_MENU_X_OFFSET = 150
+_CONTEXT_MENU_Y_OFFSET = 100
+_CONTEXT_MENU_WIDTH = 420
+_CONTEXT_MENU_HEIGHT = 380
+
+
+def find_context_menu_crop(
+    bgr_image: np.ndarray,
+    cell_center_x: int,
+    cell_center_y: int,
+) -> Optional[Tuple[int, int, int, int]]:
+    """
+    Return a positional crop rect near the right-click context menu.
+
+    Used as a fallback when color-based ``find_infobox`` fails because the
+    game changed its item panel from a light-cream background to a dark
+    context menu.  The caller must pass the window-relative cell center so
+    the crop is anchored to the correct screen location.
+    """
+    img_h, img_w = bgr_image.shape[:2]
+    x = max(0, cell_center_x + _CONTEXT_MENU_X_OFFSET)
+    y = max(0, cell_center_y + _CONTEXT_MENU_Y_OFFSET)
+    x2 = min(img_w, x + _CONTEXT_MENU_WIDTH)
+    y2 = min(img_h, y + _CONTEXT_MENU_HEIGHT)
+    w, h = x2 - x, y2 - y
+    if w < 100 or h < 100:
+        return None
+    return x, y, w, h
+
+
 def title_roi(infobox_rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
     """
     Compute the ROI for the title text within the infobox.
@@ -669,6 +703,10 @@ def preprocess_for_ocr(roi_bgr: np.ndarray) -> np.ndarray:
     roi_bgr = cv2.resize(roi_bgr, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
     gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
     _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    # Tesseract expects dark text on light background. If the background is dark
+    # (e.g. the game's new dark context-menu UI), invert so text becomes dark.
+    if float(np.mean(binary)) < 128.0:
+        binary = cv2.bitwise_not(binary)
     return binary
 
 
@@ -897,6 +935,85 @@ def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
     )
     _last_roi_hash = roi_hash
     _last_ocr_result = (item_name, raw_item_text)
+    return InfoboxOcrResult(
+        item_name=item_name,
+        raw_item_text=raw_item_text,
+        processed=processed,
+        preprocess_time=preprocess_time,
+        ocr_time=ocr_time,
+    )
+
+
+def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
+    """
+    OCR a dark context-menu crop to extract the item name.
+
+    Unlike ``ocr_infobox``, this does not strip to the title row.  Instead it
+    searches every text line top-to-bottom for one that fuzzy-matches a known
+    item name via ``match_item_name``.  This handles menus that mix action
+    labels ("Move to Backpack", "Sell", "Recycle") with the item title.
+    """
+    preprocess_start = time.perf_counter()
+    _save_debug_image("ctx_menu_raw", context_crop_bgr)
+    processed = preprocess_for_ocr(context_crop_bgr)
+    # Small dilation fills gaps in the game's thin-stroke display font so
+    # Tesseract doesn't read broken strokes as separate characters.
+    kernel = np.ones((2, 2), np.uint8)
+    processed = cv2.dilate(processed, kernel, iterations=1)
+    _save_debug_image("ctx_menu_processed", processed)
+    preprocess_time = time.perf_counter() - preprocess_start
+
+    ocr_time = 0.0
+    try:
+        ocr_start = time.perf_counter()
+        data = image_to_data(processed)
+        ocr_time = time.perf_counter() - ocr_start
+    except Exception as exc:
+        print(
+            f"[vision_ocr] ocr_backend image_to_data failed for context menu; "
+            f"falling back to empty OCR result. error={exc}",
+            flush=True,
+        )
+        return InfoboxOcrResult(
+            item_name="",
+            raw_item_text="",
+            processed=processed,
+            preprocess_time=preprocess_time,
+            ocr_time=ocr_time,
+            ocr_failed=True,
+        )
+
+    # Group words into lines keyed by (page, block, par, line).
+    texts = data.get("text", [])
+    groups: Dict[Tuple[int, int, int, int], List[int]] = {}
+    for i, raw_text in enumerate(texts):
+        cleaned = clean_ocr_text(raw_text or "")
+        if not cleaned:
+            continue
+        key = (
+            int(data["page_num"][i]),
+            int(data["block_num"][i]),
+            int(data["par_num"][i]),
+            int(data["line_num"][i]),
+        )
+        groups.setdefault(key, []).append(i)
+
+    def _line_top(indices: List[int]) -> float:
+        return min(float(data["top"][i]) for i in indices)
+
+    item_name = ""
+    raw_item_text = ""
+    for key in sorted(groups.keys(), key=lambda k: _line_top(groups[k])):
+        indices = sorted(groups[key])
+        raw_parts = [(data["text"][i] or "").strip() for i in indices if data["text"][i]]
+        cleaned_parts = [clean_ocr_text(p) for p in raw_parts]
+        line_text = " ".join(p for p in cleaned_parts if p).strip()
+        matched = match_item_name(line_text)
+        if matched:
+            item_name = matched
+            raw_item_text = " ".join(p for p in raw_parts if p).strip()
+            break
+
     return InfoboxOcrResult(
         item_name=item_name,
         raw_item_text=raw_item_text,

@@ -22,8 +22,10 @@ from ..interaction.ui_windows import (
 )
 from ..ocr.inventory_vision import (
     InfoboxOcrResult,
+    find_context_menu_crop,
     find_infobox,
     is_slot_empty,
+    ocr_context_menu,
     ocr_infobox,
 )
 
@@ -63,6 +65,7 @@ class _InfoboxCaptureResult:
     find_time: float
     capture_attempts: int
     found_on_attempt: int
+    context_menu_fallback: bool = False
 
 
 @dataclass(frozen=True)
@@ -218,6 +221,7 @@ class _ScanRunner:
         self.progress_impl = progress_impl
         self.startup_events = startup_events
         self.state = ScanRunState()
+        self._last_click_window_pos: Optional[Tuple[int, int]] = None
         self.action_context = ActionExecutionContext(
             apply_actions=context.apply_actions,
             win_left=context.win_left,
@@ -264,6 +268,8 @@ class _ScanRunner:
         return True
 
     def _open_cell_infobox(self, cell: Cell) -> None:
+        cx, cy, cw, ch = cell.safe_rect
+        self._last_click_window_pos = (cx + cw // 2, cy + ch // 2)
         open_cell_item_infobox(
             cell,
             self.context.win_left,
@@ -313,6 +319,17 @@ class _ScanRunner:
                 stop_key=self.context.stop_key,
             )
 
+        # Fallback: color-based detection failed (e.g. game updated to dark
+        # context-menu UI). Crop a positional region near the clicked cell so
+        # OCR can still extract the item name from the menu title.
+        context_menu_fallback = False
+        if infobox_rect is None and window_bgr is not None and self._last_click_window_pos is not None:
+            cx, cy = self._last_click_window_pos
+            infobox_rect = find_context_menu_crop(window_bgr, cx, cy)
+            if infobox_rect is not None:
+                found_on_attempt = capture_attempts
+                context_menu_fallback = True
+
         return _InfoboxCaptureResult(
             infobox_rect=infobox_rect,
             window_bgr=window_bgr,
@@ -320,6 +337,7 @@ class _ScanRunner:
             find_time=find_time,
             capture_attempts=capture_attempts,
             found_on_attempt=found_on_attempt,
+            context_menu_fallback=context_menu_fallback,
         )
 
     def _ocr_infobox_with_retries(
@@ -375,7 +393,11 @@ class _ScanRunner:
             else:
                 infobox_bgr = window_bgr[y : y + h, x : x + w]
 
-            infobox_ocr = ocr_infobox(infobox_bgr)
+            infobox_ocr = (
+                ocr_context_menu(infobox_bgr)
+                if capture_result.context_menu_fallback
+                else ocr_infobox(infobox_bgr)
+            )
             preprocess_time += infobox_ocr.preprocess_time
             ocr_time += infobox_ocr.ocr_time
             item_name = infobox_ocr.item_name

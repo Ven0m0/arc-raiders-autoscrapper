@@ -3,13 +3,11 @@
   "extends": [
     "config:best-practices",
     ":configMigration",
-    ":preserveSemverRanges",
     "abandonments:recommended",
     "group:all",
     "packages:linters",
     "schedule:weekly",
     ":dependencyDashboard",
-    ":automergeBranch",
     ":automergeMinor",
     ":ignoreModulesAndTests",
     "docker:enableMajor",
