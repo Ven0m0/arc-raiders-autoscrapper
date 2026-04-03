@@ -1129,10 +1129,10 @@
       "id": "chemicals",
       "name": "Chemicals",
       "value": 50,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Override: keep progression material",
+        "Manual default keep override"
       ]
     },
     {
@@ -1359,10 +1359,10 @@
       "id": "crude-explosives",
       "name": "Crude Explosives",
       "value": 270,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Override: keep progression material",
+        "Manual default keep override"
       ]
     },
     {
