@@ -13,8 +13,8 @@ This repo uses `uv` to manage Python + dependencies.
 
 ### Clone the repo
 From a terminal:
-- `git clone https://github.com/zappybiby/ArcRaiders-AutoScrapper.git`
-- `cd ArcRaiders-AutoScrapper`
+- `git clone https://github.com/Ven0m0/arc-raiders-autoscrapper.git`
+- `cd arc-raiders-autoscrapper`
 
 ### Windows 10/11 (64-bit)
 **From the repo root, run the setup script**
