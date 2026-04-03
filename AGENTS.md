@@ -1,63 +1,66 @@
-# CLAUDE.md
+# Agent Instructions
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Repository purpose
+Arc Raiders AutoScrapper is a Python 3.14 desktop automation tool for Arc Raiders inventory management. It captures the game window, OCR-reads item names, decides whether to keep, sell, or recycle them, and can optionally perform the click action.
 
-## Commands
+## Stack
+- Python 3.14
+- `uv` for setup and command execution
+- Textual for the TUI
+- `mss`, Pillow, OpenCV, and `pywinctl` for capture and window handling
+- Tesseract / `tesserocr` for OCR
+- `rapidfuzz` for fuzzy item-name matching
+- Ruff and pre-commit for code quality
 
+## Primary commands
 ```bash
-# Setup (first time, Windows)
-pwsh -NoProfile -ExecutionPolicy Bypass -File scripts\setup-windows.ps1
-
-# Setup (Linux)
+# Setup
 bash scripts/setup-linux.sh
+pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/setup-windows.ps1
 
-# Run TUI
+# Run the app
 uv run autoscrapper
-
-# Run scan directly
 uv run autoscrapper scan
 uv run autoscrapper scan --dry-run
 
-# Format + lint
+# Code quality
 uv run ruff format src/
 uv run ruff check src/
 uv run ruff check --fix src/
-
-# Pre-commit (runs ruff)
 uv run pre-commit run --all-files
 
-# Update game data snapshots (items.json, quests.json, default rules)
+# Refresh generated data and default rules
 uv run python scripts/update_snapshot_and_defaults.py
+uv run python scripts/update_snapshot_and_defaults.py --dry-run
 ```
 
-There is no test suite. Verification is done via `--dry-run` scan against a live game window.
+## Validation expectations
+Use the cheapest validation that matches the change:
+- Python source changes: `uv run ruff check src/`
+- Broad repository changes: `uv run pre-commit run --all-files`
+- OCR, scanner, grid detection, or input-driver changes: `uv run autoscrapper scan --dry-run`
+- Snapshot or default-rules changes: `uv run python scripts/update_snapshot_and_defaults.py --dry-run`
 
-## Architecture
+There is no automated test suite. End-to-end verification requires a live Arc Raiders window, so do not claim runtime validation unless it was actually performed.
 
-Captures the Arc Raiders inventory screen, OCR-reads each item name, looks up a keep/sell/recycle decision, and optionally clicks the appropriate button.
+## Architecture hotspots
+- `src/autoscrapper/scanner/` orchestrates scans, OCR initialisation, and action execution.
+- `src/autoscrapper/interaction/` handles grid detection, window targeting, and platform input.
+- `src/autoscrapper/ocr/` contains OCR preprocessing, title-strip extraction, and Tesseract integration.
+- `src/autoscrapper/core/item_actions.py` and `src/autoscrapper/items/rules_store.py` load rules and resolve keep/sell/recycle actions.
+- `src/autoscrapper/progress/` contains quest and crafting-aware decision logic plus generated data.
+- `scripts/update_snapshot_and_defaults.py` is the source of truth for generated snapshot data and `items_rules.default.json`.
+- `src/autoscrapper/config.py` owns persisted config schema and migrations.
 
-**Scan flow:**
-1. `scanner/engine.py` waits for the game window and initialises Tesseract OCR
-2. `interaction/inventory_grid.py` uses OpenCV contour detection to locate the 4×5 grid cells
-3. For each cell: click → capture infobox region → OCR the title strip (`ocr/inventory_vision.py`) → clean text
-4. `core/item_actions.py` looks up the cleaned name in `items_rules.*.json` (exact match, then `rapidfuzz` WRatio fuzzy fallback at threshold 85)
-5. `progress/decision_engine.py` evaluates quest/crafting dependencies for ambiguous items
-6. `scanner/actions.py` executes the click action (or skips in `--dry-run`)
+## Working guidelines
+- Prefer small, targeted edits in OCR, scanner, and input code; these paths are tightly coupled and easy to regress.
+- Prefer `--dry-run` before any change that could trigger clicks.
+- If generated data or default rules need to change, update them through the script instead of hand-editing generated outputs.
+- Keep README, AGENTS.md, and `.github/copilot-instructions.md` aligned when commands or workflows change.
+- Check `TODO.md` before changing fuzzy thresholds, OCR heuristics, or rule exceptions.
 
-**Key modules:**
-- `ocr/tesseract.py` — thread-safe Tesseract singleton; PSM=SINGLE_LINE; character whitelist; lazy init with multiple tessdata path fallbacks
-- `ocr/inventory_vision.py` — infobox detection by BGR colour `(236, 246, 253)` ±30 tolerance; title ROI is top ~18% of infobox; 2× INTER_CUBIC upscale before threshold
-- `core/item_actions.py` — `ActionMap` (dict of normalised name → decisions); `match_item_name()` for fuzzy fallback
-- `progress/decision_engine.py` — per-item KEEP/SELL/RECYCLE reasoning considering quests, recipes, recycle value
-- `items/rules_store.py` — loads `items_rules.custom.json` (user) → falls back to `items_rules.default.json` (generated)
-- `config.py` — persisted to `%APPDATA%/AutoScrapper/config.json` (Windows) or `~/.autoscrapper/` (Linux); `CONFIG_VERSION=5`
-- `tui/` — Textual TUI with screens for scan, settings, rules editor, progress review
-- `scripts/update_snapshot_and_defaults.py` — fetches Metaforge API → writes `progress/data/*.json` + regenerates default rules; runs daily via GitHub Actions
-
-**Platform input:** `pydirectinput-rgx` on Windows, `pynput` on Linux (abstracted in `interaction/input_driver.py`).
-
-**Package data** (bundled in wheel): `items_rules.default.json`, `progress/data/*.json`, TUI CSS stylesheets.
-
-## Active Work
-
-`TODO.md` tracks pending items. Key areas: fuzzy match threshold tuning (collect SKIP_UNLISTED OCR texts from real runs), tessdata model benchmark (`tessdata.best-eng` vs `tessdata.fast-eng`), and rules mismatches (`stitcher-i/ii` keep action, conditional `wasp-driver` pending "The Trifecta" quest).
+## Guardrails
+- Preserve custom rule precedence over default rules.
+- Preserve the scheduled workflow contract that regenerates `progress/data/*.json` and `items_rules.default.json`.
+- Do not casually change OCR thresholds, fuzzy thresholds, or click timing without a reason tied to observed behavior.
+- Be explicit about any verification limits caused by platform or live-window constraints.
