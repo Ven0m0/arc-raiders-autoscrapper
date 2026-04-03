@@ -47,12 +47,8 @@
 - [x] Fix `blue-light-stick`: action=sell but analysis has Override:Keep — change to keep
 - [x] Fix `green-light-stick`: action=sell but analysis has Override:Keep — change to keep
 - [x] Fix `yellow-light-stick`: action=sell but analysis has Override:Keep — change to keep
-- [ ] T003 Reconcile `stitcher-i` / `stitcher-ii` intent with generated defaults (defaults currently keep both)
-- [ ] T004 Route `wasp-driver` to recycle after `The Trifecta` once snapshot data exposes recycle outputs
 
 ## Execution Order
 
 - [ ] T001
 - [ ] T002
-- [ ] T004
-- [ ] T003
