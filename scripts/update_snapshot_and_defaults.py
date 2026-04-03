@@ -14,12 +14,12 @@ SRC_DIR = REPO_ROOT / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
-from autoscrapper.progress.data_update import update_data_snapshot
-from autoscrapper.progress.rules_generator import (
+from autoscrapper.progress.data_update import update_data_snapshot  # noqa: E402
+from autoscrapper.progress.rules_generator import (  # noqa: E402
     generate_rules_from_active,
     write_rules,
 )
-from autoscrapper.progress.update_report import (
+from autoscrapper.progress.update_report import (  # noqa: E402
     build_markdown_summary,
     diff_quests,
     diff_rules,
