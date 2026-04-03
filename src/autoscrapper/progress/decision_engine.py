@@ -22,7 +22,7 @@ KEEP_ITEM_OVERRIDES = {
 }
 
 
-def _normalize_override_item_id(item_id: object) -> str:
+def _normalize_override_item_id(item_id: str | None) -> str:
     return str(item_id or "").replace("_", "-")
 
 
