@@ -22,14 +22,8 @@
     "stackSize": 5,
     "craftBench": "Med Stations 1",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "plastic-parts": 3,
-      "chemicals": 3
-    },
-    "recyclesInto": {
-      "chemicals": 1,
-      "plastic-parts": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "advanced-arc-powercell",
@@ -42,9 +36,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-powercell": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "advanced-electrical-components",
@@ -56,14 +48,8 @@
     "stackSize": 5,
     "craftBench": "Refiner",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "wires-recipe": 3,
-      "electrical-components": 2
-    },
-    "recyclesInto": {
-      "electrical-components": 1,
-      "wires-recipe": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "advanced-mechanical-components",
@@ -75,14 +61,8 @@
     "stackSize": 5,
     "craftBench": "Refiner",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "spring": 2,
-      "mechanical-components": 2
-    },
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "spring": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "agave",
@@ -95,9 +75,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "assorted-seeds": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "agave-juice",
@@ -109,10 +87,7 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "agave": 1,
-      "empty-wine-bottle": 1
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -139,10 +114,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 6,
-      "processor": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "alien-duck",
@@ -180,13 +152,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "plastic-parts": 6,
-      "duct-tape-recipe": 1
-    },
-    "recyclesInto": {
-      "plastic-parts": 6
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "angled-grip-ii",
@@ -198,14 +165,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 2,
-      "duct-tape-recipe": 3
-    },
-    "recyclesInto": {
-      "duct-tape-recipe": 1,
-      "mechanical-components": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "angled-grip-ii-recipe",
@@ -230,14 +191,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 2,
-      "duct-tape-recipe": 5
-    },
-    "recyclesInto": {
-      "duct-tape-recipe": 2,
-      "mod-components": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "angled-grip-iii-recipe",
@@ -262,13 +217,8 @@
     "stackSize": 5,
     "craftBench": "Refiner",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "chemicals": 10,
-      "great-muullein": 2
-    },
-    "recyclesInto": {
-      "chemicals": 10
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "anvil-recipe",
@@ -293,15 +243,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 2",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 5,
-      "simple-gun-parts": 6,
-      "anvil-recipe": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 2,
-      "simple-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "anvil-ii",
@@ -313,15 +256,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench II",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "anvil-i": 1,
-      "mechanical-components": 3,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 3,
-      "simple-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "anvil-iii",
@@ -333,15 +269,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "anvil-ii": 1,
-      "mechanical-components": 4,
-      "heavy-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 4,
-      "simple-gun-parts": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "anvil-iv",
@@ -353,15 +282,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 4,
-      "heavy-gun-parts": 1,
-      "anvil-iii": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 5,
-      "simple-gun-parts": 5
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "anvil-splitter",
@@ -374,10 +296,7 @@
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "mod-components": 1,
-      "processor": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "aphelion-rifle",
@@ -389,15 +308,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "magnetic-accelerator": 3,
-      "complex-gun-parts": 3,
-      "matriarch-reactor": 1
-    },
-    "recyclesInto": {
-      "magnetic-accelerator": 2,
-      "complex-gun-parts": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "aphelion-rifle-blueprint",
@@ -423,9 +335,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "assorted-seeds": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "arc-alloy",
@@ -438,9 +348,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "arc-circuitry",
@@ -452,12 +360,8 @@
     "stackSize": 5,
     "craftBench": "Refiner II",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "arc-alloy": 8
-    },
-    "recyclesInto": {
-      "arc-alloy": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "arc-coolant",
@@ -470,9 +374,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 16
-    }
+    "recyclesInto": null
   },
   {
     "id": "arc-flex-rubber",
@@ -485,9 +387,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "rubber-parts-recipe": 16
-    }
+    "recyclesInto": null
   },
   {
     "id": "arc-motion-core",
@@ -499,12 +399,8 @@
     "stackSize": 5,
     "craftBench": "Refiner II",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "arc-alloy": 8
-    },
-    "recyclesInto": {
-      "arc-alloy": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "arc-performance-steel",
@@ -517,9 +413,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 12
-    }
+    "recyclesInto": null
   },
   {
     "id": "arc-powercell",
@@ -545,9 +439,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 14
-    }
+    "recyclesInto": null
   },
   {
     "id": "arc-thermo-lining",
@@ -560,9 +452,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "fabric": 16
-    }
+    "recyclesInto": null
   },
   {
     "id": "arpeggio-i",
@@ -574,10 +464,7 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 6,
-      "simple-gun-parts": 6
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -590,11 +477,7 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "arpeggio-i": 1,
-      "metal-parts": 14,
-      "simple-gun-parts": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -607,11 +490,7 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "arpeggio-ii": 1,
-      "metal-parts": 10,
-      "simple-gun-parts": 4
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -624,11 +503,7 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 1,
-      "medium-gun-parts": 2,
-      "arpeggio-iii": 1
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -642,10 +517,7 @@
     "craftBench": null,
     "updatedAt": "2026-03-31T10:07:17.014017+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "advanced-arc-powercell": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "assorted-seeds",
@@ -709,12 +581,8 @@
     "stackSize": 5,
     "craftBench": "Basic Bench or Med Station 1",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "fabric": 5
-    },
-    "recyclesInto": {
-      "fabric": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "barricade-kit",
@@ -726,12 +594,8 @@
     "stackSize": 3,
     "craftBench": "Utility Bench 1",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 1
-    },
-    "recyclesInto": {
-      "metal-parts": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "barricade-kit-recipe",
@@ -757,10 +621,7 @@
     "craftBench": null,
     "updatedAt": "2026-02-24T17:41:22.342406+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 2,
-      "advanced-mechanical-components": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "battery",
@@ -773,9 +634,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "bettina-blueprint",
@@ -800,11 +659,7 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 3,
-      "heavy-gun-parts": 3,
-      "canister": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -817,14 +672,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 1,
-      "heavy-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "bettina-iii",
@@ -836,14 +685,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 1,
-      "heavy-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "bettina-iv",
@@ -855,14 +698,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 3,
-      "heavy-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "bicycle-pump",
@@ -875,10 +712,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "canister": 4,
-      "metal-parts": 10
-    }
+    "recyclesInto": null
   },
   {
     "id": "binoculars",
@@ -890,14 +724,8 @@
     "stackSize": 1,
     "craftBench": "Utility Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "plastic-parts": 8,
-      "rubber-parts-recipe": 4
-    },
-    "recyclesInto": {
-      "plastic-parts": 4,
-      "rubber-parts-recipe": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "bison-driver",
@@ -910,10 +738,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-motion-core": 2,
-      "arc-alloy": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "black-eye-face-style",
@@ -964,14 +789,8 @@
     "stackSize": 5,
     "craftBench": "Explosive Bench 3",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "oil": 2,
-      "explosive-compound": 1
-    },
-    "recyclesInto": {
-      "metal-parts": 4,
-      "oil": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "blaze-grenade-blueprint",
@@ -1075,9 +894,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "blue-light-stick-blueprint",
@@ -1141,12 +958,7 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 3",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "magnetic-accelerator": 1,
-      "light-gun-parts": 3,
-      "bobcat-i-recipe": 1,
-      "exodus-modules": 2
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -1159,15 +971,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "bobcat-i": 1,
-      "advanced-mechanical-components": 2,
-      "light-gun-parts": 1
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 3,
-      "light-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "bobcat-iii",
@@ -1179,15 +984,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "light-gun-parts": 3,
-      "bobcat-ii": 1
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 4,
-      "light-gun-parts": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "bobcat-iv",
@@ -1199,15 +997,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "bobcat-iii": 1,
-      "advanced-mechanical-components": 2,
-      "light-gun-parts": 3
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 5,
-      "light-gun-parts": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "bombardier-cell",
@@ -1220,10 +1011,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "arc-alloy": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "bow-and-arrow-emote",
@@ -1275,10 +1063,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "battery": 2,
-      "metal-parts": 6
-    }
+    "recyclesInto": null
   },
   {
     "id": "broken-guidance-system",
@@ -1291,9 +1076,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "processor": 4
-    }
+    "recyclesInto": null
   },
   {
     "id": "broken-handcuffs",
@@ -1319,10 +1102,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "sensors-recipe": 3,
-      "wires-recipe": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "broken-taser",
@@ -1335,10 +1115,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "battery": 2,
-      "wires-recipe": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "burgerboy-backpack-charm",
@@ -1428,15 +1205,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 2",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 3,
-      "simple-gun-parts": 3,
-      "burltetta-recipe": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "simple-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "burletta-ii",
@@ -1448,15 +1218,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "burletta-i": 1,
-      "mechanical-components": 3,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 2,
-      "simple-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "burletta-iiii",
@@ -1468,15 +1231,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "burletta-ii": 1,
-      "mechanical-components": 3,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 3,
-      "simple-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "burletta-iv",
@@ -1488,15 +1244,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "burletta-iiii": 1,
-      "mechanical-components": 4,
-      "light-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 4,
-      "simple-gun-parts": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "burned-arc-circuitry",
@@ -1509,9 +1258,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "burnt-out-candles",
@@ -1537,9 +1284,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 8
-    }
+    "recyclesInto": null
   },
   {
     "id": "candleberries",
@@ -1552,9 +1297,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "assorted-seeds": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "candle-holder",
@@ -1567,9 +1310,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 8
-    }
+    "recyclesInto": null
   },
   {
     "id": "canister",
@@ -1582,9 +1323,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "cans-backpack-attachment",
@@ -1608,12 +1347,8 @@
     "weightKg": 6.5,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-03-31T13:46:05.081627+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "magnet": 5,
-      "medium-gun-parts": 3
-    },
+    "updatedAt": "2026-04-01T15:43:35.526254+00:00",
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -1704,14 +1439,8 @@
     "stackSize": 1,
     "craftBench": "Equipment Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "plastic-parts": 6,
-      "rubber-parts-recipe": 6
-    },
-    "recyclesInto": {
-      "plastic-parts": 3,
-      "rubber-parts-recipe": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "combat-mk-2",
@@ -1723,14 +1452,8 @@
     "stackSize": 1,
     "craftBench": "Equipment Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "electrical-components": 2,
-      "magnet": 3
-    },
-    "recyclesInto": {
-      "electrical-components": 1,
-      "magnet": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "combat-mk-3-aggressive",
@@ -1742,10 +1465,7 @@
     "stackSize": 1,
     "craftBench": "Gear Bench III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-electrical-components": 2,
-      "processor": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -1771,10 +1491,7 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-electrical-components": 2,
-      "processor": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -1801,10 +1518,7 @@
     "craftBench": null,
     "updatedAt": "2026-02-25T14:13:46.52305+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 2,
-      "crude-explosives": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "compensator-i",
@@ -1816,13 +1530,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 6,
-      "wires-recipe": 1
-    },
-    "recyclesInto": {
-      "metal-parts": 5
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "compensator-ii",
@@ -1834,14 +1543,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith II",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 2,
-      "wires-recipe": 4
-    },
-    "recyclesInto": {
-      "wires-recipe": 1,
-      "mechanical-components": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "compensator-ii-recipe",
@@ -1866,14 +1569,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 2,
-      "wires-recipe": 8
-    },
-    "recyclesInto": {
-      "wires-recipe": 2,
-      "mod-components": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "compensator-iii-recipe",
@@ -1898,14 +1595,8 @@
     "stackSize": 3,
     "craftBench": "Refiner",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "light-gun-parts": 2,
-      "medium-gun-parts": 2,
-      "heavy-gun-parts": 2
-    },
-    "recyclesInto": {
-      "simple-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "complex-gun-parts-blueprint",
@@ -1931,10 +1622,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 5,
-      "oil": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "cooling-coil",
@@ -1947,10 +1635,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 6,
-      "spring": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "cooling-fan",
@@ -1963,10 +1648,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 14,
-      "wires-recipe": 4
-    }
+    "recyclesInto": null
   },
   {
     "id": "cracked-bioscanner",
@@ -1979,10 +1661,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "battery": 3,
-      "rubber-parts-recipe": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "crimson-racer-aviator-colour",
@@ -2007,12 +1686,8 @@
     "stackSize": 10,
     "craftBench": "Refiner",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "chemicals": 6
-    },
-    "recyclesInto": {
-      "chemicals": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "crumpled-plastic-bottle",
@@ -2025,9 +1700,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 4
-    }
+    "recyclesInto": null
   },
   {
     "id": "damaged-arc-motion-core",
@@ -2040,9 +1713,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "damaged-arc-powercell",
@@ -2055,9 +1726,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "damaged-fireball-burner",
@@ -2070,9 +1739,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "damaged-heat-sink",
@@ -2085,10 +1752,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 6,
-      "wires-recipe": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "danaged-hornet-driver",
@@ -2114,9 +1778,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "damaged-tick-pod",
@@ -2129,9 +1791,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "damaged-wasp-driver",
@@ -2144,9 +1804,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "dam-control-center-tower-key",
@@ -2249,14 +1907,8 @@
     "stackSize": 1,
     "craftBench": "Explosives Bench III",
     "updatedAt": "2026-02-24T12:40:11.539583+00:00",
-    "recipe": {
-      "explosive-compound": 3,
-      "arc-circuitry": 2,
-      "comet-igniter": 1
-    },
-    "recyclesInto": {
-      "explosive-compound": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "deadline-blueprint",
@@ -2281,14 +1933,8 @@
     "stackSize": 3,
     "craftBench": "Med Station 3",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "plastic-parts": 3,
-      "moss": 1
-    },
-    "recyclesInto": {
-      "moss": 1,
-      "plastic-parts": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "defibrillator-recipe",
@@ -2314,10 +1960,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "fabric": 9,
-      "rubber-parts-recipe": 9
-    }
+    "recyclesInto": null
   },
   {
     "id": "degraded-arc-rubber",
@@ -2330,9 +1973,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "rubber-parts-recipe": 11
-    }
+    "recyclesInto": null
   },
   {
     "id": "diving-googles",
@@ -2345,9 +1986,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "rubber-parts-recipe": 12
-    }
+    "recyclesInto": null
   },
   {
     "id": "dog-collar",
@@ -2360,10 +1999,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "fabric": 8,
-      "metal-parts": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "dolabra",
@@ -2375,14 +2011,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-03-31T12:54:38.870425+00:00",
-    "recipe": {
-      "shredder-gyro": 3,
-      "magnetic-accelerator": 3,
-      "vaporizer-regulator": 2
-    },
-    "recyclesInto": {
-      "magnetic-accelerator": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "dolabra-blueprint",
@@ -2420,10 +2050,7 @@
     "stackSize": 1,
     "craftBench": "Utility Bench I ",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 3,
-      "rubber-parts-recipe": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -2437,9 +2064,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 9
-    }
+    "recyclesInto": null
   },
   {
     "id": "duct-tape-recipe",
@@ -2452,9 +2077,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "fabric": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "durable-cloth",
@@ -2466,12 +2089,8 @@
     "stackSize": 10,
     "craftBench": "Refiner",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "fabric": 14
-    },
-    "recyclesInto": {
-      "fabric": 6
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "electrical-components",
@@ -2483,14 +2102,8 @@
     "stackSize": 10,
     "craftBench": "Refiner",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "plastic-parts": 8,
-      "rubber-parts-recipe": 4
-    },
-    "recyclesInto": {
-      "plastic-parts": 3,
-      "rubber-parts-recipe": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "empty-wine-bottle",
@@ -2515,10 +2128,7 @@
     "stackSize": 5,
     "craftBench": null,
     "updatedAt": "2026-03-17T10:07:17.447451+00:00",
-    "recipe": {
-      "advanced-arc-powercell": 1,
-      "battery": 2
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -2531,11 +2141,7 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 3",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "queen-reactor": 1,
-      "magnetic-accelerator": 3,
-      "complex-gun-parts": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -2575,10 +2181,7 @@
     "craftBench": null,
     "updatedAt": "2026-03-04T19:25:14.886362+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "magnet": 2,
-      "processor": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "expired-pasta",
@@ -2604,10 +2207,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "fabric": 4,
-      "rubber-parts-recipe": 8
-    }
+    "recyclesInto": null
   },
   {
     "id": "explosive-compound",
@@ -2619,13 +2219,8 @@
     "stackSize": 5,
     "craftBench": "Refiner",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "crude-explosives": 2,
-      "oil": 2
-    },
-    "recyclesInto": {
-      "crude-explosives": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "explosive-mine",
@@ -2637,10 +2232,7 @@
     "stackSize": 3,
     "craftBench": "Explosives Bench 3",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "sensors-recipe": 1,
-      "explosive-compound": 1
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -2666,14 +2258,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 2,
-      "wires-recipe": 8
-    },
-    "recyclesInto": {
-      "mod-components": 1,
-      "wires-recipe": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "extended-barrel-recipe",
@@ -2698,13 +2284,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "plastic-parts": 6,
-      "spring": 1
-    },
-    "recyclesInto": {
-      "plastic-parts": 6
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "extended-light-mag-ii",
@@ -2716,14 +2297,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench II",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 2,
-      "spring": 3
-    },
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "spring": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "extended-light-mag-ii-recipe",
@@ -2748,14 +2323,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 2,
-      "spring": 5
-    },
-    "recyclesInto": {
-      "mod-components": 1,
-      "spring": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "extended-light-mag-iii-recipe",
@@ -2780,13 +2349,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "plastic-parts": 6,
-      "spring": 1
-    },
-    "recyclesInto": {
-      "plastic-parts": 6
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "extended-medium-mag-ii",
@@ -2798,14 +2362,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 2,
-      "spring": 3
-    },
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "spring": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "extended-medium-mag-ii-recipe",
@@ -2830,14 +2388,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 1,
-      "spring": 6
-    },
-    "recyclesInto": {
-      "mod-components": 1,
-      "spring": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "extended-medium-mag-iii-blueprint",
@@ -2862,13 +2414,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "plastic-parts": 6,
-      "spring": 1
-    },
-    "recyclesInto": {
-      "plastic-parts": 6
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "extended-shotgun-mag-ii",
@@ -2880,14 +2427,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith II",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 2,
-      "spring": 3
-    },
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "spring": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "extended-shotgun-mag-ii-recipe",
@@ -2912,14 +2453,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 1,
-      "spring": 2
-    },
-    "recyclesInto": {
-      "mod-components": 1,
-      "spring": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "extended-shotgun-mag-iii-recipe",
@@ -2996,14 +2531,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 5,
-      "rubber-parts-recipe": 2
-    },
-    "recyclesInto": {
-      "metal-parts": 2,
-      "rubber-parts-recipe": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "ferro-ii",
@@ -3015,14 +2544,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "ferro-i": 1,
-      "metal-parts": 7
-    },
-    "recyclesInto": {
-      "metal-parts": 4,
-      "rubber-parts-recipe": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "ferro-iii",
@@ -3034,15 +2557,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "ferro-ii": 1,
-      "metal-parts": 9,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "metal-parts": 6,
-      "simple-gun-parts": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "ferro-iv",
@@ -3054,15 +2570,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "ferro-iii": 1,
-      "mechanical-components": 1,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "simple-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "fertilizer",
@@ -3127,10 +2636,7 @@
     "craftBench": null,
     "updatedAt": "2026-03-04T17:01:13.708936+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 1,
-      "crude-explosives": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "firecracker",
@@ -3143,9 +2649,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "firefly-burner",
@@ -3158,10 +2662,7 @@
     "craftBench": null,
     "updatedAt": "2026-02-25T14:10:49.800199+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 2,
-      "crude-explosives": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "fireworks-box",
@@ -3173,13 +2674,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "explosive-compound": 1,
-      "pop-trigger": 3
-    },
-    "recyclesInto": {
-      "explosive-compound": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "fireworks-box-blueprint",
@@ -3204,10 +2700,7 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "air-freshener": 1,
-      "fireball-burner": 1
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -3234,10 +2727,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "sensors-recipe": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "flushing-terminal-key",
@@ -3263,9 +2753,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "explosive-compound": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "free-loadout-augment",
@@ -3291,10 +2779,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "speaker-component": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "fried-motherboard",
@@ -3307,10 +2792,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "electrical-components": 2,
-      "plastic-parts": 5
-    }
+    "recyclesInto": null
   },
   {
     "id": "fruit-mix",
@@ -3322,11 +2804,7 @@
     "stackSize": 5,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "lemon": 1,
-      "apricot": 1,
-      "prickly-pear": 1
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -3340,9 +2818,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 8
-    }
+    "recyclesInto": null
   },
   {
     "id": "garlic-press",
@@ -3355,9 +2831,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 12
-    }
+    "recyclesInto": null
   },
   {
     "id": "gas-grenade",
@@ -3369,14 +2843,8 @@
     "stackSize": 3,
     "craftBench": "Explosive Bench 1",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "chemicals": 4,
-      "rubber-parts-recipe": 2
-    },
-    "recyclesInto": {
-      "chemicals": 1,
-      "rubber-parts-recipe": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "gas-grenade-trap",
@@ -3402,10 +2870,7 @@
     "craftBench": "Explosives Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 1,
-      "rubber-parts-recipe": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "gas-mine-blueprint",
@@ -3431,10 +2896,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "battery": 3,
-      "exodus-modules": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "gentle-duck",
@@ -3473,9 +2935,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "assorted-seeds": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "green-light-stick",
@@ -3488,9 +2948,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "green-light-stick-blueprint",
@@ -3515,14 +2973,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 1 or Basic Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 2,
-      "plastic-parts": 5
-    },
-    "recyclesInto": {
-      "metal-parts": 2,
-      "rubber-parts-recipe": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "hairpin-ii",
@@ -3534,14 +2986,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "hairpin-i": 1,
-      "metal-parts": 8
-    },
-    "recyclesInto": {
-      "metal-parts": 4,
-      "rubber-parts-recipe": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "hairpin-iii",
@@ -3553,15 +2999,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "hairpin-ii": 1,
-      "metal-parts": 9,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "metal-parts": 6,
-      "simple-gun-parts": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "hairpin-iv",
@@ -3573,15 +3012,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "hairpin-iii": 1,
-      "mechanical-components": 1,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "simple-gun-parts": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "happy-jig-emote",
@@ -3607,10 +3039,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "rubber-parts-recipe": 7,
-      "speaker-component": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "heavy-ammo",
@@ -3622,10 +3051,7 @@
     "stackSize": 40,
     "craftBench": "Workbench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 3,
-      "chemicals": 2
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -3638,14 +3064,8 @@
     "stackSize": 3,
     "craftBench": "Explosives Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "explosive-compound": 1,
-      "canister": 2
-    },
-    "recyclesInto": {
-      "oil": 1,
-      "rubber-parts-recipe": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "heavy-gun-parts",
@@ -3657,12 +3077,8 @@
     "stackSize": 5,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "simple-gun-parts": 4
-    },
-    "recyclesInto": {
-      "simple-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "heavy-gun-parts-recipe",
@@ -3674,9 +3090,7 @@
     "stackSize": 1,
     "craftBench": "Refiner II",
     "updatedAt": "2026-03-17T15:25:31.615127+00:00",
-    "recipe": {
-      "simple-gun-parts": 4
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -3689,14 +3103,8 @@
     "stackSize": 1,
     "craftBench": "Gear Bench 3",
     "updatedAt": "2026-02-01T20:31:00.747571+00:00",
-    "recipe": {
-      "power-rod": 1,
-      "voltage-converter": 2
-    },
-    "recyclesInto": {
-      "arc-circuitry": 2,
-      "voltage-converter": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "helmet-radio-renegade-variant",
@@ -3721,14 +3129,8 @@
     "stackSize": 5,
     "craftBench": "Med Station",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "durable-cloth": 1,
-      "great-muullein": 1
-    },
-    "recyclesInto": {
-      "assorted-seeds": 2,
-      "fabric": 5
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "horizontal-grip",
@@ -3741,10 +3143,7 @@
     "craftBench": null,
     "updatedAt": "2026-02-09T15:57:29.59593+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "mod-components": 1,
-      "duct-tape-recipe": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "hornet-driver",
@@ -3757,10 +3156,7 @@
     "craftBench": null,
     "updatedAt": "2026-03-04T17:11:05.417596+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 2,
-      "electrical-components": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "household-cleaner",
@@ -3773,9 +3169,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 11
-    }
+    "recyclesInto": null
   },
   {
     "id": "hullcracker-blueprint",
@@ -3800,15 +3194,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "magnetic-accelerator": 1,
-      "heavy-gun-parts": 3,
-      "exodus-modules": 1
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "hullcracker-ii",
@@ -3820,14 +3207,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 1,
-      "heavy-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "hullcracker-iii",
@@ -3839,14 +3220,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 1
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 3,
-      "heavy-gun-parts": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "hullcracker-iv",
@@ -3858,14 +3233,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 3
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 4,
-      "heavy-gun-parts": 5
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "humidifier",
@@ -3878,10 +3247,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "canister": 2,
-      "wires-recipe": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "ice-cream-scooper",
@@ -3894,9 +3260,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 7
-    }
+    "recyclesInto": null
   },
   {
     "id": "il-toro-recipe",
@@ -3921,14 +3285,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 1",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 5,
-      "simple-gun-parts": 6
-    },
-    "recyclesInto": {
-      "mechanical-components": 2,
-      "simple-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "il-toro-ii",
@@ -3940,15 +3298,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "il-toro-i": 1,
-      "mechanical-components": 3,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 3,
-      "simple-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "il-toro-iiii",
@@ -3960,15 +3311,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "il-toro-ii": 1,
-      "mechanical-components": 4,
-      "heavy-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 4,
-      "simple-gun-parts": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "il-toro-iv",
@@ -3980,15 +3324,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "il-toro-iiii": 1,
-      "mechanical-components": 4,
-      "heavy-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 5,
-      "simple-gun-parts": 5
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "impure-arc-coolant",
@@ -4001,9 +3338,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 12
-    }
+    "recyclesInto": null
   },
   {
     "id": "industrial-battery",
@@ -4016,10 +3351,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "battery": 2,
-      "chemicals": 7
-    }
+    "recyclesInto": null
   },
   {
     "id": "industrial-charger",
@@ -4032,10 +3364,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 5,
-      "voltage-converter": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "industrial-magnet",
@@ -4048,10 +3377,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "magnet": 2,
-      "metal-parts": 4
-    }
+    "recyclesInto": null
   },
   {
     "id": "ion-sputter",
@@ -4064,10 +3390,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "exodus-modules": 1,
-      "voltage-converter": 4
-    }
+    "recyclesInto": null
   },
   {
     "id": "jolt-mine",
@@ -4079,10 +3402,7 @@
     "stackSize": 3,
     "craftBench": "Explosives Bench II",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "electrical-components": 1,
-      "battery": 1
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -4121,11 +3441,7 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 3",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "queen-reactor": 1,
-      "magnetic-accelerator": 3,
-      "complex-gun-parts": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -4151,14 +3467,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "rubber-parts-recipe": 8,
-      "metal-parts": 6
-    },
-    "recyclesInto": {
-      "metal-parts": 3,
-      "rubber-parts-recipe": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "kettle-ii",
@@ -4170,15 +3480,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "kettle-i": 1,
-      "metal-parts": 8,
-      "plastic-parts": 10
-    },
-    "recyclesInto": {
-      "metal-parts": 6,
-      "rubber-parts-recipe": 6
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "kettle-iii",
@@ -4190,15 +3493,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "kettle-ii": 1,
-      "metal-parts": 10,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "metal-parts": 12,
-      "simple-gun-parts": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "kettle-iv",
@@ -4210,15 +3506,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "kettle-iii": 1,
-      "mechanical-components": 3,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 2,
-      "simple-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "kinetic-converter",
@@ -4231,10 +3520,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "mod-components": 1,
-      "duct-tape-recipe": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "laboratory-reagents",
@@ -4247,10 +3533,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 16,
-      "crude-explosives": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "lances-mixtape-5th-edition",
@@ -4288,10 +3571,7 @@
     "stackSize": 1,
     "craftBench": "Workbench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "arc-motion-core": 1,
-      "crude-explosives": 2
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -4318,9 +3598,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "assorted-seeds": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "lidar-scanner",
@@ -4345,10 +3623,7 @@
     "stackSize": 100,
     "craftBench": "Workbench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 3,
-      "chemicals": 2
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -4374,13 +3649,8 @@
     "stackSize": 5,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "simple-gun-parts": 2,
-      "rubber-parts-recipe": 8
-    },
-    "recyclesInto": {
-      "simple-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "light-gun-parts-recipe",
@@ -4405,14 +3675,8 @@
     "stackSize": 5,
     "craftBench": "Explosive Bench 1 or Basic Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "plastic-parts": 2,
-      "chemicals": 3
-    },
-    "recyclesInto": {
-      "chemicals": 1,
-      "plastic-parts": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "light-shield",
@@ -4424,13 +3688,8 @@
     "stackSize": 1,
     "craftBench": "Equipment Bench 1",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "arc-alloy": 2,
-      "plastic-parts": 4
-    },
-    "recyclesInto": {
-      "plastic-parts": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "lightweight-stock",
@@ -4442,14 +3701,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 2,
-      "duct-tape-recipe": 5
-    },
-    "recyclesInto": {
-      "duct-tape-recipe": 1,
-      "mod-components": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "lightweight-stock-recipe",
@@ -4474,14 +3727,8 @@
     "stackSize": 5,
     "craftBench": "Utility Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "chemicals": 5,
-      "plastic-parts": 1
-    },
-    "recyclesInto": {
-      "chemicals": 1,
-      "plastic-parts": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "looting-mk-1",
@@ -4493,14 +3740,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "plastic-parts": 6,
-      "rubber-parts-recipe": 6
-    },
-    "recyclesInto": {
-      "plastic-parts": 3,
-      "rubber-parts-recipe": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "looting-mk-2",
@@ -4512,14 +3753,8 @@
     "stackSize": 1,
     "craftBench": "Equipment Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "electrical-components": 3,
-      "magnet": 2
-    },
-    "recyclesInto": {
-      "electrical-components": 1,
-      "magnet": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "looting-mk-3-cautious",
@@ -4531,10 +3766,7 @@
     "stackSize": 1,
     "craftBench": "Equipment Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-electrical-components": 2,
-      "processor": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -4547,10 +3779,7 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T09:51:53.673615+00:00",
-    "recipe": {
-      "advanced-electrical-components": 2,
-      "processor": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -4576,14 +3805,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-electrical-components": 2,
-      "processor": 3
-    },
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "processor": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "looting-mk-3-survivor-blueprint",
@@ -4608,13 +3831,8 @@
     "stackSize": 3,
     "craftBench": "Utility Bench 2",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "speaker-component": 2,
-      "plastic-parts": 2
-    },
-    "recyclesInto": {
-      "speaker-component": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "lure-grenade-recipe",
@@ -4640,9 +3858,7 @@
     "craftBench": null,
     "updatedAt": "2026-02-16T15:25:32.357041+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "speaker-component": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "magnet",
@@ -4655,9 +3871,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "magnetic-accelerator",
@@ -4669,14 +3883,8 @@
     "stackSize": 3,
     "craftBench": "Refiner",
     "updatedAt": "2026-03-04T19:25:49.476699+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "arc-motion-core": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "arc-motion-core": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "magnetron",
@@ -4689,10 +3897,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "magnetic-accelerator": 1,
-      "spring": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "mastery-medal-backpack-charm",
@@ -4718,10 +3923,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "power-rod": 1,
-      "magnetic-accelerator": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "mechanical-components",
@@ -4733,14 +3935,8 @@
     "stackSize": 10,
     "craftBench": "Refiner",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 7,
-      "rubber-parts-recipe": 3
-    },
-    "recyclesInto": {
-      "metal-parts": 3,
-      "rubber-parts-recipe": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "medium-ammo",
@@ -4752,10 +3948,7 @@
     "stackSize": 80,
     "craftBench": "Workbench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 3,
-      "chemicals": 2
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -4769,9 +3962,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "simple-gun-parts": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "medium-gun-parts-recipe",
@@ -4796,13 +3987,8 @@
     "stackSize": 1,
     "craftBench": "Equipment Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "arc-circuitry": 1,
-      "battery": 4
-    },
-    "recyclesInto": {
-      "arc-circuitry": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "metal-brackets",
@@ -4815,9 +4001,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 8
-    }
+    "recyclesInto": null
   },
   {
     "id": "metal-parts",
@@ -4843,10 +4027,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "magnet": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "mini-centrifuge",
@@ -4859,10 +4040,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "canister": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "mod-components",
@@ -4874,14 +4052,8 @@
     "stackSize": 5,
     "craftBench": "Refiner",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 2,
-      "spring": 2
-    },
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "spring": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "moss",
@@ -4894,9 +4066,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "assorted-seeds": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "motor",
@@ -4909,10 +4079,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "mechanical-components": 2,
-      "oil": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "mushroom",
@@ -4963,13 +4130,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 6,
-      "wires-recipe": 1
-    },
-    "recyclesInto": {
-      "metal-parts": 5
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "muzzle-brake-ii",
@@ -4981,14 +4143,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 2,
-      "wires-recipe": 4
-    },
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "wires-recipe": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "muzzle-brake-ii-recipe",
@@ -5013,14 +4169,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 2,
-      "wires-recipe": 8
-    },
-    "recyclesInto": {
-      "mod-components": 1,
-      "wires-recipe": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "muzzle-brake-iii-recipe",
@@ -5046,9 +4196,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "speaker-component": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "number-plate",
@@ -5061,9 +4209,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "oil",
@@ -5076,9 +4222,7 @@
     "craftBench": null,
     "updatedAt": "2026-02-11T09:25:35.593283+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "olives",
@@ -5129,15 +4273,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 2",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 3,
-      "wires-recipe": 7
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "osprey-ii",
@@ -5149,15 +4286,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "osprey-i": 1,
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "osprey-iii",
@@ -5169,15 +4299,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "osprey-ii": 1,
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "osprey-iv",
@@ -5189,15 +4312,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "osprey-iii": 1,
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 3,
-      "medium-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "padded-stock",
@@ -5209,14 +4325,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-02-09T14:52:14.092096+00:00",
-    "recipe": {
-      "mod-components": 2,
-      "duct-tape-recipe": 5
-    },
-    "recyclesInto": {
-      "mod-components": 1,
-      "duct-tape-recipe": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "padded-stock-recipe",
@@ -5293,14 +4403,8 @@
     "stackSize": 1,
     "craftBench": "Utility Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-electrical-components": 2,
-      "speaker-component": 4
-    },
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "speaker-component": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "pilgrims-peak-security-code",
@@ -5352,10 +4456,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "fabric": 6,
-      "oil": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "pop-trigger",
@@ -5368,10 +4469,7 @@
     "craftBench": null,
     "updatedAt": "2026-03-04T17:08:11.841354+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "crude-explosives": 1,
-      "arc-alloy": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "portable-television",
@@ -5384,10 +4482,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "battery": 2,
-      "wires-recipe": 6
-    }
+    "recyclesInto": null
   },
   {
     "id": "poster-natural-wonder",
@@ -5426,10 +4521,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "battery": 2,
-      "wires-recipe": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "power-cable",
@@ -5442,9 +4534,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "wires-recipe": 4
-    }
+    "recyclesInto": null
   },
   {
     "id": "power-rod",
@@ -5456,14 +4546,8 @@
     "stackSize": 3,
     "craftBench": "Refiner",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "arc-circuitry": 2,
-      "advanced-electrical-components": 2
-    },
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "arc-circuitry": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "prickly-pear",
@@ -5476,9 +4560,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "assorted-seeds": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "processor",
@@ -5491,10 +4573,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 1,
-      "wires-recipe": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "projector",
@@ -5507,10 +4586,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "processor": 1,
-      "wires-recipe": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "pulse-mine",
@@ -5523,9 +4599,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 6
-    }
+    "recyclesInto": null
   },
   {
     "id": "pulse-mine-blueprint",
@@ -5551,10 +4625,7 @@
     "craftBench": null,
     "updatedAt": "2026-02-24T17:41:47.036707+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "magnetic-accelerator": 1,
-      "power-rod": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "radio",
@@ -5567,10 +4638,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "sensors-recipe": 1,
-      "speaker-component": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "radio-relay",
@@ -5583,10 +4651,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "sensors-recipe": 2,
-      "speaker-component": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "radio-renegade-outfit",
@@ -5611,10 +4676,7 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-electrical-components": 1,
-      "sensors-recipe": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -5653,13 +4715,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 16,
-      "rubber-parts-recipe": 12
-    },
-    "recyclesInto": {
-      "metal-parts": 8
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "rattler-ii",
@@ -5671,14 +4728,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "rattler-i": 1,
-      "metal-parts": 10,
-      "rubber-parts-recipe": 10
-    },
-    "recyclesInto": {
-      "metal-parts": 12
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "rattler-iii",
@@ -5690,15 +4741,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "rattler-ii": 1,
-      "mechanical-components": 3,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 3,
-      "simple-gun-parts": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "rattler-iv",
@@ -5710,15 +4754,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 3,
-      "simple-gun-parts": 1,
-      "rattler-iii": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 4,
-      "simple-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "recorder",
@@ -5731,9 +4768,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 10
-    }
+    "recyclesInto": null
   },
   {
     "id": "red-coral-jewelry",
@@ -5759,9 +4794,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "red-light-stick-blueprint",
@@ -5813,10 +4846,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 7,
-      "sensors-recipe": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "remote-raider-flare",
@@ -5829,10 +4859,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 1,
-      "rubber-parts-recipe": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "remote-raider-flare-blueprint",
@@ -5857,15 +4884,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 2",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 3,
-      "oil": 5
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "renegade-ii",
@@ -5877,15 +4897,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "renegade-i": 1,
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "renegade-iii",
@@ -5897,15 +4910,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "renegade-ii": 1,
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "renegade-iv",
@@ -5917,15 +4923,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "renegade-iii": 1,
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 3,
-      "medium-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "resin",
@@ -5951,10 +4950,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "durable-cloth": 1,
-      "magnet": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "rocketeer-part",
@@ -5967,10 +4963,7 @@
     "craftBench": null,
     "updatedAt": "2026-03-04T17:10:24.495962+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "advanced-electrical-components": 2,
-      "arc-alloy": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "rocket-thruster",
@@ -5983,10 +4976,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "synthesized-fuel": 2,
-      "metal-parts": 6
-    }
+    "recyclesInto": null
   },
   {
     "id": "roots",
@@ -5999,9 +4989,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "assorted-seeds": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "rope",
@@ -6014,9 +5002,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "fabric": 5
-    }
+    "recyclesInto": null
   },
   {
     "id": "rosary",
@@ -6042,10 +5028,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "electrical-components": 2,
-      "processor": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "rubber-duck",
@@ -6071,9 +5054,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "rubber-parts-recipe": 18
-    }
+    "recyclesInto": null
   },
   {
     "id": "rubber-parts-recipe",
@@ -6099,10 +5080,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "rubber-parts-recipe": 18,
-      "spring": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "ruined-augment",
@@ -6128,10 +5106,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 6,
-      "rubber-parts-recipe": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "ruined-handcuffs",
@@ -6144,9 +5119,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 8
-    }
+    "recyclesInto": null
   },
   {
     "id": "ruined-parachute",
@@ -6159,9 +5132,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "fabric": 10
-    }
+    "recyclesInto": null
   },
   {
     "id": "ruined-riot-shield",
@@ -6174,10 +5145,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 10,
-      "rubber-parts-recipe": 6
-    }
+    "recyclesInto": null
   },
   {
     "id": "ruined-tactical-vest",
@@ -6190,10 +5158,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "fabric": 5,
-      "magnet": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "rusted-bolts",
@@ -6206,9 +5171,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 8
-    }
+    "recyclesInto": null
   },
   {
     "id": "rusted-gear",
@@ -6221,10 +5184,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "mechanical-components": 2,
-      "metal-parts": 4
-    }
+    "recyclesInto": null
   },
   {
     "id": "rusted-shut-medical-kit",
@@ -6237,10 +5197,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "antiseptic": 1,
-      "syringe": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "rusted-tools",
@@ -6253,10 +5210,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 8,
-      "spring": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "rusty-arc-steel",
@@ -6269,9 +5223,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 8
-    }
+    "recyclesInto": null
   },
   {
     "id": "sample-cleaner",
@@ -6284,10 +5236,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "assorted-seeds": 14,
-      "electrical-components": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "seeker-grenade",
@@ -6300,9 +5249,7 @@
     "craftBench": "Explosives Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "crude-explosives": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "seeker-grenade-blueprint",
@@ -6328,10 +5275,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 1,
-      "wires-recipe": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "sentinel-part",
@@ -6344,10 +5288,7 @@
     "craftBench": null,
     "updatedAt": "2026-02-24T17:42:33.112843+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 2,
-      "mechanical-components": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "shaker",
@@ -6360,9 +5301,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 10
-    }
+    "recyclesInto": null
   },
   {
     "id": "shield-recharger",
@@ -6374,13 +5313,8 @@
     "stackSize": 5,
     "craftBench": "Equipment Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "rubber-parts-recipe": 5,
-      "arc-powercell": 1
-    },
-    "recyclesInto": {
-      "rubber-parts-recipe": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "shotgun-ammo",
@@ -6392,10 +5326,7 @@
     "stackSize": 20,
     "craftBench": "Workbench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 3,
-      "chemicals": 2
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -6408,13 +5339,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith 1",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 6,
-      "wires-recipe": 1
-    },
-    "recyclesInto": {
-      "metal-parts": 5
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "shotgun-choke-ii",
@@ -6426,14 +5352,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 2,
-      "wires-recipe": 4
-    },
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "wires-recipe": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "shotgun-choke-ii-recipe",
@@ -6458,14 +5378,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 2,
-      "wires-recipe": 8
-    },
-    "recyclesInto": {
-      "mod-components": 1,
-      "wires-recipe": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "shotgun-choke-iii-recipe",
@@ -6490,9 +5404,7 @@
     "stackSize": 5,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "simple-gun-parts": 2
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -6505,14 +5417,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 1,
-      "wires-recipe": 9
-    },
-    "recyclesInto": {
-      "mod-components": 1,
-      "wires-recipe": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "shotgun-silencer-blueprint",
@@ -6537,15 +5443,8 @@
     "stackSize": 5,
     "craftBench": "Explosives Bench III",
     "updatedAt": "2026-02-24T12:51:19.307305+00:00",
-    "recipe": {
-      "electrical-components": 1,
-      "hornet-driver": 1,
-      "voltage-converter": 1
-    },
-    "recyclesInto": {
-      "battery": 2,
-      "electrical-components": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "showstopper-blueprint",
@@ -6570,14 +5469,8 @@
     "stackSize": 5,
     "craftBench": "Explosives Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "crude-explosives": 1,
-      "spring": 2
-    },
-    "recyclesInto": {
-      "crude-explosives": 1,
-      "metal-parts": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "shredder-gyro",
@@ -6590,10 +5483,7 @@
     "craftBench": null,
     "updatedAt": "2026-03-04T17:00:24.968368+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 3,
-      "mechanical-components": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "signal-amplifier",
@@ -6606,10 +5496,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "electrical-components": 2,
-      "voltage-converter": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "silencer-i",
@@ -6621,10 +5508,7 @@
     "stackSize": 1,
     "craftBench": "Gunsmith I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "wires-recipe": 4,
-      "mechanical-components": 2
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -6650,14 +5534,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 2,
-      "wires-recipe": 8
-    },
-    "recyclesInto": {
-      "mod-components": 1,
-      "wires-recipe": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "silencer-ii-recipe",
@@ -6683,10 +5561,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "mod-components": 1,
-      "wires-recipe": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "silver-teaspoon-set",
@@ -6712,9 +5587,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "smoke-grenade",
@@ -6726,14 +5599,8 @@
     "stackSize": 5,
     "craftBench": "Utility Bench 1 or Basic Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "chemicals": 14,
-      "canister": 1
-    },
-    "recyclesInto": {
-      "canister": 1,
-      "chemicals": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "smoke-grenade-blueprint",
@@ -6758,10 +5625,7 @@
     "stackSize": 3,
     "craftBench": null,
     "updatedAt": "2026-02-16T15:27:40.295722+00:00",
-    "recipe": {
-      "smoke-grenade": 1,
-      "wires-recipe": 1
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -6774,14 +5638,8 @@
     "stackSize": 3,
     "craftBench": "Explosives Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "crude-explosives": 2,
-      "magnet": 1
-    },
-    "recyclesInto": {
-      "chemicals": 1,
-      "magnet": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "snap-hook",
@@ -6793,15 +5651,8 @@
     "stackSize": 1,
     "craftBench": "Utility Bench 3",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "rope": 3,
-      "power-rod": 2,
-      "exodus-modules": 1
-    },
-    "recyclesInto": {
-      "power-rod": 1,
-      "rope": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "snap-hook-recipe",
@@ -6827,10 +5678,7 @@
     "craftBench": null,
     "updatedAt": "2026-03-04T17:06:51.543716+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 1,
-      "electrical-components": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "snowball",
@@ -6908,10 +5756,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 2,
-      "rubber-parts-recipe": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "spectrometer",
@@ -6924,10 +5769,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "sensors-recipe": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "spectrum-analyzer",
@@ -6940,10 +5782,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "exodus-modules": 1,
-      "sensors-recipe": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "spotter-relay",
@@ -6956,10 +5795,7 @@
     "craftBench": null,
     "updatedAt": "2026-02-24T17:43:22.212104+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 1,
-      "electrical-components": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "spring-cushion",
@@ -6972,10 +5808,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "durable-cloth": 2,
-      "spring": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "stable-stock-i",
@@ -6987,13 +5820,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "rubber-parts-recipe": 7,
-      "duct-tape-recipe": 1
-    },
-    "recyclesInto": {
-      "rubber-parts-recipe": 6
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "stable-stock-ii",
@@ -7005,14 +5833,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 2,
-      "duct-tape-recipe": 3
-    },
-    "recyclesInto": {
-      "duct-tape-recipe": 1,
-      "mechanical-components": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "stable-stock-ii-recipe",
@@ -7037,14 +5859,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 2,
-      "duct-tape-recipe": 5
-    },
-    "recyclesInto": {
-      "duct-tape-recipe": 2,
-      "mod-components": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "stable-stock-iii-recipe",
@@ -7096,9 +5912,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "stella-montis-archives-key",
@@ -7162,14 +5976,8 @@
     "stackSize": 3,
     "craftBench": "Med Station 2",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "antiseptic": 1,
-      "durable-cloth": 2
-    },
-    "recyclesInto": {
-      "antiseptic": 1,
-      "fabric": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "stitcher-i",
@@ -7181,14 +5989,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "metal-parts": 8,
-      "rubber-parts-recipe": 4
-    },
-    "recyclesInto": {
-      "metal-parts": 3,
-      "rubber-parts-recipe": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "stitcher-ii",
@@ -7200,15 +6002,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "stitcher-i": 1,
-      "metal-parts": 8,
-      "rubber-parts-recipe": 12
-    },
-    "recyclesInto": {
-      "metal-parts": 6,
-      "rubber-parts-recipe": 6
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "stitcher-iii",
@@ -7220,15 +6015,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "stitcher-ii": 1,
-      "metal-parts": 10,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "metal-parts": 12,
-      "simple-gun-parts": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "stitcher-iv",
@@ -7240,15 +6028,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "stitcher-iii": 1,
-      "mechanical-components": 3,
-      "simple-gun-parts": 1
-    },
-    "recyclesInto": {
-      "mechanical-components": 2,
-      "simple-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "succulent-backpack-charm",
@@ -7272,12 +6053,8 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": "Explosives Bench III",
-    "updatedAt": "2026-04-01T00:24:22.96087+00:00",
-    "recipe": {
-      "electrical-components": 1,
-      "sensors-recipe": 1,
-      "hornet-driver": 1
-    },
+    "updatedAt": "2026-04-01T15:47:24.211411+00:00",
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -7289,7 +6066,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-04-01T00:24:55.953024+00:00",
+    "updatedAt": "2026-04-03T09:56:14.747296+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7303,13 +6080,8 @@
     "stackSize": 5,
     "craftBench": "Medical Lab II",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "electrical-components": 1,
-      "advanced-arc-powercell": 1
-    },
-    "recyclesInto": {
-      "electrical-components": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "surveyor-vault",
@@ -7322,10 +6094,7 @@
     "craftBench": null,
     "updatedAt": "2026-02-24T17:42:57.920255+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 2,
-      "mechanical-components": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "synthesized-fuel",
@@ -7338,10 +6107,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "oil": 1,
-      "plastic-parts": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "syringe",
@@ -7354,10 +6120,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 2,
-      "plastic-parts": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "tactical-mk-1",
@@ -7369,14 +6132,8 @@
     "stackSize": 1,
     "craftBench": "Equipment Bench",
     "updatedAt": "2026-02-16T15:33:20.350113+00:00",
-    "recipe": {
-      "plastic-parts": 6,
-      "rubber-parts-recipe": 6
-    },
-    "recyclesInto": {
-      "plastic-parts": 3,
-      "rubber-parts-recipe": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "tactical-mk-2",
@@ -7388,14 +6145,8 @@
     "stackSize": 1,
     "craftBench": "Equipment Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "electrical-components": 2,
-      "magnet": 3
-    },
-    "recyclesInto": {
-      "electrical-components": 1,
-      "magnet": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "tactical-mk3-defensive",
@@ -7407,10 +6158,7 @@
     "stackSize": 1,
     "craftBench": "Gear Bench III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-electrical-components": 2,
-      "processor": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -7436,14 +6184,8 @@
     "stackSize": 1,
     "craftBench": "Gear Bench III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-electrical-components": 2,
-      "processor": 3
-    },
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "processor": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "tacical-mk3-healing-blueprint",
@@ -7468,10 +6210,7 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T09:44:01.085239+00:00",
-    "recipe": {
-      "advanced-electrical-components": 2,
-      "processor": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -7497,14 +6236,8 @@
     "stackSize": 3,
     "craftBench": "Utility Bench 3",
     "updatedAt": "2026-02-11T14:18:38.670328+00:00",
-    "recipe": {
-      "electrical-components": 1,
-      "sensors-recipe": 1
-    },
-    "recyclesInto": {
-      "plastic-parts": 1,
-      "sensors-recipe": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "tagging-grenade-recipe",
@@ -7543,9 +6276,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "fabric": 12
-    }
+    "recyclesInto": null
   },
   {
     "id": "tattered-clothes",
@@ -7558,9 +6289,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "fabric": 11
-    }
+    "recyclesInto": null
   },
   {
     "id": "telemetry-transceiver",
@@ -7573,10 +6302,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "processor": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "tempest-i-recipe",
@@ -7601,15 +6327,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 3",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "magnetic-accelerator": 1,
-      "medium-gun-parts": 3,
-      "exodus-modules": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "tempest-ii",
@@ -7621,15 +6340,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "tempest-i": 1,
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 1
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 3,
-      "medium-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "tempest-iii",
@@ -7641,15 +6353,8 @@
     "stackSize": 1,
     "craftBench": "Weapon bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "tempest-ii": 1,
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 3
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 4,
-      "medium-gun-parts": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "tempest-iv",
@@ -7661,15 +6366,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-02-16T15:22:31.679212+00:00",
-    "recipe": {
-      "tempest-iii": 1,
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 3
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 5,
-      "medium-gun-parts": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "thermostat",
@@ -7682,10 +6380,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "rubber-parts-recipe": 7,
-      "sensors-recipe": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "tick-pod",
@@ -7698,10 +6393,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 2,
-      "chemicals": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "toaster",
@@ -7714,10 +6406,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 5,
-      "wires-recipe": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "torch-ginger",
@@ -7730,9 +6419,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "torn-blanket",
@@ -7745,9 +6432,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "fabric": 12
-    }
+    "recyclesInto": null
   },
   {
     "id": "torn-book",
@@ -7785,15 +6470,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 2",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 3,
-      "spring": 6
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "torrente-ii",
@@ -7805,15 +6483,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "torrente-i": 1,
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "torrente-iii",
@@ -7825,15 +6496,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "torrente-ii": 1,
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "torrente-iv",
@@ -7845,15 +6509,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "medium-gun-parts": 2,
-      "torrente-iii": 1,
-      "advanced-mechanical-components": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 3,
-      "medium-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "trailblazer-grenade",
@@ -7865,14 +6522,8 @@
     "stackSize": 1,
     "craftBench": "Explosives Bench II",
     "updatedAt": "2026-02-24T12:47:31.846273+00:00",
-    "recipe": {
-      "synthesized-fuel": 1,
-      "crude-explosives": 2,
-      "firefly-burner": 1
-    },
-    "recyclesInto": {
-      "crude-explosives": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "trailblazer-grenade-blueprint",
@@ -7897,10 +6548,7 @@
     "stackSize": 3,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "crude-explosives": 2,
-      "processor": 1
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -7940,10 +6588,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "oil": 3
-    }
+    "recyclesInto": null
   },
   {
     "id": "unusable-weapon",
@@ -7956,10 +6601,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 4,
-      "simple-gun-parts": 5
-    }
+    "recyclesInto": null
   },
   {
     "id": "vaporizer-regulator",
@@ -7972,10 +6614,7 @@
     "craftBench": null,
     "updatedAt": "2026-03-31T10:14:53.413604+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "arc-circuitry": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "vase",
@@ -8013,15 +6652,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 2",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "magnet": 5,
-      "medium-gun-parts": 3
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "venator-ii",
@@ -8033,11 +6665,7 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2,
-      "venator-i": 1
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -8050,11 +6678,7 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "venator-ii": 1,
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -8067,15 +6691,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-02-16T15:19:52.706889+00:00",
-    "recipe": {
-      "venator-iii": 1,
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 3,
-      "medium-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "vertical-grip-i",
@@ -8087,13 +6704,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith 1",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "plastic-parts": 6,
-      "duct-tape-recipe": 1
-    },
-    "recyclesInto": {
-      "plastic-parts": 6
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "vertical-grip-ii",
@@ -8105,14 +6717,8 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mechanical-components": 2,
-      "duct-tape-recipe": 3
-    },
-    "recyclesInto": {
-      "duct-tape-recipe": 1,
-      "mechanical-components": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "vertical-grip-ii-recipe",
@@ -8137,14 +6743,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "mod-components": 2,
-      "duct-tape-recipe": 5
-    },
-    "recyclesInto": {
-      "mechanical-components": 2,
-      "duct-tape-recipe": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "vertical-grip-iii-recipe",
@@ -8182,14 +6782,8 @@
     "stackSize": 3,
     "craftBench": "Med Station 3",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "antiseptic": 2,
-      "syringe": 1
-    },
-    "recyclesInto": {
-      "chemicals": 4,
-      "syringe": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "vita-shot-recipe",
@@ -8214,11 +6808,7 @@
     "stackSize": 1,
     "craftBench": "Med Station",
     "updatedAt": "2026-02-24T12:49:46.810764+00:00",
-    "recipe": {
-      "canister": 1,
-      "tick-pod": 1,
-      "antiseptic": 3
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -8258,10 +6848,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "rubber-parts-recipe": 1,
-      "wires-recipe": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "vulcano-blueprint",
@@ -8286,15 +6873,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench 3",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "magnetic-accelerator": 1,
-      "heavy-gun-parts": 3,
-      "exodus-modules": 1
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "vulcano-ii",
@@ -8306,15 +6886,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 1,
-      "heavy-gun-parts": 2,
-      "vulcano-i": 1
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 3
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "vulcano-iii",
@@ -8326,15 +6899,8 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "vulcano-ii": 1,
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 1
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 3,
-      "heavy-gun-parts": 4
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "vulcano-iv",
@@ -8346,15 +6912,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "vulcano-iii": 1,
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 3
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 4,
-      "heavy-gun-parts": 5
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "warden-outfit",
@@ -8380,10 +6939,7 @@
     "craftBench": null,
     "updatedAt": "2026-02-24T17:41:00.192005+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 1,
-      "electrical-components": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "water-filter",
@@ -8396,10 +6952,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "canister": 3,
-      "rubber-parts-recipe": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "water-pump",
@@ -8412,10 +6965,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 4,
-      "oil": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "wires-recipe",
@@ -8428,9 +6978,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "rubber-parts-recipe": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "wolfpack",
@@ -8442,15 +6990,8 @@
     "stackSize": 1,
     "craftBench": "Explosives Bench III",
     "updatedAt": "2026-03-04T18:26:02.759581+00:00",
-    "recipe": {
-      "arc-motion-core": 2,
-      "explosive-compound": 1,
-      "rocketeer-part": 1
-    },
-    "recyclesInto": {
-      "arc-motion-core": 1,
-      "explosive-compound": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "wolfpack-recipe",
@@ -8476,9 +7017,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "chemicals": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "yellow-light-stick-blueprint",
@@ -8503,13 +7042,7 @@
     "stackSize": 3,
     "craftBench": "Utility Station II",
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
-    "recipe": {
-      "rope": 1,
-      "mechanical-components": 1
-    },
-    "recyclesInto": {
-      "metal-parts": 1,
-      "rope": 1
-    }
+    "recipe": null,
+    "recyclesInto": null
   }
 ]

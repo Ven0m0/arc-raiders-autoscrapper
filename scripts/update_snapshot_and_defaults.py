@@ -60,7 +60,7 @@ def _load_workshop_level2_map(hideout_modules_path: Path) -> Dict[str, int]:
         max_level = module.get("maxLevel", 0)
         try:
             max_level_int = int(max_level)
-        except (TypeError, ValueError):
+        except TypeError, ValueError:
             continue
         if max_level_int <= 0:
             continue
@@ -125,7 +125,7 @@ def _is_ignorable_timestamp_only_json_diff(before: bytes, after: bytes) -> bool:
     try:
         before_json = json.loads(before.decode("utf-8"))
         after_json = json.loads(after.decode("utf-8"))
-    except (UnicodeDecodeError, json.JSONDecodeError):
+    except UnicodeDecodeError, json.JSONDecodeError:
         return False
 
     return _normalize_for_semantic_diff(before_json) == _normalize_for_semantic_diff(
@@ -255,7 +255,7 @@ def _git_sha() -> str:
             text=True,
             check=True,
         )
-    except (subprocess.CalledProcessError, FileNotFoundError):
+    except subprocess.CalledProcessError, FileNotFoundError:
         return "unknown"
     return completed.stdout.strip() or "unknown"
 

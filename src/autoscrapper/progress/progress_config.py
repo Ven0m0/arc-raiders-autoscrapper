@@ -55,7 +55,7 @@ def normalize_hideout_levels(
 
         try:
             level_num = int(raw_level)
-        except (TypeError, ValueError):
+        except TypeError, ValueError:
             raise ValueError(
                 f"Invalid hideout level for '{raw_key}': {raw_level}"
             ) from None
@@ -174,7 +174,7 @@ def build_completed_quest_ids(
         quests_for_trader = quests_by_trader.get(trader_key, [])
         try:
             completed_count = int(raw_count)
-        except (TypeError, ValueError):
+        except TypeError, ValueError:
             raise ValueError(
                 f"Invalid completed quest count for trader '{raw_trader}': {raw_count}"
             ) from None
