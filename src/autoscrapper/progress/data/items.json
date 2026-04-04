@@ -1339,19 +1339,6 @@
     "recyclesInto": null
   },
   {
-    "id": "canto",
-    "name": "Canto",
-    "type": "Weapon",
-    "rarity": "rare",
-    "value": 0,
-    "weightKg": 6.5,
-    "stackSize": 1,
-    "craftBench": "Gunsmith III",
-    "updatedAt": "2026-04-01T15:43:35.526254+00:00",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
     "id": "canto-blueprint",
     "name": "Canto Blueprint",
     "type": "Blueprint",
@@ -1361,6 +1348,58 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-04-01T12:44:55.585562+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "canto",
+    "name": "Canto I",
+    "type": "Weapon",
+    "rarity": "rare",
+    "value": 7000,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": "Gunsmith III",
+    "updatedAt": "2026-04-03T23:38:31.79849+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "canto-ii",
+    "name": "Canto II",
+    "type": "Weapon",
+    "rarity": "rare",
+    "value": 10000,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": "Gunsmith III",
+    "updatedAt": "2026-04-03T23:45:42.68568+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "canto-iii",
+    "name": "Canto III",
+    "type": "Weapon",
+    "rarity": "rare",
+    "value": 13000,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-04-03T23:48:53.265546+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "canto-iv",
+    "name": "Canto IV",
+    "type": "Weapon",
+    "rarity": "rare",
+    "value": 17000,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-04-03T23:51:27.380366+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2023,7 +2062,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-04-01T12:49:21.428364+00:00",
+    "updatedAt": "2026-04-03T22:04:09.355932+00:00",
     "recipe": null,
     "recyclesInto": null
   },
