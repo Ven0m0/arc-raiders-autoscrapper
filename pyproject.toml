@@ -50,3 +50,8 @@ autoscrapper = [
 
 [tool.ruff]
 extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
