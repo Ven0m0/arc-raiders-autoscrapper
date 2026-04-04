@@ -596,6 +596,8 @@ def match_item_name_result(
     resolved_threshold = (
         DEFAULT_ITEM_NAME_MATCH_THRESHOLD if threshold is None else threshold
     )
+    if not 0 <= resolved_threshold <= 100:
+        raise ValueError("threshold must be between 0 and 100")
     if not cleaned:
         return ItemNameMatchResult(
             cleaned_text="",

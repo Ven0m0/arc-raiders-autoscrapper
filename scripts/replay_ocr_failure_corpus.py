@@ -20,6 +20,11 @@ from autoscrapper.ocr.inventory_vision import (  # noqa: E402
     match_item_name_result,
 )
 
+SELECTION_POLICY = (
+    "Prefer the current threshold when it passes; otherwise fall back to the "
+    "lowest passing candidate threshold."
+)
+
 
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -112,6 +117,7 @@ def main() -> int:
         "sample_count": len(samples),
         "current_threshold": DEFAULT_ITEM_NAME_MATCH_THRESHOLD,
         "candidate_thresholds": thresholds,
+        "selection_policy": SELECTION_POLICY,
         "passing_thresholds": passing_thresholds,
         "selected_threshold": selected_threshold,
         "threshold_reports": threshold_reports,

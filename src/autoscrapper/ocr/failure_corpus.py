@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import time
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from hashlib import blake2b
@@ -70,7 +69,6 @@ def _sample_id(
     digest = blake2b(payload, digest_size=8)
     if image is not None and image.size > 0:
         digest.update(np.ascontiguousarray(image).tobytes())
-    digest.update(str(time.time_ns()).encode("ascii"))
     return digest.hexdigest()
 
 

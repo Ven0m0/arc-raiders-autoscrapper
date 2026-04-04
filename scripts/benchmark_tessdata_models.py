@@ -33,6 +33,10 @@ MODEL_PACKAGES = {
     "fast-eng": "tessdata.fast-eng",
     "best-eng": "tessdata.best-eng",
 }
+SELECTION_POLICY = (
+    "Prefer best-eng only when it improves corpus accuracy; elapsed time is "
+    "reported for reference."
+)
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -159,19 +163,20 @@ def _install_tessdata_package(package_name: str, target_dir: Path) -> str:
         raise RuntimeError(
             f"Could not install {package_name} for benchmarking: {detail}"
         ) from exc
-    env = os.environ.copy()
-    existing_pythonpath = env.get("PYTHONPATH")
-    env["PYTHONPATH"] = (
-        str(target_dir)
-        if not existing_pythonpath
-        else f"{target_dir}{os.pathsep}{existing_pythonpath}"
-    )
     completed = subprocess.run(
-        [sys.executable, "-c", "import tessdata; print(tessdata.data_path())"],
+        [
+            sys.executable,
+            "-c",
+            (
+                "import sys; "
+                f"sys.path.insert(0, {str(target_dir)!r}); "
+                "import tessdata; "
+                "print(tessdata.data_path())"
+            ),
+        ],
         check=True,
         capture_output=True,
         text=True,
-        env=env,
     )
     lines = [line.strip() for line in completed.stdout.splitlines() if line.strip()]
     if not lines:
@@ -277,7 +282,7 @@ def main() -> int:
         "manifest_path": manifest_path.as_posix(),
         "sample_count": fast_report["sample_count"],
         "selected_model": selected_model,
-        "selection_policy": "Prefer best-eng only when it improves corpus accuracy; elapsed time is reported for reference.",
+        "selection_policy": SELECTION_POLICY,
         "dependency_should_change": selected_model != "fast-eng",
         "runs": runs,
     }
