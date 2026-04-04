@@ -169,12 +169,10 @@ def resolve_action_taken(
             return "UNREADABLE_TITLE"
         if not actions:
             return "SKIP_NO_ACTION_MAP"
-        if infobox_ocr is None:
-            return "SKIP_UNLISTED"
-        raw_text = infobox_ocr.raw_item_text
+        raw_text = infobox_ocr.raw_item_text if infobox_ocr is not None else item_name
         match_result = match_item_name_result(raw_text)
         source_image: Optional[np.ndarray] = None
-        if infobox_bgr is not None:
+        if infobox_bgr is not None and infobox_ocr is not None:
             source_image = build_skip_unlisted_corpus_image(
                 infobox_bgr,
                 from_context_menu=infobox_ocr.source == "context_menu",
@@ -185,9 +183,13 @@ def resolve_action_taken(
                 chosen_name=match_result.chosen_name,
                 matched_name=match_result.matched_name,
                 source_image=source_image,
-                from_context_menu=infobox_ocr.source == "context_menu",
+                from_context_menu=(
+                    infobox_ocr.source == "context_menu"
+                    if infobox_ocr is not None
+                    else False
+                ),
             )
-        except Exception as exc:  # pragma: no cover - runtime filesystem dependent
+        except (OSError, ValueError) as exc:  # pragma: no cover - runtime dependent
             print(
                 f"[ocr_corpus] failed to capture SKIP_UNLISTED sample: {exc}",
                 flush=True,

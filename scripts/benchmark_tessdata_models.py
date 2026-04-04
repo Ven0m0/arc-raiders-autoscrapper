@@ -123,12 +123,19 @@ def _run_worker(manifest_path: Path, label: str) -> dict[str, object]:
 
 
 def _install_tessdata_package(package_name: str, target_dir: Path) -> str:
-    subprocess.run(
-        [sys.executable, "-m", "ensurepip", "--upgrade"],
-        check=True,
+    pip_check = subprocess.run(
+        [sys.executable, "-m", "pip", "--version"],
+        check=False,
         capture_output=True,
         text=True,
     )
+    if pip_check.returncode != 0:
+        subprocess.run(
+            [sys.executable, "-m", "ensurepip", "--upgrade"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
     command = [
         sys.executable,
         "-m",
@@ -270,6 +277,7 @@ def main() -> int:
         "manifest_path": manifest_path.as_posix(),
         "sample_count": fast_report["sample_count"],
         "selected_model": selected_model,
+        "selection_policy": "Prefer best-eng only when it improves corpus accuracy; elapsed time is reported for reference.",
         "dependency_should_change": selected_model != "fast-eng",
         "runs": runs,
     }

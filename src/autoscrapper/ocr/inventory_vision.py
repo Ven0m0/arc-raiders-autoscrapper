@@ -60,6 +60,14 @@ class InfoboxOcrResult:
 
 @dataclass(frozen=True)
 class ItemNameMatchResult:
+    """
+    Match metadata for OCR item-name resolution.
+
+    `chosen_name` is the value callers use (configured match or cleaned OCR text),
+    while `matched_name` is only set when a configured item-name match cleared the
+    fuzzy threshold.
+    """
+
     cleaned_text: str
     chosen_name: str
     matched_name: str | None
