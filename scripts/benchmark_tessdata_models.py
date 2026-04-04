@@ -34,8 +34,8 @@ MODEL_PACKAGES = {
     "best-eng": "tessdata.best-eng",
 }
 SELECTION_POLICY = (
-    "Prefer best-eng only when it improves corpus accuracy; elapsed time is "
-    "reported for reference."
+    "Prefer best-eng only when it strictly improves corpus accuracy; ties keep "
+    "fast-eng and elapsed time is reported for reference."
 )
 
 

@@ -160,6 +160,8 @@ def capture_skip_unlisted_sample(
             image_path = absolute_image_path.relative_to(REPO_ROOT).as_posix()
 
     sample_raw_text = raw_text.strip()
+    # Preserve the original OCR string when available; otherwise store the
+    # cleaned fallback so replay/benchmark tooling still has a usable corpus row.
     sample = OcrFailureSample(
         sample_id=sample_id,
         captured_at=_iso_now(),
