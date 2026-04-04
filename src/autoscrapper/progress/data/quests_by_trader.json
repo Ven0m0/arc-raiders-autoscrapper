@@ -1,9 +1,5 @@
 {
-<<<<<<< Updated upstream
-  "generatedAt": "2026-04-04T02:40:54.933362Z",
-=======
-  "generatedAt": "2026-04-03T23:28:50.220997Z",
->>>>>>> Stashed changes
+  "generatedAt": "2026-04-04T14:14:25.665247Z",
   "source": "quests.json",
   "traders": {
     "Celeste": [
@@ -125,6 +121,16 @@
     ],
     "TianWen": [
       {
+        "id": "outstanding-balance",
+        "name": "Outstanding Balance",
+        "sortOrder": 0
+      },
+      {
+        "id": "settled-in-full",
+        "name": "Settled in Full",
+        "sortOrder": 0
+      },
+      {
         "id": "the-right-tool",
         "name": "The Right Tool",
         "sortOrder": 1040.3902829127408
@@ -196,6 +202,21 @@
       }
     ],
     "Shani": [
+      {
+        "id": "fragmented-logs",
+        "name": "Fragmented Logs",
+        "sortOrder": 0
+      },
+      {
+        "id": "furtive-meetings",
+        "name": "Furtive Meetings",
+        "sortOrder": 0
+      },
+      {
+        "id": "last-entry",
+        "name": "Last Entry",
+        "sortOrder": 0
+      },
       {
         "id": "waking-the-grid",
         "name": "Waking The Grid",
@@ -348,6 +369,11 @@
       }
     ],
     "Apollo": [
+      {
+        "id": "test-case",
+        "name": "Test Case",
+        "sortOrder": 0
+      },
       {
         "id": "safe-passage",
         "name": "Safe Passage",

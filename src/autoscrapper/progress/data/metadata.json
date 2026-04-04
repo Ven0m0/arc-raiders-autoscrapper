@@ -1,12 +1,8 @@
 {
-<<<<<<< Updated upstream
-  "lastUpdated": "2026-04-04T02:40:54.933664Z",
-=======
-  "lastUpdated": "2026-04-03T23:28:50.221410Z",
->>>>>>> Stashed changes
+  "lastUpdated": "2026-04-04T14:14:25.665618Z",
   "source": "https://metaforge.app/arc-raiders",
   "version": "autoscrapper-data-1",
-  "itemCount": 545,
-  "questCount": 88,
+  "itemCount": 547,
+  "questCount": 94,
   "hasPriceOverrides": false
 }

@@ -2964,6 +2964,19 @@
     "recyclesInto": null
   },
   {
+    "id": "gothic-graffiti-aviator-color",
+    "name": "Gothic Graffiti (Aviator Color)",
+    "type": "Misc",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-04-04T09:53:29.234227+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "great-muullein",
     "name": "Great Mullein",
     "type": "Topside Material",
@@ -7003,6 +7016,19 @@
     "stackSize": 3,
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "white-indigo-warden-color",
+    "name": "White Indigo (Warden Color)",
+    "type": "Misc",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-04-04T13:01:02.651435+00:00",
     "recipe": null,
     "recyclesInto": null
   },

@@ -1,12 +1,12 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-04T02:40:54.946474Z",
+    "generatedAt": "2026-04-04T14:14:25.679577Z",
     "data": {
-      "lastUpdated": "2026-04-04T02:40:54.933664Z",
+      "lastUpdated": "2026-04-04T14:14:25.665618Z",
       "source": "https://metaforge.app/arc-raiders",
       "version": "autoscrapper-data-1"
     },
-    "itemCount": 545,
+    "itemCount": 547,
     "allQuestsCompleted": true
   },
   "items": [
@@ -2377,6 +2377,16 @@
     {
       "id": "goggles-radio-renegade-variant",
       "name": "Goggles (Radio Renegade Variant)",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "gothic-graffiti-aviator-color",
+      "name": "Gothic Graffiti (Aviator Color)",
       "value": 0,
       "action": "sell",
       "analysis": [
@@ -5647,6 +5657,16 @@
         "Rare rarity",
         "May have future use - review carefully",
         "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "white-indigo-warden-color",
+      "name": "White Indigo (Warden Color)",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
