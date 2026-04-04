@@ -1,4 +1,3 @@
-import pytest
 from autoscrapper.scanner.report import _item_label
 from autoscrapper.core.item_actions import ItemActionResult
 from autoscrapper.interaction.inventory_grid import Cell
