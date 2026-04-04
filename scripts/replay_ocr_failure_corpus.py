@@ -69,8 +69,9 @@ def main() -> int:
         correct_count = 0
         for sample in samples:
             result = match_item_name_result(sample.raw_text, threshold)
+            expects_no_match = sample.expected_name is None
             is_correct = (
-                not sample.expected_name and result.matched_name is None
+                expects_no_match and result.matched_name is None
             ) or result.matched_name == sample.expected_name
             if is_correct:
                 correct_count += 1

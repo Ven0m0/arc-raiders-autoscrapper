@@ -135,8 +135,10 @@ def capture_skip_unlisted_sample(
     paths: CorpusPaths | None = None,
 ) -> OcrFailureSample | None:
     cleaned_text = clean_ocr_text(raw_text)
+    used_chosen_name_fallback = False
     if not cleaned_text:
         cleaned_text = clean_ocr_text(chosen_name)
+        used_chosen_name_fallback = bool(cleaned_text)
     if not cleaned_text:
         return None
 
@@ -175,6 +177,11 @@ def capture_skip_unlisted_sample(
     corpus_paths.manifest_path.parent.mkdir(parents=True, exist_ok=True)
     with corpus_paths.manifest_path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(asdict(sample), ensure_ascii=False) + "\n")
+    if used_chosen_name_fallback:
+        print(
+            "[ocr_corpus] captured sample without raw OCR text; used chosen name fallback",
+            flush=True,
+        )
 
     return sample
 

@@ -171,7 +171,7 @@ def resolve_action_taken(
             return "SKIP_NO_ACTION_MAP"
         if infobox_ocr is None:
             return "SKIP_UNLISTED"
-        raw_text = infobox_ocr.raw_item_text or item_name
+        raw_text = infobox_ocr.raw_item_text
         match_result = match_item_name_result(raw_text)
         source_image: Optional[np.ndarray] = None
         if infobox_bgr is not None:

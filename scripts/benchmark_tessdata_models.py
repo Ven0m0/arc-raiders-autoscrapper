@@ -228,10 +228,6 @@ def main() -> int:
                 with TemporaryDirectory() as temp_dir_raw:
                     temp_dir = Path(temp_dir_raw)
                     tessdata_dir = _install_tessdata_package(package_name, temp_dir)
-                    run_report = _invoke_worker(manifest_path, label, tessdata_dir)
-                    run_report["package_name"] = package_name
-                    runs.append(run_report)
-                    continue
 
             run_report = _invoke_worker(manifest_path, label, tessdata_dir)
             run_report["package_name"] = package_name
