@@ -10,7 +10,7 @@ import logging
 from dataclasses import dataclass
 from typing import Iterator, List, Tuple
 
-import cv2 # type: ignore
+import cv2  # type: ignore
 import numpy as np
 
 _log = logging.getLogger(__name__)

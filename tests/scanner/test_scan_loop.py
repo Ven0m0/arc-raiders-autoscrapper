@@ -46,6 +46,7 @@ def test_scroll_clicks_sequence_zero_or_negative():
     with pytest.raises(ValueError, match="scroll click pattern values must be > 0"):
         _scroll_clicks_sequence([0.5, 2.0])
 
+
 def test_scroll_clicks_sequence_string_conversion():
     # Valid strings should be converted to ints
     seq = _scroll_clicks_sequence(["1", "2"])

@@ -92,9 +92,7 @@ class DecisionEngine:
         item_type = str(item.get("type", "")).lower()
         rarity = str(item.get("rarity", "")).lower()
 
-        override_reasons = KEEP_ITEM_OVERRIDES.get(
-            _normalize_item_id(item.get("id"))
-        )
+        override_reasons = KEEP_ITEM_OVERRIDES.get(_normalize_item_id(item.get("id")))
         if override_reasons is not None:
             return self.finalize_decision(
                 item,
@@ -416,7 +414,7 @@ class DecisionEngine:
                 materials.append(f"{quantity}x {output_item.get('name')}")
                 try:
                     total_value += int(output_item.get("value", 0)) * int(quantity)
-                except (TypeError, ValueError):
+                except TypeError, ValueError:
                     continue
 
         return RecycleValue(
