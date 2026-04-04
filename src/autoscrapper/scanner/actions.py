@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import numpy as np
+
 from dataclasses import dataclass
 from typing import Any, Optional, Tuple
 
@@ -14,9 +16,12 @@ from ..interaction.ui_windows import (
     sleep_with_abort,
 )
 from ..interaction.keybinds import DEFAULT_STOP_KEY
+from ..ocr.failure_corpus import capture_skip_unlisted_sample
 from ..ocr.inventory_vision import (
     InfoboxOcrResult,
+    build_skip_unlisted_corpus_image,
     find_action_bbox_by_ocr,
+    match_item_name_result,
     recycle_confirm_button_center,
     rect_center,
     sell_confirm_button_center,
@@ -164,6 +169,30 @@ def resolve_action_taken(
             return "UNREADABLE_TITLE"
         if not actions:
             return "SKIP_NO_ACTION_MAP"
+        raw_text = infobox_ocr.raw_item_text if infobox_ocr is not None else item_name
+        match_result = match_item_name_result(raw_text)
+        source_image: Optional[np.ndarray] = None
+        from_context_menu = (
+            infobox_ocr.source == "context_menu" if infobox_ocr is not None else False
+        )
+        if infobox_bgr is not None and infobox_ocr is not None:
+            source_image = build_skip_unlisted_corpus_image(
+                infobox_bgr,
+                from_context_menu=from_context_menu,
+            )
+        try:
+            capture_skip_unlisted_sample(
+                raw_text=raw_text,
+                chosen_name=match_result.chosen_name,
+                matched_name=match_result.matched_name,
+                source_image=source_image,
+                from_context_menu=from_context_menu,
+            )
+        except (OSError, ValueError) as exc:  # pragma: no cover - runtime dependent
+            print(
+                f"[ocr_corpus] failed to capture SKIP_UNLISTED sample: {exc}",
+                flush=True,
+            )
         return "SKIP_UNLISTED"
 
     if decision == "KEEP":
