@@ -131,7 +131,7 @@ def capture_skip_unlisted_sample(
     chosen_name: str,
     matched_name: str | None,
     source_image: np.ndarray | None,
-    context_menu_fallback: bool,
+    from_context_menu: bool,
     paths: CorpusPaths | None = None,
 ) -> OcrFailureSample | None:
     cleaned_text = clean_ocr_text(raw_text)
@@ -141,7 +141,7 @@ def capture_skip_unlisted_sample(
         return None
 
     source: Literal["infobox", "context_menu"] = (
-        "context_menu" if context_menu_fallback else "infobox"
+        "context_menu" if from_context_menu else "infobox"
     )
     corpus_paths = paths or default_capture_paths()
     sample_id = _sample_id(
@@ -159,12 +159,13 @@ def capture_skip_unlisted_sample(
         if cv2.imwrite(str(absolute_image_path), source_image):
             image_path = absolute_image_path.relative_to(REPO_ROOT).as_posix()
 
+    sample_raw_text = raw_text.strip()
     sample = OcrFailureSample(
         sample_id=sample_id,
         captured_at=_iso_now(),
         outcome="SKIP_UNLISTED",
         source=source,
-        raw_text=raw_text.strip() or cleaned_text,
+        raw_text=sample_raw_text if sample_raw_text else cleaned_text,
         cleaned_text=cleaned_text,
         chosen_name=chosen_name,
         matched_name=matched_name,

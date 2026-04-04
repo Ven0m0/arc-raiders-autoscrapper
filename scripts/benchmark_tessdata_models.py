@@ -255,8 +255,18 @@ def main() -> int:
                 }
             )
 
-    fast_report = next(report for report in runs if report["label"] == "fast-eng")
-    best_report = next(report for report in runs if report["label"] == "best-eng")
+    fast_report = next(
+        (report for report in runs if report["label"] == "fast-eng"),
+        None,
+    )
+    best_report = next(
+        (report for report in runs if report["label"] == "best-eng"),
+        None,
+    )
+    if fast_report is None or best_report is None:
+        raise RuntimeError(
+            "Benchmark did not produce both fast-eng and best-eng reports"
+        )
     selected_model = (
         "best-eng" if best_report["accuracy"] > fast_report["accuracy"] else "fast-eng"
     )

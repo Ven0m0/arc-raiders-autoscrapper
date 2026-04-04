@@ -52,7 +52,7 @@ def _default_thresholds() -> list[int]:
     ]
 
 
-def _expected_result(sample_expected_name: str | None) -> str:
+def _format_expected_name(sample_expected_name: str | None) -> str:
     return sample_expected_name.strip() if sample_expected_name else "<no-match>"
 
 
@@ -78,7 +78,7 @@ def main() -> int:
                 {
                     "sample_id": sample.sample_id,
                     "raw_text": sample.raw_text,
-                    "expected": _expected_result(sample.expected_name),
+                    "expected": _format_expected_name(sample.expected_name),
                     "match_status": "matched"
                     if result.matched_name is not None
                     else "no_match",
