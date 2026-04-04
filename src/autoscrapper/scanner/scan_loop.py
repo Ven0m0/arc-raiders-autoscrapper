@@ -27,6 +27,7 @@ from ..ocr.inventory_vision import (
     is_slot_empty,
     ocr_context_menu,
     ocr_infobox,
+    reset_ocr_caches,
 )
 
 
@@ -193,7 +194,6 @@ def _detect_consecutive_empty_stop_idx(
         x, y, w, h = cell.safe_rect
         slot_bgr = window_bgr[y : y + h, x : x + w]
         if slot_bgr.size == 0:
-            prev_empty = False
             continue
         is_empty = is_slot_empty(slot_bgr)
         if is_empty and prev_empty:
@@ -222,6 +222,10 @@ class _ScanRunner:
         self.startup_events = startup_events
         self.state = ScanRunState()
         self._last_click_window_pos: Optional[Tuple[int, int]] = None
+        # Tracks which UI detection method works for this scan session.
+        # Set on the first successful detection, then reused for all
+        # subsequent cells to avoid repeatedly trying the method that fails.
+        self._detected_ui_mode: Optional[str] = None  # "context_menu" or "infobox"
         self.action_context = ActionExecutionContext(
             apply_actions=context.apply_actions,
             win_left=context.win_left,
@@ -279,6 +283,33 @@ class _ScanRunner:
             left_right_click_gap=self.context.timing.cell_infobox_left_right_click_gap,
         )
 
+    def _capture_window(self) -> Tuple[Any, float]:
+        capture_start = time.perf_counter()
+        window_bgr = capture_region(
+            (
+                self.context.win_left,
+                self.context.win_top,
+                self.context.win_width,
+                self.context.win_height,
+            )
+        )
+        return window_bgr, time.perf_counter() - capture_start
+
+    def _try_context_menu_crop(
+        self, window_bgr: Any
+    ) -> Optional[Tuple[int, int, int, int]]:
+        if self._last_click_window_pos is None:
+            return None
+        cx, cy = self._last_click_window_pos
+        return find_context_menu_crop(window_bgr, cx, cy)
+
+    def _try_infobox_color_detection(
+        self, window_bgr: Any
+    ) -> Tuple[Optional[Tuple[int, int, int, int]], float]:
+        find_start = time.perf_counter()
+        rect = find_infobox(window_bgr)
+        return rect, time.perf_counter() - find_start
+
     def _capture_infobox_with_retries(self) -> _InfoboxCaptureResult:
         infobox_rect: Optional[Tuple[int, int, int, int]] = None
         window_bgr = None
@@ -286,53 +317,79 @@ class _ScanRunner:
         find_time = 0.0
         capture_attempts = 0
         found_on_attempt = 0
-
-        for attempt in range(1, self.config.infobox_retries + 1):
-            capture_attempts += 1
-            abort_if_escape_pressed(self.context.stop_key)
-
-            capture_start = time.perf_counter()
-            window_bgr = capture_region(
-                (
-                    self.context.win_left,
-                    self.context.win_top,
-                    self.context.win_width,
-                    self.context.win_height,
-                )
-            )
-            capture_time += time.perf_counter() - capture_start
-
-            find_start = time.perf_counter()
-            infobox_rect = find_infobox(window_bgr)
-            find_time += time.perf_counter() - find_start
-
-            if infobox_rect:
-                found_on_attempt = attempt
-                break
-
-            sleep_with_abort(
-                self.context.timing.infobox_retry_interval,
-                stop_key=self.context.stop_key,
-            )
-            pause_action(
-                self.context.timing.input_action_delay,
-                stop_key=self.context.stop_key,
-            )
-
-        # Fallback: color-based detection failed (e.g. game updated to dark
-        # context-menu UI). Crop a positional region near the clicked cell so
-        # OCR can still extract the item name from the menu title.
         context_menu_fallback = False
+
+        # Fast path: if a previous cell already determined the UI mode,
+        # skip the method that is known to fail for this session.
+        skip_infobox = self._detected_ui_mode == "context_menu"
+        skip_context_menu = self._detected_ui_mode == "infobox"
+
+        # --- Attempt 1: context-menu positional crop (near-free) ---
+        if not skip_context_menu and self._last_click_window_pos is not None:
+            window_bgr, cap_t = self._capture_window()
+            capture_time += cap_t
+            capture_attempts += 1
+
+            infobox_rect = self._try_context_menu_crop(window_bgr)
+            if infobox_rect is not None:
+                found_on_attempt = 1
+                context_menu_fallback = True
+                if self._detected_ui_mode is None:
+                    self._detected_ui_mode = "context_menu"
+                return _InfoboxCaptureResult(
+                    infobox_rect=infobox_rect,
+                    window_bgr=window_bgr,
+                    capture_time=capture_time,
+                    find_time=find_time,
+                    capture_attempts=capture_attempts,
+                    found_on_attempt=found_on_attempt,
+                    context_menu_fallback=True,
+                )
+
+        # --- Attempt 2: color-based infobox detection with retries ---
+        if not skip_infobox:
+            for attempt in range(1, self.config.infobox_retries + 1):
+                capture_attempts += 1
+                abort_if_escape_pressed(self.context.stop_key)
+
+                if window_bgr is None or attempt > 1:
+                    window_bgr, cap_t = self._capture_window()
+                    capture_time += cap_t
+
+                rect, ft = self._try_infobox_color_detection(window_bgr)
+                find_time += ft
+
+                if rect is not None:
+                    infobox_rect = rect
+                    found_on_attempt = capture_attempts
+                    if self._detected_ui_mode is None:
+                        self._detected_ui_mode = "infobox"
+                    break
+
+                if attempt < self.config.infobox_retries:
+                    sleep_with_abort(
+                        self.context.timing.infobox_retry_interval,
+                        stop_key=self.context.stop_key,
+                    )
+                    pause_action(
+                        self.context.timing.input_action_delay,
+                        stop_key=self.context.stop_key,
+                    )
+
+        # --- Fallback: if color detection failed, try context menu crop
+        # (only if we haven't tried it above) ---
         if (
             infobox_rect is None
+            and not context_menu_fallback
             and window_bgr is not None
             and self._last_click_window_pos is not None
         ):
-            cx, cy = self._last_click_window_pos
-            infobox_rect = find_context_menu_crop(window_bgr, cx, cy)
+            infobox_rect = self._try_context_menu_crop(window_bgr)
             if infobox_rect is not None:
                 found_on_attempt = capture_attempts
                 context_menu_fallback = True
+                if self._detected_ui_mode is None:
+                    self._detected_ui_mode = "context_menu"
 
         return _InfoboxCaptureResult(
             infobox_rect=infobox_rect,
@@ -424,8 +481,14 @@ class _ScanRunner:
 
         abort_if_escape_pressed(self.context.stop_key)
         window = self.context.window
-        if window is not None and hasattr(window, "isAlive") and not window.isAlive:  # type: ignore[attr-defined]
-            raise RuntimeError("Target window closed during scan")
+        if window is not None and hasattr(window, "isAlive"):
+            try:
+                if not window.isAlive:  # type: ignore[attr-defined]
+                    raise RuntimeError("Target window closed during scan")
+            except RuntimeError:
+                raise
+            except Exception:
+                raise RuntimeError("Target window closed during scan (handle stale)")
 
         sleep_with_abort(
             self.context.timing.item_infobox_settle_delay,
@@ -556,7 +619,9 @@ class _ScanRunner:
         if not cells:
             return
 
+        max_destructive_retries = 5
         idx_in_page = 0
+        destructive_retries = 0
         self._open_cell_infobox(cells[0])
 
         while idx_in_page < len(cells):
@@ -571,10 +636,23 @@ class _ScanRunner:
 
             destructive_action = cell_scan.action_taken in {"SELL", "RECYCLE"}
             if destructive_action:
+                destructive_retries += 1
+                if destructive_retries > max_destructive_retries:
+                    self._emit_event(
+                        f"Exceeded {max_destructive_retries} destructive retries at "
+                        f"idx={global_idx:03d}; advancing to next cell.",
+                        style="yellow",
+                    )
+                    destructive_retries = 0
+                    idx_in_page += 1
+                    if idx_in_page < len(cells):
+                        self._open_cell_infobox(cells[idx_in_page])
+                    continue
                 # Item removed; the next item collapses into this slot. Re-open the same cell.
                 self._open_cell_infobox(cell)
                 continue
 
+            destructive_retries = 0
             idx_in_page += 1
             if idx_in_page < len(cells):
                 next_global_idx = (
@@ -586,6 +664,9 @@ class _ScanRunner:
 
     def _scan_single_page(self, page: int) -> None:
         self.state.pages_scanned += 1
+        # Allow re-detection of UI mode each page in case the game UI changed.
+        if page > 0:
+            self._detected_ui_mode = None
 
         cells = self.initial_cells
         if page > 0:
@@ -616,6 +697,7 @@ def scan_pages(
     startup_events: List[Tuple[str, str]],
     items_total: Optional[int],
 ) -> ScanRunState:
+    reset_ocr_caches()
     config = _ScanLoopConfig(
         pages_to_scan=pages_to_scan,
         infobox_retries=infobox_retries,

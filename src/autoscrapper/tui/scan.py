@@ -26,6 +26,7 @@ from ..interaction.ui_windows import (
     get_active_target_window,
     stop_key_pressed,
 )
+from ..ocr.tesseract import initialize_ocr
 from ..scanner.outcomes import _describe_action, _outcome_style
 from ..scanner.progress import ScanProgress
 from ..scanner.types import ScanStats
@@ -272,6 +273,7 @@ class ScanScreen(Screen):
         if self._scan_started:
             return
         self._scan_started = True
+        initialize_ocr()  # cysignals requires signal handlers installed on main thread
         thread = threading.Thread(
             target=self._run_scan, args=(window_snapshot,), daemon=True
         )

@@ -47,6 +47,14 @@ _last_ocr_result: Optional[Tuple[str, str]] = None
 DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75
 
 
+def reset_ocr_caches() -> None:
+    """Reset module-level OCR caches. Call at the start of each scan session."""
+    global _last_roi_hash, _last_ocr_result, _ITEM_NAMES
+    _last_roi_hash = None
+    _last_ocr_result = None
+    _ITEM_NAMES = None
+
+
 @dataclass
 class InfoboxOcrResult:
     item_name: str
@@ -515,14 +523,20 @@ def find_infobox(bgr_image: np.ndarray) -> Optional[Tuple[int, int, int, int]]:
     return wide_result.rect
 
 
-# Positional fallback crop for the dark context-menu UI (post game-update).
-# The context menu opens to the RIGHT of the right-clicked cell and its top
-# aligns roughly with the cell centre.  These offsets (relative to the cell
-# centre in window coords) give a generous crop anchored to that region.
-_CONTEXT_MENU_X_OFFSET = 150
-_CONTEXT_MENU_Y_OFFSET = 100
-_CONTEXT_MENU_WIDTH = 420
-_CONTEXT_MENU_HEIGHT = 380
+# Positional fallback crop for the context-menu UI.
+# The dark context menu opens to the LEFT of the right-clicked cell.  Its left
+# edge sits approximately 43 px right of cell centre (measured from debug images:
+# "Move to Backpack" loses ~37 px on the left when offset=80, so true edge ≈ 43).
+# Using 35 gives an 8 px safety margin to the left of the menu edge.
+# The item name header occupies the topmost row of the menu.  It sits roughly
+# 10 px above cell centre (one ~40 px row above the first action button, which
+# appears at crop-y≈10 when Y-offset=30).  Using -20 gives a 10 px safety
+# margin above the item name row.
+# Normalized context-menu crop offsets (calibrated at 1920x1080).
+_CONTEXT_MENU_X_OFFSET_NORM = 35 / 1920
+_CONTEXT_MENU_Y_OFFSET_NORM = -20 / 1080  # negative = crop starts above cell centre
+_CONTEXT_MENU_WIDTH_NORM = 490 / 1920
+_CONTEXT_MENU_HEIGHT_NORM = 450 / 1080
 
 
 def find_context_menu_crop(
@@ -539,12 +553,17 @@ def find_context_menu_crop(
     the crop is anchored to the correct screen location.
     """
     img_h, img_w = bgr_image.shape[:2]
-    x = max(0, cell_center_x + _CONTEXT_MENU_X_OFFSET)
-    y = max(0, cell_center_y + _CONTEXT_MENU_Y_OFFSET)
-    x2 = min(img_w, x + _CONTEXT_MENU_WIDTH)
-    y2 = min(img_h, y + _CONTEXT_MENU_HEIGHT)
+    x_off = int(round(_CONTEXT_MENU_X_OFFSET_NORM * img_w))
+    y_off = int(round(_CONTEXT_MENU_Y_OFFSET_NORM * img_h))
+    crop_w = int(round(_CONTEXT_MENU_WIDTH_NORM * img_w))
+    crop_h = int(round(_CONTEXT_MENU_HEIGHT_NORM * img_h))
+    x = max(0, cell_center_x + x_off)
+    y = max(0, cell_center_y + y_off)
+    x2 = min(img_w, x + crop_w)
+    y2 = min(img_h, y + crop_h)
     w, h = x2 - x, y2 - y
-    if w < 100 or h < 100:
+    min_dim = int(round(100 * min(img_w, img_h) / 1080))
+    if w < min_dim or h < min_dim:
         return None
     return x, y, w, h
 
@@ -558,11 +577,24 @@ def title_roi(infobox_rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, i
     return x, y, w, max(1, title_h)
 
 
+_TITLE_LEFT_PAD = 4  # px — keeps leftmost glyph column away from x=0 so
+# Tesseract doesn't clip the leading character edge.
+
+
 def _crop_title_strip(infobox_bgr: np.ndarray) -> np.ndarray:
     if infobox_bgr.size == 0:
         return infobox_bgr
     title_h = max(1, int(round(infobox_bgr.shape[0] * TITLE_HEIGHT_REL)))
-    return infobox_bgr[:title_h, :]
+    strip = infobox_bgr[:title_h, :]
+    if strip.shape[1] > _TITLE_LEFT_PAD * 2:
+        median_val = np.median(strip)
+        pad = np.full(
+            strip.shape[:1] + (int(_TITLE_LEFT_PAD),) + strip.shape[2:],
+            median_val,
+            dtype=strip.dtype,
+        )
+        strip = np.concatenate([pad, strip], axis=1)
+    return strip
 
 
 def _get_item_names() -> Tuple[str, ...]:
@@ -833,7 +865,11 @@ def _extract_title_from_data(
                 continue
         return sum(confs) / len(confs) if confs else -1.0
 
-    best_key = max(groups.keys(), key=lambda k: _group_score(groups[k]))
+    scored = {k: _group_score(groups[k]) for k in groups}
+    best_score = max(scored.values())
+    if best_score < 0:
+        return "", ""
+    best_key = max(scored, key=lambda k: scored[k])
     ordered_indices = sorted(groups[best_key])
     cleaned_parts = []
     raw_parts = []
@@ -930,6 +966,11 @@ def find_action_bbox_by_ocr(
         return None, processed
 
     bbox = _extract_action_line_bbox(data, target)
+    # OCR coordinates are in the 2x-upscaled image space; scale back to
+    # the original infobox coordinate system.
+    if bbox is not None:
+        bx, by, bw, bh = bbox
+        bbox = (bx // 2, by // 2, max(1, bw // 2), max(1, bh // 2))
     return bbox, processed
 
 
@@ -1021,11 +1062,10 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
     preprocess_start = time.perf_counter()
     _save_debug_image("ctx_menu_raw", context_crop_bgr)
     processed = preprocess_for_ocr(context_crop_bgr)
-    # Small dilation fills gaps in the game's thin-stroke display font so
-    # Tesseract doesn't read broken strokes as separate characters.
-    kernel = np.ones((2, 2), np.uint8)
-    processed = cv2.dilate(processed, kernel, iterations=1)
     _save_debug_image("ctx_menu_processed", processed)
+    _save_debug_image(
+        "ctx_menu_top_strip", processed[: max(1, processed.shape[0] // 4), :]
+    )
     preprocess_time = time.perf_counter() - preprocess_start
 
     ocr_time = 0.0
@@ -1067,6 +1107,22 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
     def _line_top(indices: List[int]) -> float:
         return min(float(data["top"][i]) for i in indices)
 
+    # Known action-button labels that are never item names.  Lines whose
+    # lowercased text starts with one of these are skipped before fuzzy
+    # matching so that left-clipped fragments (e.g. "it Stack" from "Split
+    # Stack") cannot accidentally match a real item name.
+    _ACTION_PREFIXES = (
+        "split stack",
+        "move to backpack",
+        "move to safe pocket",
+        "inspect",
+        "sell",
+        "recycle",
+        "drop",
+        "equip",
+        "unequip",
+    )
+
     item_name = ""
     raw_item_text = ""
     for key in sorted(groups.keys(), key=lambda k: _line_top(groups[k])):
@@ -1076,9 +1132,18 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
         ]
         cleaned_parts = [clean_ocr_text(p) for p in raw_parts]
         line_text = " ".join(p for p in cleaned_parts if p).strip()
-        matched = match_item_name(line_text)
-        if matched:
-            item_name = matched
+        line_lower = line_text.lower()
+        # Strip leading non-alpha chars (e.g. OCR'd game icons) before
+        # checking action prefixes.
+        stripped_lower = re.sub(r"^[^a-z]+", "", line_lower)
+        if any(
+            line_lower.startswith(p) or stripped_lower.startswith(p)
+            for p in _ACTION_PREFIXES
+        ):
+            continue
+        result = match_item_name_result(line_text)
+        if result.matched_name is not None:
+            item_name = result.chosen_name
             raw_item_text = " ".join(p for p in raw_parts if p).strip()
             break
 
@@ -1130,7 +1195,7 @@ def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:
         return None, cleaned
 
     try:
-        count = max(int(d) for d in digits)
+        count = int(digits[0])
     except Exception:
         count = None
 

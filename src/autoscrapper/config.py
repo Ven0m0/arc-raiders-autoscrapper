@@ -183,7 +183,7 @@ def _load_config_dict() -> Dict[str, Any]:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except FileNotFoundError:
         return {}
-    except OSError, json.JSONDecodeError:
+    except (OSError, json.JSONDecodeError):
         return {}
 
     if not isinstance(raw, dict):
