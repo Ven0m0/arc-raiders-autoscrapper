@@ -1,12 +1,12 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-03T17:26:52.275016Z",
+    "generatedAt": "2026-04-04T02:40:54.946474Z",
     "data": {
-      "lastUpdated": "2026-04-03T17:26:52.261433Z",
+      "lastUpdated": "2026-04-04T02:40:54.933664Z",
       "source": "https://metaforge.app/arc-raiders",
       "version": "autoscrapper-data-1"
     },
-    "itemCount": 542,
+    "itemCount": 545,
     "allQuestsCompleted": true
   },
   "items": [
@@ -1087,8 +1087,8 @@
     },
     {
       "id": "canto",
-      "name": "Canto",
-      "value": 0,
+      "name": "Canto I",
+      "value": 7000,
       "action": "keep",
       "analysis": [
         "Weapon - review based on your current loadout",
@@ -1104,6 +1104,39 @@
       "analysis": [
         "Legendary rarity - extremely valuable",
         "Keep all legendaries"
+      ]
+    },
+    {
+      "id": "canto-ii",
+      "name": "Canto II",
+      "value": 10000,
+      "action": "keep",
+      "analysis": [
+        "Weapon - review based on your current loadout",
+        "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "canto-iii",
+      "name": "Canto III",
+      "value": 13000,
+      "action": "keep",
+      "analysis": [
+        "Weapon - review based on your current loadout",
+        "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "canto-iv",
+      "name": "Canto IV",
+      "value": 17000,
+      "action": "keep",
+      "analysis": [
+        "Weapon - review based on your current loadout",
+        "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
