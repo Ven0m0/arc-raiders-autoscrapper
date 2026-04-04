@@ -1,4 +1,3 @@
-import pytest
 from unittest.mock import patch
 from autoscrapper.config import _migrate_config, CONFIG_VERSION
 
