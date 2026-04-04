@@ -7,6 +7,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import cv2
 
@@ -29,8 +30,8 @@ from autoscrapper.ocr.inventory_vision import (  # noqa: E402
 from autoscrapper.ocr.tesseract import initialize_ocr  # noqa: E402
 
 MODEL_PACKAGES = {
-    "fast-eng": "tessdata-fast-eng",
-    "best-eng": "tessdata-best-eng",
+    "fast-eng": "tessdata.fast-eng",
+    "best-eng": "tessdata.best-eng",
 }
 
 
@@ -121,24 +122,49 @@ def _run_worker(manifest_path: Path, label: str) -> dict[str, object]:
     }
 
 
-def _resolve_tessdata_dir(package_name: str) -> str:
-    command = [
-        sys.executable,
-        "-m",
-        "uv",
-        "run",
-        "--with",
-        package_name,
-        "python",
-        "-c",
-        "import tessdata; print(tessdata.data_path())",
-    ]
-    completed = subprocess.run(
-        command,
-        cwd=REPO_ROOT,
+def _install_tessdata_package(package_name: str, target_dir: Path) -> str:
+    subprocess.run(
+        [sys.executable, "-m", "ensurepip", "--upgrade"],
         check=True,
         capture_output=True,
         text=True,
+    )
+    command = [
+        sys.executable,
+        "-m",
+        "pip",
+        "install",
+        "--disable-pip-version-check",
+        "--no-deps",
+        "--target",
+        str(target_dir),
+        package_name,
+    ]
+    try:
+        subprocess.run(
+            command,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except subprocess.CalledProcessError as exc:
+        detail = exc.stderr.strip() or exc.stdout.strip() or str(exc)
+        raise RuntimeError(
+            f"Could not install {package_name} for benchmarking: {detail}"
+        ) from exc
+    env = os.environ.copy()
+    existing_pythonpath = env.get("PYTHONPATH")
+    env["PYTHONPATH"] = (
+        str(target_dir)
+        if not existing_pythonpath
+        else f"{target_dir}{os.pathsep}{existing_pythonpath}"
+    )
+    completed = subprocess.run(
+        [sys.executable, "-c", "import tessdata; print(tessdata.data_path())"],
+        check=True,
+        capture_output=True,
+        text=True,
+        env=env,
     )
     lines = [line.strip() for line in completed.stdout.splitlines() if line.strip()]
     if not lines:
@@ -146,7 +172,22 @@ def _resolve_tessdata_dir(package_name: str) -> str:
     return lines[-1]
 
 
-def _invoke_worker(manifest_path: Path, label: str, tessdata_dir: str) -> dict[str, object]:
+def _resolve_current_tessdata_dir() -> str:
+    completed = subprocess.run(
+        [sys.executable, "-c", "import tessdata; print(tessdata.data_path())"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    lines = [line.strip() for line in completed.stdout.splitlines() if line.strip()]
+    if not lines:
+        raise RuntimeError("Could not resolve the current tessdata dir")
+    return lines[-1]
+
+
+def _invoke_worker(
+    manifest_path: Path, label: str, tessdata_dir: str
+) -> dict[str, object]:
     env = os.environ.copy()
     env["TESSDATA_PREFIX"] = tessdata_dir
     completed = subprocess.run(
@@ -180,10 +221,39 @@ def main() -> int:
 
     runs = []
     for label, package_name in MODEL_PACKAGES.items():
-        tessdata_dir = _resolve_tessdata_dir(package_name)
-        run_report = _invoke_worker(manifest_path, label, tessdata_dir)
-        run_report["package_name"] = package_name
-        runs.append(run_report)
+        try:
+            if label == "fast-eng":
+                tessdata_dir = _resolve_current_tessdata_dir()
+            else:
+                with TemporaryDirectory() as temp_dir_raw:
+                    temp_dir = Path(temp_dir_raw)
+                    tessdata_dir = _install_tessdata_package(package_name, temp_dir)
+                    run_report = _invoke_worker(manifest_path, label, tessdata_dir)
+                    run_report["package_name"] = package_name
+                    runs.append(run_report)
+                    continue
+
+            run_report = _invoke_worker(manifest_path, label, tessdata_dir)
+            run_report["package_name"] = package_name
+            runs.append(run_report)
+        except Exception as exc:
+            runs.append(
+                {
+                    "label": label,
+                    "package_name": package_name,
+                    "sample_count": 0,
+                    "correct_count": 0,
+                    "accuracy": 0.0,
+                    "elapsed_seconds": 0.0,
+                    "backend": {
+                        "tesseract_version": "",
+                        "tessdata_dir": None,
+                        "languages": [],
+                    },
+                    "samples": [],
+                    "error": str(exc),
+                }
+            )
 
     fast_report = next(report for report in runs if report["label"] == "fast-eng")
     best_report = next(report for report in runs if report["label"] == "best-eng")
@@ -200,6 +270,14 @@ def main() -> int:
     report_path = write_report(BENCHMARK_REPORTS_DIR, "tessdata_benchmark", report)
 
     for run_report in runs:
+        if run_report.get("error"):
+            print(
+                "model={label} error={error}".format(
+                    label=run_report["label"],
+                    error=run_report["error"],
+                )
+            )
+            continue
         print(
             "model={label} accuracy={accuracy:.3f} correct={correct_count}/{sample_count} elapsed={elapsed_seconds:.3f}s tessdata_dir={tessdata_dir}".format(
                 **run_report,

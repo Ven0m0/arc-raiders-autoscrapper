@@ -6,7 +6,7 @@ from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from hashlib import blake2b
 from pathlib import Path
-from typing import Literal, Optional
+from typing import Literal
 
 import cv2
 import numpy as np
@@ -51,8 +51,11 @@ def default_capture_paths() -> CorpusPaths:
 
 
 def _iso_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace(
-        "+00:00", "Z"
+    return (
+        datetime.now(timezone.utc)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
     )
 
 
@@ -86,7 +89,18 @@ def _coerce_sample(entry: object) -> OcrFailureSample | None:
     expected_name = entry.get("expected_name")
     image_path = entry.get("image_path")
 
-    if not all(isinstance(value, str) and value for value in (sample_id, captured_at, outcome, source, raw_text, cleaned_text, chosen_name)):
+    if not all(
+        isinstance(value, str) and value
+        for value in (
+            sample_id,
+            captured_at,
+            outcome,
+            source,
+            raw_text,
+            cleaned_text,
+            chosen_name,
+        )
+    ):
         return None
     if source not in {"infobox", "context_menu"}:
         return None
@@ -197,5 +211,7 @@ def write_report(directory: Path, prefix: str, payload: object) -> Path:
     directory.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     path = directory / f"{prefix}_{stamp}.json"
-    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
     return path

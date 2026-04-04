@@ -190,7 +190,10 @@ def resolve_action_taken(
                 ),
             )
         except Exception as exc:  # pragma: no cover - runtime filesystem dependent
-            print(f"[ocr_corpus] failed to capture SKIP_UNLISTED sample: {exc}", flush=True)
+            print(
+                f"[ocr_corpus] failed to capture SKIP_UNLISTED sample: {exc}",
+                flush=True,
+            )
         return "SKIP_UNLISTED"
 
     if decision == "KEEP":

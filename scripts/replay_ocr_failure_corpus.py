@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import sys
-from dataclasses import asdict
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -46,7 +45,11 @@ def _build_parser() -> argparse.ArgumentParser:
 
 def _default_thresholds() -> list[int]:
     current = DEFAULT_ITEM_NAME_MATCH_THRESHOLD
-    return [value for value in {current - 10, current - 5, current, current + 5, current + 10} if value > 0]
+    return [
+        value
+        for value in {current - 10, current - 5, current, current + 5, current + 10}
+        if value > 0
+    ]
 
 
 def _expected_result(sample_expected_name: str | None) -> str:
@@ -67,9 +70,8 @@ def main() -> int:
         for sample in samples:
             result = match_item_name_result(sample.raw_text, threshold)
             is_correct = (
-                (not sample.expected_name and result.matched_name is None)
-                or result.matched_name == sample.expected_name
-            )
+                not sample.expected_name and result.matched_name is None
+            ) or result.matched_name == sample.expected_name
             if is_correct:
                 correct_count += 1
             sample_reports.append(
@@ -77,7 +79,9 @@ def main() -> int:
                     "sample_id": sample.sample_id,
                     "raw_text": sample.raw_text,
                     "expected": _expected_result(sample.expected_name),
-                    "match_status": "matched" if result.matched_name is not None else "no_match",
+                    "match_status": "matched"
+                    if result.matched_name is not None
+                    else "no_match",
                     "chosen_name": result.chosen_name,
                     "matched_name": result.matched_name,
                     "correct": is_correct,
@@ -122,7 +126,9 @@ def main() -> int:
         )
     print(f"report={report_path}")
     if not samples:
-        print("No samples found; capture live SKIP_UNLISTED data before calibrating the threshold.")
+        print(
+            "No samples found; capture live SKIP_UNLISTED data before calibrating the threshold."
+        )
     return 0
 
 
