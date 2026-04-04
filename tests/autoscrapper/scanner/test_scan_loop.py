@@ -10,6 +10,7 @@ sys.modules['pynput'] = MagicMock()
 sys.modules['pynput.keyboard'] = MagicMock()
 sys.modules['pynput.mouse'] = MagicMock()
 
+# ruff: noqa: E402
 from autoscrapper.scanner.scan_loop import _scroll_clicks_sequence
 
 def test_scroll_clicks_sequence_happy_path():
