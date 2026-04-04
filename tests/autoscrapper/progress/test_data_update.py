@@ -1,6 +1,5 @@
 import pytest
 import unittest.mock as mock
-from pathlib import Path
 from autoscrapper.progress.data_update import _fetch_supabase_all, update_data_snapshot, DownloadError
 
 def test_fetch_supabase_all_missing_key():
