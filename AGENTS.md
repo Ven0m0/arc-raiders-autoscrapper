@@ -52,6 +52,22 @@ There is no automated test suite. End-to-end verification requires a live Arc Ra
 - `scripts/update_snapshot_and_defaults.py` is the source of truth for generated snapshot data and `items_rules.default.json`.
 - `src/autoscrapper/config.py` owns persisted config schema and migrations.
 
+## Coordinate space invariant
+Inside `inventory_vision.py`, two coordinate spaces coexist:
+- **Original space**: the raw window crop dimensions
+- **2x-upscaled space**: output of `preprocess_for_ocr()`, used for Tesseract OCR
+
+Any bbox returned from OCR over a 2x image must be halved before applying to the original-space infobox rect. `find_action_bbox_by_ocr` handles this division internally — callers receive original-space coords.
+
+## Debug output
+OCR debug images land in `ocr_debug/` (timestamped PNGs). After a dry-run, inspect:
+- `*_infobox_detect_overlay.png` — infobox detection result
+- `*_ctx_menu_processed.png` — context menu crop and binarization
+- `*_infobox_action_sell_processed.png` — sell/recycle button OCR region
+
+## Session state
+`inventory_vision.py` holds module-level caches (`_last_roi_hash`, `_last_ocr_result`, `_ITEM_NAMES`). `reset_ocr_caches()` clears them and is called automatically at `scan_pages()` start. `_ScanRunner._detected_ui_mode` resets per page to allow UI mode re-detection.
+
 ## Working guidelines
 - Prefer small, targeted edits in OCR, scanner, and input code; these paths are tightly coupled and easy to regress.
 - Prefer `--dry-run` before any change that could trigger clicks.
@@ -64,3 +80,22 @@ There is no automated test suite. End-to-end verification requires a live Arc Ra
 - Preserve the scheduled workflow contract that regenerates `progress/data/*.json` and `items_rules.default.json`.
 - Do not casually change OCR thresholds, fuzzy thresholds, or click timing without a reason tied to observed behavior.
 - Be explicit about any verification limits caused by platform or live-window constraints.
+- Do not hand-edit `src/autoscrapper/progress/data/*.json` or `src/autoscrapper/items/items_rules.default.json` — these are generated outputs.
+
+## Recommended automations
+
+### Hooks (add to `.claude/settings.json`)
+Auto-lint on edit:
+```json
+{"PostToolUse": [{"matcher": {"tool_name": "Edit", "file_paths": ["src/**/*.py"]}, "hooks": [{"type": "command", "command": "uv run ruff check --fix \"$CLAUDE_TOOL_INPUT_FILE_PATH\""}]}]}
+```
+Block direct edits to generated data files:
+```json
+{"PreToolUse": [{"matcher": {"tool_name": "Edit", "file_paths": ["src/**/progress/data/**", "src/**/items/items_rules.default.json"]}, "hooks": [{"type": "command", "command": "echo 'BLOCK: use uv run python scripts/update_snapshot_and_defaults.py' && exit 1"}]}]}
+```
+
+### Subagent (`.claude/agents/ocr-reviewer.md`)
+Specialized reviewer for OCR/scanner changes — checks coordinate space consistency, upscale artifacts, shape assumptions, and cache reset paths.
+
+### MCP Server
+`context7` for live Textual/OpenCV/rapidfuzz API docs: `claude mcp add context7 -- npx -y @upstash/context7-mcp`
