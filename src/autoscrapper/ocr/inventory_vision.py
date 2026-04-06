@@ -1128,6 +1128,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
         "drop",
         "equip",
         "unequip",
+        "unavailable",
     )
 
     item_name = ""
