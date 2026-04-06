@@ -2058,6 +2058,95 @@
     "sortOrder": 4979.252140564836
   },
   {
+    "id": "fragmented-logs",
+    "name": "Fragmented Logs",
+    "objectives": [
+      "In either of the Robotic Sandbox control rooms, repair the out-of-service terminal with 1 Electrical Component",
+      "Enable the power in any of the conduit backrooms near the Robotic Sandboxes",
+      "Boot the main frame data terminal in the Cultural Archives service backrooms"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "showstopper",
+      "trailblazer-grenade"
+    ],
+    "rewards": [
+      {
+        "id": "3b17dee4-c4a2-4756-aebe-86db2ea6dbe4",
+        "item": {
+          "id": "showstopper",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/showstopper.webp",
+          "name": "Showstopper",
+          "rarity": "Rare",
+          "item_type": "Throwable"
+        },
+        "item_id": "showstopper",
+        "quantity": "3"
+      },
+      {
+        "id": "c3000fc9-475a-4a26-afe8-0b16642e3083",
+        "item": {
+          "id": "trailblazer-grenade",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/trailblazer-grenade.webp",
+          "name": "Trailblazer Grenade",
+          "rarity": "Rare",
+          "item_type": "Quick Use"
+        },
+        "item_id": "trailblazer-grenade",
+        "quantity": "3"
+      }
+    ],
+    "trader": "Shani",
+    "xp": 0,
+    "sortOrder": 0
+  },
+  {
+    "id": "furtive-meetings",
+    "name": "Furtive Meetings",
+    "objectives": [
+      "In One Round:",
+      "Search for the secret meeting spot under a staircase in the Medical Research Area",
+      "Find the secret meeting spot near the ventilation shaft between Robotic Sandbox B and Seed Vault",
+      "Find the secret meeting spot at the bottom of the staircase connecting the Cultural Archives and Seed Vault",
+      "Search the meeting area",
+      "Bring the Secret Meeting Info to Shani"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "aphelion-rifle",
+      "energy-ammo"
+    ],
+    "rewards": [
+      {
+        "id": "87ae969b-1271-436b-ba78-e6bcd8b22f5e",
+        "item": {
+          "id": "aphelion-rifle",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/aphelion-rifle.webp",
+          "name": "Aphelion Rifle",
+          "rarity": "Legendary",
+          "item_type": "Weapon"
+        },
+        "item_id": "aphelion-rifle",
+        "quantity": "1"
+      },
+      {
+        "id": "165d5c1e-3816-409c-86e4-55164c58e0a0",
+        "item": {
+          "id": "energy-ammo",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/energy-ammo.webp",
+          "name": "Energy Clip",
+          "rarity": "Rare",
+          "item_type": "Ammunition"
+        },
+        "item_id": "energy-ammo",
+        "quantity": "5"
+      }
+    ],
+    "trader": "Shani",
+    "xp": 0,
+    "sortOrder": 0
+  },
+  {
     "id": "greasing-her-palms",
     "name": "Greasing Her Palms",
     "objectives": [
@@ -2489,6 +2578,52 @@
     "trader": "Celeste",
     "xp": 0,
     "sortOrder": 2929.9041515567033
+  },
+  {
+    "id": "last-entry",
+    "name": "Last Entry",
+    "objectives": [
+      "In One Round:",
+      "Find and access the right work station in the Seed Vault for clues",
+      "Search for the hidden key in the adjacent room",
+      "Search the Seed Vault and unlock the seed deposit box",
+      "Search the seed deposit box",
+      "Bring the Official Shutdown Documentation to Shani"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "yellow-light-stick-blueprint",
+      "white-indigo-warden-color"
+    ],
+    "rewards": [
+      {
+        "id": "c7149989-fdc6-4e00-a401-82ab2a98574a",
+        "item": {
+          "id": "yellow-light-stick-blueprint",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/yellow-light-stick-blueprint.webp",
+          "name": "Yellow Light Stick Blueprint",
+          "rarity": "Legendary",
+          "item_type": "Blueprint"
+        },
+        "item_id": "yellow-light-stick-blueprint",
+        "quantity": "1"
+      },
+      {
+        "id": "79f3ed10-07bb-45d9-91d8-828871057ade",
+        "item": {
+          "id": "white-indigo-warden-color",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/white-indigo-warden-color.webp",
+          "name": "White Indigo (Warden Color)",
+          "rarity": "Common",
+          "item_type": "Misc"
+        },
+        "item_id": "white-indigo-warden-color",
+        "quantity": "1"
+      }
+    ],
+    "trader": "Shani",
+    "xp": 0,
+    "sortOrder": 0
   },
   {
     "id": "life-of-a-pharmacist",
@@ -3111,6 +3246,63 @@
     "sortOrder": 3807.5478144224858
   },
   {
+    "id": "outstanding-balance",
+    "name": "Outstanding Balance",
+    "objectives": [
+      "In One Round:",
+      "Search for Dodger's stash inside the Traffic Tunnel",
+      "Search Dodger's deal spot by the Pilgrim's Peak antenna",
+      "Deliver Dodger's Note to Tian Wen"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "extended-medium-mag-iii",
+      "silencer-ii",
+      "gothic-graffiti-aviator-color"
+    ],
+    "rewards": [
+      {
+        "id": "166011a2-9723-453c-9052-4f9bb31437dd",
+        "item": {
+          "id": "extended-medium-mag-iii",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/extended-medium-mag-iii.webp",
+          "name": "Extended Medium Mag III",
+          "rarity": "Rare",
+          "item_type": "Modification"
+        },
+        "item_id": "extended-medium-mag-iii",
+        "quantity": "1"
+      },
+      {
+        "id": "5bb3721c-3407-4b93-8315-2822fe3773d5",
+        "item": {
+          "id": "silencer-ii",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/silencer-ii.webp",
+          "name": "Silencer II",
+          "rarity": "Rare",
+          "item_type": "Modification"
+        },
+        "item_id": "silencer-ii",
+        "quantity": "1"
+      },
+      {
+        "id": "6ad2e0a0-d1cd-4d0a-acde-9ef1e7380443",
+        "item": {
+          "id": "gothic-graffiti-aviator-color",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/gothic-graffiti-aviator-color.webp",
+          "name": "Gothic Graffiti (Aviator Color)",
+          "rarity": "Common",
+          "item_type": "Misc"
+        },
+        "item_id": "gothic-graffiti-aviator-color",
+        "quantity": "1"
+      }
+    ],
+    "trader": "TianWen",
+    "xp": 0,
+    "sortOrder": 0
+  },
+  {
     "id": "paving-the-way",
     "name": "Paving the Way",
     "objectives": [
@@ -3445,6 +3637,35 @@
     "trader": "Apollo",
     "xp": 0,
     "sortOrder": 1039.9397757882718
+  },
+  {
+    "id": "settled-in-full",
+    "name": "Settled in Full",
+    "objectives": [
+      "Destroy a Bastion",
+      "Deliver a Bastion Cell to Tian Wen"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "raider-tokens"
+    ],
+    "rewards": [
+      {
+        "id": "15aad7e7-1f3f-4f21-80c2-f3bf07baebd6",
+        "item": {
+          "id": "raider-tokens",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/raider-tokens.webp",
+          "name": "Raider Tokens",
+          "rarity": "Common",
+          "item_type": "Misc"
+        },
+        "item_id": "raider-tokens",
+        "quantity": "30"
+      }
+    ],
+    "trader": "TianWen",
+    "xp": 0,
+    "sortOrder": 0
   },
   {
     "id": "snap-and-salvage",
@@ -3811,6 +4032,63 @@
     "trader": "Celeste",
     "xp": 0,
     "sortOrder": 4019.252140564836
+  },
+  {
+    "id": "test-case",
+    "name": "Test Case",
+    "objectives": [
+      "Deliver a Hornet Driver to Apollo",
+      "Deliver a Fireball Burner to Apollo",
+      "Destroy a Firefly",
+      "Deliver a Firefly Burner to Apollo"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "fireworks-box-blueprint",
+      "seeker-grenade",
+      "blaze-grenade"
+    ],
+    "rewards": [
+      {
+        "id": "37d1654a-9004-4dd4-b6f4-f488869b2ee3",
+        "item": {
+          "id": "fireworks-box-blueprint",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/fireworks-box-blueprint.webp",
+          "name": "Fireworks Box Blueprint",
+          "rarity": "Legendary",
+          "item_type": "Blueprint"
+        },
+        "item_id": "fireworks-box-blueprint",
+        "quantity": "1"
+      },
+      {
+        "id": "36f25393-9593-4f0f-a22d-406c40f022e7",
+        "item": {
+          "id": "seeker-grenade",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/seeker-grenade.webp",
+          "name": "Seeker Grenade",
+          "rarity": "Uncommon",
+          "item_type": "Quick Use"
+        },
+        "item_id": "seeker-grenade",
+        "quantity": "3"
+      },
+      {
+        "id": "1ab9d052-f933-4cba-a226-d86e3e1ea4af",
+        "item": {
+          "id": "blaze-grenade",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/blaze-grenade.webp",
+          "name": "Blaze Grenade",
+          "rarity": "Rare",
+          "item_type": "Throwable"
+        },
+        "item_id": "blaze-grenade",
+        "quantity": "3"
+      }
+    ],
+    "trader": "Apollo",
+    "xp": 0,
+    "sortOrder": 0
   },
   {
     "id": "the-clean-dream",

@@ -535,7 +535,7 @@ def find_infobox(bgr_image: np.ndarray) -> Optional[Tuple[int, int, int, int]]:
 # Normalized context-menu crop offsets (calibrated at 1920x1080).
 _CONTEXT_MENU_X_OFFSET_NORM = 35 / 1920
 _CONTEXT_MENU_Y_OFFSET_NORM = -20 / 1080  # negative = crop starts above cell centre
-_CONTEXT_MENU_WIDTH_NORM = 490 / 1920
+_CONTEXT_MENU_WIDTH_NORM = 310 / 1920
 _CONTEXT_MENU_HEIGHT_NORM = 450 / 1080
 
 
@@ -1063,9 +1063,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
     _save_debug_image("ctx_menu_raw", context_crop_bgr)
     processed = preprocess_for_ocr(context_crop_bgr)
     _save_debug_image("ctx_menu_processed", processed)
-    _save_debug_image(
-        "ctx_menu_top_strip", processed[: max(1, processed.shape[0] // 4), :]
-    )
+
     preprocess_time = time.perf_counter() - preprocess_start
 
     ocr_time = 0.0
@@ -1141,8 +1139,21 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
             for p in _ACTION_PREFIXES
         ):
             continue
+        # Skip very short fragments (stash quantity labels like "1", "3", or
+        # icon artefacts like "arc") — they false-match item names via
+        # partial_ratio in WRatio when query length < target length.
+        if len(line_text) < 4:
+            continue
         result = match_item_name_result(line_text)
         if result.matched_name is not None:
+            # Guard against WRatio partial_ratio false positives: a fragment
+            # like "ARC A" (5 chars) matches "Arc Alloy" (9 chars) at 100%
+            # via partial substring matching.  Require the OCR text to cover
+            # at least 60% of the matched name length so short noise strings
+            # are rejected even when they exceed the minimum-length guard.
+            coverage = len(result.cleaned_text) / max(1, len(result.matched_name))
+            if coverage < 0.6:
+                continue
             item_name = result.chosen_name
             raw_item_text = " ".join(p for p in raw_parts if p).strip()
             break
@@ -1190,6 +1201,13 @@ def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:
         return None, ""
 
     cleaned = (raw or "").replace("\n", " ").strip()
+    # The label reads "N/M" (current/capacity). Extract N from that pattern first so
+    # that a stash-icon glyph OCR'd before the digits (e.g. "8 197/232") does not
+    # cause digits[0] to return the icon's value instead of the item count.
+    m = re.search(r"(\d+)/\d+", cleaned)
+    if m:
+        return int(m.group(1)), cleaned
+
     digits = re.findall(r"\d+", cleaned)
     if not digits:
         return None, cleaned

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-04T04:14:51.802468Z",
+  "generatedAt": "2026-04-05T22:16:34.561688Z",
   "source": "quests.json",
   "traders": {
     "Celeste": [
@@ -121,6 +121,16 @@
     ],
     "TianWen": [
       {
+        "id": "outstanding-balance",
+        "name": "Outstanding Balance",
+        "sortOrder": 0
+      },
+      {
+        "id": "settled-in-full",
+        "name": "Settled in Full",
+        "sortOrder": 0
+      },
+      {
         "id": "the-right-tool",
         "name": "The Right Tool",
         "sortOrder": 1040.3902829127408
@@ -192,6 +202,21 @@
       }
     ],
     "Shani": [
+      {
+        "id": "fragmented-logs",
+        "name": "Fragmented Logs",
+        "sortOrder": 0
+      },
+      {
+        "id": "furtive-meetings",
+        "name": "Furtive Meetings",
+        "sortOrder": 0
+      },
+      {
+        "id": "last-entry",
+        "name": "Last Entry",
+        "sortOrder": 0
+      },
       {
         "id": "waking-the-grid",
         "name": "Waking The Grid",
@@ -344,6 +369,11 @@
       }
     ],
     "Apollo": [
+      {
+        "id": "test-case",
+        "name": "Test Case",
+        "sortOrder": 0
+      },
       {
         "id": "safe-passage",
         "name": "Safe Passage",
