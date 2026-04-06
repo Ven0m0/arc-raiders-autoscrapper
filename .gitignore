@@ -220,6 +220,8 @@ __marimo__/
 !.claude/settings.json
 !.claude/agents/
 !.claude/agents/**
+!.claude/skills/
+!.claude/skills/**
 .vscode/
 misplaced_files_2026-02-26_pokemon_go/
 .omc/

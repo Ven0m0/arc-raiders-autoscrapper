@@ -48,7 +48,13 @@ DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75
 
 
 def reset_ocr_caches() -> None:
-    """Reset module-level OCR caches. Call at the start of each scan session."""
+    """Reset module-level OCR caches. Call at the start of each scan session.
+
+    Resets memoization caches (_last_roi_hash, _last_ocr_result, _ITEM_NAMES).
+    Does NOT reset _OCR_DEBUG_DIR — that is session-scoped configuration set by
+    enable_ocr_debug(), not a cache, and must persist across scans within a
+    process lifetime so debug output is not silently dropped mid-session.
+    """
     global _last_roi_hash, _last_ocr_result, _ITEM_NAMES
     _last_roi_hash = None
     _last_ocr_result = None
@@ -535,7 +541,7 @@ def find_infobox(bgr_image: np.ndarray) -> Optional[Tuple[int, int, int, int]]:
 # Normalized context-menu crop offsets (calibrated at 1920x1080).
 _CONTEXT_MENU_X_OFFSET_NORM = 35 / 1920
 _CONTEXT_MENU_Y_OFFSET_NORM = -20 / 1080  # negative = crop starts above cell centre
-_CONTEXT_MENU_WIDTH_NORM = 490 / 1920
+_CONTEXT_MENU_WIDTH_NORM = 310 / 1920
 _CONTEXT_MENU_HEIGHT_NORM = 450 / 1080
 
 
@@ -970,7 +976,10 @@ def find_action_bbox_by_ocr(
     # the original infobox coordinate system.
     if bbox is not None:
         bx, by, bw, bh = bbox
-        bbox = (bx // 2, by // 2, max(1, bw // 2), max(1, bh // 2))
+        # Use ceiling division for size fields so odd-pixel 2x extents round
+        # up rather than truncating, preserving the full original-space extent.
+        # Round position fields to nearest to avoid systematic up-left bias.
+        bbox = ((bx + 1) // 2, (by + 1) // 2, max(1, (bw + 1) // 2), max(1, (bh + 1) // 2))
     return bbox, processed
 
 
@@ -1063,9 +1072,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
     _save_debug_image("ctx_menu_raw", context_crop_bgr)
     processed = preprocess_for_ocr(context_crop_bgr)
     _save_debug_image("ctx_menu_processed", processed)
-    _save_debug_image(
-        "ctx_menu_top_strip", processed[: max(1, processed.shape[0] // 4), :]
-    )
+
     preprocess_time = time.perf_counter() - preprocess_start
 
     ocr_time = 0.0
@@ -1121,6 +1128,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
         "drop",
         "equip",
         "unequip",
+        "unavailable",
     )
 
     item_name = ""
@@ -1141,8 +1149,26 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
             for p in _ACTION_PREFIXES
         ):
             continue
+        # Skip very short fragments (stash quantity labels like "1", "3") —
+        # they false-match item names via partial_ratio in WRatio.  Threshold
+        # is 3 so that any 3-char item name can still pass; the coverage guard
+        # below catches short noise that slips through (e.g. "arc" at 3 chars
+        # matches "Arc Alloy" at 33% coverage, well below the 60% floor).
+        if len(line_text) < 3:
+            continue
         result = match_item_name_result(line_text)
         if result.matched_name is not None:
+            # Guard against WRatio partial_ratio false positives: a fragment
+            # like "ARC A" (5 chars) matches "Arc Alloy" (9 chars) at 100%
+            # via partial substring matching.  Require the OCR text to cover
+            # at least 60% of the matched name length so short noise strings
+            # are rejected even when they exceed the minimum-length guard.
+            # Use line_text (single-cleaned) rather than result.cleaned_text
+            # (doubly-cleaned) so punctuation stripping doesn't shrink the
+            # measured length and over-reject valid short names.
+            coverage = len(line_text) / max(1, len(result.matched_name))
+            if coverage < 0.6:
+                continue
             item_name = result.chosen_name
             raw_item_text = " ".join(p for p in raw_parts if p).strip()
             break
@@ -1190,6 +1216,13 @@ def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:
         return None, ""
 
     cleaned = (raw or "").replace("\n", " ").strip()
+    # The label reads "N/M" (current/capacity). Extract N from that pattern first so
+    # that a stash-icon glyph OCR'd before the digits (e.g. "8 197/232") does not
+    # cause digits[0] to return the icon's value instead of the item count.
+    m = re.search(r"(\d+)/\d+", cleaned)
+    if m:
+        return int(m.group(1)), cleaned
+
     digits = re.findall(r"\d+", cleaned)
     if not digits:
         return None, cleaned
