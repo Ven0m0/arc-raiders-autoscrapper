@@ -2,7 +2,7 @@ from __future__ import annotations
 
 try:
     from rich import box
-    from rich.align import Align
+    from rich.align import Align as Align
     from rich.console import Console, Group
     from rich.live import Live
     from rich.panel import Panel
