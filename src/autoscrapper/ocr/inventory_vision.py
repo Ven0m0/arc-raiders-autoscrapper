@@ -48,7 +48,13 @@ DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75
 
 
 def reset_ocr_caches() -> None:
-    """Reset module-level OCR caches. Call at the start of each scan session."""
+    """Reset module-level OCR caches. Call at the start of each scan session.
+
+    Resets memoization caches (_last_roi_hash, _last_ocr_result, _ITEM_NAMES).
+    Does NOT reset _OCR_DEBUG_DIR — that is session-scoped configuration set by
+    enable_ocr_debug(), not a cache, and must persist across scans within a
+    process lifetime so debug output is not silently dropped mid-session.
+    """
     global _last_roi_hash, _last_ocr_result, _ITEM_NAMES
     _last_roi_hash = None
     _last_ocr_result = None
@@ -970,7 +976,10 @@ def find_action_bbox_by_ocr(
     # the original infobox coordinate system.
     if bbox is not None:
         bx, by, bw, bh = bbox
-        bbox = (bx // 2, by // 2, max(1, bw // 2), max(1, bh // 2))
+        # Use ceiling division for size fields so odd-pixel 2x extents round
+        # up rather than truncating, preserving the full original-space extent.
+        # Round position fields to nearest to avoid systematic up-left bias.
+        bbox = ((bx + 1) // 2, (by + 1) // 2, max(1, (bw + 1) // 2), max(1, (bh + 1) // 2))
     return bbox, processed
 
 
@@ -1139,10 +1148,12 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
             for p in _ACTION_PREFIXES
         ):
             continue
-        # Skip very short fragments (stash quantity labels like "1", "3", or
-        # icon artefacts like "arc") — they false-match item names via
-        # partial_ratio in WRatio when query length < target length.
-        if len(line_text) < 4:
+        # Skip very short fragments (stash quantity labels like "1", "3") —
+        # they false-match item names via partial_ratio in WRatio.  Threshold
+        # is 3 so that any 3-char item name can still pass; the coverage guard
+        # below catches short noise that slips through (e.g. "arc" at 3 chars
+        # matches "Arc Alloy" at 33% coverage, well below the 60% floor).
+        if len(line_text) < 3:
             continue
         result = match_item_name_result(line_text)
         if result.matched_name is not None:
@@ -1151,7 +1162,10 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
             # via partial substring matching.  Require the OCR text to cover
             # at least 60% of the matched name length so short noise strings
             # are rejected even when they exceed the minimum-length guard.
-            coverage = len(result.cleaned_text) / max(1, len(result.matched_name))
+            # Use line_text (single-cleaned) rather than result.cleaned_text
+            # (doubly-cleaned) so punctuation stripping doesn't shrink the
+            # measured length and over-reject valid short names.
+            coverage = len(line_text) / max(1, len(result.matched_name))
             if coverage < 0.6:
                 continue
             item_name = result.chosen_name
