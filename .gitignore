@@ -225,6 +225,10 @@ __marimo__/
 .vscode/
 misplaced_files_2026-02-26_pokemon_go/
 .omc/
+.kilo/
+kilo.json
+.opencode/
+sdio.cfg
 .cachebro/
 ocr_debug/
 
