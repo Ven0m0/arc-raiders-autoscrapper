@@ -979,7 +979,12 @@ def find_action_bbox_by_ocr(
         # Use ceiling division for size fields so odd-pixel 2x extents round
         # up rather than truncating, preserving the full original-space extent.
         # Round position fields to nearest to avoid systematic up-left bias.
-        bbox = ((bx + 1) // 2, (by + 1) // 2, max(1, (bw + 1) // 2), max(1, (bh + 1) // 2))
+        bbox = (
+            (bx + 1) // 2,
+            (by + 1) // 2,
+            max(1, (bw + 1) // 2),
+            max(1, (bh + 1) // 2),
+        )
     return bbox, processed
 
 

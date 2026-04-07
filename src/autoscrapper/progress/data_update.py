@@ -96,7 +96,9 @@ def _fetch_all_quests() -> List[dict]:
 
 def _fetch_supabase_all(table: str) -> List[dict]:
     if not SUPABASE_ANON_KEY:
-        raise DownloadError("METAFORGE_SUPABASE_ANON_KEY environment variable is not set")
+        raise DownloadError(
+            "METAFORGE_SUPABASE_ANON_KEY environment variable is not set"
+        )
 
     headers = {
         "apikey": SUPABASE_ANON_KEY,
