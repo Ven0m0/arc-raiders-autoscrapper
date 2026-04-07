@@ -34,5 +34,8 @@
       "patterns": ["src/**/*.py"],
       "command": "uv run ruff check --fix"
     }
+  },
+  "agents": {
+    "path": ".kilo/agent"
   }
 }

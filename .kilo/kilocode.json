@@ -1,0 +1,34 @@
+{
+  "$schema": "https://kilo.dev/schema.json",
+  "project": {
+    "name": "arc-raiders-autoscrapper",
+    "description": "Desktop automation tool for Arc Raiders inventory management",
+    "version": "1.0.0"
+  },
+  "commands": {
+    "path": ".kilo/command"
+  },
+  "agents": {
+    "path": ".kilo/agent"
+  },
+  "hooks": {
+    "enabled": true,
+    "path": ".kilo/hooks"
+  },
+  "mcp": {
+    "servers": []
+  },
+  "precommit": {
+    "enabled": true,
+    "config": ".pre-commit-config.yaml"
+  },
+  "validation": {
+    "ruff": {
+      "enabled": true,
+      "args": ["src/"]
+    },
+    "precommit": {
+      "enabled": true
+    }
+  }
+}
