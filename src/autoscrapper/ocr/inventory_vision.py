@@ -38,7 +38,7 @@ RECYCLE_CONFIRM_RECT_NORM = (0.5058, 0.6274, 0.1777, 0.0544)
 
 # Inventory count ROI (window-normalized rectangle)
 # Matches the always-visible "items in stash" label near the top-left.
-INVENTORY_COUNT_RECT_NORM = (0.0734, 0.1583, 0.0380, 0.0231)
+INVENTORY_COUNT_RECT_NORM = (0.0734, 0.1583, 0.0760, 0.0231)
 
 _OCR_DEBUG_DIR: Optional[Path] = None
 _ITEM_NAMES: Optional[Tuple[str, ...]] = None
@@ -410,7 +410,7 @@ def find_infobox_with_debug(
 
     candidates: List[Tuple[float, np.ndarray, int]] = []
     for contour in contours:
-        x, y, bw, bh = cv2.boundingRect(contour)
+        _, _, bw, bh = cv2.boundingRect(contour)
         area = int(bw * bh)
         if area < INFOBOX_MIN_AREA:
             continue
@@ -541,7 +541,7 @@ def find_infobox(bgr_image: np.ndarray) -> Optional[Tuple[int, int, int, int]]:
 # Normalized context-menu crop offsets (calibrated at 1920x1080).
 _CONTEXT_MENU_X_OFFSET_NORM = 35 / 1920
 _CONTEXT_MENU_Y_OFFSET_NORM = -20 / 1080  # negative = crop starts above cell centre
-_CONTEXT_MENU_WIDTH_NORM = 310 / 1920
+_CONTEXT_MENU_WIDTH_NORM = 420 / 1920
 _CONTEXT_MENU_HEIGHT_NORM = 450 / 1080
 
 
@@ -565,6 +565,9 @@ def find_context_menu_crop(
     crop_h = int(round(_CONTEXT_MENU_HEIGHT_NORM * img_h))
     x = max(0, cell_center_x + x_off)
     y = max(0, cell_center_y + y_off)
+    # Shift left if the crop would overflow the right edge so the full width is preserved.
+    if x + crop_w > img_w:
+        x = max(0, img_w - crop_w)
     x2 = min(img_w, x + crop_w)
     y2 = min(img_h, y + crop_h)
     w, h = x2 - x, y2 - y
@@ -784,13 +787,27 @@ def recycle_confirm_button_center(
     )
 
 
-def preprocess_for_ocr(roi_bgr: np.ndarray) -> np.ndarray:
+def preprocess_for_ocr(roi_bgr: np.ndarray, *, restrict_otsu_to_left: bool = False) -> np.ndarray:
     roi_bgr = cv2.resize(roi_bgr, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
     gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
-    _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    if restrict_otsu_to_left:
+        # Compute the Otsu threshold from the left half only (context-menu panel
+        # side) so that bright inventory-grid icons on the right do not bias the
+        # global threshold used for the menu text.
+        w_g = gray.shape[1]
+        thresh, _ = cv2.threshold(gray[:, : w_g // 2], 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        _, binary = cv2.threshold(gray, thresh, 255, cv2.THRESH_BINARY)
+    else:
+        _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     # Tesseract expects dark text on light background. If the background is dark
     # (e.g. the game's new dark context-menu UI), invert so text becomes dark.
-    if float(np.mean(binary)) < 128.0:
+    # Sample only the left half of the image for the inversion check. The
+    # context-menu panel is always on the left side of the crop; the right side
+    # contains the game's inventory grid which can be bright (light item icons)
+    # and would flip the polarity decision if included in the sample.
+    h, w = binary.shape[:2]
+    centre = binary[h // 4 : 3 * h // 4, 0 : w // 2]
+    if float(np.mean(centre)) < 128.0:
         binary = cv2.bitwise_not(binary)
     return binary
 
@@ -875,7 +892,10 @@ def _extract_title_from_data(
     best_score = max(scored.values())
     if best_score < 0:
         return "", ""
-    best_key = max(scored, key=lambda k: scored[k])
+    best_key = max(
+        scored,
+        key=lambda k: (scored[k], -min(float(ocr_data["top"][i]) for i in groups[k])),
+    )
     ordered_indices = sorted(groups[best_key])
     cleaned_parts = []
     raw_parts = []
@@ -940,7 +960,22 @@ def _extract_action_line_bbox(
         return sum(confs) / len(confs) if confs else -1.0
 
     best_key = max(groups.keys(), key=lambda k: _group_score(groups[k]))
-    indices = groups[best_key]
+    # Expand to all words on the winning line, not just the ones containing the
+    # target token.  This ensures the price token "(+11,000)" next to "Sell" is
+    # included in the bbox even though it doesn't contain the target string.
+    widths = ocr_data.get("width", [0] * n)
+    indices = [
+        i
+        for i in range(n)
+        if (
+            int(ocr_data["page_num"][i]),
+            int(ocr_data["block_num"][i]),
+            int(ocr_data["par_num"][i]),
+            int(ocr_data["line_num"][i]),
+        )
+        == best_key
+        and int(widths[i]) > 0
+    ]
     lefts = [int(ocr_data["left"][i]) for i in indices]
     tops = [int(ocr_data["top"][i]) for i in indices]
     rights = [int(ocr_data["left"][i]) + int(ocr_data["width"][i]) for i in indices]
@@ -959,8 +994,7 @@ def find_action_bbox_by_ocr(
     Run OCR over the full infobox to locate the line containing the target
     action. Returns (bbox, processed_image) where bbox is infobox-relative.
     """
-    processed = preprocess_for_ocr(infobox_bgr)
-    _save_debug_image(f"infobox_action_{target}_processed", processed)
+    processed = preprocess_for_ocr(infobox_bgr, restrict_otsu_to_left=True)
     try:
         data = image_to_data(processed)
     except Exception as exc:
@@ -969,6 +1003,7 @@ def find_action_bbox_by_ocr(
             f"error={exc}",
             flush=True,
         )
+        _save_debug_image(f"infobox_action_{target}_processed", processed)
         return None, processed
 
     bbox = _extract_action_line_bbox(data, target)
@@ -976,15 +1011,21 @@ def find_action_bbox_by_ocr(
     # the original infobox coordinate system.
     if bbox is not None:
         bx, by, bw, bh = bbox
-        # Use ceiling division for size fields so odd-pixel 2x extents round
-        # up rather than truncating, preserving the full original-space extent.
-        # Round position fields to nearest to avoid systematic up-left bias.
+        # Save a tightly-cropped debug image of just the target-action line
+        # region (in 2x space) so the debug PNG shows exactly what Tesseract
+        # read rather than the entire context-menu crop.
+        _save_debug_image(f"infobox_action_{target}_processed", processed[by : by + bh, bx : bx + bw])
+        # Use floor division for position fields (pixel origins round down) and
+        # ceiling division for size fields so odd-pixel 2x extents round up
+        # rather than truncating, preserving the full original-space extent.
         bbox = (
-            (bx + 1) // 2,
-            (by + 1) // 2,
+            bx // 2,
+            by // 2,
             max(1, (bw + 1) // 2),
             max(1, (bh + 1) // 2),
         )
+    else:
+        _save_debug_image(f"infobox_action_{target}_processed", processed)
     return bbox, processed
 
 
@@ -1016,6 +1057,7 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
         data = image_to_data(processed, single_line=True)
         ocr_time = time.perf_counter() - ocr_start
     except Exception as exc:
+        _last_roi_hash = None  # invalidate cache so next call does not re-serve stale result
         print(
             f"[vision_ocr] ocr_backend image_to_data failed for infobox title strip; "
             f"falling back to empty OCR result. error={exc}",
@@ -1134,6 +1176,9 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
         "equip",
         "unequip",
         "unavailable",
+        "detach mods",
+        "repair",
+        "upgrade",
     )
 
     item_name = ""
