@@ -83,7 +83,7 @@ def _create_api(*, psm: int = PSM.SINGLE_BLOCK) -> PyTessBaseAPI:
             api = PyTessBaseAPI(path=str(candidate), lang="eng", psm=psm)
             api.SetVariable(
                 "tessedit_char_whitelist",
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 '-/",
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 '-/(),.!?:&+",
             )
             _tessdata_dir = str(candidate)
             return api
@@ -204,6 +204,7 @@ def _build_data_dict(iterator) -> Dict[str, List]:
             block_num += 1
             par_num = 0
             line_num = 0
+            word_num = 0
         if word.IsAtBeginningOf(RIL.PARA):
             par_num += 1
             line_num = 0
