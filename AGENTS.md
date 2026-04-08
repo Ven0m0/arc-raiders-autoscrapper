@@ -49,7 +49,7 @@ There is no automated test suite. End-to-end verification requires a live Arc Ra
 - `src/autoscrapper/ocr/` contains OCR preprocessing, title-strip extraction, and Tesseract integration.
 - `src/autoscrapper/core/item_actions.py` and `src/autoscrapper/items/rules_store.py` load rules and resolve keep/sell/recycle actions.
 - `src/autoscrapper/progress/` contains quest and crafting-aware decision logic plus generated data.
-- `scripts/update_snapshot_and_defaults.py` is the source of truth for generated snapshot data and `items_rules.default.json`.
+- `scripts/update_snapshot_and_defaults.py` is the source of truth for generated snapshot data and `items_rules.default.json`. Default rules assume all quests completed and workshop profile at level 2 for `scrappy`, `weapon_bench`, `equipment_bench`, `med_station`, `explosives_bench`, `utility_bench`, and `refiner`.
 - `src/autoscrapper/config.py` owns persisted config schema and migrations.
 
 ## Coordinate space invariant
