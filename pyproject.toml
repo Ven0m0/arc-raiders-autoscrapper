@@ -16,7 +16,7 @@ dependencies = [
   "pydirectinput-rgx; sys_platform == 'win32'",
   "pynput; sys_platform == 'linux'",
   "pywinctl",
-  "rapidfuzz~=3.14.3",
+  "rapidfuzz~=3.14.5",
   "rich",
   "textual",
   "tessdata.fast-eng",
@@ -53,5 +53,5 @@ extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
 
 [dependency-groups]
 dev = [
-    "pytest>=9.0.2",
+    "pytest>=9.0.3",
 ]
