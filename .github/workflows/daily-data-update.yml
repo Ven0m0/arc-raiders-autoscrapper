@@ -87,11 +87,11 @@ jobs:
         if: steps.changes.outputs.has_changes == 'true'
         id: commit_push
         env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          gh auth setup-git
 
           git switch -C bot/daily-data-update
           git add \
@@ -107,9 +107,7 @@ jobs:
           fi
 
           git commit -m "chore(data): daily Metaforge snapshot + default rules"
-          auth_header="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
-          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic ${auth_header}" \
-            push --force-with-lease "https://github.com/${GITHUB_REPOSITORY}.git" HEAD:bot/daily-data-update
+          git push --force-with-lease origin HEAD:bot/daily-data-update
           echo "has_commit=true" >> "$GITHUB_OUTPUT"
 
       - name: Create or update pull request
