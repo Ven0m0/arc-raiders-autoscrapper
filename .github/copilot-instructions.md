@@ -10,14 +10,14 @@ Arc Raiders AutoScrapper is a Python 3.14 desktop automation app for inventory m
 - Safe scan validation: `uv run autoscrapper scan --dry-run`
 - Format: `uv run ruff format src/`
 - Lint: `uv run ruff check src/`
-- Full checks: `uv run pre-commit run --all-files`
+- Full checks: `uv run prek run --all-files`
 - Refresh generated data/rules: `uv run python scripts/update_snapshot_and_defaults.py`
 - Dry-run refresh: `uv run python scripts/update_snapshot_and_defaults.py --dry-run`
 
 ## Validation rules
 - There is no automated test suite.
 - Run Ruff for source changes.
-- Prefer `uv run pre-commit run --all-files` for broader changes.
+- Prefer `uv run prek run --all-files` for broader changes.
 - For OCR, scanner, grid, or input-driver changes, validate with `uv run autoscrapper scan --dry-run`.
 - For generated data or rules changes, use the updater script, usually with `--dry-run` first.
 - Do not claim end-to-end validation unless a live Arc Raiders window was used.

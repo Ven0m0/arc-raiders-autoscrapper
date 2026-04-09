@@ -25,7 +25,14 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["ruff", "pre-commit"]
+# Keep [project.optional-dependencies].dev aligned with [dependency-groups].dev
+# so pip and uv users install the same local tooling.
+dev = [
+    "mypy>=1.20.0",
+    "prek>=0.3.8",
+    "pytest>=9.0.3",
+    "ruff>=0.15.10",
+]
 
 [project.scripts]
 autoscrapper = "autoscrapper.__main__:main"
@@ -53,5 +60,8 @@ extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
 
 [dependency-groups]
 dev = [
+    "mypy>=1.20.0",
+    "prek>=0.3.8",
     "pytest>=9.0.3",
+    "ruff>=0.15.10",
 ]

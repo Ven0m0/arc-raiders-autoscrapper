@@ -7,7 +7,7 @@ Run appropriate validation based on change type.
 | Change Type | Validation Command |
 |-------------|-------------------|
 | Python source | `uv run ruff check src/` |
-| Broad repo | `uv run pre-commit run --all-files` |
+| Broad repo | `uv run prek run --all-files` |
 | OCR/scanner | `uv run autoscrapper scan --dry-run` |
 | Generated data | `uv run python scripts/update_snapshot_and_defaults.py --dry-run` |
 
