@@ -1,4 +1,4 @@
-import os
+import importlib
 import sys
 from pathlib import Path
 
@@ -6,7 +6,9 @@ from pathlib import Path
 scripts_dir = Path(__file__).parent.parent / "scripts"
 sys.path.append(str(scripts_dir))
 
-from type_coverage import check_typescript_coverage, check_python_coverage
+type_coverage = importlib.import_module("type_coverage")
+check_typescript_coverage = type_coverage.check_typescript_coverage
+check_python_coverage = type_coverage.check_python_coverage
 
 
 def test_check_typescript_coverage_no_files(tmp_path):
@@ -164,10 +166,9 @@ def test_check_python_coverage_multiple_files(tmp_path):
     assert result["files"] == 2
     assert result["stats"]["typed_functions"] == 2
 
+
 def test_analyze_python_file():
     """Test analyze_python_file directly."""
-    from type_coverage import analyze_python_file
-
     content = """
     from typing import Any
 
@@ -187,7 +188,7 @@ def test_analyze_python_file():
         return x
     """
 
-    stats = analyze_python_file(content)
+    stats = type_coverage.analyze_python_file(content)
 
     assert stats["untyped_functions"] == 1
     assert stats["typed_functions"] == 4

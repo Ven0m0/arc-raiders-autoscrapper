@@ -56,7 +56,7 @@ def detect_node_project(project_path: Path, result: dict[str, Any]) -> None:
                     {"name": "tsc", "cmd": ["npx", "tsc", "--noEmit"]}
                 )
 
-        except (IOError, json.JSONDecodeError):
+        except IOError, json.JSONDecodeError:
             pass
 
 
@@ -115,7 +115,6 @@ def run_linter(linter: dict[str, Any], cwd: Path) -> dict[str, Any]:
         result["error"] = str(e)
 
     return result
-
 
 
 def run_linters_parallel(

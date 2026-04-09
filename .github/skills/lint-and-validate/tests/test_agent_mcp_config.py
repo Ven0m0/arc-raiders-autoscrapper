@@ -15,31 +15,61 @@ def read_frontmatter(path: Path) -> str:
 
 def read_model(path: Path) -> str:
     """Return the configured primary model for an agent."""
-    match = re.search(r'^model:\s*["\']?([^\n"\']+)["\']?$', read_frontmatter(path), re.MULTILINE)
+    match = re.search(
+        r'^model:\s*["\']?([^\n"\']+)["\']?$', read_frontmatter(path), re.MULTILINE
+    )
     assert match is not None, f"missing model in {path}"
     return match.group(1)
 
 
 def test_workspace_mcp_config_includes_selected_servers():
     """Workspace MCP config should expose the newly selected high-value servers."""
-    mcp_config = json.loads((REPO_ROOT / ".vscode" / "mcp.json").read_text(encoding="utf-8"))
+    mcp_config = json.loads(
+        (REPO_ROOT / ".vscode" / "mcp.json").read_text(encoding="utf-8")
+    )
     servers = mcp_config["mcpServers"]
 
     assert servers["eslint"]["args"] == ["-y", "@eslint/mcp@latest"]
-    assert servers["chrome-devtools"]["args"] == ["-y", "chrome-devtools-mcp@latest", "--headless", "--no-usage-statistics"]
+    assert servers["chrome-devtools"]["args"] == [
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--headless",
+        "--no-usage-statistics",
+    ]
     assert servers["next-devtools"]["args"] == ["-y", "next-devtools-mcp@latest"]
     assert servers["vercel"]["url"] == "https://mcp.vercel.com"
     assert servers["netlify"]["args"] == ["-y", "@netlify/mcp"]
-    assert servers["reddit"]["args"] == ["--from", "git+https://github.com/adhikasp/mcp-reddit.git", "mcp-reddit"]
+    assert servers["reddit"]["args"] == [
+        "--from",
+        "git+https://github.com/adhikasp/mcp-reddit.git",
+        "mcp-reddit",
+    ]
     assert servers["ast-grep"]["args"] == ["-y", "@notprolands/ast-grep-mcp@latest"]
 
 
 def test_code_agents_keep_only_specialized_structural_mcp_servers():
     """Coding-focused agents should keep only the specialized MCP servers they still need."""
     expected_servers = {
-        "agents/coder.agent.md": ("eslint:", "ast-grep:", "repomix:", "semgrep:", "sequential-thinking:"),
-        "agents/reviewer.agent.md": ("eslint:", "ast-grep:", "repomix:", "semgrep:", "sequential-thinking:"),
-        "agents/codebase-maintainer.agent.md": ("eslint:", "ast-grep:", "repomix:", "sequential-thinking:"),
+        "agents/coder.agent.md": (
+            "eslint:",
+            "ast-grep:",
+            "repomix:",
+            "semgrep:",
+            "sequential-thinking:",
+        ),
+        "agents/reviewer.agent.md": (
+            "eslint:",
+            "ast-grep:",
+            "repomix:",
+            "semgrep:",
+            "sequential-thinking:",
+        ),
+        "agents/codebase-maintainer.agent.md": (
+            "eslint:",
+            "ast-grep:",
+            "repomix:",
+            "sequential-thinking:",
+        ),
         "agents/explorer.agent.md": ("ast-grep:", "repomix:"),
     }
 
@@ -53,8 +83,16 @@ def test_agents_include_specialized_mcp_servers_in_frontmatter():
     """Agents should expose the specialized MCP servers they need in frontmatter."""
     expected_servers = {
         "agents/researcher.agent.md": ("reddit:",),
-        "agents/frontend-specialist.agent.md": ("chrome-devtools:", "vercel:", "netlify:"),
-        "agents/debug.agent.md": ("chrome-devtools:", "semgrep:", "sequential-thinking:"),
+        "agents/frontend-specialist.agent.md": (
+            "chrome-devtools:",
+            "vercel:",
+            "netlify:",
+        ),
+        "agents/debug.agent.md": (
+            "chrome-devtools:",
+            "semgrep:",
+            "sequential-thinking:",
+        ),
         "agents/workflow-engineer.agent.md": ("vercel:", "netlify:"),
         "agents/repo-architect.agent.md": ("vercel:", "netlify:"),
     }

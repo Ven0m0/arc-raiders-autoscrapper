@@ -46,7 +46,6 @@ def find_project_files(project_path: Path) -> tuple[list[Path], list[Path]]:
     return ts_files, py_files
 
 
-
 def _analyze_typescript_file(file_path: Path, stats: dict) -> None:
     try:
         content = file_path.read_text(encoding="utf-8", errors="ignore")
@@ -78,7 +77,9 @@ def _analyze_typescript_file(file_path: Path, stats: dict) -> None:
         pass
 
 
-def _format_typescript_results(stats: dict, file_count: int) -> tuple[list[str], list[str]]:
+def _format_typescript_results(
+    stats: dict, file_count: int
+) -> tuple[list[str], list[str]]:
     passed = []
     issues = []
 
@@ -141,6 +142,26 @@ def check_typescript_coverage(
         "issues": issues,
         "stats": stats,
     }
+
+
+def analyze_python_file(content: str) -> dict[str, int]:
+    """Collect type coverage stats for a single Python file."""
+    typed_indices = {
+        match.start()
+        for match in chain(
+            RE_PY_TYPED_FUNC_PARAMS.finditer(content),
+            RE_PY_TYPED_FUNC_RETURN.finditer(content),
+        )
+    }
+    all_indices = {match.start() for match in RE_PY_ALL_FUNC.finditer(content)}
+
+    return {
+        "any_count": len(RE_PY_ANY.findall(content)),
+        "typed_functions": len(typed_indices),
+        "untyped_functions": len(all_indices - typed_indices),
+    }
+
+
 def check_python_coverage(
     project_path: Path,
     max_files: Optional[int] = 30,

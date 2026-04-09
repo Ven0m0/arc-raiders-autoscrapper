@@ -117,9 +117,13 @@ def test_detect_project_type_unknown(tmp_path: Path):
 
 def test_main_with_nonexistent_path():
     result = subprocess.run(
-        [sys.executable, "skills/lint-and-validate/scripts/lint_runner.py", "/nonexistent/path"],
+        [
+            sys.executable,
+            "skills/lint-and-validate/scripts/lint_runner.py",
+            "/nonexistent/path",
+        ],
         capture_output=True,
-        text=True
+        text=True,
     )
     assert result.returncode != 0
     assert "Error: Path does not exist" in result.stdout
@@ -130,9 +134,13 @@ def test_main_with_file_instead_of_dir(tmp_path: Path):
     test_file.touch()
 
     result = subprocess.run(
-        [sys.executable, "skills/lint-and-validate/scripts/lint_runner.py", str(test_file)],
+        [
+            sys.executable,
+            "skills/lint-and-validate/scripts/lint_runner.py",
+            str(test_file),
+        ],
         capture_output=True,
-        text=True
+        text=True,
     )
     assert result.returncode != 0
     assert "Error: Path is not a directory" in result.stdout
