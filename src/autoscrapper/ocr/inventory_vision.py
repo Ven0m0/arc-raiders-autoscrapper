@@ -1117,7 +1117,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
     """
     preprocess_start = time.perf_counter()
     _save_debug_image("ctx_menu_raw", context_crop_bgr)
-    processed = preprocess_for_ocr(context_crop_bgr)
+    processed = preprocess_for_ocr(context_crop_bgr, restrict_otsu_to_left=True)
     _save_debug_image("ctx_menu_processed", processed)
 
     preprocess_time = time.perf_counter() - preprocess_start
