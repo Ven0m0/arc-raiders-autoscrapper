@@ -1,0 +1,319 @@
+---
+name: docs-writer
+description: Write, review, or edit technical documentation for any `.md` files or `docs/` directory. Use when asked to write docs, update README, or improve documentation quality.
+allowed-tools: "Read, Write, Edit, Glob, Grep"
+---
+
+# docs-writer skill instructions
+
+As an expert technical writer, produce accurate, clear, and consistent
+documentation. When asked to write, edit, or review documentation, ensure the
+content strictly adheres to the standards below and accurately reflects the
+current codebase. Adhere to the repository's `CONTRIBUTING.md` where present.
+
+## Phase 1: Documentation standards
+
+Adhering to these principles and standards when writing, editing, and reviewing.
+
+### Voice and tone
+
+Adopt a tone that balances professionalism with a helpful, conversational
+approach.
+
+- **Perspective and tense:** Address the reader as "you." Use active voice and
+  present tense (e.g., "The API returns...").
+- **Tone:** Professional, friendly, and direct.
+- **Clarity:** Use simple vocabulary. Avoid jargon, slang, and marketing hype.
+- **Global Audience:** Write in standard US English. Avoid idioms and cultural
+  references.
+- **Requirements:** Be clear about requirements ("must") vs. recommendations
+  ("we recommend"). Avoid "should."
+- **Word Choice:** Avoid "please" and anthropomorphism (e.g., "the server
+  thinks"). Use contractions (don't, it's).
+
+### Language and grammar
+
+Write precisely to ensure your instructions are unambiguous.
+
+- **Abbreviations:** Avoid Latin abbreviations; use "for example" (not "e.g.")
+  and "that is" (not "i.e.").
+- **Punctuation:** Use the serial comma. Place periods and commas inside
+  quotation marks.
+- **Dates:** Use unambiguous formats (e.g., "January 22, 2026").
+- **Conciseness:** Use "lets you" instead of "allows you to." Use precise,
+  specific verbs.
+- **Examples:** Use meaningful names in examples; avoid placeholders like
+  "foo" or "bar."
+
+### Formatting and syntax
+
+Apply consistent formatting to make documentation visually organized and
+accessible.
+
+- **Overview paragraphs:** Every heading must be followed by at least one
+  introductory overview paragraph before any lists or sub-headings.
+- **Text wrap:** Wrap text at 80 characters (except long links or tables).
+- **Casing:** Use sentence case for headings, titles, and bolded text.
+- **Naming:** Use the project's canonical name consistently throughout.
+- **Lists:** Use numbered lists for sequential steps and bulleted lists
+  otherwise. Keep list items parallel in structure.
+- **UI and code:** Use **bold** for UI elements and `code font` for filenames,
+  snippets, commands, and API elements. Focus on the task when discussing
+  interaction.
+- **Links:** Use descriptive anchor text; avoid "click here." Ensure the link
+  makes sense out of context.
+- **Accessibility:** Use semantic HTML elements correctly (headings, lists,
+  tables).
+- **Media:** Use lowercase hyphenated filenames. Provide descriptive alt text
+  for all images.
+
+### Structure
+
+- **BLUF:** Start with an introduction explaining what to expect.
+- **Experimental features:** If a feature is clearly noted as experimental,
+  add the following note immediately after the introductory paragraph:
+  `> **Note:** This is a preview feature currently under active development.`
+- **Headings:** Use hierarchical headings to support the user journey.
+- **Procedures:**
+  - Introduce lists of steps with a complete sentence.
+  - Start each step with an imperative verb.
+  - Number sequential steps; use bullets for non-sequential lists.
+  - Put conditions before instructions (e.g., "On the Settings page, click...").
+  - Provide clear context for where the action takes place.
+  - Indicate optional steps clearly (e.g., "Optional: ...").
+- **Elements:** Use bullet lists, tables, notes (`> **Note:**`), and warnings
+  (`> **Warning:**`).
+- **Avoid using a table of contents:** If a table of contents is present, remove
+  it.
+- **Next steps:** Conclude with a "Next steps" section if applicable.
+
+## Phase 2: Preparation
+
+Before modifying any documentation, thoroughly investigate the request and the
+surrounding context.
+
+1.  **Clarify:** Understand the core request. Differentiate between writing new
+    content and editing existing content. If the request is ambiguous (e.g.,
+    "fix the docs"), ask for clarification.
+2.  **Investigate:** Examine relevant source code for accuracy.
+3.  **Audit:** Read the latest versions of relevant documentation files.
+4.  **Connect:** Identify all referencing pages if changing behavior.
+5.  **Plan:** Create a step-by-step plan before making changes.
+
+## Phase 3: Execution
+
+Implement your plan by either updating existing files or creating new ones
+using the appropriate file system tools. Use `replace` for small edits and
+`write_file` for new files or large rewrites.
+
+### Editing existing documentation
+
+Follow these additional steps when asked to review or update existing
+documentation.
+
+- **Gaps:** Identify areas where the documentation is incomplete or no longer
+  reflects existing code.
+- **Structure:** Apply "Structure (New Docs)" rules (BLUF, headings, etc.) when
+  adding new sections to existing pages.
+- **Tone:** Ensure the tone is active and engaging. Use "you" and contractions.
+- **Clarity:** Correct awkward wording, spelling, and grammar. Rephrase
+  sentences to make them easier for users to understand.
+- **Consistency:** Check for consistent terminology and style across all edited
+  documents.
+
+## Phase 4: Verification and finalization
+
+Perform a final quality check to ensure that all changes are correctly formatted
+and that all links are functional.
+
+1.  **Accuracy:** Ensure content accurately reflects the implementation and
+    technical behavior.
+2.  **Self-review:** Re-read changes for formatting, correctness, and flow.
+3.  **Link check:** Verify all new and existing links leading to or from modified
+    pages.
+3.  **Format:** Once all changes are complete, run the project's formatter (if
+    configured) to ensure consistent formatting.
+
+## Templates
+
+Reference templates for common documentation types.
+
+### README structure
+
+Essential sections in priority order:
+
+| Section               | Purpose                    |
+| --------------------- | -------------------------- |
+| **Title + One-liner** | What is this?              |
+| **Quick Start**       | Running in under 5 minutes |
+| **Features**          | What can I do?             |
+| **Configuration**     | How to customize           |
+| **API Reference**     | Link to detailed docs      |
+| **Contributing**      | How to help                |
+| **License**           | Legal                      |
+
+README template:
+
+```markdown
+# Project Name
+
+Brief one-line description.
+
+## Quick Start
+
+[Minimum steps to run]
+
+## Features
+
+- Feature 1
+- Feature 2
+
+## Configuration
+
+| Variable | Description | Default |
+| -------- | ----------- | ------- |
+| PORT     | Server port | 3000    |
+
+## Documentation
+
+- [API Reference](./docs/api.md)
+- [Architecture](./docs/architecture.md)
+
+## License
+
+MIT
+```
+
+### API documentation structure
+
+Per-endpoint template:
+
+```markdown
+## GET /users/:id
+
+Get a user by ID.
+
+**Parameters:**
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| id | string | Yes | User ID |
+
+**Response:**
+
+- 200: User object
+- 404: User not found
+
+**Example:**
+[Request and response example]
+```
+
+### Code comment guidelines
+
+JSDoc/TSDoc template:
+
+```typescript
+/**
+ * Brief description of what the function does.
+ *
+ * @param paramName - Description of parameter
+ * @returns Description of return value
+ * @throws ErrorType - When this error occurs
+ *
+ * @example
+ * const result = functionName(input);
+ */
+```
+
+When to comment:
+
+| Comment              | Do not comment         |
+| -------------------- | ---------------------- |
+| Why (business logic) | What (obvious)         |
+| Complex algorithms   | Every line             |
+| Non-obvious behavior | Self-explanatory code  |
+| API contracts        | Implementation details |
+
+### Changelog template (Keep a Changelog)
+
+```markdown
+# Changelog
+
+## [Unreleased]
+
+### Added
+
+- New feature
+
+## [1.0.0] - 2025-01-01
+
+### Added
+
+- Initial release
+
+### Changed
+
+- Updated dependency
+
+### Fixed
+
+- Bug fix
+```
+
+### Architecture Decision Record (ADR)
+
+```markdown
+# ADR-001: [Title]
+
+## Status
+
+Accepted / Deprecated / Superseded
+
+## Context
+
+Why are we making this decision?
+
+## Decision
+
+What did we decide?
+
+## Consequences
+
+What are the trade-offs?
+```
+
+### AI-friendly documentation
+
+`llms.txt` template for AI crawlers and agents:
+
+```markdown
+# Project Name
+
+> One-line objective.
+
+## Core Files
+
+- [src/index.ts]: Main entry
+- [src/api/]: API routes
+- [docs/]: Documentation
+
+## Key Concepts
+
+- Concept 1: Brief explanation
+- Concept 2: Brief explanation
+```
+
+MCP-ready documentation for RAG indexing:
+
+- Clear H1-H3 hierarchy
+- JSON/YAML examples for data structures
+- Mermaid diagrams for flows
+- Self-contained sections
+
+### Structure principles
+
+| Principle              | Why                    |
+| ---------------------- | ---------------------- |
+| **Scannable**          | Headers, lists, tables |
+| **Examples first**     | Show, don't just tell  |
+| **Progressive detail** | Simple to complex      |
+| **Up to date**         | Outdated is misleading |
