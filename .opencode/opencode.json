@@ -36,6 +36,6 @@
     }
   },
   "agents": {
-    "path": ".kilo/agent"
+    "path": ".kilocode/agent"
   }
 }
