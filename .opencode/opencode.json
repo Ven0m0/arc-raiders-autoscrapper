@@ -1,10 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": [
-    "AGENTS.md",
-    "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"
-  ],
+  "instructions": ["AGENTS.md", "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"],
   "default_agent": "build",
+  "disabled_providers": ["openai"],
   "lsp": {
     "basedpyright": {
       "command": ["basedpyright-langserver", "--stdio"],
@@ -38,5 +36,36 @@
       ".remember/**",
       ".cachebro/**"
     ]
+  },
+  "permission": {
+    "*": "allow",
+    "sudo *": "deny",
+    "rm -rf /": "deny",
+    "rm -rf /*": "deny",
+    "rm -rf ~": "deny",
+    "rm -rf ~/*": "deny",
+    ":(){:|:&}:": "deny",
+    "doom_loop": "deny"
+  },
+  "share": "manual",
+  "plugin": [
+    "opencode-anthropic-oauth@0.4.1",
+    "opencode-gemini-auth@1.4.9",
+    "opencode-kilo-auth@1.1.4",
+    "@gotgenes/opencode-agent-identity@3.0.1",
+    "opencode-ignore@1.1.0",
+    "opencode-pty@0.2.3",
+    "openslimedit@1.0.4",
+    "@spoons-and-mirrors/subtask2@0.3.5",
+    "openfundus@0.1.6",
+    "opencode-toolbox@0.10.4",
+    "opencode-cross-repo@0.4.1",
+    "@tuanhung303/opencode-acp@3.0.15"
+  ],
+  "experimental": {
+    "continue_loop_on_deny": false,
+    "mcp_timeout": 30000,
+    "openTelemetry": false,
+    "batch_tool": true
   }
 }
