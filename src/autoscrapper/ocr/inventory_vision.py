@@ -807,6 +807,8 @@ def preprocess_for_ocr(roi_bgr: np.ndarray, *, restrict_otsu_to_left: bool = Fal
     # and would flip the polarity decision if included in the sample.
     h, w = binary.shape[:2]
     centre = binary[h // 4 : 3 * h // 4, 0 : w // 2]
+    if centre.size == 0:
+        centre = binary[:, 0 : w // 2]
     if float(np.mean(centre)) < 128.0:
         binary = cv2.bitwise_not(binary)
     return binary
@@ -976,6 +978,10 @@ def _extract_action_line_bbox(
         == best_key
         and int(widths[i]) > 0
     ]
+    # If every word on the line has width==0 (degenerate tesserocr output), fall
+    # back to the original group indices so min/max never operate on empty lists.
+    if not indices:
+        indices = list(groups[best_key])
     lefts = [int(ocr_data["left"][i]) for i in indices]
     tops = [int(ocr_data["top"][i]) for i in indices]
     rights = [int(ocr_data["left"][i]) + int(ocr_data["width"][i]) for i in indices]
@@ -1277,9 +1283,11 @@ def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:
     if not digits:
         return None, cleaned
 
-    try:
+    # Skip a likely stash-icon noise digit: a single-digit prefix followed by a
+    # multi-digit number (e.g. "8 197" → use 197, not 8).
+    if len(digits) >= 2 and len(digits[0]) == 1 and len(digits[1]) > 1:
+        count = int(digits[1])
+    else:
         count = int(digits[0])
-    except Exception:
-        count = None
 
     return count, cleaned
