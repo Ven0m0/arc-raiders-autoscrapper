@@ -1,7 +1,7 @@
-# Run Pre-commit
+# Run Prek
 
-Run pre-commit hooks on all files.
+Run prek hooks on all files.
 
-**Command:** `uv run pre-commit run --all-files`
+**Command:** `uv run prek run --all-files`
 
 **Validation:** Must pass for all changes.

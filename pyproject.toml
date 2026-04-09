@@ -25,7 +25,13 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["ruff", "pre-commit"]
+dev = [
+    "flake8>=7.3.0",
+    "mypy>=1.20.0",
+    "prek>=0.3.8",
+    "pytest>=9.0.3",
+    "ruff",
+]
 
 [project.scripts]
 autoscrapper = "autoscrapper.__main__:main"
@@ -53,5 +59,9 @@ extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
 
 [dependency-groups]
 dev = [
+    "flake8>=7.3.0",
+    "mypy>=1.20.0",
+    "prek>=0.3.8",
     "pytest>=9.0.3",
+    "ruff>=0.15.10",
 ]
