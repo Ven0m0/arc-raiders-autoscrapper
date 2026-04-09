@@ -161,4 +161,4 @@ Optimization is complete when:
 ## References
 
 - Language standards: `instructions/bash.instructions.md`, `instructions/python.instructions.md`, `instructions/rust.instructions.md`
-- Refactoring patterns: `skills/code-maintenance/`
+- Issue-oriented follow-up: `skills/fix-issue/`
