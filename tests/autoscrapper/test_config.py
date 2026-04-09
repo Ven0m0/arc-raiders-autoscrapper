@@ -1,11 +1,13 @@
 from unittest.mock import patch
 from autoscrapper.config import _migrate_config, CONFIG_VERSION
 
+
 def test_migrate_config_no_version():
     """Test that a payload without a version is returned as-is."""
     payload = {"some_key": "some_value"}
     result = _migrate_config(payload.copy())
     assert result == payload
+
 
 def test_migrate_config_non_integer_version():
     """Test that a payload with a non-integer version is returned as-is."""
@@ -13,17 +15,20 @@ def test_migrate_config_non_integer_version():
     result = _migrate_config(payload.copy())
     assert result == payload
 
+
 def test_migrate_config_current_version():
     """Test that a payload with the current version is returned as-is."""
     payload = {"version": CONFIG_VERSION, "some_key": "some_value"}
     result = _migrate_config(payload.copy())
     assert result == payload
 
+
 def test_migrate_config_future_version():
     """Test that a payload with a future version is returned as-is, but a warning is logged."""
     payload = {"version": CONFIG_VERSION + 1, "some_key": "some_value"}
     result = _migrate_config(payload.copy())
     assert result == payload
+
 
 def test_migrate_config_old_version():
     """Test that a payload with an old version is migrated to the current version."""
@@ -34,6 +39,7 @@ def test_migrate_config_old_version():
         result = _migrate_config(payload.copy())
         assert result["version"] == CONFIG_VERSION
         assert result["some_key"] == "some_value"
+
 
 @patch("autoscrapper.config._log.warning")
 def test_migrate_config_future_version_warning(mock_warning):
@@ -46,23 +52,28 @@ def test_migrate_config_future_version_warning(mock_warning):
     assert mock_warning.call_args[0][1] == future_version
     assert mock_warning.call_args[0][2] == CONFIG_VERSION
 
+
 def migrate_1_to_2(payload):
     payload["step_1_applied"] = True
     return payload
+
 
 def migrate_2_to_3(payload):
     payload["step_2_applied"] = True
     return payload
 
+
 def migrate_3_to_4(payload):
     payload["step_3_applied"] = True
     return payload
+
 
 dummy_migrations = {
     1: migrate_1_to_2,
     2: migrate_2_to_3,
     3: migrate_3_to_4,
 }
+
 
 @patch("autoscrapper.config._MIGRATIONS", new=dummy_migrations)
 @patch("autoscrapper.config.CONFIG_VERSION", 4)

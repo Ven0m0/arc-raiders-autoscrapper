@@ -1,6 +1,7 @@
 import pytest
 from autoscrapper.interaction.keybinds import stop_key_label
 
+
 @pytest.mark.parametrize(
     "key, expected_label",
     [
@@ -28,12 +29,10 @@ from autoscrapper.interaction.keybinds import stop_key_label
         ("down", "Down Arrow"),
         ("left", "Left Arrow"),
         ("right", "Right Arrow"),
-
         # Function keys
         ("f1", "F1"),
         ("f5", "F5"),
         ("f12", "F12"),
-
         # Single characters
         ("a", "A"),
         ("Z", "Z"),
@@ -41,18 +40,16 @@ from autoscrapper.interaction.keybinds import stop_key_label
         ("-", "-"),
         ("=", "="),
         ("[", "["),
-
         # Edge cases and invalid inputs (fallback to DEFAULT_STOP_KEY which is 'escape')
         (None, "Esc"),
         (123, "Esc"),
         ("", "Esc"),
         ("   ", "Esc"),
         ("invalid_key", "Esc"),
-
         # Whitespace handling
         ("  f1  ", "F1"),
         ("  a  ", "A"),
-    ]
+    ],
 )
 def test_stop_key_label(key, expected_label):
     assert stop_key_label(key) == expected_label

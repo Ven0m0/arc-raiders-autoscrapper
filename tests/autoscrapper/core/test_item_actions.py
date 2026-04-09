@@ -5,6 +5,7 @@ from autoscrapper.core.item_actions import (
     _normalize_action,
 )
 
+
 @pytest.mark.parametrize(
     "name, expected",
     [
@@ -19,6 +20,7 @@ from autoscrapper.core.item_actions import (
 def test_normalize_item_name(name, expected):
     assert normalize_item_name(name) == expected
 
+
 @pytest.mark.parametrize(
     "raw, expected",
     [
@@ -31,6 +33,7 @@ def test_normalize_item_name(name, expected):
 )
 def test_clean_ocr_text(raw, expected):
     assert clean_ocr_text(raw) == expected
+
 
 @pytest.mark.parametrize(
     "value, expected",

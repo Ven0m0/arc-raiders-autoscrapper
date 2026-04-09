@@ -791,7 +791,9 @@ def recycle_confirm_button_center(
     )
 
 
-def preprocess_for_ocr(roi_bgr: np.ndarray, *, restrict_otsu_to_left: bool = False) -> np.ndarray:
+def preprocess_for_ocr(
+    roi_bgr: np.ndarray, *, restrict_otsu_to_left: bool = False
+) -> np.ndarray:
     roi_bgr = cv2.resize(roi_bgr, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
     gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
     if restrict_otsu_to_left:
@@ -799,7 +801,9 @@ def preprocess_for_ocr(roi_bgr: np.ndarray, *, restrict_otsu_to_left: bool = Fal
         # side) so that bright inventory-grid icons on the right do not bias the
         # global threshold used for the menu text.
         w_g = gray.shape[1]
-        thresh, _ = cv2.threshold(gray[:, : w_g // 2], 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        thresh, _ = cv2.threshold(
+            gray[:, : w_g // 2], 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
+        )
         _, binary = cv2.threshold(gray, thresh, 255, cv2.THRESH_BINARY)
     else:
         _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
@@ -1024,7 +1028,9 @@ def find_action_bbox_by_ocr(
         # Save a tightly-cropped debug image of just the target-action line
         # region (in 2x space) so the debug PNG shows exactly what Tesseract
         # read rather than the entire context-menu crop.
-        _save_debug_image(f"infobox_action_{target}_processed", processed[by : by + bh, bx : bx + bw])
+        _save_debug_image(
+            f"infobox_action_{target}_processed", processed[by : by + bh, bx : bx + bw]
+        )
         # Use floor division for position fields (pixel origins round down) and
         # ceiling division for size fields so odd-pixel 2x extents round up
         # rather than truncating, preserving the full original-space extent.
@@ -1068,7 +1074,9 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
         data = image_to_data(processed, single_line=True)
         ocr_time = time.perf_counter() - ocr_start
     except Exception as exc:
-        _last_roi_hash = None  # invalidate cache so next call does not re-serve stale result
+        _last_roi_hash = (
+            None  # invalidate cache so next call does not re-serve stale result
+        )
         print(
             f"[vision_ocr] ocr_backend image_to_data failed for infobox title strip; "
             f"falling back to empty OCR result. error={exc}",

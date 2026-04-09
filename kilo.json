@@ -16,7 +16,12 @@
     "path": ".kilo/hooks"
   },
   "mcp": {
-    "servers": []
+    "servers": {
+      "ref": {
+        "type": "http",
+        "url": "https://api.ref.tools/mcp"
+      }
+    }
   },
   "precommit": {
     "enabled": true,

@@ -222,10 +222,22 @@ __marimo__/
 !.claude/agents/**
 !.claude/skills/
 !.claude/skills/**
+.claude/afc/
 .vscode/
 misplaced_files_2026-02-26_pokemon_go/
 .omc/
-/kilocode.json
+
+# Kilo/OpenCode root configs (tracked)
+!kilo.json
+!opencode.json
+
+# KiloCode/OpenCode plugin dirs (track config, ignore build artifacts)
+.kilocode/node_modules/
+.kilocode/package.json
+.kilocode/bun.lock
+.opencode/node_modules/
+.opencode/package.json
+.opencode/bun.lock
 sdio.cfg
 .cachebro/
 ocr_debug/

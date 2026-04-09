@@ -1,6 +1,7 @@
 import sys
 from unittest.mock import MagicMock, patch
 
+
 def get_target_function():
     mock_modules = {
         "pywinctl": MagicMock(),
@@ -18,6 +19,7 @@ def get_target_function():
 
     with patch.dict(sys.modules, mock_modules):
         import autoscrapper.interaction.ui_windows as ui_windows
+
         # Save a reference to the function
         func = ui_windows._is_mss_thread_handle_error
 
@@ -36,7 +38,9 @@ def test_is_mss_thread_handle_error_with_srcdc():
 
 def test_is_mss_thread_handle_error_with_thread_local():
     func = get_target_function()
-    exc = Exception("AttributeError: '_thread._local' object has no attribute 'instance'")
+    exc = Exception(
+        "AttributeError: '_thread._local' object has no attribute 'instance'"
+    )
     assert func(exc) is True
 
 
