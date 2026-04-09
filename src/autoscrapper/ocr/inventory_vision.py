@@ -565,9 +565,13 @@ def find_context_menu_crop(
     crop_h = int(round(_CONTEXT_MENU_HEIGHT_NORM * img_h))
     x = max(0, cell_center_x + x_off)
     y = max(0, cell_center_y + y_off)
-    # Shift left if the crop would overflow the right edge so the full width is preserved.
+    # Shift left/up if the crop would overflow the right or bottom edge so the full
+    # width and height are preserved (sell/recycle labels are in the lower portion of
+    # the context menu and would be silently truncated without the bottom guard).
     if x + crop_w > img_w:
         x = max(0, img_w - crop_w)
+    if y + crop_h > img_h:
+        y = max(0, img_h - crop_h)
     x2 = min(img_w, x + crop_w)
     y2 = min(img_h, y + crop_h)
     w, h = x2 - x, y2 - y
@@ -1040,12 +1044,13 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
     OCR a pre-cropped infobox title strip to derive the item title.
     """
     global _last_ocr_result, _last_roi_hash
+    # Hash the raw BGR input so that two different raw strips that happen to produce
+    # the same binarized image are not incorrectly served each other's result.
+    roi_hash = _hash_roi(title_strip_bgr)
     preprocess_start = time.perf_counter()
     processed = preprocess_for_ocr(title_strip_bgr)
     _save_debug_image("infobox_processed", processed)
     preprocess_time = time.perf_counter() - preprocess_start
-
-    roi_hash = _hash_roi(processed)
     if _last_roi_hash == roi_hash and _last_ocr_result is not None:
         item_name, raw_item_text = _last_ocr_result
         return InfoboxOcrResult(
