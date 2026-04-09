@@ -76,6 +76,7 @@
       "mcp__claude_ai_gitmcp__search_generic_code",
       "mcp__plugin_context-mode_context-mode__ctx_fetch_and_index",
       "mcp__plugin_context-mode_context-mode__ctx_search",
+      "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
       "mcp__plugin_oh-my-claudecode_t__state_clear",
       "Skill(afc:triage)",
       "Skill(commit-commands:commit-push-pr)"

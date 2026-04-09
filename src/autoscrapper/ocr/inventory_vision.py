@@ -794,6 +794,10 @@ def recycle_confirm_button_center(
 def preprocess_for_ocr(
     roi_bgr: np.ndarray, *, restrict_otsu_to_left: bool = False
 ) -> np.ndarray:
+    if roi_bgr.size == 0:
+        raise ValueError(
+            f"preprocess_for_ocr: empty input array (shape={roi_bgr.shape})"
+        )
     roi_bgr = cv2.resize(roi_bgr, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
     gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
     if restrict_otsu_to_left:
@@ -801,9 +805,12 @@ def preprocess_for_ocr(
         # side) so that bright inventory-grid icons on the right do not bias the
         # global threshold used for the menu text.
         w_g = gray.shape[1]
-        thresh, _ = cv2.threshold(
-            gray[:, : w_g // 2], 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
-        )
+        if w_g // 2 > 0:
+            thresh, _ = cv2.threshold(
+                gray[:, : w_g // 2], 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
+            )
+        else:
+            thresh, _ = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
         _, binary = cv2.threshold(gray, thresh, 255, cv2.THRESH_BINARY)
     else:
         _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
@@ -817,6 +824,8 @@ def preprocess_for_ocr(
     centre = binary[h // 4 : 3 * h // 4, 0 : w // 2]
     if centre.size == 0:
         centre = binary[:, 0 : w // 2]
+    if centre.size == 0:
+        centre = binary
     if float(np.mean(centre)) < 128.0:
         binary = cv2.bitwise_not(binary)
     return binary
@@ -1049,6 +1058,16 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
     """
     OCR a pre-cropped infobox title strip to derive the item title.
     """
+    if title_strip_bgr.size == 0:
+        return InfoboxOcrResult(
+            item_name="",
+            raw_item_text="",
+            processed=np.zeros((1, 1), dtype=np.uint8),
+            preprocess_time=0.0,
+            ocr_time=0.0,
+            source="infobox",
+            ocr_failed=True,
+        )
     global _last_ocr_result, _last_roi_hash
     # Hash the raw BGR input so that two different raw strips that happen to produce
     # the same binarized image are not incorrectly served each other's result.
@@ -1095,8 +1114,9 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
     item_name, raw_item_text = _extract_cropped_title_from_data(
         data, processed.shape[0]
     )
-    _last_roi_hash = roi_hash
-    _last_ocr_result = (item_name, raw_item_text)
+    if item_name:
+        _last_roi_hash = roi_hash
+        _last_ocr_result = (item_name, raw_item_text)
     return InfoboxOcrResult(
         item_name=item_name,
         raw_item_text=raw_item_text,
@@ -1134,6 +1154,16 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
     item name via ``match_item_name``.  This handles menus that mix action
     labels ("Move to Backpack", "Sell", "Recycle") with the item title.
     """
+    if context_crop_bgr.size == 0:
+        return InfoboxOcrResult(
+            item_name="",
+            raw_item_text="",
+            processed=np.zeros((1, 1), dtype=np.uint8),
+            preprocess_time=0.0,
+            ocr_time=0.0,
+            source="context_menu",
+            ocr_failed=True,
+        )
     preprocess_start = time.perf_counter()
     _save_debug_image("ctx_menu_raw", context_crop_bgr)
     processed = preprocess_for_ocr(context_crop_bgr, restrict_otsu_to_left=True)
@@ -1260,7 +1290,15 @@ def ocr_item_name(roi_bgr: np.ndarray) -> str:
         return ""
 
     processed = preprocess_for_ocr(roi_bgr)
-    raw = image_to_string(processed, single_line=True)
+    try:
+        raw = image_to_string(processed, single_line=True)
+    except Exception as exc:
+        print(
+            f"[vision_ocr] ocr_backend image_to_string failed for item name; "
+            f"falling back to empty result. error={exc}",
+            flush=True,
+        )
+        return ""
     return match_item_name(raw)
 
 

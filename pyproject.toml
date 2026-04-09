@@ -58,6 +58,11 @@ autoscrapper = [
 [tool.ruff]
 extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+log_level = "WARNING"
+
 [dependency-groups]
 dev = [
     "mypy>=1.20.0",

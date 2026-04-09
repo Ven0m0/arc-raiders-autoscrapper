@@ -95,10 +95,8 @@ ipython_config.py
 # Pipfile.lock
 
 # UV
-#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-uv.lock
+#   uv.lock is tracked for reproducibility (binary package pinning).
+# uv.lock
 
 # poetry
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
@@ -223,18 +221,11 @@ __marimo__/
 !.claude/skills/
 !.claude/skills/**
 .claude/afc/
-.vscode/
-misplaced_files_2026-02-26_pokemon_go/
+.vscode/*
+!.vscode/extensions.json
 .omc/
 
-# Kilo/OpenCode root configs (tracked)
-!kilo.json
-!opencode.json
-
-# KiloCode/OpenCode plugin dirs (track config, ignore build artifacts)
-.kilocode/node_modules/
-.kilocode/package.json
-.kilocode/bun.lock
+# OpenCode plugin dir (track config, ignore build artifacts)
 .opencode/node_modules/
 .opencode/package.json
 .opencode/bun.lock
