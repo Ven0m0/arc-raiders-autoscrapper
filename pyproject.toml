@@ -28,7 +28,6 @@ dependencies = [
 # Keep this extra aligned with [dependency-groups].dev so pip and uv users
 # install the same local tooling.
 dev = [
-    "flake8>=7.3.0",
     "mypy>=1.20.0",
     "prek>=0.3.8",
     "pytest>=9.0.3",
@@ -61,7 +60,6 @@ extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
 
 [dependency-groups]
 dev = [
-    "flake8>=7.3.0",
     "mypy>=1.20.0",
     "prek>=0.3.8",
     "pytest>=9.0.3",

@@ -157,7 +157,7 @@ When performing a code review, verify test quality:
 ### Examples
 
 <examples>
-  
+
 ```typescript
 // ❌ BAD: Vague name and assertion
 test('test1', () => {

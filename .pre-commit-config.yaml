@@ -13,13 +13,6 @@ repos:
       - id: ruff-format
         stages: [pre-commit]
 
-  # Pyproject-fmt - Format pyproject.toml
-  - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: v2.21.0
-    hooks:
-      - id: pyproject-fmt
-        stages: [pre-commit]
-
   # Pre-commit hooks (official)
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -75,10 +68,10 @@ repos:
     rev: v0.9.16
     hooks:
       - id: tombi-format
-        exclude: ^pyproject\.toml$
+        exclude: ^(pyproject\.toml|uv\.lock)$
         stages: [pre-commit]
       - id: tombi-lint
-        exclude: ^pyproject\.toml$
+        exclude: ^(pyproject\.toml|uv\.lock)$
         stages: [pre-commit]
 
   # Renovate config validator
