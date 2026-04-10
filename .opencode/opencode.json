@@ -1,9 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": [
-    ".kilo/rules/*.md",
-    "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"
-  ],
+  "instructions": [".kilo/rules/*.md", "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"],
+  "default_agent": "plan",
+  "share": "manual",
   "permission": {
     "*": "allow",
     "sudo *": "deny",
@@ -12,42 +11,55 @@
     "rm -rf ~": "deny",
     "rm -rf ~/*": "deny",
     ":(){:|:&}:": "deny",
-    "doom_loop": "deny"
+	"doom_loop": "deny"
   },
   "compaction": {
     "auto": true,
     "prune": true
   },
-  "default_agent": "plan",
-  "agent": {
-    "code": {
-      "model": "minimax/minimax-m2.5:free",
-      "temperature": 0.1
-    },
-    "debug": {
-      "model": "minimax/minimax-m2.5:free",
-      "temperature": 0.05
-    },
-    "plan": {
-      "model": "qwen/qwen3.6-plus",
-      "temperature": 0.15
-    },
-    "ask": {
-      "model": "qwen/qwen3.6-plus",
-      "temperature": 0.2
-    },
-    "explore": {
-      "model": "minimax/minimax-m2.5:free",
-      "temperature": 0.0
-    },
-    "general": {
-      "model": "qwen/qwen3.6-plus",
-      "temperature": 0.15
-    },
-    "orchestrator": {
-      "model": "qwen/qwen3.6-plus",
-      "temperature": 0.1
-    }
+  "plugin": [
+	"opencode-image-compress@latest",
+    "opencode-anthropic-oauth@latest",
+    "opencode-kilo-auth@latest",
+    "@gotgenes/opencode-agent-identity@latest",
+    "opencode-ignore@latest",
+    "opencode-pty@latest",
+    "openslimedit@latest",
+    "@spoons-and-mirrors/subtask2@latest",
+	"opencode-session-handoff@1.1.6",
+	"opencode-websearch@0.5.0",
+    "openfundus@latest",
+    "opencode-toolbox@latest",
+    "opencode-cross-repo@latest",
+    "@tuanhung303/opencode-acp@latest",
+	"@xesrevinu/opencode-context-shield@latest",
+	"opencode-cachebro@latest",
+	"@howaboua/opencode-chat@latest",
+	"opencode-agent-browser@latest",
+	"@nick-vi/opencode-type-inject@latest"
+  ],
+  "disabled_providers": [
+    "openai"
+  ],
+  "watcher": {
+    "ignore": [
+      "node_modules/**",
+      "dist/**",
+      ".git/**",
+      ".venv/**",
+	  "uv.lock",
+	  "ocr_debug/**",
+	  "**/node_modules/**",
+	  ".remember/**",
+      ".omc/**",
+	  ".cachebro/**"
+    ]
+  },
+  "experimental": {
+    "continue_loop_on_deny": true,
+    "mcp_timeout": 30000,
+    "openTelemetry": false,
+    "batch_tool": true
   },
   "lsp": {
     "typescript": {
@@ -100,33 +112,23 @@
       "extensions": [".toml"]
     }
   },
-  "watcher": {
-    "ignore": [
-      ".git/**",
-      ".venv/**",
-      ".ruff_cache/**",
-      "uv.lock",
-      "ocr_debug/**",
-      "node_modules/**",
-      "**/node_modules/**",
-      ".opencode/node_modules/**",
-      ".omc/**",
-      ".remember/**",
-      ".cachebro/**"
-    ]
-  },
   "mcp": {
     "github-mcp-server": {
       "type": "remote",
       "url": "https://api.githubcopilot.com/mcp/",
       "enabled": true,
-      "oauth": false,
+      "oauth": true,
       "timeout": 30000,
-      "headers": {
-        "Authorization": "Bearer {env:GITHUB_TOKEN}",
-        "X-MCP-Insiders": "true",
-        "X-MCP-Toolsets": "default,actions,web_search,code_security,copilot,dependabot,git,secret_protection,security_advisories,stargazers,github_support_docs_search,labels,gists"
-      }
+      "headers": { "X-MCP-Toolsets": "default,actions,web_search,code_security,copilot,dependabot,git,security_advisories,github_support_docs_search" }
+    },
+    "cachebro": {
+      "type": "local",
+      "command": ["bunx", "--bun", "cachebro", "serve"]
+    },
+    "gh_grep": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+      "enabled": true
     },
     "ref-tools": {
       "type": "remote",
@@ -134,9 +136,7 @@
       "enabled": true,
       "oauth": false,
       "timeout": 30000,
-      "headers": {
-        "x-ref-api-key": "{env:REF_API_KEY}"
-      }
+      "headers": { "x-ref-api-key": "{env:REF_API_KEY}" }
     },
     "exa": {
       "type": "remote",
@@ -144,46 +144,7 @@
       "enabled": true,
       "oauth": false,
       "timeout": 30000,
-      "headers": {
-        "x-api-key": "{env:EXA_API_KEY}"
-      }
+      "headers": { "x-api-key": "{env:EXA_API_KEY}" }
     },
-    "gh_grep": {
-      "type": "remote",
-      "url": "https://mcp.grep.app",
-      "enabled": true,
-      "timeout": 30000
-    }
-  },
-  "skills": {
-    "paths": [".kilo/skill"]
-  },
-  "disabled_providers": ["openai"],
-  "experimental": {
-    "continue_loop_on_deny": true,
-    "mcp_timeout": 30000,
-    "openTelemetry": false,
-    "batch_tool": true
-  },
-  "plugin": [
-    "opencode-image-compress@0.3.2",
-    "opencode-ignore@1.1.0",
-    "openslimedit@1.0.4",
-    "opencode-pty@0.3.2",
-    "@spoons-and-mirrors/subtask2@0.3.5",
-    "opencode-session-handoff@1.1.6",
-    "opencode-websearch@0.5.0",
-    "openfundus@0.1.6",
-    "opencode-toolbox@0.10.4",
-    "opencode-cross-repo@0.4.1",
-    "@tuanhung303/opencode-acp@3.0.15",
-    "opencode-anthropic-oauth@0.4.1",
-    "opencode-kilo-auth@1.1.4",
-    "@gotgenes/opencode-agent-identity@3.0.1",
-	"@xesrevinu/opencode-context-shield@latest",
-	"@howaboua/opencode-chat@0.1.10",
-	"opencode-cachebro@latest",
-    "@nick-vi/opencode-type-inject@latest"
-  ],
-  "share": "manual"
+  }
 }
