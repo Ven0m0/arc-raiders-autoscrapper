@@ -165,6 +165,11 @@
     "openfundus@0.1.6",
     "opencode-toolbox@0.10.4",
     "opencode-cross-repo@0.4.1",
-    "@tuanhung303/opencode-acp@3.0.15"
-  ]
+    "@tuanhung303/opencode-acp@3.0.15",
+    "opencode-anthropic-oauth@0.4.1",
+    "opencode-gemini-auth@1.4.9",
+    "opencode-kilo-auth@1.1.4",
+    "@gotgenes/opencode-agent-identity@3.0.1"
+  ],
+  "share": "manual"
 }
