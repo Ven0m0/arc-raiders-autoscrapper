@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "$schema": "https://opencode.ai/config.json",
   "instructions": [
     "AGENTS.md",
@@ -183,4 +184,46 @@
     "@gotgenes/opencode-agent-identity@3.0.1"
   ],
   "share": "manual"
+=======
+	"$schema": "https://opencode.ai/config.json",
+	"instructions": [
+		"AGENTS.md",
+		"https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"
+	],
+	"default_agent": "build",
+	"lsp": {
+		"basedpyright": {
+			"command": ["basedpyright-langserver", "--stdio"],
+			"extensions": [".py", ".pyw", ".pyi"]
+		},
+		"json-ls": {
+			"command": ["vscode-json-language-server", "--stdio"],
+			"extensions": [".json", ".jsonc"]
+		},
+		"tombi": {
+			"command": ["tombi", "lsp"],
+			"extensions": [".toml"]
+		},
+		"yaml-ls": {
+			"command": ["yaml-language-server", "--stdio"],
+			"extensions": [".yaml", ".yml"]
+		},
+		"markdown-oxide": {
+			"command": ["markdown-oxide"],
+			"extensions": [".md", ".mdx"]
+		}
+	},
+	"watcher": {
+		"ignore": [
+			".git/**",
+			".venv/**",
+			"ocr_debug/**",
+			"uv.lock",
+			".omc/**",
+			".opencode/node_modules/**",
+			".remember/**",
+			".cachebro/**"
+		]
+	}
+>>>>>>> Stashed changes
 }

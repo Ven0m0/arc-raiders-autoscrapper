@@ -67,10 +67,6 @@ name = "actionlint"
 name = "bandit"
 
 [[plugin]]
-name = "editorconfig-checker"
-mode = "comment"
-
-[[plugin]]
 name = "radarlint-python"
 mode = "comment"
 
@@ -85,19 +81,10 @@ drivers = [
 ]
 
 [[plugin]]
-name = "shellcheck"
-
-[[plugin]]
 name = "trufflehog"
 
 [[plugin]]
 name = "zizmor"
-
-[[plugin]]
-name = "semgrep"
-
-[[plugin]]
-name = "shfmt"
 
 [[plugin]]
 name = "yamllint"
