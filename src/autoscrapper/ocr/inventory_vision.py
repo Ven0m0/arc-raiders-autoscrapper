@@ -45,6 +45,8 @@ _ITEM_NAMES: Optional[Tuple[str, ...]] = None
 _last_roi_hash: Optional[bytes] = None
 _last_ocr_result: Optional[Tuple[str, str]] = None
 DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75
+# Guarded fallback only uses these broad stat labels; extend this list if new
+# infobox stat headings start outranking item titles in OCR output.
 _STAT_LINE_KEYWORDS = (
     "accuracy",
     "ammo type",
@@ -957,11 +959,13 @@ def _extract_title_from_data(
             " ".join(p for p in raw_parts if p).strip(),
         )
 
-    def _looks_like_stat_line(text: str) -> bool:
-        lowered = clean_ocr_text(text).casefold()
+    def _looks_like_stat_line(cleaned_text: str) -> bool:
+        lowered = cleaned_text.casefold()
         return bool(lowered) and _STAT_LINE_PATTERN.search(lowered) is not None
 
     ranked_keys = sorted(groups, key=lambda k: (-scored[k], _group_top(k)))
+    if not ranked_keys:
+        return "", ""
     primary_text, primary_raw = _group_text(ranked_keys[0])
     primary_result = match_item_name_result(primary_text)
     if primary_result.matched_name is not None or not _looks_like_stat_line(primary_text):

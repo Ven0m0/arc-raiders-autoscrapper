@@ -264,6 +264,8 @@ class TestExtractTitleFromData:
         def _fake_match(text: str) -> ItemNameMatchResult:
             if text == "Damage 55":
                 return _match_result("Damage 55")
+            if text == "Range 100":
+                return _match_result("Range 100")
             if text == "Arc Alloy":
                 return _match_result(
                     "Arc Alloy",
