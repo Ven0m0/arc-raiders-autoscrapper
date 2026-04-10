@@ -180,9 +180,10 @@
     "opencode-anthropic-oauth@0.4.1",
     "opencode-kilo-auth@1.1.4",
     "@gotgenes/opencode-agent-identity@3.0.1",
-	  "@xesrevinu/opencode-context-shield@latest",
-	  "@howaboua/opencode-chat@0.1.10",
-    "@nick-vi/opencode-type-inject"
+	"@xesrevinu/opencode-context-shield@latest",
+	"@howaboua/opencode-chat@0.1.10",
+	"opencode-cachebro@latest",
+    "@nick-vi/opencode-type-inject@latest"
   ],
   "share": "manual"
 }
