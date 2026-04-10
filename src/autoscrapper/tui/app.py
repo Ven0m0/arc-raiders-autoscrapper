@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import time
-from typing import Callable, Iterable, Optional
+from collections.abc import Callable, Iterable
+from dataclasses import dataclass
 
 from rich.text import Text
 from textual import events
@@ -13,6 +13,7 @@ from textual.screen import ModalScreen
 from textual.widgets import Footer, OptionList, Static
 from textual.widgets.option_list import Option
 
+from ..warmup import start_background_warmup, warmup_status
 from .common import AppScreen
 from .maintenance import ResetProgressScreen, ResetRulesScreen, UpdateSnapshotScreen
 from .progress import (
@@ -31,7 +32,6 @@ from .settings import (
     ScanTimingScreen,
 )
 from .status import build_status_panel, has_progress
-from ..warmup import start_background_warmup, warmup_status
 
 MenuAction = Callable[["MenuScreen"], None]
 _SPLASH_MAX_SECONDS = 8.0
@@ -183,7 +183,7 @@ class MenuScreen(AppScreen):
         items: Iterable[MenuItem],
         *,
         default_key: str,
-        recommended_key: Optional[str] = None,
+        recommended_key: str | None = None,
         show_status: bool = False,
     ) -> None:
         super().__init__()

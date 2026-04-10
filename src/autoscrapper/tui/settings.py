@@ -11,7 +11,6 @@ from textual.screen import ModalScreen
 from textual.widget import Widget
 from textual.widgets import Button, Checkbox, Footer, Input, Static
 
-from .common import AppScreen, MessageScreen
 from ..config import (
     ScanSettings,
     load_scan_settings,
@@ -19,6 +18,7 @@ from ..config import (
     save_scan_settings,
 )
 from ..interaction.keybinds import stop_key_label, textual_key_to_stop_key
+from .common import AppScreen, MessageScreen
 
 
 class CaptureStopKeyScreen(ModalScreen[Optional[str]]):
@@ -57,7 +57,7 @@ class CaptureStopKeyScreen(ModalScreen[Optional[str]]):
 
     def __init__(self) -> None:
         super().__init__()
-        self._pending_key: Optional[str] = None
+        self._pending_key: str | None = None
 
     def compose(self) -> ComposeResult:
         with Vertical(id="capture-box"):
@@ -240,7 +240,7 @@ class ScanSettingsScreen(AppScreen):
 
     def _parse_int_field(
         self, field_id: str, *, label: str, min_value: int
-    ) -> Optional[int]:
+    ) -> int | None:
         raw = self.query_one(field_id, Input).value.strip()
         if not raw.isdigit():
             self.app.push_screen(
@@ -297,7 +297,7 @@ class ScanControlsScreen(ScanSettingsScreen):
     def _set_stop_key(self) -> None:
         self.app.push_screen(CaptureStopKeyScreen(), self._on_stop_key_selected)
 
-    def _on_stop_key_selected(self, key_name: Optional[str]) -> None:
+    def _on_stop_key_selected(self, key_name: str | None) -> None:
         if key_name is None:
             return
         self._stop_key = key_name

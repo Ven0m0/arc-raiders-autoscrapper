@@ -1,9 +1,9 @@
-import pytest
-from itertools import islice
-
 # We need to mock pywinctl and pynput to avoid X11 errors in headless environment
 import sys
+from itertools import islice
 from unittest.mock import MagicMock
+
+import pytest
 
 sys.modules["pywinctl"] = MagicMock()
 sys.modules["pymonctl"] = MagicMock()

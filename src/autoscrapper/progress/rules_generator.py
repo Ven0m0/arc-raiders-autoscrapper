@@ -1,19 +1,18 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Dict, List, Optional
 
 from .data_loader import load_game_data
 from .decision_engine import DecisionEngine, DecisionReason
-from .quest_inference import infer_completed_from_active
 from .progress_config import (
     build_quest_index,
     group_quests_by_trader,
     normalize_hideout_levels,
     resolve_active_quests,
 )
+from .quest_inference import infer_completed_from_active
 
 
 def _to_action(decision: DecisionReason) -> str:
@@ -27,18 +26,18 @@ def _to_action(decision: DecisionReason) -> str:
 
 
 def _iso_now() -> str:
-    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    return datetime.now(UTC).isoformat().replace("+00:00", "Z")
 
 
 def generate_rules_from_active(
-    active_quests: List[str],
-    hideout_levels: Dict[str, int],
+    active_quests: list[str],
+    hideout_levels: dict[str, int],
     *,
-    completed_projects: Optional[List[str]] = None,
-    completed_quests_override: Optional[List[str]] = None,
+    completed_projects: list[str] | None = None,
+    completed_quests_override: list[str] | None = None,
     all_quests_completed: bool = False,
-    data_dir: Optional[Path] = None,
-) -> Dict[str, object]:
+    data_dir: Path | None = None,
+) -> dict[str, object]:
     game_data = load_game_data(data_dir)
     normalized_levels = normalize_hideout_levels(
         hideout_levels, game_data.hideout_modules
@@ -46,7 +45,7 @@ def generate_rules_from_active(
 
     quests_by_trader = group_quests_by_trader(game_data.quests)
     quest_index = build_quest_index(quests_by_trader)
-    active_resolved: List[dict] = []
+    active_resolved: list[dict] = []
     if active_quests:
         active_resolved, missing = resolve_active_quests(active_quests, quest_index)
         if missing:
@@ -69,7 +68,7 @@ def generate_rules_from_active(
         "hideoutLevels": normalized_levels,
         "completedQuests": completed_quests,
         "completedProjects": completed_projects or [],
-        "lastUpdated": int(datetime.now(timezone.utc).timestamp() * 1000),
+        "lastUpdated": int(datetime.now(UTC).timestamp() * 1000),
     }
 
     engine = DecisionEngine(
@@ -109,6 +108,6 @@ def generate_rules_from_active(
     return {"metadata": metadata, "items": out_items}
 
 
-def write_rules(output: Dict[str, object], path: Path) -> None:
+def write_rules(output: dict[str, object], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(output, indent=2), encoding="utf-8")

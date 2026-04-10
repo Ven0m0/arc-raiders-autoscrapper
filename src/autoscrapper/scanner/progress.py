@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from .live_ui import _ScanLiveUI
 from .rich_support import Console
 
@@ -13,7 +11,7 @@ class ScanProgress:
     def stop(self) -> None:
         raise NotImplementedError
 
-    def set_total(self, total: Optional[int]) -> None:
+    def set_total(self, total: int | None) -> None:
         raise NotImplementedError
 
     def set_phase(self, phase: str) -> None:
@@ -45,7 +43,7 @@ class NullScanProgress(ScanProgress):
     def stop(self) -> None:
         return None
 
-    def set_total(self, total: Optional[int]) -> None:
+    def set_total(self, total: int | None) -> None:
         return None
 
     def set_phase(self, phase: str) -> None:
@@ -82,7 +80,7 @@ class RichScanProgress(ScanProgress):
     def stop(self) -> None:
         self._ui.stop()
 
-    def set_total(self, total: Optional[int]) -> None:
+    def set_total(self, total: int | None) -> None:
         self._ui.set_total(total)
 
     def set_phase(self, phase: str) -> None:

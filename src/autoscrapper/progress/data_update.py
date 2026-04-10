@@ -4,9 +4,8 @@ import json
 import logging
 import os
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Dict, List, Optional
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -25,7 +24,7 @@ class DownloadError(RuntimeError):
     pass
 
 
-def _fetch_json(url: str, headers: Optional[Dict[str, str]] = None) -> object:
+def _fetch_json(url: str, headers: dict[str, str] | None = None) -> object:
     request_headers = {
         "Accept": "application/json",
         "User-Agent": (
@@ -48,8 +47,8 @@ def _fetch_json(url: str, headers: Optional[Dict[str, str]] = None) -> object:
         raise DownloadError(f"Failed to reach {url}: {exc}") from exc
 
 
-def _fetch_all_items() -> List[dict]:
-    items: List[dict] = []
+def _fetch_all_items() -> list[dict]:
+    items: list[dict] = []
     current_page = 1
     has_next = True
     limit = 100
@@ -71,8 +70,8 @@ def _fetch_all_items() -> List[dict]:
     return items
 
 
-def _fetch_all_quests() -> List[dict]:
-    quests: List[dict] = []
+def _fetch_all_quests() -> list[dict]:
+    quests: list[dict] = []
     current_page = 1
     has_next = True
     limit = 100
@@ -94,7 +93,7 @@ def _fetch_all_quests() -> List[dict]:
     return quests
 
 
-def _fetch_supabase_all(table: str) -> List[dict]:
+def _fetch_supabase_all(table: str) -> list[dict]:
     if not SUPABASE_ANON_KEY:
         raise DownloadError(
             "METAFORGE_SUPABASE_ANON_KEY environment variable is not set"
@@ -106,7 +105,7 @@ def _fetch_supabase_all(table: str) -> List[dict]:
     }
     page_size = 1000
     offset = 0
-    all_rows: List[dict] = []
+    all_rows: list[dict] = []
 
     while True:
         url = f"{SUPABASE_URL}/{table}?select=*&limit={page_size}&offset={offset}"
@@ -122,8 +121,8 @@ def _fetch_supabase_all(table: str) -> List[dict]:
     return all_rows
 
 
-def _build_component_map(components: List[dict]) -> Dict[str, Dict[str, int]]:
-    component_map: Dict[str, Dict[str, int]] = {}
+def _build_component_map(components: list[dict]) -> dict[str, dict[str, int]]:
+    component_map: dict[str, dict[str, int]] = {}
     for component in components:
         item_id = component.get("item_id")
         component_id = component.get("component_id")
@@ -136,8 +135,8 @@ def _build_component_map(components: List[dict]) -> Dict[str, Dict[str, int]]:
 
 def _map_metaforge_item(
     metaforge_item: dict,
-    crafting_map: Dict[str, Dict[str, int]],
-    recycle_map: Dict[str, Dict[str, int]],
+    crafting_map: dict[str, dict[str, int]],
+    recycle_map: dict[str, dict[str, int]],
 ) -> dict:
     stat_block = metaforge_item.get("stat_block") or {}
     return {
@@ -154,7 +153,7 @@ def _map_metaforge_item(
         "stackSize": stat_block.get("stackSize") or 1,
         "craftBench": metaforge_item.get("workbench") or None,
         "updatedAt": metaforge_item.get("updated_at")
-        or datetime.now(timezone.utc).isoformat(),
+        or datetime.now(UTC).isoformat(),
         "recipe": crafting_map.get(metaforge_item.get("id")) or None,
         "recyclesInto": recycle_map.get(metaforge_item.get("id")) or None,
     }
@@ -167,10 +166,10 @@ def _map_metaforge_quest(metaforge_quest: dict) -> dict:
     required_items = metaforge_quest.get("required_items") or []
     rewards = metaforge_quest.get("rewards") or []
 
-    reward_item_ids: List[str] = []
+    reward_item_ids: list[str] = []
     if isinstance(rewards, list):
         for reward in rewards:
-            reward_item_id: Optional[str] = None
+            reward_item_id: str | None = None
             if isinstance(reward, dict):
                 reward_item_id = reward.get("item_id")
                 if not reward_item_id:
@@ -201,8 +200,8 @@ def _map_metaforge_quest(metaforge_quest: dict) -> dict:
     }
 
 
-def _build_quests_by_trader(quests: List[dict]) -> Dict[str, List[dict]]:
-    by_trader: Dict[str, List[dict]] = {}
+def _build_quests_by_trader(quests: list[dict]) -> dict[str, list[dict]]:
+    by_trader: dict[str, list[dict]] = {}
     for quest in quests:
         trader = quest.get("trader") or "Unknown"
         by_trader.setdefault(trader, []).append(
@@ -219,7 +218,7 @@ def _build_quests_by_trader(quests: List[dict]) -> Dict[str, List[dict]]:
     return by_trader
 
 
-def update_data_snapshot(data_dir: Optional[Path] = None) -> dict:
+def update_data_snapshot(data_dir: Path | None = None) -> dict:
     data_dir = data_dir or DATA_DIR
     (data_dir / "static").mkdir(parents=True, exist_ok=True)
 
@@ -254,7 +253,7 @@ def update_data_snapshot(data_dir: Optional[Path] = None) -> dict:
     )
 
     quests_by_trader = {
-        "generatedAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "generatedAt": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "source": "quests.json",
         "traders": _build_quests_by_trader(mapped_quests),
     }
@@ -263,7 +262,7 @@ def update_data_snapshot(data_dir: Optional[Path] = None) -> dict:
     )
 
     metadata = {
-        "lastUpdated": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "lastUpdated": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "source": "https://metaforge.app/arc-raiders",
         "version": "autoscrapper-data-1",
         "itemCount": len(mapped_items),

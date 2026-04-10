@@ -15,6 +15,7 @@ sys.modules.setdefault("pynput", MagicMock())
 sys.modules.setdefault("pynput.keyboard", MagicMock())
 sys.modules.setdefault("pynput.mouse", MagicMock())
 
+import autoscrapper.ocr.inventory_vision as _vision  # noqa: E402
 from autoscrapper.ocr.inventory_vision import (  # noqa: E402
     _extract_cropped_title_from_data,
     _extract_title_from_data,
@@ -22,8 +23,6 @@ from autoscrapper.ocr.inventory_vision import (  # noqa: E402
     reset_ocr_caches,
     title_roi,
 )
-import autoscrapper.ocr.inventory_vision as _vision  # noqa: E402
-
 
 # ---------------------------------------------------------------------------
 # Helpers

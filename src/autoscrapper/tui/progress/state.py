@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from datetime import datetime, timezone
 import re
-from typing import Dict, List, Set
+from dataclasses import dataclass
+from datetime import UTC, datetime
 
 from ...config import ProgressSettings, load_progress_settings, save_progress_settings
 from ...progress.data_loader import load_game_data
@@ -29,14 +28,14 @@ class HideoutModule:
 @dataclass
 class ProgressWizardState:
     all_quests_completed: bool
-    active_ids: Set[str]
-    hideout_levels: Dict[str, int]
-    quest_entries: List[QuestEntry]
-    hideout_modules: List[HideoutModule]
+    active_ids: set[str]
+    hideout_levels: dict[str, int]
+    quest_entries: list[QuestEntry]
+    hideout_modules: list[HideoutModule]
 
 
 def iso_now() -> str:
-    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    return datetime.now(UTC).isoformat().replace("+00:00", "Z")
 
 
 def normalize_quest_value(value: str) -> str:
@@ -45,8 +44,8 @@ def normalize_quest_value(value: str) -> str:
     return re.sub(r"\s+", " ", normalized).strip()
 
 
-def build_quest_entries(quests: List[dict]) -> List[QuestEntry]:
-    entries: List[QuestEntry] = []
+def build_quest_entries(quests: list[dict]) -> list[QuestEntry]:
+    entries: list[QuestEntry] = []
     for quest in quests:
         quest_id = quest.get("id")
         quest_name = quest.get("name")
@@ -67,8 +66,8 @@ def build_quest_entries(quests: List[dict]) -> List[QuestEntry]:
     return entries
 
 
-def build_hideout_modules(hideout_modules: List[dict]) -> List[HideoutModule]:
-    modules: List[HideoutModule] = []
+def build_hideout_modules(hideout_modules: list[dict]) -> list[HideoutModule]:
+    modules: list[HideoutModule] = []
     for module in hideout_modules:
         module_id = module.get("id")
         max_level = int(module.get("maxLevel", 0) or 0)
@@ -84,8 +83,8 @@ def build_hideout_modules(hideout_modules: List[dict]) -> List[HideoutModule]:
 
 
 def compute_completed_quests(
-    active_ids: List[str],
-) -> List[str]:
+    active_ids: list[str],
+) -> list[str]:
     game_data = load_game_data()
     return infer_completed_from_active(
         game_data.quests, game_data.quest_graph, active_ids
@@ -110,9 +109,9 @@ def build_wizard_state() -> ProgressWizardState:
 def persist_progress_settings(
     *,
     all_quests_completed: bool,
-    active_quests: List[str],
-    completed_quests: List[str],
-    hideout_levels: Dict[str, int],
+    active_quests: list[str],
+    completed_quests: list[str],
+    hideout_levels: dict[str, int],
 ) -> ProgressSettings:
     progress_settings = ProgressSettings(
         all_quests_completed=all_quests_completed,
@@ -125,7 +124,7 @@ def persist_progress_settings(
     return progress_settings
 
 
-def save_workshop_levels(levels: Dict[str, int]) -> None:
+def save_workshop_levels(levels: dict[str, int]) -> None:
     settings = load_progress_settings()
     persist_progress_settings(
         all_quests_completed=settings.all_quests_completed,

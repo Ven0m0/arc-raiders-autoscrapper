@@ -3,12 +3,11 @@ from __future__ import annotations
 import importlib
 import threading
 from dataclasses import dataclass
-from typing import Optional
 
 _WARMUP_LOCK = threading.Lock()
 _WARMUP_DONE = threading.Event()
 _WARMUP_STARTED = False
-_WARMUP_ERROR: Optional[str] = None
+_WARMUP_ERROR: str | None = None
 
 _HEAVY_MODULES = (
     # Only modules that do NOT transitively import tesserocr are safe to
@@ -28,16 +27,16 @@ class WarmupStatus:
     started: bool
     completed: bool
     failed: bool
-    error: Optional[str]
+    error: str | None
 
 
-def _set_warmup_error(error: Optional[str]) -> None:
+def _set_warmup_error(error: str | None) -> None:
     global _WARMUP_ERROR
     with _WARMUP_LOCK:
         _WARMUP_ERROR = error
 
 
-def _get_warmup_error() -> Optional[str]:
+def _get_warmup_error() -> str | None:
     with _WARMUP_LOCK:
         return _WARMUP_ERROR
 

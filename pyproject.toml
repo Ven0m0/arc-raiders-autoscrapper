@@ -59,16 +59,18 @@ autoscrapper = [
 extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
 line-length = 120
 target-version = "py314"
-fix = true
+fix = false
+show-fixes = true
+src = ["src", "tests", "scripts"]
 
 [tool.ruff.lint]
-select = [ "ALL"]
+select = ["E", "F", "I"]
 ignore = [
-  "E501",   # line too long (handled by formatter)
-  "T201",   # print() in CLI scripts is intentional
-  "BLE001", # broad exception in CLI error handlers is acceptable
-  "COM812", # trailing comma conflicts with formatter
+  "E501", # line too long (handled by formatter)
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["F401"]
 
 [tool.ruff.format]
 quote-style = "double"

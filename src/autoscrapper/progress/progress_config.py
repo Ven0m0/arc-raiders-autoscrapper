@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import re
-from typing import Dict, List, Tuple
 
 
 def _norm_key(key: str) -> str:
@@ -37,9 +36,9 @@ HIDEOUT_ALIASES = {
 
 
 def normalize_hideout_levels(
-    input_levels: Dict[str, int] | None, hideout_modules: List[dict]
-) -> Dict[str, int]:
-    out: Dict[str, int] = {}
+    input_levels: dict[str, int] | None, hideout_modules: list[dict]
+) -> dict[str, int]:
+    out: dict[str, int] = {}
     if not input_levels:
         return out
 
@@ -73,8 +72,8 @@ def _normalize_quest_name(value: str) -> str:
     return re.sub(r"\s+", " ", normalized).strip()
 
 
-def group_quests_by_trader(quests: List[dict]) -> Dict[str, List[dict]]:
-    quests_by_trader: Dict[str, List[dict]] = {}
+def group_quests_by_trader(quests: list[dict]) -> dict[str, list[dict]]:
+    quests_by_trader: dict[str, list[dict]] = {}
     for quest in quests:
         trader = quest.get("trader") or "Unknown"
         quests_by_trader.setdefault(trader, []).append(quest)
@@ -86,10 +85,10 @@ def group_quests_by_trader(quests: List[dict]) -> Dict[str, List[dict]]:
 
 
 def build_quest_index(
-    quests_by_trader: Dict[str, List[dict]],
-) -> Tuple[Dict[str, dict], Dict[str, dict]]:
-    by_id: Dict[str, dict] = {}
-    by_name: Dict[str, dict] = {}
+    quests_by_trader: dict[str, list[dict]],
+) -> tuple[dict[str, dict], dict[str, dict]]:
+    by_id: dict[str, dict] = {}
+    by_name: dict[str, dict] = {}
 
     for trader, quests in quests_by_trader.items():
         for idx, quest in enumerate(quests):
@@ -105,11 +104,11 @@ def build_quest_index(
 
 
 def resolve_active_quests(
-    active_list: List[str], quest_index: Tuple[Dict[str, dict], Dict[str, dict]]
-) -> Tuple[List[dict], List[str]]:
+    active_list: list[str], quest_index: tuple[dict[str, dict], dict[str, dict]]
+) -> tuple[list[dict], list[str]]:
     by_id, by_name = quest_index
-    resolved: List[dict] = []
-    missing: List[str] = []
+    resolved: list[dict] = []
+    missing: list[str] = []
 
     for entry in active_list:
         by_id_match = by_id.get(entry)
@@ -131,8 +130,8 @@ def resolve_active_quests(
 
 
 def infer_completed_by_trader(
-    quests_by_trader: Dict[str, List[dict]], active_resolved: List[dict]
-) -> List[str]:
+    quests_by_trader: dict[str, list[dict]], active_resolved: list[dict]
+) -> list[str]:
     completed = set()
     for active in active_resolved:
         trader = active.get("trader")
@@ -150,10 +149,10 @@ def infer_completed_by_trader(
 
 
 def build_completed_quest_ids(
-    quests: List[dict],
-    quest_progress_by_trader: Dict[str, int] | None,
-    completed_quest_ids: List[str] | None,
-) -> List[str]:
+    quests: list[dict],
+    quest_progress_by_trader: dict[str, int] | None,
+    completed_quest_ids: list[str] | None,
+) -> list[str]:
     completed = set(completed_quest_ids or [])
     if not quest_progress_by_trader:
         return list(completed)

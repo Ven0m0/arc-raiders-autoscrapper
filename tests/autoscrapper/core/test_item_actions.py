@@ -1,8 +1,9 @@
 import pytest
+
 from autoscrapper.core.item_actions import (
-    normalize_item_name,
-    clean_ocr_text,
     _normalize_action,
+    clean_ocr_text,
+    normalize_item_name,
 )
 
 

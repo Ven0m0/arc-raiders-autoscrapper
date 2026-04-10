@@ -2,7 +2,6 @@
 
 import sys
 from dataclasses import dataclass
-from typing import Tuple
 from unittest.mock import MagicMock, patch
 
 import numpy as np
@@ -18,7 +17,6 @@ sys.modules.setdefault("pynput.mouse", MagicMock())
 
 from autoscrapper.scanner.scan_loop import _detect_consecutive_empty_stop_idx  # noqa: E402
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -26,7 +24,7 @@ from autoscrapper.scanner.scan_loop import _detect_consecutive_empty_stop_idx  #
 @dataclass
 class _Cell:
     index: int
-    safe_rect: Tuple[int, int, int, int]
+    safe_rect: tuple[int, int, int, int]
 
 
 _WINDOW = np.zeros((50, 50, 3), dtype=np.uint8)
@@ -36,7 +34,7 @@ def _run(page, cells, cells_per_page, *, is_empty_seq, window=_WINDOW):
     """Run the function with all platform calls mocked."""
     call_iter = iter(is_empty_seq)
 
-    def _is_empty(_bgr):  # noqa: ARG001
+    def _is_empty(_bgr):
         return next(call_iter)
 
     with patch("autoscrapper.scanner.scan_loop.capture_region", return_value=window), \

@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
+from typing import Any
+
 import numpy as np
 
-from dataclasses import dataclass
-from typing import Any, Optional, Tuple
-
 from ..config import ScanSettings
+from ..core.item_actions import ActionMap, Decision
+from ..interaction.keybinds import DEFAULT_STOP_KEY
 from ..interaction.ui_windows import (
     MOVE_DURATION,
     SELL_RECYCLE_SPEED_MULT,
@@ -15,18 +17,16 @@ from ..interaction.ui_windows import (
     move_window_relative,
     sleep_with_abort,
 )
-from ..interaction.keybinds import DEFAULT_STOP_KEY
 from ..ocr.failure_corpus import capture_skip_unlisted_sample
 from ..ocr.inventory_vision import (
     InfoboxOcrResult,
     build_skip_unlisted_corpus_image,
     find_action_bbox_by_ocr,
     match_item_name_result,
-    recycle_confirm_button_center,
     rect_center,
+    recycle_confirm_button_center,
     sell_confirm_button_center,
 )
-from ..core.item_actions import ActionMap, Decision
 
 # Keep action fallback timings aligned with persisted scan settings.
 _DEFAULT_SCAN_SETTINGS = ScanSettings()
@@ -49,8 +49,8 @@ class ActionExecutionContext:
 
 
 def _perform_sell(
-    infobox_rect: Tuple[int, int, int, int],
-    action_bbox_rel: Tuple[int, int, int, int],
+    infobox_rect: tuple[int, int, int, int],
+    action_bbox_rel: tuple[int, int, int, int],
     window_left: int,
     window_top: int,
     window_width: int,
@@ -102,14 +102,14 @@ def _perform_sell(
 def _apply_destructive_decision(
     *,
     decision: Decision,
-    infobox_rect: Optional[Tuple[int, int, int, int]],
-    infobox_bgr: Optional[Any],
-    infobox_ocr: Optional[InfoboxOcrResult],
+    infobox_rect: tuple[int, int, int, int] | None,
+    infobox_bgr: Any | None,
+    infobox_ocr: InfoboxOcrResult | None,
     context: ActionExecutionContext,
 ) -> str:
     if infobox_rect is None or infobox_ocr is None:
         return "SKIP_NO_INFOBOX"
-    action_bbox_rel: Optional[Tuple[int, int, int, int]] = None
+    action_bbox_rel: tuple[int, int, int, int] | None = None
     if infobox_bgr is not None:
         target = "sell" if decision == "SELL" else "recycle"
         action_bbox_rel, _processed = find_action_bbox_by_ocr(infobox_bgr, target)
@@ -150,12 +150,12 @@ def _apply_destructive_decision(
 
 def resolve_action_taken(
     *,
-    decision: Optional[Decision],
+    decision: Decision | None,
     item_name: str,
     actions: ActionMap,
-    infobox_rect: Optional[Tuple[int, int, int, int]],
-    infobox_bgr: Optional[Any],
-    infobox_ocr: Optional[InfoboxOcrResult],
+    infobox_rect: tuple[int, int, int, int] | None,
+    infobox_bgr: Any | None,
+    infobox_ocr: InfoboxOcrResult | None,
     context: ActionExecutionContext,
 ) -> str:
     if decision is None:
@@ -171,7 +171,7 @@ def resolve_action_taken(
             return "SKIP_NO_ACTION_MAP"
         raw_text = infobox_ocr.raw_item_text if infobox_ocr is not None else item_name
         match_result = match_item_name_result(raw_text)
-        source_image: Optional[np.ndarray] = None
+        source_image: np.ndarray | None = None
         from_context_menu = (
             infobox_ocr.source == "context_menu" if infobox_ocr is not None else False
         )
@@ -217,8 +217,8 @@ def resolve_action_taken(
 
 
 def _perform_recycle(
-    infobox_rect: Tuple[int, int, int, int],
-    action_bbox_rel: Tuple[int, int, int, int],
+    infobox_rect: tuple[int, int, int, int],
+    action_bbox_rel: tuple[int, int, int, int],
     window_left: int,
     window_top: int,
     window_width: int,

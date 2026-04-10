@@ -4,13 +4,13 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Literal, Optional, Tuple, cast
+from typing import Literal, cast
 
 from ..interaction.inventory_grid import Cell
 
 Decision = Literal["KEEP", "RECYCLE", "SELL"]
-DecisionList = List[Decision]
-ActionMap = Dict[str, DecisionList]
+DecisionList = list[Decision]
+ActionMap = dict[str, DecisionList]
 
 
 @dataclass
@@ -18,10 +18,10 @@ class ItemActionResult:
     page: int
     cell: Cell
     item_name: str
-    decision: Optional[Decision]
+    decision: Decision | None
     action_taken: str
-    raw_item_text: Optional[str] = None
-    note: Optional[str] = None
+    raw_item_text: str | None = None
+    note: str | None = None
 
 
 VALID_DECISIONS = {"KEEP", "RECYCLE", "SELL"}
@@ -44,7 +44,7 @@ ITEM_RULES_CUSTOM_PATH = (
 ITEM_RULES_PATH = ITEM_RULES_DEFAULT_PATH
 
 
-def resolve_item_actions_path(path: Optional[Path] = None) -> Path:
+def resolve_item_actions_path(path: Path | None = None) -> Path:
     if path is None or path == ITEM_RULES_DEFAULT_PATH or path == ITEM_RULES_PATH:
         return (
             ITEM_RULES_CUSTOM_PATH
@@ -65,7 +65,7 @@ def clean_ocr_text(raw: str) -> str:
     return text.strip()
 
 
-def _normalize_action(value: object) -> Optional[Decision]:
+def _normalize_action(value: object) -> Decision | None:
     if not isinstance(value, str):
         return None
     key = value.strip().lower()
@@ -78,7 +78,7 @@ def _normalize_action(value: object) -> Optional[Decision]:
     return None
 
 
-def load_item_actions(path: Optional[Path] = None) -> ActionMap:
+def load_item_actions(path: Path | None = None) -> ActionMap:
     path = resolve_item_actions_path(path)
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
@@ -139,7 +139,7 @@ def load_item_actions(path: Optional[Path] = None) -> ActionMap:
 
 def choose_decision(
     item_name: str, actions: ActionMap
-) -> Tuple[Optional[Decision], Optional[str]]:
+) -> tuple[Decision | None, str | None]:
     normalized = normalize_item_name(item_name)
     if not normalized:
         return None, None

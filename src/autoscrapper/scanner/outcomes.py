@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List, Tuple
-
 _UNREADABLE_REASONS = {
     "UNREADABLE_NO_INFOBOX": "infobox missing",
     "UNREADABLE_NO_OCR": "ocr not run",
@@ -18,11 +16,11 @@ _SKIP_REASONS = {
 }
 
 
-def _describe_action(action_taken: str) -> Tuple[str, List[str]]:
+def _describe_action(action_taken: str) -> tuple[str, list[str]]:
     """
     Normalize the action label (for display) and attach human-readable details.
     """
-    details: List[str] = []
+    details: list[str] = []
     if action_taken.startswith("SKIP_"):
         reason = _SKIP_REASONS.get(
             action_taken, action_taken.replace("SKIP_", "").replace("_", " ").lower()

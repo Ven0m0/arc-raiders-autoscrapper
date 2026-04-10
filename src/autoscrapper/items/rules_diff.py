@@ -1,12 +1,12 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
+
 # Compute user-facing rule diffs between default and updated item payloads.
 # Both payloads are expected to contain an ``items`` list of dict-like entries.
 # Entries are matched by ``id`` first, then by ``name`` as a fallback.
 # Only action changes are emitted.
-
 from dataclasses import dataclass
-from typing import Mapping
 
 
 @dataclass(frozen=True)

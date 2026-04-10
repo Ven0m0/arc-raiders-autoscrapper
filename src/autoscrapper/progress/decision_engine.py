@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Dict, List, Optional
 
 from .recipe_utils import build_reverse_recipe_index
 from .weapon_grouping import WeaponGrouper
@@ -29,8 +28,8 @@ def _normalize_item_id(item_id: str | None) -> str:
 @dataclass(frozen=True)
 class DecisionReason:
     decision: str
-    reasons: List[str]
-    dependencies: Optional[List[str]] = None
+    reasons: list[str]
+    dependencies: list[str] | None = None
     recycle_value_exceeds_item: bool = False
 
 
@@ -51,10 +50,10 @@ class RecycleValue:
 class DecisionEngine:
     def __init__(
         self,
-        items: List[dict],
-        hideout_modules: List[dict],
-        quests: List[dict],
-        projects: List[dict],
+        items: list[dict],
+        hideout_modules: list[dict],
+        quests: list[dict],
+        projects: list[dict],
     ) -> None:
         self.items = {item.get("id"): item for item in items}
         self.hideout_modules = hideout_modules
@@ -285,8 +284,8 @@ class DecisionEngine:
 
     def is_used_in_active_quests(
         self, item: dict, user_progress: dict
-    ) -> Dict[str, List[str] | bool]:
-        quest_names: List[str] = []
+    ) -> dict[str, list[str] | bool]:
+        quest_names: list[str] = []
         completed = set(user_progress.get("completedQuests", []))
         for quest in self.quests:
             if quest.get("id") in completed:
@@ -306,8 +305,8 @@ class DecisionEngine:
 
     def is_used_in_active_projects(
         self, item: dict, user_progress: dict
-    ) -> Dict[str, List[str] | bool]:
-        project_names: List[str] = []
+    ) -> dict[str, list[str] | bool]:
+        project_names: list[str] = []
         completed = set(user_progress.get("completedProjects", []))
 
         for project in self.projects:
@@ -338,8 +337,8 @@ class DecisionEngine:
 
     def is_needed_for_upgrades(
         self, item: dict, user_progress: dict
-    ) -> Dict[str, List[str] | bool]:
-        module_names: List[str] = []
+    ) -> dict[str, list[str] | bool]:
+        module_names: list[str] = []
         hideout_levels = user_progress.get("hideoutLevels", {})
 
         for module in self.hideout_modules:
@@ -423,8 +422,8 @@ class DecisionEngine:
             estimated_value=total_value,
         )
 
-    def get_items_with_decisions(self, user_progress: dict) -> List[dict]:
-        items_with_decisions: List[dict] = []
+    def get_items_with_decisions(self, user_progress: dict) -> list[dict]:
+        items_with_decisions: list[dict] = []
         for item in self.items.values():
             decision = self.get_decision(item, user_progress)
             items_with_decisions.append({**item, "decision_data": decision})

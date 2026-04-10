@@ -4,10 +4,10 @@ from textual.app import ComposeResult
 from textual.containers import Horizontal
 from textual.widgets import Button, Footer, Static
 
-from .common import AppScreen, MessageScreen
 from ..config import ProgressSettings, save_progress_settings
 from ..core.item_actions import ITEM_RULES_CUSTOM_PATH
 from ..progress.data_update import DownloadError, update_data_snapshot
+from .common import AppScreen, MessageScreen
 
 
 class UpdateSnapshotScreen(AppScreen):
@@ -39,7 +39,7 @@ class UpdateSnapshotScreen(AppScreen):
         except DownloadError as exc:
             status.update(f"Download failed: {exc}")
             return
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             status.update(f"Update failed: {exc}")
             return
 

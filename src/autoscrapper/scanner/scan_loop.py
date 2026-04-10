@@ -1,13 +1,11 @@
 from __future__ import annotations
 
 import time
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from itertools import cycle
-from typing import Any, Iterable, List, Optional, Tuple
+from typing import Any
 
-from .actions import ActionExecutionContext, resolve_action_taken
-from .outcomes import _describe_action
-from .progress import ScanProgress
 from ..core.item_actions import ActionMap, Decision, ItemActionResult, choose_decision
 from ..interaction.inventory_grid import Cell, Grid
 from ..interaction.ui_windows import (
@@ -29,6 +27,9 @@ from ..ocr.inventory_vision import (
     ocr_infobox,
     reset_ocr_caches,
 )
+from .actions import ActionExecutionContext, resolve_action_taken
+from .outcomes import _describe_action
+from .progress import ScanProgress
 
 
 @dataclass(frozen=True)
@@ -43,15 +44,15 @@ class TimingConfig:
 
 @dataclass(frozen=True)
 class ScanContext:
-    window: Optional[Any]
+    window: Any | None
     stop_key: str
     win_left: int
     win_top: int
     win_width: int
     win_height: int
-    grid_roi: Tuple[int, int, int, int]
-    safe_point_abs: Tuple[int, int]
-    grid_center_abs: Tuple[int, int]
+    grid_roi: tuple[int, int, int, int]
+    safe_point_abs: tuple[int, int]
+    grid_center_abs: tuple[int, int]
     cells_per_page: int
     actions: ActionMap
     apply_actions: bool
@@ -60,8 +61,8 @@ class ScanContext:
 
 @dataclass(frozen=True)
 class _InfoboxCaptureResult:
-    infobox_rect: Optional[Tuple[int, int, int, int]]
-    window_bgr: Optional[Any]
+    infobox_rect: tuple[int, int, int, int] | None
+    window_bgr: Any | None
     capture_time: float
     find_time: float
     capture_attempts: int
@@ -71,8 +72,8 @@ class _InfoboxCaptureResult:
 
 @dataclass(frozen=True)
 class _InfoboxReadResult:
-    infobox_ocr: Optional[InfoboxOcrResult]
-    infobox_bgr: Optional[Any]
+    infobox_ocr: InfoboxOcrResult | None
+    infobox_bgr: Any | None
     item_name: str
     raw_item_text: str
     preprocess_time: float
@@ -89,9 +90,9 @@ class _CellScanResult:
 
 @dataclass
 class ScanRunState:
-    results: List[ItemActionResult] = field(default_factory=list)
+    results: list[ItemActionResult] = field(default_factory=list)
     pages_scanned: int = 0
-    stop_at_global_idx: Optional[int] = None
+    stop_at_global_idx: int | None = None
 
 
 @dataclass(frozen=True)
@@ -100,12 +101,12 @@ class _ScanLoopConfig:
     infobox_retries: int
     ocr_unreadable_retries: int
     profile_timing: bool
-    items_total: Optional[int]
+    items_total: int | None
 
 
 def _queue_event(
-    progress_impl: Optional[ScanProgress],
-    startup_events: List[Tuple[str, str]],
+    progress_impl: ScanProgress | None,
+    startup_events: list[tuple[str, str]],
     message: str,
     *,
     style: str = "dim",
@@ -130,8 +131,8 @@ def _scroll_clicks_sequence(click_pattern: Iterable[int]) -> Iterable[int]:
 
 def detect_grid(
     context: ScanContext,
-    progress_impl: Optional[ScanProgress],
-    startup_events: List[Tuple[str, str]],
+    progress_impl: ScanProgress | None,
+    startup_events: list[tuple[str, str]],
 ) -> Grid:
     """
     Move the cursor out of the grid, capture the ROI, and detect cells.
@@ -162,16 +163,16 @@ def detect_grid(
 
 def _detect_consecutive_empty_stop_idx(
     page: int,
-    cells: List[Cell],
+    cells: list[Cell],
     cells_per_page: int,
     window_left: int,
     window_top: int,
     window_width: int,
     window_height: int,
-    safe_point_abs: Tuple[int, int],
+    safe_point_abs: tuple[int, int],
     stop_key: str,
     action_delay: float,
-) -> Optional[int]:
+) -> int | None:
     """
     Capture the current page and return the global index of the *second* empty cell
     in the first run of two consecutive empty cells (row-major order).
@@ -209,11 +210,11 @@ class _ScanRunner:
         self,
         *,
         context: ScanContext,
-        initial_cells: List[Cell],
+        initial_cells: list[Cell],
         scroll_sequence: Iterable[int],
         config: _ScanLoopConfig,
-        progress_impl: Optional[ScanProgress],
-        startup_events: List[Tuple[str, str]],
+        progress_impl: ScanProgress | None,
+        startup_events: list[tuple[str, str]],
     ) -> None:
         self.context = context
         self.initial_cells = initial_cells
@@ -222,11 +223,11 @@ class _ScanRunner:
         self.progress_impl = progress_impl
         self.startup_events = startup_events
         self.state = ScanRunState()
-        self._last_click_window_pos: Optional[Tuple[int, int]] = None
+        self._last_click_window_pos: tuple[int, int] | None = None
         # Tracks which UI detection method works for this scan session.
         # Set on the first successful detection, then reused for all
         # subsequent cells to avoid repeatedly trying the method that fails.
-        self._detected_ui_mode: Optional[str] = None  # "context_menu" or "infobox"
+        self._detected_ui_mode: str | None = None  # "context_menu" or "infobox"
         self.action_context = ActionExecutionContext(
             apply_actions=context.apply_actions,
             win_left=context.win_left,
@@ -284,7 +285,7 @@ class _ScanRunner:
             left_right_click_gap=self.context.timing.cell_infobox_left_right_click_gap,
         )
 
-    def _capture_window(self) -> Tuple[Any, float]:
+    def _capture_window(self) -> tuple[Any, float]:
         capture_start = time.perf_counter()
         window_bgr = capture_region(
             (
@@ -298,7 +299,7 @@ class _ScanRunner:
 
     def _try_context_menu_crop(
         self, window_bgr: Any
-    ) -> Optional[Tuple[int, int, int, int]]:
+    ) -> tuple[int, int, int, int] | None:
         if self._last_click_window_pos is None:
             return None
         cx, cy = self._last_click_window_pos
@@ -306,13 +307,13 @@ class _ScanRunner:
 
     def _try_infobox_color_detection(
         self, window_bgr: Any
-    ) -> Tuple[Optional[Tuple[int, int, int, int]], float]:
+    ) -> tuple[tuple[int, int, int, int] | None, float]:
         find_start = time.perf_counter()
         rect = find_infobox(window_bgr)
         return rect, time.perf_counter() - find_start
 
     def _capture_infobox_with_retries(self) -> _InfoboxCaptureResult:
-        infobox_rect: Optional[Tuple[int, int, int, int]] = None
+        infobox_rect: tuple[int, int, int, int] | None = None
         window_bgr = None
         capture_time = 0.0
         find_time = 0.0
@@ -409,8 +410,8 @@ class _ScanRunner:
         infobox_rect = capture_result.infobox_rect
         window_bgr = capture_result.window_bgr
 
-        infobox_ocr: Optional[InfoboxOcrResult] = None
-        infobox_bgr: Optional[Any] = None
+        infobox_ocr: InfoboxOcrResult | None = None
+        infobox_bgr: Any | None = None
         item_name = ""
         raw_item_text = ""
         preprocess_time = 0.0
@@ -503,8 +504,8 @@ class _ScanRunner:
         capture_result = self._capture_infobox_with_retries()
         ocr_result = self._ocr_infobox_with_retries(capture_result)
 
-        decision: Optional[Decision] = None
-        decision_note: Optional[str] = None
+        decision: Decision | None = None
+        decision_note: str | None = None
         if self.context.actions and ocr_result.item_name:
             decision, decision_note = choose_decision(
                 ocr_result.item_name,
@@ -584,7 +585,7 @@ class _ScanRunner:
         )
 
     def _update_stop_from_empty_detection(
-        self, *, page: int, cells: List[Cell]
+        self, *, page: int, cells: list[Cell]
     ) -> None:
         empty_idx = _detect_consecutive_empty_stop_idx(
             page,
@@ -616,7 +617,7 @@ class _ScanRunner:
             style="yellow",
         )
 
-    def _scan_cells_on_page(self, *, page: int, cells: List[Cell]) -> None:
+    def _scan_cells_on_page(self, *, page: int, cells: list[Cell]) -> None:
         if not cells:
             return
 
@@ -689,14 +690,14 @@ class _ScanRunner:
 def scan_pages(
     *,
     context: ScanContext,
-    initial_cells: List[Cell],
+    initial_cells: list[Cell],
     pages_to_scan: int,
     infobox_retries: int,
     ocr_unreadable_retries: int,
     profile_timing: bool,
-    progress_impl: Optional[ScanProgress],
-    startup_events: List[Tuple[str, str]],
-    items_total: Optional[int],
+    progress_impl: ScanProgress | None,
+    startup_events: list[tuple[str, str]],
+    items_total: int | None,
 ) -> ScanRunState:
     reset_ocr_caches()
     config = _ScanLoopConfig(
