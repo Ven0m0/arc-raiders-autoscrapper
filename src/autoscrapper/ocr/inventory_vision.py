@@ -45,6 +45,31 @@ _ITEM_NAMES: Optional[Tuple[str, ...]] = None
 _last_roi_hash: Optional[bytes] = None
 _last_ocr_result: Optional[Tuple[str, str]] = None
 DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75
+# Guarded fallback only uses these broad stat labels; extend this list if new
+# infobox stat headings start outranking item titles in OCR output.
+_STAT_LINE_KEYWORDS = (
+    "accuracy",
+    "ammo type",
+    "arc armor",
+    "armor penetration",
+    "damage",
+    "durability",
+    "fire rate",
+    "firing mode",
+    "magazine size",
+    "range",
+    "rarity",
+    "reload",
+    "stack size",
+    "value",
+    "weight",
+)
+_STAT_LINE_PATTERN = re.compile(
+    r"\b(?:"
+    + "|".join(re.escape(keyword) for keyword in _STAT_LINE_KEYWORDS)
+    + r")\b",
+    re.IGNORECASE,
+)
 
 
 def reset_ocr_caches() -> None:
@@ -911,25 +936,50 @@ def _extract_title_from_data(
     best_score = max(scored.values())
     if best_score < 0:
         return "", ""
-    best_key = max(
-        scored,
-        key=lambda k: (scored[k], -min(float(ocr_data["top"][i]) for i in groups[k])),
-    )
-    ordered_indices = sorted(groups[best_key])
-    cleaned_parts = []
-    raw_parts = []
-    for i in ordered_indices:
-        if not texts[i]:
-            continue
-        raw_text = (texts[i] or "").strip()
-        raw_parts.append(raw_text)
-        cleaned = clean_ocr_text(raw_text)
-        if cleaned:
-            cleaned_parts.append(cleaned)
 
-    item_name = match_item_name(" ".join(p for p in cleaned_parts if p).strip())
-    raw = " ".join(p for p in raw_parts if p).strip()
-    return item_name, raw
+    def _group_top(key: Tuple[int, int, int, int]) -> float:
+        return min(float(ocr_data["top"][i]) for i in groups[key])
+
+    def _group_text(
+        key: Tuple[int, int, int, int],
+    ) -> Tuple[str, str]:
+        ordered_indices = sorted(groups[key])
+        cleaned_parts = []
+        raw_parts = []
+        for i in ordered_indices:
+            if not texts[i]:
+                continue
+            raw_text = (texts[i] or "").strip()
+            raw_parts.append(raw_text)
+            cleaned = clean_ocr_text(raw_text)
+            if cleaned:
+                cleaned_parts.append(cleaned)
+        return (
+            " ".join(p for p in cleaned_parts if p).strip(),
+            " ".join(p for p in raw_parts if p).strip(),
+        )
+
+    def _looks_like_stat_line(cleaned_text: str) -> bool:
+        lowered = cleaned_text.casefold()
+        return bool(lowered) and _STAT_LINE_PATTERN.search(lowered) is not None
+
+    ranked_keys = sorted(groups, key=lambda k: (-scored[k], _group_top(k)))
+    if not ranked_keys:
+        return "", ""
+    primary_text, primary_raw = _group_text(ranked_keys[0])
+    primary_result = match_item_name_result(primary_text)
+    if primary_result.matched_name is not None or not _looks_like_stat_line(primary_text):
+        return primary_result.chosen_name, primary_raw
+
+    for candidate_key in ranked_keys[1:]:
+        candidate_text, candidate_raw = _group_text(candidate_key)
+        if not candidate_text or _looks_like_stat_line(candidate_text):
+            continue
+        candidate_result = match_item_name_result(candidate_text)
+        if candidate_result.matched_name is not None:
+            return candidate_result.chosen_name, candidate_raw
+
+    return primary_result.chosen_name, primary_raw
 
 
 def _extract_cropped_title_from_data(
