@@ -18,10 +18,7 @@ _log = logging.getLogger(__name__)
 METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
 SUPABASE_URL = "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
 
-SUPABASE_ANON_KEY = os.environ.get(
-    "METAFORGE_SUPABASE_ANON_KEY",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVuaGJ2a3N6d2hjemJqeGdldGdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ5NjgwMjUsImV4cCI6MjA2MDU0NDAyNX0.gckCmxnlpwwJOGmc5ebLYDnaWaxr5PW31eCrSPR5aRQ",
-)
+SUPABASE_ANON_KEY = os.environ.get("METAFORGE_SUPABASE_ANON_KEY")
 
 
 class DownloadError(RuntimeError):
@@ -98,6 +95,11 @@ def _fetch_all_quests() -> List[dict]:
 
 
 def _fetch_supabase_all(table: str) -> List[dict]:
+    if not SUPABASE_ANON_KEY:
+        raise DownloadError(
+            "METAFORGE_SUPABASE_ANON_KEY environment variable is not set"
+        )
+
     headers = {
         "apikey": SUPABASE_ANON_KEY,
         "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
