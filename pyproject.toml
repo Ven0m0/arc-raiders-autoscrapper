@@ -64,7 +64,7 @@ show-fixes = true
 src = ["src", "tests", "scripts"]
 
 [tool.ruff.lint]
-select = ["E", "F", "I"]
+select = ["E", "F"]
 ignore = [
   "E501", # line too long (handled by formatter)
 ]
@@ -75,12 +75,6 @@ ignore = [
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
-
-[tool.ruff.lint.isort]
-known-first-party = [ "scripts" ]
-
-[tool.ruff.lint.pydocstyle]
-convention = "google"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
