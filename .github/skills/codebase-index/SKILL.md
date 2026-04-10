@@ -88,7 +88,3 @@ Keep index results for the session:
 - File structure (one-time)
 - Import relationships (update on changes)
 - Search results (fresh each time)
-
-## Notes/Inspiration
-
-Inspired by [`opencode-codebase-index`](https://www.npmjs.com/package/opencode-codebase-index) - Codebase indexer for OpenCode.
