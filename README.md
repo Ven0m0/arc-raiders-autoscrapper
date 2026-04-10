@@ -11,6 +11,9 @@ Automates Arc Raiders inventory actions (Sell/Recycle) using screen capture and 
 ## Setup
 This repo uses `uv` to manage Python + dependencies.
 
+- `uv sync` is enough for cloud/CI tasks that only need the project plus dev tooling.
+- Linux desktop automation also needs the optional `linux-input` extra, which the setup script installs for you.
+
 ### Clone the repo
 From a terminal:
 - `git clone https://github.com/Ven0m0/arc-raiders-autoscrapper.git`
@@ -30,6 +33,8 @@ From a terminal:
 `bash scripts/setup-linux.sh`
 - **Use a different supported Python version**:
   - `PYTHON_VERSION=3.14 bash scripts/setup-linux.sh`
+- **Manual full Linux install**:
+  - `uv sync --extra linux-input`
 
 ## Usage
 
