@@ -109,9 +109,7 @@ class StartupSplash(ModalScreen[None]):
                     line_chars.append(" ")
                     continue
                 if idx == glitch_col and self._tick % 2 == 0:
-                    line_chars.append(
-                        _SPLASH_GLITCH[(self._tick + idx) % len(_SPLASH_GLITCH)]
-                    )
+                    line_chars.append(_SPLASH_GLITCH[(self._tick + idx) % len(_SPLASH_GLITCH)])
                 else:
                     line_chars.append(ch)
                 reveal_budget -= 1
@@ -150,13 +148,9 @@ class StartupSplash(ModalScreen[None]):
         elif self._timed_out:
             phase = "Warmup taking longer than expected, continuing..."
 
-        self.query_one("#startup-title", Static).update(
-            self._animated_title(ready=ready)
-        )
+        self.query_one("#startup-title", Static).update(self._animated_title(ready=ready))
         self.query_one("#startup-status", Static).update(f"{spinner} {phase}")
-        self.query_one("#startup-bar", Static).update(
-            f"{self._progress_bar(percent)} {percent:3d}%"
-        )
+        self.query_one("#startup-bar", Static).update(f"{self._progress_bar(percent)} {percent:3d}%")
 
         self._tick += 1
         if ready:
@@ -237,9 +231,7 @@ class MenuScreen(AppScreen):
     def _highlight_default(self) -> None:
         menu = self.query_one(OptionList)
         highlighted_key = self.default_key
-        default_item = next(
-            (item for item in self.items if item.key == self.default_key), None
-        )
+        default_item = next((item for item in self.items if item.key == self.default_key), None)
         if default_item and default_item.disabled:
             fallback = next((item for item in self.items if not item.disabled), None)
             if fallback:

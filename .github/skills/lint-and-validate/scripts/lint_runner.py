@@ -43,38 +43,28 @@ def detect_node_project(project_path: Path, result: dict[str, Any]) -> None:
 
             # Check for lint script
             if "lint" in scripts:
-                result["linters"].append(
-                    {"name": "npm lint", "cmd": ["npm", "run", "lint"]}
-                )
+                result["linters"].append({"name": "npm lint", "cmd": ["npm", "run", "lint"]})
             elif "eslint" in deps:
-                result["linters"].append(
-                    {"name": "eslint", "cmd": ["npx", "eslint", "."]}
-                )
+                result["linters"].append({"name": "eslint", "cmd": ["npx", "eslint", "."]})
 
             # Check for TypeScript
             if "typescript" in deps or (project_path / "tsconfig.json").exists():
-                result["linters"].append(
-                    {"name": "tsc", "cmd": ["npx", "tsc", "--noEmit"]}
-                )
+                result["linters"].append({"name": "tsc", "cmd": ["npx", "tsc", "--noEmit"]})
 
-        except (IOError, orjson.JSONDecodeError):
+        except IOError, orjson.JSONDecodeError:
             pass
 
 
 def detect_python_project(project_path: Path, result: dict[str, Any]) -> None:
     """Detect Python project and available linters."""
-    if (project_path / "pyproject.toml").exists() or (
-        project_path / "requirements.txt"
-    ).exists():
+    if (project_path / "pyproject.toml").exists() or (project_path / "requirements.txt").exists():
         result["type"] = "python"
 
         # Check for ruff
         result["linters"].append({"name": "ruff", "cmd": ["ruff", "check", "."]})
 
         # Check for mypy
-        if (project_path / "mypy.ini").exists() or (
-            project_path / "pyproject.toml"
-        ).exists():
+        if (project_path / "mypy.ini").exists() or (project_path / "pyproject.toml").exists():
             result["linters"].append({"name": "mypy", "cmd": ["mypy", "."]})
 
 
@@ -128,10 +118,7 @@ def run_linters_parallel(
 
     print("\nRunning linters in parallel...")
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        future_to_linter = {
-            executor.submit(run_linter, linter, project_path): linter
-            for linter in linters
-        }
+        future_to_linter = {executor.submit(run_linter, linter, project_path): linter for linter in linters}
 
         for future in concurrent.futures.as_completed(future_to_linter):
             linter = future_to_linter[future]

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # AutoScrapper Linux Setup Script
-# Required: Python 3.14.x
+# Required: Python 3.14.3
 set -euo pipefail
 
 abort() {
@@ -58,8 +58,8 @@ if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
   fi
 fi
 
-# Python 3.14.x is required; `uv python install 3.14` resolves to the latest 3.14 patch.
-PYTHON_VERSION="${PYTHON_VERSION:-3.14}"
+# Python 3.14.3 is required.
+PYTHON_VERSION="${PYTHON_VERSION:-3.14.3}"
 
 # 1) System prerequisites
 # - build-essential/linux-headers: needed when the linux-input extra compiles evdev via pynput

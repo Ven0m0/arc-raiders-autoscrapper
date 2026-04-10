@@ -50,9 +50,7 @@ def load_json(path: Path, default: Any) -> Any:
         return default
 
 
-def diff_quests(
-    before_quests: Sequence[object], after_quests: Sequence[object]
-) -> dict:
+def diff_quests(before_quests: Sequence[object], after_quests: Sequence[object]) -> dict:
     before_by_id: Dict[str, Mapping[str, object]] = {}
     after_by_id: Dict[str, Mapping[str, object]] = {}
 
@@ -142,9 +140,7 @@ def diff_quests(
     }
 
 
-def diff_rules(
-    before_payload: Mapping[str, object], after_payload: Mapping[str, object]
-) -> dict:
+def diff_rules(before_payload: Mapping[str, object], after_payload: Mapping[str, object]) -> dict:
     before_items_raw = before_payload.get("items")
     after_items_raw = after_payload.get("items")
     before_items = before_items_raw if isinstance(before_items_raw, list) else []
@@ -226,12 +222,8 @@ def diff_rules(
                 }
             )
 
-        before_analysis = (
-            before.get("analysis") if isinstance(before.get("analysis"), list) else []
-        )
-        after_analysis = (
-            after.get("analysis") if isinstance(after.get("analysis"), list) else []
-        )
+        before_analysis = before.get("analysis") if isinstance(before.get("analysis"), list) else []
+        after_analysis = after.get("analysis") if isinstance(after.get("analysis"), list) else []
         if before_analysis != after_analysis:
             changes["analysis"] = {"before": before_analysis, "after": after_analysis}
             analysis_changed.append(
@@ -260,21 +252,11 @@ def diff_rules(
                 }
             )
 
-    modified.sort(
-        key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id")))
-    )
-    value_changed.sort(
-        key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id")))
-    )
-    action_changed.sort(
-        key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id")))
-    )
-    analysis_changed.sort(
-        key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id")))
-    )
-    name_changed.sort(
-        key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id")))
-    )
+    modified.sort(key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id"))))
+    value_changed.sort(key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id"))))
+    action_changed.sort(key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id"))))
+    analysis_changed.sort(key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id"))))
+    name_changed.sort(key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id"))))
 
     return {
         "beforeCount": len(before_by_key),
@@ -296,22 +278,16 @@ def diff_rules(
     }
 
 
-def graph_gap_report(
-    quests: Sequence[object], quest_graph: Mapping[str, object]
-) -> dict:
+def graph_gap_report(quests: Sequence[object], quest_graph: Mapping[str, object]) -> dict:
     nodes = quest_graph.get("nodes")
     node_values = nodes.values() if isinstance(nodes, dict) else []
     node_names_normalized = {
-        _normalize_quest_name(node_name)
-        for node_name in node_values
-        if _normalize_quest_name(node_name)
+        _normalize_quest_name(node_name) for node_name in node_values if _normalize_quest_name(node_name)
     }
 
     quest_entries = [quest for quest in quests if isinstance(quest, dict)]
     quest_names_normalized = {
-        _normalize_quest_name(quest.get("name"))
-        for quest in quest_entries
-        if _normalize_quest_name(quest.get("name"))
+        _normalize_quest_name(quest.get("name")) for quest in quest_entries if _normalize_quest_name(quest.get("name"))
     }
 
     missing_quests: List[dict] = []
@@ -348,9 +324,7 @@ def graph_gap_report(
     }
 
 
-def _render_item_list(
-    items: Sequence[Mapping[str, object]], limit: int = 10
-) -> List[str]:
+def _render_item_list(items: Sequence[Mapping[str, object]], limit: int = 10) -> List[str]:
     lines: List[str] = []
     for entry in list(items)[:limit]:
         item_id = entry.get("id") or "unknown-id"
@@ -359,9 +333,7 @@ def _render_item_list(
     return lines
 
 
-def build_markdown_summary(
-    report: Mapping[str, object], *, sample_limit: int = 10
-) -> str:
+def build_markdown_summary(report: Mapping[str, object], *, sample_limit: int = 10) -> str:
     snapshot = report.get("snapshot") or {}
     quests = report.get("quests") or {}
     rules = report.get("rules") or {}
@@ -374,14 +346,8 @@ def build_markdown_summary(
     lines.append(f"Generated at: `{report.get('generatedAt', iso_now())}`")
     lines.append("")
     lines.append("## Snapshot")
-    lines.append(
-        "- Items: "
-        f"{snapshot.get('beforeItemCount', 0)} -> {snapshot.get('afterItemCount', 0)}"
-    )
-    lines.append(
-        "- Quests: "
-        f"{snapshot.get('beforeQuestCount', 0)} -> {snapshot.get('afterQuestCount', 0)}"
-    )
+    lines.append(f"- Items: {snapshot.get('beforeItemCount', 0)} -> {snapshot.get('afterItemCount', 0)}")
+    lines.append(f"- Quests: {snapshot.get('beforeQuestCount', 0)} -> {snapshot.get('afterQuestCount', 0)}")
     lines.append(
         "- Data lastUpdated: "
         f"`{snapshot.get('beforeLastUpdated', 'unknown')}` -> "
@@ -439,19 +405,13 @@ def build_markdown_summary(
     if isinstance(action_changed, list) and action_changed:
         lines.append("- Action changes (sample):")
         for entry in action_changed[:sample_limit]:
-            lines.append(
-                f"  - `{entry.get('id')}`: "
-                f"`{entry.get('before')}` -> `{entry.get('after')}`"
-            )
+            lines.append(f"  - `{entry.get('id')}`: `{entry.get('before')}` -> `{entry.get('after')}`")
 
     value_changed = rules.get("valueChanged")
     if isinstance(value_changed, list) and value_changed:
         lines.append("- Value changes (sample):")
         for entry in value_changed[:sample_limit]:
-            lines.append(
-                f"  - `{entry.get('id')}`: "
-                f"`{entry.get('before')}` -> `{entry.get('after')}`"
-            )
+            lines.append(f"  - `{entry.get('id')}`: `{entry.get('before')}` -> `{entry.get('after')}`")
 
     lines.append("")
     lines.append("## Quest Graph Coverage")
@@ -466,20 +426,12 @@ def build_markdown_summary(
 
     lines.append("")
     lines.append("## Generation Baseline")
-    lines.append(
-        f"- `allQuestsCompleted`: `{assumptions.get('allQuestsCompleted', False)}`"
-    )
-    lines.append(
-        f"- Workshop profile: `{assumptions.get('workshopProfile', 'unknown')}`"
-    )
-    lines.append(
-        f"- Workshop IDs at level 2: `{', '.join(assumptions.get('workshopIds', []))}`"
-    )
+    lines.append(f"- `allQuestsCompleted`: `{assumptions.get('allQuestsCompleted', False)}`")
+    lines.append(f"- Workshop profile: `{assumptions.get('workshopProfile', 'unknown')}`")
+    lines.append(f"- Workshop IDs at level 2: `{', '.join(assumptions.get('workshopIds', []))}`")
     lines.append("- Report artifact: `artifacts/update-report.json`")
 
     lines.append("")
-    lines.append(
-        "This PR was generated automatically by the scheduled data update workflow."
-    )
+    lines.append("This PR was generated automatically by the scheduled data update workflow.")
 
     return "\n".join(lines) + "\n"

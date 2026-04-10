@@ -64,9 +64,7 @@ class DecisionEngine:
 
     def finalize_decision(self, item: dict, decision: DecisionReason) -> DecisionReason:
         final_decision = decision
-        recycle_data = (
-            item.get("recyclesInto") or item.get("salvagesInto") or item.get("crafting")
-        )
+        recycle_data = item.get("recyclesInto") or item.get("salvagesInto") or item.get("crafting")
         if recycle_data and isinstance(recycle_data, dict) and recycle_data:
             recycle_value = self.evaluate_recycle_value(item)
             if recycle_value.estimated_value > item.get("value", 0):
@@ -80,8 +78,7 @@ class DecisionEngine:
         if final_decision.decision == "situational":
             final_decision = DecisionReason(
                 decision="keep",
-                reasons=final_decision.reasons
-                + ["Override: treat 'Your Call' as Keep"],
+                reasons=final_decision.reasons + ["Override: treat 'Your Call' as Keep"],
                 dependencies=final_decision.dependencies,
                 recycle_value_exceeds_item=final_decision.recycle_value_exceeds_item,
             )
@@ -180,9 +177,7 @@ class DecisionEngine:
                 item,
                 DecisionReason(
                     decision="keep",
-                    reasons=[
-                        f"Required for quest: {', '.join(quest_use['quest_names'])}"
-                    ],
+                    reasons=[f"Required for quest: {', '.join(quest_use['quest_names'])}"],
                     dependencies=quest_use["quest_names"],
                 ),
             )
@@ -193,9 +188,7 @@ class DecisionEngine:
                 item,
                 DecisionReason(
                     decision="keep",
-                    reasons=[
-                        f"Needed for project: {', '.join(project_use['project_names'])}"
-                    ],
+                    reasons=[f"Needed for project: {', '.join(project_use['project_names'])}"],
                     dependencies=project_use["project_names"],
                 ),
             )
@@ -206,10 +199,7 @@ class DecisionEngine:
                 item,
                 DecisionReason(
                     decision="keep",
-                    reasons=[
-                        "Required for hideout upgrade: "
-                        + ", ".join(upgrade_use["module_names"])
-                    ],
+                    reasons=["Required for hideout upgrade: " + ", ".join(upgrade_use["module_names"])],
                     dependencies=upgrade_use["module_names"],
                 ),
             )
@@ -239,16 +229,12 @@ class DecisionEngine:
                 ),
             )
 
-        recycle_data = (
-            item.get("recyclesInto") or item.get("salvagesInto") or item.get("crafting")
-        )
+        recycle_data = item.get("recyclesInto") or item.get("salvagesInto") or item.get("crafting")
         if recycle_data and isinstance(recycle_data, dict) and recycle_data:
             recycle_value = self.evaluate_recycle_value(item)
             if recycle_value.is_valuable:
                 compare = (
-                    "worth MORE than"
-                    if recycle_value.estimated_value > item.get("value", 0)
-                    else "worth less than"
+                    "worth MORE than" if recycle_value.estimated_value > item.get("value", 0) else "worth less than"
                 )
                 return self.finalize_decision(
                     item,
@@ -283,9 +269,7 @@ class DecisionEngine:
             ),
         )
 
-    def is_used_in_active_quests(
-        self, item: dict, user_progress: dict
-    ) -> Dict[str, List[str] | bool]:
+    def is_used_in_active_quests(self, item: dict, user_progress: dict) -> Dict[str, List[str] | bool]:
         quest_names: List[str] = []
         completed = set(user_progress.get("completedQuests", []))
         for quest in self.quests:
@@ -295,18 +279,14 @@ class DecisionEngine:
             is_required = False
             requirements = quest.get("requirements") or []
             if isinstance(requirements, list):
-                is_required = any(
-                    req.get("item_id") == item.get("id") for req in requirements
-                )
+                is_required = any(req.get("item_id") == item.get("id") for req in requirements)
 
             if is_required:
                 quest_names.append(quest.get("name", ""))
 
         return {"is_used": bool(quest_names), "quest_names": quest_names}
 
-    def is_used_in_active_projects(
-        self, item: dict, user_progress: dict
-    ) -> Dict[str, List[str] | bool]:
+    def is_used_in_active_projects(self, item: dict, user_progress: dict) -> Dict[str, List[str] | bool]:
         project_names: List[str] = []
         completed = set(user_progress.get("completedProjects", []))
 
@@ -317,17 +297,13 @@ class DecisionEngine:
             is_required = False
             requirements = project.get("requirements") or []
             if isinstance(requirements, list):
-                is_required = any(
-                    req.get("item_id") == item.get("id") for req in requirements
-                )
+                is_required = any(req.get("item_id") == item.get("id") for req in requirements)
 
             phases = project.get("phases") or []
             if not is_required and isinstance(phases, list):
                 for phase in phases:
                     reqs = phase.get("requirementItemIds") or []
-                    if isinstance(reqs, list) and any(
-                        req.get("item_id") == item.get("id") for req in reqs
-                    ):
+                    if isinstance(reqs, list) and any(req.get("item_id") == item.get("id") for req in reqs):
                         is_required = True
                         break
 
@@ -336,9 +312,7 @@ class DecisionEngine:
 
         return {"is_used": bool(project_names), "project_names": project_names}
 
-    def is_needed_for_upgrades(
-        self, item: dict, user_progress: dict
-    ) -> Dict[str, List[str] | bool]:
+    def is_needed_for_upgrades(self, item: dict, user_progress: dict) -> Dict[str, List[str] | bool]:
         module_names: List[str] = []
         hideout_levels = user_progress.get("hideoutLevels", {})
 
@@ -372,9 +346,7 @@ class DecisionEngine:
         return CraftingValue(
             is_valuable=recipe_count > 2 or (recipe_count > 0 and is_rare),
             recipe_count=recipe_count,
-            details=(
-                "Rare crafting material" if is_rare else "Common crafting ingredient"
-            ),
+            details=("Rare crafting material" if is_rare else "Common crafting ingredient"),
         )
 
     def is_high_value_trinket(self, item: dict) -> bool:
@@ -382,28 +354,17 @@ class DecisionEngine:
         trinket_keywords = {"trinket", "misc", "collectible"}
 
         has_no_recipe = not item.get("recipe")
-        recycle_data = (
-            item.get("recyclesInto") or item.get("salvagesInto") or item.get("crafting")
-        )
+        recycle_data = item.get("recyclesInto") or item.get("salvagesInto") or item.get("crafting")
         has_no_recycle = not recycle_data
         item_type = str(item.get("type", "")).lower()
         is_trinket = any(keyword in item_type for keyword in trinket_keywords)
 
-        return (
-            item.get("value", 0) >= high_value_threshold
-            and has_no_recipe
-            and has_no_recycle
-            and is_trinket
-        )
+        return item.get("value", 0) >= high_value_threshold and has_no_recipe and has_no_recycle and is_trinket
 
     def evaluate_recycle_value(self, item: dict) -> RecycleValue:
-        recycle_data = (
-            item.get("recyclesInto") or item.get("salvagesInto") or item.get("crafting")
-        )
+        recycle_data = item.get("recyclesInto") or item.get("salvagesInto") or item.get("crafting")
         if not recycle_data or not isinstance(recycle_data, dict) or not recycle_data:
-            return RecycleValue(
-                is_valuable=False, description="Nothing", estimated_value=0
-            )
+            return RecycleValue(is_valuable=False, description="Nothing", estimated_value=0)
 
         materials = []
         total_value = 0

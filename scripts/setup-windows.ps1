@@ -1,12 +1,12 @@
 param(
-  [string]$PythonVersion = "3.14"
+  [string]$PythonVersion = "3.14.3"
 )
 
 # AutoScrapper Windows Setup Script
-# Required: Python 3.14.x
+# Required: Python 3.14.3
 # Usage: .\scripts\setup-windows.ps1
 
-# Python 3.14.x is required; `uv python install 3.14` resolves to the latest 3.14 patch.
+# Python 3.14.3 is required.
 
 $ErrorActionPreference = "Stop"
 

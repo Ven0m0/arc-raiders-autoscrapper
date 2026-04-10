@@ -98,10 +98,10 @@ Use pytest with descriptive test names:
 def test_process_data_returns_expected_result() -> None:
     # Arrange
     data = {"key": "value"}
-    
+
     # Act
     result = process_data(data)
-    
+
     # Assert
     assert result == expected
 ```

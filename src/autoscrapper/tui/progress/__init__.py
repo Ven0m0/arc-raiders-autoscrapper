@@ -182,9 +182,7 @@ class ActiveQuestsScreen(ProgressScreen):
             classes="hint",
         )
         with Horizontal(id="quest-filterbar"):
-            yield Input(
-                placeholder="Search quests... (name, id, trader)", id="quest-search"
-            )
+            yield Input(placeholder="Search quests... (name, id, trader)", id="quest-search")
             yield Button("Sort: Name A-Z", id="quest-sort", variant="primary")
         yield Static(id="quest-list-summary", classes="hint")
         yield OptionList(id="quest-list")
@@ -236,11 +234,7 @@ class ActiveQuestsScreen(ProgressScreen):
         for entry in entries:
             name_norm = normalize_quest_value(entry.name)
             trader_norm = normalize_quest_value(entry.trader)
-            if (
-                normalized in name_norm
-                or normalized in trader_norm
-                or normalized == entry.id
-            ):
+            if normalized in name_norm or normalized in trader_norm or normalized == entry.id:
                 results.append(entry)
         return results
 
@@ -453,9 +447,7 @@ class WorkshopLevelsScreen(ProgressScreen):
     def _refresh_options(self) -> None:
         menu = self.query_one("#workshop-list", OptionList)
         prev_highlight = menu.highlighted
-        options = [
-            Option(self._option_label(entry), id=entry.id) for entry in self.entries
-        ]
+        options = [Option(self._option_label(entry), id=entry.id) for entry in self.entries]
         menu.set_options(options)
         if options:
             if prev_highlight is None:
@@ -561,9 +553,7 @@ class ProgressSummaryScreen(ProgressScreen):
     def _render_summary(self) -> None:
         active_count = len(self.state.active_ids)
         workshop_count = len(self.state.hideout_levels)
-        requirement_entries = [
-            entry for entry in self.state.quest_entries if entry.has_requirements
-        ]
+        requirement_entries = [entry for entry in self.state.quest_entries if entry.has_requirements]
         lines = [
             f"Active quests selected: {active_count}",
             f"Workshops configured: {workshop_count}",
@@ -572,13 +562,9 @@ class ProgressSummaryScreen(ProgressScreen):
         ]
         try:
             if self.state.all_quests_completed:
-                self.inferred_completed_ids = [
-                    entry.id for entry in self.state.quest_entries
-                ]
+                self.inferred_completed_ids = [entry.id for entry in self.state.quest_entries]
             else:
-                self.inferred_completed_ids = compute_completed_quests(
-                    list(self.state.active_ids)
-                )
+                self.inferred_completed_ids = compute_completed_quests(list(self.state.active_ids))
         except ValueError as exc:
             self.inferred_completed_ids = []
             lines.extend(["", f"Could not infer completed quests: {exc}"])
@@ -586,12 +572,8 @@ class ProgressSummaryScreen(ProgressScreen):
             return
 
         completed_set = set(self.inferred_completed_ids)
-        inferred_requirement_completed = [
-            entry.name for entry in requirement_entries if entry.id in completed_set
-        ]
-        inferred_requirement_remaining = [
-            entry.name for entry in requirement_entries if entry.id not in completed_set
-        ]
+        inferred_requirement_completed = [entry.name for entry in requirement_entries if entry.id in completed_set]
+        inferred_requirement_remaining = [entry.name for entry in requirement_entries if entry.id not in completed_set]
         lines.extend(
             [
                 "",
@@ -608,9 +590,7 @@ class ProgressSummaryScreen(ProgressScreen):
 
     def _save(self) -> None:
         try:
-            completed_ids = list(
-                self.inferred_completed_ids
-            ) or compute_completed_quests(list(self.state.active_ids))
+            completed_ids = list(self.inferred_completed_ids) or compute_completed_quests(list(self.state.active_ids))
         except ValueError as exc:
             self.app.push_screen(MessageScreen(str(exc)))
             return

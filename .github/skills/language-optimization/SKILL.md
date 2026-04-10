@@ -69,7 +69,7 @@ Think through optimization systematically:
 5. Document trade-off if complexity increased
 </performance_patterns>
 <examples>
-    
+
 ### Python: Add type safety
 ```python
 # Before
@@ -111,5 +111,5 @@ Optimization is complete when:
 - Code follows language-specific idioms from `.github/instructions/`
 
 ## References
-- Language standards: `.github/instructions/bash.instructions.md`, `.github/instructions/python.instructions.md`, 
+- Language standards: `.github/instructions/bash.instructions.md`, `.github/instructions/python.instructions.md`,
 - Issue-oriented follow-up: `.github/skills/fix-issue/`
