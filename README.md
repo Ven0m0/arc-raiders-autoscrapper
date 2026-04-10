@@ -1,5 +1,5 @@
 # Arc Raiders Inventory Auto Scrapper
-[![Maintainability](https://qlty.sh/gh/Ven0m0/projects/arc-raiders-autoscrapper/maintainability.svg)](https://qlty.sh/gh/Ven0m0/projects/arc-raiders-autoscrapper)
+>[![Maintainability](https://qlty.sh/gh/Ven0m0/projects/arc-raiders-autoscrapper/maintainability.svg)](https://qlty.sh/gh/Ven0m0/projects/arc-raiders-autoscrapper)
 <p align="center">
   <img src="https://github.com/user-attachments/assets/c1de27b2-4dd9-4d04-855a-b4faa4e9dd1a" alt="autoscrapper_logo4">
 </p>
@@ -68,8 +68,63 @@ The default rules are regenerated with this baseline:
 - all quests completed
 - workshop profile at level 2 for `scrappy`, `weapon_bench`, `equipment_bench`, `med_station`, `explosives_bench`, `utility_bench`, and `refiner`
 
+### Data sources
+
+The updater uses a primary API source plus a repository fallback so snapshot
+refreshes stay usable when upstream data is incomplete or temporarily
+unavailable.
+
+| Source | Purpose | Behavior in AutoScrapper |
+| --- | --- | --- |
+| [MetaForge ARC Raiders API docs](https://metaforge.app/arc-raiders/api) | Primary item and quest source | Reads paginated `items` and `quests` responses from `https://metaforge.app/api/arc-raiders` |
+| `METAFORGE_SUPABASE_ANON_KEY` + MetaForge Supabase tables | Optional crafting and recycle relationships | Adds `recipe` and `recyclesInto` data when the anon key is available |
+| [RaidTheory `arcraiders-data`](https://github.com/RaidTheory/arcraiders-data) | Supplemental and fallback item and quest source | Merges missing records into MetaForge results, or replaces missing datasets when MetaForge is unavailable |
+
+### MetaForge API reference
+
+MetaForge publishes the ARC Raiders endpoint documentation at
+`https://metaforge.app/arc-raiders/api`. The updater follows that reference and
+uses the API base URL `https://metaforge.app/api/arc-raiders`.
+
+The current snapshot refresh reads these endpoints:
+
+- `GET /items?page=<page>&limit=<limit>` for item records and pagination
+  metadata
+- `GET /quests?page=<page>&limit=<limit>` for quest records, reward items, and
+  requirement payloads
+
+MetaForge notes that these endpoints can change or break without warning and
+asks consumers to cache results locally. AutoScrapper follows that guidance by
+querying MetaForge only during snapshot refreshes, then reading the generated
+JSON files at runtime instead of calling the API while scanning.
+
+If you reuse this updater or publish derived data, keep MetaForge attribution
+and link back to `https://metaforge.app/arc-raiders`, as required by the API
+terms.
+
+### RaidTheory fallback
+
+The updater also downloads the
+[`RaidTheory/arcraiders-data`](https://github.com/RaidTheory/arcraiders-data)
+repository archive during refreshes. AutoScrapper normalizes the item and quest
+JSON files from that repository and uses them in two cases:
+
+1. It appends item or quest records that are missing from the MetaForge API.
+2. It falls back to the RaidTheory dataset when a MetaForge item or quest fetch
+   fails.
+
+MetaForge remains the preferred source when both providers return the same
+record ID. Generated `metadata.json` records which provider supplied the final
+item and quest datasets.
+
 ### Run updater locally
 
+Use these commands from the repository root when you want to refresh generated
+data on demand.
+
+- Install the optional MetaForge anon key only if you want crafting and recycle
+  component enrichment:
+  - `export METAFORGE_SUPABASE_ANON_KEY=...`
 - Real update (writes tracked files):
   - `uv run python scripts/update_snapshot_and_defaults.py`
 - Dry run (no tracked file writes):
