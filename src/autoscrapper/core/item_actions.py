@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Literal, Optional, Tuple, cast
+
+import orjson
 
 from ..interaction.inventory_grid import Cell
 
@@ -81,13 +82,13 @@ def _normalize_action(value: object) -> Optional[Decision]:
 def load_item_actions(path: Optional[Path] = None) -> ActionMap:
     path = resolve_item_actions_path(path)
     try:
-        raw = json.loads(path.read_text(encoding="utf-8"))
+        raw = orjson.loads(path.read_bytes())
     except FileNotFoundError:
         print(
             f"[warn] Item rules file not found at {path}; defaulting to skip actions."
         )
         return {}
-    except json.JSONDecodeError as exc:
+    except orjson.JSONDecodeError as exc:
         print(
             f"[warn] Could not parse item rules file {path}: {exc}; defaulting to skip actions."
         )

@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
+
+import orjson
 
 from .data_loader import load_game_data
 from .decision_engine import DecisionEngine, DecisionReason
@@ -111,4 +112,4 @@ def generate_rules_from_active(
 
 def write_rules(output: Dict[str, object], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(output, indent=2), encoding="utf-8")
+    path.write_bytes(orjson.dumps(output, option=orjson.OPT_INDENT_2))

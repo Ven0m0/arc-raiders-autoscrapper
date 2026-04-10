@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import argparse
-import json
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Dict, Iterable
+
+import orjson
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SRC_DIR = REPO_ROOT / "src"
@@ -123,9 +124,9 @@ def _is_ignorable_timestamp_only_json_diff(before: bytes, after: bytes) -> bool:
         return False
 
     try:
-        before_json = json.loads(before.decode("utf-8"))
-        after_json = json.loads(after.decode("utf-8"))
-    except UnicodeDecodeError, json.JSONDecodeError:
+        before_json = orjson.loads(before)
+        after_json = orjson.loads(after)
+    except (orjson.JSONDecodeError, UnicodeDecodeError):
         return False
 
     return _normalize_for_semantic_diff(before_json) == _normalize_for_semantic_diff(
@@ -393,7 +394,7 @@ def main() -> int:
     )
 
     report_json_path.parent.mkdir(parents=True, exist_ok=True)
-    report_json_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    report_json_path.write_bytes(orjson.dumps(report, option=orjson.OPT_INDENT_2))
 
     markdown = build_markdown_summary(report, sample_limit=max(1, args.sample_limit))
     report_md_path.parent.mkdir(parents=True, exist_ok=True)

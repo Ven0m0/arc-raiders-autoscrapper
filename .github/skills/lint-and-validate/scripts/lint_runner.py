@@ -14,10 +14,11 @@ Supports:
 import subprocess
 import concurrent.futures
 import sys
-import json
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+
+import orjson
 
 from utils import fix_windows_console_encoding
 
@@ -36,7 +37,7 @@ def detect_node_project(project_path: Path, result: dict[str, Any]) -> None:
     if package_json.exists():
         result["type"] = "node"
         try:
-            pkg = json.loads(package_json.read_text(encoding="utf-8"))
+            pkg = orjson.loads(package_json.read_bytes())
             scripts = pkg.get("scripts", {})
             deps = {**pkg.get("dependencies", {}), **pkg.get("devDependencies", {})}
 
@@ -56,7 +57,7 @@ def detect_node_project(project_path: Path, result: dict[str, Any]) -> None:
                     {"name": "tsc", "cmd": ["npx", "tsc", "--noEmit"]}
                 )
 
-        except IOError, json.JSONDecodeError:
+        except (IOError, orjson.JSONDecodeError):
             pass
 
 
@@ -199,7 +200,7 @@ def main():
             "passed": True,
             "message": "No linters configured",
         }
-        print(json.dumps(output, indent=2))
+        print(orjson.dumps(output, option=orjson.OPT_INDENT_2).decode("utf-8"))
         sys.exit(0)
 
     # Run each linter in parallel
@@ -222,7 +223,7 @@ def main():
         "passed": all_passed,
     }
 
-    print("\n" + json.dumps(output, indent=2))
+    print("\n" + orjson.dumps(output, option=orjson.OPT_INDENT_2).decode("utf-8"))
 
     sys.exit(0 if all_passed else 1)
 
