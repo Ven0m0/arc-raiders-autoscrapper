@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # AutoScrapper Linux Setup Script
-# Required: Python 3.14+
+# Required: Python 3.14.x
 set -euo pipefail
 
 abort() {
@@ -58,8 +58,8 @@ if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
   fi
 fi
 
-# Python 3.14 is required
-PYTHON_VERSION="3.14"
+# Python 3.14.x is required; `uv python install 3.14` resolves to the latest 3.14 patch.
+PYTHON_VERSION="${PYTHON_VERSION:-3.14}"
 
 # 1) System prerequisites
 # - build-essential/linux-headers: needed when dependencies compile (e.g., evdev via pynput)
@@ -113,7 +113,7 @@ if ! command -v uv >/dev/null 2>&1; then
   exit 1
 fi
 
-# 3) Install Python 3.14 (required)
+# 3) Install Python (required)
 print_step "Step 3: Install Python ${PYTHON_VERSION} (required)"
 echo "Command to run:"
 echo "  uv python install \"${PYTHON_VERSION}\""

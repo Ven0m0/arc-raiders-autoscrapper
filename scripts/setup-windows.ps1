@@ -1,11 +1,14 @@
+param(
+  [string]$PythonVersion = "3.14"
+)
+
 # AutoScrapper Windows Setup Script
-# Required: Python 3.14+
+# Required: Python 3.14.x
 # Usage: .\scripts\setup-windows.ps1
 
-$ErrorActionPreference = "Stop"
+# Python 3.14.x is required; `uv python install 3.14` resolves to the latest 3.14 patch.
 
-# Python 3.14 is required
-$PythonVersion = "3.14"
+$ErrorActionPreference = "Stop"
 
 function Confirm-Step {
   param(
@@ -161,7 +164,7 @@ if (-not $uvExe) {
   }
 }
 
-# 2) Install Python 3.14 (required)
+# 2) Install Python (required)
 Confirm-OrAbort (Confirm-Step `
     -Title "Step 2: Install Python $PythonVersion (required)" `
     -Commands @('& "' + $uvExe + '" python install ' + $PythonVersion) `
