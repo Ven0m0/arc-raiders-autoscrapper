@@ -11,7 +11,7 @@
     "rm -rf ~": "deny",
     "rm -rf ~/*": "deny",
     ":(){:|:&}:": "deny",
-	"doom_loop": "deny"
+    "doom_loop": "deny"
   },
   "compaction": {
     "auto": true,
