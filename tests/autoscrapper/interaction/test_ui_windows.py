@@ -38,9 +38,7 @@ def test_is_mss_thread_handle_error_with_srcdc():
 
 def test_is_mss_thread_handle_error_with_thread_local():
     func = get_target_function()
-    exc = Exception(
-        "AttributeError: '_thread._local' object has no attribute 'instance'"
-    )
+    exc = Exception("AttributeError: '_thread._local' object has no attribute 'instance'")
     assert func(exc) is True
 
 

@@ -77,9 +77,7 @@ def _analyze_typescript_file(file_path: Path, stats: dict) -> None:
         pass
 
 
-def _format_typescript_results(
-    stats: dict, file_count: int
-) -> tuple[list[str], list[str]]:
+def _format_typescript_results(stats: dict, file_count: int) -> tuple[list[str], list[str]]:
     passed = []
     issues = []
 
@@ -92,11 +90,7 @@ def _format_typescript_results(
         issues.append(f"[X] {stats['any_count']} 'any' types found (too many)")
 
     if stats["total_functions"] > 0:
-        typed_ratio = (
-            (stats["total_functions"] - stats["untyped_functions"])
-            / stats["total_functions"]
-            * 100
-        )
+        typed_ratio = (stats["total_functions"] - stats["untyped_functions"]) / stats["total_functions"] * 100
         if typed_ratio >= 80:
             passed.append(f"[OK] Type coverage: {typed_ratio:.0f}%")
         elif typed_ratio >= 50:
@@ -205,9 +199,7 @@ def check_python_coverage(
         elif typed_ratio >= 40:
             issues.append(f"[!] Type hints coverage: {typed_ratio:.0f}%")
         else:
-            issues.append(
-                f"[X] Type hints coverage: {typed_ratio:.0f}% (add type hints)"
-            )
+            issues.append(f"[X] Type hints coverage: {typed_ratio:.0f}% (add type hints)")
 
     if stats["any_count"] == 0:
         passed.append("[OK] No 'Any' types found")
@@ -229,9 +221,7 @@ def check_python_coverage(
 
 def main():
     parser = argparse.ArgumentParser(description="Type Coverage Checker")
-    parser.add_argument(
-        "target", nargs="?", default=".", help="Target directory to check"
-    )
+    parser.add_argument("target", nargs="?", default=".", help="Target directory to check")
     parser.add_argument(
         "--max-files",
         type=int,

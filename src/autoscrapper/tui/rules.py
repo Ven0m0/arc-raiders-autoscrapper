@@ -490,9 +490,7 @@ class RulesScreen(AppScreen):
                             yield Button("Add rule", id="add-rule", variant="primary")
                             yield Button("Cancel", id="cancel-add")
                 with Vertical(id="rules-reasons-panel"):
-                    yield Static(
-                        "Default Reasons", id="reasons-title", classes="section-title"
-                    )
+                    yield Static("Default Reasons", id="reasons-title", classes="section-title")
                     yield Static(id="rule-reasons")
         yield Footer()
 
@@ -512,17 +510,13 @@ class RulesScreen(AppScreen):
         try:
             rules_path = active_rules_path()
             if rules_path.exists():
-                timestamp = datetime.fromtimestamp(rules_path.stat().st_mtime).strftime(
-                    "%Y-%m-%d %H:%M:%S"
-                )
+                timestamp = datetime.fromtimestamp(rules_path.stat().st_mtime).strftime("%Y-%m-%d %H:%M:%S")
                 return f"Last saved: {timestamp}"
         except OSError:
             pass
         return "Last saved: unknown"
 
-    def _build_default_action_indexes(
-        self, items: list[object]
-    ) -> tuple[dict[str, str], dict[str, str]]:
+    def _build_default_action_indexes(self, items: list[object]) -> tuple[dict[str, str], dict[str, str]]:
         by_id: dict[str, str] = {}
         by_name: dict[str, str] = {}
         for item in items:
@@ -539,9 +533,7 @@ class RulesScreen(AppScreen):
                 by_name[name] = action
         return by_id, by_name
 
-    def _build_default_item_indexes(
-        self, items: list[object]
-    ) -> tuple[dict[str, dict], dict[str, dict]]:
+    def _build_default_item_indexes(self, items: list[object]) -> tuple[dict[str, dict], dict[str, dict]]:
         by_id: dict[str, dict] = {}
         by_name: dict[str, dict] = {}
         for item in items:
@@ -585,9 +577,7 @@ class RulesScreen(AppScreen):
         lines = [
             reason.strip()
             for reason in default_analysis
-            if isinstance(reason, str)
-            and reason.strip()
-            and not _should_hide_reason(reason)
+            if isinstance(reason, str) and reason.strip() and not _should_hide_reason(reason)
         ]
         return (lines, True)
 
@@ -604,18 +594,14 @@ class RulesScreen(AppScreen):
         return self.modified_map.get(index, False)
 
     def _refresh_modified_map(self) -> None:
-        self.modified_map = {
-            idx: self._is_modified(item) for idx, item in enumerate(self.items)
-        }
+        self.modified_map = {idx: self._is_modified(item) for idx, item in enumerate(self.items)}
 
     def _sort_indices(self, indices: List[int]) -> List[int]:
         if self.sort_mode == "action":
             return sorted(
                 indices,
                 key=lambda idx: (
-                    self.ACTION_SORT_ORDER.get(
-                        _normalized_action(self.items[idx]) or "", 99
-                    ),
+                    self.ACTION_SORT_ORDER.get(_normalized_action(self.items[idx]) or "", 99),
                     str(self.items[idx].get("name", "")).lower(),
                 ),
             )
@@ -627,14 +613,10 @@ class RulesScreen(AppScreen):
                     str(self.items[idx].get("name", "")).lower(),
                 ),
             )
-        return sorted(
-            indices, key=lambda idx: str(self.items[idx].get("name", "")).lower()
-        )
+        return sorted(indices, key=lambda idx: str(self.items[idx].get("name", "")).lower())
 
     def _refresh_list_summary(self) -> None:
-        changed_count = sum(
-            1 for is_modified in self.modified_map.values() if is_modified
-        )
+        changed_count = sum(1 for is_modified in self.modified_map.values() if is_modified)
         sort_label = self.SORT_LABELS.get(self.sort_mode, self.sort_mode)
         self.query_one("#rules-sort", Button).label = f"Sort: {sort_label}"
         summary_parts = [
@@ -662,9 +644,7 @@ class RulesScreen(AppScreen):
         for list_index, item_index in enumerate(self.filtered):
             item = self.items[item_index]
             action_label, action_style = _action_badge(item)
-            name_style = (
-                "bold #f59e0b" if self._is_modified_index(item_index) else "bold"
-            )
+            name_style = "bold #f59e0b" if self._is_modified_index(item_index) else "bold"
             item_name = _truncate_label(str(item.get("name", "")), name_limit)
             label = Text.assemble(
                 (f"{list_index + 1:>3} ", "dim"),
@@ -683,18 +663,14 @@ class RulesScreen(AppScreen):
             menu.highlighted = highlighted
             self.selected_index = self.filtered[highlighted]
             if self.mode != "add":
-                self.current_action = (
-                    _normalized_action(self.items[self.selected_index]) or "keep"
-                )
+                self.current_action = _normalized_action(self.items[self.selected_index]) or "keep"
         else:
             self.selected_index = None
             if self.mode != "add":
                 self.current_action = "keep"
 
         if previous_scroll_y is not None:
-            menu.scroll_to(
-                y=previous_scroll_y, animate=False, force=True, immediate=True
-            )
+            menu.scroll_to(y=previous_scroll_y, animate=False, force=True, immediate=True)
 
         self._refresh_action_buttons()
         self._refresh_list_summary()
@@ -713,10 +689,7 @@ class RulesScreen(AppScreen):
 
         if self.mode == "add":
             title.update("Create New Rule")
-            reasons.update(
-                "Default reasons are shown for existing rules.\n"
-                "Enter a new rule name and choose an action."
-            )
+            reasons.update("Default reasons are shown for existing rules.\nEnter a new rule name and choose an action.")
             self._refresh_action_buttons()
             return
 
@@ -731,9 +704,7 @@ class RulesScreen(AppScreen):
 
         item = self.items[self.selected_index]
         name = str(item.get("name", ""))
-        name_style = (
-            "bold #f59e0b" if self._is_modified_index(self.selected_index) else "bold"
-        )
+        name_style = "bold #f59e0b" if self._is_modified_index(self.selected_index) else "bold"
         title.update(Text(name, style=name_style))
 
         current_action = _normalized_action(item) or "keep"
@@ -752,9 +723,7 @@ class RulesScreen(AppScreen):
         reasons.update("\n".join(lines))
         self._refresh_action_buttons()
 
-    def _set_save_chip(
-        self, text: str, *, state: Literal["saved", "saving", "error"]
-    ) -> None:
+    def _set_save_chip(self, text: str, *, state: Literal["saved", "saving", "error"]) -> None:
         save_chip = self.query_one("#rules-save-chip", Static)
         save_chip.remove_class("is-saved")
         save_chip.remove_class("is-saving")
@@ -1014,9 +983,7 @@ class RulesScreen(AppScreen):
         self.mode = "edit"
         self._refresh_details()
 
-    def on_option_list_option_highlighted(
-        self, event: OptionList.OptionHighlighted
-    ) -> None:
+    def on_option_list_option_highlighted(self, event: OptionList.OptionHighlighted) -> None:
         if event.option_id is None:
             return
         try:
@@ -1126,11 +1093,7 @@ class RulesChangesScreen(AppScreen):
         total_changes = len(self.changes)
         showing = len(self.filtered)
         base_total = self.default_count or self.item_count
-        summary = (
-            f"Changed rules: {total_changes} | "
-            f"Default items: {base_total} | "
-            f"Showing: {showing}"
-        )
+        summary = f"Changed rules: {total_changes} | Default items: {base_total} | Showing: {showing}"
         self.query_one("#changes-summary", Static).update(summary)
 
     def _filter_indices(self) -> List[int]:
@@ -1175,11 +1138,7 @@ class RulesChangesScreen(AppScreen):
     def _refresh_details(self) -> None:
         detail = self.query_one("#changes-detail-body", Static)
         if self.selected_index is None:
-            detail.update(
-                "No changes match your filter."
-                if self.changes
-                else "No changes detected."
-            )
+            detail.update("No changes match your filter." if self.changes else "No changes detected.")
             return
         change = self.changes[self.selected_index]
         lines = [
@@ -1187,9 +1146,7 @@ class RulesChangesScreen(AppScreen):
             f"ID: {change.item_id}",
             f"Action: {change.before_action.upper()} -> {change.after_action.upper()}",
         ]
-        visible_reasons = [
-            reason for reason in change.reasons if not _should_hide_reason(reason)
-        ]
+        visible_reasons = [reason for reason in change.reasons if not _should_hide_reason(reason)]
         if visible_reasons:
             lines.append("Reasons:")
             lines.extend([f"- {reason}" for reason in visible_reasons[:8]])

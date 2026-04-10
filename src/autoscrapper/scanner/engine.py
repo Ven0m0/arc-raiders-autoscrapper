@@ -49,9 +49,7 @@ INFOBOX_RETRY_INTERVAL_MS = _DEFAULT_SCAN_SETTINGS.infobox_retry_interval_ms
 OCR_UNREADABLE_RETRIES = _DEFAULT_SCAN_SETTINGS.ocr_unreadable_retries
 OCR_RETRY_INTERVAL_MS = _DEFAULT_SCAN_SETTINGS.ocr_retry_interval_ms
 INPUT_ACTION_DELAY_MS = _DEFAULT_SCAN_SETTINGS.input_action_delay_ms
-CELL_INFOBOX_LEFT_RIGHT_CLICK_GAP_MS = (
-    _DEFAULT_SCAN_SETTINGS.cell_infobox_left_right_click_gap_ms
-)
+CELL_INFOBOX_LEFT_RIGHT_CLICK_GAP_MS = _DEFAULT_SCAN_SETTINGS.cell_infobox_left_right_click_gap_ms
 ITEM_INFOBOX_SETTLE_DELAY_MS = _DEFAULT_SCAN_SETTINGS.item_infobox_settle_delay_ms
 POST_SELL_RECYCLE_DELAY_MS = _DEFAULT_SCAN_SETTINGS.post_sell_recycle_delay_ms
 
@@ -135,19 +133,11 @@ def _collect_window_bounds_warnings(
 ) -> List[Tuple[str, str]]:
     work_left, work_top, work_right, work_bottom = work_area
     win_is_full_monitor = (
-        win_left == mon_left
-        and win_top == mon_top
-        and win_right == mon_right
-        and win_bottom == mon_bottom
+        win_left == mon_left and win_top == mon_top and win_right == mon_right and win_bottom == mon_bottom
     )
 
     startup_events: List[Tuple[str, str]] = []
-    if (
-        win_left < mon_left
-        or win_top < mon_top
-        or win_right > mon_right
-        or win_bottom > mon_bottom
-    ):
+    if win_left < mon_left or win_top < mon_top or win_right > mon_right or win_bottom > mon_bottom:
         startup_events.append(
             (
                 "Target window extends beyond its display bounds; ensure it is fully visible.",
@@ -155,10 +145,7 @@ def _collect_window_bounds_warnings(
             )
         )
     elif not win_is_full_monitor and (
-        win_left < work_left
-        or win_top < work_top
-        or win_right > work_right
-        or win_bottom > work_bottom
+        win_left < work_left or win_top < work_top or win_right > work_right or win_bottom > work_bottom
     ):
         startup_events.append(
             (
@@ -190,9 +177,7 @@ def _detect_inventory_count(
         count_roi_rel = inventory_count_rect(win_width, win_height)
         count_left = win_left + count_roi_rel[0]
         count_top = win_top + count_roi_rel[1]
-        count_bgr = capture_region(
-            (count_left, count_top, count_roi_rel[2], count_roi_rel[3])
-        )
+        count_bgr = capture_region((count_left, count_top, count_roi_rel[2], count_roi_rel[3]))
         return ocr_inventory_count(count_bgr)
     except Exception as exc:
         startup_events.append((f"Failed to read stash count: {exc}", "yellow"))
@@ -266,14 +251,10 @@ def scan_inventory(
         window = None
         if window_snapshot is None:
             if progress_impl is not None:
-                window = wait_for_target_window(
-                    timeout=window_timeout, stop_key=stop_key
-                )
+                window = wait_for_target_window(timeout=window_timeout, stop_key=stop_key)
             else:
                 print("waiting for Arc Raiders to be active window...", flush=True)
-                window = wait_for_target_window(
-                    timeout=window_timeout, stop_key=stop_key
-                )
+                window = wait_for_target_window(timeout=window_timeout, stop_key=stop_key)
 
             _display_name, _display_size, work_area = window_display_info(window)
             mon_left, mon_top, mon_right, mon_bottom = window_monitor_rect(window)
@@ -304,11 +285,7 @@ def scan_inventory(
             work_area=work_area,
         )
 
-        actions: ActionMap = (
-            actions_override
-            if actions_override is not None
-            else load_item_actions(actions_path)
-        )
+        actions: ActionMap = actions_override if actions_override is not None else load_item_actions(actions_path)
 
         grid_roi = inventory_roi_rect(win_width, win_height)
         safe_point = safe_mouse_point(win_width, win_height)
@@ -327,9 +304,7 @@ def scan_inventory(
             action_delay=timing.input_action_delay,
             startup_events=startup_events,
         )
-        auto_pages = (
-            math.ceil(stash_items / cells_per_page) if stash_items is not None else None
-        )
+        auto_pages = math.ceil(stash_items / cells_per_page) if stash_items is not None else None
         pages_to_scan = pages if pages is not None else auto_pages or 1
         pages_to_scan = max(1, pages_to_scan)
         pages_source = "cli" if pages is not None else "auto"

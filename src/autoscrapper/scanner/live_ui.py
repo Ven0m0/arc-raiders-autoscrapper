@@ -51,9 +51,7 @@ def _format_duration(seconds: Optional[float]) -> str:
     return f"{minutes:02d}:{secs:02d}"
 
 
-if (
-    ProgressColumn is not None and Task is not None and Text is not None
-):  # pragma: no cover
+if ProgressColumn is not None and Task is not None and Text is not None:  # pragma: no cover
 
     class _ItemsPerSecondColumn(ProgressColumn):
         def render(self, task: Task) -> Text:

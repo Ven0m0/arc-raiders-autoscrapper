@@ -15,18 +15,14 @@ def read_frontmatter(path: Path) -> str:
 
 def read_model(path: Path) -> str:
     """Return the configured primary model for an agent."""
-    match = re.search(
-        r'^model:\s*["\']?([^\n"\']+)["\']?$', read_frontmatter(path), re.MULTILINE
-    )
+    match = re.search(r'^model:\s*["\']?([^\n"\']+)["\']?$', read_frontmatter(path), re.MULTILINE)
     assert match is not None, f"missing model in {path}"
     return match.group(1)
 
 
 def test_workspace_mcp_config_includes_selected_servers():
     """Workspace MCP config should expose the newly selected high-value servers."""
-    mcp_config = json.loads(
-        (REPO_ROOT / ".vscode" / "mcp.json").read_text(encoding="utf-8")
-    )
+    mcp_config = json.loads((REPO_ROOT / ".vscode" / "mcp.json").read_text(encoding="utf-8"))
     servers = mcp_config["mcpServers"]
 
     assert servers["eslint"]["args"] == ["-y", "@eslint/mcp@latest"]

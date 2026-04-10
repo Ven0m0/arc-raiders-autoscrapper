@@ -35,15 +35,8 @@ def load_game_data(data_dir: Optional[Path] = None) -> GameData:
     projects_path = data_dir / "static" / "projects.json"
     metadata_path = data_dir / "metadata.json"
 
-    if (
-        not items_path.exists()
-        or not quests_path.exists()
-        or not quest_graph_path.exists()
-    ):
-        raise FileNotFoundError(
-            "Missing data snapshot. Expected "
-            f"{items_path}, {quests_path}, and {quest_graph_path}."
-        )
+    if not items_path.exists() or not quests_path.exists() or not quest_graph_path.exists():
+        raise FileNotFoundError(f"Missing data snapshot. Expected {items_path}, {quests_path}, and {quest_graph_path}.")
 
     items = _read_json(items_path)
     quests = apply_quest_overrides(_read_json(quests_path))

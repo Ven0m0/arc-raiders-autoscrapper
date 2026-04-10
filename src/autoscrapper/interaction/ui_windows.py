@@ -34,9 +34,7 @@ WINDOW_POLL_INTERVAL = 0.05
 ACTION_DELAY = 0.05
 MOVE_DURATION = 0.05
 CELL_INFOBOX_LEFT_RIGHT_CLICK_GAP = 0.25
-SELL_RECYCLE_SPEED_MULT = (
-    1.5  # extra slack vs default pacing (MOVE_DURATION/ACTION_DELAY)
-)
+SELL_RECYCLE_SPEED_MULT = 1.5  # extra slack vs default pacing (MOVE_DURATION/ACTION_DELAY)
 SELL_RECYCLE_MOVE_DURATION = MOVE_DURATION * SELL_RECYCLE_SPEED_MULT
 SELL_RECYCLE_ACTION_DELAY = ACTION_DELAY * SELL_RECYCLE_SPEED_MULT
 SELL_RECYCLE_POST_DELAY = 0.1  # seconds to allow item collapse after confirm
@@ -189,9 +187,7 @@ def window_display_info(
         raise RuntimeError("Unable to determine which monitor the target window is on.")
     if len(display_names) > 1:
         joined = ", ".join(display_names)
-        raise RuntimeError(
-            f"Target window spans multiple monitors ({joined}); move it fully onto one display."
-        )
+        raise RuntimeError(f"Target window spans multiple monitors ({joined}); move it fully onto one display.")
 
     display_name = display_names[0]
     size = pwc.getScreenSize(display_name)
@@ -237,9 +233,7 @@ def _get_mss() -> "MSSBase":
     missing `srcdc`, so each thread keeps its own instance.
     """
     if sys.platform not in ("win32", "linux"):
-        raise RuntimeError(
-            "Screen capture requires Windows or Linux; this build targets X11/XWayland."
-        )
+        raise RuntimeError("Screen capture requires Windows or Linux; this build targets X11/XWayland.")
 
     sct = getattr(_MSS_LOCAL, "instance", None)
     if sct is None:
@@ -297,13 +291,9 @@ def capture_region(region: Tuple[int, int, int, int]) -> np.ndarray:
             try:
                 shot = _get_mss().grab(bbox)
             except Exception as retry_exc:
-                raise RuntimeError(
-                    f"mss failed to capture the requested region {bbox}: {retry_exc}"
-                ) from retry_exc
+                raise RuntimeError(f"mss failed to capture the requested region {bbox}: {retry_exc}") from retry_exc
         else:
-            raise RuntimeError(
-                f"mss failed to capture the requested region {bbox}: {exc}"
-            ) from exc
+            raise RuntimeError(f"mss failed to capture the requested region {bbox}: {exc}") from exc
 
     frame = np.asarray(shot)
     if frame.shape[2] == 4:
@@ -319,9 +309,7 @@ def sleep_with_abort(duration: float, *, stop_key: str = DEFAULT_STOP_KEY) -> No
     abort_if_escape_pressed(stop_key)
 
 
-def pause_action(
-    duration: float = ACTION_DELAY, *, stop_key: str = DEFAULT_STOP_KEY
-) -> None:
+def pause_action(duration: float = ACTION_DELAY, *, stop_key: str = DEFAULT_STOP_KEY) -> None:
     """
     Standard pause to keep a safe delay between input/processing steps.
     """
@@ -356,9 +344,7 @@ def click_window_relative(
     *,
     stop_key: str = DEFAULT_STOP_KEY,
 ) -> None:
-    click_absolute(
-        int(window_left + x), int(window_top + y), pause=pause, stop_key=stop_key
-    )
+    click_absolute(int(window_left + x), int(window_top + y), pause=pause, stop_key=stop_key)
 
 
 def move_absolute(
@@ -445,9 +431,7 @@ def scroll_to_next_grid_at(
         f"[scroll] vscroll clicks={scroll_clicks} interval={scroll_interval} at=({gx},{gy})",
         flush=True,
     )
-    timed_action(
-        pdi.vscroll, clicks=scroll_clicks, interval=scroll_interval, stop_key=stop_key
-    )
+    timed_action(pdi.vscroll, clicks=scroll_clicks, interval=scroll_interval, stop_key=stop_key)
     sleep_with_abort(settle_delay, stop_key=stop_key)
 
     if safe_point_abs is not None:
@@ -455,8 +439,6 @@ def scroll_to_next_grid_at(
         move_absolute(sx, sy, pause=pause, stop_key=stop_key)
 
 
-def _cell_screen_center(
-    cell: Cell, window_left: int, window_top: int
-) -> Tuple[int, int]:
+def _cell_screen_center(cell: Cell, window_left: int, window_top: int) -> Tuple[int, int]:
     cx, cy = cell.safe_center
     return int(window_left + cx), int(window_top + cy)

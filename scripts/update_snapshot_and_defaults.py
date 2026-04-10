@@ -30,9 +30,7 @@ from autoscrapper.progress.update_report import (  # noqa: E402
 )
 
 DATA_DIR = REPO_ROOT / "src" / "autoscrapper" / "progress" / "data"
-DEFAULT_RULES_PATH = (
-    REPO_ROOT / "src" / "autoscrapper" / "items" / "items_rules.default.json"
-)
+DEFAULT_RULES_PATH = REPO_ROOT / "src" / "autoscrapper" / "items" / "items_rules.default.json"
 TARGET_RELATIVE_FILES = (
     "src/autoscrapper/progress/data/items.json",
     "src/autoscrapper/progress/data/quests.json",
@@ -126,12 +124,10 @@ def _is_ignorable_timestamp_only_json_diff(before: bytes, after: bytes) -> bool:
     try:
         before_json = orjson.loads(before)
         after_json = orjson.loads(after)
-    except (orjson.JSONDecodeError, UnicodeDecodeError):
+    except orjson.JSONDecodeError, UnicodeDecodeError:
         return False
 
-    return _normalize_for_semantic_diff(before_json) == _normalize_for_semantic_diff(
-        after_json
-    )
+    return _normalize_for_semantic_diff(before_json) == _normalize_for_semantic_diff(after_json)
 
 
 def _diff_changed_files(
@@ -147,18 +143,14 @@ def _diff_changed_files(
         if before_value == after_value:
             continue
 
-        if ignore_timestamp_only_diffs and _is_ignorable_timestamp_only_json_diff(
-            before_value, after_value
-        ):
+        if ignore_timestamp_only_diffs and _is_ignorable_timestamp_only_json_diff(before_value, after_value):
             continue
 
         changed.append(path.relative_to(REPO_ROOT).as_posix())
     return changed
 
 
-def _copy_support_files_for_temp_run(
-    source_data_dir: Path, temp_data_dir: Path
-) -> None:
+def _copy_support_files_for_temp_run(source_data_dir: Path, temp_data_dir: Path) -> None:
     quest_graph_path = source_data_dir / "quests_graph.json"
     if quest_graph_path.exists():
         shutil.copy2(quest_graph_path, temp_data_dir / "quests_graph.json")
@@ -173,9 +165,7 @@ def _copy_support_files_for_temp_run(
 
 def _update_in_place(data_dir: Path, rules_path: Path) -> dict:
     snapshot_metadata = update_data_snapshot(data_dir)
-    hideout_levels = _load_workshop_level2_map(
-        data_dir / "static" / "hideout_modules.json"
-    )
+    hideout_levels = _load_workshop_level2_map(data_dir / "static" / "hideout_modules.json")
     rules_payload = generate_rules_from_active(
         active_quests=[],
         hideout_levels=hideout_levels,
@@ -201,9 +191,7 @@ def _update_dry_run(source_data_dir: Path) -> dict:
         _copy_support_files_for_temp_run(source_data_dir, temp_data_dir)
 
         snapshot_metadata = update_data_snapshot(temp_data_dir)
-        hideout_levels = _load_workshop_level2_map(
-            temp_data_dir / "static" / "hideout_modules.json"
-        )
+        hideout_levels = _load_workshop_level2_map(temp_data_dir / "static" / "hideout_modules.json")
         rules_payload = generate_rules_from_active(
             active_quests=[],
             hideout_levels=hideout_levels,
@@ -271,22 +259,12 @@ def build_report(
 ) -> dict:
     quests = diff_quests(before_state.get("quests", []), after_state.get("quests", []))
     rules = diff_rules(before_state.get("rules", {}), after_state.get("rules", {}))
-    quest_graph = graph_gap_report(
-        after_state.get("quests", []), after_state.get("quest_graph", {})
-    )
+    quest_graph = graph_gap_report(after_state.get("quests", []), after_state.get("quest_graph", {}))
 
     before_metadata = before_state.get("metadata", {})
     after_metadata = after_state.get("metadata", {})
-    before_last_updated = (
-        before_metadata.get("lastUpdated")
-        if isinstance(before_metadata, dict)
-        else "unknown"
-    )
-    after_last_updated = (
-        after_metadata.get("lastUpdated")
-        if isinstance(after_metadata, dict)
-        else "unknown"
-    )
+    before_last_updated = before_metadata.get("lastUpdated") if isinstance(before_metadata, dict) else "unknown"
+    after_last_updated = after_metadata.get("lastUpdated") if isinstance(after_metadata, dict) else "unknown"
 
     workshop_ids = sorted(hideout_levels.keys())
 
@@ -318,8 +296,7 @@ def build_report(
 def main() -> int:
     parser = argparse.ArgumentParser(
         description=(
-            "Update progress snapshot and regenerate default rules using "
-            "all quests completed + level-2 workshops."
+            "Update progress snapshot and regenerate default rules using all quests completed + level-2 workshops."
         )
     )
     parser.add_argument(
@@ -411,10 +388,7 @@ def main() -> int:
 
     graph_missing = report.get("questGraph", {}).get("questsMissingFromGraphCount", 0)
     if isinstance(graph_missing, int) and graph_missing > 0:
-        print(
-            f"Warning: {graph_missing} quests are missing from quests_graph.json; "
-            "workflow continues by design."
-        )
+        print(f"Warning: {graph_missing} quests are missing from quests_graph.json; workflow continues by design.")
 
     return 0
 

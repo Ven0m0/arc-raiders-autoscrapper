@@ -43,9 +43,7 @@ def save_rules(payload: dict, path: Path) -> None:
     items = payload.get("items")
     if not isinstance(items, list):
         items = []
-    metadata = (
-        payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
-    )
+    metadata = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
     metadata["itemCount"] = len(items)
     payload = {"metadata": metadata, "items": items}
     path.parent.mkdir(parents=True, exist_ok=True)

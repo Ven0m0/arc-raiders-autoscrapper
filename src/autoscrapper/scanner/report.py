@@ -28,16 +28,8 @@ def _render_scan_overview(
     items_processed = len(results)
     stash_label = str(stats.items_in_stash) if stats.items_in_stash is not None else "?"
     duration_label = f"{stats.processing_seconds:.1f}s"
-    planned_suffix = (
-        f" (planned {stats.pages_planned})"
-        if stats.pages_planned != stats.pages_scanned
-        else ""
-    )
-    raw_suffix = (
-        f" raw='{stats.stash_count_text}'"
-        if stats.stash_count_text and stats.items_in_stash is None
-        else ""
-    )
+    planned_suffix = f" (planned {stats.pages_planned})" if stats.pages_planned != stats.pages_scanned else ""
+    raw_suffix = f" raw='{stats.stash_count_text}'" if stats.stash_count_text and stats.items_in_stash is None else ""
 
     if console is None:
         print(
@@ -109,14 +101,7 @@ def _render_results(
     cells_per_page: int,
     stats: ScanStats,
 ) -> None:
-    console = (
-        Console()
-        if Console is not None
-        and Table is not None
-        and Text is not None
-        and box is not None
-        else None
-    )
+    console = Console() if Console is not None and Table is not None and Text is not None and box is not None else None
     summary = _summarize_results(results)
 
     _render_scan_overview(results, stats, console)

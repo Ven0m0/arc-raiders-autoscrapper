@@ -21,16 +21,13 @@ from autoscrapper.ocr.inventory_vision import (  # noqa: E402
 )
 
 SELECTION_POLICY = (
-    "Prefer the current threshold when it passes; otherwise fall back to the "
-    "lowest passing candidate threshold."
+    "Prefer the current threshold when it passes; otherwise fall back to the lowest passing candidate threshold."
 )
 
 
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description=(
-            "Replay captured SKIP_UNLISTED OCR samples against candidate fuzzy thresholds."
-        )
+        description=("Replay captured SKIP_UNLISTED OCR samples against candidate fuzzy thresholds.")
     )
     parser.add_argument(
         "--manifest",
@@ -50,11 +47,7 @@ def _build_parser() -> argparse.ArgumentParser:
 
 def _default_thresholds() -> list[int]:
     current = DEFAULT_ITEM_NAME_MATCH_THRESHOLD
-    return [
-        value
-        for value in {current - 10, current - 5, current, current + 5, current + 10}
-        if value > 0
-    ]
+    return [value for value in {current - 10, current - 5, current, current + 5, current + 10} if value > 0]
 
 
 def _format_expected_name_or_default(sample_expected_name: str | None) -> str:
@@ -85,9 +78,7 @@ def main() -> int:
                     "sample_id": sample.sample_id,
                     "raw_text": sample.raw_text,
                     "expected": _format_expected_name_or_default(sample.expected_name),
-                    "match_status": "matched"
-                    if result.matched_name is not None
-                    else "no_match",
+                    "match_status": "matched" if result.matched_name is not None else "no_match",
                     "chosen_name": result.chosen_name,
                     "matched_name": result.matched_name,
                     "correct": is_correct,
@@ -126,16 +117,10 @@ def main() -> int:
 
     print(f"samples={len(samples)} manifest={manifest_path}")
     for threshold_report in threshold_reports:
-        print(
-            "threshold={threshold} passes={passes} correct={correct_count}/{sample_count}".format(
-                **threshold_report
-            )
-        )
+        print("threshold={threshold} passes={passes} correct={correct_count}/{sample_count}".format(**threshold_report))
     print(f"report={report_path}")
     if not samples:
-        print(
-            "No samples found; capture live SKIP_UNLISTED data before calibrating the threshold."
-        )
+        print("No samples found; capture live SKIP_UNLISTED data before calibrating the threshold.")
     return 0
 
 

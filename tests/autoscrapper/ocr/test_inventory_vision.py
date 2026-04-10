@@ -30,6 +30,7 @@ import autoscrapper.ocr.inventory_vision as _vision  # noqa: E402
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _make_ocr_data(*words):
     """Build a Tesseract-style data dict from (text, conf, top, height) tuples.
 
@@ -79,6 +80,7 @@ def _solid_bgr(h, w, color=(128, 128, 128)):
 # preprocess_for_ocr — Bug 1 & 2 regression
 # ---------------------------------------------------------------------------
 
+
 class TestPreprocessForOcr:
     def test_zero_size_raises_value_error(self):
         """Bug 1: zero-size input must raise ValueError before cv2 crashes."""
@@ -117,6 +119,7 @@ class TestPreprocessForOcr:
 # title_roi — pure coordinate math
 # ---------------------------------------------------------------------------
 
+
 class TestTitleRoi:
     def test_returns_same_x_y(self):
         rect = (10, 20, 200, 100)
@@ -131,6 +134,7 @@ class TestTitleRoi:
 
     def test_height_is_fraction_of_infobox_height(self):
         from autoscrapper.ocr.inventory_vision import TITLE_HEIGHT_REL
+
         _, _, _, h_title = title_roi((0, 0, 100, 100))
         assert h_title == max(1, int(TITLE_HEIGHT_REL * 100))
 
@@ -144,6 +148,7 @@ class TestTitleRoi:
 # _extract_title_from_data — coordinate-space regression (Bug 3 from review 2)
 # ---------------------------------------------------------------------------
 
+
 class TestExtractTitleFromData:
     """Tesseract returns coords in 2x-upscaled space; image_height must match."""
 
@@ -155,9 +160,7 @@ class TestExtractTitleFromData:
         with patch.object(
             _vision,
             "match_item_name_result",
-            return_value=_match_result(
-                "Hello", chosen_name="Hello", matched_name="Hello"
-            ),
+            return_value=_match_result("Hello", chosen_name="Hello", matched_name="Hello"),
         ):
             _, raw = _extract_title_from_data(data, image_height=40, top_fraction=0.5)
         assert "Hello" in raw
@@ -285,6 +288,7 @@ class TestExtractTitleFromData:
 # _extract_cropped_title_from_data — delegates with top_fraction=1.0
 # ---------------------------------------------------------------------------
 
+
 class TestExtractCroppedTitleFromData:
     def test_top_fraction_one_includes_all_words(self):
         """top_fraction=1.0 means the cutoff equals image_height — all words pass."""
@@ -293,9 +297,7 @@ class TestExtractCroppedTitleFromData:
         with patch.object(
             _vision,
             "match_item_name_result",
-            return_value=_match_result(
-                "Alloy", chosen_name="Alloy", matched_name="Alloy"
-            ),
+            return_value=_match_result("Alloy", chosen_name="Alloy", matched_name="Alloy"),
         ):
             _, raw = _extract_cropped_title_from_data(data, image_height=40)
         assert "Alloy" in raw
@@ -304,6 +306,7 @@ class TestExtractCroppedTitleFromData:
 # ---------------------------------------------------------------------------
 # ocr_title_strip — cache does not store empty item_name (Bug 5 regression)
 # ---------------------------------------------------------------------------
+
 
 class TestOcrTitleStripCache:
     def _make_image(self):
@@ -318,18 +321,18 @@ class TestOcrTitleStripCache:
         img = self._make_image()
         empty_data = _make_ocr_data()  # no words → item_name will be ""
 
-        with patch.object(_vision, "image_to_data", return_value=empty_data) as mock_ocr, \
-             patch.object(
-                 _vision,
-                 "match_item_name_result",
-                 return_value=_match_result("", chosen_name=""),
-             ):
+        with (
+            patch.object(_vision, "image_to_data", return_value=empty_data) as mock_ocr,
+            patch.object(
+                _vision,
+                "match_item_name_result",
+                return_value=_match_result("", chosen_name=""),
+            ),
+        ):
             _vision.ocr_title_strip(img)
             _vision.ocr_title_strip(img)  # same image
 
-        assert mock_ocr.call_count == 2, (
-            "image_to_data should be called twice when the first result was empty"
-        )
+        assert mock_ocr.call_count == 2, "image_to_data should be called twice when the first result was empty"
 
     def test_non_empty_result_is_cached(self):
         """When item_name is non-empty, the second call must use the cache."""
@@ -337,27 +340,28 @@ class TestOcrTitleStripCache:
         img = self._make_image()
         data = _make_ocr_data(("Arc Alloy", 90, 2, 8))
 
-        with patch.object(_vision, "image_to_data", return_value=data) as mock_ocr, \
-             patch.object(
-                 _vision,
-                 "match_item_name_result",
-                 return_value=_match_result(
-                     "Arc Alloy",
-                     chosen_name="Arc Alloy",
-                     matched_name="Arc Alloy",
-                 ),
-             ):
+        with (
+            patch.object(_vision, "image_to_data", return_value=data) as mock_ocr,
+            patch.object(
+                _vision,
+                "match_item_name_result",
+                return_value=_match_result(
+                    "Arc Alloy",
+                    chosen_name="Arc Alloy",
+                    matched_name="Arc Alloy",
+                ),
+            ),
+        ):
             _vision.ocr_title_strip(img)
             _vision.ocr_title_strip(img)  # same image — should hit cache
 
-        assert mock_ocr.call_count == 1, (
-            "image_to_data should only be called once when result was cached"
-        )
+        assert mock_ocr.call_count == 1, "image_to_data should only be called once when result was cached"
 
 
 # ---------------------------------------------------------------------------
 # reset_ocr_caches
 # ---------------------------------------------------------------------------
+
 
 class TestResetOcrCaches:
     def test_clears_all_three_caches(self):
