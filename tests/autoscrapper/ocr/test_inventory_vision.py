@@ -16,6 +16,7 @@ sys.modules.setdefault("pynput.keyboard", MagicMock())
 sys.modules.setdefault("pynput.mouse", MagicMock())
 
 from autoscrapper.ocr.inventory_vision import (  # noqa: E402
+    ItemNameMatchResult,
     _extract_cropped_title_from_data,
     _extract_title_from_data,
     preprocess_for_ocr,
@@ -32,11 +33,17 @@ import autoscrapper.ocr.inventory_vision as _vision  # noqa: E402
 def _make_ocr_data(*words):
     """Build a Tesseract-style data dict from (text, conf, top, height) tuples.
 
-    All words share page/block/par/line = 1 so they form a single group.
+    By default all words share page/block/par/line = 1 so they form a single
+    group. Pass a 5th tuple value to override line_num for multi-line tests.
     """
     keys = ["text", "conf", "top", "height", "page_num", "block_num", "par_num", "line_num"]
     result = {k: [] for k in keys}
-    for text, conf, top, height in words:
+    for word in words:
+        if len(word) == 4:
+            text, conf, top, height = word
+            line_num = 1
+        else:
+            text, conf, top, height, line_num = word
         result["text"].append(text)
         result["conf"].append(conf)
         result["top"].append(top)
@@ -44,8 +51,23 @@ def _make_ocr_data(*words):
         result["page_num"].append(1)
         result["block_num"].append(1)
         result["par_num"].append(1)
-        result["line_num"].append(1)
+        result["line_num"].append(line_num)
     return result
+
+
+def _match_result(
+    cleaned_text: str,
+    *,
+    chosen_name: str | None = None,
+    matched_name: str | None = None,
+    threshold: int = 75,
+) -> ItemNameMatchResult:
+    return ItemNameMatchResult(
+        cleaned_text=cleaned_text,
+        chosen_name=cleaned_text if chosen_name is None else chosen_name,
+        matched_name=matched_name,
+        threshold=threshold,
+    )
 
 
 def _solid_bgr(h, w, color=(128, 128, 128)):
@@ -130,7 +152,13 @@ class TestExtractTitleFromData:
         # 2x image height = 40; top_fraction = 0.5 → cutoff = 20
         # Word at top=5, height=10 → center_y = 10 ≤ 20 → included
         data = _make_ocr_data(("Hello", 90, 5, 10))
-        with patch.object(_vision, "match_item_name", return_value="Hello"):
+        with patch.object(
+            _vision,
+            "match_item_name_result",
+            return_value=_match_result(
+                "Hello", chosen_name="Hello", matched_name="Hello"
+            ),
+        ):
             _, raw = _extract_title_from_data(data, image_height=40, top_fraction=0.5)
         assert "Hello" in raw
 
@@ -139,7 +167,11 @@ class TestExtractTitleFromData:
         # 2x image height = 40; top_fraction = 0.5 → cutoff = 20
         # Word at top=16, height=10 → center_y = 21 > 20 → excluded
         data = _make_ocr_data(("Hidden", 90, 16, 10))
-        with patch.object(_vision, "match_item_name", return_value=""):
+        with patch.object(
+            _vision,
+            "match_item_name_result",
+            return_value=_match_result("", chosen_name=""),
+        ):
             _, raw = _extract_title_from_data(data, image_height=40, top_fraction=0.5)
         assert "Hidden" not in raw
 
@@ -152,7 +184,11 @@ class TestExtractTitleFromData:
         Passing processed.shape[0] (2x) is therefore the correct behaviour.
         """
         data = _make_ocr_data(("Arc", 90, 8, 10))
-        with patch.object(_vision, "match_item_name", return_value="Arc"):
+        with patch.object(
+            _vision,
+            "match_item_name_result",
+            return_value=_match_result("Arc", chosen_name="Arc", matched_name="Arc"),
+        ):
             _, raw_2x = _extract_title_from_data(data, image_height=40, top_fraction=0.5)
             _, raw_orig = _extract_title_from_data(data, image_height=20, top_fraction=0.5)
         assert "Arc" in raw_2x, "2x height should include word in lower portion"
@@ -163,9 +199,56 @@ class TestExtractTitleFromData:
 
     def test_no_texts_returns_empty_strings(self):
         data = _make_ocr_data()
-        with patch.object(_vision, "match_item_name", return_value=""):
+        with patch.object(
+            _vision,
+            "match_item_name_result",
+            return_value=_match_result("", chosen_name=""),
+        ):
             result = _extract_title_from_data(data, image_height=40)
         assert result == ("", "")
+
+    def test_stat_line_uses_lower_priority_known_item_fallback(self):
+        data = _make_ocr_data(
+            ("Damage", 95, 2, 8, 1),
+            ("55", 95, 2, 8, 1),
+            ("Arc Alloy", 80, 14, 8, 2),
+        )
+
+        def _fake_match(text: str) -> ItemNameMatchResult:
+            if text == "Damage 55":
+                return _match_result("Damage 55")
+            if text == "Arc Alloy":
+                return _match_result(
+                    "Arc Alloy",
+                    chosen_name="Arc Alloy",
+                    matched_name="Arc Alloy",
+                )
+            raise AssertionError(f"unexpected OCR text: {text}")
+
+        with patch.object(_vision, "match_item_name_result", side_effect=_fake_match):
+            item_name, raw = _extract_title_from_data(data, image_height=40)
+
+        assert item_name == "Arc Alloy"
+        assert raw == "Arc Alloy"
+
+    def test_unmatched_non_stat_line_does_not_trigger_fallback(self):
+        data = _make_ocr_data(
+            ("Arc Allov", 95, 2, 8, 1),
+            ("Damage", 80, 14, 8, 2),
+        )
+
+        def _fake_match(text: str) -> ItemNameMatchResult:
+            if text == "Arc Allov":
+                return _match_result("Arc Allov", chosen_name="Arc Allov")
+            if text == "Damage":
+                return _match_result("Damage", chosen_name="Damage")
+            raise AssertionError(f"unexpected OCR text: {text}")
+
+        with patch.object(_vision, "match_item_name_result", side_effect=_fake_match):
+            item_name, raw = _extract_title_from_data(data, image_height=40)
+
+        assert item_name == "Arc Allov"
+        assert raw == "Arc Allov"
 
 
 # ---------------------------------------------------------------------------
@@ -177,7 +260,13 @@ class TestExtractCroppedTitleFromData:
         """top_fraction=1.0 means the cutoff equals image_height — all words pass."""
         # center_y = top + height/2 = 30 + 5 = 35; image_height = 40; cutoff = 40 → passes
         data = _make_ocr_data(("Alloy", 90, 30, 10))
-        with patch.object(_vision, "match_item_name", return_value="Alloy"):
+        with patch.object(
+            _vision,
+            "match_item_name_result",
+            return_value=_match_result(
+                "Alloy", chosen_name="Alloy", matched_name="Alloy"
+            ),
+        ):
             _, raw = _extract_cropped_title_from_data(data, image_height=40)
         assert "Alloy" in raw
 
@@ -200,7 +289,11 @@ class TestOcrTitleStripCache:
         empty_data = _make_ocr_data()  # no words → item_name will be ""
 
         with patch.object(_vision, "image_to_data", return_value=empty_data) as mock_ocr, \
-             patch.object(_vision, "match_item_name", return_value=""):
+             patch.object(
+                 _vision,
+                 "match_item_name_result",
+                 return_value=_match_result("", chosen_name=""),
+             ):
             _vision.ocr_title_strip(img)
             _vision.ocr_title_strip(img)  # same image
 
@@ -215,7 +308,15 @@ class TestOcrTitleStripCache:
         data = _make_ocr_data(("Arc Alloy", 90, 2, 8))
 
         with patch.object(_vision, "image_to_data", return_value=data) as mock_ocr, \
-             patch.object(_vision, "match_item_name", return_value="Arc Alloy"):
+             patch.object(
+                 _vision,
+                 "match_item_name_result",
+                 return_value=_match_result(
+                     "Arc Alloy",
+                     chosen_name="Arc Alloy",
+                     matched_name="Arc Alloy",
+                 ),
+             ):
             _vision.ocr_title_strip(img)
             _vision.ocr_title_strip(img)  # same image — should hit cache
 
