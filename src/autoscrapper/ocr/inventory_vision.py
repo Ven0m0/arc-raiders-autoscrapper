@@ -852,10 +852,10 @@ def _save_debug_image(name: str, image: np.ndarray) -> None:
     if _OCR_DEBUG_DIR is None:
         return
     timestamp = time.strftime("%Y%m%d_%H%M%S")
-    filename = f"{timestamp}_{time.time_ns() % 1_000_000_000:09d}_{name}.png"
+    filename = f"{timestamp}_{time.time_ns() % 1_000_000_000:09d}_{name}.webp"
     path = _OCR_DEBUG_DIR / filename
     try:
-        cv2.imwrite(str(path), image)
+        cv2.imwrite(str(path), image, [cv2.IMWRITE_WEBP_QUALITY, 80])
     except Exception as exc:  # pragma: no cover - filesystem dependent
         print(f"[vision_ocr] failed to save debug image {path}: {exc}", flush=True)
 
