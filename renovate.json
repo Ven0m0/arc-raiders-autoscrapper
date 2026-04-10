@@ -61,7 +61,7 @@
       "matchManagers": ["pep621"],
       "matchPackageNames": ["python"],
       "matchDepTypes": ["requires-python"],
-      "allowedVersions": "<3.14.4 >=3.14"
+      "allowedVersions": ">=3.14 <3.14.4"
     },
     {
       "description": "Disable Docker digest pinning",
