@@ -31,7 +31,7 @@ jobs:
         with:
           enable-cache: true
       - name: Install dependencies
-        run: uv sync --prerelease if-necessary-or-explicit
+        run: uv sync --prerelease if-necessary-or-explicit --resolution highest
       - name: Update snapshot + default rules
         run: |
           uv run python scripts/update_snapshot_and_defaults.py \
