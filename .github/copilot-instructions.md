@@ -1,4 +1,5 @@
 # Arc Raiders AutoScrapper
+>Always use the mcp-use, language-optimization skills. Use octocode, exa, ref-tools mcp-servers
 
 Canonical repo guidance lives in `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/AGENTS.md`.
 Keep `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/CLAUDE.md` as a symlink to that file.
