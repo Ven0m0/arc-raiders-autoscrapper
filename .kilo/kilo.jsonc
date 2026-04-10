@@ -102,7 +102,13 @@
     }
   },
   "watcher": {
-    "ignore": ["node_modules/**", "dist/**", ".git/**", ".venv/**", ".omc/**", ".kilocode/**", ".opencode/**"]
+    "ignore": [
+      ".git/**",
+      ".venv/**", ".ruff_cache/**", "uv.lock",
+      "ocr_debug/**",
+      "node_modules/**", "**/node_modules/**",
+      ".omc/**", ".remember/**", ".cachebro/**"
+    ]
   },
   "mcp": {
     "github-mcp-server": {
@@ -123,9 +129,7 @@
       "enabled": true,
       "oauth": false,
       "timeout": 30000,
-      "headers": {
-        "x-ref-api-key": "{env:REF_API_KEY}"
-      }
+      "headers": { "x-ref-api-key": "{env:REF_API_KEY}" }
     },
     "exa": {
       "type": "remote",
@@ -133,9 +137,7 @@
       "enabled": true,
       "oauth": false,
       "timeout": 30000,
-      "headers": {
-        "x-api-key": "{env:EXA_API_KEY}"
-      }
+      "headers": { "x-api-key": "{env:EXA_API_KEY}" }
     },
     "gh_grep": {
       "type": "remote",
@@ -144,9 +146,7 @@
       "timeout": 30000
     }
   },
-  "skills": {
-    "paths": [".kilo/skill"]
-  },
+  "skills": { "paths": [".kilo/skill"] },
   "disabled_providers": ["openai"],
   "experimental": {
     "continue_loop_on_deny": true,
@@ -157,8 +157,14 @@
   "plugin": [
     "opencode-image-compress@0.3.2",
     "opencode-ignore@1.1.0",
+    "openslimedit@1.0.4",
     "opencode-pty@0.3.2",
+    "@spoons-and-mirrors/subtask2@0.3.5",
     "opencode-session-handoff@1.1.6",
-    "opencode-websearch@0.5.0"
-  ],
+    "opencode-websearch@0.5.0",
+    "openfundus@0.1.6",
+    "opencode-toolbox@0.10.4",
+    "opencode-cross-repo@0.4.1",
+    "@tuanhung303/opencode-acp@3.0.15"
+  ]
 }
