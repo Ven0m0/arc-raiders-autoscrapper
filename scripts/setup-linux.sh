@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # AutoScrapper Linux Setup Script
-# Required: Python 3.14.4+
+# Required: Python 3.14+
 set -euo pipefail
 
 abort() {
@@ -58,8 +58,8 @@ if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
   fi
 fi
 
-# Python 3.14.4+ is required
-PYTHON_VERSION="${PYTHON_VERSION:-3.14.4}"
+# Python 3.14+ is required
+PYTHON_VERSION="${PYTHON_VERSION:-3.14}"
 
 # 1) System prerequisites
 # - build-essential/linux-headers: needed when dependencies compile (e.g., evdev via pynput)
