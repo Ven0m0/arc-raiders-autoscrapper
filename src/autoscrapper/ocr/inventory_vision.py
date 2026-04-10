@@ -62,6 +62,12 @@ _STAT_LINE_KEYWORDS = (
     "value",
     "weight",
 )
+_STAT_LINE_PATTERN = re.compile(
+    r"\b(?:"
+    + "|".join(re.escape(keyword) for keyword in _STAT_LINE_KEYWORDS)
+    + r")\b",
+    re.IGNORECASE,
+)
 
 
 def reset_ocr_caches() -> None:
@@ -953,9 +959,7 @@ def _extract_title_from_data(
 
     def _looks_like_stat_line(text: str) -> bool:
         lowered = clean_ocr_text(text).casefold()
-        return bool(lowered) and any(
-            keyword in lowered for keyword in _STAT_LINE_KEYWORDS
-        )
+        return bool(lowered) and _STAT_LINE_PATTERN.search(lowered) is not None
 
     ranked_keys = sorted(groups, key=lambda k: (-scored[k], _group_top(k)))
     primary_text, primary_raw = _group_text(ranked_keys[0])

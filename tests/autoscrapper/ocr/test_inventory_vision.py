@@ -217,6 +217,8 @@ class TestExtractTitleFromData:
         def _fake_match(text: str) -> ItemNameMatchResult:
             if text == "Damage 55":
                 return _match_result("Damage 55")
+            if text == "Range 100":
+                return _match_result("Range 100")
             if text == "Arc Alloy":
                 return _match_result(
                     "Arc Alloy",
@@ -234,14 +236,14 @@ class TestExtractTitleFromData:
     def test_unmatched_non_stat_line_does_not_trigger_fallback(self):
         data = _make_ocr_data(
             ("Arc Allov", 95, 2, 8, 1),
-            ("Damage", 80, 14, 8, 2),
+            ("Random Text", 80, 14, 8, 2),
         )
 
         def _fake_match(text: str) -> ItemNameMatchResult:
             if text == "Arc Allov":
                 return _match_result("Arc Allov", chosen_name="Arc Allov")
-            if text == "Damage":
-                return _match_result("Damage", chosen_name="Damage")
+            if text == "Random Text":
+                return _match_result("Random Text", chosen_name="Random Text")
             raise AssertionError(f"unexpected OCR text: {text}")
 
         with patch.object(_vision, "match_item_name_result", side_effect=_fake_match):
@@ -249,6 +251,32 @@ class TestExtractTitleFromData:
 
         assert item_name == "Arc Allov"
         assert raw == "Arc Allov"
+
+    def test_fallback_skips_multiple_stat_lines_before_known_item(self):
+        data = _make_ocr_data(
+            ("Damage", 95, 2, 8, 1),
+            ("55", 95, 2, 8, 1),
+            ("Range", 90, 12, 8, 2),
+            ("100", 90, 12, 8, 2),
+            ("Arc Alloy", 80, 22, 8, 3),
+        )
+
+        def _fake_match(text: str) -> ItemNameMatchResult:
+            if text == "Damage 55":
+                return _match_result("Damage 55")
+            if text == "Arc Alloy":
+                return _match_result(
+                    "Arc Alloy",
+                    chosen_name="Arc Alloy",
+                    matched_name="Arc Alloy",
+                )
+            raise AssertionError(f"unexpected OCR text: {text}")
+
+        with patch.object(_vision, "match_item_name_result", side_effect=_fake_match):
+            item_name, raw = _extract_title_from_data(data, image_height=40)
+
+        assert item_name == "Arc Alloy"
+        assert raw == "Arc Alloy"
 
 
 # ---------------------------------------------------------------------------
