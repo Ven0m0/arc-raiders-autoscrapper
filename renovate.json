@@ -53,7 +53,6 @@
       "description": "Pin and constrain Python Docker image to <3.14.4",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["python"],
-      "matchVersion": "/^3\\.1[0-3]\\./",
       "pinDigests": false,
       "pinVersions": ["3.14.3"],
       "allowedVersions": "<3.14.4"
