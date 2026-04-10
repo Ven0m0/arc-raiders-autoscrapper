@@ -1097,12 +1097,12 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
     ocr_time = 0.0
     try:
         ocr_start = time.perf_counter()
-        data = image_to_data(processed, single_line=True)
+        raw_text = image_to_string(processed, single_line=True)
         ocr_time = time.perf_counter() - ocr_start
     except Exception as exc:
         _last_roi_hash = None  # invalidate cache so next call does not re-serve stale result
         print(
-            f"[vision_ocr] ocr_backend image_to_data failed for infobox title strip; "
+            f"[vision_ocr] ocr_backend image_to_string failed for infobox title strip; "
             f"falling back to empty OCR result. error={exc}",
             flush=True,
         )
@@ -1116,7 +1116,8 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
             ocr_failed=True,
         )
 
-    item_name, raw_item_text = _extract_cropped_title_from_data(data, processed.shape[0])
+    raw_item_text = clean_ocr_text(raw_text)
+    item_name = match_item_name(raw_item_text)
     if item_name:
         _last_roi_hash = roi_hash
         _last_ocr_result = (item_name, raw_item_text)

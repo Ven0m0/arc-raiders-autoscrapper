@@ -132,7 +132,7 @@ def _get_api() -> PyTessBaseAPI:
 
 def _get_api_line() -> PyTessBaseAPI:
     """
-    Lazily initialize and return the shared single-line Tesseract API instance.
+    Lazily initialize and return the shared single-line Tesseract API instance (PSM.SINGLE_LINE).
     """
     global _api_line
     if _api_line is not None:
@@ -242,7 +242,7 @@ def _build_data_dict(iterator) -> Dict[str, List]:
 
 def image_to_string(image: np.ndarray, *, single_line: bool = False) -> str:
     """
-    OCR the provided image and return raw UTF-8 text.
+    OCR the provided image and return raw UTF-8 text. Uses _api_line singleton if single_line is True.
     """
     api = _get_api_line() if single_line else _get_api()
     pil_img = _as_pil_image(np.ascontiguousarray(image))
