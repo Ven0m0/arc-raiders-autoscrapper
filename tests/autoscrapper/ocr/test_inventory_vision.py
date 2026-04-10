@@ -228,7 +228,7 @@ class TestExtractTitleFromData:
             raise AssertionError(f"unexpected OCR text: {text}")
 
         with patch.object(_vision, "match_item_name_result", side_effect=_fake_match):
-            item_name, raw = _extract_title_from_data(data, image_height=40)
+            item_name, raw = _extract_title_from_data(data, image_height=120)
 
         assert item_name == "Arc Alloy"
         assert raw == "Arc Alloy"
@@ -247,7 +247,7 @@ class TestExtractTitleFromData:
             raise AssertionError(f"unexpected OCR text: {text}")
 
         with patch.object(_vision, "match_item_name_result", side_effect=_fake_match):
-            item_name, raw = _extract_title_from_data(data, image_height=40)
+            item_name, raw = _extract_title_from_data(data, image_height=120)
 
         assert item_name == "Arc Allov"
         assert raw == "Arc Allov"
