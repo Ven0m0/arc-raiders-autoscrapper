@@ -5,7 +5,7 @@ import logging
 import os
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict, Optional
 
 from .interaction.keybinds import DEFAULT_STOP_KEY, normalize_stop_key
 
@@ -39,8 +39,8 @@ class ProgressSettings:
     all_quests_completed: bool = False
     active_quests: list[str] = field(default_factory=list)
     completed_quests: list[str] = field(default_factory=list)
-    hideout_levels: dict[str, int] = field(default_factory=dict)
-    last_updated: str | None = None
+    hideout_levels: Dict[str, int] = field(default_factory=dict)
+    last_updated: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -64,13 +64,13 @@ def _coerce_bool(value: Any, default: bool) -> bool:
     return value if isinstance(value, bool) else default
 
 
-def _coerce_positive_int(value: Any) -> int | None:
+def _coerce_positive_int(value: Any) -> Optional[int]:
     if isinstance(value, int) and value > 0:
         return value
     return None
 
 
-def _coerce_non_negative_int(value: Any) -> int | None:
+def _coerce_non_negative_int(value: Any) -> Optional[int]:
     if isinstance(value, int) and value >= 0:
         return value
     return None
@@ -102,7 +102,7 @@ def _clamp_retry_count(value: int, field_name: str) -> int:
     return value
 
 
-def _raw_with_aliases(raw: dict[str, Any], *keys: str) -> Any:
+def _raw_with_aliases(raw: Dict[str, Any], *keys: str) -> Any:
     for key in keys:
         if key in raw:
             return raw.get(key)
@@ -114,22 +114,22 @@ def _raw_with_aliases(raw: dict[str, Any], *keys: str) -> Any:
 # ---------------------------------------------------------------------------
 
 
-def _migrate_v1_to_v2(payload: dict[str, Any]) -> dict[str, Any]:
+def _migrate_v1_to_v2(payload: Dict[str, Any]) -> Dict[str, Any]:
     """Stub: no structural changes between v1 and v2."""
     return payload
 
 
-def _migrate_v2_to_v3(payload: dict[str, Any]) -> dict[str, Any]:
+def _migrate_v2_to_v3(payload: Dict[str, Any]) -> Dict[str, Any]:
     """Stub: no structural changes between v2 and v3."""
     return payload
 
 
-def _migrate_v3_to_v4(payload: dict[str, Any]) -> dict[str, Any]:
+def _migrate_v3_to_v4(payload: Dict[str, Any]) -> Dict[str, Any]:
     """Stub: no structural changes between v3 and v4."""
     return payload
 
 
-def _migrate_v4_to_v5(payload: dict[str, Any]) -> dict[str, Any]:
+def _migrate_v4_to_v5(payload: Dict[str, Any]) -> Dict[str, Any]:
     """Stub: no structural changes between v4 and v5."""
     return payload
 
@@ -142,7 +142,7 @@ _MIGRATIONS = {
 }
 
 
-def _migrate_config(payload: dict[str, Any]) -> dict[str, Any]:
+def _migrate_config(payload: Dict[str, Any]) -> Dict[str, Any]:
     """
     Walk the payload from its stored version up to CONFIG_VERSION,
     applying each migration step in sequence.  Warns if the stored
@@ -177,7 +177,7 @@ def _migrate_config(payload: dict[str, Any]) -> dict[str, Any]:
     return payload
 
 
-def _load_config_dict() -> dict[str, Any]:
+def _load_config_dict() -> Dict[str, Any]:
     path = config_path()
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
@@ -192,7 +192,7 @@ def _load_config_dict() -> dict[str, Any]:
     return _migrate_config(raw)
 
 
-def _save_config_dict(payload: dict[str, Any]) -> None:
+def _save_config_dict(payload: Dict[str, Any]) -> None:
     path = config_path()
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -346,7 +346,7 @@ def _from_raw_progress_settings(raw: Any) -> ProgressSettings:
         if isinstance(completed_quests_raw, list)
         else []
     )
-    hideout_levels: dict[str, int] = {}
+    hideout_levels: Dict[str, int] = {}
     if isinstance(hideout_levels_raw, dict):
         for key, value in hideout_levels_raw.items():
             try:

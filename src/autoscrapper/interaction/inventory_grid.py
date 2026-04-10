@@ -7,8 +7,8 @@ when the grid is vertically offset ("carousel" effect).
 """
 
 import logging
-from collections.abc import Iterator
 from dataclasses import dataclass
+from typing import Iterator, List, Tuple
 
 import cv2  # type: ignore
 import numpy as np
@@ -63,21 +63,21 @@ class Cell:
     y: int  # top-left y in pixels (window-relative)
     width: int  # visible width
     height: int  # visible height
-    safe_bounds: tuple[int, int, int, int]  # (x1, y1, x2, y2) window-relative
+    safe_bounds: Tuple[int, int, int, int]  # (x1, y1, x2, y2) window-relative
 
     @property
-    def rect(self) -> tuple[int, int, int, int]:
+    def rect(self) -> Tuple[int, int, int, int]:
         """(x, y, w, h) rectangle in pixels."""
         return self.x, self.y, self.width, self.height
 
     @property
-    def safe_rect(self) -> tuple[int, int, int, int]:
+    def safe_rect(self) -> Tuple[int, int, int, int]:
         """Shrunken rectangle inside the cell (x, y, w, h)."""
         x1, y1, x2, y2 = self.safe_bounds
         return x1, y1, x2 - x1, y2 - y1
 
     @property
-    def center(self) -> tuple[float, float]:
+    def center(self) -> Tuple[float, float]:
         """
         Center of the safe rectangle in pixels (cx, cy).
         Using the safe rectangle keeps the cursor away from borders.
@@ -88,7 +88,7 @@ class Cell:
         return cx, cy
 
     @property
-    def safe_center(self) -> tuple[float, float]:
+    def safe_center(self) -> Tuple[float, float]:
         """Alias for center for readability."""
         return self.center
 
@@ -104,8 +104,8 @@ class Grid:
 
     def __init__(
         self,
-        cells: list[Cell],
-        roi_rect: tuple[int, int, int, int],
+        cells: List[Cell],
+        roi_rect: Tuple[int, int, int, int],
         window_width: int,
         window_height: int,
     ):
@@ -118,10 +118,10 @@ class Grid:
     def detect(
         cls,
         inv_bgr: np.ndarray,
-        roi_rect: tuple[int, int, int, int],
+        roi_rect: Tuple[int, int, int, int],
         window_width: int,
         window_height: int,
-    ) -> Grid:
+    ) -> "Grid":
         """
         Build a grid by detecting cell contours inside the provided ROI image.
         inv_bgr: BGR image cropped to the inventory ROI (window-relative).
@@ -141,7 +141,7 @@ class Grid:
             )
             detections = _synthetic_grid(roi_w, roi_h)
 
-        cells: list[Cell] = []
+        cells: List[Cell] = []
         roi_x, roi_y, _, _ = roi_rect
 
         for idx, det in enumerate(detections):
@@ -189,11 +189,11 @@ class Grid:
         idx = row * self.COLS + col
         return self._cells[idx]
 
-    def center_by_index(self, index: int) -> tuple[float, float]:
+    def center_by_index(self, index: int) -> Tuple[float, float]:
         """Center (cx, cy) of cell with given row-major index."""
         return self.cell_by_index(index).center
 
-    def center(self, row: int, col: int) -> tuple[float, float]:
+    def center(self, row: int, col: int) -> Tuple[float, float]:
         """Center (cx, cy) of cell at (row, col)."""
         return self.cell(row, col).center
 
@@ -204,10 +204,10 @@ class Grid:
 
 
 def normalized_rect_to_window(
-    norm_rect: tuple[float, float, float, float],
+    norm_rect: Tuple[float, float, float, float],
     window_width: int,
     window_height: int,
-) -> tuple[int, int, int, int]:
+) -> Tuple[int, int, int, int]:
     """
     Scale a normalized rectangle (x, y, w, h in [0,1]) to window-relative pixels.
     """
@@ -221,14 +221,14 @@ def normalized_rect_to_window(
 
 def inventory_roi_rect(
     window_width: int, window_height: int
-) -> tuple[int, int, int, int]:
+) -> Tuple[int, int, int, int]:
     """
     Window-relative rectangle for the inventory grid ROI.
     """
     return normalized_rect_to_window(GRID_ROI_NORM, window_width, window_height)
 
 
-def safe_mouse_point(window_width: int, window_height: int) -> tuple[int, int]:
+def safe_mouse_point(window_width: int, window_height: int) -> Tuple[int, int]:
     """
     Window-relative point to park the mouse while detecting cells.
     """
@@ -238,7 +238,7 @@ def safe_mouse_point(window_width: int, window_height: int) -> tuple[int, int]:
     return sx + sw // 2, sy + sh // 2
 
 
-def grid_center_point(window_width: int, window_height: int) -> tuple[int, int]:
+def grid_center_point(window_width: int, window_height: int) -> Tuple[int, int]:
     """
     Window-relative center point of the grid ROI (useful for scrolling).
     """
@@ -254,7 +254,7 @@ def grid_center_point(window_width: int, window_height: int) -> tuple[int, int]:
 def _synthetic_grid(
     roi_w: int,
     roi_h: int,
-) -> list[dict]:
+) -> List[dict]:
     """
     Build a uniform 4×5 grid of cells from the ROI dimensions.
     Used as a fallback when contour detection finds fewer than the expected
@@ -263,7 +263,7 @@ def _synthetic_grid(
     """
     col_w = roi_w / GRID_COLS
     row_h = roi_h / GRID_ROWS
-    cells: list[dict] = []
+    cells: List[dict] = []
     for row in range(GRID_ROWS):
         for col in range(GRID_COLS):
             x = int(round(col * col_w))
@@ -298,7 +298,7 @@ def _scaled_cell_size(window_width: int, window_height: int) -> int:
     return max(1, int(round(REF_CELL_SIZE * scale)))
 
 
-def _detect_cells_by_contours(inv_bgr: np.ndarray, cell_size: int) -> list[dict]:
+def _detect_cells_by_contours(inv_bgr: np.ndarray, cell_size: int) -> List[dict]:
     """
     Detect cell bounding boxes within the inventory ROI using contours.
     Returns a list of dictionaries:
@@ -322,7 +322,7 @@ def _detect_cells_by_contours(inv_bgr: np.ndarray, cell_size: int) -> list[dict]
 
     contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    cells: list[dict] = []
+    cells: List[dict] = []
     min_w = cell_size * (1.0 - CELL_SIZE_TOLERANCE)
     max_w = cell_size * (1.0 + CELL_SIZE_TOLERANCE)
     min_h = cell_size * MIN_VISIBLE_RATIO

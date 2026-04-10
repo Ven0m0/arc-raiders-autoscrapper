@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import asdict, dataclass
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from hashlib import blake2b
 from pathlib import Path
 from typing import Literal
@@ -51,7 +51,7 @@ def default_capture_paths() -> CorpusPaths:
 
 def _iso_now() -> str:
     return (
-        datetime.now(UTC)
+        datetime.now(timezone.utc)
         .replace(microsecond=0)
         .isoformat()
         .replace("+00:00", "Z")
@@ -217,7 +217,7 @@ def resolve_image_path(sample: OcrFailureSample, *, manifest_path: Path) -> Path
 
 def write_report(directory: Path, prefix: str, payload: object) -> Path:
     directory.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     path = directory / f"{prefix}_{stamp}.json"
     path.write_text(
         json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"

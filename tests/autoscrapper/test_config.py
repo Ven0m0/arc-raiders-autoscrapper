@@ -1,6 +1,5 @@
 from unittest.mock import patch
-
-from autoscrapper.config import CONFIG_VERSION, _migrate_config
+from autoscrapper.config import _migrate_config, CONFIG_VERSION
 
 
 def test_migrate_config_no_version():

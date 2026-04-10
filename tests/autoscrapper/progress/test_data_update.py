@@ -1,20 +1,19 @@
-import unittest.mock as mock
-
 import pytest
-
+import unittest.mock as mock
 from autoscrapper.progress.data_update import (
-    DownloadError,
     _fetch_supabase_all,
     update_data_snapshot,
+    DownloadError,
 )
 
 
 def test_fetch_supabase_all_missing_key():
-    with mock.patch("autoscrapper.progress.data_update.SUPABASE_ANON_KEY", None), pytest.raises(
-        DownloadError,
-        match="METAFORGE_SUPABASE_ANON_KEY environment variable is not set",
-    ):
-        _fetch_supabase_all("some_table")
+    with mock.patch("autoscrapper.progress.data_update.SUPABASE_ANON_KEY", None):
+        with pytest.raises(
+            DownloadError,
+            match="METAFORGE_SUPABASE_ANON_KEY environment variable is not set",
+        ):
+            _fetch_supabase_all("some_table")
 
 
 def test_update_data_snapshot_handles_missing_key(tmp_path):

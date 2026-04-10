@@ -1,5 +1,4 @@
 import pytest
-
 from autoscrapper.interaction.keybinds import stop_key_label
 
 

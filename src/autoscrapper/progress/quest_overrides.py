@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import List
+
 QUEST_TRADER_OVERRIDES = {
     "combat-recon": "Shani",
     "bombing-run": "Shani",
@@ -9,7 +11,7 @@ QUEST_TRADER_OVERRIDES = {
 }
 
 
-def apply_quest_overrides(quests: list[dict]) -> list[dict]:
+def apply_quest_overrides(quests: List[dict]) -> List[dict]:
     """Apply quest overrides without mutating the original list."""
     updated = []
     for quest in quests:

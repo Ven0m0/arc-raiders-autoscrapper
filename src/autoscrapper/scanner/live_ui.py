@@ -3,6 +3,7 @@ from __future__ import annotations
 import time
 from collections import Counter, deque
 from datetime import datetime, timedelta
+from typing import Optional
 
 from .outcomes import _outcome_style
 from .rich_support import (
@@ -38,7 +39,7 @@ AUTOSCRAPPER_ASCII = r"""
 """.strip("\n")
 
 
-def _format_duration(seconds: float | None) -> str:
+def _format_duration(seconds: Optional[float]) -> str:
     if seconds is None:
         return "--:--"
     if seconds < 0:
@@ -98,7 +99,7 @@ class _ScanLiveUI:
         self.last_item_label = ""
         self.last_outcome_label = ""
 
-        self._scan_started_at: float | None = None
+        self._scan_started_at: Optional[float] = None
 
         self.progress: Progress = Progress(
             SpinnerColumn(style="cyan"),
@@ -131,7 +132,7 @@ class _ScanLiveUI:
         if self._scan_started_at is None:
             self._scan_started_at = time.perf_counter()
 
-    def set_total(self, total: int | None) -> None:
+    def set_total(self, total: Optional[int]) -> None:
         self.progress.update(self._task_id, total=total)
         self.refresh()
 
@@ -157,7 +158,7 @@ class _ScanLiveUI:
     def refresh(self) -> None:
         self._live.update(self._render(), refresh=True)
 
-    def _render_counts(self) -> Table:
+    def _render_counts(self) -> "Table":
         table = Table(
             box=box.SIMPLE,
             show_header=False,
@@ -203,7 +204,7 @@ class _ScanLiveUI:
         eta = datetime.now() + timedelta(seconds=seconds)
         return eta.strftime("%H:%M:%S")
 
-    def _render_events(self) -> Table:
+    def _render_events(self) -> "Table":
         table = Table.grid(expand=True)
         table.add_column(justify="right", width=8, no_wrap=True, style="dim")
         table.add_column(ratio=1, overflow="fold")
@@ -217,7 +218,7 @@ class _ScanLiveUI:
 
         return table
 
-    def _render(self) -> Group:
+    def _render(self) -> "Group":
         banner = Text(AUTOSCRAPPER_ASCII, style="bold cyan")
 
         subtitle = Text()

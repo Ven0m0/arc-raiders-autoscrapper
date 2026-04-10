@@ -173,7 +173,7 @@ class ActiveQuestsScreen(ProgressScreen):
         self.state = state
         self.search_query = ""
         self.sort_mode: str = "name_asc"
-        self.filtered: list[QuestEntry] = []
+        self.filtered: List[QuestEntry] = []
 
     def compose(self) -> ComposeResult:
         yield Static("Select Active Quests", id="quest-title")
@@ -205,7 +205,7 @@ class ActiveQuestsScreen(ProgressScreen):
     def _focus_list(self) -> None:
         self.query_one("#quest-list", OptionList).focus()
 
-    def _sorted_entries(self) -> list[QuestEntry]:
+    def _sorted_entries(self) -> List[QuestEntry]:
         entries = list(self.state.quest_entries)
         if self.sort_mode == "trader":
             entries.sort(
@@ -225,14 +225,14 @@ class ActiveQuestsScreen(ProgressScreen):
         )
         return entries
 
-    def _filtered_entries(self) -> list[QuestEntry]:
+    def _filtered_entries(self) -> List[QuestEntry]:
         entries = self._sorted_entries()
         if not self.search_query:
             return entries
         normalized = normalize_quest_value(self.search_query)
         if not normalized:
             return entries
-        results: list[QuestEntry] = []
+        results: List[QuestEntry] = []
         for entry in entries:
             name_norm = normalize_quest_value(entry.name)
             trader_norm = normalize_quest_value(entry.trader)
@@ -721,13 +721,13 @@ def launch_generate_rules(app) -> None:
 
 
 __all__ = [
-    "ActiveQuestsScreen",
-    "ProgressIntroScreen",
-    "ProgressSummaryScreen",
-    "ReviewQuestsScreen",
-    "WorkshopLevelsScreen",
     "launch_edit_workshops",
     "launch_generate_rules",
     "launch_progress_wizard",
     "launch_review_quests",
+    "ProgressIntroScreen",
+    "ActiveQuestsScreen",
+    "WorkshopLevelsScreen",
+    "ProgressSummaryScreen",
+    "ReviewQuestsScreen",
 ]

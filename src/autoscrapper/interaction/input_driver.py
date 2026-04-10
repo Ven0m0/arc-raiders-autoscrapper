@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import sys
 import time
+from typing import Optional
 
 from .keybinds import DEFAULT_STOP_KEY, normalize_stop_key
 
@@ -41,7 +42,7 @@ if sys.platform == "win32":
         "down": 0x28,
     }
 
-    def _vk_code_for_stop_key(stop_key: str) -> int | None:
+    def _vk_code_for_stop_key(stop_key: str) -> Optional[int]:
         key = normalize_stop_key(stop_key)
         special = _SPECIAL_VK.get(key)
         if special is not None:
@@ -92,7 +93,7 @@ elif sys.platform.startswith("linux"):
     _MOUSE = mouse.Controller()
     _KEY_STATE: set[object] = set()
     _KEY_LATCH: set[str] = set()
-    _LISTENER: keyboard.Listener | None = None
+    _LISTENER: Optional[keyboard.Listener] = None
     _LISTENER_LOCK = threading.Lock()
     _KEY_STATE_LOCK = threading.Lock()
 
@@ -134,7 +135,7 @@ elif sys.platform.startswith("linux"):
     ):
         _register_special_key(_attr, _canonical)
 
-    def _canonical_linux_key(key: object) -> str | None:
+    def _canonical_linux_key(key: object) -> Optional[str]:
         special = _SPECIAL_KEYS.get(key)
         if special is not None:
             return special

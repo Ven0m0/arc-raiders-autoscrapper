@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-import re
 from collections import deque
-from collections.abc import Iterable
+import re
+from typing import Dict, Iterable, List, Set, Tuple
 
 from .progress_config import (
     build_quest_index,
@@ -18,14 +18,14 @@ def _normalize_quest_name(value: str) -> str:
 
 
 def _build_predecessors_by_id(
-    quests: list[dict], quest_graph: dict[str, object]
-) -> dict[str, set[str]]:
+    quests: List[dict], quest_graph: Dict[str, object]
+) -> Dict[str, Set[str]]:
     nodes = quest_graph.get("nodes")
     edges = quest_graph.get("edges")
     if not isinstance(nodes, dict) or not isinstance(edges, list):
         raise ValueError("Invalid quest graph format.")
 
-    quest_id_by_name: dict[str, str] = {}
+    quest_id_by_name: Dict[str, str] = {}
     for quest in quests:
         quest_id = quest.get("id")
         quest_name = quest.get("name")
@@ -37,8 +37,8 @@ def _build_predecessors_by_id(
             raise ValueError(f"Duplicate quest name in data: {quest_name}")
         quest_id_by_name[normalized_name] = str(quest_id)
 
-    node_to_quest_id: dict[str, str] = {}
-    unresolved_nodes: list[str] = []
+    node_to_quest_id: Dict[str, str] = {}
+    unresolved_nodes: List[str] = []
     for node_id, node_name in nodes.items():
         if not isinstance(node_id, str):
             continue
@@ -55,7 +55,7 @@ def _build_predecessors_by_id(
             f"{examples}"
         )
 
-    predecessors: dict[str, set[str]] = {}
+    predecessors: Dict[str, Set[str]] = {}
     for quest in quests:
         quest_id = quest.get("id")
         if quest_id:
@@ -77,11 +77,11 @@ def _build_predecessors_by_id(
 
 
 def _build_trader_sequences(
-    quests: list[dict],
-) -> tuple[list[str], dict[str, list[str]]]:
+    quests: List[dict],
+) -> Tuple[List[str], Dict[str, List[str]]]:
     quests_by_trader = group_quests_by_trader(quests)
     trader_order = sorted(quests_by_trader.keys())
-    sequences: dict[str, list[str]] = {}
+    sequences: Dict[str, List[str]] = {}
     for trader in trader_order:
         ids = []
         for quest in quests_by_trader[trader]:
@@ -93,24 +93,24 @@ def _build_trader_sequences(
 
 
 def _state_completed_ids(
-    state: tuple[int, ...],
-    trader_order: list[str],
-    trader_sequences: dict[str, list[str]],
-) -> list[str]:
-    completed: list[str] = []
+    state: Tuple[int, ...],
+    trader_order: List[str],
+    trader_sequences: Dict[str, List[str]],
+) -> List[str]:
+    completed: List[str] = []
     for idx, trader in enumerate(trader_order):
         completed.extend(trader_sequences[trader][: state[idx]])
     return completed
 
 
 def _state_active_signature(
-    state: tuple[int, ...],
-    trader_order: list[str],
-    trader_sequences: dict[str, list[str]],
-    predecessors_by_id: dict[str, set[str]],
-) -> tuple[str, ...]:
+    state: Tuple[int, ...],
+    trader_order: List[str],
+    trader_sequences: Dict[str, List[str]],
+    predecessors_by_id: Dict[str, Set[str]],
+) -> Tuple[str, ...]:
     completed = set(_state_completed_ids(state, trader_order, trader_sequences))
-    active: list[str] = []
+    active: List[str] = []
     for idx, trader in enumerate(trader_order):
         line = trader_sequences[trader]
         cursor = state[idx]
@@ -124,11 +124,11 @@ def _state_active_signature(
 
 
 def _infer_completed_from_graph_ancestors(
-    quests: list[dict],
+    quests: List[dict],
     active_ids: Iterable[str],
-    predecessors_by_id: dict[str, set[str]],
-) -> list[str]:
-    completed: set[str] = set()
+    predecessors_by_id: Dict[str, Set[str]],
+) -> List[str]:
+    completed: Set[str] = set()
     active = {str(quest_id) for quest_id in active_ids}
     stack = list(active)
 
@@ -145,7 +145,7 @@ def _infer_completed_from_graph_ancestors(
     return [quest_id for quest_id in ordered_ids if quest_id in completed]
 
 
-def _resolve_active_ids(quests: list[dict], active_quests: Iterable[str]) -> set[str]:
+def _resolve_active_ids(quests: List[dict], active_quests: Iterable[str]) -> Set[str]:
     quests_by_trader = group_quests_by_trader(quests)
     quest_index = build_quest_index(quests_by_trader)
     active_resolved, missing = resolve_active_quests(list(active_quests), quest_index)
@@ -155,21 +155,21 @@ def _resolve_active_ids(quests: list[dict], active_quests: Iterable[str]) -> set
 
 
 def infer_completed_from_active(
-    quests: list[dict], quest_graph: dict[str, object], active_quests: Iterable[str]
-) -> list[str]:
+    quests: List[dict], quest_graph: Dict[str, object], active_quests: Iterable[str]
+) -> List[str]:
     target_active = tuple(sorted(_resolve_active_ids(quests, active_quests)))
     trader_order, trader_sequences = _build_trader_sequences(quests)
     predecessors_by_id = _build_predecessors_by_id(quests, quest_graph)
 
-    trader_index_by_id: dict[str, int] = {}
+    trader_index_by_id: Dict[str, int] = {}
     for idx, trader in enumerate(trader_order):
         for quest_id in trader_sequences[trader]:
             trader_index_by_id[quest_id] = idx
 
     start_state = tuple(0 for _ in trader_order)
-    queue: deque[tuple[int, ...]] = deque([start_state])
-    seen: set[tuple[int, ...]] = {start_state}
-    matches: list[tuple[int, ...]] = []
+    queue: deque[Tuple[int, ...]] = deque([start_state])
+    seen: Set[Tuple[int, ...]] = {start_state}
+    matches: List[Tuple[int, ...]] = []
 
     while queue:
         state = queue.popleft()

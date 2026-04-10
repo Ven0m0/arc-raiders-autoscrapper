@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict, List, Optional
 
 from .quest_overrides import apply_quest_overrides
 
@@ -12,19 +12,19 @@ DATA_DIR = Path(__file__).resolve().parent / "data"
 
 @dataclass(frozen=True)
 class GameData:
-    items: list[dict]
-    hideout_modules: list[dict]
-    quests: list[dict]
-    quest_graph: dict[str, Any]
-    projects: list[dict]
-    metadata: dict[str, str]
+    items: List[dict]
+    hideout_modules: List[dict]
+    quests: List[dict]
+    quest_graph: Dict[str, Any]
+    projects: List[dict]
+    metadata: Dict[str, str]
 
 
 def _read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def load_game_data(data_dir: Path | None = None) -> GameData:
+def load_game_data(data_dir: Optional[Path] = None) -> GameData:
     data_dir = data_dir or DATA_DIR
 
     items_path = data_dir / "items.json"
@@ -50,7 +50,7 @@ def load_game_data(data_dir: Path | None = None) -> GameData:
     hideout_modules = _read_json(hideout_modules_path)
     projects = _read_json(projects_path)
 
-    metadata: dict | None = None
+    metadata: Optional[dict] = None
     if metadata_path.exists():
         try:
             metadata = _read_json(metadata_path)
@@ -73,7 +73,7 @@ def load_game_data(data_dir: Path | None = None) -> GameData:
     )
 
 
-def _normalize_items(items: list[dict]) -> list[dict]:
+def _normalize_items(items: List[dict]) -> List[dict]:
     normalized = []
     for item in items:
         found_in = item.get("foundIn")

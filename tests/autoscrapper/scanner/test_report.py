@@ -1,6 +1,6 @@
+from autoscrapper.scanner.report import _item_label
 from autoscrapper.core.item_actions import ItemActionResult
 from autoscrapper.interaction.inventory_grid import Cell
-from autoscrapper.scanner.report import _item_label
 
 
 def test_item_label_prefers_item_name_over_raw_text():

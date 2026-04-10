@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Optional
 
 DEFAULT_RULES_PATH = Path(__file__).with_name("items_rules.default.json")
 CUSTOM_RULES_PATH = Path(__file__).with_name("items_rules.custom.json")
@@ -29,7 +30,7 @@ def _coerce_payload(raw: object) -> dict:
     return {"metadata": {}, "items": []}
 
 
-def load_rules(path: Path | None = None) -> dict:
+def load_rules(path: Optional[Path] = None) -> dict:
     rules_path = path or active_rules_path()
     if not rules_path.exists():
         return {"metadata": {}, "items": []}
@@ -56,7 +57,7 @@ def save_custom_rules(payload: dict) -> None:
     save_rules(payload, CUSTOM_RULES_PATH)
 
 
-def normalize_action(value: str) -> str | None:
+def normalize_action(value: str) -> Optional[str]:
     raw = value.strip().lower()
     if raw in {"k", "keep"}:
         return "keep"

@@ -1,22 +1,23 @@
 from __future__ import annotations
 
 import os
-import sys
 import threading
 from dataclasses import dataclass
 from pathlib import Path
+import sys
+from typing import Dict, List
 
 import numpy as np
-import tessdata
 from PIL import Image
-from tesserocr import PSM, RIL, PyTessBaseAPI, iterate_level
+import tessdata
+from tesserocr import PSM, PyTessBaseAPI, RIL, iterate_level
 
 _api_lock = threading.Lock()
 _api_init_lock = threading.Lock()
 _api: PyTessBaseAPI | None = None
 _api_line: PyTessBaseAPI | None = None
 _tessdata_dir: str | None = None
-_backend_info: OcrBackendInfo | None = None
+_backend_info: "OcrBackendInfo | None" = None
 
 
 @dataclass(frozen=True)
@@ -174,7 +175,7 @@ def _as_pil_image(image: np.ndarray) -> Image.Image:
     raise ValueError(f"Unsupported image shape for OCR: {image.shape}")
 
 
-def _empty_data_dict() -> dict[str, list]:
+def _empty_data_dict() -> Dict[str, List]:
     return {
         "level": [],
         "page_num": [],
@@ -191,7 +192,7 @@ def _empty_data_dict() -> dict[str, list]:
     }
 
 
-def _build_data_dict(iterator) -> dict[str, list]:
+def _build_data_dict(iterator) -> Dict[str, List]:
     data = _empty_data_dict()
     block_num = 0
     par_num = 0
@@ -253,7 +254,7 @@ def image_to_string(image: np.ndarray, *, single_line: bool = False) -> str:
     return text
 
 
-def image_to_data(image: np.ndarray, *, single_line: bool = False) -> dict[str, list]:
+def image_to_data(image: np.ndarray, *, single_line: bool = False) -> Dict[str, List]:
     """
     OCR the provided image and return a dict shaped like pytesseract Output.DICT.
     """

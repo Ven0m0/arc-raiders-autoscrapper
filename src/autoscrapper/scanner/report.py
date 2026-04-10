@@ -1,14 +1,15 @@
 from __future__ import annotations
 
 from collections import Counter
+from typing import List, Optional
 
-from ..core.item_actions import ItemActionResult
 from .outcomes import _describe_action, _outcome_style
 from .rich_support import Console, Table, Text, box
 from .types import ScanStats
+from ..core.item_actions import ItemActionResult
 
 
-def _summarize_results(results: list[ItemActionResult]) -> Counter:
+def _summarize_results(results: List[ItemActionResult]) -> Counter:
     summary = Counter()
     for result in results:
         label, _ = _describe_action(result.action_taken)
@@ -17,9 +18,9 @@ def _summarize_results(results: list[ItemActionResult]) -> Counter:
 
 
 def _render_scan_overview(
-    results: list[ItemActionResult],
+    results: List[ItemActionResult],
     stats: ScanStats,
-    console: Console | None,
+    console: Optional["Console"],
 ) -> None:
     """
     Display high-level scan metrics (stash total, processed count, pages, time).
@@ -66,7 +67,7 @@ def _render_scan_overview(
     console.print(table)
 
 
-def _render_summary(summary: Counter, console: Console | None) -> None:
+def _render_summary(summary: Counter, console: Optional["Console"]) -> None:
     ordered_keys = [k for k in ("KEEP", "RECYCLE", "SELL") if k in summary]
     ordered_keys += [k for k in ("DRY-KEEP", "DRY-RECYCLE", "DRY-SELL") if k in summary]
     if "UNREADABLE" in summary:
@@ -104,7 +105,7 @@ def _item_label(result: ItemActionResult) -> str:
 
 
 def _render_results(
-    results: list[ItemActionResult],
+    results: List[ItemActionResult],
     cells_per_page: int,
     stats: ScanStats,
 ) -> None:
