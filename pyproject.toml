@@ -1,5 +1,5 @@
 [build-system]
-requires = ["uv_build>=0.11.6", "setuptools>=61", "wheel"]
+requires = ["uv_build>=0.11.6", "setuptools>=82.0.1", "wheel"]
 build-backend = "uv_build"
 
 [project]
@@ -13,7 +13,7 @@ dependencies = [
   "numpy",
   "opencv-python-headless",
   "orjson",
-  "Pillow>=12.1.1",
+  "Pillow>=12.2.0",
   "pydirectinput-rgx; sys_platform == 'win32'",
   "pywinctl",
   "rapidfuzz~=3.14.5",

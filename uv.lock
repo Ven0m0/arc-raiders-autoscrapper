@@ -53,7 +53,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python-headless" },
     { name = "orjson" },
-    { name = "pillow", specifier = ">=12.1.1" },
+    { name = "pillow", specifier = ">=12.2.0" },
     { name = "prek", marker = "extra == 'dev'", specifier = ">=0.3.8" },
     { name = "pydirectinput-rgx", marker = "sys_platform == 'win32'" },
     { name = "pynput", marker = "sys_platform == 'linux' and extra == 'linux-input'" },
