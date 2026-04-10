@@ -827,7 +827,7 @@ def enable_ocr_debug(debug_dir: Path) -> None:
         debug_dir.mkdir(parents=True, exist_ok=True)
         _OCR_DEBUG_DIR = debug_dir
         print(f"[vision_ocr] OCR debug output enabled at {_OCR_DEBUG_DIR}", flush=True)
-    except Exception as exc:  # pragma: no cover - filesystem dependent
+    except Exception as exc:
         print(f"[vision_ocr] failed to enable OCR debug dir: {exc}", flush=True)
         _OCR_DEBUG_DIR = None
 
@@ -1030,7 +1030,7 @@ def find_action_bbox_by_ocr(
     processed = preprocess_for_ocr(infobox_bgr, restrict_otsu_to_left=True)
     try:
         data = image_to_data(processed)
-    except Exception as exc:
+    except Exception as exc:  # pragma: no cover - filesystem dependent
         print(
             f"[vision_ocr] ocr_backend image_to_data failed for target={target}; falling back to no bbox. error={exc}",
             flush=True,
@@ -1099,7 +1099,7 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
         ocr_start = time.perf_counter()
         data = image_to_data(processed, single_line=True)
         ocr_time = time.perf_counter() - ocr_start
-    except Exception as exc:
+    except Exception as exc:  # pragma: no cover - filesystem dependent
         _last_roi_hash = None  # invalidate cache so next call does not re-serve stale result
         print(
             f"[vision_ocr] ocr_backend image_to_data failed for infobox title strip; "
@@ -1177,7 +1177,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
         ocr_start = time.perf_counter()
         data = image_to_data(processed)
         ocr_time = time.perf_counter() - ocr_start
-    except Exception as exc:
+    except Exception as exc:  # pragma: no cover - filesystem dependent
         print(
             f"[vision_ocr] ocr_backend image_to_data failed for context menu; "
             f"falling back to empty OCR result. error={exc}",
@@ -1288,7 +1288,7 @@ def ocr_item_name(roi_bgr: np.ndarray) -> str:
     processed = preprocess_for_ocr(roi_bgr)
     try:
         raw = image_to_string(processed, single_line=True)
-    except Exception as exc:
+    except Exception as exc:  # pragma: no cover - filesystem dependent
         print(
             f"[vision_ocr] ocr_backend image_to_string failed for item name; falling back to empty result. error={exc}",
             flush=True,
@@ -1310,7 +1310,7 @@ def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:
 
     try:
         raw = image_to_string(processed)
-    except Exception as exc:
+    except Exception as exc:  # pragma: no cover - filesystem dependent
         print(
             f"[vision_ocr] ocr_backend image_to_string failed for inventory count: {exc}",
             flush=True,

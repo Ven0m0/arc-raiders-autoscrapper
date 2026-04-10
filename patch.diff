@@ -1,0 +1,9 @@
+--- src/autoscrapper/ocr/inventory_vision.py
++++ src/autoscrapper/ocr/inventory_vision.py
+@@ -843,7 +843,7 @@
+     path = _OCR_DEBUG_DIR / filename
+     try:
+         cv2.imwrite(str(path), image, [cv2.IMWRITE_WEBP_QUALITY, 80])
+-    except Exception as exc:
++    except Exception as exc:  # pragma: no cover - filesystem dependent
+         print(f"[vision_ocr] failed to save debug image {path}: {exc}", flush=True)

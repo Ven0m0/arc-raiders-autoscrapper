@@ -375,3 +375,36 @@ class TestResetOcrCaches:
         assert _vision._last_roi_hash is None
         assert _vision._last_ocr_result is None
         assert _vision._ITEM_NAMES is None
+
+# ---------------------------------------------------------------------------
+# enable_ocr_debug
+# ---------------------------------------------------------------------------
+
+
+class TestEnableOcrDebug:
+    def test_enable_ocr_debug_success(self, tmp_path):
+        from autoscrapper.ocr.inventory_vision import enable_ocr_debug
+
+        debug_dir = tmp_path / "ocr_debug"
+        original_dir = _vision._OCR_DEBUG_DIR
+        try:
+            enable_ocr_debug(debug_dir)
+            assert _vision._OCR_DEBUG_DIR == debug_dir
+            assert debug_dir.exists()
+        finally:
+            _vision._OCR_DEBUG_DIR = original_dir
+
+    def test_enable_ocr_debug_mkdir_exception(self, tmp_path, capsys):
+        from autoscrapper.ocr.inventory_vision import enable_ocr_debug
+
+        debug_dir = tmp_path / "ocr_debug"
+        original_dir = _vision._OCR_DEBUG_DIR
+        try:
+            with patch.object(debug_dir.__class__, "mkdir", side_effect=OSError("Mocked OS Error")):
+                enable_ocr_debug(debug_dir)
+
+            assert _vision._OCR_DEBUG_DIR is None
+            captured = capsys.readouterr()
+            assert "[vision_ocr] failed to enable OCR debug dir:" in captured.out
+        finally:
+            _vision._OCR_DEBUG_DIR = original_dir
