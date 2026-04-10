@@ -57,6 +57,13 @@
       "allowedVersions": "3.14.3"
     },
     {
+      "description": "Keep requires-python within supported Python 3.14 range",
+      "matchManagers": ["pep621"],
+      "matchPackageNames": ["python"],
+      "matchDepTypes": ["requires-python"],
+      "allowedVersions": ">=3.14 <3.14.4"
+    },
+    {
       "description": "Disable Docker digest pinning",
       "matchDatasources": ["docker"],
       "pinDigests": false
