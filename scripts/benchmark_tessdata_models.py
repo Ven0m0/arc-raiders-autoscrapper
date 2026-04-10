@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 import os
 import subprocess
 import sys
@@ -10,6 +9,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import cv2
+import orjson
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SRC_DIR = REPO_ROOT / "src"
@@ -218,7 +218,7 @@ def _invoke_worker(
         capture_output=True,
         text=True,
     )
-    return json.loads(completed.stdout)
+    return orjson.loads(completed.stdout)
 
 
 def main() -> int:
@@ -228,7 +228,8 @@ def main() -> int:
     if args.worker:
         if not args.label:
             raise SystemExit("--label is required with --worker")
-        print(json.dumps(_run_worker(manifest_path, args.label)))
+        sys.stdout.buffer.write(orjson.dumps(_run_worker(manifest_path, args.label)))
+        sys.stdout.buffer.write(b"\n")
         return 0
 
     runs = []

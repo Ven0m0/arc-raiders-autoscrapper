@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from hashlib import blake2b
@@ -9,6 +8,7 @@ from typing import Literal
 
 import cv2
 import numpy as np
+import orjson
 
 from ..core.item_actions import clean_ocr_text
 
@@ -177,8 +177,8 @@ def capture_skip_unlisted_sample(
     )
 
     corpus_paths.manifest_path.parent.mkdir(parents=True, exist_ok=True)
-    with corpus_paths.manifest_path.open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(asdict(sample), ensure_ascii=False) + "\n")
+    with corpus_paths.manifest_path.open("ab") as handle:
+        handle.write(orjson.dumps(asdict(sample)) + b"\n")
     if used_chosen_name_fallback:
         print(
             "[ocr_corpus] captured sample without raw OCR text; used chosen name fallback",
@@ -198,7 +198,7 @@ def load_failure_corpus(path: Path) -> list[OcrFailureSample]:
             payload = line.strip()
             if not payload:
                 continue
-            sample = _coerce_sample(json.loads(payload))
+            sample = _coerce_sample(orjson.loads(payload))
             if sample is not None:
                 samples.append(sample)
     return samples
@@ -221,7 +221,7 @@ def write_report(directory: Path, prefix: str, payload: object) -> Path:
     directory.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     path = directory / f"{prefix}_{stamp}.json"
-    path.write_text(
-        json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    path.write_bytes(
+        orjson.dumps(payload, option=orjson.OPT_INDENT_2) + b"\n"
     )
     return path

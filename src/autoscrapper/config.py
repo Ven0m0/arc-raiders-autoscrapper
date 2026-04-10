@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-import json
 import logging
 import os
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Dict, Optional
+
+import orjson
 
 from .interaction.keybinds import DEFAULT_STOP_KEY, normalize_stop_key
 
@@ -180,10 +181,10 @@ def _migrate_config(payload: Dict[str, Any]) -> Dict[str, Any]:
 def _load_config_dict() -> Dict[str, Any]:
     path = config_path()
     try:
-        raw = json.loads(path.read_text(encoding="utf-8"))
+        raw = orjson.loads(path.read_bytes())
     except FileNotFoundError:
         return {}
-    except OSError, json.JSONDecodeError:
+    except OSError, orjson.JSONDecodeError:
         return {}
 
     if not isinstance(raw, dict):
@@ -195,7 +196,7 @@ def _load_config_dict() -> Dict[str, Any]:
 def _save_config_dict(payload: Dict[str, Any]) -> None:
     path = config_path()
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    path.write_bytes(orjson.dumps(payload, option=orjson.OPT_INDENT_2))
 
 
 def _from_raw_scan_settings(raw: Any) -> ScanSettings:

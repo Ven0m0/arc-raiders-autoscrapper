@@ -12,6 +12,7 @@ dependencies = [
   "mss",
   "numpy",
   "opencv-python-headless",
+  "orjson",
   "Pillow",
   "pydirectinput-rgx; sys_platform == 'win32'",
   "pynput; sys_platform == 'linux'",

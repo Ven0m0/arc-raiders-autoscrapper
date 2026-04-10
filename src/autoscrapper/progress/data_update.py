@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import logging
 import os
 import time
@@ -9,6 +8,8 @@ from pathlib import Path
 from typing import Dict, List, Optional
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+
+import orjson
 
 from .data_loader import DATA_DIR
 from .quest_overrides import apply_quest_overrides
@@ -40,8 +41,7 @@ def _fetch_json(url: str, headers: Optional[Dict[str, str]] = None) -> object:
     req = Request(url, headers=request_headers)
     try:
         with urlopen(req, timeout=30) as resp:
-            payload = resp.read().decode("utf-8")
-            return json.loads(payload)
+            return orjson.loads(resp.read())
     except HTTPError as exc:
         raise DownloadError(f"HTTP {exc.code} for {url}") from exc
     except URLError as exc:
@@ -246,11 +246,11 @@ def update_data_snapshot(data_dir: Optional[Path] = None) -> dict:
     mapped_quests = [_map_metaforge_quest(quest) for quest in metaforge_quests]
     mapped_quests = apply_quest_overrides(mapped_quests)
 
-    (data_dir / "items.json").write_text(
-        json.dumps(mapped_items, indent=2), encoding="utf-8"
+    (data_dir / "items.json").write_bytes(
+        orjson.dumps(mapped_items, option=orjson.OPT_INDENT_2)
     )
-    (data_dir / "quests.json").write_text(
-        json.dumps(mapped_quests, indent=2), encoding="utf-8"
+    (data_dir / "quests.json").write_bytes(
+        orjson.dumps(mapped_quests, option=orjson.OPT_INDENT_2)
     )
 
     quests_by_trader = {
@@ -258,8 +258,8 @@ def update_data_snapshot(data_dir: Optional[Path] = None) -> dict:
         "source": "quests.json",
         "traders": _build_quests_by_trader(mapped_quests),
     }
-    (data_dir / "quests_by_trader.json").write_text(
-        json.dumps(quests_by_trader, indent=2), encoding="utf-8"
+    (data_dir / "quests_by_trader.json").write_bytes(
+        orjson.dumps(quests_by_trader, option=orjson.OPT_INDENT_2)
     )
 
     metadata = {
@@ -271,8 +271,8 @@ def update_data_snapshot(data_dir: Optional[Path] = None) -> dict:
         # Kept for compatibility with older metadata consumers.
         "hasPriceOverrides": False,
     }
-    (data_dir / "metadata.json").write_text(
-        json.dumps(metadata, indent=2), encoding="utf-8"
+    (data_dir / "metadata.json").write_bytes(
+        orjson.dumps(metadata, option=orjson.OPT_INDENT_2)
     )
 
     return metadata

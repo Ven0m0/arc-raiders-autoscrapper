@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Sequence
+
+import orjson
 
 
 def _normalize_quest_name(value: object) -> str:
@@ -44,8 +45,8 @@ def load_json(path: Path, default: Any) -> Any:
     if not path.exists():
         return default
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
+        return orjson.loads(path.read_bytes())
+    except orjson.JSONDecodeError:
         return default
 
 

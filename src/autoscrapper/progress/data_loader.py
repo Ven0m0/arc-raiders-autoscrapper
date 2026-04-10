@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+import orjson
 
 from .quest_overrides import apply_quest_overrides
 
@@ -21,7 +22,7 @@ class GameData:
 
 
 def _read_json(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return orjson.loads(path.read_bytes())
 
 
 def load_game_data(data_dir: Optional[Path] = None) -> GameData:
@@ -54,7 +55,7 @@ def load_game_data(data_dir: Optional[Path] = None) -> GameData:
     if metadata_path.exists():
         try:
             metadata = _read_json(metadata_path)
-        except json.JSONDecodeError:
+        except orjson.JSONDecodeError:
             metadata = None
 
     normalized_items = _normalize_items(items)
