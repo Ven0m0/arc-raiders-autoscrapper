@@ -1,4 +1,3 @@
-import pytest
 from autoscrapper.progress.progress_config import group_quests_by_trader
 
 def test_group_quests_by_trader_empty():
