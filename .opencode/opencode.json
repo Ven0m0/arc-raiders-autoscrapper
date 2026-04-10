@@ -52,20 +52,8 @@
   },
   "lsp": {
     "typescript": {
-      "command": [
-        "vtsls",
-        "--stdio"
-      ],
-      "extensions": [
-        ".js",
-        ".jsx",
-        ".ts",
-        ".tsx",
-        ".mjs",
-        ".cjs",
-        ".mts",
-        ".cts"
-      ],
+      "command": ["vtsls", "--stdio"],
+      "extensions": [".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs", ".mts", ".cts"],
       "initialization": {
         "preferences": {
           "importModuleSpecifierPreference": "relative"
@@ -73,102 +61,44 @@
       }
     },
     "pyright": {
-      "command": [
-        "basedpyright-langserver",
-        "--stdio"
-      ],
-      "extensions": [
-        ".py",
-        ".pyw",
-        ".pyi"
-      ]
+      "command": ["basedpyright-langserver", "--stdio"],
+      "extensions": [".py", ".pyw", ".pyi"]
     },
     "rust": {
-      "command": [
-        "rust-analyzer"
-      ],
-      "extensions": [
-        ".rs"
-      ]
+      "command": ["rust-analyzer"],
+      "extensions": [".rs"]
     },
     "bash": {
-      "command": [
-        "bash-language-server",
-        "start"
-      ],
-      "extensions": [
-        ".sh",
-        ".bash",
-        ".zsh"
-      ]
+      "command": ["bash-language-server", "start"],
+      "extensions": [".sh", ".bash", ".zsh"]
     },
     "yaml-ls": {
-      "command": [
-        "yaml-language-server",
-        "--stdio"
-      ],
-      "extensions": [
-        ".yaml",
-        ".yml"
-      ]
+      "command": ["yaml-language-server", "--stdio"],
+      "extensions": [".yaml", ".yml"]
     },
     "markdown-oxide": {
-      "command": [
-        "markdown-oxide"
-      ],
-      "extensions": [
-        ".md",
-        ".mdx"
-      ]
+      "command": ["markdown-oxide"],
+      "extensions": [".md", ".mdx"]
     },
     "json-ls": {
-      "command": [
-        "vscode-json-language-server",
-        "--stdio"
-      ],
-      "extensions": [
-        ".json",
-        ".jsonc"
-      ]
+      "command": ["vscode-json-language-server", "--stdio"],
+      "extensions": [".json", ".jsonc"]
     },
     "dockerfile-ls": {
-      "command": [
-        "docker-langserver",
-        "--stdio"
-      ],
-      "extensions": [
-        ".dockerfile"
-      ]
+      "command": ["docker-langserver", "--stdio"],
+      "extensions": [".dockerfile"]
     },
     "html-ls": {
-      "command": [
-        "vscode-html-language-server",
-        "--stdio"
-      ],
-      "extensions": [
-        ".html",
-        ".htm"
-      ]
+      "command": ["vscode-html-language-server", "--stdio"],
+      "extensions": [".html", ".htm"]
     },
     "css-ls": {
-      "command": [
-        "vscode-css-language-server",
-        "--stdio"
-      ],
-      "extensions": [
-        ".css",
-        ".scss",
-        ".less"
-      ]
+      "command": ["vscode-css-language-server", "--stdio"],
+      "extensions": [".css", ".scss", ".less"]
     },
     "tombi": {
-      "command": [
-        "tombi",
-        "lsp"
-      ],
-      "extensions": [
-        ".toml"
-      ]
+      "command": ["tombi", "lsp"],
+      "extensions": [".toml"]
     }
   },
   "watcher": {
@@ -226,13 +156,9 @@
     }
   },
   "skills": {
-    "paths": [
-      ".kilo/skill"
-    ]
+    "paths": [".kilo/skill"]
   },
-  "disabled_providers": [
-    "openai"
-  ],
+  "disabled_providers": ["openai"],
   "experimental": {
     "continue_loop_on_deny": true,
     "mcp_timeout": 30000,

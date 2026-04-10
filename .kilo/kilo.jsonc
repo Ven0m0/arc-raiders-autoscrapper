@@ -104,10 +104,15 @@
   "watcher": {
     "ignore": [
       ".git/**",
-      ".venv/**", ".ruff_cache/**", "uv.lock",
+      ".venv/**",
+      ".ruff_cache/**",
+      "uv.lock",
       "ocr_debug/**",
-      "node_modules/**", "**/node_modules/**",
-      ".omc/**", ".remember/**", ".cachebro/**"
+      "node_modules/**",
+      "**/node_modules/**",
+      ".omc/**",
+      ".remember/**",
+      ".cachebro/**"
     ]
   },
   "mcp": {

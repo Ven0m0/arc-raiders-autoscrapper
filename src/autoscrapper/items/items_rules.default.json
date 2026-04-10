@@ -15,10 +15,7 @@
       "name": "Acoustic Guitar",
       "value": 7000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "adrenaline-shot",
@@ -36,80 +33,56 @@
       "name": "Advanced ARC Powercell",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "advanced-electrical-components",
       "name": "Advanced Electrical Components",
       "value": 1750,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "advanced-mechanical-components",
       "name": "Advanced Mechanical Components",
       "value": 1750,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Gunsmith (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Gunsmith (Level 3)"]
     },
     {
       "id": "agave",
       "name": "Agave",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "agave-juice",
       "name": "Agave Juice",
       "value": 1800,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "air-freshener",
       "name": "Air Freshener",
       "value": 2000,
       "action": "sell",
-      "analysis": [
-        "High value (2000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (2000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "alarm-clock",
       "name": "Alarm Clock",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "alien-duck",
       "name": "Alien Duck",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "High value (1000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (1000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "ancient-fort-security-code",
@@ -149,10 +122,7 @@
       "name": "Angled Grip II Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "angled-grip-iii",
@@ -170,19 +140,14 @@
       "name": "Angled Grip III Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "antiseptic",
       "name": "Antiseptic",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Medical Lab (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Medical Lab (Level 3)"]
     },
     {
       "id": "anvil-i",
@@ -233,143 +198,98 @@
       "name": "Anvil Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "anvil-splitter",
       "name": "Anvil Splitter",
       "value": 7000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "aphelion-rifle",
       "name": "Aphelion Rifle",
       "value": 27500,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "aphelion-rifle-blueprint",
       "name": "Aphelion Rifle Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "apricot",
       "name": "Apricot",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Scrappy (Level 3), Scrappy (Level 5)"
-      ]
+      "analysis": ["Required for hideout upgrade: Scrappy (Level 3), Scrappy (Level 5)"]
     },
     {
       "id": "arc-alloy",
       "name": "ARC Alloy",
       "value": 200,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "arc-circuitry",
       "name": "ARC Circuitry",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Refiner (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Refiner (Level 3)"]
     },
     {
       "id": "arc-coolant",
       "name": "ARC Coolant",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "arc-flex-rubber",
       "name": "ARC Flex Rubber",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "arc-motion-core",
       "name": "ARC Motion Core",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "arc-performance-steel",
       "name": "ARC Performance Steel",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "arc-powercell",
       "name": "ARC Powercell",
       "value": 270,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "arc-synthetic-resin",
       "name": "ARC Synthetic Resin",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "arc-thermo-lining",
       "name": "ARC Thermo Lining",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "arpeggio-i",
@@ -420,51 +340,35 @@
       "name": "Assessor Matrix",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "assorted-seeds",
       "name": "Assorted Seeds",
       "value": 100,
       "action": "keep",
-      "analysis": [
-        "Valuable currency item",
-        "Used for trading with Celeste"
-      ]
+      "analysis": ["Valuable currency item", "Used for trading with Celeste"]
     },
     {
       "id": "aviator-outfit",
       "name": "Aviator (Outfit)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "bag-radio-renegade-variant",
       "name": "Bag (Radio Renegade Variant)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "banana-backpack-charm",
       "name": "Banana (Backpack Charm)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "bandage",
@@ -493,38 +397,28 @@
       "name": "Barricade Kit Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "bastion-part",
       "name": "Bastion Cell",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Gear Bench (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Gear Bench (Level 3)"]
     },
     {
       "id": "battery",
       "name": "Battery",
       "value": 250,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "bettina-blueprint",
       "name": "Bettina Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "bettina-i",
@@ -575,83 +469,56 @@
       "name": "Bicycle Pump",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "binoculars",
       "name": "Binoculars",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "bison-driver",
       "name": "Bison Driver",
       "value": 2500,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "black-and-white-origin-color",
       "name": "Black & White (Origin Color)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "black-eye-face-style",
       "name": "Black Eye (Face Style)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "black-hiker-colour",
       "name": "Black (Hiker Colour)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "blaze-grenade",
       "name": "Blaze Grenade",
       "value": 1600,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "blaze-grenade-blueprint",
       "name": "Blaze Grenade Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "blaze-grenade-trap",
@@ -669,10 +536,7 @@
       "name": "Bloated Tuna Can",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "High value (1000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (1000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "blue-gate-cellar-key",
@@ -734,30 +598,21 @@
       "name": "Blue Light Stick Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "blue-radio-renegade-color",
       "name": "Blue (Radio Renegade Color)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "blue-yellow-aviator-color",
       "name": "Blue Yellow (Aviator Color)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "bobcat-i",
@@ -775,10 +630,7 @@
       "name": "Bobcat Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "bobcat-ii",
@@ -818,103 +670,70 @@
       "name": "Bombardier Cell",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Refiner (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Refiner (Level 3)"]
     },
     {
       "id": "bow-and-arrow-emote",
       "name": "Bow and Arrow (Emote)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "breathtaking-snow-globe",
       "name": "Breathtaking Snow Globe",
       "value": 7000,
       "action": "sell",
-      "analysis": [
-        "High value (7000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (7000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "briefcase-backpack-attachment",
       "name": "Briefcase (Backpack Attachment)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "broken-flashlight",
       "name": "Broken Flashlight",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "broken-guidance-system",
       "name": "Broken Guidance System",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "broken-handcuffs",
       "name": "Broken Handcuffs",
       "value": 270,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "broken-handheld-radio",
       "name": "Broken Handheld Radio",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "broken-taser",
       "name": "Broken Taser",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "burgerboy-backpack-charm",
       "name": "Burgerboy (Backpack Charm)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "buried-city-hospital-key",
@@ -1009,81 +828,56 @@
       "name": "Burletta Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "burned-arc-circuitry",
       "name": "Burned ARC Circuitry",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "burnt-out-candles",
       "name": "Burnt-Out Candles",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "camera-lens",
       "name": "Camera Lens",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "candle-holder",
       "name": "Candle Holder",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "candleberries",
       "name": "Candleberries",
       "value": 460,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "canister",
       "name": "Canister",
       "value": 300,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "cans-backpack-attachment",
       "name": "Cans (Backpack Attachment)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "canto",
@@ -1101,10 +895,7 @@
       "name": "Canto Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "canto-ii",
@@ -1144,123 +935,84 @@
       "name": "Cat Bed",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Scrappy (Level 4)"
-      ]
+      "analysis": ["Required for hideout upgrade: Scrappy (Level 4)"]
     },
     {
       "id": "cheer-emote",
       "name": "Cheer (Emote)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "chemicals",
       "name": "Chemicals",
       "value": 50,
       "action": "keep",
-      "analysis": [
-        "Override: keep progression material",
-        "Manual default keep override"
-      ]
+      "analysis": ["Override: keep progression material", "Manual default keep override"]
     },
     {
       "id": "coffee-pot",
       "name": "Coffee Pot",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "High value (1000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (1000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "coins",
       "name": "Coins",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "combat-mk-1",
       "name": "Combat Mk. 1",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "combat-mk-2",
       "name": "Combat Mk. 2",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "combat-mk-3-aggressive",
       "name": "Combat Mk. 3 (Aggressive)",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "combat-mk-3-flanking",
       "name": "Combat Mk. 3 (Flanking) Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "combat-mk3-aggressive-blueprint",
       "name": "Combat Mk.3 (Aggressive) Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "combat-mk3-flanking",
       "name": "Combat Mk.3 (Flanking) ",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "comet-igniter",
       "name": "Comet Igniter",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "compensator-i",
@@ -1289,10 +1041,7 @@
       "name": "Compensator II Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "compensator-iii",
@@ -1310,103 +1059,70 @@
       "name": "Compensator III Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "complex-gun-parts",
       "name": "Complex Gun Parts",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "complex-gun-parts-blueprint",
       "name": "Complex Gun Parts Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "coolant",
       "name": "Coolant",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "cooling-coil",
       "name": "Cooling Coil",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "cooling-fan",
       "name": "Cooling Fan",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "cracked-bioscanner",
       "name": "Cracked Bioscanner",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "crimson-racer-aviator-colour",
       "name": "Crimson Racer (Aviator Colour)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "crude-explosives",
       "name": "Crude Explosives",
       "value": 270,
       "action": "keep",
-      "analysis": [
-        "Override: keep progression material",
-        "Manual default keep override"
-      ]
+      "analysis": ["Override: keep progression material", "Manual default keep override"]
     },
     {
       "id": "crumpled-plastic-bottle",
       "name": "Crumpled Plastic Bottle",
       "value": 270,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "dam-control-center-tower-key",
@@ -1468,101 +1184,70 @@
       "name": "Dam Utility Key",
       "value": 100,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "damaged-arc-motion-core",
       "name": "Damaged ARC Motion Core",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "damaged-arc-powercell",
       "name": "Damaged ARC Powercell",
       "value": 293,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "damaged-fireball-burner",
       "name": "Damaged Fireball Burner",
       "value": 270,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "damaged-heat-sink",
       "name": "Damaged Heat Sink",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "damaged-rocketeer-part",
       "name": "Damaged Rocketeer Driver",
       "value": 2000,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "damaged-tick-pod",
       "name": "Damaged Tick Pod",
       "value": 270,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "damaged-wasp-driver",
       "name": "Damaged Wasp Driver",
       "value": 270,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "danaged-hornet-driver",
       "name": "Damaged Hornet Driver",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "dart-board",
       "name": "Dart Board",
       "value": 2000,
       "action": "sell",
-      "analysis": [
-        "High value (2000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (2000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "deadline",
@@ -1580,10 +1265,7 @@
       "name": "Deadline Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "defibrillator",
@@ -1601,82 +1283,56 @@
       "name": "Defibrillator Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "deflated-football",
       "name": "Deflated Football",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "degraded-arc-rubber",
       "name": "Degraded ARC Rubber",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "diving-googles",
       "name": "Diving Goggles",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "dog-collar",
       "name": "Dog Collar",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "dolabra",
       "name": "Dolabra",
       "value": 27500,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "dolabra-blueprint",
       "name": "Dolabra Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "doodly-duck",
       "name": "Doodly Duck",
       "value": 3000,
       "action": "sell",
-      "analysis": [
-        "High value (3000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (3000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "door-blocker",
@@ -1694,48 +1350,35 @@
       "name": "Dried-Out ARC Resin",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "duct-tape-recipe",
       "name": "Duct Tape",
       "value": 300,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "durable-cloth",
       "name": "Durable Cloth",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "electrical-components",
       "name": "Electrical Components",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "empty-wine-bottle",
       "name": "Empty Wine Bottle",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "High value (1000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (1000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "energy-ammo",
@@ -1753,69 +1396,49 @@
       "name": "Equalizer",
       "value": 27500,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "equalizer-recipe",
       "name": "Equalizer Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "esr-analyzer",
       "name": "ESR Analyzer",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "exodus-modules",
       "name": "Exodus Modules",
       "value": 2750,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "expired-pasta",
       "name": "Expired Pasta",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "High value (1000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (1000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "expired-respirator",
       "name": "Expired Respirator",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "explosive-compound",
       "name": "Explosive Compound",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Explosives Station (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Explosives Station (Level 3)"]
     },
     {
       "id": "explosive-mine",
@@ -1833,31 +1456,21 @@
       "name": "Explosive Mine Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "extended-barrel",
       "name": "Extended Barrel",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "extended-barrel-recipe",
       "name": "Extended Barrel Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "extended-light-mag-i",
@@ -1886,10 +1499,7 @@
       "name": "Extended Light Mag II Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "extended-light-mag-iii",
@@ -1907,10 +1517,7 @@
       "name": "Extended Light Mag III Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "extended-medium-mag-i",
@@ -1939,10 +1546,7 @@
       "name": "Extended Medium Mag II Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "extended-medium-mag-iii",
@@ -1960,10 +1564,7 @@
       "name": "Extended Medium Mag III Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "extended-shotgun-mag-i",
@@ -1992,10 +1593,7 @@
       "name": "Extended Shotgun Mag II Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "extended-shotgun-mag-iii",
@@ -2013,50 +1611,35 @@
       "name": "Extended Shotgun Mag III Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "fabric",
       "name": "Fabric",
       "value": 50,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "faded-flush-aviator-color",
       "name": "Faded Flush (Aviator Color)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "faded-photograph",
       "name": "Faded Photograph",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "familiar-duck",
       "name": "Familiar Duck",
       "value": 7000,
       "action": "sell",
-      "analysis": [
-        "High value (7000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (7000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "ferro-i",
@@ -2107,50 +1690,35 @@
       "name": "Fertilizer",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "film-reel",
       "name": "Film Reel",
       "value": 2000,
       "action": "sell",
-      "analysis": [
-        "High value (2000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (2000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "fine-wristwatch",
       "name": "Fine Wristwatch",
       "value": 3000,
       "action": "sell",
-      "analysis": [
-        "High value (3000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (3000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "finger-gun-single-shot-emote",
       "name": "Finger Gun Single Shot (Emote)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "fireball-burner",
       "name": "Fireball Burner",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "firecracker",
@@ -2168,11 +1736,7 @@
       "name": "Firefly Burner",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "fireworks-box",
@@ -2190,10 +1754,7 @@
       "name": "Fireworks Box Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "flame-spray",
@@ -2211,72 +1772,49 @@
       "name": "Flashy Duck",
       "value": 3000,
       "action": "sell",
-      "analysis": [
-        "High value (3000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (3000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "flow-controller",
       "name": "Flow Controller",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "flushing-terminal-key",
       "name": "Flushing Terminal Key",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "fossilized-lightning",
       "name": "Fossilized Lightning",
       "value": 4000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "free-loadout-augment",
       "name": "Free Loadout Augment",
       "value": 100,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "frequency-modulation-box",
       "name": "Frequency Modulation Box",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "fried-motherboard",
       "name": "Fried Motherboard",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Utility Station (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Utility Station (Level 3)"]
     },
     {
       "id": "fruit-mix",
@@ -2294,21 +1832,14 @@
       "name": "Frying Pan",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "garlic-press",
       "name": "Garlic Press",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "gas-grenade",
@@ -2348,61 +1879,42 @@
       "name": "Gas Mine Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "geiger-counter",
       "name": "Geiger Counter",
       "value": 3500,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "gentle-duck",
       "name": "Gentle Duck",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "High value (1000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (1000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "goggles-radio-renegade-variant",
       "name": "Goggles (Radio Renegade Variant)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "gothic-graffiti-aviator-color",
       "name": "Gothic Graffiti (Aviator Color)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "great-muullein",
       "name": "Great Mullein",
       "value": 300,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "green-light-stick",
@@ -2420,10 +1932,7 @@
       "name": "Green Light Stick Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "hairpin-i",
@@ -2474,21 +1983,14 @@
       "name": "Happy Jig (Emote)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "headphones",
       "name": "Headphones",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "heavy-ammo",
@@ -2517,42 +2019,28 @@
       "name": "Heavy Gun Parts",
       "value": 700,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "heavy-gun-parts-recipe",
       "name": "Heavy Gun Parts Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "heavy-shield",
       "name": "Heavy Shield",
       "value": 5500,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "helmet-radio-renegade-variant",
       "name": "Helmet (Radio Renegade Variant)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "herbal-bandage",
@@ -2570,42 +2058,28 @@
       "name": "Horizontal Grip",
       "value": 7000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "hornet-driver",
       "name": "Hornet Driver",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "household-cleaner",
       "name": "Household Cleaner",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "hullcracker-blueprint",
       "name": "Hullcracker Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "hullcracker-i",
@@ -2656,19 +2130,14 @@
       "name": "Humidifier",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "ice-cream-scooper",
       "name": "Ice Cream Scooper",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "il-toro-i",
@@ -2719,62 +2188,42 @@
       "name": "Il Toro Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "impure-arc-coolant",
       "name": "Impure ARC Coolant",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "industrial-battery",
       "name": "Industrial Battery",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Gear Bench (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Gear Bench (Level 3)"]
     },
     {
       "id": "industrial-charger",
       "name": "Industrial Charger",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "industrial-magnet",
       "name": "Industrial Magnet",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "ion-sputter",
       "name": "Ion Sputter",
       "value": 6000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "jolt-mine",
@@ -2792,40 +2241,28 @@
       "name": "Jolt Mine Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "junior-outfit",
       "name": "Junior (Outfit)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "jupiter-i",
       "name": "Jupiter",
       "value": 27500,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "jupiter-i-recipe",
       "name": "Jupiter Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "kettle-i",
@@ -2876,29 +2313,21 @@
       "name": "Kinetic Converter",
       "value": 7000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "laboratory-reagents",
       "name": "Laboratory Reagents",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Explosives Station (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Explosives Station (Level 3)"]
     },
     {
       "id": "lances-mixtape-5th-edition",
       "name": "Lance's Mixtape (5th Edition)",
       "value": 10000,
       "action": "sell",
-      "analysis": [
-        "High value (10000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (10000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "laser-trap-lure-recipe",
@@ -2938,28 +2367,21 @@
       "name": "Leaper Pulse Unit",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "lemon",
       "name": "Lemon",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Scrappy (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Scrappy (Level 3)"]
     },
     {
       "id": "lidar-scanner",
       "name": "Lidar Scanner",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "light-ammo",
@@ -2977,30 +2399,21 @@
       "name": "Light Bulb",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "light-gun-parts",
       "name": "Light Gun Parts",
       "value": 700,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "light-gun-parts-recipe",
       "name": "Light Gun Parts Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "light-impact-grenade",
@@ -3018,31 +2431,21 @@
       "name": "Light Shield",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "lightweight-stock",
       "name": "Lightweight Stock",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "lightweight-stock-recipe",
       "name": "Lightweight Stock Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "lil-smoke-grenade",
@@ -3060,74 +2463,49 @@
       "name": "Looting Mk. 1",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "looting-mk-2",
       "name": "Looting Mk. 2",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "looting-mk-3-cautious",
       "name": "Looting MK. 3 (Cautious)",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "looting-mk-3-safekeeper",
       "name": "Looting MK. 3 (Safekeeper)",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "looting-mk-3-safekeeper-blueprint",
       "name": "Looting MK. 3 (Safekeeper) Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "looting-mk-3-survivor",
       "name": "Looting MK. 3 (Survivor)",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "looting-mk-3-survivor-blueprint",
       "name": "Looting MK. 3 (Survivor) Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "lure-grenade",
@@ -3145,10 +2523,7 @@
       "name": "Lure Grenade Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "lure-grenade-trap",
@@ -3166,60 +2541,42 @@
       "name": "Magnet",
       "value": 300,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "magnetic-accelerator",
       "name": "Magnetic Accelerator",
       "value": 5500,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "magnetron",
       "name": "Magnetron",
       "value": 6000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "mastery-medal-backpack-charm",
       "name": "Mastery Medal (Backpack Charm)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "matriarch-reactor",
       "name": "Matriarch Reactor",
       "value": 13000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "mechanical-components",
       "name": "Mechanical Components",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "medium-ammo",
@@ -3237,133 +2594,91 @@
       "name": "Medium Gun Parts",
       "value": 700,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "medium-gun-parts-recipe",
       "name": "Medium Gun Parts Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "medium-shield",
       "name": "Medium Shield",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "metal-brackets",
       "name": "Metal Brackets",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "metal-parts",
       "name": "Metal Parts",
       "value": 75,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "microscope",
       "name": "Microscope",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "mini-centrifuge",
       "name": "Mini Centrifuge",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "mod-components",
       "name": "Mod Components",
       "value": 1750,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "moss",
       "name": "Moss",
       "value": 500,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "motor",
       "name": "Motor",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Refiner (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Refiner (Level 3)"]
     },
     {
       "id": "mushroom",
       "name": "Mushroom",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Scrappy (Level 5)"
-      ]
+      "analysis": ["Required for hideout upgrade: Scrappy (Level 5)"]
     },
     {
       "id": "music-album",
       "name": "Music Album",
       "value": 3000,
       "action": "sell",
-      "analysis": [
-        "High value (3000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (3000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "music-box",
       "name": "Music Box",
       "value": 5000,
       "action": "sell",
-      "analysis": [
-        "High value (5000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (5000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "muzzle-brake-i",
@@ -3392,10 +2707,7 @@
       "name": "Muzzle Brake II Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "muzzle-brake-iii",
@@ -3413,10 +2725,7 @@
       "name": "Muzzle Brake III Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "noisemaker",
@@ -3434,39 +2743,28 @@
       "name": "Number Plate",
       "value": 270,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "oil",
       "name": "Oil",
       "value": 300,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "olives",
       "name": "Olives",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Scrappy (Level 4)"
-      ]
+      "analysis": ["Required for hideout upgrade: Scrappy (Level 4)"]
     },
     {
       "id": "orange-camo-origin-outfit",
       "name": "Orange Camo (Origin Outfit)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "osprey-i",
@@ -3517,51 +2815,35 @@
       "name": "Osprey Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "padded-stock",
       "name": "Padded Stock",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "padded-stock-recipe",
       "name": "Padded Stock Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "painted-box",
       "name": "Painted Box",
       "value": 2000,
       "action": "sell",
-      "analysis": [
-        "High value (2000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (2000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "patchwork-warden-color",
       "name": "Patchwork (Warden Color)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "patrol-car-key",
@@ -3579,10 +2861,7 @@
       "name": "Patrol (Outfit)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "photoelectric-cloak",
@@ -3611,136 +2890,91 @@
       "name": "Plastic Parts",
       "value": 60,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "playing-cards",
       "name": "Playing Cards",
       "value": 5000,
       "action": "sell",
-      "analysis": [
-        "High value (5000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (5000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "polluted-air-filter",
       "name": "Polluted Air Filter",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "pop-trigger",
       "name": "Pop Trigger",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "portable-television",
       "name": "Portable TV",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "poster-natural-wonder",
       "name": "Poster of Natural Wonder",
       "value": 2000,
       "action": "sell",
-      "analysis": [
-        "High value (2000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (2000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "pottery",
       "name": "Pottery",
       "value": 2000,
       "action": "sell",
-      "analysis": [
-        "High value (2000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (2000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "power-bank",
       "name": "Power Bank",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "power-cable",
       "name": "Power Cable",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "power-rod",
       "name": "Power Rod",
       "value": 5500,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "prickly-pear",
       "name": "Prickly Pear",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Scrappy (Level 4)"
-      ]
+      "analysis": ["Required for hideout upgrade: Scrappy (Level 4)"]
     },
     {
       "id": "processor",
       "name": "Processor",
       "value": 500,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "projector",
       "name": "Projector",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "pulse-mine",
@@ -3758,52 +2992,35 @@
       "name": "Pulse Mine Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "queen-reactor",
       "name": "Queen Reactor",
       "value": 11000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "radio",
       "name": "Radio",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "radio-relay",
       "name": "Radio Relay",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "radio-renegade-outfit",
       "name": "Radio Renegade (Outfit)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "raider-hatch-key",
@@ -3821,10 +3038,7 @@
       "name": "Raider Tokens",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "raiders-refuge-security-code",
@@ -3897,10 +3111,7 @@
       "name": "Red Coral Jewelry",
       "value": 5000,
       "action": "sell",
-      "analysis": [
-        "High value (5000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (5000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "red-light-stick",
@@ -3918,20 +3129,14 @@
       "name": "Red Light Stick Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "red-radio-renegade-color",
       "name": "Red (Radio Renegade Color)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "reinforced-reception-security-code",
@@ -3949,11 +3154,7 @@
       "name": "Remote Control",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "remote-raider-flare",
@@ -3971,10 +3172,7 @@
       "name": "Remote Raider Flare Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "renegade-i",
@@ -4025,244 +3223,168 @@
       "name": "Resin",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "ripped-safety-vest",
       "name": "Ripped Safety Vest",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "rocket-thruster",
       "name": "Rocket Thruster",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "rocketeer-part",
       "name": "Rocketeer Driver",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Explosives Station (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Explosives Station (Level 3)"]
     },
     {
       "id": "roots",
       "name": "Roots",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "rope",
       "name": "Rope",
       "value": 500,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "rosary",
       "name": "Rosary",
       "value": 2000,
       "action": "sell",
-      "analysis": [
-        "High value (2000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (2000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "rotary-encoder",
       "name": "Rotary Encoder",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "rubber-duck",
       "name": "Rubber Duck",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "High value (1000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (1000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "rubber-pad",
       "name": "Rubber Pad",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "rubber-parts-recipe",
       "name": "Rubber Parts",
       "value": 50,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "ruined-accordion",
       "name": "Ruined Accordion",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "ruined-augment",
       "name": "Ruined Augment",
       "value": 270,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "ruined-baton",
       "name": "Ruined Baton",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "ruined-handcuffs",
       "name": "Ruined Handcuffs",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "ruined-parachute",
       "name": "Ruined Parachute",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "ruined-riot-shield",
       "name": "Ruined Riot Shield",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "ruined-tactical-vest",
       "name": "Ruined Tactical Vest",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "rusted-bolts",
       "name": "Rusted Bolts",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "rusted-gear",
       "name": "Rusted Gear",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Gunsmith (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Gunsmith (Level 3)"]
     },
     {
       "id": "rusted-shut-medical-kit",
       "name": "Rusted Shut Medical Kit",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Medical Lab (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Medical Lab (Level 3)"]
     },
     {
       "id": "rusted-tools",
       "name": "Rusted Tools",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "rusty-arc-steel",
       "name": "Rusty ARC Steel",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "sample-cleaner",
       "name": "Sample Cleaner",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "seeker-grenade",
@@ -4280,28 +3402,21 @@
       "name": "Seeker Grenade Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "sensors-recipe",
       "name": "Sensors",
       "value": 500,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "sentinel-part",
       "name": "Sentinel Firing Core",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Gunsmith (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Gunsmith (Level 3)"]
     },
     {
       "id": "shaker",
@@ -4363,10 +3478,7 @@
       "name": "Shotgun Choke II Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "shotgun-choke-iii",
@@ -4384,95 +3496,63 @@
       "name": "Shotgun Choke III Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "shotgun-gun-parts",
       "name": "Shotgun Parts",
       "value": 700,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "shotgun-silencer",
       "name": "Shotgun Silencer",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "shotgun-silencer-blueprint",
       "name": "Shotgun Silencer Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "showstopper",
       "name": "Showstopper",
       "value": 2100,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "showstopper-blueprint",
       "name": "Showstopper Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "shrapnel-grenade",
       "name": "Shrapnel Grenade",
       "value": 800,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "shredder-gyro",
       "name": "Shredder Gyro",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "signal-amplifier",
       "name": "Signal Amplifier",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "silencer-i",
@@ -4490,10 +3570,7 @@
       "name": "Silencer I Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "silencer-ii",
@@ -4511,10 +3588,7 @@
       "name": "Silencer II Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "silencer-iii",
@@ -4532,41 +3606,28 @@
       "name": "Silver Teaspoon Set",
       "value": 3000,
       "action": "sell",
-      "analysis": [
-        "High value (3000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (3000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "simple-gun-parts",
       "name": "Simple Gun Parts",
       "value": 330,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "smoke-grenade",
       "name": "Smoke Grenade",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "smoke-grenade-blueprint",
       "name": "Smoke Grenade Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "snap-blast-grenade",
@@ -4584,40 +3645,28 @@
       "name": "Snap Hook",
       "value": 14000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "snap-hook-recipe",
       "name": "Snap Hook Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "snitch-scanner",
       "name": "Snitch Scanner",
       "value": 2000,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "snowball",
       "name": "Snowball",
       "value": 10,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "spaceport-container-storage-key",
@@ -4668,63 +3717,42 @@
       "name": "Speaker Component",
       "value": 500,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "spectrometer",
       "name": "Spectrometer",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "spectrum-analyzer",
       "name": "Spectrum Analyzer",
       "value": 3500,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "spotter-relay",
       "name": "Spotter Relay",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "spring",
       "name": "Steel Spring",
       "value": 300,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "spring-cushion",
       "name": "Spring Cushion",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "stable-stock-i",
@@ -4753,10 +3781,7 @@
       "name": "Stable Stock II Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "stable-stock-iii",
@@ -4774,30 +3799,21 @@
       "name": "Stable Stock III Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "stack-of-movie-tapes",
       "name": "Stack of Movie Tapes",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "statuette",
       "name": "Statuette",
       "value": 3000,
       "action": "sell",
-      "analysis": [
-        "High value (3000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (3000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "stella-montis-archives-key",
@@ -4903,31 +3919,21 @@
       "name": "Succulent (Backpack Charm)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "surge-coil",
       "name": "Surge Coil",
       "value": 0,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "surge-coil-blueprint",
       "name": "Surge Coil Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "surge-shield-recharger",
@@ -4945,115 +3951,77 @@
       "name": "Surveyor Vault",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Medical Lab (Level 3)"
-      ]
+      "analysis": ["Required for hideout upgrade: Medical Lab (Level 3)"]
     },
     {
       "id": "synthesized-fuel",
       "name": "Synthesized Fuel",
       "value": 700,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "syringe",
       "name": "Syringe",
       "value": 500,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "tacical-mk3-healing-blueprint",
       "name": "Tactical MK.3 (Healing) Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "tactical-mk-1",
       "name": "Tactical Mk. 1",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "tactical-mk-2",
       "name": "Tactical Mk. 2",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "tactical-mk-3-healing",
       "name": "Tactical Mk. 3 (Healing)",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "tactical-mk-3-revival",
       "name": "Tactical MK. 3 (Revival)",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "tactical-mk-3-revival-blueprint",
       "name": "Tactical Mk. 3 (Revival) Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "tactical-mk3-defensive",
       "name": "Tactical Mk.3 (Defensive)",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "tactical-mk3-defensive-blueprint",
       "name": "Tactical MK.3 (Defensive) Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "tagging-grenade",
@@ -5071,51 +4039,35 @@
       "name": "Tagging Grenade Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "tangerine-warden-color",
       "name": "Tangerine (Warden Color)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "tattered-arc-lining",
       "name": "Tattered ARC Lining",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "tattered-clothes",
       "name": "Tattered Clothes",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "telemetry-transceiver",
       "name": "Telemetry Transceiver",
       "value": 3000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "tempest-i",
@@ -5133,10 +4085,7 @@
       "name": "Tempest Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "tempest-ii",
@@ -5176,73 +4125,49 @@
       "name": "Thermostat",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "tick-pod",
       "name": "Tick Pod",
       "value": 640,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "toaster",
       "name": "Toaster",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "torch-ginger",
       "name": "Torch Ginger",
       "value": 300,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "torn-blanket",
       "name": "Torn Blanket",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "torn-book",
       "name": "Torn Book",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "High value (1000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (1000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "torrent-i-recipe",
       "name": "Torrente Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "torrente-i",
@@ -5304,10 +4229,7 @@
       "name": "Trailblazer Grenade Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "trigger-nade",
@@ -5325,63 +4247,42 @@
       "name": "Trigger Nade Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "tropical-duck",
       "name": "Tropical Duck",
       "value": 1000,
       "action": "sell",
-      "analysis": [
-        "High value (1000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (1000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "turbo-pump",
       "name": "Turbo Pump",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "unusable-weapon",
       "name": "Unusable Weapon",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "vaporizer-regulator",
       "name": "Vaporizer Regulator",
       "value": 6000,
       "action": "keep",
-      "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Epic rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "vase",
       "name": "Vase",
       "value": 3000,
       "action": "sell",
-      "analysis": [
-        "High value (3000 coins)",
-        "No crafting or upgrade use"
-      ]
+      "analysis": ["High value (3000 coins)", "No crafting or upgrade use"]
     },
     {
       "id": "venator-i",
@@ -5432,10 +4333,7 @@
       "name": "Venator Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "vertical-grip-i",
@@ -5464,10 +4362,7 @@
       "name": "Vertical Grip II Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "vertical-grip-iii",
@@ -5485,19 +4380,14 @@
       "name": "Vertical Grip III Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "very-comfortable-pillow",
       "name": "Very Comfortable Pillow",
       "value": 2000,
       "action": "keep",
-      "analysis": [
-        "Required for hideout upgrade: Scrappy (Level 5)"
-      ]
+      "analysis": ["Required for hideout upgrade: Scrappy (Level 5)"]
     },
     {
       "id": "vita-shot",
@@ -5515,10 +4405,7 @@
       "name": "Vita Shot Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "vita-spray",
@@ -5536,41 +4423,28 @@
       "name": "Vita Spray Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "volcanic-rock",
       "name": "Volcanic Rock",
       "value": 270,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "voltage-converter",
       "name": "Voltage Converter",
       "value": 500,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "vulcano-blueprint",
       "name": "Vulcano Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "vulcano-i",
@@ -5621,62 +4495,42 @@
       "name": "Warden (Outfit)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "wasp-driver",
       "name": "Wasp Driver",
       "value": 640,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "water-filter",
       "name": "Water Filter",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "water-pump",
       "name": "Water Pump",
       "value": 1000,
       "action": "keep",
-      "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
-      ]
+      "analysis": ["Rare rarity", "May have future use - review carefully", "Override: treat 'Your Call' as Keep"]
     },
     {
       "id": "white-indigo-warden-color",
       "name": "White Indigo (Warden Color)",
       "value": 0,
       "action": "sell",
-      "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
-      ]
+      "analysis": ["No immediate use found", "Safe to sell or recycle"]
     },
     {
       "id": "wires-recipe",
       "name": "Wires",
       "value": 200,
       "action": "keep",
-      "analysis": [
-        "Needed for project: Expedition Project"
-      ]
+      "analysis": ["Needed for project: Expedition Project"]
     },
     {
       "id": "wolfpack",
@@ -5694,10 +4548,7 @@
       "name": "Wolfpack Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "yellow-light-stick",
@@ -5715,10 +4566,7 @@
       "name": "Yellow Light Stick Blueprint",
       "value": 5000,
       "action": "keep",
-      "analysis": [
-        "Legendary rarity - extremely valuable",
-        "Keep all legendaries"
-      ]
+      "analysis": ["Legendary rarity - extremely valuable", "Keep all legendaries"]
     },
     {
       "id": "zipline",
