@@ -7,7 +7,7 @@ import time
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -166,7 +166,7 @@ def _normalize_component_values(value: object) -> Optional[Dict[str, int]]:
     return normalized or None
 
 
-def _normalize_raidtheory_rewards(value: object, item_names: Dict[str, str]) -> tuple[List[str], List[dict]]:
+def _normalize_raidtheory_rewards(value: object, item_names: Dict[str, str]) -> Tuple[List[str], List[dict]]:
     if not isinstance(value, list):
         return [], []
 
@@ -180,12 +180,12 @@ def _normalize_raidtheory_rewards(value: object, item_names: Dict[str, str]) -> 
             continue
         reward_ids.append(item_id)
 
-        reward_payload: dict[str, object] = {"item_id": item_id}
+        reward_payload: Dict[str, object] = {"item_id": item_id}
         quantity = reward.get("quantity")
         if quantity is not None:
             reward_payload["quantity"] = str(quantity)
 
-        item_payload: dict[str, object] = {"id": item_id}
+        item_payload: Dict[str, object] = {"id": item_id}
         reward_name = item_names.get(item_id)
         if reward_name:
             item_payload["name"] = reward_name
@@ -270,7 +270,7 @@ def _map_raidtheory_quest(raidtheory_quest: dict, item_names: Dict[str, str]) ->
     }
 
 
-def _load_raidtheory_fallback_data() -> tuple[List[dict], List[dict]]:
+def _load_raidtheory_fallback_data() -> Tuple[List[dict], List[dict]]:
     archive_bytes = _fetch_bytes(
         RAIDTHEORY_ARCHIVE_URL,
         headers={"Accept": "application/octet-stream"},
@@ -295,7 +295,7 @@ def _load_raidtheory_fallback_data() -> tuple[List[dict], List[dict]]:
     return mapped_items, mapped_quests
 
 
-def _merge_missing_entries(primary: List[dict], fallback: List[dict]) -> tuple[List[dict], int]:
+def _merge_missing_entries(primary: List[dict], fallback: List[dict]) -> Tuple[List[dict], int]:
     merged: List[dict] = []
     seen_ids: set[str] = set()
 
