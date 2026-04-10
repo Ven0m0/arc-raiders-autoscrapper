@@ -50,6 +50,13 @@
   "postUpdateOptions": ["uvLockUpdate"],
   "packageRules": [
     {
+      "description": "Pin Python Docker image to 3.14.3",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["python"],
+      "pinDigests": false,
+      "pinVersions": ["3.14.3"]
+    },
+    {
       "description": "Disable Docker digest pinning",
       "matchDatasources": ["docker"],
       "pinDigests": false
