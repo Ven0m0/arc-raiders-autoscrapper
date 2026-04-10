@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Mapping, Sequence
 
 
 def _normalize_quest_name(value: object) -> str:
-    normalized = str(value or "").lower().replace("'", "").replace("’", "")
+    normalized = str(value or "").lower().replace("'", "").replace("\u2019", "")
     normalized = re.sub(r"[^a-z0-9]+", " ", normalized)
     return re.sub(r"\s+", " ", normalized).strip()
 
