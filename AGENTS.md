@@ -11,6 +11,7 @@ Arc Raiders AutoScrapper is a screen-capture + OCR automation tool that scans th
 ```bash
 # Setup (after clone)
 uv sync
+uv sync --extra linux-input      # full Linux desktop automation
 
 # Run (TUI)
 uv run autoscrapper
