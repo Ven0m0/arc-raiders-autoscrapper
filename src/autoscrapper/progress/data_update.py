@@ -15,8 +15,12 @@ from .quest_overrides import apply_quest_overrides
 
 _log = logging.getLogger(__name__)
 
-METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
-SUPABASE_URL = "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
+METAFORGE_API_BASE = os.environ.get(
+    "METAFORGE_API_BASE", "https://metaforge.app/api/arc-raiders"
+)
+SUPABASE_URL = os.environ.get(
+    "METAFORGE_SUPABASE_URL", "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
+)
 
 SUPABASE_ANON_KEY = os.environ.get("METAFORGE_SUPABASE_ANON_KEY")
 
