@@ -126,7 +126,7 @@ def _is_ignorable_timestamp_only_json_diff(before: bytes, after: bytes) -> bool:
     try:
         before_json = orjson.loads(before)
         after_json = orjson.loads(after)
-    except orjson.JSONDecodeError:
+    except (orjson.JSONDecodeError, UnicodeDecodeError):
         return False
 
     return _normalize_for_semantic_diff(before_json) == _normalize_for_semantic_diff(

@@ -184,7 +184,7 @@ def _load_config_dict() -> Dict[str, Any]:
         raw = orjson.loads(path.read_bytes())
     except FileNotFoundError:
         return {}
-    except OSError, orjson.JSONDecodeError:
+    except (OSError, orjson.JSONDecodeError):
         return {}
 
     if not isinstance(raw, dict):

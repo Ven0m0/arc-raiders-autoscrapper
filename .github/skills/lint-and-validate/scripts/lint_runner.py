@@ -57,7 +57,7 @@ def detect_node_project(project_path: Path, result: dict[str, Any]) -> None:
                     {"name": "tsc", "cmd": ["npx", "tsc", "--noEmit"]}
                 )
 
-        except IOError, orjson.JSONDecodeError:
+        except (IOError, orjson.JSONDecodeError):
             pass
 
 
