@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**/*.json"],
+    "includes": ["**/*.json", "**/*.jsonc"],
     "ignores": [
       "src/autoscrapper/progress/data/**",
       "src/autoscrapper/items/items_rules.default.json",
