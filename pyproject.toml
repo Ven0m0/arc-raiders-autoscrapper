@@ -1,13 +1,13 @@
 [build-system]
-requires = ["uv_build>=0.11.6,<0.12"]
+requires = ["uv_build>=0.11.6", "setuptools>=61", "wheel"]
 build-backend = "uv_build"
 
 [project]
 name = "autoscrapper"
-version = "0.1.0"
+version = "0.2.0"
 description = "Arc Raiders inventory autoscrapper"
 readme = "README.md"
-requires-python = ">=3.14.4"
+requires-python = ">=3.14,<3.14.4"
 dependencies = [
   "mss",
   "numpy",
@@ -15,6 +15,7 @@ dependencies = [
   "orjson",
   "Pillow>=12.1.1",
   "pydirectinput-rgx; sys_platform == 'win32'",
+  "pynput; sys_platform == 'linux'",
   "pywinctl",
   "rapidfuzz~=3.14.5",
   "rich",
@@ -39,10 +40,10 @@ dev = [
     "mypy>=1.20.0",
     "prek>=0.3.8",
     "pytest>=9.0.3",
-    "ruff>=0.15.10",
+    "ruff>=0.15.10"
 ]
 linux-input = [
-    "pynput; sys_platform == 'linux'",
+    #"pynput; sys_platform == 'linux'",
 ]
 
 [project.scripts]
@@ -50,6 +51,21 @@ autoscrapper = "autoscrapper.__main__:main"
 
 [project.urls]
 Homepage = "https://github.com/Ven0m0/arc-raiders-autoscrapper"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+autoscrapper = [
+    "items/items_rules.default.json",
+    "progress/data/*.json",
+    "progress/data/static/*.json",
+    "tui/*.tcss",
+]
 
 [tool.ruff]
 extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
@@ -96,3 +112,8 @@ warn_unreachable = true
 ignore_missing_imports = true
 show_error_codes = true
 enable_error_code = ["ignore-without-code", "unused-awaitable", "possibly-undefined"]
+
+[tool.black]
+extend-exclude = '''
+^scripts/(setup-linux\.sh|setup-windows\.ps1)$
+'''
