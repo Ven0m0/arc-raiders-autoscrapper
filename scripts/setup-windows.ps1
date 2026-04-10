@@ -3,8 +3,10 @@ param(
 )
 
 # AutoScrapper Windows Setup Script
-# Required: Python 3.14+
+# Required: Python 3.14.x
 # Usage: .\scripts\setup-windows.ps1
+
+# Python 3.14.x is required; `uv python install 3.14` resolves to the latest 3.14 patch.
 
 $ErrorActionPreference = "Stop"
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # AutoScrapper Linux Setup Script
-# Required: Python 3.14+
+# Required: Python 3.14.x
 set -euo pipefail
 
 abort() {
@@ -58,7 +58,7 @@ if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
   fi
 fi
 
-# Python 3.14+ is required
+# Python 3.14.x is required; `uv python install 3.14` resolves to the latest 3.14 patch.
 PYTHON_VERSION="${PYTHON_VERSION:-3.14}"
 
 # 1) System prerequisites
