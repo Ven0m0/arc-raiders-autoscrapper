@@ -154,9 +154,11 @@ def capture_skip_unlisted_sample(
     image_path: str | None = None
     if source_image is not None and source_image.size > 0:
         corpus_paths.images_dir.mkdir(parents=True, exist_ok=True)
-        image_name = f"{sample_id}.png"
+        image_name = f"{sample_id}.webp"
         absolute_image_path = corpus_paths.images_dir / image_name
-        if cv2.imwrite(str(absolute_image_path), source_image):
+        if cv2.imwrite(
+            str(absolute_image_path), source_image, [cv2.IMWRITE_WEBP_QUALITY, 80]
+        ):
             image_path = absolute_image_path.relative_to(REPO_ROOT).as_posix()
 
     sample_raw_text = raw_text.strip()
