@@ -952,16 +952,21 @@ def _extract_action_line_bbox(
     groups: Dict[Tuple[int, int, int, int], List[int]] = {}
     texts = ocr_data.get("text", [])
     n = len(texts)
+    page_nums = [int(v) for v in ocr_data["page_num"]]
+    block_nums = [int(v) for v in ocr_data["block_num"]]
+    par_nums = [int(v) for v in ocr_data["par_num"]]
+    line_nums = [int(v) for v in ocr_data["line_num"]]
+
     for i in range(n):
         raw_text = texts[i] or ""
         cleaned = re.sub(r"[^a-z]", "", raw_text.lower())
         if not cleaned or target not in cleaned:
             continue
         key = (
-            int(ocr_data["page_num"][i]),
-            int(ocr_data["block_num"][i]),
-            int(ocr_data["par_num"][i]),
-            int(ocr_data["line_num"][i]),
+            page_nums[i],
+            block_nums[i],
+            par_nums[i],
+            line_nums[i],
         )
         groups.setdefault(key, []).append(i)
 
@@ -982,18 +987,16 @@ def _extract_action_line_bbox(
     # Expand to all words on the winning line, not just the ones containing the
     # target token.  This ensures the price token "(+11,000)" next to "Sell" is
     # included in the bbox even though it doesn't contain the target string.
-    widths = ocr_data.get("width", [0] * n)
+    widths = [int(v) for v in ocr_data.get("width", [0] * n)]
+    bp, bb, bpa, bl = best_key
     indices = [
         i
         for i in range(n)
-        if (
-            int(ocr_data["page_num"][i]),
-            int(ocr_data["block_num"][i]),
-            int(ocr_data["par_num"][i]),
-            int(ocr_data["line_num"][i]),
-        )
-        == best_key
-        and int(widths[i]) > 0
+        if page_nums[i] == bp
+        and block_nums[i] == bb
+        and par_nums[i] == bpa
+        and line_nums[i] == bl
+        and widths[i] > 0
     ]
     # If every word on the line has width==0 (degenerate tesserocr output), fall
     # back to the original group indices so min/max never operate on empty lists.
