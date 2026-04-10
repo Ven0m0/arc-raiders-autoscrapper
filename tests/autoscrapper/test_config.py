@@ -1,5 +1,8 @@
-from unittest.mock import patch
-from autoscrapper.config import _migrate_config, CONFIG_VERSION
+import json
+from pathlib import Path
+from unittest.mock import MagicMock, patch
+
+from autoscrapper.config import CONFIG_VERSION, _load_config_dict, _migrate_config
 
 
 def test_migrate_config_no_version():
@@ -86,3 +89,60 @@ def test_migrate_config_applies_all_steps():
     assert result.get("step_1_applied") is True
     assert result.get("step_2_applied") is True
     assert result.get("step_3_applied") is True
+
+
+@patch("autoscrapper.config.config_path")
+def test_load_config_dict_file_not_found(mock_config_path):
+    """Test that _load_config_dict returns an empty dict if the file is not found."""
+    mock_path = MagicMock(spec=Path)
+    mock_path.read_text.side_effect = FileNotFoundError()
+    mock_config_path.return_value = mock_path
+
+    result = _load_config_dict()
+    assert result == {}
+
+
+@patch("autoscrapper.config.config_path")
+def test_load_config_dict_json_decode_error(mock_config_path):
+    """Test that _load_config_dict returns an empty dict if the file contains invalid JSON."""
+    mock_path = MagicMock(spec=Path)
+    mock_path.read_text.return_value = "invalid json"
+    mock_config_path.return_value = mock_path
+
+    # json.loads will raise JSONDecodeError
+    result = _load_config_dict()
+    assert result == {}
+
+
+@patch("autoscrapper.config.config_path")
+def test_load_config_dict_os_error(mock_config_path):
+    """Test that _load_config_dict returns an empty dict if an OSError occurs."""
+    mock_path = MagicMock(spec=Path)
+    mock_path.read_text.side_effect = OSError("Read error")
+    mock_config_path.return_value = mock_path
+
+    result = _load_config_dict()
+    assert result == {}
+
+
+@patch("autoscrapper.config.config_path")
+def test_load_config_dict_not_a_dict(mock_config_path):
+    """Test that _load_config_dict returns an empty dict if the JSON is not a dictionary."""
+    mock_path = MagicMock(spec=Path)
+    mock_path.read_text.return_value = "[1, 2, 3]"
+    mock_config_path.return_value = mock_path
+
+    result = _load_config_dict()
+    assert result == {}
+
+
+@patch("autoscrapper.config.config_path")
+def test_load_config_dict_success(mock_config_path):
+    """Test that _load_config_dict returns the loaded dictionary on success."""
+    payload = {"version": CONFIG_VERSION, "scan": {"debug_ocr": True}}
+    mock_path = MagicMock(spec=Path)
+    mock_path.read_text.return_value = json.dumps(payload)
+    mock_config_path.return_value = mock_path
+
+    result = _load_config_dict()
+    assert result == payload
