@@ -1,5 +1,5 @@
 # Arc Raiders AutoScrapper
->Always use the mcp-use skill
+>Always use the mcp-use, language-optimization, codebase-index skills.
 
 Arc Raiders AutoScrapper is a Python 3.14 desktop automation app for inventory management. It uses Textual for the UI, screen capture plus OCR to identify items, rule lookup to decide keep/sell/recycle, and optional click automation.
 
