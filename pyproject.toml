@@ -13,7 +13,7 @@ dependencies = [
   "numpy",
   "opencv-python-headless",
   "orjson",
-  "Pillow",
+  "Pillow>=12.0.0",
   "pydirectinput-rgx; sys_platform == 'win32'",
   "pywinctl",
   "rapidfuzz~=3.14.5",
