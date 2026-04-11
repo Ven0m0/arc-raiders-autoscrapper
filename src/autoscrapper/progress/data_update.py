@@ -75,9 +75,28 @@ def _fetch_metaforge_collection(resource: str) -> List[dict]:
     rows.extend(entry for entry in data if isinstance(entry, dict))
 
     pagination = response.get("pagination") or {}
-    total_pages = pagination.get("totalPages")
+    if not isinstance(pagination, dict):
+        raise DownloadError(f"Unexpected {resource} payload: pagination must be an object")
 
-    if total_pages and total_pages > 1:
+    raw_total_pages = pagination.get("totalPages")
+    total_pages: Optional[int]
+    if raw_total_pages is None:
+        total_pages = None
+    elif isinstance(raw_total_pages, bool):
+        raise DownloadError(f"Unexpected {resource} payload: totalPages must be an integer")
+    elif isinstance(raw_total_pages, int):
+        total_pages = raw_total_pages
+    elif isinstance(raw_total_pages, str):
+        try:
+            total_pages = int(raw_total_pages)
+        except ValueError as exc:
+            raise DownloadError(
+                f"Unexpected {resource} payload: totalPages must be an integer"
+            ) from exc
+    else:
+        raise DownloadError(f"Unexpected {resource} payload: totalPages must be an integer")
+
+    if total_pages is not None and total_pages > 1:
         def fetch_page(page: int) -> List[dict]:
             page_url = f"{METAFORGE_API_BASE}/{resource}?page={page}&limit={limit}"
             page_response = _fetch_json(page_url)
