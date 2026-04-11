@@ -319,10 +319,10 @@ class TestOcrTitleStripCache:
         """
         reset_ocr_caches()
         img = self._make_image()
-        empty_data = _make_ocr_data()  # no words → item_name will be ""
+           # no words → item_name will be ""
 
         with (
-            patch.object(_vision, "image_to_data", return_value=empty_data) as mock_ocr,
+            patch.object(_vision, "image_to_string", return_value="") as mock_ocr,
             patch.object(
                 _vision,
                 "match_item_name_result",
@@ -338,10 +338,10 @@ class TestOcrTitleStripCache:
         """When item_name is non-empty, the second call must use the cache."""
         reset_ocr_caches()
         img = self._make_image()
-        data = _make_ocr_data(("Arc Alloy", 90, 2, 8))
+
 
         with (
-            patch.object(_vision, "image_to_data", return_value=data) as mock_ocr,
+            patch.object(_vision, "image_to_string", return_value="FoundItem") as mock_ocr,
             patch.object(
                 _vision,
                 "match_item_name_result",
