@@ -131,8 +131,8 @@ def _scroll_clicks_sequence(click_pattern: Iterable[int]) -> cycle[int]:
 
 def detect_grid(
     context: ScanContext,
-    progress_impl: Optional[ScanProgress],
-    startup_events: List[Tuple[str, str]],
+    progress_impl: ScanProgress | None,
+    startup_events: list[tuple[str, str]],
 ) -> Grid:
     """
     Move the cursor out of the grid, capture the ROI, and detect cells.
@@ -161,16 +161,16 @@ def detect_grid(
 
 def _detect_consecutive_empty_stop_idx(
     page: int,
-    cells: List[Cell],
+    cells: list[Cell],
     cells_per_page: int,
     window_left: int,
     window_top: int,
     window_width: int,
     window_height: int,
-    safe_point_abs: Tuple[int, int],
+    safe_point_abs: tuple[int, int],
     stop_key: str,
     action_delay: float,
-) -> Optional[int]:
+) -> int | None:
     """
     Capture the current page and return the global index of the *second* empty cell
     in the first run of two consecutive empty cells (row-major order).
@@ -208,11 +208,11 @@ class _ScanRunner:
         self,
         *,
         context: ScanContext,
-        initial_cells: List[Cell],
+        initial_cells: list[Cell],
         scroll_sequence: Iterable[int],
         config: _ScanLoopConfig,
-        progress_impl: Optional[ScanProgress],
-        startup_events: List[Tuple[str, str]],
+        progress_impl: ScanProgress | None,
+        startup_events: list[tuple[str, str]],
     ) -> None:
         self.context = context
         self.initial_cells = initial_cells
@@ -221,11 +221,11 @@ class _ScanRunner:
         self.progress_impl = progress_impl
         self.startup_events = startup_events
         self.state = ScanRunState()
-        self._last_click_window_pos: Optional[Tuple[int, int]] = None
+        self._last_click_window_pos: tuple[int, int] | None = None
         # Tracks which UI detection method works for this scan session.
         # Set on the first successful detection, then reused for all
         # subsequent cells to avoid repeatedly trying the method that fails.
-        self._detected_ui_mode: Optional[str] = None  # "context_menu" or "infobox"
+        self._detected_ui_mode: str | None = None  # "context_menu" or "infobox"
         self.action_context = ActionExecutionContext(
             apply_actions=context.apply_actions,
             win_left=context.win_left,
