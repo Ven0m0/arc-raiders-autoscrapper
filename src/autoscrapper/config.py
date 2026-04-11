@@ -183,7 +183,7 @@ def _load_config_dict() -> Dict[str, Any]:
         raw = orjson.loads(path.read_bytes())
     except FileNotFoundError:
         return {}
-    except (OSError, json.JSONDecodeError) as e:
+    except (OSError, orjson.JSONDecodeError) as e:
         _log.warning("config: failed to load config file: %s", e)
         return {}
 

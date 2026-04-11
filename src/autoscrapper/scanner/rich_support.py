@@ -17,7 +17,7 @@ try:
         TimeElapsedColumn,
         TimeRemainingColumn,
     )
-    from rich.table import Table
+    from rich.table import Table as Table
     from rich.text import Text
 except ImportError:  # pragma: no cover - optional dependency
     Align = None
