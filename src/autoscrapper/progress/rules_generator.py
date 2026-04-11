@@ -34,8 +34,8 @@ def generate_rules_from_active(
     active_quests: list[str],
     hideout_levels: dict[str, int],
     *,
-    completed_projects: list[str | None] = None,
-    completed_quests_override: list[str | None] = None,
+    completed_projects: list[str] | None = None,
+    completed_quests_override: list[str] | None = None,
     all_quests_completed: bool = False,
     data_dir: Path | None = None,
 ) -> dict[str, object]:
