@@ -211,10 +211,10 @@ def normalized_rect_to_window(
     Scale a normalized rectangle (x, y, w, h in [0,1]) to window-relative pixels.
     """
     nx, ny, nw, nh = norm_rect
-    x = int(round(nx * window_width))
-    y = int(round(ny * window_height))
-    w = max(1, int(round(nw * window_width)))
-    h = max(1, int(round(nh * window_height)))
+    x = round(nx * window_width)
+    y = round(ny * window_height)
+    w = max(1, round(nw * window_width))
+    h = max(1, round(nh * window_height))
     return x, y, w, h
 
 
@@ -261,10 +261,10 @@ def _synthetic_grid(
     cells: List[dict] = []
     for row in range(GRID_ROWS):
         for col in range(GRID_COLS):
-            x = int(round(col * col_w))
-            y = int(round(row * row_h))
-            w = int(round((col + 1) * col_w)) - x
-            h = int(round((row + 1) * row_h)) - y
+            x = round(col * col_w)
+            y = round(row * row_h)
+            w = round((col + 1) * col_w) - x
+            h = round((row + 1) * row_h) - y
             pad_x = int(w * SHRINK_RATIO_X)
             pad_y = int(h * SHRINK_RATIO_Y)
             ix1 = x + pad_x
@@ -290,7 +290,7 @@ def _scaled_cell_size(window_width: int, window_height: int) -> int:
     scale_x = window_width / REF_WIDTH
     scale_y = window_height / REF_HEIGHT
     scale = (scale_x + scale_y) / 2.0
-    return max(1, int(round(REF_CELL_SIZE * scale)))
+    return max(1, round(REF_CELL_SIZE * scale))
 
 
 def _detect_cells_by_contours(inv_bgr: np.ndarray, cell_size: int) -> List[dict]:
