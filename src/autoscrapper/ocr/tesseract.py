@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 import os
+import sys
 import threading
 from dataclasses import dataclass
 from pathlib import Path
-import sys
-from typing import Dict, List
 
 import numpy as np
 from PIL import Image
@@ -20,7 +19,7 @@ _tessdata_dir: str | None = None
 _backend_info: "OcrBackendInfo | None" = None
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class OcrBackendInfo:
     tesseract_version: str
     tessdata_dir: str | None
@@ -175,7 +174,7 @@ def _as_pil_image(image: np.ndarray) -> Image.Image:
     raise ValueError(f"Unsupported image shape for OCR: {image.shape}")
 
 
-def _empty_data_dict() -> Dict[str, List]:
+def _empty_data_dict() -> dict[str, list]:
     return {
         "level": [],
         "page_num": [],
@@ -192,7 +191,7 @@ def _empty_data_dict() -> Dict[str, List]:
     }
 
 
-def _build_data_dict(iterator) -> Dict[str, List]:
+def _build_data_dict(iterator) -> dict[str, list]:
     data = _empty_data_dict()
     block_num = 0
     par_num = 0
@@ -254,7 +253,7 @@ def image_to_string(image: np.ndarray, *, single_line: bool = False) -> str:
     return text
 
 
-def image_to_data(image: np.ndarray, *, single_line: bool = False) -> Dict[str, List]:
+def image_to_data(image: np.ndarray, *, single_line: bool = False) -> dict[str, list]:
     """
     OCR the provided image and return a dict shaped like pytesseract Output.DICT.
     """

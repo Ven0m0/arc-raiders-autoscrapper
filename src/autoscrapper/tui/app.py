@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 import time
-from typing import Callable, Iterable, Optional
 
 from rich.text import Text
 from textual import events
@@ -49,7 +49,7 @@ _SPLASH_TITLE = (
 )
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class MenuItem:
     key: str
     label: str
@@ -177,7 +177,7 @@ class MenuScreen(AppScreen):
         items: Iterable[MenuItem],
         *,
         default_key: str,
-        recommended_key: Optional[str] = None,
+        recommended_key: str | None = None,
         show_status: bool = False,
     ) -> None:
         super().__init__()
