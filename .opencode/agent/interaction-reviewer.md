@@ -1,3 +1,8 @@
+---
+description: Review interaction changes for platform-guard, coordinate, and dry-run regressions.
+mode: subagent
+---
+
 # Interaction Reviewer Agent
 
 Specialized reviewer for input/interaction changes.
