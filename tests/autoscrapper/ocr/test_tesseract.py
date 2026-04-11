@@ -6,8 +6,8 @@ from unittest.mock import MagicMock, patch
 import numpy as np
 import pytest
 
-from src.autoscrapper.ocr import tesseract
-from src.autoscrapper.ocr.tesseract import OcrBackendInfo, _empty_data_dict
+from autoscrapper.ocr import tesseract
+from autoscrapper.ocr.tesseract import OcrBackendInfo, _empty_data_dict
 
 
 @pytest.fixture(autouse=True)
