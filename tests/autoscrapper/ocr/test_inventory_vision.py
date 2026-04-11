@@ -319,10 +319,10 @@ class TestOcrTitleStripCache:
         """
         reset_ocr_caches()
         img = self._make_image()
-        empty_data = _make_ocr_data()  # no words → item_name will be ""
+           # no words → item_name will be ""
 
         with (
-            patch.object(_vision, "image_to_data", return_value=empty_data) as mock_ocr,
+            patch.object(_vision, "image_to_string", return_value="") as mock_ocr,
             patch.object(
                 _vision,
                 "match_item_name_result",
@@ -338,10 +338,10 @@ class TestOcrTitleStripCache:
         """When item_name is non-empty, the second call must use the cache."""
         reset_ocr_caches()
         img = self._make_image()
-        data = _make_ocr_data(("Arc Alloy", 90, 2, 8))
+
 
         with (
-            patch.object(_vision, "image_to_data", return_value=data) as mock_ocr,
+            patch.object(_vision, "image_to_string", return_value="FoundItem") as mock_ocr,
             patch.object(
                 _vision,
                 "match_item_name_result",
@@ -375,3 +375,23 @@ class TestResetOcrCaches:
         assert _vision._last_roi_hash is None
         assert _vision._last_ocr_result is None
         assert _vision._ITEM_NAMES is None
+
+# ---------------------------------------------------------------------------
+# enable_ocr_debug
+# ---------------------------------------------------------------------------
+
+class TestEnableOcrDebug:
+    def test_enable_ocr_debug_mkdir_exception(self, capsys):
+        """Test that an exception during directory creation is caught and handled."""
+        from pathlib import Path
+
+        mock_path = MagicMock(spec=Path)
+        mock_path.mkdir.side_effect = OSError("Permission denied")
+
+        # Use patch to isolate global state and verify it is cleared on failure
+        with patch.object(_vision, "_OCR_DEBUG_DIR", Path("/tmp/dummy")):
+            _vision.enable_ocr_debug(mock_path)
+            assert _vision._OCR_DEBUG_DIR is None
+
+        captured = capsys.readouterr()
+        assert "[vision_ocr] failed to enable OCR debug dir: Permission denied" in captured.out

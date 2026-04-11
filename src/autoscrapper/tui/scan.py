@@ -107,7 +107,7 @@ def _format_exception_for_ui(exc: BaseException, *, context: str) -> str:
     lines = [context, "", f"{type(exc).__name__}: {exc}"]
     com_details = _com_error_details(exc)
     if com_details is not None:
-        hresult, text, hresult_hex = com_details
+        _, text, hresult_hex = com_details
         lines.append(f"COM error: {hresult_hex} ({text})")
     lines.extend(["", "Traceback:", trace])
     report_path = _write_crash_report("\n".join(lines))

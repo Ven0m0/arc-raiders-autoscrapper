@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import re
 import time
+from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Literal, Optional, Tuple
@@ -860,7 +861,7 @@ def _extract_title_from_data(
         return "", ""
 
     cutoff = max(1.0, float(image_height) * top_fraction)
-    groups: Dict[Tuple[int, int, int, int], List[int]] = {}
+    groups: Dict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
     n = len(texts)
     for i in range(n):
         raw_text = texts[i] or ""
@@ -880,7 +881,7 @@ def _extract_title_from_data(
             int(ocr_data["par_num"][i]),
             int(ocr_data["line_num"][i]),
         )
-        groups.setdefault(key, []).append(i)
+        groups[key].append(i)
 
     if not groups:
         return "", ""
@@ -959,21 +960,26 @@ def _extract_action_line_bbox(
     Given OCR data, return a bbox (left, top, w, h) for
     the line containing the target action (infobox-relative coords).
     """
-    groups: Dict[Tuple[int, int, int, int], List[int]] = {}
+    groups: defaultdict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
     texts = ocr_data.get("text", [])
     n = len(texts)
+    page_nums = [int(v) for v in ocr_data.get("page_num", [])]
+    block_nums = [int(v) for v in ocr_data.get("block_num", [])]
+    par_nums = [int(v) for v in ocr_data.get("par_num", [])]
+    line_nums = [int(v) for v in ocr_data.get("line_num", [])]
+
     for i in range(n):
         raw_text = texts[i] or ""
         cleaned = re.sub(r"[^a-z]", "", raw_text.lower())
         if not cleaned or target not in cleaned:
             continue
         key = (
-            int(ocr_data["page_num"][i]),
-            int(ocr_data["block_num"][i]),
-            int(ocr_data["par_num"][i]),
-            int(ocr_data["line_num"][i]),
+            page_nums[i],
+            block_nums[i],
+            par_nums[i],
+            line_nums[i],
         )
-        groups.setdefault(key, []).append(i)
+        groups[key].append(i)
 
     if not groups:
         return None
@@ -992,18 +998,16 @@ def _extract_action_line_bbox(
     # Expand to all words on the winning line, not just the ones containing the
     # target token.  This ensures the price token "(+11,000)" next to "Sell" is
     # included in the bbox even though it doesn't contain the target string.
-    widths = ocr_data.get("width", [0] * n)
+    widths = [int(v) for v in ocr_data.get("width", [0] * n)]
+    bp, bb, bpa, bl = best_key
     indices = [
         i
         for i in range(n)
-        if (
-            int(ocr_data["page_num"][i]),
-            int(ocr_data["block_num"][i]),
-            int(ocr_data["par_num"][i]),
-            int(ocr_data["line_num"][i]),
-        )
-        == best_key
-        and int(widths[i]) > 0
+        if page_nums[i] == bp
+        and block_nums[i] == bb
+        and par_nums[i] == bpa
+        and line_nums[i] == bl
+        and widths[i] > 0
     ]
     # If every word on the line has width==0 (degenerate tesserocr output), fall
     # back to the original group indices so min/max never operate on empty lists.
@@ -1097,12 +1101,12 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
     ocr_time = 0.0
     try:
         ocr_start = time.perf_counter()
-        data = image_to_data(processed, single_line=True)
+        raw_text = image_to_string(processed, single_line=True)
         ocr_time = time.perf_counter() - ocr_start
     except Exception as exc:
         _last_roi_hash = None  # invalidate cache so next call does not re-serve stale result
         print(
-            f"[vision_ocr] ocr_backend image_to_data failed for infobox title strip; "
+            f"[vision_ocr] ocr_backend image_to_string failed for infobox title strip; "
             f"falling back to empty OCR result. error={exc}",
             flush=True,
         )
@@ -1116,7 +1120,9 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
             ocr_failed=True,
         )
 
-    item_name, raw_item_text = _extract_cropped_title_from_data(data, processed.shape[0])
+    match_result = match_item_name_result(raw_text)
+    raw_item_text = match_result.cleaned_text
+    item_name = match_result.chosen_name
     if item_name:
         _last_roi_hash = roi_hash
         _last_ocr_result = (item_name, raw_item_text)
@@ -1195,7 +1201,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
 
     # Group words into lines keyed by (page, block, par, line).
     texts = data.get("text", [])
-    groups: Dict[Tuple[int, int, int, int], List[int]] = {}
+    groups: defaultdict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
     for i, raw_text in enumerate(texts):
         cleaned = clean_ocr_text(raw_text or "")
         if not cleaned:
@@ -1206,7 +1212,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
             int(data["par_num"][i]),
             int(data["line_num"][i]),
         )
-        groups.setdefault(key, []).append(i)
+        groups[key].append(i)
 
     def _line_top(indices: List[int]) -> float:
         return min(float(data["top"][i]) for i in indices)
