@@ -112,7 +112,6 @@ def test_diff_quests_changes() -> None:
 
     # Check that untracked fields are not in the diff
     assert "ignored_field" not in changes
-
 def test_diff_quests_no_changes() -> None:
     """Test that quests with identical tracked fields result in no changes."""
     before = [
