@@ -1196,7 +1196,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
 
     # Group words into lines keyed by (page, block, par, line).
     texts = data.get("text", [])
-    groups: Dict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
+    groups: defaultdict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
     for i, raw_text in enumerate(texts):
         cleaned = clean_ocr_text(raw_text or "")
         if not cleaned:
