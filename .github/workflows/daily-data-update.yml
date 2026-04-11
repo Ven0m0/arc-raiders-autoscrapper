@@ -17,6 +17,7 @@ concurrency:
 jobs:
   update-data:
     runs-on: ubuntu-latest
+    environment: daily-data-update
     env:
       METAFORGE_SUPABASE_ANON_KEY: ${{ secrets.METAFORGE_SUPABASE_ANON_KEY || secrets.METAFORGE_API }}
     steps:
