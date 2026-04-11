@@ -1,15 +1,15 @@
 import os
 import importlib
+import importlib
+
 import autoscrapper.progress.data_update as data_update
 
-def test_config_defaults(monkeypatch):
-    # Ensure environment variables are not set to test defaults
-    monkeypatch.delenv("METAFORGE_API_BASE", raising=False)
-    monkeypatch.delenv("METAFORGE_SUPABASE_URL", raising=False)
+
+def test_config_defaults():
+    # Reload module to ensure we're testing with fresh state if env vars were set
     importlib.reload(data_update)
     assert data_update.METAFORGE_API_BASE == "https://metaforge.app/api/arc-raiders"
     assert data_update.SUPABASE_URL == "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
-
 def test_config_env_vars(monkeypatch):
     monkeypatch.setenv("METAFORGE_API_BASE", "https://example.com/api")
     monkeypatch.setenv("METAFORGE_SUPABASE_URL", "https://supabase.example.com")
