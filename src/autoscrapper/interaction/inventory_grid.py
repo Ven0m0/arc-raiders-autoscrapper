@@ -134,8 +134,7 @@ class Grid:
         if len(detections) < expected_count:
             _, _, roi_w, roi_h = roi_rect
             _log.warning(
-                "Detected %d cells inside the grid ROI (expected %d); "
-                "falling back to synthetic uniform grid.",
+                "Detected %d cells inside the grid ROI (expected %d); falling back to synthetic uniform grid.",
                 len(detections),
                 expected_count,
             )
@@ -219,9 +218,7 @@ def normalized_rect_to_window(
     return x, y, w, h
 
 
-def inventory_roi_rect(
-    window_width: int, window_height: int
-) -> Tuple[int, int, int, int]:
+def inventory_roi_rect(window_width: int, window_height: int) -> Tuple[int, int, int, int]:
     """
     Window-relative rectangle for the inventory grid ROI.
     """
@@ -232,9 +229,7 @@ def safe_mouse_point(window_width: int, window_height: int) -> Tuple[int, int]:
     """
     Window-relative point to park the mouse while detecting cells.
     """
-    sx, sy, sw, sh = normalized_rect_to_window(
-        SAFE_MOUSE_RECT_NORM, window_width, window_height
-    )
+    sx, sy, sw, sh = normalized_rect_to_window(SAFE_MOUSE_RECT_NORM, window_width, window_height)
     return sx + sw // 2, sy + sh // 2
 
 

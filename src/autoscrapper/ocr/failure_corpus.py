@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from hashlib import blake2b
@@ -9,6 +8,7 @@ from typing import Literal
 
 import cv2
 import numpy as np
+import orjson
 
 from ..core.item_actions import clean_ocr_text
 
@@ -50,12 +50,7 @@ def default_capture_paths() -> CorpusPaths:
 
 
 def _iso_now() -> str:
-    return (
-        datetime.now(timezone.utc)
-        .replace(microsecond=0)
-        .isoformat()
-        .replace("+00:00", "Z")
-    )
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _sample_id(
@@ -140,9 +135,7 @@ def capture_skip_unlisted_sample(
     if not cleaned_text:
         return None
 
-    source: Literal["infobox", "context_menu"] = (
-        "context_menu" if from_context_menu else "infobox"
-    )
+    source: Literal["infobox", "context_menu"] = "context_menu" if from_context_menu else "infobox"
     corpus_paths = paths or default_capture_paths()
     sample_id = _sample_id(
         raw_text=raw_text,
@@ -154,9 +147,9 @@ def capture_skip_unlisted_sample(
     image_path: str | None = None
     if source_image is not None and source_image.size > 0:
         corpus_paths.images_dir.mkdir(parents=True, exist_ok=True)
-        image_name = f"{sample_id}.png"
+        image_name = f"{sample_id}.webp"
         absolute_image_path = corpus_paths.images_dir / image_name
-        if cv2.imwrite(str(absolute_image_path), source_image):
+        if cv2.imwrite(str(absolute_image_path), source_image, [cv2.IMWRITE_WEBP_QUALITY, 80]):
             image_path = absolute_image_path.relative_to(REPO_ROOT).as_posix()
 
     sample_raw_text = raw_text.strip()
@@ -175,8 +168,8 @@ def capture_skip_unlisted_sample(
     )
 
     corpus_paths.manifest_path.parent.mkdir(parents=True, exist_ok=True)
-    with corpus_paths.manifest_path.open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(asdict(sample), ensure_ascii=False) + "\n")
+    with corpus_paths.manifest_path.open("ab") as handle:
+        handle.write(orjson.dumps(asdict(sample)) + b"\n")
     if used_chosen_name_fallback:
         print(
             "[ocr_corpus] captured sample without raw OCR text; used chosen name fallback",
@@ -196,7 +189,7 @@ def load_failure_corpus(path: Path) -> list[OcrFailureSample]:
             payload = line.strip()
             if not payload:
                 continue
-            sample = _coerce_sample(json.loads(payload))
+            sample = _coerce_sample(orjson.loads(payload))
             if sample is not None:
                 samples.append(sample)
     return samples
@@ -219,7 +212,5 @@ def write_report(directory: Path, prefix: str, payload: object) -> Path:
     directory.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     path = directory / f"{prefix}_{stamp}.json"
-    path.write_text(
-        json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
-    )
+    path.write_bytes(orjson.dumps(payload, option=orjson.OPT_INDENT_2) + b"\n")
     return path

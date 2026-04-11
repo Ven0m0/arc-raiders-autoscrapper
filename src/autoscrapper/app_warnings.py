@@ -23,10 +23,7 @@ def maybe_warn_default_rules(console: Optional[Console] = None) -> None:
     if has_saved_progress(load_progress_settings()):
         return
 
-    message = (
-        "Tip: You are using default rules. "
-        "Most users will want to set their progress first for better results."
-    )
+    message = "Tip: You are using default rules. Most users will want to set their progress first for better results."
     if console:
         console.print(f"[yellow]{message}[/yellow]")
     else:

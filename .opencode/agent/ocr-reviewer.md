@@ -1,3 +1,8 @@
+---
+description: Review OCR and scanner changes for coordinate-space and cache-reset regressions.
+mode: subagent
+---
+
 # OCR Reviewer Agent
 
 Specialized reviewer for OCR/scanner changes.

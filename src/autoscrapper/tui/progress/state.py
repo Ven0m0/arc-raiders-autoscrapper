@@ -77,9 +77,7 @@ def build_hideout_modules(hideout_modules: List[dict]) -> List[HideoutModule]:
         if module_id in {"stash", "workbench"}:
             continue
         name = module.get("name", module_id)
-        modules.append(
-            HideoutModule(id=str(module_id), name=str(name), max_level=max_level)
-        )
+        modules.append(HideoutModule(id=str(module_id), name=str(name), max_level=max_level))
     return modules
 
 
@@ -87,9 +85,7 @@ def compute_completed_quests(
     active_ids: List[str],
 ) -> List[str]:
     game_data = load_game_data()
-    return infer_completed_from_active(
-        game_data.quests, game_data.quest_graph, active_ids
-    )
+    return infer_completed_from_active(game_data.quests, game_data.quest_graph, active_ids)
 
 
 def build_wizard_state() -> ProgressWizardState:

@@ -76,11 +76,7 @@ def _format_duration(seconds: Optional[float]) -> str:
 
 
 def _item_label(result: "ItemActionResult") -> str:
-    return (
-        (result.item_name or result.raw_item_text or "<unreadable>")
-        .replace("\n", " ")
-        .strip()
-    )
+    return (result.item_name or result.raw_item_text or "<unreadable>").replace("\n", " ").strip()
 
 
 def _com_error_details(exc: BaseException) -> Optional[tuple[int, str, str]]:
@@ -107,9 +103,7 @@ def _write_crash_report(content: str) -> Optional[str]:
 
 
 def _format_exception_for_ui(exc: BaseException, *, context: str) -> str:
-    trace = "".join(
-        traceback.format_exception(type(exc), exc, exc.__traceback__)
-    ).rstrip()
+    trace = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__)).rstrip()
     lines = [context, "", f"{type(exc).__name__}: {exc}"]
     com_details = _com_error_details(exc)
     if com_details is not None:
@@ -210,11 +204,7 @@ class ScanScreen(Screen):
 
     def _start_window_wait(self) -> None:
         self._window_wait_started = time.monotonic()
-        self._updates.put(
-            ScanUpdate(
-                kind="phase", payload={"phase": "Waiting for Arc Raiders window…"}
-            )
-        )
+        self._updates.put(ScanUpdate(kind="phase", payload={"phase": "Waiting for Arc Raiders window…"}))
         self._window_wait_timer = self.set_interval(0.25, self._poll_for_window)
 
     def _stop_window_wait(self) -> None:
@@ -233,9 +223,7 @@ class ScanScreen(Screen):
             self._updates.put(
                 ScanUpdate(
                     kind="error",
-                    payload={
-                        "message": f"Aborted by {stop_key_label(self._settings.stop_key)} key."
-                    },
+                    payload={"message": f"Aborted by {stop_key_label(self._settings.stop_key)} key."},
                 )
             )
             return
@@ -246,9 +234,7 @@ class ScanScreen(Screen):
             self._updates.put(
                 ScanUpdate(
                     kind="error",
-                    payload={
-                        "message": f"Timed out waiting for active window {TARGET_APP!r}"
-                    },
+                    payload={"message": f"Timed out waiting for active window {TARGET_APP!r}"},
                 )
             )
             return
@@ -260,9 +246,7 @@ class ScanScreen(Screen):
             snapshot = build_window_snapshot(window)
         except Exception as exc:
             self._stop_window_wait()
-            message = _format_exception_for_ui(
-                exc, context="Failed to read target window information."
-            )
+            message = _format_exception_for_ui(exc, context="Failed to read target window information.")
             self._updates.put(ScanUpdate(kind="error", payload={"message": message}))
             return
 
@@ -274,9 +258,7 @@ class ScanScreen(Screen):
             return
         self._scan_started = True
         initialize_ocr()  # cysignals requires signal handlers installed on main thread
-        thread = threading.Thread(
-            target=self._run_scan, args=(window_snapshot,), daemon=True
-        )
+        thread = threading.Thread(target=self._run_scan, args=(window_snapshot,), daemon=True)
         thread.start()
 
     def _run_scan(self, window_snapshot: WindowSnapshot) -> None:
@@ -320,35 +302,25 @@ class ScanScreen(Screen):
             self._updates.put(
                 ScanUpdate(
                     kind="error",
-                    payload={
-                        "message": f"Aborted by {stop_key_label(settings.stop_key)} key."
-                    },
+                    payload={"message": f"Aborted by {stop_key_label(settings.stop_key)} key."},
                 )
             )
             return
         except ValueError as exc:
-            self._updates.put(
-                ScanUpdate(kind="error", payload={"message": f"Error: {exc}"})
-            )
+            self._updates.put(ScanUpdate(kind="error", payload={"message": f"Error: {exc}"}))
             return
         except TimeoutError as exc:
             self._updates.put(ScanUpdate(kind="error", payload={"message": str(exc)}))
             return
         except RuntimeError as exc:
-            self._updates.put(
-                ScanUpdate(kind="error", payload={"message": f"Fatal: {exc}"})
-            )
+            self._updates.put(ScanUpdate(kind="error", payload={"message": f"Fatal: {exc}"}))
             return
         except Exception as exc:  # pragma: no cover - safety net
-            message = _format_exception_for_ui(
-                exc, context="Unexpected error while scanning."
-            )
+            message = _format_exception_for_ui(exc, context="Unexpected error while scanning.")
             self._updates.put(ScanUpdate(kind="error", payload={"message": message}))
             return
 
-        self._updates.put(
-            ScanUpdate(kind="done", payload={"results": results, "stats": stats})
-        )
+        self._updates.put(ScanUpdate(kind="done", payload={"results": results, "stats": stats}))
 
     def _drain_updates(self) -> None:
         dirty = False
@@ -616,11 +588,7 @@ class ScanResultsScreen(AppScreen):
     def _build_overview(self) -> Text:
         text = Text()
         text.append("Overview\n", style="bold")
-        stash_label = (
-            str(self._stats.items_in_stash)
-            if self._stats.items_in_stash is not None
-            else "?"
-        )
+        stash_label = str(self._stats.items_in_stash) if self._stats.items_in_stash is not None else "?"
         text.append("Items in stash: ", style="cyan")
         text.append(stash_label)
         text.append("\n")
@@ -628,9 +596,7 @@ class ScanResultsScreen(AppScreen):
         text.append(str(len(self._results)))
         text.append("\n")
         planned_suffix = (
-            f" (planned {self._stats.pages_planned})"
-            if self._stats.pages_planned != self._stats.pages_scanned
-            else ""
+            f" (planned {self._stats.pages_planned})" if self._stats.pages_planned != self._stats.pages_scanned else ""
         )
         text.append("4x5 pages run: ", style="cyan")
         text.append(f"{self._stats.pages_scanned}{planned_suffix}")

@@ -17,9 +17,7 @@ def _normalize_quest_name(value: str) -> str:
     return re.sub(r"\s+", " ", normalized).strip()
 
 
-def _build_predecessors_by_id(
-    quests: List[dict], quest_graph: Dict[str, object]
-) -> Dict[str, Set[str]]:
+def _build_predecessors_by_id(quests: List[dict], quest_graph: Dict[str, object]) -> Dict[str, Set[str]]:
     nodes = quest_graph.get("nodes")
     edges = quest_graph.get("edges")
     if not isinstance(nodes, dict) or not isinstance(edges, list):
@@ -50,10 +48,7 @@ def _build_predecessors_by_id(
 
     if unresolved_nodes:
         examples = ", ".join(sorted(unresolved_nodes)[:5])
-        raise ValueError(
-            "Quest graph contains nodes that could not be matched to quests: "
-            f"{examples}"
-        )
+        raise ValueError(f"Quest graph contains nodes that could not be matched to quests: {examples}")
 
     predecessors: Dict[str, Set[str]] = {}
     for quest in quests:
@@ -173,9 +168,7 @@ def infer_completed_from_active(
 
     while queue:
         state = queue.popleft()
-        active_signature = _state_active_signature(
-            state, trader_order, trader_sequences, predecessors_by_id
-        )
+        active_signature = _state_active_signature(state, trader_order, trader_sequences, predecessors_by_id)
         if active_signature == target_active:
             matches.append(state)
 
@@ -189,8 +182,6 @@ def infer_completed_from_active(
                 queue.append(encoded)
 
     if len(matches) != 1:
-        return _infer_completed_from_graph_ancestors(
-            quests, target_active, predecessors_by_id
-        )
+        return _infer_completed_from_graph_ancestors(quests, target_active, predecessors_by_id)
 
     return _state_completed_ids(matches[0], trader_order, trader_sequences)

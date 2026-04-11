@@ -2468,7 +2468,7 @@
         "item": {
           "id": "shotgun-ammo",
           "icon": "https://cdn.metaforge.app/arc-raiders/icons/shotgun-ammo.webp",
-          "name": "Shotgun ammo",
+          "name": "Shotgun Ammo",
           "rarity": "Common",
           "item_type": "Ammunition"
         },
@@ -4801,7 +4801,7 @@
         "item": {
           "id": "shotgun-ammo",
           "icon": "https://cdn.metaforge.app/arc-raiders/icons/shotgun-ammo.webp",
-          "name": "Shotgun ammo",
+          "name": "Shotgun Ammo",
           "rarity": "Common",
           "item_type": "Ammunition"
         },
@@ -5252,5 +5252,64 @@
     "trader": "Celeste",
     "xp": 0,
     "sortOrder": 7663.633629104386
+  },
+  {
+    "id": "a-reveal-in-ruins",
+    "name": "A Reveal in Ruins",
+    "objectives": [
+      "Search for an ESR Analyzer inside any pharmacy in Buried City",
+      "Deliver the ESR Analyzer to Lance"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "tactical-mk3-healing",
+      "surge-shield-recharger"
+    ],
+    "rewards": [
+      {
+        "item_id": "tactical-mk3-healing",
+        "quantity": "1",
+        "item": {
+          "id": "tactical-mk3-healing",
+          "name": "Tactical Mk. 3 (Healing)"
+        }
+      },
+      {
+        "item_id": "surge-shield-recharger",
+        "quantity": "1",
+        "item": {
+          "id": "surge-shield-recharger",
+          "name": "Surge Shield Recharger"
+        }
+      }
+    ],
+    "trader": "Lance",
+    "xp": 0,
+    "sortOrder": 0
+  },
+  {
+    "id": "off-the-radar",
+    "name": "Off The Radar",
+    "objectives": [
+      "Visit a Field Depot",
+      "Repair the antenna on the roof of the Field Depot"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "defibrillator"
+    ],
+    "rewards": [
+      {
+        "item_id": "defibrillator",
+        "quantity": "2",
+        "item": {
+          "id": "defibrillator",
+          "name": "Defibrillator"
+        }
+      }
+    ],
+    "trader": "Shani",
+    "xp": 0,
+    "sortOrder": 0
   }
 ]

@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Literal, Optional, Tuple, cast
+
+import orjson
 
 from ..interaction.inventory_grid import Cell
 
@@ -35,22 +36,14 @@ ACTION_ALIASES = {
     "sell or recycle": "SELL",
     "crafting material": "KEEP",
 }
-ITEM_RULES_DEFAULT_PATH = (
-    Path(__file__).resolve().parent.parent / "items" / "items_rules.default.json"
-)
-ITEM_RULES_CUSTOM_PATH = (
-    Path(__file__).resolve().parent.parent / "items" / "items_rules.custom.json"
-)
+ITEM_RULES_DEFAULT_PATH = Path(__file__).resolve().parent.parent / "items" / "items_rules.default.json"
+ITEM_RULES_CUSTOM_PATH = Path(__file__).resolve().parent.parent / "items" / "items_rules.custom.json"
 ITEM_RULES_PATH = ITEM_RULES_DEFAULT_PATH
 
 
 def resolve_item_actions_path(path: Optional[Path] = None) -> Path:
     if path is None or path == ITEM_RULES_DEFAULT_PATH or path == ITEM_RULES_PATH:
-        return (
-            ITEM_RULES_CUSTOM_PATH
-            if ITEM_RULES_CUSTOM_PATH.exists()
-            else ITEM_RULES_DEFAULT_PATH
-        )
+        return ITEM_RULES_CUSTOM_PATH if ITEM_RULES_CUSTOM_PATH.exists() else ITEM_RULES_DEFAULT_PATH
     return path
 
 
@@ -81,16 +74,12 @@ def _normalize_action(value: object) -> Optional[Decision]:
 def load_item_actions(path: Optional[Path] = None) -> ActionMap:
     path = resolve_item_actions_path(path)
     try:
-        raw = json.loads(path.read_text(encoding="utf-8"))
+        raw = orjson.loads(path.read_bytes())
     except FileNotFoundError:
-        print(
-            f"[warn] Item rules file not found at {path}; defaulting to skip actions."
-        )
+        print(f"[warn] Item rules file not found at {path}; defaulting to skip actions.")
         return {}
-    except json.JSONDecodeError as exc:
-        print(
-            f"[warn] Could not parse item rules file {path}: {exc}; defaulting to skip actions."
-        )
+    except orjson.JSONDecodeError as exc:
+        print(f"[warn] Could not parse item rules file {path}: {exc}; defaulting to skip actions.")
         return {}
 
     if isinstance(raw, dict):
@@ -99,9 +88,7 @@ def load_item_actions(path: Optional[Path] = None) -> ActionMap:
         raw_items = raw
 
     if not isinstance(raw_items, list):
-        print(
-            f"[warn] Item rules file {path} must contain an items list; defaulting to skip actions."
-        )
+        print(f"[warn] Item rules file {path} must contain an items list; defaulting to skip actions.")
         return {}
 
     actions: ActionMap = {}
@@ -137,9 +124,7 @@ def load_item_actions(path: Optional[Path] = None) -> ActionMap:
     return actions
 
 
-def choose_decision(
-    item_name: str, actions: ActionMap
-) -> Tuple[Optional[Decision], Optional[str]]:
+def choose_decision(item_name: str, actions: ActionMap) -> Tuple[Optional[Decision], Optional[str]]:
     normalized = normalize_item_name(item_name)
     if not normalized:
         return None, None

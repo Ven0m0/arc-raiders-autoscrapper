@@ -4,7 +4,9 @@
       "type": "http",
       "tools": ["*"],
       "url": "https://api.githubcopilot.com/mcp/insiders",
-      "headers": { "X-MCP-Toolsets": "default,actions,code_security,copilot,git,github_support_docs_search,stargazers,dependabot" }
+      "headers": {
+        "X-MCP-Toolsets": "default,actions,code_security,copilot,git,github_support_docs_search,stargazers,dependabot"
+      }
     },
     "playwright": {
       "type": "local",
@@ -34,14 +36,35 @@
       "command": "npx",
       "args": ["-y", "fast-filesystem-mcp@latest"],
       "env": { "MCP_SILENT_ERRORS": "true" },
-      "tools": ["fast_read_file", "fast_read_multiple_files", "fast_write_file", "fast_large_write_file", "fast_search_files", "fast_search_code", "fast_edit_block", "fast_extract_lines", "fast_copy_file", "fast_move_file", "fast_delete_file", "fast_batch_file_operations"]
+      "tools": [
+        "fast_read_file",
+        "fast_read_multiple_files",
+        "fast_write_file",
+        "fast_large_write_file",
+        "fast_search_files",
+        "fast_search_code",
+        "fast_edit_block",
+        "fast_extract_lines",
+        "fast_copy_file",
+        "fast_move_file",
+        "fast_delete_file",
+        "fast_batch_file_operations"
+      ]
     },
     "octocode": {
       "type": "local",
       "command": "npx",
       "args": ["-y", "octocode-mcp@latest"],
       "env": { "GITHUB_TOKEN": "$GITHUB_PERSONAL_ACCESS_TOKEN", "ENABLE_LOCAL": "true", "LOG": "false" },
-      "tools": ["githubSearchCode", "githubGetFileContent", "githubViewRepoStructure", "githubSearchRepositories", "lspGotoDefinition", "lspFindReferences", "lspCallHierarchy"]
+      "tools": [
+        "githubSearchCode",
+        "githubGetFileContent",
+        "githubViewRepoStructure",
+        "githubSearchRepositories",
+        "lspGotoDefinition",
+        "lspFindReferences",
+        "lspCallHierarchy"
+      ]
     }
   }
 }

@@ -1,3 +1,8 @@
+---
+description: Review rules and generated-data changes for precedence and regeneration regressions.
+mode: subagent
+---
+
 # Rules Reviewer Agent
 
 Specialized reviewer for item rules changes.

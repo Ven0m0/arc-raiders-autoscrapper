@@ -81,9 +81,7 @@ class ReviewQuestsScreen(ProgressScreen):
         Binding("ctrl+s", "save", "Save"),
     ]
 
-    def __init__(
-        self, quest_entries: List[QuestEntry], settings: ProgressSettings
-    ) -> None:
+    def __init__(self, quest_entries: List[QuestEntry], settings: ProgressSettings) -> None:
         super().__init__()
         self.quest_entries = quest_entries
         self.completed = set(settings.completed_quests)
@@ -106,9 +104,7 @@ class ReviewQuestsScreen(ProgressScreen):
             classes="hint",
         )
         with Horizontal(id="review-filterbar"):
-            yield Input(
-                placeholder="Search quests... (name, id, trader)", id="review-search"
-            )
+            yield Input(placeholder="Search quests... (name, id, trader)", id="review-search")
             yield Button("Sort: Name A-Z", id="review-sort", variant="primary")
         yield Static(id="review-list-summary", classes="hint")
         yield OptionList(id="review-list")
@@ -157,11 +153,7 @@ class ReviewQuestsScreen(ProgressScreen):
         for entry in entries:
             name_norm = normalize_quest_value(entry.name)
             trader_norm = normalize_quest_value(entry.trader)
-            if (
-                normalized in name_norm
-                or normalized in trader_norm
-                or normalized == entry.id
-            ):
+            if normalized in name_norm or normalized in trader_norm or normalized == entry.id:
                 matches.append(entry)
         return matches
 
@@ -210,8 +202,7 @@ class ReviewQuestsScreen(ProgressScreen):
         self.query_one("#review-sort", Button).label = f"Sort: {sort_label}"
         filter_text = self.search_query if self.search_query.strip() else "all"
         self.query_one("#review-list-summary", Static).update(
-            f"Showing {len(self.filtered)} of {len(self.quest_entries)} • "
-            f"Sort: {sort_label} • Filter: {filter_text}"
+            f"Showing {len(self.filtered)} of {len(self.quest_entries)} • Sort: {sort_label} • Filter: {filter_text}"
         )
         count_text = (
             f"Completed: {len(self.completed)} • "
@@ -247,21 +238,13 @@ class ReviewQuestsScreen(ProgressScreen):
             self.completed.remove(entry.id)
         else:
             if entry.id in self.active_read_only:
-                self.app.push_screen(
-                    MessageScreen(
-                        "This quest is marked active. Update active quests in setup first."
-                    )
-                )
+                self.app.push_screen(MessageScreen("This quest is marked active. Update active quests in setup first."))
                 return
             self.completed.add(entry.id)
         self._refresh()
 
     def _save(self) -> None:
-        active_quests = [
-            quest_id
-            for quest_id in self.original.active_quests
-            if quest_id not in self.completed
-        ]
+        active_quests = [quest_id for quest_id in self.original.active_quests if quest_id not in self.completed]
         persist_progress_settings(
             all_quests_completed=(len(self.completed) == len(self.quest_entries)),
             active_quests=active_quests,

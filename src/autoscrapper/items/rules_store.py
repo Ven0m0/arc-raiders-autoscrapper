@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Optional
+
+import orjson
 
 DEFAULT_RULES_PATH = Path(__file__).with_name("items_rules.default.json")
 CUSTOM_RULES_PATH = Path(__file__).with_name("items_rules.custom.json")
@@ -34,8 +35,7 @@ def load_rules(path: Optional[Path] = None) -> dict:
     rules_path = path or active_rules_path()
     if not rules_path.exists():
         return {"metadata": {}, "items": []}
-    with rules_path.open("r", encoding="utf-8") as fp:
-        raw = json.load(fp)
+    raw = orjson.loads(rules_path.read_bytes())
     return _coerce_payload(raw)
 
 
@@ -43,14 +43,11 @@ def save_rules(payload: dict, path: Path) -> None:
     items = payload.get("items")
     if not isinstance(items, list):
         items = []
-    metadata = (
-        payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
-    )
+    metadata = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
     metadata["itemCount"] = len(items)
     payload = {"metadata": metadata, "items": items}
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as fp:
-        json.dump(payload, fp, indent=2)
+    path.write_bytes(orjson.dumps(payload, option=orjson.OPT_INDENT_2))
 
 
 def save_custom_rules(payload: dict) -> None:

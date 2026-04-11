@@ -1,112 +1,95 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Canonical agent guide for this repository.
+Keep `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/CLAUDE.md` as a symlink to this file; do not maintain separate content.
 
-## What This Project Does
+## Project
 
-Arc Raiders AutoScrapper is a screen-capture + OCR automation tool that scans the Arc Raiders game inventory, reads item names via Tesseract, matches them against user-defined rules, and executes sell/recycle actions via mouse/keyboard simulation. It does **not** hook into the game process.
+Arc Raiders AutoScrapper is a Python 3.14.3 desktop automation app for Arc Raiders inventory management.
+It uses Textual for the TUI, screen capture + OCR for item detection, rule lookup for `KEEP | SELL | RECYCLE`, and optional desktop input automation.
+It does **not** hook into the game process.
+
+## Stack
+
+| Area | Details |
+| --- | --- |
+| Runtime | Python 3.14.3, `uv` |
+| UI | `textual` |
+| OCR | `tesserocr`, `tessdata.fast-eng` |
+| Vision | `opencv-python-headless`, `Pillow`, `mss` |
+| Matching | `rapidfuzz` |
+| Input | `pydirectinput-rgx` (Windows), `pynput` via `linux-input` extra (Linux) |
 
 ## Commands
 
-```bash
-# Setup (after clone)
-uv sync
+Prefer `python3 -m uv ...` in automation because `uv` may not be on `PATH`.
 
-# Run (TUI)
-uv run autoscrapper
+| Task | Command |
+| --- | --- |
+| Setup | `python3 -m uv sync` |
+| Setup with Linux input | `python3 -m uv sync --extra linux-input` |
+| Run TUI | `python3 -m uv run autoscrapper` |
+| Scan | `python3 -m uv run autoscrapper scan` |
+| Safe scan validation | `python3 -m uv run autoscrapper scan --dry-run` |
+| Lint | `python3 -m uv run ruff check src/ tests/` |
+| Format | `python3 -m uv run ruff format src/ tests/ scripts/` |
+| Tests | `python3 -m uv run pytest` |
+| Types | `python3 -m uv run mypy src/ tests/` |
+| Broad repo checks | `python3 -m uv run prek run --all-files` |
+| Refresh generated data/rules | `python3 -m uv run python scripts/update_snapshot_and_defaults.py` |
+| Dry-run data refresh | `python3 -m uv run python scripts/update_snapshot_and_defaults.py --dry-run` |
 
-# Run scanner directly
-uv run autoscrapper scan
-uv run autoscrapper scan --dry-run   # validate without executing actions
+## Validation
 
-# Lint / format
-uv run ruff check src/
-uv run ruff format src/
+| Change type | Minimum validation |
+| --- | --- |
+| Python source | `python3 -m uv run ruff check src/ tests/` + `python3 -m uv run pytest` |
+| OCR / scanner / interaction / input | Standard validation + `python3 -m uv run autoscrapper scan --dry-run` against a live Arc Raiders window |
+| Generated data / default rules | Use the updater script; usually run `--dry-run` first |
+| Docs / agent guidance only | Verify affected files, links, and instructions stay accurate |
 
-# Tests
-uv run pytest                        # all tests
-uv run pytest tests/path/to/test_file.py::test_name   # single test
+Notes:
+- Local tests exist and should be run for code changes even though GitHub Actions currently runs Ruff only.
+- Do not claim end-to-end validation unless a live Arc Raiders window was used.
+- Prefer `--dry-run` before anything that could click in-game.
 
-# Pre-commit (runs ruff + other checks)
-uv run prek run --all-files
+## Repository Map
 
-# Refresh game data snapshots and default rules
-uv run python scripts/update_snapshot_and_defaults.py
-uv run python scripts/update_snapshot_and_defaults.py --dry-run
-```
+| Path | Purpose |
+| --- | --- |
+| `src/autoscrapper/tui/` | Textual screens; `scan.py` starts the scan flow |
+| `src/autoscrapper/scanner/` | Engine, page loop, reporting, action execution |
+| `src/autoscrapper/interaction/` | Screen capture, grid detection, platform input |
+| `src/autoscrapper/ocr/` | Tesseract init, preprocessing, infobox/item extraction |
+| `src/autoscrapper/core/item_actions.py` | Rule lookup and fuzzy decision logic |
+| `src/autoscrapper/items/rules_store.py` | Load/save custom rules; custom overrides bundled defaults |
+| `src/autoscrapper/progress/` | Quest/hideout/crafting data and default-rule generation |
+| `scripts/update_snapshot_and_defaults.py` | Regenerates progress snapshots and bundled default rules |
+| `src/autoscrapper/config.py` | Persisted config dataclasses and versioning |
+| `tests/` | Pytest suite |
 
-## Architecture
+## Critical Invariants
 
-The app has seven modules under `src/autoscrapper/`:
+- Preserve custom-over-default rule precedence.
+- Do **not** hand-edit `src/autoscrapper/progress/data/*` or `src/autoscrapper/items/items_rules.default.json`; regenerate via `scripts/update_snapshot_and_defaults.py`.
+- Bump the config version in `src/autoscrapper/config.py` when changing persisted config fields.
+- `initialize_ocr()` must run on the main thread before the scan thread starts.
+- Image-processing coordinates are capture-space pixels; screen-space translation belongs in `src/autoscrapper/interaction/ui_windows.py`.
+- The dark context menu opens to the **left** of the clicked cell; `_CONTEXT_MENU_*` constants in `inventory_vision.py` are normalized by 1920.
+- Keep the fuzzy-match threshold shared between OCR matching and rule lookup.
+- `ocr_debug/` is disposable debug output and is safe to clear between sessions.
 
-### Scan Pipeline (hot path)
+## Hotspots
 
-1. **`tui/`** — Textual TUI. `scan.py` (scan screen), `rules.py` (rules editor), `settings.py` (scanner settings), `maintenance.py` (data refresh UI). `scan.py` drives the scanner engine.
-2. **`scanner/engine.py`** — Orchestrates a full scan: validates settings, initializes OCR, waits for the game window, loops over pages.
-3. **`scanner/scan_loop.py`** — Page-level scanning. For each grid cell: open infobox → OCR → rule lookup → execute action → scroll.
-4. **`interaction/`**
-   - `ui_windows.py` — Window capture (mss), mouse/keyboard control, infobox open/close, scrolling.
-   - `inventory_grid.py` — Contour-based 4×5 grid detection; resolution-agnostic, handles carousel scroll.
-   - `input_driver.py` — Platform-specific input (Windows: pydirectinput-rgx; Linux: pynput).
-5. **`ocr/`**
-   - `tesseract.py` — Thread-safe PyTessBaseAPI wrapper with tessdata auto-discovery.
-   - `inventory_vision.py` — Image preprocessing, infobox region detection, item name extraction. **Hottest file (229 edits).**
-   - `failure_corpus.py` — OCR error tracking.
-6. **`scanner/actions.py`** — Executes the resolved action (sell/recycle keystrokes).
+- `src/autoscrapper/ocr/`, `src/autoscrapper/interaction/`, and `src/autoscrapper/scanner/` are tightly coupled.
+- `src/autoscrapper/ocr/inventory_vision.py` is the hottest and most calibration-sensitive file.
+- `src/autoscrapper/core/item_actions.py` and `src/autoscrapper/items/rules_store.py` define action resolution behavior.
+- `src/autoscrapper/progress/` changes often imply regenerating bundled data.
 
-### Rule Engine
+## Agent Workflow
 
-- **`core/item_actions.py`** — Loads rules and maps item names → `KEEP | SELL | RECYCLE` decisions using rapidfuzz fuzzy matching.
-- **`items/rules_store.py`** — Loads/saves `items_rules.json` (custom file overrides bundled default).
-- **`items/rules_diff.py`** — Diffs rule sets.
-
-### Progress / Data Generation
-
-- **`progress/`** — Loads game data snapshots (quests, hideout, crafting), infers quest completion, and **auto-generates default rules** via `rules_generator.py`. Run the updater script after game patches.
-
-### Config
-
-- **`config.py`** — `ScanSettings`, `ProgressSettings`, `UiSettings` dataclasses. Persisted to `~/.AutoScrapper/config.json` (Windows) or `~/.autoscrapper/` (Linux). Config versioning is load-bearing — bump the version constant when adding fields.
-
-## Key Dependencies
-
-| Package | Purpose |
-|---|---|
-| `tesserocr` | Tesseract OCR bindings |
-| `opencv-python-headless` | Image processing for grid/infobox detection |
-| `mss` | Fast screen capture |
-| `pydirectinput-rgx` / `pynput` | Input simulation (Windows/Linux) |
-| `rapidfuzz` | Fuzzy item name matching |
-| `textual` | TUI framework |
-
-## Coordinate Spaces
-
-All image coordinates are in **capture-space pixels** (the raw screenshot dimensions). The grid detector works in this space. Do not mix with screen-space coordinates used by the input driver — `ui_windows.py` handles the translation.
-
-## Context Menu Geometry
-
-The dark context menu opens to the **left** of the right-clicked cell (not to the right).
-All `_CONTEXT_MENU_*` crop constants in `inventory_vision.py` are **normalized** (divided by 1920) — not raw pixel values.
-`_capture_infobox_with_retries` tries `find_context_menu_crop` first; `find_infobox` (color-based, cream panel) is a fallback for a legacy UI the game no longer uses by default.
-
-## OCR Thread Constraint
-
-`initialize_ocr()` must run on the **main thread** before the scan thread starts — `cysignals` (used by `tesserocr`) can only install signal handlers from the main thread. The call is idempotent; subsequent calls from the scan thread are fast no-ops. This is pre-initialized in `tui/scan.py:_start_scan`.
-
-## Debug Images
-
-`ocr_debug/` accumulates timestamped PNGs rapidly (~10k+ per full scan session). It is gitignored. Safe to clear between sessions: `rm -rf ocr_debug/`.
-
-## Fuzzy Match Threshold
-
-`rapidfuzz` is used in two places that share a threshold constant defined in `core/item_actions.py`. If you change the threshold, both the rule lookup path and the OCR item-name matching path must use the same value — divergent values cause items to match OCR but fail rule lookup silently.
-
-## Tessdata
-
-`tesseract.py` auto-discovers tessdata at startup. If OCR fails to initialize with a "tessdata not found" error, check that Tesseract is installed and `TESSDATA_PREFIX` is set (or tessdata is at the default system path).
-
-## OCR / Scanner Changes
-
-After editing `ocr/` or `scanner/`:
-- Always validate with `uv run autoscrapper scan --dry-run` against a live game window.
-- Check `inventory_vision.py` threshold and crop constants — they are tuned for specific upscale ratios.
+- Make minimal, targeted edits.
+- Prefer project skills in `.github/skills/` when relevant, especially `mcp-use`, `codebase-index`, `language-optimization`, `ai-tuning`, and `workflow-development`.
+- Read the relevant module before editing; update adjacent docs only when the behavior or workflow changes.
+- Use script-driven or tool-driven changes instead of manual rewrites for generated assets.
+- Call out any unverified behavior clearly in summaries and PR text.

@@ -128,9 +128,7 @@ def test_validate_scan_args_invalid_input_action_delay_ms():
 
 def test_validate_scan_args_invalid_cell_infobox_left_right_click_gap_ms():
     _validate_scan_args = _get_validate_fn()
-    with pytest.raises(
-        ValueError, match="cell_infobox_left_right_click_gap_ms must be >= 0"
-    ):
+    with pytest.raises(ValueError, match="cell_infobox_left_right_click_gap_ms must be >= 0"):
         _validate_scan_args(
             infobox_retries=1,
             infobox_retry_interval_ms=0,
