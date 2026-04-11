@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List, Optional
 
 import orjson
 
@@ -32,20 +31,20 @@ def _iso_now() -> str:
 
 
 def generate_rules_from_active(
-    active_quests: List[str],
-    hideout_levels: Dict[str, int],
+    active_quests: list[str],
+    hideout_levels: dict[str, int],
     *,
-    completed_projects: Optional[List[str]] = None,
-    completed_quests_override: Optional[List[str]] = None,
+    completed_projects: list[str | None] = None,
+    completed_quests_override: list[str | None] = None,
     all_quests_completed: bool = False,
-    data_dir: Optional[Path] = None,
-) -> Dict[str, object]:
+    data_dir: Path | None = None,
+) -> dict[str, object]:
     game_data = load_game_data(data_dir)
     normalized_levels = normalize_hideout_levels(hideout_levels, game_data.hideout_modules)
 
     quests_by_trader = group_quests_by_trader(game_data.quests)
     quest_index = build_quest_index(quests_by_trader)
-    active_resolved: List[dict] = []
+    active_resolved: list[dict] = []
     if active_quests:
         active_resolved, missing = resolve_active_quests(active_quests, quest_index)
         if missing:
@@ -102,6 +101,6 @@ def generate_rules_from_active(
     return {"metadata": metadata, "items": out_items}
 
 
-def write_rules(output: Dict[str, object], path: Path) -> None:
+def write_rules(output: dict[str, object], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(orjson.dumps(output, option=orjson.OPT_INDENT_2))

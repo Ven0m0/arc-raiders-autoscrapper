@@ -700,7 +700,7 @@ def rect_center(rect: tuple[int, int, int, int]) -> tuple[int, int]:
 
 
 def normalized_rect_to_window(
-    norm_rect: Tuple[float, float, float, float],
+    norm_rect: tuple[float, float, float, float],
     window_width: int,
     window_height: int,
 ) -> tuple[int, int, int, int]:
@@ -860,7 +860,7 @@ def _extract_title_from_data(
         return "", ""
 
     cutoff = max(1.0, float(image_height) * top_fraction)
-    groups: Dict[tuple[int, int, int, int], List[int]] = defaultdict(list)
+    groups: dict[tuple[int, int, int, int], list[int]] = defaultdict(list)
     n = len(texts)
     for i in range(n):
         raw_text = texts[i] or ""
@@ -885,7 +885,7 @@ def _extract_title_from_data(
     if not groups:
         return "", ""
 
-    def _group_score(indices: List[int]) -> float:
+    def _group_score(indices: list[int]) -> float:
         confs = []
         for idx in indices:
             try:
@@ -959,7 +959,7 @@ def _extract_action_line_bbox(
     Given OCR data, return a bbox (left, top, w, h) for
     the line containing the target action (infobox-relative coords).
     """
-    groups: defaultdict[tuple[int, int, int, int], List[int]] = defaultdict(list)
+    groups: defaultdict[tuple[int, int, int, int], list[int]] = defaultdict(list)
     texts = ocr_data.get("text", [])
     n = len(texts)
     page_nums = [int(v) for v in ocr_data.get("page_num", [])]
@@ -983,7 +983,7 @@ def _extract_action_line_bbox(
     if not groups:
         return None
 
-    def _group_score(indices: List[int]) -> float:
+    def _group_score(indices: list[int]) -> float:
         confs = []
         for idx in indices:
             conf_str = ocr_data["conf"][idx]
@@ -1196,7 +1196,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
 
     # Group words into lines keyed by (page, block, par, line).
     texts = data.get("text", [])
-    groups: defaultdict[tuple[int, int, int, int], List[int]] = defaultdict(list)
+    groups: defaultdict[tuple[int, int, int, int], list[int]] = defaultdict(list)
     for i, raw_text in enumerate(texts):
         cleaned = clean_ocr_text(raw_text or "")
         if not cleaned:
@@ -1209,7 +1209,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
         )
         groups[key].append(i)
 
-    def _line_top(indices: List[int]) -> float:
+    def _line_top(indices: list[int]) -> float:
         return min(float(data["top"][i]) for i in indices)
 
     # Known action-button labels that are never item names.  Lines whose

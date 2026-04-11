@@ -22,7 +22,7 @@ REPLAY_REPORTS_DIR = OCR_ARTIFACTS_DIR / "replay_reports"
 BENCHMARK_REPORTS_DIR = OCR_ARTIFACTS_DIR / "benchmark_reports"
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class OcrFailureSample:
     sample_id: str
     captured_at: str
@@ -36,7 +36,7 @@ class OcrFailureSample:
     image_path: str | None = None
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class CorpusPaths:
     manifest_path: Path
     images_dir: Path

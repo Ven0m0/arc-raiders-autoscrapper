@@ -1,21 +1,20 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List, Optional, Tuple
 
 import orjson
 from ..core.item_actions import clean_ocr_text
 
-_ITEM_NAMES: Optional[Tuple[str, ...]] = None
+_ITEM_NAMES: tuple[str, ... | None] = None
 
 
-def get_item_names() -> Tuple[str, ...]:
+def get_item_names() -> tuple[str, ...]:
     global _ITEM_NAMES
     if _ITEM_NAMES is not None:
         return _ITEM_NAMES
 
     payload = load_rules()
-    names: List[str] = []
+    names: list[str] = []
     seen: set[str] = set()
     for entry in payload.get("items", []):
         if not isinstance(entry, dict):
@@ -65,7 +64,7 @@ def _coerce_payload(raw: object) -> dict:
     return {"metadata": {}, "items": []}
 
 
-def load_rules(path: Optional[Path] = None) -> dict:
+def load_rules(path: Path | None = None) -> dict:
     rules_path = path or active_rules_path()
     if not rules_path.exists():
         return {"metadata": {}, "items": []}
@@ -88,7 +87,7 @@ def save_custom_rules(payload: dict) -> None:
     save_rules(payload, CUSTOM_RULES_PATH)
 
 
-def normalize_action(value: str) -> Optional[str]:
+def normalize_action(value: str) -> str | None:
     raw = value.strip().lower()
     if raw in {"k", "keep"}:
         return "keep"

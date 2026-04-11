@@ -3,7 +3,8 @@ from __future__ import annotations
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Mapping, Sequence
+from collections.abc import Mapping, Sequence
+from typing import Any
 
 import orjson
 
@@ -51,8 +52,8 @@ def load_json(path: Path, default: Any) -> Any:
 
 
 def diff_quests(before_quests: Sequence[object], after_quests: Sequence[object]) -> dict:
-    before_by_id: Dict[str, Mapping[str, object]] = {}
-    after_by_id: Dict[str, Mapping[str, object]] = {}
+    before_by_id: dict[str, Mapping[str, object]] = {}
+    after_by_id: dict[str, Mapping[str, object]] = {}
 
     for quest in before_quests:
         if not isinstance(quest, dict):
@@ -97,7 +98,7 @@ def diff_quests(before_quests: Sequence[object], after_quests: Sequence[object])
         for quest_id in removed_ids
     ]
 
-    changed: List[dict] = []
+    changed: list[dict] = []
     changed_fields = (
         "name",
         "trader",
@@ -109,7 +110,7 @@ def diff_quests(before_quests: Sequence[object], after_quests: Sequence[object])
     for quest_id in common_ids:
         before = before_by_id[quest_id]
         after = after_by_id[quest_id]
-        changes: Dict[str, dict] = {}
+        changes: dict[str, dict] = {}
         for field in changed_fields:
             before_val = before.get(field)
             after_val = after.get(field)
@@ -148,8 +149,8 @@ def diff_rules(before_payload: Mapping[str, object], after_payload: Mapping[str,
     before_items = before_items_raw if isinstance(before_items_raw, list) else []
     after_items = after_items_raw if isinstance(after_items_raw, list) else []
 
-    before_by_key: Dict[str, Mapping[str, object]] = {}
-    after_by_key: Dict[str, Mapping[str, object]] = {}
+    before_by_key: dict[str, Mapping[str, object]] = {}
+    after_by_key: dict[str, Mapping[str, object]] = {}
 
     for item in before_items:
         if not isinstance(item, dict):
@@ -193,16 +194,16 @@ def diff_rules(before_payload: Mapping[str, object], after_payload: Mapping[str,
         if (item := before_by_key[key]) or True
     ]
 
-    modified: List[dict] = []
-    value_changed: List[dict] = []
-    action_changed: List[dict] = []
-    analysis_changed: List[dict] = []
-    name_changed: List[dict] = []
+    modified: list[dict] = []
+    value_changed: list[dict] = []
+    action_changed: list[dict] = []
+    analysis_changed: list[dict] = []
+    name_changed: list[dict] = []
 
     for key in common_keys:
         before = before_by_key[key]
         after = after_by_key[key]
-        changes: Dict[str, dict] = {}
+        changes: dict[str, dict] = {}
 
         before_value = before.get("value")
         after_value = after.get("value")
@@ -307,7 +308,7 @@ def graph_gap_report(quests: Sequence[object], quest_graph: Mapping[str, object]
         _normalize_quest_name(quest.get("name")) for quest in quest_entries if _normalize_quest_name(quest.get("name"))
     }
 
-    missing_quests: List[dict] = []
+    missing_quests: list[dict] = []
     for quest in quest_entries:
         quest_name = _normalize_quest_name(quest.get("name"))
         if not quest_name or quest_name in node_names_normalized:
@@ -341,8 +342,8 @@ def graph_gap_report(quests: Sequence[object], quest_graph: Mapping[str, object]
     }
 
 
-def _render_item_list(items: Sequence[Mapping[str, object]], limit: int = 10) -> List[str]:
-    lines: List[str] = []
+def _render_item_list(items: Sequence[Mapping[str, object]], limit: int = 10) -> list[str]:
+    lines: list[str] = []
     for entry in list(items)[:limit]:
         item_id = entry.get("id") or "unknown-id"
         name = entry.get("name") or "Unknown"
@@ -357,7 +358,7 @@ def build_markdown_summary(report: Mapping[str, object], *, sample_limit: int = 
     graph = report.get("questGraph") or {}
     assumptions = report.get("assumptions") or {}
 
-    lines: List[str] = []
+    lines: list[str] = []
     lines.append("# Daily Metaforge Data Update Report")
     lines.append("")
     lines.append(f"Generated at: `{report.get('generatedAt', iso_now())}`")

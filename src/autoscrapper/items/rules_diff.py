@@ -6,10 +6,10 @@ from __future__ import annotations
 # Only action changes are emitted.
 
 from dataclasses import dataclass
-from typing import Mapping
+from collections.abc import Mapping
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class RuleChange:
     item_id: str
     name: str

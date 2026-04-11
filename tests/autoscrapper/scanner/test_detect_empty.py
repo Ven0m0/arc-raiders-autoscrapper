@@ -2,7 +2,6 @@
 
 import sys
 from dataclasses import dataclass
-from typing import Tuple
 from unittest.mock import MagicMock, patch
 
 import numpy as np
@@ -24,10 +23,10 @@ from autoscrapper.scanner.scan_loop import _detect_consecutive_empty_stop_idx  #
 # ---------------------------------------------------------------------------
 
 
-@dataclass
+@dataclass(slots=True)
 class _Cell:
     index: int
-    safe_rect: Tuple[int, int, int, int]
+    safe_rect: tuple[int, int, int, int]
 
 
 _WINDOW = np.zeros((50, 50, 3), dtype=np.uint8)
