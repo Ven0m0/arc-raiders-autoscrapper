@@ -1,3 +1,8 @@
+---
+description: Specialized reviewer for input and interaction changes. Focus on platform guards, grid detection, coordinate transforms, and dry-run safety.
+mode: subagent
+---
+
 # Interaction Reviewer Agent
 
 Specialized reviewer for input/interaction changes.

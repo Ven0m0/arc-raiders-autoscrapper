@@ -1,10 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": [
-    ".kilo/rules/*.md",
-    "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md",
-    "node_modules/@morphllm/opencode-morph-plugin/instructions/morph-tools.md"
-  ],
+  "instructions": ["AGENTS.md"],
   "default_agent": "plan",
   "share": "manual",
   "permission": {
@@ -17,29 +13,10 @@
     ":(){:|:&}:": "deny",
     "doom_loop": "deny"
   },
-  "compaction": { "auto": true, "prune": true },
-  "plugin": [
-	"opencode-image-compress@0.3.2",
-    "@gotgenes/opencode-agent-identity@3.0.1",
-    "opencode-ignore@1.1.0",
-    "opencode-pty@0.3.2",
-    "openslimedit@1.0.4",
-    "@spoons-and-mirrors/subtask2@0.3.5",
-	"opencode-session-handoff@1.1.6",
-	"opencode-websearch@0.5.0",
-    "openfundus@0.1.6",
-    "opencode-toolbox@0.10.4",
-    "opencode-cross-repo@0.4.1",
-    "@tuanhung303/opencode-acp@3.0.15",
-	"@xesrevinu/opencode-context-shield@0.1.1",
-	"opencode-cachebro@0.1.1",
-	"@howaboua/opencode-chat@0.1.10",
-	"opencode-agent-browser@1.0.0",
-	"@nick-vi/opencode-type-inject@1.5.1",
-	"@bastiangx/opencode-unmoji@0.3.12",
-	"@morphllm/opencode-morph-plugin@2.0.9",
-	"context-mode@1.0.75"
-  ],
+  "compaction": {
+    "auto": true,
+    "prune": true
+  },
   "disabled_providers": ["openai"],
   "watcher": {
     "ignore": [
@@ -47,113 +24,12 @@
       "dist/**",
       ".git/**",
       ".venv/**",
-	  "uv.lock",
-	  "ocr_debug/**",
-	  "**/node_modules/**",
-	  ".remember/**",
-      ".omc/**",
-	  ".cachebro/**"
+      "uv.lock",
+      "ocr_debug/**",
+      "**/node_modules/**"
     ]
   },
   "experimental": {
-    "continue_loop_on_deny": true,
-    "mcp_timeout": 30000,
-    "openTelemetry": false,
-    "batch_tool": true
-  },
-  "lsp": {
-    "typescript": {
-      "command": ["vtsls", "--stdio"],
-      "extensions": [".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs", ".mts", ".cts"],
-      "initialization": {
-        "preferences": {
-          "importModuleSpecifierPreference": "relative"
-        }
-      }
-    },
-    "basedpyright": {
-      "command": ["basedpyright-langserver", "--stdio"],
-      "extensions": [".py", ".pyw", ".pyi"]
-    },
-    "rust": {
-      "command": ["rust-analyzer"],
-      "extensions": [".rs"]
-    },
-    "bash": {
-      "command": ["bash-language-server", "start"],
-      "extensions": [".sh", ".bash", ".zsh"]
-    },
-    "yaml-ls": {
-      "command": ["yaml-language-server", "--stdio"],
-      "extensions": [".yaml", ".yml"]
-    },
-    "markdown-oxide": {
-      "command": ["markdown-oxide"],
-      "extensions": [".md", ".mdx"]
-    },
-    "json-ls": {
-      "command": ["vscode-json-language-server", "--stdio"],
-      "extensions": [".json", ".jsonc"]
-    },
-    "dockerfile-ls": {
-      "command": ["docker-langserver", "--stdio"],
-      "extensions": [".dockerfile"]
-    },
-    "html-ls": {
-      "command": ["vscode-html-language-server", "--stdio"],
-      "extensions": [".html", ".htm"]
-    },
-    "css-ls": {
-      "command": ["vscode-css-language-server", "--stdio"],
-      "extensions": [".css", ".scss", ".less"]
-    },
-    "tombi": {
-      "command": ["tombi", "lsp"],
-      "extensions": [".toml"]
-    }
-  },
-  "mcp": {
-    "github-mcp-server": {
-      "type": "remote",
-      "url": "https://api.githubcopilot.com/mcp/",
-      "enabled": true,
-      "oauth": false,
-      "headers": { "X-MCP-Toolsets": "default,actions,web_search,code_security,copilot,dependabot,git,security_advisories,github_support_docs_search" }
-    },
-    "cachebro": {
-      "type": "local",
-      "command": ["bunx", "--bun", "cachebro", "serve"]
-    },
-    "gh_grep": {
-      "type": "remote",
-      "url": "https://mcp.grep.app",
-      "enabled": true
-    },
-    "ref-tools": {
-      "type": "remote",
-      "url": "https://api.ref.tools/mcp",
-      "enabled": true,
-      "oauth": false,
-      "timeout": 30000,
-      "headers": { "x-ref-api-key": "{env:REF_API_KEY}" }
-    },
-    "exa": {
-      "type": "remote",
-      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,get_code_context_exa,crawling_exa",
-      "enabled": true,
-      "oauth": false,
-      "timeout": 30000,
-      "headers": { "x-api-key": "{env:EXA_API_KEY}" }
-    },
-    "context-mode": {
-      "type": "local",
-	  "enabled": true,
-      "command": ["context-mode"]
-    },
-    "context7": {
-      "type": "remote",
-      "enabled": true,
-      "url": "https://mcp.context7.com/mcp"
-    }
+    "continue_loop_on_deny": false
   }
 }
