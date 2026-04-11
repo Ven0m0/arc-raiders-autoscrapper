@@ -158,7 +158,7 @@ def analyze_python_file(content: str) -> dict[str, int]:
 def check_python_coverage(
     project_path: Path,
     max_files: int | None = 30,
-    files: list[Path | None] = None,
+    files: list[Path] | None = None,
 ) -> dict:
     """Check Python type hints coverage."""
     issues = []
