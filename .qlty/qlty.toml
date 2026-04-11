@@ -65,6 +65,7 @@ name = "actionlint"
 
 [[plugin]]
 name = "bandit"
+exclude_patterns = ["tests/**", ".github/**/tests/**"]
 
 [[plugin]]
 name = "radarlint-python"

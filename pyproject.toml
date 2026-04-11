@@ -26,20 +26,24 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "mypy>=1.20.0",
+    "basedpyright",
+    "deadcode>=2.4.1",
     "prek>=0.3.8",
     "pytest>=9.0.3",
     "ruff>=0.15.10",
+    "vulture>=2.16",
 ]
 
 [project.optional-dependencies]
 # Keep [project.optional-dependencies].dev aligned with [dependency-groups].dev
 # so pip and uv users install the same local tooling.
 dev = [
-    "mypy>=1.20.0",
+    "basedpyright",
+    "deadcode>=2.4.1",
     "prek>=0.3.8",
     "pytest>=9.0.3",
-    "ruff>=0.15.10"
+    "ruff>=0.15.10",
+    "vulture>=2.16"
 ]
 linux-input = [
     "pynput; sys_platform == 'linux'",
@@ -101,25 +105,15 @@ testpaths = ["tests"]
 addopts = "-v --tb=short"
 log_level = "WARNING"
 
-[tool.mypy]
-python_version = "3.14"
-strict = true
-strict_optional = true
-disallow_any_generics = true
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
-disallow_any_unimported = false
-no_implicit_optional = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-warn_no_return = true
-check_untyped_defs = true
-strict_equality = true
-warn_unreachable = true
-ignore_missing_imports = true
-show_error_codes = true
-enable_error_code = ["ignore-without-code", "unused-awaitable", "possibly-undefined"]
+[tool.basedpyright]
+pythonVersion = "3.14"
+typeCheckingMode = "standard"
+reportMissingTypeStubs = false
+reportMissingModuleSource = false
+
+[tool.vulture]
+paths = ["src/", "scripts/", "tests/"]
+min_confidence = 80
 
 [tool.black]
 extend-exclude = '''

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-10T14:27:21.115757Z",
+  "generatedAt": "2026-04-11T14:15:32.302994Z",
   "source": "quests.json",
   "traders": {
     "Celeste": [
@@ -223,11 +223,6 @@
         "sortOrder": 0
       },
       {
-        "id": "off-the-radar",
-        "name": "Off The Radar",
-        "sortOrder": 0
-      },
-      {
         "id": "picking-up-the-pieces",
         "name": "Picking Up The Pieces",
         "sortOrder": 83.77692521396251
@@ -441,11 +436,6 @@
       }
     ],
     "Lance": [
-      {
-        "id": "a-reveal-in-ruins",
-        "name": "A Reveal in Ruins",
-        "sortOrder": 0
-      },
       {
         "id": "in-my-image",
         "name": "In My Image",

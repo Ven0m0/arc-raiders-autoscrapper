@@ -4,6 +4,7 @@ import concurrent.futures
 import io
 import logging
 import os
+import re
 import time
 import zipfile
 from datetime import datetime, timezone
@@ -214,7 +215,7 @@ def _normalize_component_values(value: object) -> dict[str, int] | None:
             continue
         try:
             quantity = int(raw_quantity)
-        except TypeError, ValueError:
+        except (TypeError, ValueError):
             continue
         if quantity <= 0:
             continue
@@ -352,9 +353,16 @@ def _load_raidtheory_fallback_data() -> tuple[list[dict], list[dict]]:
     return mapped_items, mapped_quests
 
 
+def _normalize_entry_name(name: object) -> str:
+    text = str(name or "").lower().replace("'", "").replace("\u2019", "")
+    text = re.sub(r"[^a-z0-9]+", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
 def _merge_missing_entries(primary: list[dict], fallback: list[dict]) -> tuple[list[dict], int]:
     merged: list[dict] = []
     seen_ids: set[str] = set()
+    seen_names: set[str] = set()
 
     for entry in primary:
         entry_id = entry.get("id")
@@ -364,6 +372,9 @@ def _merge_missing_entries(primary: list[dict], fallback: list[dict]) -> tuple[l
             continue
         merged.append(entry)
         seen_ids.add(entry_id)
+        name_key = _normalize_entry_name(entry.get("name"))
+        if name_key:
+            seen_names.add(name_key)
 
     supplemental_count = 0
     for entry in fallback:
@@ -372,8 +383,13 @@ def _merge_missing_entries(primary: list[dict], fallback: list[dict]) -> tuple[l
             continue
         if entry_id in seen_ids:
             continue
+        name_key = _normalize_entry_name(entry.get("name"))
+        if name_key and name_key in seen_names:
+            continue
         merged.append(entry)
         seen_ids.add(entry_id)
+        if name_key:
+            seen_names.add(name_key)
         supplemental_count += 1
 
     return merged, supplemental_count

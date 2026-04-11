@@ -1,6 +1,7 @@
+---
 name: Daily Data Update
 
-on:
+"on":
   schedule:
     - cron: "0 14 * * *"
   workflow_dispatch:
@@ -74,7 +75,9 @@ jobs:
               for file_path in changed_files:
                   print(f" - {file_path}")
           else:
-              print("No substantive tracked changes (timestamp-only updates ignored).")
+              print(
+              "No substantive tracked changes (timestamp-only updates ignored)."
+          )
 
           with Path(os.environ["GITHUB_OUTPUT"]).open("a", encoding="utf-8") as output:
               output.write(f"has_changes={'true' if has_changes else 'false'}\n")

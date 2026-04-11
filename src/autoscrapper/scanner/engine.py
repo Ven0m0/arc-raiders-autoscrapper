@@ -4,7 +4,8 @@ import math
 import time
 from pathlib import Path
 
-from .progress import RichScanProgress, ScanProgress
+from .progress import NullScanProgress, RichScanProgress, ScanProgress
+from .report import _render_results
 from .rich_support import Console
 from .scan_loop import ScanContext, TimingConfig, detect_grid, scan_pages
 from .types import ScanStats
@@ -107,15 +108,15 @@ def _build_timing_config(
 def _build_progress_impl(
     show_progress: bool,
     progress: ScanProgress | None,
-) -> ScanProgress | None:
+) -> ScanProgress:
     if progress is not None:
         return progress
     if not show_progress or Console is None:
-        return None
+        return NullScanProgress()
     try:
         return RichScanProgress()
     except Exception:
-        return None
+        return NullScanProgress()
 
 
 def _collect_window_bounds_warnings(
@@ -371,7 +372,11 @@ def scan_inventory(
             processing_seconds=processing_seconds,
         )
 
+        if progress is None and show_progress:
+            # Headless mode: no custom TUI progress handler but terminal output requested.
+            # Render the final results table after the Rich live display ends.
+            _render_results(run_state.results, cells_per_page, stats)
+
         return run_state.results, stats
     finally:
-        if progress_impl is not None:
-            progress_impl.stop()
+        progress_impl.stop()
