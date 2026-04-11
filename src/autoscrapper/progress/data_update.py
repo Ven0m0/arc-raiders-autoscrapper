@@ -203,7 +203,7 @@ def _extract_english_text(value: object) -> str | None:
     return None
 
 
-def _normalize_component_values(value: object) -> dict[str, int | None]:
+def _normalize_component_values(value: object) -> dict[str, int] | None:
     if not isinstance(value, dict):
         return None
 
