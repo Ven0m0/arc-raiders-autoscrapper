@@ -568,6 +568,12 @@ def find_context_menu_crop(
     game changed its item panel from a light-cream background to a dark
     context menu.  The caller must pass the window-relative cell center so
     the crop is anchored to the correct screen location.
+
+    Returns ``None`` if the computed crop region does not contain the
+    characteristic bright (cream/white) background of the context menu
+    panel — for example when the context menu has not opened yet, has
+    already closed, or the positional offset lands on a different UI
+    element such as the dark LOADOUT equipment panel.
     """
     img_h, img_w = bgr_image.shape[:2]
     x_off = int(round(_CONTEXT_MENU_X_OFFSET_NORM * img_w))
@@ -589,6 +595,17 @@ def find_context_menu_crop(
     min_dim = int(round(100 * min(img_w, img_h) / 1080))
     if w < min_dim or h < min_dim:
         return None
+    # Brightness guard: verify the left half of the crop contains the
+    # bright cream/white background of the context menu panel.  The context
+    # menu has a mean grayscale brightness well above 120 (typically >200),
+    # while dark UI areas (LOADOUT slots, stash background) are well below
+    # 80.  Sampling only the left half avoids the dark inventory grid that
+    # can appear on the right side of the crop.
+    crop_left_half = bgr_image[y : y2, x : x + max(1, w // 2)]
+    if crop_left_half.size > 0:
+        mean_brightness = float(np.mean(cv2.cvtColor(crop_left_half, cv2.COLOR_BGR2GRAY)))
+        if mean_brightness < 120.0:
+            return None
     return x, y, w, h
 
 
@@ -619,31 +636,6 @@ def _crop_title_strip(infobox_bgr: np.ndarray) -> np.ndarray:
         )
         strip = np.concatenate([pad, strip], axis=1)
     return strip
-
-
-def _get_item_names() -> Tuple[str, ...]:
-    global _ITEM_NAMES
-    if _ITEM_NAMES is not None:
-        return _ITEM_NAMES
-
-    payload = rules_store.load_rules()
-    names: List[str] = []
-    seen: set[str] = set()
-    for entry in payload.get("items", []):
-        if not isinstance(entry, dict):
-            continue
-        name = entry.get("name")
-        if not isinstance(name, str):
-            continue
-        cleaned = clean_ocr_text(name)
-        key = cleaned.casefold()
-        if not cleaned or key in seen:
-            continue
-        seen.add(key)
-        names.append(cleaned)
-
-    _ITEM_NAMES = tuple(names)
-    return _ITEM_NAMES
 
 
 def match_item_name_result(raw: str, threshold: int | None = None) -> ItemNameMatchResult:

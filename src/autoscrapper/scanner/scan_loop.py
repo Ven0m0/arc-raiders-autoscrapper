@@ -339,7 +339,13 @@ class _ScanRunner:
                 )
 
         # --- Attempt 2: color-based infobox detection with retries ---
-        if not skip_infobox:
+        # Also run when context-menu mode is active but the crop returned
+        # nothing (brightness guard rejected it — the menu was not visible).
+        # Falling back to infobox detection in that case prevents a permanent
+        # UNREADABLE for items where the context menu is absent but the
+        # hover-infobox is still showing.
+        ctx_menu_missed = skip_infobox and infobox_rect is None
+        if not skip_infobox or ctx_menu_missed:
             for attempt in range(1, self.config.infobox_retries + 1):
                 capture_attempts += 1
                 abort_if_escape_pressed(self.context.stop_key)
