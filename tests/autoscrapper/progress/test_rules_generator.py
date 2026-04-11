@@ -104,6 +104,9 @@ def test_generate_rules_with_active_quests(mock_load: MagicMock, mock_game_data:
     assert item1_rule["action"] == "keep"
 
     # Item 2 is not required for Quest 1 but it's required for uncompleted Quest 2.
+    item2_rule = next(item for item in result["items"] if item["id"] == "item2")
+    assert item2_rule["action"] == "keep"
+
     # Item 3 is completely unused, should be sell
     item3_rule = next(item for item in result["items"] if item["id"] == "item3")
     assert item3_rule["action"] == "sell"
