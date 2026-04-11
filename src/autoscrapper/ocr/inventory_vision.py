@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import re
 import time
+from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Literal, Optional, Tuple
@@ -860,7 +861,7 @@ def _extract_title_from_data(
         return "", ""
 
     cutoff = max(1.0, float(image_height) * top_fraction)
-    groups: Dict[Tuple[int, int, int, int], List[int]] = {}
+    groups: Dict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
     n = len(texts)
     for i in range(n):
         raw_text = texts[i] or ""
@@ -880,7 +881,7 @@ def _extract_title_from_data(
             int(ocr_data["par_num"][i]),
             int(ocr_data["line_num"][i]),
         )
-        groups.setdefault(key, []).append(i)
+        groups[key].append(i)
 
     if not groups:
         return "", ""
@@ -959,7 +960,7 @@ def _extract_action_line_bbox(
     Given OCR data, return a bbox (left, top, w, h) for
     the line containing the target action (infobox-relative coords).
     """
-    groups: Dict[Tuple[int, int, int, int], List[int]] = {}
+    groups: defaultdict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
     texts = ocr_data.get("text", [])
     n = len(texts)
     page_nums = [int(v) for v in ocr_data.get("page_num", [])]
@@ -978,7 +979,7 @@ def _extract_action_line_bbox(
             par_nums[i],
             line_nums[i],
         )
-        groups.setdefault(key, []).append(i)
+        groups[key].append(i)
 
     if not groups:
         return None
@@ -1200,7 +1201,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
 
     # Group words into lines keyed by (page, block, par, line).
     texts = data.get("text", [])
-    groups: Dict[Tuple[int, int, int, int], List[int]] = {}
+    groups: defaultdict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
     for i, raw_text in enumerate(texts):
         cleaned = clean_ocr_text(raw_text or "")
         if not cleaned:
@@ -1211,7 +1212,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
             int(data["par_num"][i]),
             int(data["line_num"][i]),
         )
-        groups.setdefault(key, []).append(i)
+        groups[key].append(i)
 
     def _line_top(indices: List[int]) -> float:
         return min(float(data["top"][i]) for i in indices)
