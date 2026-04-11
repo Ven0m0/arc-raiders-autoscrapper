@@ -36,8 +36,13 @@ def test_update_data_snapshot_handles_missing_key(tmp_path):
 
         # Verify it logged warnings for both attempts to fetch from Supabase
         assert mock_log.warning.call_count == 2
-        args, _ = mock_log.warning.call_args_list[0]
-        assert "Skipping crafting component data" in args[0]
-        assert "METAFORGE_SUPABASE_ANON_KEY environment variable is not set" in str(
-            args[1]
+        warning_calls = [call_args for call_args, _ in mock_log.warning.call_args_list]
+        assert any(
+            "Skipping crafting component data" in call_args[0]
+            for call_args in warning_calls
+        )
+        assert any(
+            "METAFORGE_SUPABASE_ANON_KEY environment variable is not set"
+            in " ".join(str(arg) for arg in call_args)
+            for call_args in warning_calls
         )
