@@ -1099,7 +1099,7 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
         ocr_start = time.perf_counter()
         data = image_to_data(processed, single_line=True)
         ocr_time = time.perf_counter() - ocr_start
-    except Exception as exc:  # pragma: no cover - filesystem dependent
+    except Exception as exc:  # pragma: no cover - OCR backend dependent
         _last_roi_hash = None  # invalidate cache so next call does not re-serve stale result
         print(
             f"[vision_ocr] ocr_backend image_to_data failed for infobox title strip; "
