@@ -133,7 +133,7 @@ def test_capture_skip_unlisted_sample(tmp_path: Path) -> None:
 
         assert sample is not None
         assert sample.source == "context_menu"
-        assert sample.raw_text == "Raw Text" # stripped
+        assert sample.raw_text == "Raw Text"  # stripped
         assert sample.cleaned_text == "Raw Text"
 
         assert manifest_path.exists()
