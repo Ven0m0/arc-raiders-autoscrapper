@@ -952,10 +952,10 @@ def _extract_action_line_bbox(
     groups: Dict[Tuple[int, int, int, int], List[int]] = {}
     texts = ocr_data.get("text", [])
     n = len(texts)
-    page_nums = [int(v) for v in ocr_data["page_num"]]
-    block_nums = [int(v) for v in ocr_data["block_num"]]
-    par_nums = [int(v) for v in ocr_data["par_num"]]
-    line_nums = [int(v) for v in ocr_data["line_num"]]
+    page_nums = [int(v) for v in ocr_data.get("page_num", [])]
+    block_nums = [int(v) for v in ocr_data.get("block_num", [])]
+    par_nums = [int(v) for v in ocr_data.get("par_num", [])]
+    line_nums = [int(v) for v in ocr_data.get("line_num", [])]
 
     for i in range(n):
         raw_text = texts[i] or ""
