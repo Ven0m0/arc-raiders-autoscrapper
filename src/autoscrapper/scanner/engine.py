@@ -374,9 +374,10 @@ def scan_inventory(
         )
 
         if progress is None and show_progress:
+            # Headless mode: no custom TUI progress handler but terminal output requested.
+            # Render the final results table after the Rich live display ends.
             _render_results(run_state.results, cells_per_page, stats)
 
         return run_state.results, stats
     finally:
-        if progress_impl is not None:
-            progress_impl.stop()
+        progress_impl.stop()
