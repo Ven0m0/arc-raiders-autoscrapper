@@ -1,8 +1,8 @@
 # Arc Raiders AutoScrapper
 >Always use the mcp-use, language-optimization skills. Use octocode, exa, ref-tools, gh_grep mcp-servers
 
-Canonical repo guidance lives in `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/AGENTS.md`.
-Keep `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/CLAUDE.md` as a symlink to that file.
+Canonical repo guidance lives in `AGENTS.md`.
+Keep `CLAUDE.md` as a symlink to that file.
 
 Use this file for concise repository-wide Copilot guidance only.
 Detailed rules belong in `AGENTS.md`; path-specific rules belong in `.github/instructions/*.instructions.md`.
