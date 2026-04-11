@@ -1,5 +1,5 @@
 ---
-description: Specialized reviewer for input and interaction changes. Focus on platform guards, grid detection, coordinate transforms, and dry-run safety.
+description: Review interaction changes for platform-guard, coordinate, and dry-run regressions.
 mode: subagent
 ---
 

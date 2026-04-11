@@ -1,5 +1,5 @@
 ---
-description: Specialized reviewer for OCR and scanner changes. Focus on coordinate space consistency, upscale artifacts, bounding box assumptions, and OCR cache reset paths.
+description: Review OCR and scanner changes for coordinate-space and cache-reset regressions.
 mode: subagent
 ---
 
