@@ -1,11 +1,9 @@
 from __future__ import annotations
 
 from pathlib import Path
-
-import orjson
-
 from typing import List, Optional, Tuple
 
+import orjson
 from ..core.item_actions import clean_ocr_text
 
 _ITEM_NAMES: Optional[Tuple[str, ...]] = None
