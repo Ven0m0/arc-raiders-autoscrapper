@@ -399,7 +399,7 @@ class DecisionEngine:
                 materials.append(f"{quantity}x {output_item.get('name')}")
                 try:
                     total_value += int(output_item.get("value", 0)) * int(quantity)
-                except TypeError, ValueError:
+                except (TypeError, ValueError):
                     continue
 
         return RecycleValue(
