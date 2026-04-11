@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from json import JSONDecodeError
 import logging
 import os
 from dataclasses import asdict, dataclass, field
@@ -183,7 +184,8 @@ def _load_config_dict() -> Dict[str, Any]:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except FileNotFoundError:
         return {}
-    except OSError, json.JSONDecodeError:
+    except (OSError, JSONDecodeError) as e:
+        _log.warning("config: failed to load config file: %s", e)
         return {}
 
     if not isinstance(raw, dict):
@@ -351,7 +353,7 @@ def _from_raw_progress_settings(raw: Any) -> ProgressSettings:
         for key, value in hideout_levels_raw.items():
             try:
                 level = int(value)
-            except TypeError, ValueError:
+            except (TypeError, ValueError):
                 continue
             hideout_levels[str(key)] = level
 
