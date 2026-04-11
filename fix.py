@@ -1,7 +1,6 @@
-import re
-with open("tests/autoscrapper/ocr/test_inventory_vision.py", "r") as f:
-    content = f.read()
+"""Temporary ad-hoc cleanup logic was removed.
 
-content = re.sub(r'class TestEnableOcrDebug:[\s\S]*?(?=class TestEnableOcrDebug:)', '', content, count=1)
-with open("tests/autoscrapper/ocr/test_inventory_vision.py", "w") as f:
-    f.write(content)
+This file previously rewrote a test file in-place using a regex to delete a
+class definition. Repository-modifying cleanup scripts should either be removed
+entirely or maintained under a documented scripts/ location instead.
+"""
