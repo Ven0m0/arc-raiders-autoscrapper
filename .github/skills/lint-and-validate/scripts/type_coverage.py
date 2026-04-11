@@ -9,7 +9,6 @@ import sys
 import re
 import argparse
 from pathlib import Path
-from typing import Optional
 from itertools import chain
 
 from utils import fix_windows_console_encoding
@@ -104,8 +103,8 @@ def _format_typescript_results(stats: dict, file_count: int) -> tuple[list[str],
 
 def check_typescript_coverage(
     project_path: Path,
-    max_files: Optional[int] = 30,
-    files: Optional[list[Path]] = None,
+    max_files: int | None = 30,
+    files: list[Path] | None = None,
 ) -> dict:
     """Check TypeScript type coverage."""
     stats = {"any_count": 0, "untyped_functions": 0, "total_functions": 0}
@@ -158,8 +157,8 @@ def analyze_python_file(content: str) -> dict[str, int]:
 
 def check_python_coverage(
     project_path: Path,
-    max_files: Optional[int] = 30,
-    files: Optional[list[Path]] = None,
+    max_files: int | None = 30,
+    files: list[Path] | None = None,
 ) -> dict:
     """Check Python type hints coverage."""
     issues = []

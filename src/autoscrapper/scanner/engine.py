@@ -3,7 +3,6 @@ from __future__ import annotations
 import math
 import time
 from pathlib import Path
-from typing import List, Optional, Tuple
 
 from .progress import NullScanProgress, RichScanProgress, ScanProgress
 from .report import _render_results
@@ -65,7 +64,7 @@ def _validate_scan_args(
     cell_infobox_left_right_click_gap_ms: int,
     item_infobox_settle_delay_ms: int,
     post_sell_recycle_delay_ms: int,
-    pages: Optional[int],
+    pages: int | None,
 ) -> None:
     if infobox_retries < 1:
         raise ValueError("infobox_retries must be >= 1")
@@ -108,7 +107,7 @@ def _build_timing_config(
 
 def _build_progress_impl(
     show_progress: bool,
-    progress: Optional[ScanProgress],
+    progress: ScanProgress | None,
 ) -> ScanProgress:
     if progress is not None:
         return progress
@@ -130,14 +129,14 @@ def _collect_window_bounds_warnings(
     win_top: int,
     win_right: int,
     win_bottom: int,
-    work_area: Tuple[int, int, int, int],
-) -> List[Tuple[str, str]]:
+    work_area: tuple[int, int, int, int],
+) -> list[tuple[str, str]]:
     work_left, work_top, work_right, work_bottom = work_area
     win_is_full_monitor = (
         win_left == mon_left and win_top == mon_top and win_right == mon_right and win_bottom == mon_bottom
     )
 
-    startup_events: List[Tuple[str, str]] = []
+    startup_events: list[tuple[str, str]] = []
     if win_left < mon_left or win_top < mon_top or win_right > mon_right or win_bottom > mon_bottom:
         startup_events.append(
             (
@@ -164,11 +163,11 @@ def _detect_inventory_count(
     win_top: int,
     win_width: int,
     win_height: int,
-    safe_point_abs: Tuple[int, int],
+    safe_point_abs: tuple[int, int],
     stop_key: str,
     action_delay: float,
-    startup_events: List[Tuple[str, str]],
-) -> Tuple[Optional[int], str]:
+    startup_events: list[tuple[str, str]],
+) -> tuple[int | None, str]:
     """
     Capture the stash count label while the cursor is in a safe spot.
     """
@@ -197,14 +196,14 @@ def scan_inventory(
     item_infobox_settle_delay_ms: int = ITEM_INFOBOX_SETTLE_DELAY_MS,
     post_sell_recycle_delay_ms: int = POST_SELL_RECYCLE_DELAY_MS,
     show_progress: bool = True,
-    pages: Optional[int] = None,
+    pages: int | None = None,
     apply_actions: bool = True,
     actions_path: Path = ITEM_RULES_PATH,
-    actions_override: Optional[ActionMap] = None,
+    actions_override: ActionMap | None = None,
     profile_timing: bool = False,
-    progress: Optional[ScanProgress] = None,
-    window_snapshot: Optional[WindowSnapshot] = None,
-) -> Tuple[List[ItemActionResult], ScanStats]:
+    progress: ScanProgress | None = None,
+    window_snapshot: WindowSnapshot | None = None,
+) -> tuple[list[ItemActionResult], ScanStats]:
     """
     Walk each 4x5 grid (top-to-bottom, left-to-right), OCR each cell's item
     title, and apply the configured keep/recycle/sell decision when possible.

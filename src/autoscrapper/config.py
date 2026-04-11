@@ -2,9 +2,10 @@ from __future__ import annotations
 
 import logging
 import os
+from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any
 
 import orjson
 
@@ -20,7 +21,10 @@ APP_CONFIG_DIR_NAME = "AutoScrapper"
 CONFIG_FILE_NAME = "config.json"
 
 
-@dataclass(frozen=True)
+type ConfigDict = dict[str, Any]
+
+
+@dataclass(frozen=True, slots=True)
 class ScanSettings:
     stop_key: str = DEFAULT_STOP_KEY
     infobox_retries: int = 3
@@ -35,16 +39,16 @@ class ScanSettings:
     profile: bool = False
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class ProgressSettings:
     all_quests_completed: bool = False
     active_quests: list[str] = field(default_factory=list)
     completed_quests: list[str] = field(default_factory=list)
-    hideout_levels: Dict[str, int] = field(default_factory=dict)
-    last_updated: Optional[str] = None
+    hideout_levels: dict[str, int] = field(default_factory=dict)
+    last_updated: str | None = None
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class UiSettings:
     default_rules_warning_shown: bool = False
 
@@ -65,13 +69,13 @@ def _coerce_bool(value: Any, default: bool) -> bool:
     return value if isinstance(value, bool) else default
 
 
-def _coerce_positive_int(value: Any) -> Optional[int]:
+def _coerce_positive_int(value: Any) -> int | None:
     if isinstance(value, int) and value > 0:
         return value
     return None
 
 
-def _coerce_non_negative_int(value: Any) -> Optional[int]:
+def _coerce_non_negative_int(value: Any) -> int | None:
     if isinstance(value, int) and value >= 0:
         return value
     return None
@@ -103,7 +107,7 @@ def _clamp_retry_count(value: int, field_name: str) -> int:
     return value
 
 
-def _raw_with_aliases(raw: Dict[str, Any], *keys: str) -> Any:
+def _raw_with_aliases(raw: ConfigDict, *keys: str) -> Any:
     for key in keys:
         if key in raw:
             return raw.get(key)
@@ -115,27 +119,29 @@ def _raw_with_aliases(raw: Dict[str, Any], *keys: str) -> Any:
 # ---------------------------------------------------------------------------
 
 
-def _migrate_v1_to_v2(payload: Dict[str, Any]) -> Dict[str, Any]:
+def _migrate_v1_to_v2(payload: ConfigDict) -> ConfigDict:
     """Stub: no structural changes between v1 and v2."""
     return payload
 
 
-def _migrate_v2_to_v3(payload: Dict[str, Any]) -> Dict[str, Any]:
+def _migrate_v2_to_v3(payload: ConfigDict) -> ConfigDict:
     """Stub: no structural changes between v2 and v3."""
     return payload
 
 
-def _migrate_v3_to_v4(payload: Dict[str, Any]) -> Dict[str, Any]:
+def _migrate_v3_to_v4(payload: ConfigDict) -> ConfigDict:
     """Stub: no structural changes between v3 and v4."""
     return payload
 
 
-def _migrate_v4_to_v5(payload: Dict[str, Any]) -> Dict[str, Any]:
+def _migrate_v4_to_v5(payload: ConfigDict) -> ConfigDict:
     """Stub: no structural changes between v4 and v5."""
     return payload
 
 
-_MIGRATIONS = {
+type MigrateFn = Callable[[ConfigDict], ConfigDict]
+
+_MIGRATIONS: dict[int, MigrateFn] = {
     1: _migrate_v1_to_v2,
     2: _migrate_v2_to_v3,
     3: _migrate_v3_to_v4,
@@ -143,7 +149,7 @@ _MIGRATIONS = {
 }
 
 
-def _migrate_config(payload: Dict[str, Any]) -> Dict[str, Any]:
+def _migrate_config(payload: ConfigDict) -> ConfigDict:
     """
     Walk the payload from its stored version up to CONFIG_VERSION,
     applying each migration step in sequence.  Warns if the stored
@@ -177,7 +183,7 @@ def _migrate_config(payload: Dict[str, Any]) -> Dict[str, Any]:
     return payload
 
 
-def _load_config_dict() -> Dict[str, Any]:
+def _load_config_dict() -> ConfigDict:
     path = config_path()
     try:
         raw = orjson.loads(path.read_bytes())
@@ -192,7 +198,7 @@ def _load_config_dict() -> Dict[str, Any]:
     return _migrate_config(raw)
 
 
-def _save_config_dict(payload: Dict[str, Any]) -> None:
+def _save_config_dict(payload: ConfigDict) -> None:
     path = config_path()
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(orjson.dumps(payload, option=orjson.OPT_INDENT_2))
@@ -318,7 +324,7 @@ def _from_raw_progress_settings(raw: Any) -> ProgressSettings:
     completed_quests = (
         [str(q) for q in completed_quests_raw if str(q).strip()] if isinstance(completed_quests_raw, list) else []
     )
-    hideout_levels: Dict[str, int] = {}
+    hideout_levels: dict[str, int] = {}
     if isinstance(hideout_levels_raw, dict):
         for key, value in hideout_levels_raw.items():
             try:

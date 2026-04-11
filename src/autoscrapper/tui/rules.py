@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import List, Literal, Optional
+from typing import Literal
 
 from rich.text import Text
 from textual import events
@@ -34,7 +34,7 @@ def _display_action(item: dict) -> str:
     return ""
 
 
-def _normalized_action(item: dict) -> Optional[str]:
+def _normalized_action(item: dict) -> str | None:
     action = normalize_action(str(item.get("action", "")))
     if action:
         return action
@@ -48,7 +48,7 @@ def _normalized_action(item: dict) -> Optional[str]:
     return None
 
 
-def _lookup_key(value: object) -> Optional[str]:
+def _lookup_key(value: object) -> str | None:
     if isinstance(value, str):
         normalized = value.strip().lower()
         if normalized:
@@ -56,7 +56,7 @@ def _lookup_key(value: object) -> Optional[str]:
     return None
 
 
-def _action_label_style(action: Optional[str]) -> tuple[str, str]:
+def _action_label_style(action: str | None) -> tuple[str, str]:
     if action == "keep":
         return ("KEEP", "bold #56B4E9")
     if action == "sell":
@@ -81,11 +81,11 @@ def _should_hide_reason(reason: str) -> bool:
     return reason.strip().lower().startswith("override:")
 
 
-def _filter_indices(items: List[dict], query: str) -> List[int]:
+def _filter_indices(items: list[dict], query: str) -> list[int]:
     if not query:
         return list(range(len(items)))
     q = query.lower().strip()
-    matches: List[int] = []
+    matches: list[int] = []
     for idx, item in enumerate(items):
         name = str(item.get("name", "")).lower()
         item_id = str(item.get("id", "")).lower()
@@ -442,11 +442,11 @@ class RulesScreen(AppScreen):
             self.default_items_by_id,
             self.default_items_by_name,
         ) = self._build_default_item_indexes(list(defaults.get("items", [])))
-        self.filtered: List[int] = []
+        self.filtered: list[int] = []
         self.modified_map: dict[int, bool] = {}
         self.search_query = ""
         self.sort_mode: Literal["name_asc", "action", "modified"] = "name_asc"
-        self.selected_index: Optional[int] = None
+        self.selected_index: int | None = None
         self.mode: str = "edit"
         self.current_action: str = "keep"
         self._save_flash_timer = None
@@ -547,7 +547,7 @@ class RulesScreen(AppScreen):
                 by_name[name] = item
         return by_id, by_name
 
-    def _default_action_for_item(self, item: dict) -> Optional[str]:
+    def _default_action_for_item(self, item: dict) -> str | None:
         item_id = _lookup_key(item.get("id"))
         if item_id and item_id in self.default_actions_by_id:
             return self.default_actions_by_id[item_id]
@@ -556,7 +556,7 @@ class RulesScreen(AppScreen):
             return self.default_actions_by_name[name]
         return None
 
-    def _default_item_for_item(self, item: dict) -> Optional[dict]:
+    def _default_item_for_item(self, item: dict) -> dict | None:
         item_id = _lookup_key(item.get("id"))
         if item_id and item_id in self.default_items_by_id:
             return self.default_items_by_id[item_id]
@@ -596,7 +596,7 @@ class RulesScreen(AppScreen):
     def _refresh_modified_map(self) -> None:
         self.modified_map = {idx: self._is_modified(item) for idx, item in enumerate(self.items)}
 
-    def _sort_indices(self, indices: List[int]) -> List[int]:
+    def _sort_indices(self, indices: list[int]) -> list[int]:
         if self.sort_mode == "action":
             return sorted(
                 indices,
@@ -1052,16 +1052,16 @@ class RulesChangesScreen(AppScreen):
 
     def __init__(
         self,
-        changes: List[RuleChange],
+        changes: list[RuleChange],
         *,
         item_count: int,
         default_count: int,
     ) -> None:
         super().__init__()
         self.changes = list(changes)
-        self.filtered: List[int] = []
+        self.filtered: list[int] = []
         self.search_query = ""
-        self.selected_index: Optional[int] = None
+        self.selected_index: int | None = None
         self.item_count = item_count
         self.default_count = default_count
 
@@ -1096,13 +1096,13 @@ class RulesChangesScreen(AppScreen):
         summary = f"Changed rules: {total_changes} | Default items: {base_total} | Showing: {showing}"
         self.query_one("#changes-summary", Static).update(summary)
 
-    def _filter_indices(self) -> List[int]:
+    def _filter_indices(self) -> list[int]:
         if not self.search_query:
             return list(range(len(self.changes)))
         q = self.search_query.lower().strip()
         if not q:
             return list(range(len(self.changes)))
-        matches: List[int] = []
+        matches: list[int] = []
         for idx, change in enumerate(self.changes):
             name = change.name.lower()
             item_id = change.item_id.lower()

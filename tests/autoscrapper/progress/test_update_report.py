@@ -1,12 +1,13 @@
-from typing import Any, Dict, List
+
+from typing import Any
 
 from autoscrapper.progress.update_report import diff_quests
 
 
 def test_diff_quests_empty_lists() -> None:
     """Test that empty inputs result in zero counts and empty lists."""
-    before: List[Dict[str, Any]] = []
-    after: List[Dict[str, Any]] = []
+    before: list[dict[str, Any]] = []
+    after: list[dict[str, Any]] = []
 
     diff = diff_quests(before, after)
 
@@ -22,7 +23,7 @@ def test_diff_quests_empty_lists() -> None:
 
 def test_diff_quests_ignores_invalid_entries() -> None:
     """Test that non-dict objects and dicts without valid IDs are ignored."""
-    before: List[Any] = [
+    before: list[Any] = [
         "not a dict",
         None,
         123,
@@ -30,7 +31,7 @@ def test_diff_quests_ignores_invalid_entries() -> None:
         {"id": " ", "name": "Empty ID Quest"},  # Dict with blank 'id'
         {"id": "q1", "name": "Valid Before"},
     ]
-    after: List[Any] = [
+    after: list[Any] = [
         {"id": "q2", "name": "Valid After"},
         {"id": "", "name": "Empty ID"},
     ]

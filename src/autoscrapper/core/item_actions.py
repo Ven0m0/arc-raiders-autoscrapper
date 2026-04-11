@@ -3,26 +3,26 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Literal, Optional, cast
+from typing import Literal, cast
 
 import orjson
 
 from ..interaction.inventory_grid import Cell
 
-Decision = Literal["KEEP", "RECYCLE", "SELL"]
-DecisionList = list[Decision]
-ActionMap = dict[str, DecisionList]
+type Decision = Literal["KEEP", "RECYCLE", "SELL"]
+type DecisionList = list[Decision]
+type ActionMap = dict[str, DecisionList]
 
 
-@dataclass
+@dataclass(slots=True)
 class ItemActionResult:
     page: int
     cell: Cell
     item_name: str
-    decision: Optional[Decision]
+    decision: Decision | None
     action_taken: str
-    raw_item_text: Optional[str] = None
-    note: Optional[str] = None
+    raw_item_text: str | None = None
+    note: str | None = None
 
 
 VALID_DECISIONS = {"KEEP", "RECYCLE", "SELL"}
@@ -41,7 +41,7 @@ ITEM_RULES_CUSTOM_PATH = Path(__file__).resolve().parent.parent / "items" / "ite
 ITEM_RULES_PATH = ITEM_RULES_DEFAULT_PATH
 
 
-def resolve_item_actions_path(path: Optional[Path] = None) -> Path:
+def resolve_item_actions_path(path: Path | None = None) -> Path:
     if path is None or path == ITEM_RULES_DEFAULT_PATH or path == ITEM_RULES_PATH:
         return ITEM_RULES_CUSTOM_PATH if ITEM_RULES_CUSTOM_PATH.exists() else ITEM_RULES_DEFAULT_PATH
     return path
@@ -58,7 +58,7 @@ def clean_ocr_text(raw: str) -> str:
     return text.strip()
 
 
-def _normalize_action(value: object) -> Optional[Decision]:
+def _normalize_action(value: object) -> Decision | None:
     if not isinstance(value, str):
         return None
     key = value.strip().lower()
@@ -71,7 +71,7 @@ def _normalize_action(value: object) -> Optional[Decision]:
     return None
 
 
-def load_item_actions(path: Optional[Path] = None) -> ActionMap:
+def load_item_actions(path: Path | None = None) -> ActionMap:
     path = resolve_item_actions_path(path)
     try:
         raw = orjson.loads(path.read_bytes())
@@ -124,7 +124,7 @@ def load_item_actions(path: Optional[Path] = None) -> ActionMap:
     return actions
 
 
-def choose_decision(item_name: str, actions: ActionMap) -> tuple[Optional[Decision], Optional[str]]:
+def choose_decision(item_name: str, actions: ActionMap) -> tuple[Decision | None, str | None]:
     normalized = normalize_item_name(item_name)
     if not normalized:
         return None, None

@@ -5,7 +5,6 @@ import sys
 import threading
 import time
 from dataclasses import dataclass
-from typing import Optional, Tuple
 
 import mss
 import numpy as np
@@ -72,20 +71,20 @@ SCROLL_SETTLE_DELAY = 0.05
 _MSS_LOCAL = threading.local()
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class WindowSnapshot:
     win_left: int
     win_top: int
     win_width: int
     win_height: int
-    work_area: Tuple[int, int, int, int]
+    work_area: tuple[int, int, int, int]
     mon_left: int
     mon_top: int
     mon_right: int
     mon_bottom: int
 
 
-def get_active_target_window(target_app: str = TARGET_APP) -> Optional[pwc.Window]:
+def get_active_target_window(target_app: str = TARGET_APP) -> pwc.Window | None:
     """
     Return the active window if it matches the target app; otherwise None.
     """
@@ -164,7 +163,7 @@ def wait_for_target_window(
     raise TimeoutError(f"Timed out waiting for active window {target_app!r}")
 
 
-def window_rect(win: pwc.Window) -> Tuple[int, int, int, int]:
+def window_rect(win: pwc.Window) -> tuple[int, int, int, int]:
     """
     (left, top, width, height) in screen coordinates for the window.
     """
@@ -173,7 +172,7 @@ def window_rect(win: pwc.Window) -> Tuple[int, int, int, int]:
 
 def window_display_info(
     win: pwc.Window,
-) -> Tuple[str, Tuple[int, int], Tuple[int, int, int, int]]:
+) -> tuple[str, tuple[int, int], tuple[int, int, int, int]]:
     """
     Return (display name, display size, work area) and enforce that the window is on a single monitor.
     """
@@ -190,7 +189,7 @@ def window_display_info(
     return display_name, size, work_area
 
 
-def window_monitor_rect(win: pwc.Window) -> Tuple[int, int, int, int]:
+def window_monitor_rect(win: pwc.Window) -> tuple[int, int, int, int]:
     """
     Return (left, top, right, bottom) bounds for the physical monitor containing
     the window center.
@@ -262,7 +261,7 @@ def _is_mss_thread_handle_error(exc: Exception) -> bool:
     return "srcdc" in text or "thread._local" in text
 
 
-def capture_region(region: Tuple[int, int, int, int]) -> np.ndarray:
+def capture_region(region: tuple[int, int, int, int]) -> np.ndarray:
     """
     Capture a BGR screenshot of the given region (left, top, width, height).
     """
@@ -398,8 +397,8 @@ def open_cell_item_infobox(
 
 def scroll_to_next_grid_at(
     clicks: int,
-    grid_center_abs: Tuple[int, int],
-    safe_point_abs: Optional[Tuple[int, int]] = None,
+    grid_center_abs: tuple[int, int],
+    safe_point_abs: tuple[int, int] | None = None,
     *,
     stop_key: str = DEFAULT_STOP_KEY,
     pause: float = ACTION_DELAY,
@@ -434,6 +433,6 @@ def scroll_to_next_grid_at(
         move_absolute(sx, sy, pause=pause, stop_key=stop_key)
 
 
-def _cell_screen_center(cell: Cell, window_left: int, window_top: int) -> Tuple[int, int]:
+def _cell_screen_center(cell: Cell, window_left: int, window_top: int) -> tuple[int, int]:
     cx, cy = cell.safe_center
     return int(window_left + cx), int(window_top + cy)

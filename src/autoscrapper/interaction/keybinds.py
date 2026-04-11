@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import re
-from typing import Optional
 
 DEFAULT_STOP_KEY = "escape"
 
@@ -100,7 +99,7 @@ def stop_key_label(key: object) -> str:
     return canonical
 
 
-def textual_key_to_stop_key(key: str, character: Optional[str] = None) -> Optional[str]:
+def textual_key_to_stop_key(key: str, character: str | None = None) -> str | None:
     """
     Convert a Textual key event payload into a canonical stop-key name.
     Returns None for modifier-only presses that should be ignored.

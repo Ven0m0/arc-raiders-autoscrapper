@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import ClassVar, Optional
+from typing import ClassVar
 
 from textual import events
 from textual.app import ComposeResult
@@ -36,7 +36,7 @@ class MessageScreen(ModalScreen[None]):
     }
     """
 
-    def __init__(self, message: str, *, title: Optional[str] = None) -> None:
+    def __init__(self, message: str, *, title: str | None = None) -> None:
         super().__init__()
         self.message = message
         self.title = title or "Notice"

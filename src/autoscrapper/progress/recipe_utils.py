@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from typing import Dict, List
 
 
-def build_reverse_recipe_index(items: List[dict]) -> Dict[str, List[str]]:
+def build_reverse_recipe_index(items: list[dict]) -> dict[str, list[str]]:
     """Build a reverse recipe index mapping ingredient IDs to output item IDs."""
-    reverse_index: Dict[str, List[str]] = {}
+    reverse_index: dict[str, list[str]] = {}
     for item in items:
         recipe = item.get("recipe")
         if not isinstance(recipe, dict):

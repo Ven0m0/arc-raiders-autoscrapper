@@ -8,7 +8,7 @@ import threading
 import time
 import traceback
 from pathlib import Path
-from typing import Any, Deque, Optional
+from typing import Any
 
 from rich.text import Text
 from textual.app import ComposeResult
@@ -38,13 +38,13 @@ CELLS_PER_PAGE = 20
 EVENT_LIMIT = 8
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class ScanUpdate:
     kind: str
     payload: dict
 
 
-@dataclass
+@dataclass(slots=True)
 class ScanState:
     phase: str = "Starting..."
     mode_label: str = ""
@@ -53,14 +53,14 @@ class ScanState:
     current_label: str = ""
     last_item_label: str = ""
     last_outcome_label: str = ""
-    total: Optional[int] = None
+    total: int | None = None
     completed: int = 0
     counts: Counter[str] = field(default_factory=Counter)
-    events: Deque[Text] = field(default_factory=lambda: deque(maxlen=EVENT_LIMIT))
-    start_time: Optional[float] = None
+    events: deque[Text] = field(default_factory=lambda: deque(maxlen=EVENT_LIMIT))
+    start_time: float | None = None
 
 
-def _format_duration(seconds: Optional[float]) -> str:
+def _format_duration(seconds: float | None) -> str:
     if seconds is None:
         return "--:--"
     if seconds < 0:
@@ -76,7 +76,7 @@ def _item_label(result: Any) -> str:
     return (result.item_name or result.raw_item_text or "<unreadable>").replace("\n", " ").strip()
 
 
-def _com_error_details(exc: BaseException) -> Optional[tuple[int, str, str]]:
+def _com_error_details(exc: BaseException) -> tuple[int, str, str] | None:
     args = getattr(exc, "args", ())
     if len(args) < 2 or not isinstance(args[0], int) or not isinstance(args[1], str):
         return None
@@ -89,7 +89,7 @@ def _com_error_details(exc: BaseException) -> Optional[tuple[int, str, str]]:
     return hresult, text, hresult_hex
 
 
-def _write_crash_report(content: str) -> Optional[str]:
+def _write_crash_report(content: str) -> str | None:
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     path = Path.cwd() / f"autoscrapper_crash_{timestamp}.log"
     try:
@@ -126,7 +126,7 @@ class TextualScanProgress(ScanProgress):
     def stop(self) -> None:
         self._emit("stop")
 
-    def set_total(self, total: Optional[int]) -> None:
+    def set_total(self, total: int | None) -> None:
         self._emit("total", total=total)
 
     def set_phase(self, phase: str) -> None:
@@ -166,10 +166,10 @@ class ScanScreen(Screen):
         self._scan_complete = False
         self._scan_update_timer = None
         self._window_wait_timer = None
-        self._window_wait_started: Optional[float] = None
+        self._window_wait_started: float | None = None
         self._scan_started = False
         self._results: list[Any] = []
-        self._stats: Optional[ScanStats] = None
+        self._stats: ScanStats | None = None
 
     def compose(self) -> ComposeResult:
         with Vertical(id="scan-layout"):
@@ -514,12 +514,12 @@ class ScanScreen(Screen):
         filled = int(width * ratio)
         return f"[{'#' * filled}{'-' * (width - filled)}]"
 
-    def _speed(self, elapsed: float) -> Optional[float]:
+    def _speed(self, elapsed: float) -> float | None:
         if elapsed <= 0 or self._state.completed <= 0:
             return None
         return self._state.completed / elapsed
 
-    def _eta_label(self, speed: Optional[float], elapsed: float) -> str:
+    def _eta_label(self, speed: float | None, elapsed: float) -> str:
         if speed is None or speed <= 0:
             return ""
         total = self._state.total

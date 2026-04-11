@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import orjson
 
@@ -11,21 +11,21 @@ from .quest_overrides import apply_quest_overrides
 DATA_DIR = Path(__file__).resolve().parent / "data"
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class GameData:
-    items: List[dict]
-    hideout_modules: List[dict]
-    quests: List[dict]
-    quest_graph: Dict[str, Any]
-    projects: List[dict]
-    metadata: Dict[str, str]
+    items: list[dict]
+    hideout_modules: list[dict]
+    quests: list[dict]
+    quest_graph: dict[str, Any]
+    projects: list[dict]
+    metadata: dict[str, Any]
 
 
 def _read_json(path: Path) -> Any:
     return orjson.loads(path.read_bytes())
 
 
-def load_game_data(data_dir: Optional[Path] = None) -> GameData:
+def load_game_data(data_dir: Path | None = None) -> GameData:
     data_dir = data_dir or DATA_DIR
 
     items_path = data_dir / "items.json"
@@ -44,39 +44,20 @@ def load_game_data(data_dir: Optional[Path] = None) -> GameData:
     hideout_modules = _read_json(hideout_modules_path)
     projects = _read_json(projects_path)
 
-    metadata: Optional[dict] = None
+    metadata: dict | None = None
     if metadata_path.exists():
         try:
             metadata = _read_json(metadata_path)
-        except orjson.JSONDecodeError:
-            metadata = None
-
-    normalized_items = _normalize_items(items)
+        except Exception:
+            metadata = {}
+    if metadata is None:
+        metadata = {}
 
     return GameData(
-        items=normalized_items,
-        hideout_modules=hideout_modules,
-        quests=quests,
-        quest_graph=quest_graph,
-        projects=projects,
-        metadata={
-            "lastUpdated": (metadata or {}).get("lastUpdated", "1970-01-01T00:00:00Z"),
-            "source": (metadata or {}).get("source", "unknown"),
-            "version": (metadata or {}).get("version", "0.0.0"),
-        },
+        items=items if isinstance(items, list) else [],
+        hideout_modules=hideout_modules if isinstance(hideout_modules, list) else [],
+        quests=quests if isinstance(quests, list) else [],
+        quest_graph=quest_graph if isinstance(quest_graph, dict) else {},
+        projects=projects if isinstance(projects, list) else [],
+        metadata=metadata if isinstance(metadata, dict) else {},
     )
-
-
-def _normalize_items(items: List[dict]) -> List[dict]:
-    normalized = []
-    for item in items:
-        found_in = item.get("foundIn")
-        if isinstance(found_in, str):
-            updated = {
-                **item,
-                "foundIn": [loc.strip() for loc in found_in.split(",") if loc.strip()],
-            }
-            normalized.append(updated)
-        else:
-            normalized.append(item)
-    return normalized
