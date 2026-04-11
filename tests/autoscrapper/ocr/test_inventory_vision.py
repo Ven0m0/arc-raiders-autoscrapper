@@ -386,15 +386,12 @@ class TestEnableOcrDebug:
         from pathlib import Path
 
         mock_path = MagicMock(spec=Path)
-        # Configure the mock to raise an exception when mkdir is called
         mock_path.mkdir.side_effect = OSError("Permission denied")
 
-        # Call the function
-        _vision.enable_ocr_debug(mock_path)
+        # Use patch to isolate global state and verify it is cleared on failure
+        with patch.object(_vision, "_OCR_DEBUG_DIR", Path("/tmp/dummy")):
+            _vision.enable_ocr_debug(mock_path)
+            assert _vision._OCR_DEBUG_DIR is None
 
-        # Verify that _OCR_DEBUG_DIR was set to None
-        assert _vision._OCR_DEBUG_DIR is None
-
-        # Verify the exception was caught and an error message was printed
         captured = capsys.readouterr()
         assert "[vision_ocr] failed to enable OCR debug dir: Permission denied" in captured.out
