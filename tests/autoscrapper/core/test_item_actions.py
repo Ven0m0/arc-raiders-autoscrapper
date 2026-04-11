@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import patch
+
+import pytest
 from autoscrapper.core.item_actions import (
     normalize_item_name,
     clean_ocr_text,
