@@ -1,9 +1,43 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional, Tuple
 
 import orjson
+from ..core.item_actions import clean_ocr_text
+
+_ITEM_NAMES: Optional[Tuple[str, ...]] = None
+
+
+def get_item_names() -> Tuple[str, ...]:
+    global _ITEM_NAMES
+    if _ITEM_NAMES is not None:
+        return _ITEM_NAMES
+
+    payload = load_rules()
+    names: List[str] = []
+    seen: set[str] = set()
+    for entry in payload.get("items", []):
+        if not isinstance(entry, dict):
+            continue
+        name = entry.get("name")
+        if not isinstance(name, str):
+            continue
+        cleaned = clean_ocr_text(name)
+        key = cleaned.casefold()
+        if not cleaned or key in seen:
+            continue
+        seen.add(key)
+        names.append(cleaned)
+
+    _ITEM_NAMES = tuple(names)
+    return _ITEM_NAMES
+
+
+def reset_item_names_cache() -> None:
+    global _ITEM_NAMES
+    _ITEM_NAMES = None
+
 
 DEFAULT_RULES_PATH = Path(__file__).with_name("items_rules.default.json")
 CUSTOM_RULES_PATH = Path(__file__).with_name("items_rules.custom.json")

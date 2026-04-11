@@ -1,6 +1,8 @@
 from typing import Any, Dict, List
 
 from autoscrapper.progress.update_report import diff_quests
+
+
 def test_diff_quests_empty_lists() -> None:
     """Test that empty inputs result in zero counts and empty lists."""
     before: List[Dict[str, Any]] = []
@@ -16,6 +18,8 @@ def test_diff_quests_empty_lists() -> None:
     assert diff["added"] == []
     assert diff["removed"] == []
     assert diff["changed"] == []
+
+
 def test_diff_quests_ignores_invalid_entries() -> None:
     """Test that non-dict objects and dicts without valid IDs are ignored."""
     before: List[Any] = [
@@ -39,6 +43,8 @@ def test_diff_quests_ignores_invalid_entries() -> None:
     assert diff["addedCount"] == 1
     assert diff["removed"][0]["id"] == "q1"
     assert diff["added"][0]["id"] == "q2"
+
+
 def test_diff_quests_additions_and_removals() -> None:
     """Test that new quests are tracked as additions and missing quests as removals."""
     before = [
@@ -58,12 +64,10 @@ def test_diff_quests_additions_and_removals() -> None:
     assert diff["removedCount"] == 1
     assert diff["changedCount"] == 0
 
-    assert diff["removed"][0] == {
-        "id": "q1", "name": "Quest 1", "trader": "Trader A", "xp": 100, "sortOrder": 1
-    }
-    assert diff["added"][0] == {
-        "id": "q3", "name": "Quest 3", "trader": "Trader C", "xp": 300, "sortOrder": 3
-    }
+    assert diff["removed"][0] == {"id": "q1", "name": "Quest 1", "trader": "Trader A", "xp": 100, "sortOrder": 1}
+    assert diff["added"][0] == {"id": "q3", "name": "Quest 3", "trader": "Trader C", "xp": 300, "sortOrder": 3}
+
+
 def test_diff_quests_changes() -> None:
     """Test that specific fields changing between versions are accurately tracked."""
     before = [
@@ -75,7 +79,7 @@ def test_diff_quests_changes() -> None:
             "xp": 100,
             "requirements": ["req1"],
             "rewardItemIds": ["rew1"],
-            "ignored_field": "old"
+            "ignored_field": "old",
         }
     ]
     after = [
@@ -87,7 +91,7 @@ def test_diff_quests_changes() -> None:
             "xp": 200,
             "requirements": ["req1", "req2"],
             "rewardItemIds": ["rew2"],
-            "ignored_field": "new"
+            "ignored_field": "new",
         }
     ]
 
@@ -112,14 +116,12 @@ def test_diff_quests_changes() -> None:
 
     # Check that untracked fields are not in the diff
     assert "ignored_field" not in changes
+
+
 def test_diff_quests_no_changes() -> None:
     """Test that quests with identical tracked fields result in no changes."""
-    before = [
-        {"id": "q1", "name": "Quest 1", "trader": "Trader A", "untracked_field": "A"}
-    ]
-    after = [
-        {"id": "q1", "name": "Quest 1", "trader": "Trader A", "untracked_field": "B"}
-    ]
+    before = [{"id": "q1", "name": "Quest 1", "trader": "Trader A", "untracked_field": "A"}]
+    after = [{"id": "q1", "name": "Quest 1", "trader": "Trader A", "untracked_field": "B"}]
 
     diff = diff_quests(before, after)
 
@@ -127,6 +129,7 @@ def test_diff_quests_no_changes() -> None:
     assert diff["addedCount"] == 0
     assert diff["removedCount"] == 0
     assert diff["changed"] == []
+
 
 def test_diff_quests_sorting() -> None:
     """Test that the changed list is sorted by name, then id."""

@@ -44,6 +44,15 @@ def _get_warmup_error() -> Optional[str]:
 
 def _run_background_warmup() -> None:
     try:
+        from .items import rules_store
+
+        rules_store.get_item_names()
+    except Exception as e:
+        error = f"Failed to pre-populate item names cache in warmup: {type(e).__name__}: {e}"
+        _set_warmup_error(error)
+        print(f"[warn] {error}")
+
+    try:
         for module_name in _HEAVY_MODULES:
             importlib.import_module(module_name)
         # initialize_ocr() is intentionally NOT called here: tesserocr imports

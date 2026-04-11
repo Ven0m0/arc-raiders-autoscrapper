@@ -73,8 +73,12 @@ def test_start_background_warmup(mock_thread_class: MagicMock) -> None:
 
 
 @patch("autoscrapper.warmup.importlib.import_module")
-def test_run_background_warmup_success(mock_import_module: MagicMock) -> None:
+@patch("autoscrapper.items.rules_store.get_item_names")
+def test_run_background_warmup_success(mock_get_item_names: MagicMock, mock_import_module: MagicMock) -> None:
     _run_background_warmup()
+
+    # Should call get_item_names
+    mock_get_item_names.assert_called_once()
 
     # Should call import_module for each item in _HEAVY_MODULES
     assert mock_import_module.call_count == len(warmup._HEAVY_MODULES)

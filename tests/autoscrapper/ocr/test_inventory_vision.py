@@ -406,13 +406,14 @@ class TestResetOcrCaches:
         # Prime the caches artificially
         _vision._last_roi_hash = b"fake"
         _vision._last_ocr_result = ("Item", "Item")
-        _vision._ITEM_NAMES = ("Item A", "Item B")
+        _vision.rules_store._ITEM_NAMES = ("Item A", "Item B")
 
         reset_ocr_caches()
 
         assert _vision._last_roi_hash is None
         assert _vision._last_ocr_result is None
-        assert _vision._ITEM_NAMES is None
+        assert _vision.rules_store._ITEM_NAMES is None
+
 
 
 # ---------------------------------------------------------------------------
