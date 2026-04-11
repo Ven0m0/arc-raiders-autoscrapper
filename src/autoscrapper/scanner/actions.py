@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 
 from dataclasses import dataclass
-from typing import Any, Optional, Tuple
+from typing import Any, Callable, Optional, Tuple
 
 from ..config import ScanSettings
 from ..interaction.ui_windows import (
@@ -48,7 +48,7 @@ class ActionExecutionContext:
     post_action_delay: float
 
 
-def _perform_sell(
+def _perform_destructive_action(
     infobox_rect: Tuple[int, int, int, int],
     action_bbox_rel: Tuple[int, int, int, int],
     window_left: int,
@@ -56,6 +56,7 @@ def _perform_sell(
     window_width: int,
     window_height: int,
     *,
+    confirm_center_func: Callable[[int, int, int, int], Tuple[int, int]],
     stop_key: str = DEFAULT_STOP_KEY,
     action_delay: float = INPUT_ACTION_DELAY,
     item_infobox_settle_delay: float = ITEM_INFOBOX_SETTLE_DELAY,
@@ -64,11 +65,11 @@ def _perform_sell(
     move_duration = MOVE_DURATION * SELL_RECYCLE_SPEED_MULT
     action_pause = action_delay * SELL_RECYCLE_SPEED_MULT
     bx, by, bw, bh = action_bbox_rel
-    sell_bbox_win = (infobox_rect[0] + bx, infobox_rect[1] + by, bw, bh)
-    sx, sy = rect_center(sell_bbox_win)
+    action_bbox_win = (infobox_rect[0] + bx, infobox_rect[1] + by, bw, bh)
+    ax, ay = rect_center(action_bbox_win)
     move_window_relative(
-        sx,
-        sy,
+        ax,
+        ay,
         window_left,
         window_top,
         duration=move_duration,
@@ -76,8 +77,8 @@ def _perform_sell(
         stop_key=stop_key,
     )
     click_window_relative(
-        sx,
-        sy,
+        ax,
+        ay,
         window_left,
         window_top,
         pause=action_pause,
@@ -85,7 +86,7 @@ def _perform_sell(
     )
     sleep_with_abort(item_infobox_settle_delay, stop_key=stop_key)
 
-    cx, cy = sell_confirm_button_center(window_left, window_top, window_width, window_height)
+    cx, cy = confirm_center_func(window_left, window_top, window_width, window_height)
     move_absolute(
         cx,
         cy,
@@ -117,13 +118,14 @@ def _apply_destructive_decision(
         return f"DRY_RUN_{decision}"
 
     if decision == "SELL":
-        _perform_sell(
+        _perform_destructive_action(
             infobox_rect,
             action_bbox_rel,
             context.win_left,
             context.win_top,
             context.win_width,
             context.win_height,
+            confirm_center_func=sell_confirm_button_center,
             stop_key=context.stop_key,
             action_delay=context.action_delay,
             item_infobox_settle_delay=context.item_infobox_settle_delay,
@@ -131,13 +133,14 @@ def _apply_destructive_decision(
         )
         return "SELL"
 
-    _perform_recycle(
+    _perform_destructive_action(
         infobox_rect,
         action_bbox_rel,
         context.win_left,
         context.win_top,
         context.win_width,
         context.win_height,
+        confirm_center_func=recycle_confirm_button_center,
         stop_key=context.stop_key,
         action_delay=context.action_delay,
         item_infobox_settle_delay=context.item_infobox_settle_delay,
@@ -212,50 +215,3 @@ def resolve_action_taken(
     return "SCAN_ONLY"
 
 
-def _perform_recycle(
-    infobox_rect: Tuple[int, int, int, int],
-    action_bbox_rel: Tuple[int, int, int, int],
-    window_left: int,
-    window_top: int,
-    window_width: int,
-    window_height: int,
-    *,
-    stop_key: str = DEFAULT_STOP_KEY,
-    action_delay: float = INPUT_ACTION_DELAY,
-    item_infobox_settle_delay: float = ITEM_INFOBOX_SETTLE_DELAY,
-    post_action_delay: float = POST_SELL_RECYCLE_DELAY,
-) -> None:
-    move_duration = MOVE_DURATION * SELL_RECYCLE_SPEED_MULT
-    action_pause = action_delay * SELL_RECYCLE_SPEED_MULT
-    bx, by, bw, bh = action_bbox_rel
-    recycle_bbox_win = (infobox_rect[0] + bx, infobox_rect[1] + by, bw, bh)
-    rx, ry = rect_center(recycle_bbox_win)
-    move_window_relative(
-        rx,
-        ry,
-        window_left,
-        window_top,
-        duration=move_duration,
-        pause=action_pause,
-        stop_key=stop_key,
-    )
-    click_window_relative(
-        rx,
-        ry,
-        window_left,
-        window_top,
-        pause=action_pause,
-        stop_key=stop_key,
-    )
-    sleep_with_abort(item_infobox_settle_delay, stop_key=stop_key)
-
-    cx, cy = recycle_confirm_button_center(window_left, window_top, window_width, window_height)
-    move_absolute(
-        cx,
-        cy,
-        duration=move_duration,
-        pause=action_pause,
-        stop_key=stop_key,
-    )
-    click_absolute(cx, cy, pause=action_pause, stop_key=stop_key)
-    sleep_with_abort(post_action_delay, stop_key=stop_key)
