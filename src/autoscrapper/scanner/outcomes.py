@@ -1,15 +1,13 @@
 from __future__ import annotations
 
-from typing import List, Tuple
-
-_UNREADABLE_REASONS = {
+_UNREADABLE_REASONS: dict[str, str] = {
     "UNREADABLE_NO_INFOBOX": "infobox missing",
     "UNREADABLE_NO_OCR": "ocr not run",
     "UNREADABLE_OCR_FAILED": "ocr failed",
     "UNREADABLE_TITLE": "title unreadable",
 }
 
-_SKIP_REASONS = {
+_SKIP_REASONS: dict[str, str] = {
     "SKIP_NO_NAME": "missing OCR name",
     "SKIP_NO_ACTION_MAP": "no action map loaded",
     "SKIP_UNLISTED": "no configured decision",
@@ -18,26 +16,26 @@ _SKIP_REASONS = {
 }
 
 
-def _describe_action(action_taken: str) -> Tuple[str, List[str]]:
+def _describe_action(action_taken: str) -> tuple[str, list[str]]:
     """
     Normalize the action label (for display) and attach human-readable details.
     """
-    details: List[str] = []
+    details: list[str] = []
     if action_taken.startswith("SKIP_"):
-        reason = _SKIP_REASONS.get(action_taken, action_taken.replace("SKIP_", "").replace("_", " ").lower())
+        reason = _SKIP_REASONS.get(action_taken, action_taken.removeprefix("SKIP_").replace("_", " ").lower())
         details.append(reason)
         return "SKIP", details
 
     if action_taken.startswith("UNREADABLE_"):
         reason = _UNREADABLE_REASONS.get(
             action_taken,
-            action_taken.replace("UNREADABLE_", "").replace("_", " ").lower(),
+            action_taken.removeprefix("UNREADABLE_").replace("_", " ").lower(),
         )
         details.append(reason)
         return "UNREADABLE", details
 
     if action_taken.startswith("DRY_RUN_"):
-        base = action_taken[len("DRY_RUN_") :]
+        base = action_taken.removeprefix("DRY_RUN_")
         details.append("dry run")
         return f"DRY-{base}", details
 

@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import time
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from itertools import cycle
-from typing import Any, Iterable, List, Optional, Tuple
+from typing import Any
 
 from .actions import ActionExecutionContext, resolve_action_taken
 from .outcomes import _describe_action
@@ -31,7 +32,7 @@ from ..ocr.inventory_vision import (
 )
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class TimingConfig:
     input_action_delay: float
     cell_infobox_left_right_click_gap: float
@@ -41,27 +42,27 @@ class TimingConfig:
     ocr_retry_interval: float
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class ScanContext:
-    window: Optional[Any]
+    window: Any | None
     stop_key: str
     win_left: int
     win_top: int
     win_width: int
     win_height: int
-    grid_roi: Tuple[int, int, int, int]
-    safe_point_abs: Tuple[int, int]
-    grid_center_abs: Tuple[int, int]
+    grid_roi: tuple[int, int, int, int]
+    safe_point_abs: tuple[int, int]
+    grid_center_abs: tuple[int, int]
     cells_per_page: int
     actions: ActionMap
     apply_actions: bool
     timing: TimingConfig
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class _InfoboxCaptureResult:
-    infobox_rect: Optional[Tuple[int, int, int, int]]
-    window_bgr: Optional[Any]
+    infobox_rect: tuple[int, int, int, int] | None
+    window_bgr: Any | None
     capture_time: float
     find_time: float
     capture_attempts: int
@@ -69,17 +70,17 @@ class _InfoboxCaptureResult:
     context_menu_fallback: bool = False
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class _InfoboxReadResult:
-    infobox_ocr: Optional[InfoboxOcrResult]
-    infobox_bgr: Optional[Any]
+    infobox_ocr: InfoboxOcrResult | None
+    infobox_bgr: Any | None
     item_name: str
     raw_item_text: str
     preprocess_time: float
     ocr_time: float
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class _CellScanResult:
     result: ItemActionResult
     action_label: str
@@ -87,25 +88,25 @@ class _CellScanResult:
     action_taken: str
 
 
-@dataclass
+@dataclass(slots=True)
 class ScanRunState:
-    results: List[ItemActionResult] = field(default_factory=list)
+    results: list[ItemActionResult] = field(default_factory=list)
     pages_scanned: int = 0
-    stop_at_global_idx: Optional[int] = None
+    stop_at_global_idx: int | None = None
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class _ScanLoopConfig:
     pages_to_scan: int
     infobox_retries: int
     ocr_unreadable_retries: int
     profile_timing: bool
-    items_total: Optional[int]
+    items_total: int | None
 
 
 def _queue_event(
-    progress_impl: Optional[ScanProgress],
-    startup_events: List[Tuple[str, str]],
+    progress_impl: ScanProgress | None,
+    startup_events: list[tuple[str, str]],
     message: str,
     *,
     style: str = "dim",
@@ -116,7 +117,7 @@ def _queue_event(
         startup_events.append((message, style))
 
 
-def _scroll_clicks_sequence(click_pattern: Iterable[int]) -> Iterable[int]:
+def _scroll_clicks_sequence(click_pattern: Iterable[int]) -> cycle[int]:
     """
     Yield repeating calibrated scroll counts.
     """
