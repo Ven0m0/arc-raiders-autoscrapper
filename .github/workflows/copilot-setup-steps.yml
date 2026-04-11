@@ -1,0 +1,28 @@
+name: "Copilot Setup Steps"
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Install Tesseract OCR system dependencies
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -yq tesseract-ocr libtesseract-dev libleptonica-dev python3-evdev python3-pil python3-pil.imagetk
+      - name: Install uv and Python 3.14.3
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.14.3"
+          enable-cache: true
+      - name: Install project dependencies
+        run: uv sync --all-extras --frozen
