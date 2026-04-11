@@ -1,7 +1,6 @@
 from typing import Any, Dict, List
 
 from autoscrapper.progress.update_report import diff_quests
-
 def test_diff_quests_empty_lists() -> None:
     """Test that empty inputs result in zero counts and empty lists."""
     before: List[Dict[str, Any]] = []
