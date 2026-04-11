@@ -3,15 +3,15 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Literal, Optional, Tuple, cast
+from typing import Literal, Optional, cast
 
 import orjson
 
 from ..interaction.inventory_grid import Cell
 
 Decision = Literal["KEEP", "RECYCLE", "SELL"]
-DecisionList = List[Decision]
-ActionMap = Dict[str, DecisionList]
+DecisionList = list[Decision]
+ActionMap = dict[str, DecisionList]
 
 
 @dataclass
@@ -124,7 +124,7 @@ def load_item_actions(path: Optional[Path] = None) -> ActionMap:
     return actions
 
 
-def choose_decision(item_name: str, actions: ActionMap) -> Tuple[Optional[Decision], Optional[str]]:
+def choose_decision(item_name: str, actions: ActionMap) -> tuple[Optional[Decision], Optional[str]]:
     normalized = normalize_item_name(item_name)
     if not normalized:
         return None, None
