@@ -168,14 +168,24 @@ class DecisionEngine:
             )
 
         if item_type == "weapon" or WeaponGrouper.is_weapon_variant(item):
+            item_id = str(item.get("id", ""))
+            tier = WeaponGrouper.get_tier_number(item_id)
+            base_name = WeaponGrouper.get_base_name(str(item.get("name", ""))) if tier > 0 else ""
+            base_id = WeaponGrouper.get_base_id(item_id) if tier > 0 else ""
+            tier_label = f"Tier {tier} variant" if tier > 0 else "Weapon"
+            reasons = [
+                f"{tier_label} - review based on your current loadout",
+                "Consider tier and your play style",
+            ]
+            if base_name and base_id and base_name != base_id:
+                reasons.append(f"Base weapon: {base_name}")
+            elif base_id:
+                reasons.append(f"Base weapon family: {base_id}")
             return self.finalize_decision(
                 item,
                 DecisionReason(
                     decision="situational",
-                    reasons=[
-                        "Weapon - review based on your current loadout",
-                        "Consider tier and your play style",
-                    ],
+                    reasons=reasons,
                 ),
             )
 

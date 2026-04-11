@@ -7,7 +7,7 @@ from typing import Any, Callable, Optional, Tuple
 
 from ..config import ScanSettings
 from ..interaction.ui_windows import (
-    MOVE_DURATION,
+    SELL_RECYCLE_MOVE_DURATION,
     SELL_RECYCLE_SPEED_MULT,
     click_absolute,
     click_window_relative,
@@ -62,7 +62,7 @@ def _perform_destructive_action(
     item_infobox_settle_delay: float = ITEM_INFOBOX_SETTLE_DELAY,
     post_action_delay: float = POST_SELL_RECYCLE_DELAY,
 ) -> None:
-    move_duration = MOVE_DURATION * SELL_RECYCLE_SPEED_MULT
+    move_duration = SELL_RECYCLE_MOVE_DURATION
     action_pause = action_delay * SELL_RECYCLE_SPEED_MULT
     bx, by, bw, bh = action_bbox_rel
     action_bbox_win = (infobox_rect[0] + bx, infobox_rect[1] + by, bw, bh)
