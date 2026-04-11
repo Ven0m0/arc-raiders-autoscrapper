@@ -463,8 +463,8 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
     data_dir = data_dir or DATA_DIR
     (data_dir / "static").mkdir(parents=True, exist_ok=True)
 
-    metaforge_items: list[dict | None] = None
-    metaforge_quests: list[dict | None] = None
+    metaforge_items: list[dict] | None = None
+    metaforge_quests: list[dict] | None = None
     metaforge_items_error: str | None = None
     metaforge_quests_error: str | None = None
     try:
