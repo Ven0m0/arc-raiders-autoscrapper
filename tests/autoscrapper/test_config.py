@@ -137,12 +137,15 @@ def test_load_config_dict_not_a_dict(mock_config_path):
 
 
 @patch("autoscrapper.config.config_path")
+@patch("autoscrapper.config.config_path")
 def test_load_config_dict_success(mock_config_path):
-    """Test that _load_config_dict returns the loaded dictionary on success."""
-    payload = {"version": CONFIG_VERSION, "scan": {"debug_ocr": True}}
+    """Test that _load_config_dict returns the loaded dictionary and applies migrations."""
+    # Use an older version to verify migration is applied
+    payload = {"version": 1, "scan": {"debug_ocr": True}}
     mock_path = MagicMock(spec=Path)
     mock_path.read_text.return_value = json.dumps(payload)
     mock_config_path.return_value = mock_path
 
     result = _load_config_dict()
-    assert result == payload
+    assert result["version"] == CONFIG_VERSION
+    assert result["scan"]["debug_ocr"] is True
