@@ -18,9 +18,9 @@ _log = logging.getLogger(__name__)
 METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
 SUPABASE_URL = "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
 
-SUPABASE_ANON_KEY = os.environ.get("METAFORGE_SUPABASE_ANON_KEY")
 
-
+def _get_supabase_anon_key() -> Optional[str]:
+    return os.environ.get("METAFORGE_SUPABASE_ANON_KEY")
 class DownloadError(RuntimeError):
     pass
 
