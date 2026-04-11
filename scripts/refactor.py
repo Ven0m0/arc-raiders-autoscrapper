@@ -7,8 +7,8 @@ import sys
 from pathlib import Path
 
 
-def refactor_file(path: Path) -> str:
-    """Refactor a single Python file."""
+def refactor_file(path: Path) -> str | None:
+    """Refactor a single Python file and return updated content if it changed."""
     content = path.read_text()
     original = content
 
