@@ -1148,8 +1148,8 @@ def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
 
 def build_skip_unlisted_corpus_image(infobox_bgr: np.ndarray, *, from_context_menu: bool) -> np.ndarray:
     if from_context_menu:
-        return np.ascontiguousarray(infobox_bgr.copy())
-    return np.ascontiguousarray(_crop_title_strip(infobox_bgr).copy())
+        return np.ascontiguousarray(infobox_bgr)
+    return np.ascontiguousarray(_crop_title_strip(infobox_bgr))
 
 
 def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
