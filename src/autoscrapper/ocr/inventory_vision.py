@@ -960,7 +960,7 @@ def _extract_action_line_bbox(
     Given OCR data, return a bbox (left, top, w, h) for
     the line containing the target action (infobox-relative coords).
     """
-    groups: Dict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
+    groups: defaultdict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
     texts = ocr_data.get("text", [])
     n = len(texts)
     for i in range(n):
