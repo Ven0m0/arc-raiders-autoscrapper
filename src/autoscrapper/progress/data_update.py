@@ -67,6 +67,7 @@ def _fetch_metaforge_collection(resource: str) -> List[dict]:
     limit = 100
 
     while has_next:
+        t0 = time.monotonic()
         url = f"{METAFORGE_API_BASE}/{resource}?page={current_page}&limit={limit}"
         response = _fetch_json(url)
         if not isinstance(response, dict):
@@ -79,7 +80,9 @@ def _fetch_metaforge_collection(resource: str) -> List[dict]:
         has_next = bool(pagination.get("hasNextPage"))
         current_page += 1
         if has_next:
-            time.sleep(0.1)
+            elapsed = time.monotonic() - t0
+            if elapsed < 0.1:
+                time.sleep(0.1 - elapsed)
 
     return rows
 
@@ -105,6 +108,7 @@ def _fetch_supabase_all(table: str) -> List[dict]:
     all_rows: List[dict] = []
 
     while True:
+        t0 = time.monotonic()
         url = f"{SUPABASE_URL}/{table}?select=*&limit={page_size}&offset={offset}"
         batch = _fetch_json(url, headers=headers)
         if not isinstance(batch, list):
@@ -113,7 +117,9 @@ def _fetch_supabase_all(table: str) -> List[dict]:
         if len(batch) < page_size:
             break
         offset += page_size
-        time.sleep(0.1)
+        elapsed = time.monotonic() - t0
+        if elapsed < 0.1:
+            time.sleep(0.1 - elapsed)
 
     return all_rows
 
