@@ -1030,7 +1030,7 @@ def find_action_bbox_by_ocr(
     processed = preprocess_for_ocr(infobox_bgr, restrict_otsu_to_left=True)
     try:
         data = image_to_data(processed)
-    except Exception as exc:  # pragma: no cover - filesystem dependent
+    except Exception as exc:  # pragma: no cover - OCR-backend dependent
         print(
             f"[vision_ocr] ocr_backend image_to_data failed for target={target}; falling back to no bbox. error={exc}",
             flush=True,
