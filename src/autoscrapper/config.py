@@ -352,7 +352,8 @@ def _from_raw_progress_settings(raw: Any) -> ProgressSettings:
         for key, value in hideout_levels_raw.items():
             try:
                 level = int(value)
-            except (TypeError, ValueError):
+            except (TypeError, ValueError) as e:
+                _log.debug("config: failed to parse hideout level for %s: %s", key, e)
                 continue
             hideout_levels[str(key)] = level
 
