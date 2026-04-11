@@ -2,8 +2,9 @@ from __future__ import annotations
 
 import numpy as np
 
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Callable, Optional, Tuple
+from typing import Any
 
 from ..config import ScanSettings
 from ..interaction.ui_windows import (
@@ -35,7 +36,7 @@ ITEM_INFOBOX_SETTLE_DELAY = _DEFAULT_SCAN_SETTINGS.item_infobox_settle_delay_ms 
 POST_SELL_RECYCLE_DELAY = _DEFAULT_SCAN_SETTINGS.post_sell_recycle_delay_ms / 1000.0
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class ActionExecutionContext:
     apply_actions: bool
     win_left: int
@@ -49,14 +50,14 @@ class ActionExecutionContext:
 
 
 def _perform_destructive_action(
-    infobox_rect: Tuple[int, int, int, int],
-    action_bbox_rel: Tuple[int, int, int, int],
+    infobox_rect: tuple[int, int, int, int],
+    action_bbox_rel: tuple[int, int, int, int],
     window_left: int,
     window_top: int,
     window_width: int,
     window_height: int,
     *,
-    confirm_center_func: Callable[[int, int, int, int], Tuple[int, int]],
+    confirm_center_func: Callable[[int, int, int, int], tuple[int, int]],
     stop_key: str = DEFAULT_STOP_KEY,
     action_delay: float = INPUT_ACTION_DELAY,
     item_infobox_settle_delay: float = ITEM_INFOBOX_SETTLE_DELAY,
@@ -101,14 +102,14 @@ def _perform_destructive_action(
 def _apply_destructive_decision(
     *,
     decision: Decision,
-    infobox_rect: Optional[Tuple[int, int, int, int]],
-    infobox_bgr: Optional[Any],
-    infobox_ocr: Optional[InfoboxOcrResult],
+    infobox_rect: tuple[int, int, int, int] | None,
+    infobox_bgr: Any | None,
+    infobox_ocr: InfoboxOcrResult | None,
     context: ActionExecutionContext,
 ) -> str:
     if infobox_rect is None or infobox_ocr is None:
         return "SKIP_NO_INFOBOX"
-    action_bbox_rel: Optional[Tuple[int, int, int, int]] = None
+    action_bbox_rel: tuple[int, int, int, int] | None = None
     if infobox_bgr is not None:
         target = "sell" if decision == "SELL" else "recycle"
         action_bbox_rel, _processed = find_action_bbox_by_ocr(infobox_bgr, target)
@@ -151,12 +152,12 @@ def _apply_destructive_decision(
 
 def resolve_action_taken(
     *,
-    decision: Optional[Decision],
+    decision: Decision | None,
     item_name: str,
     actions: ActionMap,
-    infobox_rect: Optional[Tuple[int, int, int, int]],
-    infobox_bgr: Optional[Any],
-    infobox_ocr: Optional[InfoboxOcrResult],
+    infobox_rect: tuple[int, int, int, int] | None,
+    infobox_bgr: Any | None,
+    infobox_ocr: InfoboxOcrResult | None,
     context: ActionExecutionContext,
 ) -> str:
     if decision is None:
@@ -172,7 +173,7 @@ def resolve_action_taken(
             return "SKIP_NO_ACTION_MAP"
         raw_text = infobox_ocr.raw_item_text if infobox_ocr is not None else item_name
         match_result = match_item_name_result(raw_text)
-        source_image: Optional[np.ndarray] = None
+        source_image: np.ndarray | None = None
         from_context_menu = infobox_ocr.source == "context_menu" if infobox_ocr is not None else False
         if infobox_bgr is not None and infobox_ocr is not None:
             source_image = build_skip_unlisted_corpus_image(

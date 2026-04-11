@@ -6,7 +6,7 @@ import subprocess
 import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Dict, Iterable
+from collections.abc import Iterable
 
 import orjson
 
@@ -42,9 +42,9 @@ EXCLUDED_LEVEL2_IDS = {"stash", "workbench"}
 VOLATILE_TIMESTAMP_KEYS = {"generatedAt", "lastUpdated", "lastupdated"}
 
 
-def _load_workshop_level2_map(hideout_modules_path: Path) -> Dict[str, int]:
+def _load_workshop_level2_map(hideout_modules_path: Path) -> dict[str, int]:
     modules = load_json(hideout_modules_path, [])
-    out: Dict[str, int] = {}
+    out: dict[str, int] = {}
     if not isinstance(modules, list):
         return out
 
@@ -94,8 +94,8 @@ def _load_state(data_dir: Path, rules_path: Path) -> dict:
     }
 
 
-def _capture_file_bytes(paths: Iterable[Path]) -> Dict[Path, bytes]:
-    captured: Dict[Path, bytes] = {}
+def _capture_file_bytes(paths: Iterable[Path]) -> dict[Path, bytes]:
+    captured: dict[Path, bytes] = {}
     for path in paths:
         if path.exists():
             captured[path] = path.read_bytes()
@@ -131,8 +131,8 @@ def _is_ignorable_timestamp_only_json_diff(before: bytes, after: bytes) -> bool:
 
 
 def _diff_changed_files(
-    before_bytes: Dict[Path, bytes],
-    after_bytes: Dict[Path, bytes],
+    before_bytes: dict[Path, bytes],
+    after_bytes: dict[Path, bytes],
     *,
     ignore_timestamp_only_diffs: bool = False,
 ) -> list[str]:
@@ -254,7 +254,7 @@ def build_report(
     before_state: dict,
     after_state: dict,
     changed_files: list[str],
-    hideout_levels: Dict[str, int],
+    hideout_levels: dict[str, int],
     dry_run: bool,
 ) -> dict:
     quests = diff_quests(before_state.get("quests", []), after_state.get("quests", []))

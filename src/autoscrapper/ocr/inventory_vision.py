@@ -6,7 +6,7 @@ import time
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Literal, Optional, Tuple
+from typing import Literal
 
 import cv2
 import numpy as np
@@ -41,9 +41,9 @@ RECYCLE_CONFIRM_RECT_NORM = (0.5058, 0.6274, 0.1777, 0.0544)
 # Matches the always-visible "items in stash" label near the top-left.
 INVENTORY_COUNT_RECT_NORM = (0.0734, 0.1583, 0.0760, 0.0231)
 
-_OCR_DEBUG_DIR: Optional[Path] = None
-_last_roi_hash: Optional[bytes] = None
-_last_ocr_result: Optional[Tuple[str, str]] = None
+_OCR_DEBUG_DIR: Path | None = None
+_last_roi_hash: bytes | None = None
+_last_ocr_result: tuple[str, str] | None = None
 DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75
 # Guarded fallback only uses these broad stat labels; extend this list if new
 # infobox stat headings start outranking item titles in OCR output.
@@ -84,7 +84,7 @@ def reset_ocr_caches() -> None:
     rules_store.reset_item_names_cache()
 
 
-@dataclass
+@dataclass(slots=True)
 class InfoboxOcrResult:
     item_name: str
     raw_item_text: str
@@ -95,7 +95,7 @@ class InfoboxOcrResult:
     ocr_failed: bool = False
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class ItemNameMatchResult:
     """
     Match metadata for OCR item-name resolution.
@@ -112,18 +112,18 @@ class ItemNameMatchResult:
     threshold: int
 
 
-@dataclass
+@dataclass(slots=True)
 class InfoboxDetectionResult:
-    rect: Optional[Tuple[int, int, int, int]]
+    rect: tuple[int, int, int, int] | None
     tolerance: int
     min_dist: float
     close_kernel: int
     contour_count: int
     candidate_count: int
-    selected_area: Optional[int]
-    selected_score: Optional[float]
-    bbox_method: Optional[Literal["dominant_edge", "percentile_fallback"]]
-    failure_reason: Optional[str]
+    selected_area: int | None
+    selected_score: float | None
+    bbox_method: Literal["dominant_edge", "percentile_fallback"] | None
+    failure_reason: str | None
 
 
 def is_empty_cell(bright_fraction: float, gray_var: float, edge_fraction: float) -> bool:
@@ -150,7 +150,7 @@ def slot_metrics(
     v_thresh: int = 120,
     canny1: int = 50,
     canny2: int = 150,
-) -> Tuple[float, float, float]:
+) -> tuple[float, float, float]:
     """
     Compute simple statistics for an inventory slot.
 
@@ -197,7 +197,7 @@ def _compute_auto_tolerance(
     bgr_image: np.ndarray,
     target_bgr: np.ndarray,
     tolerance_max: int = INFOBOX_TOLERANCE_MAX,
-) -> Tuple[int, float]:
+) -> tuple[int, float]:
     image_f = bgr_image.astype(np.float32)
     target_f = target_bgr.astype(np.float32)
     dist = np.linalg.norm(image_f - target_f, axis=2)
@@ -209,7 +209,7 @@ def _compute_auto_tolerance(
 
 def _dominant_edge_bbox(
     contour: np.ndarray, image_width: int, image_height: int
-) -> Optional[Tuple[int, int, int, int]]:
+) -> tuple[int, int, int, int] | None:
     points = contour.reshape(-1, 2)
     if points.size == 0:
         return None
@@ -242,7 +242,7 @@ def _dominant_edge_bbox(
 
 def _percentile_bbox_from_filled_contour(
     contour: np.ndarray, image_width: int, image_height: int
-) -> Optional[Tuple[int, int, int, int]]:
+) -> tuple[int, int, int, int] | None:
     filled = np.zeros((image_height, image_width), dtype=np.uint8)
     cv2.drawContours(filled, [contour], contourIdx=-1, color=255, thickness=-1)
     ys, xs = np.where(filled > 0)
@@ -261,12 +261,12 @@ def _save_infobox_detection_debug_images(
     bgr_image: np.ndarray,
     mask: np.ndarray,
     mask_proc: np.ndarray,
-    contour: Optional[np.ndarray],
-    rect: Optional[Tuple[int, int, int, int]],
+    contour: np.ndarray | None,
+    rect: tuple[int, int, int, int] | None,
     tolerance: int,
     min_dist: float,
-    bbox_method: Optional[str],
-    failure_reason: Optional[str],
+    bbox_method: str | None,
+    failure_reason: str | None,
 ) -> None:
     if _OCR_DEBUG_DIR is None:
         return
@@ -425,7 +425,7 @@ def find_infobox_with_debug(
             failure_reason="no_contours",
         )
 
-    candidates: List[Tuple[float, np.ndarray, int]] = []
+    candidates: list[tuple[float, np.ndarray, int]] = []
     for contour in contours:
         _, _, bw, bh = cv2.boundingRect(contour)
         area = int(bw * bh)
@@ -463,8 +463,8 @@ def find_infobox_with_debug(
     selected_score, best_contour, selected_area = max(candidates, key=lambda item: item[0])
 
     dominant_bbox = _dominant_edge_bbox(best_contour, img_w, img_h)
-    bbox_method: Optional[Literal["dominant_edge", "percentile_fallback"]]
-    failure_reason: Optional[str]
+    bbox_method: Literal["dominant_edge", "percentile_fallback"] | None
+    failure_reason: str | None
 
     if dominant_bbox is not None:
         rect = dominant_bbox
@@ -526,7 +526,7 @@ def find_infobox_with_debug(
     )
 
 
-def find_infobox(bgr_image: np.ndarray) -> Optional[Tuple[int, int, int, int]]:
+def find_infobox(bgr_image: np.ndarray) -> tuple[int, int, int, int] | None:
     """
     Backward-compatible wrapper returning only the detected infobox rectangle.
     Returns (x, y, w, h) relative to the provided image, or None if not found.
@@ -560,7 +560,7 @@ def find_context_menu_crop(
     bgr_image: np.ndarray,
     cell_center_x: int,
     cell_center_y: int,
-) -> Optional[Tuple[int, int, int, int]]:
+) -> tuple[int, int, int, int] | None:
     """
     Return a positional crop rect near the right-click context menu.
 
@@ -611,7 +611,7 @@ def find_context_menu_crop(
     return x, y, w, h
 
 
-def title_roi(infobox_rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
+def title_roi(infobox_rect: tuple[int, int, int, int]) -> tuple[int, int, int, int]:
     """
     Compute the ROI for the title text within the infobox.
     """
@@ -685,7 +685,7 @@ def _hash_roi(image: np.ndarray) -> bytes:
     return hashlib.blake2b(contiguous.tobytes(), digest_size=16).digest()
 
 
-def rect_center(rect: Tuple[int, int, int, int]) -> Tuple[int, int]:
+def rect_center(rect: tuple[int, int, int, int]) -> tuple[int, int]:
     """
     Center (cx, cy) of a rectangle.
     """
@@ -694,10 +694,10 @@ def rect_center(rect: Tuple[int, int, int, int]) -> Tuple[int, int]:
 
 
 def normalized_rect_to_window(
-    norm_rect: Tuple[float, float, float, float],
+    norm_rect: tuple[float, float, float, float],
     window_width: int,
     window_height: int,
-) -> Tuple[int, int, int, int]:
+) -> tuple[int, int, int, int]:
     """
     Scale a normalized rectangle (x,y,w,h in [0,1]) to window-relative pixels.
     """
@@ -710,10 +710,10 @@ def normalized_rect_to_window(
 
 
 def window_relative_to_screen(
-    rect: Tuple[int, int, int, int],
+    rect: tuple[int, int, int, int],
     window_left: int,
     window_top: int,
-) -> Tuple[int, int, int, int]:
+) -> tuple[int, int, int, int]:
     """
     Convert a window-relative rectangle to absolute screen coordinates.
     """
@@ -721,7 +721,7 @@ def window_relative_to_screen(
     return window_left + x, window_top + y, w, h
 
 
-def inventory_count_rect(window_width: int, window_height: int) -> Tuple[int, int, int, int]:
+def inventory_count_rect(window_width: int, window_height: int) -> tuple[int, int, int, int]:
     """
     Window-relative rectangle for the always-visible inventory count label.
     """
@@ -733,7 +733,7 @@ def sell_confirm_button_rect(
     window_top: int,
     window_width: int,
     window_height: int,
-) -> Tuple[int, int, int, int]:
+) -> tuple[int, int, int, int]:
     """
     Absolute screen rectangle for the Sell confirmation button.
     """
@@ -746,7 +746,7 @@ def recycle_confirm_button_rect(
     window_top: int,
     window_width: int,
     window_height: int,
-) -> Tuple[int, int, int, int]:
+) -> tuple[int, int, int, int]:
     """
     Absolute screen rectangle for the Recycle confirmation button.
     """
@@ -759,7 +759,7 @@ def sell_confirm_button_center(
     window_top: int,
     window_width: int,
     window_height: int,
-) -> Tuple[int, int]:
+) -> tuple[int, int]:
     """
     Center of the Sell confirmation button (absolute screen coords).
     """
@@ -771,7 +771,7 @@ def recycle_confirm_button_center(
     window_top: int,
     window_width: int,
     window_height: int,
-) -> Tuple[int, int]:
+) -> tuple[int, int]:
     """
     Center of the Recycle confirmation button (absolute screen coords).
     """
@@ -842,10 +842,10 @@ def _save_debug_image(name: str, image: np.ndarray) -> None:
 
 
 def _extract_title_from_data(
-    ocr_data: Dict[str, List],
+    ocr_data: dict[str, list],
     image_height: int,
     top_fraction: float = 0.22,
-) -> Tuple[str, str]:
+) -> tuple[str, str]:
     """
     Choose the best-confidence line near the top of the infobox as the title.
     """
@@ -854,7 +854,7 @@ def _extract_title_from_data(
         return "", ""
 
     cutoff = max(1.0, float(image_height) * top_fraction)
-    groups: Dict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
+    groups: dict[tuple[int, int, int, int], list[int]] = defaultdict(list)
     n = len(texts)
     for i in range(n):
         raw_text = texts[i] or ""
@@ -879,7 +879,7 @@ def _extract_title_from_data(
     if not groups:
         return "", ""
 
-    def _group_score(indices: List[int]) -> float:
+    def _group_score(indices: list[int]) -> float:
         confs = []
         for idx in indices:
             try:
@@ -893,12 +893,12 @@ def _extract_title_from_data(
     if best_score < 0:
         return "", ""
 
-    def _group_top(key: Tuple[int, int, int, int]) -> float:
+    def _group_top(key: tuple[int, int, int, int]) -> float:
         return min(float(ocr_data["top"][i]) for i in groups[key])
 
     def _group_text(
-        key: Tuple[int, int, int, int],
-    ) -> Tuple[str, str]:
+        key: tuple[int, int, int, int],
+    ) -> tuple[str, str]:
         ordered_indices = sorted(groups[key])
         cleaned_parts = []
         raw_parts = []
@@ -938,7 +938,7 @@ def _extract_title_from_data(
     return primary_result.chosen_name, primary_raw
 
 
-def _extract_cropped_title_from_data(ocr_data: Dict[str, List], image_height: int) -> Tuple[str, str]:
+def _extract_cropped_title_from_data(ocr_data: dict[str, list], image_height: int) -> tuple[str, str]:
     """
     Extract a title from OCR data that was already cropped to the title strip.
     """
@@ -946,14 +946,14 @@ def _extract_cropped_title_from_data(ocr_data: Dict[str, List], image_height: in
 
 
 def _extract_action_line_bbox(
-    ocr_data: Dict[str, List],
+    ocr_data: dict[str, list],
     target: Literal["sell", "recycle"],
-) -> Optional[Tuple[int, int, int, int]]:
+) -> tuple[int, int, int, int] | None:
     """
     Given OCR data, return a bbox (left, top, w, h) for
     the line containing the target action (infobox-relative coords).
     """
-    groups: defaultdict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
+    groups: defaultdict[tuple[int, int, int, int], list[int]] = defaultdict(list)
     texts = ocr_data.get("text", [])
     n = len(texts)
     page_nums = [int(v) for v in ocr_data.get("page_num", [])]
@@ -977,7 +977,7 @@ def _extract_action_line_bbox(
     if not groups:
         return None
 
-    def _group_score(indices: List[int]) -> float:
+    def _group_score(indices: list[int]) -> float:
         confs = []
         for idx in indices:
             conf_str = ocr_data["conf"][idx]
@@ -1015,7 +1015,7 @@ def _extract_action_line_bbox(
 def find_action_bbox_by_ocr(
     infobox_bgr: np.ndarray,
     target: Literal["sell", "recycle"],
-) -> Tuple[Optional[Tuple[int, int, int, int]], np.ndarray]:
+) -> tuple[tuple[int, int, int, int] | None, np.ndarray]:
     """
     Run OCR over the full infobox to locate the line containing the target
     action. Returns (bbox, processed_image) where bbox is infobox-relative.
@@ -1190,7 +1190,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
 
     # Group words into lines keyed by (page, block, par, line).
     texts = data.get("text", [])
-    groups: defaultdict[Tuple[int, int, int, int], List[int]] = defaultdict(list)
+    groups: defaultdict[tuple[int, int, int, int], list[int]] = defaultdict(list)
     for i, raw_text in enumerate(texts):
         cleaned = clean_ocr_text(raw_text or "")
         if not cleaned:
@@ -1203,7 +1203,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
         )
         groups[key].append(i)
 
-    def _line_top(indices: List[int]) -> float:
+    def _line_top(indices: list[int]) -> float:
         return min(float(data["top"][i]) for i in indices)
 
     # Known action-button labels that are never item names.  Lines whose
@@ -1304,7 +1304,7 @@ def ocr_item_name(roi_bgr: np.ndarray) -> str:
     return item_name
 
 
-def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:
+def ocr_inventory_count(roi_bgr: np.ndarray) -> tuple[int | None, str]:
     """
     OCR the "items in stash" label and return (count, raw_text).
     """

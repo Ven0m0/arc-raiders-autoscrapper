@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Optional
+
 
 from rich.text import Text
 from textual import events
@@ -81,7 +81,7 @@ class ReviewQuestsScreen(ProgressScreen):
         Binding("ctrl+s", "save", "Save"),
     ]
 
-    def __init__(self, quest_entries: List[QuestEntry], settings: ProgressSettings) -> None:
+    def __init__(self, quest_entries: list[QuestEntry], settings: ProgressSettings) -> None:
         super().__init__()
         self.quest_entries = quest_entries
         self.completed = set(settings.completed_quests)
@@ -95,7 +95,7 @@ class ReviewQuestsScreen(ProgressScreen):
         )
         self.search_query = ""
         self.sort_mode: str = "name_asc"
-        self.filtered: List[QuestEntry] = []
+        self.filtered: list[QuestEntry] = []
 
     def compose(self) -> ComposeResult:
         yield Static("Review Completed Quests", id="review-title")
@@ -122,7 +122,7 @@ class ReviewQuestsScreen(ProgressScreen):
         self._refresh()
         self.query_one("#review-list", OptionList).focus()
 
-    def _sorted_entries(self) -> List[QuestEntry]:
+    def _sorted_entries(self) -> list[QuestEntry]:
         entries = list(self.quest_entries)
         if self.sort_mode == "trader":
             entries.sort(
@@ -142,14 +142,14 @@ class ReviewQuestsScreen(ProgressScreen):
         )
         return entries
 
-    def _visible_entries(self) -> List[QuestEntry]:
+    def _visible_entries(self) -> list[QuestEntry]:
         entries = self._sorted_entries()
         if not self.search_query:
             return entries
         normalized = normalize_quest_value(self.search_query)
         if not normalized:
             return entries
-        matches: List[QuestEntry] = []
+        matches: list[QuestEntry] = []
         for entry in entries:
             name_norm = normalize_quest_value(entry.name)
             trader_norm = normalize_quest_value(entry.trader)
@@ -173,7 +173,7 @@ class ReviewQuestsScreen(ProgressScreen):
             prev_id = prev_filtered[prev_highlight].id
 
         self.filtered = self._visible_entries()
-        options: List[Option] = []
+        options: list[Option] = []
         for list_index, entry in enumerate(self.filtered):
             label = Text()
             label.append(f"{list_index + 1:>3} ", style="dim")
@@ -222,7 +222,7 @@ class ReviewQuestsScreen(ProgressScreen):
             return
         menu.highlighted = new_index
 
-    def _selected_entry(self) -> Optional[QuestEntry]:
+    def _selected_entry(self) -> QuestEntry | None:
         menu = self.query_one("#review-list", OptionList)
         if menu.highlighted is None:
             return None

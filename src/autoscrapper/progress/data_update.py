@@ -9,7 +9,6 @@ import time
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -33,7 +32,7 @@ class DownloadError(RuntimeError):
     pass
 
 
-def _fetch_bytes(url: str, headers: Optional[Dict[str, str]] = None) -> bytes:
+def _fetch_bytes(url: str, headers: dict[str, str] | None = None) -> bytes:
     request_headers = {
         "Accept": "application/json",
         "User-Agent": (
@@ -55,15 +54,15 @@ def _fetch_bytes(url: str, headers: Optional[Dict[str, str]] = None) -> bytes:
         raise DownloadError(f"Failed to reach {url}: {exc}") from exc
 
 
-def _fetch_json(url: str, headers: Optional[Dict[str, str]] = None) -> object:
+def _fetch_json(url: str, headers: dict[str, str] | None = None) -> object:
     try:
         return orjson.loads(_fetch_bytes(url, headers=headers))
     except orjson.JSONDecodeError as exc:
         raise DownloadError(f"Invalid JSON returned from {url}") from exc
 
 
-def _fetch_metaforge_collection(resource: str) -> List[dict]:
-    rows: List[dict] = []
+def _fetch_metaforge_collection(resource: str) -> list[dict]:
+    rows: list[dict] = []
     limit = 100
 
     url = f"{METAFORGE_API_BASE}/{resource}?page=1&limit={limit}"
@@ -80,7 +79,7 @@ def _fetch_metaforge_collection(resource: str) -> List[dict]:
         raise DownloadError(f"Unexpected {resource} payload: pagination must be an object")
 
     raw_total_pages = pagination.get("totalPages")
-    total_pages: Optional[int]
+    total_pages: int | None
     if raw_total_pages is None:
         total_pages = None
     elif isinstance(raw_total_pages, bool):
@@ -97,7 +96,7 @@ def _fetch_metaforge_collection(resource: str) -> List[dict]:
 
     if total_pages is not None and total_pages > 1:
 
-        def fetch_page(page: int) -> List[dict]:
+        def fetch_page(page: int) -> list[dict]:
             page_url = f"{METAFORGE_API_BASE}/{resource}?page={page}&limit={limit}"
             try:
                 page_response = _fetch_json(page_url)
@@ -140,15 +139,15 @@ def _fetch_metaforge_collection(resource: str) -> List[dict]:
     return rows
 
 
-def _fetch_all_items() -> List[dict]:
+def _fetch_all_items() -> list[dict]:
     return _fetch_metaforge_collection("items")
 
 
-def _fetch_all_quests() -> List[dict]:
+def _fetch_all_quests() -> list[dict]:
     return _fetch_metaforge_collection("quests")
 
 
-def _fetch_supabase_all(table: str) -> List[dict]:
+def _fetch_supabase_all(table: str) -> list[dict]:
     if not SUPABASE_ANON_KEY:
         raise DownloadError("METAFORGE_SUPABASE_ANON_KEY environment variable is not set")
 
@@ -158,7 +157,7 @@ def _fetch_supabase_all(table: str) -> List[dict]:
     }
     page_size = 1000
     offset = 0
-    all_rows: List[dict] = []
+    all_rows: list[dict] = []
 
     while True:
         t0 = time.monotonic()
@@ -177,8 +176,8 @@ def _fetch_supabase_all(table: str) -> List[dict]:
     return all_rows
 
 
-def _build_component_map(components: List[dict]) -> Dict[str, Dict[str, int]]:
-    component_map: Dict[str, Dict[str, int]] = {}
+def _build_component_map(components: list[dict]) -> dict[str, dict[str, int]]:
+    component_map: dict[str, dict[str, int]] = {}
     for component in components:
         item_id = component.get("item_id")
         component_id = component.get("component_id")
@@ -189,13 +188,13 @@ def _build_component_map(components: List[dict]) -> Dict[str, Dict[str, int]]:
     return component_map
 
 
-def _normalize_external_id(value: object) -> Optional[str]:
+def _normalize_external_id(value: object) -> str | None:
     if not isinstance(value, str) or not value:
         return None
     return value.replace("_", "-")
 
 
-def _extract_english_text(value: object) -> Optional[str]:
+def _extract_english_text(value: object) -> str | None:
     if isinstance(value, str) and value:
         return value
     if isinstance(value, dict):
@@ -205,11 +204,11 @@ def _extract_english_text(value: object) -> Optional[str]:
     return None
 
 
-def _normalize_component_values(value: object) -> Optional[Dict[str, int]]:
+def _normalize_component_values(value: object) -> dict[str, int] | None:
     if not isinstance(value, dict):
         return None
 
-    normalized: Dict[str, int] = {}
+    normalized: dict[str, int] = {}
     for raw_item_id, raw_quantity in value.items():
         item_id = _normalize_external_id(raw_item_id)
         if item_id is None:
@@ -225,12 +224,12 @@ def _normalize_component_values(value: object) -> Optional[Dict[str, int]]:
     return normalized or None
 
 
-def _normalize_raidtheory_rewards(value: object, item_names: Dict[str, str]) -> Tuple[List[str], List[dict]]:
+def _normalize_raidtheory_rewards(value: object, item_names: dict[str, str]) -> tuple[list[str], list[dict]]:
     if not isinstance(value, list):
         return [], []
 
-    reward_ids: List[str] = []
-    rewards: List[dict] = []
+    reward_ids: list[str] = []
+    rewards: list[dict] = []
     for reward in value:
         if not isinstance(reward, dict):
             continue
@@ -239,12 +238,12 @@ def _normalize_raidtheory_rewards(value: object, item_names: Dict[str, str]) -> 
             continue
         reward_ids.append(item_id)
 
-        reward_payload: Dict[str, object] = {"item_id": item_id}
+        reward_payload: dict[str, object] = {"item_id": item_id}
         quantity = reward.get("quantity")
         if quantity is not None:
             reward_payload["quantity"] = str(quantity)
 
-        item_payload: Dict[str, object] = {"id": item_id}
+        item_payload: dict[str, object] = {"id": item_id}
         reward_name = item_names.get(item_id)
         if reward_name:
             item_payload["name"] = reward_name
@@ -254,10 +253,10 @@ def _normalize_raidtheory_rewards(value: object, item_names: Dict[str, str]) -> 
     return list(dict.fromkeys(reward_ids)), rewards
 
 
-def _normalize_raidtheory_objectives(value: object) -> List[str]:
+def _normalize_raidtheory_objectives(value: object) -> list[str]:
     if not isinstance(value, list):
         return []
-    objectives: List[str] = []
+    objectives: list[str] = []
     for objective in value:
         text = _extract_english_text(objective)
         if text:
@@ -265,15 +264,15 @@ def _normalize_raidtheory_objectives(value: object) -> List[str]:
     return objectives
 
 
-def _raidtheory_archive_prefix(names: List[str]) -> str:
+def _raidtheory_archive_prefix(names: list[str]) -> str:
     for name in names:
         if "/" in name:
             return name.split("/", 1)[0] + "/"
     raise DownloadError("RaidTheory archive is missing the expected root directory")
 
 
-def _load_raidtheory_json_entries(archive: zipfile.ZipFile, prefix: str) -> List[dict]:
-    entries: List[dict] = []
+def _load_raidtheory_json_entries(archive: zipfile.ZipFile, prefix: str) -> list[dict]:
+    entries: list[dict] = []
     for name in sorted(archive.namelist()):
         if not name.startswith(prefix) or not name.endswith(".json"):
             continue
@@ -287,7 +286,7 @@ def _load_raidtheory_json_entries(archive: zipfile.ZipFile, prefix: str) -> List
     return entries
 
 
-def _map_raidtheory_item(raidtheory_item: dict) -> Optional[dict]:
+def _map_raidtheory_item(raidtheory_item: dict) -> dict | None:
     item_id = _normalize_external_id(raidtheory_item.get("id"))
     item_name = _extract_english_text(raidtheory_item.get("name"))
     if item_id is None or item_name is None:
@@ -308,7 +307,7 @@ def _map_raidtheory_item(raidtheory_item: dict) -> Optional[dict]:
     }
 
 
-def _map_raidtheory_quest(raidtheory_quest: dict, item_names: Dict[str, str]) -> Optional[dict]:
+def _map_raidtheory_quest(raidtheory_quest: dict, item_names: dict[str, str]) -> dict | None:
     quest_id = _normalize_external_id(raidtheory_quest.get("id"))
     quest_name = _extract_english_text(raidtheory_quest.get("name"))
     if quest_id is None or quest_name is None:
@@ -329,7 +328,7 @@ def _map_raidtheory_quest(raidtheory_quest: dict, item_names: Dict[str, str]) ->
     }
 
 
-def _load_raidtheory_fallback_data() -> Tuple[List[dict], List[dict]]:
+def _load_raidtheory_fallback_data() -> tuple[list[dict], list[dict]]:
     archive_bytes = _fetch_bytes(
         RAIDTHEORY_ARCHIVE_URL,
         headers={"Accept": "application/octet-stream"},
@@ -360,8 +359,8 @@ def _normalize_entry_name(name: object) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def _merge_missing_entries(primary: List[dict], fallback: List[dict]) -> Tuple[List[dict], int]:
-    merged: List[dict] = []
+def _merge_missing_entries(primary: list[dict], fallback: list[dict]) -> tuple[list[dict], int]:
+    merged: list[dict] = []
     seen_ids: set[str] = set()
     seen_names: set[str] = set()
 
@@ -398,8 +397,8 @@ def _merge_missing_entries(primary: List[dict], fallback: List[dict]) -> Tuple[L
 
 def _map_metaforge_item(
     metaforge_item: dict,
-    crafting_map: Dict[str, Dict[str, int]],
-    recycle_map: Dict[str, Dict[str, int]],
+    crafting_map: dict[str, dict[str, int]],
+    recycle_map: dict[str, dict[str, int]],
 ) -> dict:
     stat_block = metaforge_item.get("stat_block") or {}
     return {
@@ -424,10 +423,10 @@ def _map_metaforge_quest(metaforge_quest: dict) -> dict:
     required_items = metaforge_quest.get("required_items") or []
     rewards = metaforge_quest.get("rewards") or []
 
-    reward_item_ids: List[str] = []
+    reward_item_ids: list[str] = []
     if isinstance(rewards, list):
         for reward in rewards:
-            reward_item_id: Optional[str] = None
+            reward_item_id: str | None = None
             if isinstance(reward, dict):
                 reward_item_id = reward.get("item_id")
                 if not reward_item_id:
@@ -458,8 +457,8 @@ def _map_metaforge_quest(metaforge_quest: dict) -> dict:
     }
 
 
-def _build_quests_by_trader(quests: List[dict]) -> Dict[str, List[dict]]:
-    by_trader: Dict[str, List[dict]] = {}
+def _build_quests_by_trader(quests: list[dict]) -> dict[str, list[dict]]:
+    by_trader: dict[str, list[dict]] = {}
     for quest in quests:
         trader = quest.get("trader") or "Unknown"
         by_trader.setdefault(trader, []).append(
@@ -476,14 +475,14 @@ def _build_quests_by_trader(quests: List[dict]) -> Dict[str, List[dict]]:
     return by_trader
 
 
-def update_data_snapshot(data_dir: Optional[Path] = None) -> dict:
+def update_data_snapshot(data_dir: Path | None = None) -> dict:
     data_dir = data_dir or DATA_DIR
     (data_dir / "static").mkdir(parents=True, exist_ok=True)
 
-    metaforge_items: Optional[List[dict]] = None
-    metaforge_quests: Optional[List[dict]] = None
-    metaforge_items_error: Optional[str] = None
-    metaforge_quests_error: Optional[str] = None
+    metaforge_items: list[dict] | None = None
+    metaforge_quests: list[dict] | None = None
+    metaforge_items_error: str | None = None
+    metaforge_quests_error: str | None = None
     try:
         metaforge_items = _fetch_all_items()
     except DownloadError as exc:
@@ -495,9 +494,9 @@ def update_data_snapshot(data_dir: Optional[Path] = None) -> dict:
         metaforge_quests_error = str(exc)
         _log.warning("MetaForge quests unavailable: %s", exc)
 
-    fallback_items: List[dict] = []
-    fallback_quests: List[dict] = []
-    fallback_error: Optional[str] = None
+    fallback_items: list[dict] = []
+    fallback_quests: list[dict] = []
+    fallback_error: str | None = None
     try:
         fallback_items, fallback_quests = _load_raidtheory_fallback_data()
     except DownloadError as exc:
