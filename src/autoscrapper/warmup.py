@@ -48,7 +48,9 @@ def _run_background_warmup() -> None:
 
         rules_store.get_item_names()
     except Exception as e:
-        print(f"[warn] Failed to pre-populate item names cache in warmup: {e}")
+        error = f"Failed to pre-populate item names cache in warmup: {type(e).__name__}: {e}"
+        _set_warmup_error(error)
+        print(f"[warn] {error}")
 
     try:
         for module_name in _HEAVY_MODULES:
