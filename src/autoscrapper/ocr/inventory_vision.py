@@ -1003,11 +1003,7 @@ def _extract_action_line_bbox(
     indices = [
         i
         for i in range(n)
-        if page_nums[i] == bp
-        and block_nums[i] == bb
-        and par_nums[i] == bpa
-        and line_nums[i] == bl
-        and widths[i] > 0
+        if page_nums[i] == bp and block_nums[i] == bb and par_nums[i] == bpa and line_nums[i] == bl and widths[i] > 0
     ]
     # If every word on the line has width==0 (degenerate tesserocr output), fall
     # back to the original group indices so min/max never operate on empty lists.
@@ -1291,16 +1287,28 @@ def ocr_item_name(roi_bgr: np.ndarray) -> str:
     if roi_bgr.size == 0:
         return ""
 
+    global _last_ocr_result, _last_roi_hash
+    roi_hash = _hash_roi(roi_bgr)
+    if _last_roi_hash == roi_hash and _last_ocr_result is not None:
+        return _last_ocr_result[0]
+
     processed = preprocess_for_ocr(roi_bgr)
     try:
         raw = image_to_string(processed, single_line=True)
     except Exception as exc:
+        _last_roi_hash = None  # invalidate cache so next call does not re-serve stale result
         print(
             f"[vision_ocr] ocr_backend image_to_string failed for item name; falling back to empty result. error={exc}",
             flush=True,
         )
         return ""
-    return match_item_name(raw)
+
+    item_name = match_item_name(raw)
+    if item_name:
+        _last_roi_hash = roi_hash
+        _last_ocr_result = (item_name, raw)
+
+    return item_name
 
 
 def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:

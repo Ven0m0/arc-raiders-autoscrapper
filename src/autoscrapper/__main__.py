@@ -4,7 +4,7 @@ import sys
 
 
 def _run_tui() -> int:
-    from .tui import run_tui
+    from .tui.app import run_tui
 
     return run_tui()
 
