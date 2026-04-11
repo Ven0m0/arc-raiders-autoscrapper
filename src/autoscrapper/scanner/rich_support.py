@@ -18,7 +18,7 @@ try:
         TimeRemainingColumn as TimeRemainingColumn,
     )
     from rich.table import Table as Table
-    from rich.text import Text as Text
+    from rich.text import Text as Text  # noqa: F401
 except ImportError:  # pragma: no cover - optional dependency
     Align = None
     Console = None
