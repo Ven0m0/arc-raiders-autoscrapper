@@ -319,7 +319,7 @@ class TestOcrTitleStripCache:
         """
         reset_ocr_caches()
         img = self._make_image()
-           # no words → item_name will be ""
+        # no words → item_name will be ""
 
         with (
             patch.object(_vision, "image_to_string", return_value="") as mock_ocr,
@@ -338,7 +338,6 @@ class TestOcrTitleStripCache:
         """When item_name is non-empty, the second call must use the cache."""
         reset_ocr_caches()
         img = self._make_image()
-
 
         with (
             patch.object(_vision, "image_to_string", return_value="FoundItem") as mock_ocr,
@@ -359,6 +358,45 @@ class TestOcrTitleStripCache:
 
 
 # ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
+# ocr_item_name — cache tests
+# ---------------------------------------------------------------------------
+
+
+class TestOcrItemNameCache:
+    def _make_image(self):
+        return _solid_bgr(30, 100)
+
+    def test_empty_result_not_cached(self):
+        reset_ocr_caches()
+        img = self._make_image()
+
+        with patch.object(_vision, "image_to_string", return_value="") as mock_ocr:
+            _vision.ocr_item_name(img)
+            _vision.ocr_item_name(img)
+
+        assert mock_ocr.call_count == 2, "image_to_string should be called twice when the first result was empty"
+
+    def test_non_empty_result_is_cached(self):
+        reset_ocr_caches()
+        img = self._make_image()
+
+        with (
+            patch.object(_vision, "image_to_string", return_value="FoundItem") as mock_ocr,
+            patch.object(
+                _vision,
+                "match_item_name",
+                return_value="Arc Alloy",
+            ),
+        ):
+            _vision.ocr_item_name(img)
+            _vision.ocr_item_name(img)
+
+        assert mock_ocr.call_count == 1, "image_to_string should only be called once when result was cached"
+
+
 # reset_ocr_caches
 # ---------------------------------------------------------------------------
 
@@ -376,9 +414,11 @@ class TestResetOcrCaches:
         assert _vision._last_ocr_result is None
         assert _vision._ITEM_NAMES is None
 
+
 # ---------------------------------------------------------------------------
 # enable_ocr_debug
 # ---------------------------------------------------------------------------
+
 
 class TestEnableOcrDebug:
     def test_enable_ocr_debug_mkdir_exception(self, capsys):
