@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional
+from typing import ClassVar, Optional
 
 from textual import events
 from textual.app import ComposeResult
@@ -11,7 +11,7 @@ from textual.widgets import Button, Static
 
 
 class AppScreen(Screen):
-    BINDINGS = [Binding("escape,ctrl+b", "back", "Back", priority=True)]
+    BINDINGS: ClassVar[list[Binding]] = [Binding("escape,ctrl+b", "back", "Back", priority=True)]
 
     def action_back(self) -> None:
         self.app.pop_screen()
