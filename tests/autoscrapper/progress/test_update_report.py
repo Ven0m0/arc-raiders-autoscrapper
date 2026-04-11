@@ -39,7 +39,6 @@ def test_diff_quests_ignores_invalid_entries() -> None:
     assert diff["addedCount"] == 1
     assert diff["removed"][0]["id"] == "q1"
     assert diff["added"][0]["id"] == "q2"
-
 def test_diff_quests_additions_and_removals() -> None:
     """Test that new quests are tracked as additions and missing quests as removals."""
     before = [
