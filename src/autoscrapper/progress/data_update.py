@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import concurrent.futures
 import io
 import logging
 import os
@@ -62,27 +63,78 @@ def _fetch_json(url: str, headers: Optional[Dict[str, str]] = None) -> object:
 
 def _fetch_metaforge_collection(resource: str) -> List[dict]:
     rows: List[dict] = []
-    current_page = 1
-    has_next = True
     limit = 100
 
-    while has_next:
-        t0 = time.monotonic()
-        url = f"{METAFORGE_API_BASE}/{resource}?page={current_page}&limit={limit}"
-        response = _fetch_json(url)
-        if not isinstance(response, dict):
-            raise DownloadError(f"Unexpected response for {resource}")
-        data = response.get("data") or []
-        if not isinstance(data, list):
-            raise DownloadError(f"Unexpected {resource} payload: data must be a list")
-        rows.extend(entry for entry in data if isinstance(entry, dict))
-        pagination = response.get("pagination") or {}
-        has_next = bool(pagination.get("hasNextPage"))
-        current_page += 1
-        if has_next:
-            elapsed = time.monotonic() - t0
-            if elapsed < 0.1:
-                time.sleep(0.1 - elapsed)
+    url = f"{METAFORGE_API_BASE}/{resource}?page=1&limit={limit}"
+    response = _fetch_json(url)
+    if not isinstance(response, dict):
+        raise DownloadError(f"Unexpected response for {resource}")
+    data = response.get("data") or []
+    if not isinstance(data, list):
+        raise DownloadError(f"Unexpected {resource} payload: data must be a list")
+    rows.extend(entry for entry in data if isinstance(entry, dict))
+
+    pagination = response.get("pagination") or {}
+    if not isinstance(pagination, dict):
+        raise DownloadError(f"Unexpected {resource} payload: pagination must be an object")
+
+    raw_total_pages = pagination.get("totalPages")
+    total_pages: Optional[int]
+    if raw_total_pages is None:
+        total_pages = None
+    elif isinstance(raw_total_pages, bool):
+        raise DownloadError(f"Unexpected {resource} payload: totalPages must be an integer")
+    elif isinstance(raw_total_pages, int):
+        total_pages = raw_total_pages
+    elif isinstance(raw_total_pages, str):
+        try:
+            total_pages = int(raw_total_pages)
+        except ValueError as exc:
+            raise DownloadError(f"Unexpected {resource} payload: totalPages must be an integer") from exc
+    else:
+        raise DownloadError(f"Unexpected {resource} payload: totalPages must be an integer")
+
+    if total_pages is not None and total_pages > 1:
+
+        def fetch_page(page: int) -> List[dict]:
+            page_url = f"{METAFORGE_API_BASE}/{resource}?page={page}&limit={limit}"
+            try:
+                page_response = _fetch_json(page_url)
+                if not isinstance(page_response, dict):
+                    raise DownloadError(f"Unexpected response for {resource} on page {page} ({page_url})")
+                page_data = page_response.get("data") or []
+                if not isinstance(page_data, list):
+                    raise DownloadError(
+                        f"Unexpected {resource} payload on page {page} ({page_url}): data must be a list"
+                    )
+                return [entry for entry in page_data if isinstance(entry, dict)]
+            except DownloadError:
+                raise
+            except Exception as exc:
+                raise DownloadError(f"Failed to fetch {resource} page {page} ({page_url})") from exc
+
+        max_workers = min(10, total_pages - 1)
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            for page_rows in executor.map(fetch_page, range(2, total_pages + 1)):
+                rows.extend(page_rows)
+    elif pagination.get("hasNextPage"):
+        # Fallback to sequential if totalPages is not available
+        current_page = 2
+        has_next = True
+        while has_next:
+            url = f"{METAFORGE_API_BASE}/{resource}?page={current_page}&limit={limit}"
+            response = _fetch_json(url)
+            if not isinstance(response, dict):
+                raise DownloadError(f"Unexpected response for {resource} on page {current_page} ({url})")
+            data = response.get("data") or []
+            if not isinstance(data, list):
+                raise DownloadError(
+                    f"Unexpected {resource} payload on page {current_page} ({url}): data must be a list"
+                )
+            rows.extend(entry for entry in data if isinstance(entry, dict))
+            pagination = response.get("pagination") or {}
+            has_next = bool(pagination.get("hasNextPage"))
+            current_page += 1
 
     return rows
 

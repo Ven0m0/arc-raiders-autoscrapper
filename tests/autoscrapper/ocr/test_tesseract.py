@@ -51,7 +51,7 @@ def test_has_eng_returns_false_if_not_dir(tmp_path):
 
 @patch.dict(os.environ, {"TESSDATA_PREFIX": "/mock/env/path", "APPDATA": "/mock/appdata"})
 @patch("tessdata.data_path", return_value="/mock/tessdata/path")
-@patch("src.autoscrapper.ocr.tesseract.tessdata.__file__", "/mock/pkg/tessdata/__init__.py")
+@patch("autoscrapper.ocr.tesseract.tessdata.__file__", "/mock/pkg/tessdata/__init__.py")
 def test_candidate_tessdata_paths_order(mock_tessdata_path):
     paths = tesseract._candidate_tessdata_paths()
 
@@ -64,9 +64,9 @@ def test_candidate_tessdata_paths_order(mock_tessdata_path):
     assert paths[4] == Path(f"/mock/appdata/Python/{py_ver}/share/tessdata")
 
 
-@patch("src.autoscrapper.ocr.tesseract._has_eng", return_value=True)
-@patch("src.autoscrapper.ocr.tesseract._candidate_tessdata_paths", return_value=[Path("/mock/path")])
-@patch("src.autoscrapper.ocr.tesseract.PyTessBaseAPI")
+@patch("autoscrapper.ocr.tesseract._has_eng", return_value=True)
+@patch("autoscrapper.ocr.tesseract._candidate_tessdata_paths", return_value=[Path("/mock/path")])
+@patch("autoscrapper.ocr.tesseract.PyTessBaseAPI")
 def test_create_api_success(mock_api_class, mock_paths, mock_has_eng):
     mock_api_instance = MagicMock()
     mock_api_class.return_value = mock_api_instance
@@ -79,9 +79,9 @@ def test_create_api_success(mock_api_class, mock_paths, mock_has_eng):
     assert tesseract._tessdata_dir == "/mock/path"
 
 
-@patch("src.autoscrapper.ocr.tesseract._has_eng", return_value=True)
-@patch("src.autoscrapper.ocr.tesseract._candidate_tessdata_paths", return_value=[Path("/mock/path")])
-@patch("src.autoscrapper.ocr.tesseract.PyTessBaseAPI", side_effect=Exception("mock init error"))
+@patch("autoscrapper.ocr.tesseract._has_eng", return_value=True)
+@patch("autoscrapper.ocr.tesseract._candidate_tessdata_paths", return_value=[Path("/mock/path")])
+@patch("autoscrapper.ocr.tesseract.PyTessBaseAPI", side_effect=Exception("mock init error"))
 def test_create_api_fails_all_candidates(mock_api_class, mock_paths, mock_has_eng):
     with pytest.raises(RuntimeError) as exc_info:
         tesseract._create_api()
@@ -125,7 +125,7 @@ def test_as_pil_image_raises_value_error_for_invalid_shape():
         tesseract._as_pil_image(img_invalid)
 
 
-@patch("src.autoscrapper.ocr.tesseract._get_api")
+@patch("autoscrapper.ocr.tesseract._get_api")
 def test_image_to_string_success(mock_get_api):
     mock_api = MagicMock()
     mock_api.GetUTF8Text.return_value = "Mock Text"
@@ -139,7 +139,7 @@ def test_image_to_string_success(mock_get_api):
     mock_api.GetUTF8Text.assert_called_once()
 
 
-@patch("src.autoscrapper.ocr.tesseract._get_api")
+@patch("autoscrapper.ocr.tesseract._get_api")
 def test_image_to_string_empty(mock_get_api):
     mock_api = MagicMock()
     mock_api.GetUTF8Text.return_value = None
@@ -151,7 +151,7 @@ def test_image_to_string_empty(mock_get_api):
     assert text == ""
 
 
-@patch("src.autoscrapper.ocr.tesseract._get_api")
+@patch("autoscrapper.ocr.tesseract._get_api")
 def test_image_to_data_empty_iterator(mock_get_api):
     mock_api = MagicMock()
     mock_api.GetIterator.return_value = None
@@ -173,7 +173,7 @@ def test_build_data_dict_with_iterator():
     mock_word.GetUTF8Text.return_value = "TestWord"
 
     # We need iterate_level to yield our mock word
-    with patch("src.autoscrapper.ocr.tesseract.iterate_level", return_value=[mock_word]):
+    with patch("autoscrapper.ocr.tesseract.iterate_level", return_value=[mock_word]):
         data = tesseract._build_data_dict(MagicMock())
 
         assert len(data["text"]) == 1
@@ -215,9 +215,9 @@ def test_record_backend_info_no_version_attr():
     assert info.tesseract_version == ""
 
 
-@patch("src.autoscrapper.ocr.tesseract._get_api")
-@patch("src.autoscrapper.ocr.tesseract._get_api_line")
-@patch("src.autoscrapper.ocr.tesseract._record_backend_info")
+@patch("autoscrapper.ocr.tesseract._get_api")
+@patch("autoscrapper.ocr.tesseract._get_api_line")
+@patch("autoscrapper.ocr.tesseract._record_backend_info")
 def test_initialize_ocr(mock_record, mock_get_line, mock_get):
     mock_api = MagicMock()
     mock_get.return_value = mock_api
@@ -234,8 +234,8 @@ def test_initialize_ocr(mock_record, mock_get_line, mock_get):
     mock_record.assert_called_once_with(mock_api)
 
 
-@patch("src.autoscrapper.ocr.tesseract._create_api")
-@patch("src.autoscrapper.ocr.tesseract._record_backend_info")
+@patch("autoscrapper.ocr.tesseract._create_api")
+@patch("autoscrapper.ocr.tesseract._record_backend_info")
 def test_get_api_creates_instance(mock_record, mock_create):
     mock_api = MagicMock()
     mock_create.return_value = mock_api
@@ -247,8 +247,8 @@ def test_get_api_creates_instance(mock_record, mock_create):
     mock_record.assert_called_once_with(mock_api)
 
 
-@patch("src.autoscrapper.ocr.tesseract._create_api")
-@patch("src.autoscrapper.ocr.tesseract._record_backend_info")
+@patch("autoscrapper.ocr.tesseract._create_api")
+@patch("autoscrapper.ocr.tesseract._record_backend_info")
 def test_get_api_line_creates_instance(mock_record, mock_create):
     mock_api = MagicMock()
     mock_create.return_value = mock_api
@@ -260,7 +260,7 @@ def test_get_api_line_creates_instance(mock_record, mock_create):
     mock_record.assert_called_once_with(mock_api)
 
 
-@patch("src.autoscrapper.ocr.tesseract._get_api_line")
+@patch("autoscrapper.ocr.tesseract._get_api_line")
 def test_image_to_string_single_line(mock_get_api_line):
     mock_api = MagicMock()
     mock_api.GetUTF8Text.return_value = "Line Text"
@@ -273,7 +273,7 @@ def test_image_to_string_single_line(mock_get_api_line):
     mock_api.SetImage.assert_called_once()
 
 
-@patch("src.autoscrapper.ocr.tesseract._get_api_line")
+@patch("autoscrapper.ocr.tesseract._get_api_line")
 def test_image_to_data_single_line(mock_get_api_line):
     mock_api = MagicMock()
     mock_api.GetIterator.return_value = None
@@ -297,8 +297,8 @@ def test_record_backend_info_already_set():
     mock_api.Version.assert_not_called()
 
 
-@patch("src.autoscrapper.ocr.tesseract._get_api_line")
-@patch("src.autoscrapper.ocr.tesseract._get_api")
+@patch("autoscrapper.ocr.tesseract._get_api_line")
+@patch("autoscrapper.ocr.tesseract._get_api")
 def test_image_to_data_with_iterator(mock_get_api, mock_get_api_line):
     # This tests the full path from image_to_data down to _build_data_dict
     mock_api = MagicMock()
@@ -317,7 +317,7 @@ def test_image_to_data_with_iterator(mock_get_api, mock_get_api_line):
 
     img = np.zeros((10, 10), dtype=np.uint8)
 
-    with patch("src.autoscrapper.ocr.tesseract.iterate_level", return_value=[mock_word]):
+    with patch("autoscrapper.ocr.tesseract.iterate_level", return_value=[mock_word]):
         data = tesseract.image_to_data(img)
 
     assert data["text"][0] == "TestWord"
@@ -335,7 +335,7 @@ def test_build_data_dict_no_bbox():
     mock_word.Confidence.return_value = 95.5
     mock_word.GetUTF8Text.return_value = "TestWord"
 
-    with patch("src.autoscrapper.ocr.tesseract.iterate_level", return_value=[mock_word]):
+    with patch("autoscrapper.ocr.tesseract.iterate_level", return_value=[mock_word]):
         data = tesseract._build_data_dict(MagicMock())
 
         # Word should be skipped if bbox is None
@@ -351,7 +351,7 @@ def test_build_data_dict_none_confidence():
     mock_word.Confidence.return_value = None
     mock_word.GetUTF8Text.return_value = "TestWord"
 
-    with patch("src.autoscrapper.ocr.tesseract.iterate_level", return_value=[mock_word]):
+    with patch("autoscrapper.ocr.tesseract.iterate_level", return_value=[mock_word]):
         data = tesseract._build_data_dict(MagicMock())
 
         assert len(data["text"]) == 1
@@ -367,7 +367,7 @@ def test_build_data_dict_none_text():
     mock_word.Confidence.return_value = 95.5
     mock_word.GetUTF8Text.return_value = None
 
-    with patch("src.autoscrapper.ocr.tesseract.iterate_level", return_value=[mock_word]):
+    with patch("autoscrapper.ocr.tesseract.iterate_level", return_value=[mock_word]):
         data = tesseract._build_data_dict(MagicMock())
 
         assert len(data["text"]) == 1
@@ -391,15 +391,15 @@ def test_get_api_line_already_initialized():
 def test_candidate_tessdata_paths_exception_in_tessdata_data_path():
     with patch.dict(os.environ, clear=True):
         with patch("tessdata.data_path", side_effect=Exception("mock error")):
-            with patch("src.autoscrapper.ocr.tesseract.tessdata.__file__", "/mock/pkg/tessdata/__init__.py"):
+            with patch("autoscrapper.ocr.tesseract.tessdata.__file__", "/mock/pkg/tessdata/__init__.py"):
                 paths = tesseract._candidate_tessdata_paths()
 
                 # Should not include tessdata.data_path since it threw an exception
                 assert Path("/mock/pkg/share/tessdata") in paths
 
 
-@patch("src.autoscrapper.ocr.tesseract._get_api")
-@patch("src.autoscrapper.ocr.tesseract._get_api_line")
+@patch("autoscrapper.ocr.tesseract._get_api")
+@patch("autoscrapper.ocr.tesseract._get_api_line")
 def test_image_to_string_exception(mock_get_api_line, mock_get_api):
     mock_api = MagicMock()
     mock_api.GetUTF8Text.side_effect = Exception("OCR failed")
@@ -410,8 +410,8 @@ def test_image_to_string_exception(mock_get_api_line, mock_get_api):
         tesseract.image_to_string(img)
 
 
-@patch("src.autoscrapper.ocr.tesseract._get_api")
-@patch("src.autoscrapper.ocr.tesseract._get_api_line")
+@patch("autoscrapper.ocr.tesseract._get_api")
+@patch("autoscrapper.ocr.tesseract._get_api_line")
 def test_image_to_data_exception(mock_get_api_line, mock_get_api):
     mock_api = MagicMock()
     mock_api.GetIterator.side_effect = Exception("OCR failed")
@@ -430,7 +430,7 @@ def test_build_data_dict_all_levels():
     mock_word.Confidence.return_value = 95.5
     mock_word.GetUTF8Text.return_value = "TestWord"
 
-    with patch("src.autoscrapper.ocr.tesseract.iterate_level", return_value=[mock_word, mock_word]):
+    with patch("autoscrapper.ocr.tesseract.iterate_level", return_value=[mock_word, mock_word]):
         data = tesseract._build_data_dict(MagicMock())
 
         assert len(data["text"]) == 2
@@ -448,9 +448,9 @@ def test_build_data_dict_all_levels():
 
 def test_initialize_ocr_without_metadata():
     with (
-        patch("src.autoscrapper.ocr.tesseract._get_api"),
-        patch("src.autoscrapper.ocr.tesseract._get_api_line"),
-        patch("src.autoscrapper.ocr.tesseract._record_backend_info"),
+        patch("autoscrapper.ocr.tesseract._get_api"),
+        patch("autoscrapper.ocr.tesseract._get_api_line"),
+        patch("autoscrapper.ocr.tesseract._record_backend_info"),
     ):
         # Ensure _backend_info remains None
         tesseract._backend_info = None

@@ -15,6 +15,7 @@ from .inventory_grid import Cell
 from . import input_driver as pdi
 from .keybinds import DEFAULT_STOP_KEY
 
+
 # Target window
 def _default_target_app() -> str:
     if sys.platform.startswith("linux"):
