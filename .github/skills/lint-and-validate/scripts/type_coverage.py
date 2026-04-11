@@ -104,7 +104,7 @@ def _format_typescript_results(stats: dict, file_count: int) -> tuple[list[str],
 def check_typescript_coverage(
     project_path: Path,
     max_files: int | None = 30,
-    files: list[Path | None] = None,
+    files: list[Path] | None = None,
 ) -> dict:
     """Check TypeScript type coverage."""
     stats = {"any_count": 0, "untyped_functions": 0, "total_functions": 0}
