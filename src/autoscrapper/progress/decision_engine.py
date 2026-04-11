@@ -30,7 +30,7 @@ def _normalize_item_id(item_id: str | None) -> str:
 class DecisionReason:
     decision: str
     reasons: list[str]
-    dependencies: list[str | None] = None
+    dependencies: list[str] | None = None
     recycle_value_exceeds_item: bool = False
 
 

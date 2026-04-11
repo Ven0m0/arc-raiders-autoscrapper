@@ -31,7 +31,7 @@ class DownloadError(RuntimeError):
     pass
 
 
-def _fetch_bytes(url: str, headers: dict[str, str | None] = None) -> bytes:
+def _fetch_bytes(url: str, headers: dict[str, str] | None = None) -> bytes:
     request_headers = {
         "Accept": "application/json",
         "User-Agent": (
@@ -53,7 +53,7 @@ def _fetch_bytes(url: str, headers: dict[str, str | None] = None) -> bytes:
         raise DownloadError(f"Failed to reach {url}: {exc}") from exc
 
 
-def _fetch_json(url: str, headers: dict[str, str | None] = None) -> object:
+def _fetch_json(url: str, headers: dict[str, str] | None = None) -> object:
     try:
         return orjson.loads(_fetch_bytes(url, headers=headers))
     except orjson.JSONDecodeError as exc:

@@ -280,7 +280,7 @@ class _ScanRunner:
             left_right_click_gap=self.context.timing.cell_infobox_left_right_click_gap,
         )
 
-    def _capture_window(self) -> Tuple[Any, float]:
+    def _capture_window(self) -> tuple[Any, float]:
         capture_start = time.perf_counter()
         window_bgr = capture_region(
             (
@@ -292,19 +292,19 @@ class _ScanRunner:
         )
         return window_bgr, time.perf_counter() - capture_start
 
-    def _try_context_menu_crop(self, window_bgr: Any) -> Optional[Tuple[int, int, int, int]]:
+    def _try_context_menu_crop(self, window_bgr: Any) -> tuple[int, int, int, int] | None:
         if self._last_click_window_pos is None:
             return None
         cx, cy = self._last_click_window_pos
         return find_context_menu_crop(window_bgr, cx, cy)
 
-    def _try_infobox_color_detection(self, window_bgr: Any) -> Tuple[Optional[Tuple[int, int, int, int]], float]:
+    def _try_infobox_color_detection(self, window_bgr: Any) -> tuple[tuple[int, int, int, int] | None, float]:
         find_start = time.perf_counter()
         rect = find_infobox(window_bgr)
         return rect, time.perf_counter() - find_start
 
     def _capture_infobox_with_retries(self) -> _InfoboxCaptureResult:
-        infobox_rect: Optional[Tuple[int, int, int, int]] = None
+        infobox_rect: tuple[int, int, int, int] | None = None
         window_bgr = None
         capture_time = 0.0
         find_time = 0.0
@@ -401,8 +401,8 @@ class _ScanRunner:
         infobox_rect = capture_result.infobox_rect
         window_bgr = capture_result.window_bgr
 
-        infobox_ocr: Optional[InfoboxOcrResult] = None
-        infobox_bgr: Optional[Any] = None
+        infobox_ocr: InfoboxOcrResult | None = None
+        infobox_bgr: Any | None = None
         item_name = ""
         raw_item_text = ""
         preprocess_time = 0.0
@@ -491,8 +491,8 @@ class _ScanRunner:
         capture_result = self._capture_infobox_with_retries()
         ocr_result = self._ocr_infobox_with_retries(capture_result)
 
-        decision: Optional[Decision] = None
-        decision_note: Optional[str] = None
+        decision: Decision | None = None
+        decision_note: str | None = None
         if self.context.actions and ocr_result.item_name:
             decision, decision_note = choose_decision(
                 ocr_result.item_name,
@@ -562,7 +562,7 @@ class _ScanRunner:
             cell_scan.action_label,
         )
 
-    def _update_stop_from_empty_detection(self, *, page: int, cells: List[Cell]) -> None:
+    def _update_stop_from_empty_detection(self, *, page: int, cells: list[Cell]) -> None:
         empty_idx = _detect_consecutive_empty_stop_idx(
             page,
             cells,
@@ -590,7 +590,7 @@ class _ScanRunner:
             style="yellow",
         )
 
-    def _scan_cells_on_page(self, *, page: int, cells: List[Cell]) -> None:
+    def _scan_cells_on_page(self, *, page: int, cells: list[Cell]) -> None:
         if not cells:
             return
 
@@ -661,14 +661,14 @@ class _ScanRunner:
 def scan_pages(
     *,
     context: ScanContext,
-    initial_cells: List[Cell],
+    initial_cells: list[Cell],
     pages_to_scan: int,
     infobox_retries: int,
     ocr_unreadable_retries: int,
     profile_timing: bool,
-    progress_impl: Optional[ScanProgress],
-    startup_events: List[Tuple[str, str]],
-    items_total: Optional[int],
+    progress_impl: ScanProgress | None,
+    startup_events: list[tuple[str, str]],
+    items_total: int | None,
 ) -> ScanRunState:
     reset_ocr_caches()
     config = _ScanLoopConfig(

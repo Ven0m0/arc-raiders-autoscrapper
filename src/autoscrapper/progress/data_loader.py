@@ -18,7 +18,7 @@ class GameData:
     quests: list[dict]
     quest_graph: dict[str, Any]
     projects: list[dict]
-    metadata: dict[str, str]
+    metadata: dict[str, Any]
 
 
 def _read_json(path: Path) -> Any:
