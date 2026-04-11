@@ -5,7 +5,7 @@ from textual.containers import Horizontal
 from textual.widgets import Button, Footer, Static
 
 from .common import AppScreen, MessageScreen
-from ..config import ProgressSettings, save_progress_settings
+from ..config import reset_progress_settings
 from ..core.item_actions import ITEM_RULES_CUSTOM_PATH
 from ..progress.data_update import DownloadError, update_data_snapshot
 
@@ -82,7 +82,7 @@ class ResetProgressScreen(AppScreen):
         if event.button.id == "cancel":
             self.app.pop_screen()
         elif event.button.id == "reset":
-            save_progress_settings(ProgressSettings())
+            reset_progress_settings()
             self.app.pop_screen()
             self.app.push_screen(MessageScreen("Progress reset."))
 

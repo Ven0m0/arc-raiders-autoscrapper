@@ -111,6 +111,10 @@ typeCheckingMode = "standard"
 reportMissingTypeStubs = false
 reportMissingModuleSource = false
 
+[tool.vulture]
+paths = ["src/", "scripts/", "tests/"]
+min_confidence = 80
+
 [tool.black]
 extend-exclude = '''
 ^scripts/(setup-linux\.sh|setup-windows\.ps1)$

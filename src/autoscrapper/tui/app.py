@@ -478,6 +478,9 @@ class AutoScrapperApp(App[None]):
 def run_tui(*, start_screen: str = "home", dry_run: bool = False) -> int:
     if start_screen not in {"home", "scan"}:
         raise ValueError("start_screen must be 'home' or 'scan'")
+    from ..app_warnings import maybe_warn_default_rules
+
+    maybe_warn_default_rules()
     app = AutoScrapperApp(start_screen=start_screen, scan_dry_run=dry_run)
     app.run(mouse=True)
     return 0
