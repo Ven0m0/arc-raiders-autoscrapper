@@ -99,7 +99,7 @@ def test_as_pil_image_converts_2d():
 
 def test_as_pil_image_converts_3d_bgr():
     img_3d = np.zeros((10, 10, 3), dtype=np.uint8)
-    img_3d[:, :, 0] = 255 # Blue channel
+    img_3d[:, :, 0] = 255  # Blue channel
     pil_img = tesseract._as_pil_image(img_3d)
     assert pil_img.size == (10, 10)
     assert pil_img.mode == "RGB"
