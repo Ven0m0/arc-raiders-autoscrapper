@@ -25,12 +25,11 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
+          python-version: "3.14.3"
           enable-cache: true
           cache-dependency-glob: |
             uv.lock
             pyproject.toml
-      - name: Install Python
-        run: uv python install
       - name: Install dependencies
         run: uv sync --frozen
       - name: Update snapshot + default rules
@@ -48,7 +47,7 @@ jobs:
       - name: Check for tracked changes
         id: changes
         run: |
-          python - <<'PY'
+          uv run python - <<'PY'
           import json
           import os
           import sys
@@ -111,7 +110,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          python - <<'PY'
+          uv run python - <<'PY'
           import json
           import os
           import urllib.parse
