@@ -1,5 +1,4 @@
 {
-<<<<<<< Updated upstream
   "recommendations": [
     "biomejs.biome",
     "oxc.oxc-vscode",
@@ -12,16 +11,7 @@
     "tombi-toml.tombi",
     "davidanson.vscode-markdownlint",
     "github.vscode-github-actions",
+    "oven.bun-vscode",
     "ast-grep.ast-grep-vscode"
   ]
-=======
-	"recommendations": [
-		"biomejs.biome",
-		"oxc.oxc-vscode",
-		"detachhead.basedpyright",
-		"mads-hartmann.bash-ide-vscode",
-		"redhat.vscode-yaml",
-		"tombi-toml.tombi"
-	]
->>>>>>> Stashed changes
 }
