@@ -64,7 +64,6 @@ def test_diff_quests_additions_and_removals() -> None:
     assert diff["added"][0] == {
         "id": "q3", "name": "Quest 3", "trader": "Trader C", "xp": 300, "sortOrder": 3
     }
-
 def test_diff_quests_changes() -> None:
     """Test that specific fields changing between versions are accurately tracked."""
     before = [
