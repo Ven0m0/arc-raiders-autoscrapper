@@ -40,6 +40,18 @@ Prefer `python3 -m uv ...` in automation because `uv` may not be on `PATH`.
 | Refresh generated data/rules | `python3 -m uv run python scripts/update_snapshot_and_defaults.py` |
 | Dry-run data refresh | `python3 -m uv run python scripts/update_snapshot_and_defaults.py --dry-run` |
 
+## Instruction Hierarchy
+
+| Layer | Purpose |
+| --- | --- |
+| `AGENTS.md` | Canonical repo-wide agent guidance; keep broad rules here |
+| `.github/copilot-instructions.md` | Concise repository-wide Copilot instructions; defer detail to `AGENTS.md` |
+| `.github/instructions/*.instructions.md` | Path- or language-specific guidance for Bash, Python, Markdown, reviews, and token usage |
+| `.claude/skills/*/SKILL.md` + `.github/skills/*/SKILL.md` | Task-specific workflows and reusable operational guidance |
+| `.claude/agents/*.md` + `.kilo/agents/*.md` | Specialized review/validation agents for hotspot modules |
+
+Keep repo-wide rules in the top layer; avoid duplicating them in narrower instruction files.
+
 ## Validation
 
 | Change type | Minimum validation |
@@ -60,6 +72,8 @@ Notes:
 
 | Path | Purpose |
 | --- | --- |
+| `.github/copilot-instructions.md` | Repo-wide GitHub Copilot custom instructions; should stay concise and point back to `AGENTS.md` |
+| `.github/instructions/` | Path-specific Copilot instruction files for language/tool-specific standards |
 | `src/autoscrapper/__main__.py` | Entry point; dispatches to TUI (`autoscrapper`) or scan CLI (`autoscrapper scan [--dry-run]`) |
 | `src/autoscrapper/tui/` | Textual screens; `app.py` is the root; `scan.py` starts the scan flow |
 | `src/autoscrapper/scanner/engine.py` | Scan coordinator; builds `ScanContext`, calls `scan_pages()`, returns `ScanStats` |
@@ -144,6 +158,7 @@ Project skills in `.github/skills/` (for GitHub Copilot agents):
 
 - Make minimal, targeted edits.
 - Prefer project skills in `.claude/skills/` and `.github/skills/` when relevant; especially `mcp-use`, `codebase-index`, `language-optimization`, `ai-tuning`, and `workflow-development`.
+- Keep `.github/copilot-instructions.md` concise and repo-wide; move detailed or path-specific rules into `AGENTS.md` or `.github/instructions/*.instructions.md` instead of duplicating them.
 - Invoke the appropriate sub-agent from `.claude/agents/` after any change to OCR, scanner, interaction, config, rules, or progress modules.
 - Read the relevant module before editing; update adjacent docs only when the behavior or workflow changes.
 - Use script-driven or tool-driven changes instead of manual rewrites for generated assets.
