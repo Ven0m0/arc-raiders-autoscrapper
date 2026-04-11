@@ -18,9 +18,9 @@ _log = logging.getLogger(__name__)
 METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
 SUPABASE_URL = "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
 
+SUPABASE_ANON_KEY = os.environ.get("METAFORGE_SUPABASE_ANON_KEY")
 
-def _get_supabase_anon_key() -> Optional[str]:
-    return os.environ.get("METAFORGE_SUPABASE_ANON_KEY")
+
 class DownloadError(RuntimeError):
     pass
 
@@ -243,7 +243,7 @@ def update_data_snapshot(data_dir: Optional[Path] = None) -> dict:
     mapped_items = [
         _map_metaforge_item(item, crafting_map, recycle_map) for item in metaforge_items
     ]
-    mapped_quests = [_map_metaforge_quest(quest) for quest in metaforge_quests]
+    mapped_quests = [_map_metaforge_quest(quest) for metaforge_quests]
     mapped_quests = apply_quest_overrides(mapped_quests)
 
     (data_dir / "items.json").write_text(
