@@ -8,7 +8,7 @@ import threading
 import time
 import traceback
 from pathlib import Path
-from typing import Deque, Optional, TYPE_CHECKING
+from typing import Any, Deque, Optional
 
 from rich.text import Text
 from textual.app import ComposeResult
@@ -32,9 +32,6 @@ from ..scanner.progress import ScanProgress
 from ..scanner.types import ScanStats
 from ..warmup import start_background_warmup, warmup_status
 from .common import AppScreen, MessageScreen
-
-if TYPE_CHECKING:
-    from ..core.item_actions import ItemActionResult
 
 
 CELLS_PER_PAGE = 20
@@ -75,7 +72,7 @@ def _format_duration(seconds: Optional[float]) -> str:
     return f"{minutes:02d}:{secs:02d}"
 
 
-def _item_label(result: "ItemActionResult") -> str:
+def _item_label(result: Any) -> str:
     return (result.item_name or result.raw_item_text or "<unreadable>").replace("\n", " ").strip()
 
 
@@ -171,7 +168,7 @@ class ScanScreen(Screen):
         self._window_wait_timer = None
         self._window_wait_started: Optional[float] = None
         self._scan_started = False
-        self._results: list["ItemActionResult"] = []
+        self._results: list[Any] = []
         self._stats: Optional[ScanStats] = None
 
     def compose(self) -> ComposeResult:
@@ -540,7 +537,7 @@ class ScanResultsScreen(AppScreen):
     def __init__(
         self,
         *,
-        results: list["ItemActionResult"],
+        results: list[Any],
         stats: ScanStats,
         dry_run: bool,
     ) -> None:
