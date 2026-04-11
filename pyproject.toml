@@ -66,6 +66,10 @@ autoscrapper = [
     "tui/*.tcss",
 ]
 
+[tool.uv]
+link-mode = "symlink"
+prerelease = "-necessary-or-explicit"
+
 [tool.ruff]
 extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
 line-length = 120
