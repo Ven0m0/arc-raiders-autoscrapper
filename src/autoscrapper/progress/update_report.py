@@ -111,10 +111,12 @@ def diff_quests(before_quests: Sequence[object], after_quests: Sequence[object])
         after = after_by_id[quest_id]
         changes: Dict[str, dict] = {}
         for field in changed_fields:
-            if before.get(field) != after.get(field):
+            before_val = before.get(field)
+            after_val = after.get(field)
+            if before_val != after_val:
                 changes[field] = {
-                    "before": before.get(field),
-                    "after": after.get(field),
+                    "before": before_val,
+                    "after": after_val,
                 }
         if not changes:
             continue
@@ -171,22 +173,24 @@ def diff_rules(before_payload: Mapping[str, object], after_payload: Mapping[str,
 
     added = [
         {
-            "id": after_by_key[key].get("id"),
-            "name": after_by_key[key].get("name"),
-            "value": after_by_key[key].get("value"),
-            "action": after_by_key[key].get("action"),
+            "id": item.get("id"),
+            "name": item.get("name"),
+            "value": item.get("value"),
+            "action": item.get("action"),
         }
         for key in added_keys
+        if (item := after_by_key[key]) or True
     ]
 
     removed = [
         {
-            "id": before_by_key[key].get("id"),
-            "name": before_by_key[key].get("name"),
-            "value": before_by_key[key].get("value"),
-            "action": before_by_key[key].get("action"),
+            "id": item.get("id"),
+            "name": item.get("name"),
+            "value": item.get("value"),
+            "action": item.get("action"),
         }
         for key in removed_keys
+        if (item := before_by_key[key]) or True
     ]
 
     modified: List[dict] = []
@@ -200,45 +204,58 @@ def diff_rules(before_payload: Mapping[str, object], after_payload: Mapping[str,
         after = after_by_key[key]
         changes: Dict[str, dict] = {}
 
-        if before.get("value") != after.get("value"):
-            change = {"before": before.get("value"), "after": after.get("value")}
+        before_value = before.get("value")
+        after_value = after.get("value")
+        before_action = before.get("action")
+        after_action = after.get("action")
+        before_analysis_raw = before.get("analysis")
+        after_analysis_raw = after.get("analysis")
+        before_name = before.get("name")
+        after_name = after.get("name")
+
+        # Cache IDs and Names for changes
+        after_id_or_before = after.get("id") or before.get("id")
+        after_name_or_before = after_name or before_name
+
+        if before_value != after_value:
+            change = {"before": before_value, "after": after_value}
             changes["value"] = change
             value_changed.append(
                 {
-                    "id": after.get("id") or before.get("id"),
-                    "name": after.get("name") or before.get("name"),
+                    "id": after_id_or_before,
+                    "name": after_name_or_before,
                     **change,
                 }
             )
 
-        if before.get("action") != after.get("action"):
-            change = {"before": before.get("action"), "after": after.get("action")}
+        if before_action != after_action:
+            change = {"before": before_action, "after": after_action}
             changes["action"] = change
             action_changed.append(
                 {
-                    "id": after.get("id") or before.get("id"),
-                    "name": after.get("name") or before.get("name"),
+                    "id": after_id_or_before,
+                    "name": after_name_or_before,
                     **change,
                 }
             )
 
-        before_analysis = before.get("analysis") if isinstance(before.get("analysis"), list) else []
-        after_analysis = after.get("analysis") if isinstance(after.get("analysis"), list) else []
+        before_analysis = before_analysis_raw if isinstance(before_analysis_raw, list) else []
+        after_analysis = after_analysis_raw if isinstance(after_analysis_raw, list) else []
         if before_analysis != after_analysis:
             changes["analysis"] = {"before": before_analysis, "after": after_analysis}
             analysis_changed.append(
                 {
-                    "id": after.get("id") or before.get("id"),
-                    "name": after.get("name") or before.get("name"),
+                    "id": after_id_or_before,
+                    "name": after_name_or_before,
                 }
             )
 
-        if before.get("name") != after.get("name"):
-            change = {"before": before.get("name"), "after": after.get("name")}
+        if before_name != after_name:
+            change = {"before": before_name, "after": after_name}
             changes["name"] = change
             name_changed.append(
                 {
-                    "id": after.get("id") or before.get("id"),
+                    "id": after_id_or_before,
                     **change,
                 }
             )
@@ -246,8 +263,8 @@ def diff_rules(before_payload: Mapping[str, object], after_payload: Mapping[str,
         if changes:
             modified.append(
                 {
-                    "id": after.get("id") or before.get("id"),
-                    "name": after.get("name") or before.get("name"),
+                    "id": after_id_or_before,
+                    "name": after_name_or_before,
                     "changes": changes,
                 }
             )
