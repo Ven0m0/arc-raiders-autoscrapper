@@ -122,5 +122,3 @@ def resolve_active_quests(
             missing.append(entry)
 
     return resolved, missing
-
-

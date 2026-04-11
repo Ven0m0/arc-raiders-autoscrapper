@@ -603,7 +603,7 @@ def find_context_menu_crop(
     # The previous threshold of 120 was calibrated for the old light
     # cream menu and incorrectly rejected the game's current dark
     # context menu (mean brightness ~60-100).
-    crop_left_half = bgr_image[y : y2, x : x + max(1, w // 2)]
+    crop_left_half = bgr_image[y:y2, x : x + max(1, w // 2)]
     if crop_left_half.size > 0:
         mean_brightness = float(np.mean(cv2.cvtColor(crop_left_half, cv2.COLOR_BGR2GRAY)))
         if mean_brightness < 40.0:

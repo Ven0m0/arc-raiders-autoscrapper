@@ -9,14 +9,13 @@ Add fixtures with:
 
 The suite is skipped automatically when no fixtures have been captured yet.
 """
+
 from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Generator
 
 import cv2
-import numpy as np
 import pytest
 
 FIXTURES_DIR = Path(__file__).resolve().parents[3] / "tests" / "fixtures" / "ocr"

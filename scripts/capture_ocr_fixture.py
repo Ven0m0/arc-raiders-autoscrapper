@@ -15,6 +15,7 @@ Output:
 Example:
     uv run python scripts/capture_ocr_fixture.py ocr_debug/infobox_0.png "Rusty Gear"
 """
+
 from __future__ import annotations
 
 import argparse
