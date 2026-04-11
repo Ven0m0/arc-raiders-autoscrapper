@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import concurrent.futures
 import io
 import logging
 import os
@@ -62,24 +63,51 @@ def _fetch_json(url: str, headers: Optional[Dict[str, str]] = None) -> object:
 
 def _fetch_metaforge_collection(resource: str) -> List[dict]:
     rows: List[dict] = []
-    current_page = 1
-    has_next = True
     limit = 100
 
-    while has_next:
-        url = f"{METAFORGE_API_BASE}/{resource}?page={current_page}&limit={limit}"
-        response = _fetch_json(url)
-        if not isinstance(response, dict):
-            raise DownloadError(f"Unexpected response for {resource}")
-        data = response.get("data") or []
-        if not isinstance(data, list):
-            raise DownloadError(f"Unexpected {resource} payload: data must be a list")
-        rows.extend(entry for entry in data if isinstance(entry, dict))
-        pagination = response.get("pagination") or {}
-        has_next = bool(pagination.get("hasNextPage"))
-        current_page += 1
-        if has_next:
-            time.sleep(0.1)
+    url = f"{METAFORGE_API_BASE}/{resource}?page=1&limit={limit}"
+    response = _fetch_json(url)
+    if not isinstance(response, dict):
+        raise DownloadError(f"Unexpected response for {resource}")
+    data = response.get("data") or []
+    if not isinstance(data, list):
+        raise DownloadError(f"Unexpected {resource} payload: data must be a list")
+    rows.extend(entry for entry in data if isinstance(entry, dict))
+
+    pagination = response.get("pagination") or {}
+    total_pages = pagination.get("totalPages")
+
+    if total_pages and total_pages > 1:
+        def fetch_page(page: int) -> List[dict]:
+            page_url = f"{METAFORGE_API_BASE}/{resource}?page={page}&limit={limit}"
+            page_response = _fetch_json(page_url)
+            if not isinstance(page_response, dict):
+                raise DownloadError(f"Unexpected response for {resource}")
+            page_data = page_response.get("data") or []
+            if not isinstance(page_data, list):
+                raise DownloadError(f"Unexpected {resource} payload: data must be a list")
+            return [entry for entry in page_data if isinstance(entry, dict)]
+
+        # Use up to 10 workers for concurrent fetching
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+            for page_rows in executor.map(fetch_page, range(2, total_pages + 1)):
+                rows.extend(page_rows)
+    elif pagination.get("hasNextPage"):
+        # Fallback to sequential if totalPages is not available
+        current_page = 2
+        has_next = True
+        while has_next:
+            url = f"{METAFORGE_API_BASE}/{resource}?page={current_page}&limit={limit}"
+            response = _fetch_json(url)
+            if not isinstance(response, dict):
+                raise DownloadError(f"Unexpected response for {resource}")
+            data = response.get("data") or []
+            if not isinstance(data, list):
+                raise DownloadError(f"Unexpected {resource} payload: data must be a list")
+            rows.extend(entry for entry in data if isinstance(entry, dict))
+            pagination = response.get("pagination") or {}
+            has_next = bool(pagination.get("hasNextPage"))
+            current_page += 1
 
     return rows
 
