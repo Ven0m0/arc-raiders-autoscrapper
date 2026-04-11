@@ -192,7 +192,6 @@ def _detect_consecutive_empty_stop_idx(
         x, y, w, h = cell.safe_rect
         slot_bgr = window_bgr[y : y + h, x : x + w]
         if slot_bgr.size == 0:
-            prev_empty = False
             continue
         is_empty = is_slot_empty(slot_bgr)
         if is_empty and prev_empty:
@@ -631,6 +630,9 @@ class _ScanRunner:
                         self._open_cell_infobox(cells[idx_in_page])
                     continue
                 # Item removed; the next item collapses into this slot. Re-open the same cell.
+                # Reset UI mode so the collapsed item is detected fresh (it may show infobox
+                # instead of context-menu if the cell count changed).
+                self._detected_ui_mode = None
                 self._open_cell_infobox(cell)
                 continue
 
@@ -645,8 +647,7 @@ class _ScanRunner:
     def _scan_single_page(self, page: int) -> None:
         self.state.pages_scanned += 1
         # Allow re-detection of UI mode each page in case the game UI changed.
-        if page > 0:
-            self._detected_ui_mode = None
+        self._detected_ui_mode = None
 
         cells = self.initial_cells
         if page > 0:

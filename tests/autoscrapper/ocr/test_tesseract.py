@@ -58,7 +58,7 @@ def test_candidate_tessdata_paths_order(mock_tessdata_path):
     # Check that paths are generated and deduplicated in order
     assert paths[0] == Path("/mock/env/path")
     assert paths[1] == Path("/mock/tessdata/path")
-    assert paths[2] == Path("/mock/pkg/share/tessdata")
+    assert paths[2] == Path("/mock/pkg/tessdata/__init__.py").resolve().parent.parent / "share" / "tessdata"
     assert paths[3] == Path("/mock/appdata/Python/share/tessdata")
     py_ver = f"Python{sys.version_info.major}{sys.version_info.minor}"
     assert paths[4] == Path(f"/mock/appdata/Python/{py_ver}/share/tessdata")
@@ -74,9 +74,9 @@ def test_create_api_success(mock_api_class, mock_paths, mock_has_eng):
     api = tesseract._create_api()
 
     assert api == mock_api_instance
-    mock_api_class.assert_called_once_with(path="/mock/path", lang="eng", psm=tesseract.PSM.SINGLE_BLOCK)
+    mock_api_class.assert_called_once_with(path=str(Path("/mock/path")), lang="eng", psm=tesseract.PSM.SINGLE_BLOCK)
     mock_api_instance.SetVariable.assert_called_once()
-    assert tesseract._tessdata_dir == "/mock/path"
+    assert tesseract._tessdata_dir == str(Path("/mock/path"))
 
 
 @patch("autoscrapper.ocr.tesseract._has_eng", return_value=True)
@@ -87,7 +87,7 @@ def test_create_api_fails_all_candidates(mock_api_class, mock_paths, mock_has_en
         tesseract._create_api()
 
     assert "Could not initialize Tesseract API" in str(exc_info.value)
-    assert "/mock/path: mock init error" in str(exc_info.value)
+    assert f"{str(Path('/mock/path'))}: mock init error" in str(exc_info.value)
 
 
 def test_as_pil_image_converts_2d():
@@ -395,7 +395,7 @@ def test_candidate_tessdata_paths_exception_in_tessdata_data_path():
                 paths = tesseract._candidate_tessdata_paths()
 
                 # Should not include tessdata.data_path since it threw an exception
-                assert Path("/mock/pkg/share/tessdata") in paths
+                assert Path("/mock/pkg/tessdata/__init__.py").resolve().parent.parent / "share" / "tessdata" in paths
 
 
 @patch("autoscrapper.ocr.tesseract._get_api")

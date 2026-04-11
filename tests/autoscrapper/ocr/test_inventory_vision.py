@@ -19,6 +19,7 @@ from autoscrapper.ocr.inventory_vision import (  # noqa: E402
     ItemNameMatchResult,
     _extract_cropped_title_from_data,
     _extract_title_from_data,
+    ocr_inventory_count,
     preprocess_for_ocr,
     reset_ocr_caches,
     title_roi,
@@ -332,7 +333,9 @@ class TestOcrTitleStripCache:
             _vision.ocr_title_strip(img)
             _vision.ocr_title_strip(img)  # same image
 
-        assert mock_ocr.call_count == 2, "image_to_data should be called twice when the first result was empty"
+        # Each ocr_title_strip call makes 2 image_to_string calls when empty:
+        # once with upscale, once without (no-upscale fallback). 2 × 2 = 4.
+        assert mock_ocr.call_count == 4, "image_to_string called 4 times: 2 per invocation (upscale + no-upscale fallback)"
 
     def test_non_empty_result_is_cached(self):
         """When item_name is non-empty, the second call must use the cache."""
@@ -446,3 +449,61 @@ class TestEnableOcrDebug:
 
         captured = capsys.readouterr()
         assert "[vision_ocr] failed to enable OCR debug dir: Permission denied" in captured.out
+
+
+# ---------------------------------------------------------------------------
+# ocr_inventory_count — regression tests for the phantom-digit fix
+# ---------------------------------------------------------------------------
+
+
+class TestOcrInventoryCount:
+    """Tests for ocr_inventory_count() focusing on the N/M artifact-stripping logic."""
+
+    def _call(self, ocr_text: str):
+        """Call ocr_inventory_count with a real dummy image but mocked OCR output."""
+        img = _solid_bgr(20, 80)
+        with patch("autoscrapper.ocr.inventory_vision.image_to_string", return_value=ocr_text):
+            return ocr_inventory_count(img)
+
+    def test_normal_count(self):
+        count, raw = self._call("197/232")
+        assert count == 197
+        assert "197/232" in raw
+
+    def test_current_equals_capacity(self):
+        """Full stash — current == capacity is valid."""
+        count, _ = self._call("280/280")
+        assert count == 280
+
+    def test_phantom_leading_digit_stripped(self):
+        """Regression: OCR reads '2251/280'; should recover to 251."""
+        count, _ = self._call("2251/280")
+        assert count == 251
+
+    def test_artifact_not_stripped_when_same_digit_length(self, capsys):
+        """'999/280': same digit length as capacity — no strip, returns None + logs."""
+        count, _ = self._call("999/280")
+        assert count is None
+        out = capsys.readouterr().out
+        assert "[vision_ocr] ocr_inventory_count: unrecoverable count" in out
+
+    def test_artifact_not_stripped_when_two_surplus_digits(self, capsys):
+        """'22251/280': two surplus digits — conservative, no strip, returns None."""
+        count, _ = self._call("22251/280")
+        assert count is None
+        capsys.readouterr()  # consume log
+
+    def test_no_slash_pattern_falls_through_to_digit_fallback(self):
+        """No N/M pattern — falls through to digit extraction path."""
+        count, _ = self._call("251")
+        assert count == 251
+
+    def test_empty_roi_returns_none(self):
+        empty = np.zeros((0, 0, 3), dtype=np.uint8)
+        count, raw = ocr_inventory_count(empty)
+        assert count is None
+        assert raw == ""
+
+    def test_no_digits_returns_none(self):
+        count, _ = self._call("no digits here")
+        assert count is None

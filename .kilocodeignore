@@ -43,9 +43,25 @@ artifacts/
 .nv/ComputeCache/
 node_modules/
 __pycache__/
+**/__pycache__/
 .ruff_cache/
+.pytest_cache/
+.mypy_cache/
 .cargo/
 .rustup/
+.venv/
+venv/
+
+# ─── Project-specific: disposable & generated ───────────────────────────────
+ocr_debug/
+.omc/
+.claude/worktrees/
+# Generated — never hand-edit; regenerate via scripts/update_snapshot_and_defaults.py
+src/autoscrapper/progress/data/
+src/autoscrapper/items/items_rules.default.json
+# Bundled OCR traineddata (large binary)
+*.traineddata
+tessdata/
 
 # ─── OS / Editor Noise ───────────────────────────────────────────────────────
 .DS_Store

@@ -79,7 +79,7 @@ unavailable.
 | --- | --- | --- |
 | [MetaForge ARC Raiders API docs](https://metaforge.app/arc-raiders/api) | Primary item and quest source | Reads paginated `items` and `quests` responses from `https://metaforge.app/api/arc-raiders` |
 | `METAFORGE_SUPABASE_ANON_KEY` + MetaForge Supabase tables | Optional crafting and recycle relationships | Adds `recipe` and `recyclesInto` data when the anon key is available |
-| [RaidTheory `arcraiders-data`](https://github.com/RaidTheory/arcraiders-data) | Supplemental and fallback item and quest source | Merges missing records into MetaForge results, or replaces missing datasets when MetaForge is unavailable |
+| [fgrzesiak `arcraiders-data`](https://github.com/fgrzesiak/arcraiders-data) | Supplemental and fallback item and quest source | Merges missing records into MetaForge results, or replaces missing datasets when MetaForge is unavailable |
 
 ### MetaForge API reference
 
@@ -103,15 +103,15 @@ If you reuse this updater or publish derived data, keep MetaForge attribution
 and link back to `https://metaforge.app/arc-raiders`, as required by the API
 terms.
 
-### RaidTheory fallback
+### fgrzesiak fallback
 
 The updater also downloads the
-[`RaidTheory/arcraiders-data`](https://github.com/RaidTheory/arcraiders-data)
+[`fgrzesiak/arcraiders-data`](https://github.com/fgrzesiak/arcraiders-data)
 repository archive during refreshes. AutoScrapper normalizes the item and quest
 JSON files from that repository and uses them in two cases:
 
 1. It appends item or quest records that are missing from the MetaForge API.
-2. It falls back to the RaidTheory dataset when a MetaForge item or quest fetch
+2. It falls back to the fgrzesiak dataset when a MetaForge item or quest fetch
    fails.
 
 MetaForge remains the preferred source when both providers return the same

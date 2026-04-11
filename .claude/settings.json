@@ -6,7 +6,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path',''); subprocess.run(['uv','run','ruff','check','--fix',f]) if f.endswith('.py') else None\""
+						"command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path','').replace('\\\\','/'); subprocess.run(['uv','run','ruff','check','--fix',f]) if f.endswith('.py') and ('/src/' in f or '/tests/' in f or '/scripts/' in f) else None\""
 					}
 				]
 			},
@@ -60,7 +60,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path',''); subprocess.run(['uv','run','ruff','format',f]) if f.endswith('.py') else None\""
+						"command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path','').replace('\\\\','/'); subprocess.run(['uv','run','ruff','format',f]) if f.endswith('.py') and ('/src/' in f or '/tests/' in f or '/scripts/' in f) else None\""
 					}
 				]
 			},
@@ -69,7 +69,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path',''); subprocess.run(['uv','run','basedpyright','src/']) if f.endswith('.py') else None\""
+						"command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path','').replace('\\\\','/'); subprocess.run(['uv','run','basedpyright','src/']) if f.endswith('.py') and ('/src/' in f or '/tests/' in f) else None\""
 					}
 				]
 			}
@@ -95,11 +95,24 @@
 			}
 		]
 	},
+  "prefersReducedMotion": true,
 	"permissions": {
 		"allow": [
 			"Bash(qlty check:*)",
 			"Bash(qlty metrics:*)",
 			"Bash(qlty smells:*)",
+			"Bash(uv run pytest:*)",
+			"Bash(uv run ruff check:*)",
+			"Bash(uv run ruff format:*)",
+			"Bash(uv run basedpyright:*)",
+			"Bash(uv run autoscrapper scan --dry-run:*)",
+			"Bash(uv sync:*)",
+			"Bash(python3 -m uv run pytest:*)",
+			"Bash(python3 -m uv run ruff check:*)",
+			"Bash(python3 -m uv run basedpyright:*)",
+			"Bash(git status:*)",
+			"Bash(git diff:*)",
+			"Bash(git log:*)",
 			"mcp__plugin_oh-my-claudecode_t__lsp_document_symbols",
 			"mcp__plugin_context-mode_context-mode__ctx_execute",
 			"mcp__claude_ai_gitmcp__fetch_generic_documentation",
@@ -109,7 +122,9 @@
 			"mcp__plugin_context-mode_context-mode__ctx_batch_execute",
 			"mcp__plugin_oh-my-claudecode_t__state_clear",
 			"Skill(afc:triage)",
-			"Skill(commit-commands:commit-push-pr)"
+			"Skill(commit-commands:commit-push-pr)",
+      "mcp__cachebro__read_files",
+      "mcp__cachebro__read_file"
 		]
 	}
 }

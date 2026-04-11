@@ -541,10 +541,12 @@ def find_infobox(bgr_image: np.ndarray) -> Optional[Tuple[int, int, int, int]]:
 
 
 # Positional fallback crop for the context-menu UI.
-# The dark context menu opens to the LEFT of the right-clicked cell.  Its left
-# edge sits approximately 43 px right of cell centre (measured from debug images:
-# "Move to Backpack" loses ~37 px on the left when offset=80, so true edge ≈ 43).
-# Using 35 gives an 8 px safety margin to the left of the menu edge.
+# The dark context menu opens to the LEFT of the right-clicked cell.  The crop
+# must therefore be anchored to the LEFT of the cell centre.
+# Formula: x = cell_centre_x - crop_w + x_off
+#   crop_w ≈ 420 px (1920-normalised)
+#   x_off  =  35 px — keeps the crop's right edge ~35 px past the cell centre
+#              so the narrow right-side gap is included without clipping the menu.
 # The item name header occupies the topmost row of the menu.  It sits roughly
 # 10 px above cell centre (one ~40 px row above the first action button, which
 # appears at crop-y≈10 when Y-offset=30).  Using -20 gives a 10 px safety
@@ -580,7 +582,10 @@ def find_context_menu_crop(
     y_off = int(round(_CONTEXT_MENU_Y_OFFSET_NORM * img_h))
     crop_w = int(round(_CONTEXT_MENU_WIDTH_NORM * img_w))
     crop_h = int(round(_CONTEXT_MENU_HEIGHT_NORM * img_h))
-    x = max(0, cell_center_x + x_off)
+    # Menu opens LEFT of the cell; anchor the crop so its right edge sits
+    # x_off pixels past cell centre (giving a small safety margin), with the
+    # bulk of the 420-px-wide crop extending to the left of the cell centre.
+    x = max(0, cell_center_x - crop_w + x_off)
     y = max(0, cell_center_y + y_off)
     # Shift left/up if the crop would overflow the right or bottom edge so the full
     # width and height are preserved (sell/recycle labels are in the lower portion of
@@ -592,7 +597,7 @@ def find_context_menu_crop(
     x2 = min(img_w, x + crop_w)
     y2 = min(img_h, y + crop_h)
     w, h = x2 - x, y2 - y
-    min_dim = int(round(100 * min(img_w, img_h) / 1080))
+    min_dim = int(round(100 * min(img_w, img_h) / img_h))
     if w < min_dim or h < min_dim:
         return None
     # Brightness guard: verify the left half of the crop contains UI
@@ -778,11 +783,14 @@ def recycle_confirm_button_center(
     return rect_center(recycle_confirm_button_rect(window_left, window_top, window_width, window_height))
 
 
-def preprocess_for_ocr(roi_bgr: np.ndarray, *, restrict_otsu_to_left: bool = False) -> np.ndarray:
+def preprocess_for_ocr(
+    roi_bgr: np.ndarray, *, restrict_otsu_to_left: bool = False, upscale: bool = True
+) -> np.ndarray:
     if roi_bgr.size == 0:
         raise ValueError(f"preprocess_for_ocr: empty input array (shape={roi_bgr.shape})")
-    roi_bgr = cv2.resize(roi_bgr, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
     gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
+    if upscale:
+        gray = cv2.resize(gray, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
     if restrict_otsu_to_left:
         # Compute the Otsu threshold from the left half only (context-menu panel
         # side) so that bright inventory-grid icons on the right do not bias the
@@ -1112,6 +1120,19 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
     match_result = match_item_name_result(raw_text)
     raw_item_text = match_result.cleaned_text
     item_name = match_result.chosen_name
+    if not item_name:
+        # Fallback: retry without 2x upscale. Upscale-induced interpolation
+        # artefacts can confuse Tesseract on certain low-contrast strips.
+        processed_no_up = preprocess_for_ocr(title_strip_bgr, upscale=False)
+        try:
+            raw_text_no_up = image_to_string(processed_no_up, single_line=True)
+        except Exception:  # pragma: no cover
+            raw_text_no_up = ""
+        fallback = match_item_name_result(raw_text_no_up)
+        if fallback.chosen_name:
+            raw_item_text = fallback.cleaned_text
+            item_name = fallback.chosen_name
+            processed = processed_no_up
     if item_name:
         _last_roi_hash = roi_hash
         _last_ocr_result = (item_name, raw_item_text)
@@ -1259,6 +1280,8 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
             coverage = len(line_text) / max(1, len(result.matched_name))
             if coverage < 0.6:
                 continue
+            if result.chosen_name.lower().startswith("unavailable"):
+                continue
             item_name = result.chosen_name
             raw_item_text = " ".join(p for p in raw_parts if p).strip()
             break
@@ -1316,7 +1339,7 @@ def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:
     _save_debug_image("inventory_count_processed", processed)
 
     try:
-        raw = image_to_string(processed)
+        raw = image_to_string(processed, single_line=True)
     except Exception as exc:  # pragma: no cover - OCR backend dependent
         print(
             f"[vision_ocr] ocr_backend image_to_string failed for inventory count: {exc}",
@@ -1328,9 +1351,27 @@ def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:
     # The label reads "N/M" (current/capacity). Extract N from that pattern first so
     # that a stash-icon glyph OCR'd before the digits (e.g. "8 197/232") does not
     # cause digits[0] to return the icon's value instead of the item count.
-    m = re.search(r"(\d+)/\d+", cleaned)
+    m = re.search(r"(\d+)/(\d+)", cleaned)
     if m:
-        return int(m.group(1)), cleaned
+        current, capacity = int(m.group(1)), int(m.group(2))
+        if current <= capacity:
+            return current, cleaned
+        # OCR artifact: a single spurious leading digit (e.g. "2251/280" → "251/280").
+        # Only attempt recovery when raw_current has exactly one surplus digit relative
+        # to capacity, so we never silently discard real leading digits from a valid count.
+        raw_current = m.group(1)
+        if len(raw_current) == len(str(capacity)) + 1:
+            trimmed = int(raw_current[1:])
+            if trimmed <= capacity:
+                return trimmed, cleaned
+        # Cannot recover cleanly — return None so the engine uses its safe fallback
+        # (1 page or CLI-supplied page count) rather than an unreliable guess.
+        print(
+            f"[vision_ocr] ocr_inventory_count: unrecoverable count in {cleaned!r}; "
+            f"parsed {current} > capacity {capacity}",
+            flush=True,
+        )
+        return None, cleaned
 
     digits = re.findall(r"\d+", cleaned)
     if not digits:

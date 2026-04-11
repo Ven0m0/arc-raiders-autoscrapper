@@ -23,11 +23,24 @@
       ".venv/**",
       "uv.lock",
       "ocr_debug/**",
-      "**/node_modules/**"
+      ".omc/**",
+      ".claude/worktrees/**",
+      ".ruff_cache/**",
+      "__pycache__/**",
+      "**/__pycache__/**",
+      "**/node_modules/**",
+      "src/autoscrapper/progress/data/**",
+      "src/autoscrapper/items/items_rules.default.json"
     ]
   },
   "experimental": {
     "continue_loop_on_deny": false,
     "batch_tool": true
+  },
+  "mcp": {
+    "git-mcp": {
+      "type": "remote",
+      "url": "https://gitmcp.io/Ven0m0/arc-raiders-autoscrapper"
+    }
   }
 }

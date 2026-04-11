@@ -37,6 +37,11 @@ Module-level caches in `inventory_vision.py`:
 | Item name truncated | Title strip crop too narrow — check `TITLE_STRIP_*` constants |
 | "Arc Alloy" false positives | Fuzzy threshold too low — rapidfuzz score below rejection threshold |
 | Empty slots detected as items | `slot_bgr.size == 0` guard missing in `_find_first_empty_slot` |
+| Item label shows "UNAVAILABLE" | Context-menu OCR fuzzy-matched the game's greyed-out "Unavailable" button as the item name — see `ocr-unavailable` skill |
+
+## No-upscale fallback
+
+`ocr_title_strip` automatically retries with `upscale=False` when the first attempt returns an empty item name. If a debug image from a 2x run looks wrong (interpolation artefacts around thin strokes), the fallback will try the raw-resolution crop. You can trigger the same path manually by calling `preprocess_for_ocr(roi, upscale=False)`.
 
 ## Debug images
 

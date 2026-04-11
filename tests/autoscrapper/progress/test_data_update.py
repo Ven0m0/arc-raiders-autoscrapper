@@ -183,6 +183,6 @@ def test_update_data_snapshot_uses_raidtheory_fallback_and_tracks_sources(tmp_pa
     assert metadata["dataSources"]["quests"]["provider"] == "raidtheory-fallback"
     assert metadata["dataSources"]["items"]["primary"]["error"] == "MetaForge unavailable"
     assert metadata["dataSources"]["items"]["fallback"]["repository"] == (
-        "https://github.com/RaidTheory/arcraiders-data"
+        "https://github.com/fgrzesiak/arcraiders-data"
     )
     assert metadata["dataSources"]["quests"]["primary"]["error"] == "MetaForge unavailable"
