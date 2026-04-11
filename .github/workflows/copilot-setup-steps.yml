@@ -20,7 +20,7 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -yq tesseract-ocr libtesseract-dev libleptonica-dev python3-evdev python3-pil python3-pil.imagetk
       - name: Install uv and Python 3.14.3
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v7
         with:
           python-version: "3.14.3"
           enable-cache: true
