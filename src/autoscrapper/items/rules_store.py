@@ -5,7 +5,7 @@ from pathlib import Path
 import orjson
 from ..core.item_actions import clean_ocr_text
 
-_ITEM_NAMES: tuple[str, ... | None] = None
+_ITEM_NAMES: tuple[str, ...] | None = None
 
 
 def get_item_names() -> tuple[str, ...]:
