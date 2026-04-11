@@ -42,7 +42,6 @@ RECYCLE_CONFIRM_RECT_NORM = (0.5058, 0.6274, 0.1777, 0.0544)
 INVENTORY_COUNT_RECT_NORM = (0.0734, 0.1583, 0.0760, 0.0231)
 
 _OCR_DEBUG_DIR: Optional[Path] = None
-_ITEM_NAMES: Optional[Tuple[str, ...]] = None
 _last_roi_hash: Optional[bytes] = None
 _last_ocr_result: Optional[Tuple[str, str]] = None
 DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75
@@ -74,15 +73,15 @@ _STAT_LINE_PATTERN = re.compile(
 def reset_ocr_caches() -> None:
     """Reset module-level OCR caches. Call at the start of each scan session.
 
-    Resets memoization caches (_last_roi_hash, _last_ocr_result, _ITEM_NAMES).
+    Resets memoization caches (_last_roi_hash, _last_ocr_result, and rules_store._ITEM_NAMES).
     Does NOT reset _OCR_DEBUG_DIR — that is session-scoped configuration set by
     enable_ocr_debug(), not a cache, and must persist across scans within a
     process lifetime so debug output is not silently dropped mid-session.
     """
-    global _last_roi_hash, _last_ocr_result, _ITEM_NAMES
+    global _last_roi_hash, _last_ocr_result
     _last_roi_hash = None
     _last_ocr_result = None
-    _ITEM_NAMES = None
+    rules_store.reset_item_names_cache()
 
 
 @dataclass
@@ -662,7 +661,7 @@ def match_item_name_result(raw: str, threshold: int | None = None) -> ItemNameMa
 
     match = process.extractOne(
         cleaned,
-        _get_item_names(),
+        rules_store.get_item_names(),
         scorer=fuzz.WRatio,
         score_cutoff=resolved_threshold,
     )
@@ -1003,11 +1002,7 @@ def _extract_action_line_bbox(
     indices = [
         i
         for i in range(n)
-        if page_nums[i] == bp
-        and block_nums[i] == bb
-        and par_nums[i] == bpa
-        and line_nums[i] == bl
-        and widths[i] > 0
+        if page_nums[i] == bp and block_nums[i] == bb and par_nums[i] == bpa and line_nums[i] == bl and widths[i] > 0
     ]
     # If every word on the line has width==0 (degenerate tesserocr output), fall
     # back to the original group indices so min/max never operate on empty lists.

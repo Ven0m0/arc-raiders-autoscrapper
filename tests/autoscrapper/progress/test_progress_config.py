@@ -1,7 +1,9 @@
 from autoscrapper.progress.progress_config import group_quests_by_trader
 
+
 def test_group_quests_by_trader_empty():
     assert group_quests_by_trader([]) == {}
+
 
 def test_group_quests_by_trader_basic_grouping():
     quests = [
@@ -14,6 +16,7 @@ def test_group_quests_by_trader_basic_grouping():
     assert [q["id"] for q in result["Alice"]] == ["q1", "q3"]
     assert [q["id"] for q in result["Bob"]] == ["q2"]
 
+
 def test_group_quests_by_trader_sorting():
     quests = [
         {"id": "q1", "trader": "Alice", "sortOrder": 2},
@@ -25,6 +28,7 @@ def test_group_quests_by_trader_sorting():
     assert [q["id"] for q in result["Alice"]] == ["q2", "q1"]
     assert [q["id"] for q in result["Bob"]] == ["q4", "q3"]
 
+
 def test_group_quests_by_trader_default_trader():
     quests = [
         {"id": "q1"},
@@ -35,6 +39,7 @@ def test_group_quests_by_trader_default_trader():
     result = group_quests_by_trader(quests)
     assert set(result.keys()) == {"Unknown", "Alice"}
     assert [q["id"] for q in result["Unknown"]] == ["q1", "q2", "q3"]
+
 
 def test_group_quests_by_trader_default_sort_order():
     quests = [

@@ -109,8 +109,8 @@ def test_as_pil_image_converts_3d_bgr():
 
 def test_as_pil_image_converts_3d_bgra():
     img_4d = np.zeros((10, 10, 4), dtype=np.uint8)
-    img_4d[:, :, 0] = 255 # Blue channel
-    img_4d[:, :, 3] = 255 # Alpha channel
+    img_4d[:, :, 0] = 255  # Blue channel
+    img_4d[:, :, 3] = 255  # Alpha channel
     pil_img = tesseract._as_pil_image(img_4d)
     assert pil_img.size == (10, 10)
     assert pil_img.mode == "RGBA"
@@ -165,7 +165,9 @@ def test_image_to_data_empty_iterator(mock_get_api):
 
 def test_build_data_dict_with_iterator():
     mock_word = MagicMock()
-    mock_word.IsAtBeginningOf.side_effect = lambda level: level in (tesseract.RIL.BLOCK, tesseract.RIL.PARA, tesseract.RIL.TEXTLINE)
+    mock_word.IsAtBeginningOf.side_effect = lambda level: (
+        level in (tesseract.RIL.BLOCK, tesseract.RIL.PARA, tesseract.RIL.TEXTLINE)
+    )
     mock_word.BoundingBox.return_value = (10, 10, 100, 30)
     mock_word.Confidence.return_value = 95.5
     mock_word.GetUTF8Text.return_value = "TestWord"
@@ -306,7 +308,9 @@ def test_image_to_data_with_iterator(mock_get_api, mock_get_api_line):
     mock_api.GetIterator.return_value = mock_iterator
 
     mock_word = MagicMock()
-    mock_word.IsAtBeginningOf.side_effect = lambda level: level in (tesseract.RIL.BLOCK, tesseract.RIL.PARA, tesseract.RIL.TEXTLINE)
+    mock_word.IsAtBeginningOf.side_effect = lambda level: (
+        level in (tesseract.RIL.BLOCK, tesseract.RIL.PARA, tesseract.RIL.TEXTLINE)
+    )
     mock_word.BoundingBox.return_value = (10, 10, 100, 30)
     mock_word.Confidence.return_value = 95.5
     mock_word.GetUTF8Text.return_value = "TestWord"
@@ -324,7 +328,9 @@ def test_image_to_data_with_iterator(mock_get_api, mock_get_api_line):
 
 def test_build_data_dict_no_bbox():
     mock_word = MagicMock()
-    mock_word.IsAtBeginningOf.side_effect = lambda level: level in (tesseract.RIL.BLOCK, tesseract.RIL.PARA, tesseract.RIL.TEXTLINE)
+    mock_word.IsAtBeginningOf.side_effect = lambda level: (
+        level in (tesseract.RIL.BLOCK, tesseract.RIL.PARA, tesseract.RIL.TEXTLINE)
+    )
     mock_word.BoundingBox.return_value = None
     mock_word.Confidence.return_value = 95.5
     mock_word.GetUTF8Text.return_value = "TestWord"
@@ -335,9 +341,12 @@ def test_build_data_dict_no_bbox():
         # Word should be skipped if bbox is None
         assert len(data["text"]) == 0
 
+
 def test_build_data_dict_none_confidence():
     mock_word = MagicMock()
-    mock_word.IsAtBeginningOf.side_effect = lambda level: level in (tesseract.RIL.BLOCK, tesseract.RIL.PARA, tesseract.RIL.TEXTLINE)
+    mock_word.IsAtBeginningOf.side_effect = lambda level: (
+        level in (tesseract.RIL.BLOCK, tesseract.RIL.PARA, tesseract.RIL.TEXTLINE)
+    )
     mock_word.BoundingBox.return_value = (10, 10, 100, 30)
     mock_word.Confidence.return_value = None
     mock_word.GetUTF8Text.return_value = "TestWord"
@@ -348,9 +357,12 @@ def test_build_data_dict_none_confidence():
         assert len(data["text"]) == 1
         assert data["conf"][0] == "-1"
 
+
 def test_build_data_dict_none_text():
     mock_word = MagicMock()
-    mock_word.IsAtBeginningOf.side_effect = lambda level: level in (tesseract.RIL.BLOCK, tesseract.RIL.PARA, tesseract.RIL.TEXTLINE)
+    mock_word.IsAtBeginningOf.side_effect = lambda level: (
+        level in (tesseract.RIL.BLOCK, tesseract.RIL.PARA, tesseract.RIL.TEXTLINE)
+    )
     mock_word.BoundingBox.return_value = (10, 10, 100, 30)
     mock_word.Confidence.return_value = 95.5
     mock_word.GetUTF8Text.return_value = None
@@ -361,17 +373,20 @@ def test_build_data_dict_none_text():
         assert len(data["text"]) == 1
         assert data["text"][0] == ""
 
+
 def test_get_api_already_initialized():
     mock_api = MagicMock()
     tesseract._api = mock_api
 
     assert tesseract._get_api() == mock_api
 
+
 def test_get_api_line_already_initialized():
     mock_api = MagicMock()
     tesseract._api_line = mock_api
 
     assert tesseract._get_api_line() == mock_api
+
 
 def test_candidate_tessdata_paths_exception_in_tessdata_data_path():
     with patch.dict(os.environ, clear=True):
@@ -381,6 +396,7 @@ def test_candidate_tessdata_paths_exception_in_tessdata_data_path():
 
                 # Should not include tessdata.data_path since it threw an exception
                 assert Path("/mock/pkg/share/tessdata") in paths
+
 
 @patch("src.autoscrapper.ocr.tesseract._get_api")
 @patch("src.autoscrapper.ocr.tesseract._get_api_line")
@@ -393,6 +409,7 @@ def test_image_to_string_exception(mock_get_api_line, mock_get_api):
     with pytest.raises(Exception, match="OCR failed"):
         tesseract.image_to_string(img)
 
+
 @patch("src.autoscrapper.ocr.tesseract._get_api")
 @patch("src.autoscrapper.ocr.tesseract._get_api_line")
 def test_image_to_data_exception(mock_get_api_line, mock_get_api):
@@ -403,6 +420,7 @@ def test_image_to_data_exception(mock_get_api_line, mock_get_api):
     img = np.zeros((10, 10), dtype=np.uint8)
     with pytest.raises(Exception, match="OCR failed"):
         tesseract.image_to_data(img)
+
 
 def test_build_data_dict_all_levels():
     mock_word = MagicMock()
@@ -427,11 +445,13 @@ def test_build_data_dict_all_levels():
         assert data["line_num"][1] == 1
         assert data["word_num"][1] == 1
 
-def test_initialize_ocr_without_metadata():
-    with patch("src.autoscrapper.ocr.tesseract._get_api"), \
-         patch("src.autoscrapper.ocr.tesseract._get_api_line"), \
-         patch("src.autoscrapper.ocr.tesseract._record_backend_info"):
 
+def test_initialize_ocr_without_metadata():
+    with (
+        patch("src.autoscrapper.ocr.tesseract._get_api"),
+        patch("src.autoscrapper.ocr.tesseract._get_api_line"),
+        patch("src.autoscrapper.ocr.tesseract._record_backend_info"),
+    ):
         # Ensure _backend_info remains None
         tesseract._backend_info = None
 

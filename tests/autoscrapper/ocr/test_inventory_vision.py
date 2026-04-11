@@ -319,7 +319,7 @@ class TestOcrTitleStripCache:
         """
         reset_ocr_caches()
         img = self._make_image()
-           # no words → item_name will be ""
+        # no words → item_name will be ""
 
         with (
             patch.object(_vision, "image_to_string", return_value="") as mock_ocr,
@@ -338,7 +338,6 @@ class TestOcrTitleStripCache:
         """When item_name is non-empty, the second call must use the cache."""
         reset_ocr_caches()
         img = self._make_image()
-
 
         with (
             patch.object(_vision, "image_to_string", return_value="FoundItem") as mock_ocr,
@@ -368,17 +367,19 @@ class TestResetOcrCaches:
         # Prime the caches artificially
         _vision._last_roi_hash = b"fake"
         _vision._last_ocr_result = ("Item", "Item")
-        _vision._ITEM_NAMES = ("Item A", "Item B")
+        _vision.rules_store._ITEM_NAMES = ("Item A", "Item B")
 
         reset_ocr_caches()
 
         assert _vision._last_roi_hash is None
         assert _vision._last_ocr_result is None
-        assert _vision._ITEM_NAMES is None
+        assert _vision.rules_store._ITEM_NAMES is None
+
 
 # ---------------------------------------------------------------------------
 # enable_ocr_debug
 # ---------------------------------------------------------------------------
+
 
 class TestEnableOcrDebug:
     def test_enable_ocr_debug_mkdir_exception(self, capsys):

@@ -155,7 +155,7 @@ def test_capture_skip_unlisted_sample_empty_text(tmp_path: Path) -> None:
     paths = CorpusPaths(manifest_path=tmp_path / "samples.jsonl", images_dir=tmp_path / "images")
 
     sample = capture_skip_unlisted_sample(
-        raw_text="  \n ", # empty when cleaned
+        raw_text="  \n ",  # empty when cleaned
         chosen_name="Fallback Name",
         matched_name=None,
         source_image=None,
@@ -165,7 +165,7 @@ def test_capture_skip_unlisted_sample_empty_text(tmp_path: Path) -> None:
 
     assert sample is not None
     assert sample.cleaned_text == "Fallback Name"
-    assert sample.raw_text == "Fallback Name" # sample_raw_text is empty, so it uses cleaned_text
+    assert sample.raw_text == "Fallback Name"  # sample_raw_text is empty, so it uses cleaned_text
 
 
 def test_capture_skip_unlisted_sample_completely_empty(tmp_path: Path) -> None:
@@ -173,7 +173,7 @@ def test_capture_skip_unlisted_sample_completely_empty(tmp_path: Path) -> None:
 
     sample = capture_skip_unlisted_sample(
         raw_text="  \n ",
-        chosen_name="   ", # also empty
+        chosen_name="   ",  # also empty
         matched_name=None,
         source_image=None,
         from_context_menu=False,
@@ -200,9 +200,9 @@ def test_load_failure_corpus(tmp_path: Path) -> None:
 
     with manifest_path.open("wb") as f:
         f.write(orjson.dumps(valid_dict) + b"\n")
-        f.write(b"  \n") # empty line
-        f.write(b'{"invalid": "json"\n') # this line doesn't throw, we handle it below
-        f.write(orjson.dumps({"valid": "json_but_invalid_sample"}) + b"\n") # coerce returns None
+        f.write(b"  \n")  # empty line
+        f.write(b'{"invalid": "json"\n')  # this line doesn't throw, we handle it below
+        f.write(orjson.dumps({"valid": "json_but_invalid_sample"}) + b"\n")  # coerce returns None
 
     # Load failure corpus will throw if json isn't well formed per line,
     # instead of crashing let's just make sure load failure corpus handles what it's supposed to
@@ -211,7 +211,7 @@ def test_load_failure_corpus(tmp_path: Path) -> None:
     manifest_path2 = tmp_path / "samples2.jsonl"
     with manifest_path2.open("wb") as f:
         f.write(orjson.dumps(valid_dict) + b"\n")
-        f.write(orjson.dumps({"valid": "json_but_invalid_sample"}) + b"\n") # coerce returns None
+        f.write(orjson.dumps({"valid": "json_but_invalid_sample"}) + b"\n")  # coerce returns None
         f.write(b"  \n")
         f.write(b"\n")
 
