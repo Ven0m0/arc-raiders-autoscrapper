@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-11T10:26:05.459829Z",
+    "generatedAt": "2026-04-11T14:15:32.310412Z",
     "data": {
-      "lastUpdated": "2026-04-11T10:26:05.372734Z",
+      "lastUpdated": "2026-04-11T14:15:32.303187Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1"
     },
@@ -128,8 +128,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Angled Grip",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -139,8 +140,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Angled Grip",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -160,8 +162,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Angled Grip",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -190,8 +193,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Anvil",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -201,8 +205,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Anvil",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -212,8 +217,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Anvil",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -223,8 +229,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Anvil",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -398,8 +405,9 @@
       "value": 5500,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Arpeggio",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -409,8 +417,9 @@
       "value": 8000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Arpeggio",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -420,8 +429,9 @@
       "value": 11500,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Arpeggio",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -431,8 +441,9 @@
       "value": 15000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Arpeggio",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -553,8 +564,9 @@
       "value": 8000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bettina",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -564,8 +576,9 @@
       "value": 11000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bettina",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -575,8 +588,9 @@
       "value": 14000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bettina",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -586,8 +600,9 @@
       "value": 18000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bettina",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -786,8 +801,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bobcat",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -807,8 +823,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bobcat",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -818,8 +835,9 @@
       "value": 22000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bobcat",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -829,8 +847,9 @@
       "value": 27000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bobcat",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -987,8 +1006,9 @@
       "value": 2900,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Burletta",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -998,8 +1018,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Burletta",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1020,8 +1041,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Burletta",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1133,8 +1155,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Canto",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1144,8 +1167,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Canto",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1155,8 +1179,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Canto",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1299,8 +1324,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Compensator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1310,8 +1336,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Compensator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1331,8 +1358,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Compensator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1957,8 +1985,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Light Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1968,8 +1997,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Light Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1989,8 +2019,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Light Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2010,8 +2041,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Medium Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2021,8 +2053,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Medium Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2042,8 +2075,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Medium Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2063,8 +2097,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Shotgun Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2074,8 +2109,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Shotgun Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2095,8 +2131,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Shotgun Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2156,8 +2193,9 @@
       "value": 475,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Ferro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2167,8 +2205,9 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Ferro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2178,8 +2217,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Ferro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2189,8 +2229,9 @@
       "value": 2900,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Ferro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2553,8 +2594,9 @@
       "value": 450,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hairpin",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2564,8 +2606,9 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hairpin",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2575,8 +2618,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hairpin",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2586,8 +2630,9 @@
       "value": 2900,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hairpin",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2735,8 +2780,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hullcracker",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2746,8 +2792,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hullcracker",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2757,8 +2804,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hullcracker",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2768,8 +2816,9 @@
       "value": 22000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hullcracker IV",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2798,8 +2847,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Il Toro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2809,8 +2859,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Il Toro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2831,8 +2882,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Il Toro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2955,8 +3007,9 @@
       "value": 840,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Kettle",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2966,8 +3019,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Kettle",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2977,8 +3031,9 @@
       "value": 3000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Kettle",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2988,8 +3043,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Kettle",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3533,8 +3589,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Muzzle Brake",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3544,8 +3601,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Muzzle Brake",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3565,8 +3623,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Muzzle Brake",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3666,8 +3725,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Osprey",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3677,8 +3737,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Osprey",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3688,8 +3749,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Osprey",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3699,8 +3761,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Osprey",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4065,8 +4128,9 @@
       "value": 1750,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Rattler",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4076,8 +4140,9 @@
       "value": 3000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Rattler",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4087,8 +4152,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Rattler",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4098,8 +4164,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Rattler",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4204,8 +4271,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Renegade",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4215,8 +4283,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Renegade",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4226,8 +4295,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Renegade",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4237,8 +4307,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Renegade",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4584,8 +4655,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Shotgun Choke",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4595,8 +4667,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Shotgun Choke",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4616,8 +4689,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Shotgun Choke",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4722,8 +4796,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Silencer",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4743,8 +4818,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Silencer",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4764,8 +4840,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Silencer",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4974,8 +5051,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stable Stock",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4985,8 +5063,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stable Stock",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5006,8 +5085,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stable Stock",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5102,8 +5182,9 @@
       "value": 800,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stitcher",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5113,8 +5194,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stitcher",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5124,8 +5206,9 @@
       "value": 3000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stitcher",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5135,8 +5218,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stitcher",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5365,8 +5449,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Tempest",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5386,8 +5471,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Tempest",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5397,8 +5483,9 @@
       "value": 22000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Tempest",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5408,8 +5495,9 @@
       "value": 27000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Tempest",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5492,8 +5580,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Torrente",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5503,8 +5592,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Torrente",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5514,8 +5604,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Torrente",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5525,8 +5616,9 @@
       "value": 15000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Torrente",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5653,8 +5745,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Venator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5664,8 +5757,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Venator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5675,8 +5769,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Venator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5686,8 +5781,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Venator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5707,8 +5803,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vertical Grip",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5718,8 +5815,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vertical Grip",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5739,8 +5837,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vertical Grip",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5842,8 +5941,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vulcano",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5853,8 +5953,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vulcano",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5864,8 +5965,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vulcano",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5875,8 +5977,9 @@
       "value": 22000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vulcano",
         "Override: treat 'Your Call' as Keep"
       ]
     },
