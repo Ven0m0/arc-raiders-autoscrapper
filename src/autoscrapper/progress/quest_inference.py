@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import deque
+import logging
 import re
 from typing import Dict, Iterable, List, Set, Tuple
 
@@ -9,6 +10,8 @@ from .progress_config import (
     group_quests_by_trader,
     resolve_active_quests,
 )
+
+_log = logging.getLogger(__name__)
 
 
 def _normalize_quest_name(value: str) -> str:
@@ -32,7 +35,13 @@ def _build_predecessors_by_id(quests: List[dict], quest_graph: Dict[str, object]
         normalized_name = _normalize_quest_name(str(quest_name))
         existing = quest_id_by_name.get(normalized_name)
         if existing and existing != str(quest_id):
-            raise ValueError(f"Duplicate quest name in data: {quest_name}")
+            _log.warning(
+                "Duplicate quest name in data: %r (ids: %s, %s) — keeping first occurrence.",
+                quest_name,
+                existing,
+                quest_id,
+            )
+            continue
         quest_id_by_name[normalized_name] = str(quest_id)
 
     node_to_quest_id: Dict[str, str] = {}
