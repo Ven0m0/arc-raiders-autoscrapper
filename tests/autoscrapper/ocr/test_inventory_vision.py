@@ -375,3 +375,23 @@ class TestResetOcrCaches:
         assert _vision._last_roi_hash is None
         assert _vision._last_ocr_result is None
         assert _vision._ITEM_NAMES is None
+
+# ---------------------------------------------------------------------------
+# enable_ocr_debug
+# ---------------------------------------------------------------------------
+
+class TestEnableOcrDebug:
+    def test_enable_ocr_debug_mkdir_exception(self, capsys):
+        """Test that an exception during directory creation is caught and handled."""
+        from pathlib import Path
+
+        mock_path = MagicMock(spec=Path)
+        mock_path.mkdir.side_effect = OSError("Permission denied")
+
+        # Use patch to isolate global state and verify it is cleared on failure
+        with patch.object(_vision, "_OCR_DEBUG_DIR", Path("/tmp/dummy")):
+            _vision.enable_ocr_debug(mock_path)
+            assert _vision._OCR_DEBUG_DIR is None
+
+        captured = capsys.readouterr()
+        assert "[vision_ocr] failed to enable OCR debug dir: Permission denied" in captured.out
