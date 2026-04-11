@@ -1,24 +1,24 @@
 from __future__ import annotations
 
 try:
-    from rich import box
+    from rich import box as box
     from rich.align import Align as Align
-    from rich.console import Console, Group
-    from rich.live import Live
-    from rich.panel import Panel
+    from rich.console import Console as Console, Group as Group
+    from rich.live import Live as Live
+    from rich.panel import Panel as Panel
     from rich.progress import (
-        BarColumn,
-        Progress,
-        ProgressColumn,
-        SpinnerColumn,
-        Task,
-        TaskProgressColumn,
-        TextColumn,
-        TimeElapsedColumn,
-        TimeRemainingColumn,
+        BarColumn as BarColumn,
+        Progress as Progress,
+        ProgressColumn as ProgressColumn,
+        SpinnerColumn as SpinnerColumn,
+        Task as Task,
+        TaskProgressColumn as TaskProgressColumn,
+        TextColumn as TextColumn,
+        TimeElapsedColumn as TimeElapsedColumn,
+        TimeRemainingColumn as TimeRemainingColumn,
     )
-    from rich.table import Table
-    from rich.text import Text
+    from rich.table import Table as Table
+    from rich.text import Text as Text
 except ImportError:  # pragma: no cover - optional dependency
     Align = None
     Console = None
