@@ -1116,8 +1116,9 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
             ocr_failed=True,
         )
 
-    raw_item_text = clean_ocr_text(raw_text)
-    item_name = match_item_name(raw_item_text)
+    match_result = match_item_name_result(raw_text)
+    raw_item_text = match_result.cleaned_text
+    item_name = match_result.chosen_name
     if item_name:
         _last_roi_hash = roi_hash
         _last_ocr_result = (item_name, raw_item_text)
