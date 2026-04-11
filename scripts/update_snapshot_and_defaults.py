@@ -59,7 +59,7 @@ def _load_workshop_level2_map(hideout_modules_path: Path) -> Dict[str, int]:
         max_level = module.get("maxLevel", 0)
         try:
             max_level_int = int(max_level)
-        except (TypeError, ValueError):
+        except TypeError, ValueError:
             continue
         if max_level_int <= 0:
             continue

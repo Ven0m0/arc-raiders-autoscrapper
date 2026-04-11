@@ -51,7 +51,7 @@ def normalize_hideout_levels(input_levels: Dict[str, int] | None, hideout_module
 
         try:
             level_num = int(raw_level)
-        except (TypeError, ValueError):
+        except TypeError, ValueError:
             raise ValueError(f"Invalid hideout level for '{raw_key}': {raw_level}") from None
         if level_num < 0:
             raise ValueError(f"Invalid hideout level for '{raw_key}': {raw_level}")
@@ -122,5 +122,3 @@ def resolve_active_quests(
             missing.append(entry)
 
     return resolved, missing
-
-

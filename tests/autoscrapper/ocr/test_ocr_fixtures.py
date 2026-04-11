@@ -9,14 +9,13 @@ Add fixtures with:
 
 The suite is skipped automatically when no fixtures have been captured yet.
 """
+
 from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Generator
 
 import cv2
-import numpy as np
 import pytest
 
 FIXTURES_DIR = Path(__file__).resolve().parents[3] / "tests" / "fixtures" / "ocr"
@@ -28,7 +27,7 @@ def _collect_fixtures() -> list[tuple[Path, str]]:
     for sidecar in sorted(FIXTURES_DIR.glob("*.json")):
         try:
             data = json.loads(sidecar.read_text(encoding="utf-8"))
-        except (json.JSONDecodeError, OSError):
+        except json.JSONDecodeError, OSError:
             continue
         expected_name = data.get("expected_name")
         if not isinstance(expected_name, str) or not expected_name:

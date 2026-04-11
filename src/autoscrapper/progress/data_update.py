@@ -216,7 +216,7 @@ def _normalize_component_values(value: object) -> Optional[Dict[str, int]]:
             continue
         try:
             quantity = int(raw_quantity)
-        except (TypeError, ValueError):
+        except TypeError, ValueError:
             continue
         if quantity <= 0:
             continue
