@@ -16,6 +16,8 @@ def test_read_json_invalid(tmp_path: Path):
     with pytest.raises(orjson.JSONDecodeError):
         _read_json(file_path)
 
+
+
 def test_read_json_not_found(tmp_path: Path):
     file_path = tmp_path / "missing.json"
 
