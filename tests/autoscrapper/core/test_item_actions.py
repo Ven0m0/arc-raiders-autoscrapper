@@ -4,6 +4,7 @@ from autoscrapper.core.item_actions import (
     clean_ocr_text,
     _normalize_action,
     choose_decision,
+    load_item_actions,
 )
 
 
@@ -77,3 +78,9 @@ def test__normalize_action(value, expected):
 )
 def test_choose_decision(item_name, actions, expected):
     assert choose_decision(item_name, actions) == expected
+
+
+def test_load_item_actions_file_not_found(tmp_path):
+    missing_path = tmp_path / "missing.json"
+    result = load_item_actions(path=missing_path)
+    assert result == {}

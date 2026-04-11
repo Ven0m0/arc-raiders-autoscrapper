@@ -213,5 +213,3 @@ def resolve_action_taken(
             context=context,
         )
     return "SCAN_ONLY"
-
-

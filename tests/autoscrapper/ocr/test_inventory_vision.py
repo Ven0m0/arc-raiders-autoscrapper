@@ -415,13 +415,23 @@ class TestResetOcrCaches:
         assert _vision.rules_store._ITEM_NAMES is None
 
 
-
 # ---------------------------------------------------------------------------
 # enable_ocr_debug
 # ---------------------------------------------------------------------------
 
 
 class TestEnableOcrDebug:
+    def test_enable_ocr_debug_success(self, tmp_path):
+        """Test that enable_ocr_debug sets the debug directory and creates it."""
+        debug_dir = tmp_path / "ocr_debug"
+        original_dir = _vision._OCR_DEBUG_DIR
+        try:
+            _vision.enable_ocr_debug(debug_dir)
+            assert _vision._OCR_DEBUG_DIR == debug_dir
+            assert debug_dir.exists()
+        finally:
+            _vision._OCR_DEBUG_DIR = original_dir
+
     def test_enable_ocr_debug_mkdir_exception(self, capsys):
         """Test that an exception during directory creation is caught and handled."""
         from pathlib import Path
