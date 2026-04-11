@@ -13,23 +13,25 @@ from autoscrapper.warmup import (
 
 
 @pytest.fixture(autouse=True)
-def reset_warmup_state() -> None:
-    orig_started = warmup._WARMUP_STARTED
-    orig_error = warmup._WARMUP_ERROR
-    orig_done_is_set = warmup._WARMUP_DONE.is_set()
+def reset_warmup_state():
+    with warmup._WARMUP_LOCK:
+        orig_started = warmup._WARMUP_STARTED
+        orig_error = warmup._WARMUP_ERROR
+        orig_done_is_set = warmup._WARMUP_DONE.is_set()
 
-    warmup._WARMUP_STARTED = False
-    warmup._WARMUP_ERROR = None
-    warmup._WARMUP_DONE.clear()
+        warmup._WARMUP_STARTED = False
+        warmup._WARMUP_ERROR = None
+        warmup._WARMUP_DONE.clear()
 
     yield
 
-    warmup._WARMUP_STARTED = orig_started
-    warmup._WARMUP_ERROR = orig_error
-    if orig_done_is_set:
-        warmup._WARMUP_DONE.set()
-    else:
-        warmup._WARMUP_DONE.clear()
+    with warmup._WARMUP_LOCK:
+        warmup._WARMUP_STARTED = orig_started
+        warmup._WARMUP_ERROR = orig_error
+        if orig_done_is_set:
+            warmup._WARMUP_DONE.set()
+        else:
+            warmup._WARMUP_DONE.clear()
 
 
 def test_warmup_status_initial() -> None:
