@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: daily-data-update
     env:
-      METAFORGE_SUPABASE_ANON_KEY: ${{ secrets.METAFORGE_SUPABASE_ANON_KEY || secrets.METAFORGE_API }}
+      METAFORGE_SUPABASE_ANON_KEY: ${{ secrets.METAFORGE_SUPABASE_ANON_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
