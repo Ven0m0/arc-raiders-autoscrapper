@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import defaultdict
 from dataclasses import dataclass
 from typing import Dict, List, Optional
 
@@ -61,6 +62,49 @@ class DecisionEngine:
         self.quests = quests
         self.projects = projects
         self.reverse_recipe_index = build_reverse_recipe_index(items)
+
+        self._quest_requirements: Dict[str, List[dict]] = defaultdict(list)
+        for quest in quests:
+            reqs = quest.get("requirements") or []
+            if isinstance(reqs, list):
+                for req in reqs:
+                    item_id = req.get("item_id")
+                    if item_id:
+                        self._quest_requirements[item_id].append(quest)
+
+        self._project_requirements: Dict[str, List[dict]] = defaultdict(list)
+        for project in projects:
+            reqs = project.get("requirements") or []
+            if isinstance(reqs, list):
+                for req in reqs:
+                    item_id = req.get("item_id")
+                    if item_id:
+                        self._project_requirements[item_id].append(project)
+
+            phases = project.get("phases") or []
+            if isinstance(phases, list):
+                for phase in phases:
+                    phase_reqs = phase.get("requirementItemIds") or []
+                    if isinstance(phase_reqs, list):
+                        for req in phase_reqs:
+                            item_id = req.get("item_id")
+                            if item_id:
+                                # Avoid adding the same project multiple times if it appears in multiple phases
+                                if project not in self._project_requirements[item_id]:
+                                    self._project_requirements[item_id].append(project)
+
+        self._upgrade_requirements: Dict[str, List[tuple[dict, int]]] = defaultdict(list)
+        for module in hideout_modules:
+            levels = module.get("levels") or []
+            if isinstance(levels, list):
+                for level_data in levels:
+                    level = level_data.get("level")
+                    reqs = level_data.get("requirementItemIds") or []
+                    if level is not None and isinstance(reqs, list):
+                        for req in reqs:
+                            item_id = req.get("item_id")
+                            if item_id:
+                                self._upgrade_requirements[item_id].append((module, level))
 
     def finalize_decision(self, item: dict, decision: DecisionReason) -> DecisionReason:
         final_decision = decision
@@ -272,69 +316,37 @@ class DecisionEngine:
     def is_used_in_active_quests(self, item: dict, user_progress: dict) -> Dict[str, List[str] | bool]:
         quest_names: List[str] = []
         completed = set(user_progress.get("completedQuests", []))
-        for quest in self.quests:
-            if quest.get("id") in completed:
-                continue
+        item_id = item.get("id")
 
-            is_required = False
-            requirements = quest.get("requirements") or []
-            if isinstance(requirements, list):
-                is_required = any(req.get("item_id") == item.get("id") for req in requirements)
-
-            if is_required:
-                quest_names.append(quest.get("name", ""))
+        if item_id:
+            for quest in self._quest_requirements.get(item_id, []):
+                if quest.get("id") not in completed:
+                    quest_names.append(quest.get("name", ""))
 
         return {"is_used": bool(quest_names), "quest_names": quest_names}
 
     def is_used_in_active_projects(self, item: dict, user_progress: dict) -> Dict[str, List[str] | bool]:
         project_names: List[str] = []
         completed = set(user_progress.get("completedProjects", []))
+        item_id = item.get("id")
 
-        for project in self.projects:
-            if project.get("id") in completed:
-                continue
-
-            is_required = False
-            requirements = project.get("requirements") or []
-            if isinstance(requirements, list):
-                is_required = any(req.get("item_id") == item.get("id") for req in requirements)
-
-            phases = project.get("phases") or []
-            if not is_required and isinstance(phases, list):
-                for phase in phases:
-                    reqs = phase.get("requirementItemIds") or []
-                    if isinstance(reqs, list) and any(req.get("item_id") == item.get("id") for req in reqs):
-                        is_required = True
-                        break
-
-            if is_required:
-                project_names.append(project.get("name", ""))
+        if item_id:
+            for project in self._project_requirements.get(item_id, []):
+                if project.get("id") not in completed:
+                    project_names.append(project.get("name", ""))
 
         return {"is_used": bool(project_names), "project_names": project_names}
 
     def is_needed_for_upgrades(self, item: dict, user_progress: dict) -> Dict[str, List[str] | bool]:
         module_names: List[str] = []
         hideout_levels = user_progress.get("hideoutLevels", {})
+        item_id = item.get("id")
 
-        for module in self.hideout_modules:
-            module_id = module.get("id")
-            current_level = hideout_levels.get(module_id, 0)
-            max_level = module.get("maxLevel", 0)
-            levels = module.get("levels") or []
-            if current_level >= max_level:
-                continue
-            if not isinstance(levels, list):
-                continue
-
-            for level_data in levels:
-                level = level_data.get("level")
-                if level is None or level <= current_level:
-                    continue
-                reqs = level_data.get("requirementItemIds") or []
-                if not isinstance(reqs, list):
-                    continue
-                is_required = any(req.get("item_id") == item.get("id") for req in reqs)
-                if is_required:
+        if item_id:
+            for module, level in self._upgrade_requirements.get(item_id, []):
+                module_id = module.get("id")
+                current_level = hideout_levels.get(module_id, 0)
+                if level > current_level:
                     module_names.append(f"{module.get('name')} (Level {level})")
 
         return {"is_needed": bool(module_names), "module_names": module_names}
