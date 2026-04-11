@@ -99,13 +99,25 @@ def _fetch_metaforge_collection(resource: str) -> List[dict]:
     if total_pages is not None and total_pages > 1:
         def fetch_page(page: int) -> List[dict]:
             page_url = f"{METAFORGE_API_BASE}/{resource}?page={page}&limit={limit}"
-            page_response = _fetch_json(page_url)
-            if not isinstance(page_response, dict):
-                raise DownloadError(f"Unexpected response for {resource}")
-            page_data = page_response.get("data") or []
-            if not isinstance(page_data, list):
-                raise DownloadError(f"Unexpected {resource} payload: data must be a list")
-            return [entry for entry in page_data if isinstance(entry, dict)]
+            try:
+                page_response = _fetch_json(page_url)
+                if not isinstance(page_response, dict):
+                    raise DownloadError(
+                        f"Unexpected response for {resource} on page {page} ({page_url})"
+                    )
+                page_data = page_response.get("data") or []
+                if not isinstance(page_data, list):
+                    raise DownloadError(
+                        f"Unexpected {resource} payload on page {page} ({page_url}): "
+                        "data must be a list"
+                    )
+                return [entry for entry in page_data if isinstance(entry, dict)]
+            except DownloadError:
+                raise
+            except Exception as exc:
+                raise DownloadError(
+                    f"Failed to fetch {resource} page {page} ({page_url})"
+                ) from exc
 
         # Use up to 10 workers for concurrent fetching
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
@@ -119,10 +131,15 @@ def _fetch_metaforge_collection(resource: str) -> List[dict]:
             url = f"{METAFORGE_API_BASE}/{resource}?page={current_page}&limit={limit}"
             response = _fetch_json(url)
             if not isinstance(response, dict):
-                raise DownloadError(f"Unexpected response for {resource}")
+                raise DownloadError(
+                    f"Unexpected response for {resource} on page {current_page} ({url})"
+                )
             data = response.get("data") or []
             if not isinstance(data, list):
-                raise DownloadError(f"Unexpected {resource} payload: data must be a list")
+                raise DownloadError(
+                    f"Unexpected {resource} payload on page {current_page} ({url}): "
+                    "data must be a list"
+                )
             rows.extend(entry for entry in data if isinstance(entry, dict))
             pagination = response.get("pagination") or {}
             has_next = bool(pagination.get("hasNextPage"))
