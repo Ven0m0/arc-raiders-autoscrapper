@@ -36,16 +36,12 @@ HIDEOUT_ALIASES = {
 }
 
 
-def normalize_hideout_levels(
-    input_levels: Dict[str, int] | None, hideout_modules: List[dict]
-) -> Dict[str, int]:
+def normalize_hideout_levels(input_levels: Dict[str, int] | None, hideout_modules: List[dict]) -> Dict[str, int]:
     out: Dict[str, int] = {}
     if not input_levels:
         return out
 
-    name_to_id = {
-        _norm_key(mod.get("name", "")): mod.get("id") for mod in hideout_modules
-    }
+    name_to_id = {_norm_key(mod.get("name", "")): mod.get("id") for mod in hideout_modules}
 
     for raw_key, raw_level in input_levels.items():
         key = _norm_key(raw_key)
@@ -56,9 +52,7 @@ def normalize_hideout_levels(
         try:
             level_num = int(raw_level)
         except TypeError, ValueError:
-            raise ValueError(
-                f"Invalid hideout level for '{raw_key}': {raw_level}"
-            ) from None
+            raise ValueError(f"Invalid hideout level for '{raw_key}': {raw_level}") from None
         if level_num < 0:
             raise ValueError(f"Invalid hideout level for '{raw_key}': {raw_level}")
 
@@ -130,9 +124,7 @@ def resolve_active_quests(
     return resolved, missing
 
 
-def infer_completed_by_trader(
-    quests_by_trader: Dict[str, List[dict]], active_resolved: List[dict]
-) -> List[str]:
+def infer_completed_by_trader(quests_by_trader: Dict[str, List[dict]], active_resolved: List[dict]) -> List[str]:
     completed = set()
     for active in active_resolved:
         trader = active.get("trader")
@@ -159,30 +151,22 @@ def build_completed_quest_ids(
         return list(completed)
 
     quests_by_trader = group_quests_by_trader(quests)
-    trader_lookup = {
-        _norm_key(trader): trader for trader in sorted(quests_by_trader.keys())
-    }
+    trader_lookup = {_norm_key(trader): trader for trader in sorted(quests_by_trader.keys())}
 
     for raw_trader, raw_count in quest_progress_by_trader.items():
         trader_key = trader_lookup.get(_norm_key(raw_trader))
         if not trader_key:
             available = ", ".join(sorted(quests_by_trader.keys()))
-            raise ValueError(
-                f"Unknown trader '{raw_trader}' in questProgressByTrader. Available traders: {available}"
-            )
+            raise ValueError(f"Unknown trader '{raw_trader}' in questProgressByTrader. Available traders: {available}")
 
         quests_for_trader = quests_by_trader.get(trader_key, [])
         try:
             completed_count = int(raw_count)
         except TypeError, ValueError:
-            raise ValueError(
-                f"Invalid completed quest count for trader '{raw_trader}': {raw_count}"
-            ) from None
+            raise ValueError(f"Invalid completed quest count for trader '{raw_trader}': {raw_count}") from None
 
         if completed_count < 0:
-            raise ValueError(
-                f"Invalid completed quest count for trader '{raw_trader}': {raw_count}"
-            )
+            raise ValueError(f"Invalid completed quest count for trader '{raw_trader}': {raw_count}")
         if completed_count > len(quests_for_trader):
             raise ValueError(
                 f"questProgressByTrader['{raw_trader}'] is {completed_count}, but trader only has {len(quests_for_trader)} quests"

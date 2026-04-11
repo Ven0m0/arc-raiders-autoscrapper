@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 import os
 import subprocess
 import sys
@@ -10,6 +9,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import cv2
+import orjson
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SRC_DIR = REPO_ROOT / "src"
@@ -86,11 +86,7 @@ def _run_worker(manifest_path: Path, label: str) -> dict[str, object]:
         if image is None:
             continue
         sample_start = time.perf_counter()
-        result = (
-            ocr_context_menu(image)
-            if sample.source == "context_menu"
-            else ocr_title_strip(image)
-        )
+        result = ocr_context_menu(image) if sample.source == "context_menu" else ocr_title_strip(image)
         elapsed = time.perf_counter() - sample_start
         total_duration += elapsed
         is_correct = result.item_name == sample.expected_name
@@ -160,19 +156,12 @@ def _install_tessdata_package(package_name: str, target_dir: Path) -> str:
         )
     except subprocess.CalledProcessError as exc:
         detail = exc.stderr.strip() or exc.stdout.strip() or str(exc)
-        raise RuntimeError(
-            f"Could not install {package_name} for benchmarking: {detail}"
-        ) from exc
+        raise RuntimeError(f"Could not install {package_name} for benchmarking: {detail}") from exc
     completed = subprocess.run(
         [
             sys.executable,
             "-c",
-            (
-                "import sys; "
-                f"sys.path.insert(0, {str(target_dir)!r}); "
-                "import tessdata; "
-                "print(tessdata.data_path())"
-            ),
+            (f"import sys; sys.path.insert(0, {str(target_dir)!r}); import tessdata; print(tessdata.data_path())"),
         ],
         check=True,
         capture_output=True,
@@ -197,9 +186,7 @@ def _resolve_current_tessdata_dir() -> str:
     return lines[-1]
 
 
-def _invoke_worker(
-    manifest_path: Path, label: str, tessdata_dir: str
-) -> dict[str, object]:
+def _invoke_worker(manifest_path: Path, label: str, tessdata_dir: str) -> dict[str, object]:
     env = os.environ.copy()
     env["TESSDATA_PREFIX"] = tessdata_dir
     completed = subprocess.run(
@@ -218,7 +205,7 @@ def _invoke_worker(
         capture_output=True,
         text=True,
     )
-    return json.loads(completed.stdout)
+    return orjson.loads(completed.stdout)
 
 
 def main() -> int:
@@ -228,7 +215,8 @@ def main() -> int:
     if args.worker:
         if not args.label:
             raise SystemExit("--label is required with --worker")
-        print(json.dumps(_run_worker(manifest_path, args.label)))
+        sys.stdout.buffer.write(orjson.dumps(_run_worker(manifest_path, args.label)))
+        sys.stdout.buffer.write(b"\n")
         return 0
 
     runs = []
@@ -272,12 +260,8 @@ def main() -> int:
         None,
     )
     if fast_report is None or best_report is None:
-        raise RuntimeError(
-            "Benchmark did not produce both fast-eng and best-eng reports"
-        )
-    selected_model = (
-        "best-eng" if best_report["accuracy"] > fast_report["accuracy"] else "fast-eng"
-    )
+        raise RuntimeError("Benchmark did not produce both fast-eng and best-eng reports")
+    selected_model = "best-eng" if best_report["accuracy"] > fast_report["accuracy"] else "fast-eng"
     report = {
         "manifest_path": manifest_path.as_posix(),
         "sample_count": fast_report["sample_count"],

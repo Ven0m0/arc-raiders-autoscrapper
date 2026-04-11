@@ -116,6 +116,4 @@ class ResetRulesScreen(AppScreen):
         elif event.button.id == "reset":
             ITEM_RULES_CUSTOM_PATH.unlink(missing_ok=True)
             self.app.pop_screen()
-            self.app.push_screen(
-                MessageScreen("Custom rules removed. Defaults restored.")
-            )
+            self.app.push_screen(MessageScreen("Custom rules removed. Defaults restored."))

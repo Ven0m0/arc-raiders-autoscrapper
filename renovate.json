@@ -29,6 +29,9 @@
   "prConcurrentLimit": 5,
   "prHourlyLimit": 0,
   "rangeStrategy": "bump",
+  "constraints": {
+    "python": "<3.14.4"
+  },
   "pep621": {
     "enabled": true
   },
@@ -46,6 +49,20 @@
   },
   "postUpdateOptions": ["uvLockUpdate"],
   "packageRules": [
+    {
+      "description": "Pin and constrain Python Docker image to 3.14.3",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["python"],
+      "pinDigests": false,
+      "allowedVersions": "3.14.3"
+    },
+    {
+      "description": "Keep requires-python within supported Python 3.14 range",
+      "matchManagers": ["pep621"],
+      "matchPackageNames": ["python"],
+      "matchDepTypes": ["requires-python"],
+      "allowedVersions": ">=3.14 <3.14.4"
+    },
     {
       "description": "Disable Docker digest pinning",
       "matchDatasources": ["docker"],
@@ -97,10 +114,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "**/.github/workflows/*.yml",
-        "**/.github/workflows/*.yaml"
-      ],
+      "managerFilePatterns": ["**/.github/workflows/*.yml", "**/.github/workflows/*.yaml"],
       "datasourceTemplate": "github-releases",
       "matchStrings": [
         "# renovate: datasource=(?<datasource>[^\\s]+) depName=(?<depName>[^\\s]+)(?: version=[^\\s]+)?\\s+[A-Za-z0-9_]+_VERSION:\\s*['\"]?(?<currentValue>[^'\"\\s]+)['\"]?"

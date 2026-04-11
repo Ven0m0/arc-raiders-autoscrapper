@@ -38,9 +38,7 @@ def _first_nonempty_text(value: object) -> str | None:
 
 
 def _extract_action(item: Mapping[str, object]) -> str | None:
-    return _first_nonempty_text(item.get("action")) or _first_nonempty_text(
-        item.get("decision")
-    )
+    return _first_nonempty_text(item.get("action")) or _first_nonempty_text(item.get("decision"))
 
 
 def _extract_reasons(item: Mapping[str, object]) -> list[str]:
@@ -106,11 +104,7 @@ def collect_rule_changes(
 
         before_action = _extract_action(default_item)
         after_action = _extract_action(updated_item)
-        if (
-            before_action is None
-            or after_action is None
-            or before_action == after_action
-        ):
+        if before_action is None or after_action is None or before_action == after_action:
             continue
 
         reasons = _extract_reasons(updated_item)

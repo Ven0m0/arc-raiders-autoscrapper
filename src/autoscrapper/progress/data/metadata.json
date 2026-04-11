@@ -1,8 +1,38 @@
 {
-  "lastUpdated": "2026-04-09T03:46:55.348885Z",
-  "source": "https://metaforge.app/arc-raiders",
+  "lastUpdated": "2026-04-10T14:27:21.115914Z",
+  "source": "https://metaforge.app/arc-raiders/api",
   "version": "autoscrapper-data-1",
-  "itemCount": 547,
-  "questCount": 94,
+  "itemCount": 656,
+  "questCount": 96,
+  "dataSources": {
+    "items": {
+      "provider": "metaforge+raidtheory",
+      "primary": {
+        "documentation": "https://metaforge.app/arc-raiders/api",
+        "apiBase": "https://metaforge.app/api/arc-raiders",
+        "error": null
+      },
+      "fallback": {
+        "repository": "https://github.com/RaidTheory/arcraiders-data",
+        "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
+        "supplementalCount": 109,
+        "error": null
+      }
+    },
+    "quests": {
+      "provider": "metaforge+raidtheory",
+      "primary": {
+        "documentation": "https://metaforge.app/arc-raiders/api",
+        "apiBase": "https://metaforge.app/api/arc-raiders",
+        "error": null
+      },
+      "fallback": {
+        "repository": "https://github.com/RaidTheory/arcraiders-data",
+        "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
+        "supplementalCount": 2,
+        "error": null
+      }
+    }
+  },
   "hasPriceOverrides": false
 }

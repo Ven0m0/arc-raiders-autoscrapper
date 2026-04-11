@@ -53,6 +53,7 @@
 *.webp binary diff=exif
 *.avif binary diff=exif
 *.jxl binary diff=exif
+*.png binary diff=exif
 
 # SVGs are text; let linguist handle them
 *.svg text

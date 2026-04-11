@@ -1,20 +1,20 @@
 [build-system]
-requires = ["setuptools>=82.0.1", "wheel>=0.46.2"]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build>=0.11.6", "setuptools>=82.0.1", "wheel"]
+build-backend = "uv_build"
 
 [project]
 name = "autoscrapper"
-version = "0.1.0"
+version = "0.2.0"
 description = "Arc Raiders inventory autoscrapper"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.14.3, <3.14.4"
 dependencies = [
   "mss",
   "numpy",
   "opencv-python-headless",
-  "Pillow",
+  "orjson",
+  "Pillow>=12.2.0",
   "pydirectinput-rgx; sys_platform == 'win32'",
-  "pynput; sys_platform == 'linux'",
   "pywinctl",
   "rapidfuzz~=3.14.5",
   "rich",
@@ -24,9 +24,7 @@ dependencies = [
   "tesserocr @ https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp314-cp314-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.14' and platform_machine == 'AMD64'",
 ]
 
-[project.optional-dependencies]
-# Keep [project.optional-dependencies].dev aligned with [dependency-groups].dev
-# so pip and uv users install the same local tooling.
+[dependency-groups]
 dev = [
     "mypy>=1.20.0",
     "prek>=0.3.8",
@@ -34,14 +32,27 @@ dev = [
     "ruff>=0.15.10",
 ]
 
+[project.optional-dependencies]
+# Keep [project.optional-dependencies].dev aligned with [dependency-groups].dev
+# so pip and uv users install the same local tooling.
+dev = [
+    "mypy>=1.20.0",
+    "prek>=0.3.8",
+    "pytest>=9.0.3",
+    "ruff>=0.15.10"
+]
+linux-input = [
+    "pynput; sys_platform == 'linux'",
+]
+
 [project.scripts]
 autoscrapper = "autoscrapper.__main__:main"
 
 [project.urls]
-Homepage = "https://github.com/zappybiby/ArcRaiders-AutoScrapper"
+Homepage = "https://github.com/Ven0m0/arc-raiders-autoscrapper"
 
 [tool.setuptools]
-package-dir = { "" = "src" }
+package-dir = {"" = "src"}
 include-package-data = true
 
 [tool.setuptools.packages.find]
@@ -49,10 +60,10 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 autoscrapper = [
-  "items/items_rules.default.json",
-  "progress/data/*.json",
-  "progress/data/static/*.json",
-  "tui/*.tcss",
+    "items/items_rules.default.json",
+    "progress/data/*.json",
+    "progress/data/static/*.json",
+    "tui/*.tcss",
 ]
 
 [tool.ruff]
@@ -101,10 +112,7 @@ ignore_missing_imports = true
 show_error_codes = true
 enable_error_code = ["ignore-without-code", "unused-awaitable", "possibly-undefined"]
 
-[dependency-groups]
-dev = [
-    "mypy>=1.20.0",
-    "prek>=0.3.8",
-    "pytest>=9.0.3",
-    "ruff>=0.15.10",
-]
+[tool.black]
+extend-exclude = '''
+^scripts/(setup-linux\.sh|setup-windows\.ps1)$
+'''

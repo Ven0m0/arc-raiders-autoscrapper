@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-import json
 import logging
 import os
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Dict, Optional
+
+import orjson
 
 from .interaction.keybinds import DEFAULT_STOP_KEY, normalize_stop_key
 
@@ -163,8 +164,7 @@ def _migrate_config(payload: Dict[str, Any]) -> Dict[str, Any]:
 
     if stored_version < CONFIG_VERSION:
         _log.warning(
-            "config: stored version %d is older than current version %d; "
-            "migrating automatically",
+            "config: stored version %d is older than current version %d; migrating automatically",
             stored_version,
             CONFIG_VERSION,
         )
@@ -180,7 +180,7 @@ def _migrate_config(payload: Dict[str, Any]) -> Dict[str, Any]:
 def _load_config_dict() -> Dict[str, Any]:
     path = config_path()
     try:
-        raw = json.loads(path.read_text(encoding="utf-8"))
+        raw = orjson.loads(path.read_bytes())
     except FileNotFoundError:
         return {}
     except (OSError, json.JSONDecodeError) as e:
@@ -196,7 +196,7 @@ def _load_config_dict() -> Dict[str, Any]:
 def _save_config_dict(payload: Dict[str, Any]) -> None:
     path = config_path()
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    path.write_bytes(orjson.dumps(payload, option=orjson.OPT_INDENT_2))
 
 
 def _from_raw_scan_settings(raw: Any) -> ScanSettings:
@@ -221,9 +221,7 @@ def _from_raw_scan_settings(raw: Any) -> ScanSettings:
         "input_action_delay_ms",
         "action_delay_ms",
     )
-    cell_infobox_left_right_click_gap_ms_raw = raw.get(
-        "cell_infobox_left_right_click_gap_ms"
-    )
+    cell_infobox_left_right_click_gap_ms_raw = raw.get("cell_infobox_left_right_click_gap_ms")
     item_infobox_settle_delay_ms_raw = _raw_with_aliases(
         raw,
         "item_infobox_settle_delay_ms",
@@ -243,59 +241,39 @@ def _from_raw_scan_settings(raw: Any) -> ScanSettings:
     infobox_retry_interval_ms = _coerce_non_negative_int(infobox_retry_interval_ms_raw)
     if infobox_retry_interval_ms is None:
         infobox_retry_interval_ms = ScanSettings.infobox_retry_interval_ms
-    infobox_retry_interval_ms = _clamp_delay_ms(
-        infobox_retry_interval_ms, "infobox_retry_interval_ms"
-    )
+    infobox_retry_interval_ms = _clamp_delay_ms(infobox_retry_interval_ms, "infobox_retry_interval_ms")
 
     ocr_unreadable_retries = _coerce_non_negative_int(ocr_unreadable_retries_raw)
     if ocr_unreadable_retries is None:
         ocr_unreadable_retries = ScanSettings.ocr_unreadable_retries
-    ocr_unreadable_retries = _clamp_retry_count(
-        ocr_unreadable_retries, "ocr_unreadable_retries"
-    )
+    ocr_unreadable_retries = _clamp_retry_count(ocr_unreadable_retries, "ocr_unreadable_retries")
 
     ocr_retry_interval_ms = _coerce_non_negative_int(ocr_retry_interval_ms_raw)
     if ocr_retry_interval_ms is None:
         ocr_retry_interval_ms = ScanSettings.ocr_retry_interval_ms
-    ocr_retry_interval_ms = _clamp_delay_ms(
-        ocr_retry_interval_ms, "ocr_retry_interval_ms"
-    )
+    ocr_retry_interval_ms = _clamp_delay_ms(ocr_retry_interval_ms, "ocr_retry_interval_ms")
 
     input_action_delay_ms = _coerce_non_negative_int(input_action_delay_ms_raw)
     if input_action_delay_ms is None:
         input_action_delay_ms = ScanSettings.input_action_delay_ms
-    input_action_delay_ms = _clamp_delay_ms(
-        input_action_delay_ms, "input_action_delay_ms"
-    )
+    input_action_delay_ms = _clamp_delay_ms(input_action_delay_ms, "input_action_delay_ms")
 
-    cell_infobox_left_right_click_gap_ms = _coerce_non_negative_int(
-        cell_infobox_left_right_click_gap_ms_raw
-    )
+    cell_infobox_left_right_click_gap_ms = _coerce_non_negative_int(cell_infobox_left_right_click_gap_ms_raw)
     if cell_infobox_left_right_click_gap_ms is None:
-        cell_infobox_left_right_click_gap_ms = (
-            ScanSettings.cell_infobox_left_right_click_gap_ms
-        )
+        cell_infobox_left_right_click_gap_ms = ScanSettings.cell_infobox_left_right_click_gap_ms
     cell_infobox_left_right_click_gap_ms = _clamp_delay_ms(
         cell_infobox_left_right_click_gap_ms, "cell_infobox_left_right_click_gap_ms"
     )
 
-    item_infobox_settle_delay_ms = _coerce_non_negative_int(
-        item_infobox_settle_delay_ms_raw
-    )
+    item_infobox_settle_delay_ms = _coerce_non_negative_int(item_infobox_settle_delay_ms_raw)
     if item_infobox_settle_delay_ms is None:
         item_infobox_settle_delay_ms = ScanSettings.item_infobox_settle_delay_ms
-    item_infobox_settle_delay_ms = _clamp_delay_ms(
-        item_infobox_settle_delay_ms, "item_infobox_settle_delay_ms"
-    )
+    item_infobox_settle_delay_ms = _clamp_delay_ms(item_infobox_settle_delay_ms, "item_infobox_settle_delay_ms")
 
-    post_sell_recycle_delay_ms = _coerce_non_negative_int(
-        post_sell_recycle_delay_ms_raw
-    )
+    post_sell_recycle_delay_ms = _coerce_non_negative_int(post_sell_recycle_delay_ms_raw)
     if post_sell_recycle_delay_ms is None:
         post_sell_recycle_delay_ms = ScanSettings.post_sell_recycle_delay_ms
-    post_sell_recycle_delay_ms = _clamp_delay_ms(
-        post_sell_recycle_delay_ms, "post_sell_recycle_delay_ms"
-    )
+    post_sell_recycle_delay_ms = _clamp_delay_ms(post_sell_recycle_delay_ms, "post_sell_recycle_delay_ms")
 
     return ScanSettings(
         stop_key=normalize_stop_key(stop_key_raw),
@@ -337,15 +315,9 @@ def _from_raw_progress_settings(raw: Any) -> ProgressSettings:
     hideout_levels_raw = raw.get("hideout_levels")
     last_updated_raw = raw.get("last_updated")
 
-    active_quests = (
-        [str(q) for q in active_quests_raw if str(q).strip()]
-        if isinstance(active_quests_raw, list)
-        else []
-    )
+    active_quests = [str(q) for q in active_quests_raw if str(q).strip()] if isinstance(active_quests_raw, list) else []
     completed_quests = (
-        [str(q) for q in completed_quests_raw if str(q).strip()]
-        if isinstance(completed_quests_raw, list)
-        else []
+        [str(q) for q in completed_quests_raw if str(q).strip()] if isinstance(completed_quests_raw, list) else []
     )
     hideout_levels: Dict[str, int] = {}
     if isinstance(hideout_levels_raw, dict):
@@ -362,9 +334,7 @@ def _from_raw_progress_settings(raw: Any) -> ProgressSettings:
         active_quests=active_quests,
         completed_quests=completed_quests,
         hideout_levels=hideout_levels,
-        last_updated=(
-            str(last_updated_raw) if isinstance(last_updated_raw, str) else None
-        ),
+        last_updated=(str(last_updated_raw) if isinstance(last_updated_raw, str) else None),
     )
 
 
@@ -388,21 +358,14 @@ def reset_progress_settings() -> None:
 
 def has_saved_progress(settings: ProgressSettings) -> bool:
     return bool(
-        settings.all_quests_completed
-        or settings.active_quests
-        or settings.completed_quests
-        or settings.hideout_levels
+        settings.all_quests_completed or settings.active_quests or settings.completed_quests or settings.hideout_levels
     )
 
 
 def _from_raw_ui_settings(raw: Any) -> UiSettings:
     if not isinstance(raw, dict):
         return UiSettings()
-    return UiSettings(
-        default_rules_warning_shown=_coerce_bool(
-            raw.get("default_rules_warning_shown"), False
-        )
-    )
+    return UiSettings(default_rules_warning_shown=_coerce_bool(raw.get("default_rules_warning_shown"), False))
 
 
 def load_ui_settings() -> UiSettings:

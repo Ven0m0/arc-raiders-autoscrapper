@@ -144,9 +144,7 @@ def detect_grid(
     pause_action(context.timing.input_action_delay, stop_key=context.stop_key)
     roi_left = context.win_left + context.grid_roi[0]
     roi_top = context.win_top + context.grid_roi[1]
-    inv_bgr = capture_region(
-        (roi_left, roi_top, context.grid_roi[2], context.grid_roi[3])
-    )
+    inv_bgr = capture_region((roi_left, roi_top, context.grid_roi[2], context.grid_roi[3]))
     grid = Grid.detect(inv_bgr, context.grid_roi, context.win_width, context.win_height)
     expected_cells = Grid.COLS * Grid.ROWS
     if len(grid) < expected_cells:
@@ -242,10 +240,7 @@ class _ScanRunner:
     def run(self) -> ScanRunState:
         for page in range(self.config.pages_to_scan):
             page_base_idx = page * self.context.cells_per_page
-            if (
-                self.state.stop_at_global_idx is not None
-                and page_base_idx >= self.state.stop_at_global_idx
-            ):
+            if self.state.stop_at_global_idx is not None and page_base_idx >= self.state.stop_at_global_idx:
                 break
             self._scan_single_page(page)
 
@@ -296,17 +291,13 @@ class _ScanRunner:
         )
         return window_bgr, time.perf_counter() - capture_start
 
-    def _try_context_menu_crop(
-        self, window_bgr: Any
-    ) -> Optional[Tuple[int, int, int, int]]:
+    def _try_context_menu_crop(self, window_bgr: Any) -> Optional[Tuple[int, int, int, int]]:
         if self._last_click_window_pos is None:
             return None
         cx, cy = self._last_click_window_pos
         return find_context_menu_crop(window_bgr, cx, cy)
 
-    def _try_infobox_color_detection(
-        self, window_bgr: Any
-    ) -> Tuple[Optional[Tuple[int, int, int, int]], float]:
+    def _try_infobox_color_detection(self, window_bgr: Any) -> Tuple[Optional[Tuple[int, int, int, int]], float]:
         find_start = time.perf_counter()
         rect = find_infobox(window_bgr)
         return rect, time.perf_counter() - find_start
@@ -439,9 +430,7 @@ class _ScanRunner:
                     stop_key=self.context.stop_key,
                 )
                 try:
-                    infobox_bgr = capture_region(
-                        (self.context.win_left + x, self.context.win_top + y, w, h)
-                    )
+                    infobox_bgr = capture_region((self.context.win_left + x, self.context.win_top + y, w, h))
                 except Exception:
                     window_bgr = capture_region(
                         (
@@ -456,9 +445,7 @@ class _ScanRunner:
                 infobox_bgr = window_bgr[y : y + h, x : x + w]
 
             infobox_ocr = (
-                ocr_context_menu(infobox_bgr)
-                if capture_result.context_menu_fallback
-                else ocr_infobox(infobox_bgr)
+                ocr_context_menu(infobox_bgr) if capture_result.context_menu_fallback else ocr_infobox(infobox_bgr)
             )
             preprocess_time += infobox_ocr.preprocess_time
             ocr_time += infobox_ocr.ocr_time
@@ -522,11 +509,7 @@ class _ScanRunner:
         )
 
         action_label, _details = _describe_action(action_taken)
-        item_label = (
-            (ocr_result.item_name or ocr_result.raw_item_text or "<unreadable>")
-            .replace("\n", " ")
-            .strip()
-        )
+        item_label = (ocr_result.item_name or ocr_result.raw_item_text or "<unreadable>").replace("\n", " ").strip()
 
         result = ItemActionResult(
             page=page,
@@ -570,22 +553,15 @@ class _ScanRunner:
             return
 
         processed = len(self.state.results)
-        total_label = (
-            str(self.config.items_total) if self.config.items_total is not None else "?"
-        )
-        current_label = (
-            f"{processed}/{total_label} • p{page + 1}/{self.config.pages_to_scan} "
-            f"r{cell.row}c{cell.col}"
-        )
+        total_label = str(self.config.items_total) if self.config.items_total is not None else "?"
+        current_label = f"{processed}/{total_label} • p{page + 1}/{self.config.pages_to_scan} r{cell.row}c{cell.col}"
         self.progress_impl.update_item(
             current_label,
             cell_scan.item_label,
             cell_scan.action_label,
         )
 
-    def _update_stop_from_empty_detection(
-        self, *, page: int, cells: List[Cell]
-    ) -> None:
+    def _update_stop_from_empty_detection(self, *, page: int, cells: List[Cell]) -> None:
         empty_idx = _detect_consecutive_empty_stop_idx(
             page,
             cells,
@@ -600,10 +576,7 @@ class _ScanRunner:
         )
         if empty_idx is None:
             return
-        if (
-            self.state.stop_at_global_idx is not None
-            and empty_idx >= self.state.stop_at_global_idx
-        ):
+        if self.state.stop_at_global_idx is not None and empty_idx >= self.state.stop_at_global_idx:
             return
 
         self.state.stop_at_global_idx = empty_idx
@@ -656,9 +629,7 @@ class _ScanRunner:
             destructive_retries = 0
             idx_in_page += 1
             if idx_in_page < len(cells):
-                next_global_idx = (
-                    page * self.context.cells_per_page + cells[idx_in_page].index
-                )
+                next_global_idx = page * self.context.cells_per_page + cells[idx_in_page].index
                 if self._should_stop_at_index(next_global_idx):
                     break
                 self._open_cell_infobox(cells[idx_in_page])

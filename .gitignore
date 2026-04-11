@@ -238,3 +238,11 @@ src/autoscrapper/items/items_rules.custom.json
 
 # Generated local update reports
 artifacts/
+
+.qlty/*
+!.qlty/configs
+!.qlty/configs/**
+!.qlty/hooks
+!.qlty/hooks/**
+!.qlty/qlty.toml
+!.qlty/.gitignore

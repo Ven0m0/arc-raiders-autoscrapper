@@ -78,9 +78,7 @@ class CaptureStopKeyScreen(ModalScreen[Optional[str]]):
             return
 
         self._pending_key = key_name
-        self.query_one("#capture-selected", Static).update(
-            f"Selected: {stop_key_label(key_name)}"
-        )
+        self.query_one("#capture-selected", Static).update(f"Selected: {stop_key_label(key_name)}")
         self.query_one("#confirm", Button).disabled = False
         event.stop()
 
@@ -238,20 +236,14 @@ class ScanSettingsScreen(AppScreen):
     def action_focus_previous_field(self) -> None:
         self._move_focus(-1)
 
-    def _parse_int_field(
-        self, field_id: str, *, label: str, min_value: int
-    ) -> Optional[int]:
+    def _parse_int_field(self, field_id: str, *, label: str, min_value: int) -> Optional[int]:
         raw = self.query_one(field_id, Input).value.strip()
         if not raw.isdigit():
-            self.app.push_screen(
-                MessageScreen(f"Enter a valid {label} (>= {min_value}).")
-            )
+            self.app.push_screen(MessageScreen(f"Enter a valid {label} (>= {min_value})."))
             return None
         value = int(raw)
         if value < min_value:
-            self.app.push_screen(
-                MessageScreen(f"Enter a valid {label} (>= {min_value}).")
-            )
+            self.app.push_screen(MessageScreen(f"Enter a valid {label} (>= {min_value})."))
             return None
         return value
 
@@ -348,18 +340,10 @@ class ScanDetectionScreen(ScanSettingsScreen):
 
     def _load_into_fields(self) -> None:
         self.settings = load_scan_settings()
-        self.query_one("#infobox-retries", Input).value = str(
-            self.settings.infobox_retries
-        )
-        self.query_one("#infobox-delay", Input).value = str(
-            self.settings.infobox_retry_interval_ms
-        )
-        self.query_one("#ocr-retries", Input).value = str(
-            self.settings.ocr_unreadable_retries
-        )
-        self.query_one("#ocr-delay", Input).value = str(
-            self.settings.ocr_retry_interval_ms
-        )
+        self.query_one("#infobox-retries", Input).value = str(self.settings.infobox_retries)
+        self.query_one("#infobox-delay", Input).value = str(self.settings.infobox_retry_interval_ms)
+        self.query_one("#ocr-retries", Input).value = str(self.settings.ocr_unreadable_retries)
+        self.query_one("#ocr-delay", Input).value = str(self.settings.ocr_retry_interval_ms)
 
     def _save(self) -> None:
         infobox_retries = self._parse_int_field(
@@ -437,18 +421,10 @@ class ScanTimingScreen(ScanSettingsScreen):
 
     def _load_into_fields(self) -> None:
         self.settings = load_scan_settings()
-        self.query_one("#action-delay", Input).value = str(
-            self.settings.input_action_delay_ms
-        )
-        self.query_one("#click-gap", Input).value = str(
-            self.settings.cell_infobox_left_right_click_gap_ms
-        )
-        self.query_one("#item-infobox-delay", Input).value = str(
-            self.settings.item_infobox_settle_delay_ms
-        )
-        self.query_one("#post-delay", Input).value = str(
-            self.settings.post_sell_recycle_delay_ms
-        )
+        self.query_one("#action-delay", Input).value = str(self.settings.input_action_delay_ms)
+        self.query_one("#click-gap", Input).value = str(self.settings.cell_infobox_left_right_click_gap_ms)
+        self.query_one("#item-infobox-delay", Input).value = str(self.settings.item_infobox_settle_delay_ms)
+        self.query_one("#post-delay", Input).value = str(self.settings.post_sell_recycle_delay_ms)
 
     def _save(self) -> None:
         action_delay = self._parse_int_field(

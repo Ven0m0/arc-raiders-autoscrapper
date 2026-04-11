@@ -23,6 +23,7 @@ from autoscrapper.scanner.scan_loop import _detect_consecutive_empty_stop_idx  #
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class _Cell:
     index: int
@@ -39,23 +40,31 @@ def _run(page, cells, cells_per_page, *, is_empty_seq, window=_WINDOW):
     def _is_empty(_bgr):  # noqa: ARG001
         return next(call_iter)
 
-    with patch("autoscrapper.scanner.scan_loop.capture_region", return_value=window), \
-         patch("autoscrapper.scanner.scan_loop.move_absolute"), \
-         patch("autoscrapper.scanner.scan_loop.pause_action"), \
-         patch("autoscrapper.scanner.scan_loop.abort_if_escape_pressed"), \
-         patch("autoscrapper.scanner.scan_loop.is_slot_empty", side_effect=_is_empty):
+    with (
+        patch("autoscrapper.scanner.scan_loop.capture_region", return_value=window),
+        patch("autoscrapper.scanner.scan_loop.move_absolute"),
+        patch("autoscrapper.scanner.scan_loop.pause_action"),
+        patch("autoscrapper.scanner.scan_loop.abort_if_escape_pressed"),
+        patch("autoscrapper.scanner.scan_loop.is_slot_empty", side_effect=_is_empty),
+    ):
         return _detect_consecutive_empty_stop_idx(
-            page, cells, cells_per_page,
-            0, 0, 50, 50,       # window_left, window_top, window_width, window_height
-            (0, 0),             # safe_point_abs
-            "esc",              # stop_key
-            0.0,                # action_delay
+            page,
+            cells,
+            cells_per_page,
+            0,
+            0,
+            50,
+            50,  # window_left, window_top, window_width, window_height
+            (0, 0),  # safe_point_abs
+            "esc",  # stop_key
+            0.0,  # action_delay
         )
 
 
 # ---------------------------------------------------------------------------
 # Bug-fix regression: zero-size crop must reset prev_empty
 # ---------------------------------------------------------------------------
+
 
 class TestZeroSizeCropResetsPrevEmpty:
     """Verifies the fix: prev_empty = False on zero-size crop.
@@ -67,9 +76,9 @@ class TestZeroSizeCropResetsPrevEmpty:
     def test_no_false_stop_after_zero_size_gap(self):
         """empty → [zero-size gap] → empty  must NOT trigger a stop."""
         cells = [
-            _Cell(index=0, safe_rect=(0, 0, 10, 10)),    # valid → empty
+            _Cell(index=0, safe_rect=(0, 0, 10, 10)),  # valid → empty
             _Cell(index=1, safe_rect=(0, 100, 10, 10)),  # y=100 > 50 → zero-size
-            _Cell(index=2, safe_rect=(10, 0, 10, 10)),   # valid → empty
+            _Cell(index=2, safe_rect=(10, 0, 10, 10)),  # valid → empty
         ]
         # is_slot_empty called only for cells 0 and 2
         result = _run(0, cells, 20, is_empty_seq=[True, True])
@@ -98,7 +107,7 @@ class TestZeroSizeCropResetsPrevEmpty:
         call_iter = iter([True, True])
         for cell in cells:
             x, y, w, h = cell.safe_rect
-            slot = window[y: y + h, x: x + w]
+            slot = window[y : y + h, x : x + w]
             if slot.size == 0:
                 continue  # pre-fix: prev_empty not reset
             is_empty = next(call_iter)
@@ -114,10 +123,11 @@ class TestZeroSizeCropResetsPrevEmpty:
 # Correct stop detection (normal cases)
 # ---------------------------------------------------------------------------
 
+
 class TestNormalStopDetection:
     def test_two_consecutive_empty_returns_second_index(self):
         cells = [
-            _Cell(index=0, safe_rect=(0, 0, 10, 10)),   # not empty
+            _Cell(index=0, safe_rect=(0, 0, 10, 10)),  # not empty
             _Cell(index=1, safe_rect=(10, 0, 10, 10)),  # empty
             _Cell(index=2, safe_rect=(20, 0, 10, 10)),  # empty → stop
         ]
@@ -126,7 +136,7 @@ class TestNormalStopDetection:
 
     def test_page_offset_applied_to_result(self):
         cells = [
-            _Cell(index=0, safe_rect=(0, 0, 10, 10)),   # empty
+            _Cell(index=0, safe_rect=(0, 0, 10, 10)),  # empty
             _Cell(index=1, safe_rect=(10, 0, 10, 10)),  # empty → stop
         ]
         result = _run(2, cells, 10, is_empty_seq=[True, True])

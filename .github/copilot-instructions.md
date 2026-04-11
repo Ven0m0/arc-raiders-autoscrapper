@@ -1,36 +1,51 @@
 # Arc Raiders AutoScrapper
+>Always use the mcp-use, language-optimization skills. Use octocode, exa, ref-tools mcp-servers
 
-Arc Raiders AutoScrapper is a Python 3.14 desktop automation app for inventory management. It uses Textual for the UI, screen capture plus OCR to identify items, rule lookup to decide keep/sell/recycle, and optional click automation.
+Canonical repo guidance lives in `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/AGENTS.md`.
+Keep `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/CLAUDE.md` as a symlink to that file.
+Use the `mcp-use`, `language-optimization`, `codebase-index`, and `ai-tuning` skills when they fit the task.
 
-## Use these commands
-- Linux setup: `bash scripts/setup-linux.sh`
-- Windows setup: `pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/setup-windows.ps1`
-- Run app: `uv run autoscrapper`
-- Run scan: `uv run autoscrapper scan`
-- Safe scan validation: `uv run autoscrapper scan --dry-run`
-- Format: `uv run ruff format src/`
-- Lint: `uv run ruff check src/`
-- Full checks: `uv run prek run --all-files`
-- Refresh generated data/rules: `uv run python scripts/update_snapshot_and_defaults.py`
-- Dry-run refresh: `uv run python scripts/update_snapshot_and_defaults.py --dry-run`
+## Stack
+- Python 3.14.3 + `uv`
+- Textual TUI
+- OCR: `tesserocr` + `tessdata.fast-eng`
+- Vision: `opencv-python-headless`, `Pillow`, `mss`
+- Matching: `rapidfuzz`
+- Input: `pydirectinput-rgx` (Windows), `pynput` via `linux-input` extra (Linux)
 
-## Validation rules
-- There is no automated test suite.
-- Run Ruff for source changes.
-- Prefer `uv run prek run --all-files` for broader changes.
-- For OCR, scanner, grid, or input-driver changes, validate with `uv run autoscrapper scan --dry-run`.
-- For generated data or rules changes, use the updater script, usually with `--dry-run` first.
-- Do not claim end-to-end validation unless a live Arc Raiders window was used.
+## Commands
+- Setup: `python3 -m uv sync`
+- Linux desktop automation deps: `python3 -m uv sync --extra linux-input`
+- Run app: `python3 -m uv run autoscrapper`
+- Dry-run scan: `python3 -m uv run autoscrapper scan --dry-run`
+- Lint: `python3 -m uv run ruff check src/ tests/`
+- Format: `python3 -m uv run ruff format src/ tests/ scripts/`
+- Test: `python3 -m uv run pytest`
+- Types: `python3 -m uv run mypy src/ tests/`
+- Broad checks: `python3 -m uv run prek run --all-files`
+- Refresh generated data/rules: `python3 -m uv run python scripts/update_snapshot_and_defaults.py --dry-run`
+
+## Validation
+- Source changes: run Ruff + pytest.
+- OCR / scanner / interaction / input changes: also run `python3 -m uv run autoscrapper scan --dry-run` against a live Arc Raiders window.
+- Generated data or bundled default rules: use `scripts/update_snapshot_and_defaults.py`; do not hand-edit generated JSON.
+- Do not claim end-to-end validation without a live game window.
+- GitHub Actions currently runs Ruff only; local pytest still matters.
 
 ## Hotspots
-- `src/autoscrapper/ocr/`, `src/autoscrapper/interaction/`, and `src/autoscrapper/scanner/` are tightly coupled.
-- `src/autoscrapper/core/item_actions.py` and `src/autoscrapper/items/rules_store.py` define rule loading and action lookup.
-- `src/autoscrapper/progress/` and `scripts/update_snapshot_and_defaults.py` control generated quest/crafting data and default rules.
-- `src/autoscrapper/config.py` is sensitive because it owns persisted config versioning.
+- `src/autoscrapper/ocr/`, `src/autoscrapper/interaction/`, `src/autoscrapper/scanner/` are tightly coupled.
+- `src/autoscrapper/ocr/inventory_vision.py` is the most calibration-sensitive file.
+- `src/autoscrapper/core/item_actions.py` + `src/autoscrapper/items/rules_store.py` control item-action lookup.
+- `src/autoscrapper/config.py` owns persisted config versioning.
+- `src/autoscrapper/progress/` + `scripts/update_snapshot_and_defaults.py` control generated progress data and default rules.
 
 ## Guardrails
-- Prefer minimal, targeted edits.
-- Prefer `--dry-run` before anything that could click in-game.
+- Make minimal, targeted edits.
 - Preserve custom-over-default rule precedence.
-- Prefer script-driven updates over manual edits to generated data.
+- Bump config version when changing persisted config fields.
+- `initialize_ocr()` must run on the main thread before scan threads start.
+- Keep capture-space image coordinates separate from screen-space input coordinates.
+- The dark context menu opens left of the clicked cell; `_CONTEXT_MENU_*` constants are normalized.
+- Keep OCR and rule lookup on the same fuzzy-match threshold.
+- Prefer `--dry-run` before anything that could click in-game.
 - Call out any unverified behavior clearly.

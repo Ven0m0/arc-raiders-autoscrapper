@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # AutoScrapper Linux Setup Script
-# Required: Python 3.14.x
+# Required: Python 3.14.3
 set -euo pipefail
 
 abort() {
@@ -58,11 +58,11 @@ if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
   fi
 fi
 
-# Python 3.14.x is required; `uv python install 3.14` resolves to the latest 3.14 patch.
-PYTHON_VERSION="${PYTHON_VERSION:-3.14}"
+# Python 3.14.3 is required.
+PYTHON_VERSION="${PYTHON_VERSION:-3.14.3}"
 
 # 1) System prerequisites
-# - build-essential/linux-headers: needed when dependencies compile (e.g., evdev via pynput)
+# - build-essential/linux-headers: needed when the linux-input extra compiles evdev via pynput
 # - tesseract/leptonica/pkg-config: required to build/link tesserocr on Linux
 KERNEL_HEADERS_PKG="linux-headers-$(uname -r)"
 print_step "Step 1: Install system prerequisites (apt)"
@@ -126,11 +126,11 @@ confirm_or_abort "Run: uv python pin \"${PYTHON_VERSION}\"?"
 uv python pin "$PYTHON_VERSION"
 
 # 4) Install project dependencies with uv
-print_step "Step 4: Install project dependencies (uv sync)"
+print_step "Step 4: Install project dependencies (uv sync --extra linux-input)"
 echo "Command to run:"
-echo "  uv sync"
+echo "  uv sync --extra linux-input"
 confirm_or_abort "Proceed with Step 4?"
-uv sync
+uv sync --extra linux-input
 
 echo ""
 echo "Setup finished! Run the application with:"

@@ -12,11 +12,7 @@ from scripts.lint_runner import (
 def test_detect_node_project_with_lint_script(tmp_path: Path):
     result = {"type": "unknown", "linters": []}
     package_json = tmp_path / "package.json"
-    package_json.write_text(
-        json.dumps(
-            {"scripts": {"lint": "eslint ."}, "dependencies": {"typescript": "^4.0.0"}}
-        )
-    )
+    package_json.write_text(json.dumps({"scripts": {"lint": "eslint ."}, "dependencies": {"typescript": "^4.0.0"}}))
 
     detect_node_project(tmp_path, result)
 
@@ -87,11 +83,7 @@ def test_detect_python_project_requirements(tmp_path: Path):
 
 def test_detect_project_type_node(tmp_path: Path):
     package_json = tmp_path / "package.json"
-    package_json.write_text(
-        json.dumps(
-            {"scripts": {"lint": "eslint ."}, "dependencies": {"typescript": "^4.0.0"}}
-        )
-    )
+    package_json.write_text(json.dumps({"scripts": {"lint": "eslint ."}, "dependencies": {"typescript": "^4.0.0"}}))
 
     result = detect_project_type(tmp_path)
 

@@ -24,9 +24,7 @@ def _describe_action(action_taken: str) -> Tuple[str, List[str]]:
     """
     details: List[str] = []
     if action_taken.startswith("SKIP_"):
-        reason = _SKIP_REASONS.get(
-            action_taken, action_taken.replace("SKIP_", "").replace("_", " ").lower()
-        )
+        reason = _SKIP_REASONS.get(action_taken, action_taken.replace("SKIP_", "").replace("_", " ").lower())
         details.append(reason)
         return "SKIP", details
 

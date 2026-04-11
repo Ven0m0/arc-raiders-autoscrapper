@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
+
+import orjson
 
 from .data_loader import load_game_data
 from .decision_engine import DecisionEngine, DecisionReason
@@ -40,9 +41,7 @@ def generate_rules_from_active(
     data_dir: Optional[Path] = None,
 ) -> Dict[str, object]:
     game_data = load_game_data(data_dir)
-    normalized_levels = normalize_hideout_levels(
-        hideout_levels, game_data.hideout_modules
-    )
+    normalized_levels = normalize_hideout_levels(hideout_levels, game_data.hideout_modules)
 
     quests_by_trader = group_quests_by_trader(game_data.quests)
     quest_index = build_quest_index(quests_by_trader)
@@ -53,17 +52,13 @@ def generate_rules_from_active(
             raise ValueError(f"Active quests not found: {', '.join(missing)}")
 
     if all_quests_completed:
-        completed_quests = [
-            quest.get("id") for quest in game_data.quests if quest.get("id")
-        ]
+        completed_quests = [quest.get("id") for quest in game_data.quests if quest.get("id")]
     elif completed_quests_override is not None:
         completed_quests = completed_quests_override
     else:
         if not active_resolved:
             raise ValueError("No active quests provided.")
-        completed_quests = infer_completed_from_active(
-            game_data.quests, game_data.quest_graph, active_quests
-        )
+        completed_quests = infer_completed_from_active(game_data.quests, game_data.quest_graph, active_quests)
 
     user_progress = {
         "hideoutLevels": normalized_levels,
@@ -72,9 +67,7 @@ def generate_rules_from_active(
         "lastUpdated": int(datetime.now(timezone.utc).timestamp() * 1000),
     }
 
-    engine = DecisionEngine(
-        game_data.items, game_data.hideout_modules, game_data.quests, game_data.projects
-    )
+    engine = DecisionEngine(game_data.items, game_data.hideout_modules, game_data.quests, game_data.projects)
     items_with_decisions = engine.get_items_with_decisions(user_progress)
 
     out_items = [
@@ -111,4 +104,4 @@ def generate_rules_from_active(
 
 def write_rules(output: Dict[str, object], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(output, indent=2), encoding="utf-8")
+    path.write_bytes(orjson.dumps(output, option=orjson.OPT_INDENT_2))

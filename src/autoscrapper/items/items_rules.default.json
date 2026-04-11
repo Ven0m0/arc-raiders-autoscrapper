@@ -1,12 +1,12 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-04T14:14:25.679577Z",
+    "generatedAt": "2026-04-10T14:27:21.129634Z",
     "data": {
-      "lastUpdated": "2026-04-04T14:14:25.665618Z",
-      "source": "https://metaforge.app/arc-raiders",
+      "lastUpdated": "2026-04-10T14:27:21.115914Z",
+      "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1"
     },
-    "itemCount": 547,
+    "itemCount": 656,
     "allQuestsCompleted": true
   },
   "items": [
@@ -37,8 +37,8 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -145,6 +145,17 @@
       ]
     },
     {
+      "id": "angled-grip-ii-blueprint",
+      "name": "Angled Grip II Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "angled-grip-ii-recipe",
       "name": "Angled Grip II Blueprint",
       "value": 5000,
@@ -166,6 +177,17 @@
       ]
     },
     {
+      "id": "angled-grip-iii-blueprint",
+      "name": "Angled Grip III Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "angled-grip-iii-recipe",
       "name": "Angled Grip III Blueprint",
       "value": 5000,
@@ -182,6 +204,17 @@
       "action": "keep",
       "analysis": [
         "Required for hideout upgrade: Medical Lab (Level 3)"
+      ]
+    },
+    {
+      "id": "anvil-blueprint",
+      "name": "Anvil Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -246,6 +279,27 @@
       "analysis": [
         "Legendary rarity - extremely valuable",
         "Keep all legendaries"
+      ]
+    },
+    {
+      "id": "aphelion",
+      "name": "Aphelion",
+      "value": 27500,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
+      ]
+    },
+    {
+      "id": "aphelion-blueprint",
+      "name": "Aphelion Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -489,6 +543,17 @@
       ]
     },
     {
+      "id": "barricade-kit-blueprint",
+      "name": "Barricade Kit Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "barricade-kit-recipe",
       "name": "Barricade Kit Blueprint",
       "value": 5000,
@@ -496,6 +561,16 @@
       "analysis": [
         "Legendary rarity - extremely valuable",
         "Keep all legendaries"
+      ]
+    },
+    {
+      "id": "bastion-cell",
+      "name": "Bastion Cell",
+      "value": 3000,
+      "action": "sell",
+      "analysis": [
+        "Recycles into: 1x Advanced Mechanical Components, 3x ARC Alloy",
+        "Recycle value: Components (2350 coins) worth less than Item (3000 coins)"
       ]
     },
     {
@@ -760,6 +835,17 @@
       ]
     },
     {
+      "id": "bobcat-blueprint",
+      "name": "Bobcat Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "bobcat-i",
       "name": "Bobcat I",
       "value": 13000,
@@ -961,6 +1047,17 @@
       ]
     },
     {
+      "id": "burletta-blueprint",
+      "name": "Burletta Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "burletta-i",
       "name": "Burletta I",
       "value": 2900,
@@ -975,6 +1072,17 @@
       "id": "burletta-ii",
       "name": "Burletta II",
       "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Weapon - review based on your current loadout",
+        "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "burletta-iii",
+      "name": "Burletta III",
+      "value": 7000,
       "action": "keep",
       "analysis": [
         "Weapon - review based on your current loadout",
@@ -1107,6 +1215,16 @@
       ]
     },
     {
+      "id": "canto-i",
+      "name": "Canto I",
+      "value": 7000,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
+      ]
+    },
+    {
       "id": "canto-ii",
       "name": "Canto II",
       "value": 10000,
@@ -1146,6 +1264,16 @@
       "action": "keep",
       "analysis": [
         "Required for hideout upgrade: Scrappy (Level 4)"
+      ]
+    },
+    {
+      "id": "celeste-journal",
+      "name": "Celeste's Journal",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -1231,6 +1359,38 @@
       ]
     },
     {
+      "id": "combat-mk1",
+      "name": "Combat Mk. 1",
+      "value": 640,
+      "action": "sell",
+      "analysis": [
+        "Recycles into: 3x Plastic Parts, 3x Rubber Parts",
+        "Recycle value: Components (330 coins) worth less than Item (640 coins)"
+      ]
+    },
+    {
+      "id": "combat-mk2",
+      "name": "Combat Mk. 2",
+      "value": 2000,
+      "action": "keep",
+      "analysis": [
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "combat-mk3-aggressive",
+      "name": "Combat Mk. 3 (Aggressive)",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Epic rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "combat-mk3-aggressive-blueprint",
       "name": "Combat Mk.3 (Aggressive) Blueprint",
       "value": 5000,
@@ -1248,6 +1408,17 @@
       "analysis": [
         "Epic rarity",
         "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "combat-mk3-flanking-blueprint",
+      "name": "Combat Mk. 3 (Flanking) Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1285,6 +1456,17 @@
       ]
     },
     {
+      "id": "compensator-ii-blueprint",
+      "name": "Compensator II Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "compensator-ii-recipe",
       "name": "Compensator II Blueprint",
       "value": 5000,
@@ -1306,6 +1488,17 @@
       ]
     },
     {
+      "id": "compensator-iii-blueprint",
+      "name": "Compensator III Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "compensator-iii-recipe",
       "name": "Compensator III Blueprint",
       "value": 5000,
@@ -1321,8 +1514,8 @@
       "value": 3000,
       "action": "keep",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
+        "Used in 3 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1411,6 +1604,17 @@
     {
       "id": "dam-control-center-tower-key",
       "name": "Dam Control Center Tower Key",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "dam-control-tower-key",
+      "name": "Dam Control Tower Key",
       "value": 100,
       "action": "keep",
       "analysis": [
@@ -1515,9 +1719,39 @@
       ]
     },
     {
+      "id": "damaged-hornet-driver",
+      "name": "Damaged Hornet Driver",
+      "value": 640,
+      "action": "sell",
+      "analysis": [
+        "Recycles into: 2x ARC Alloy",
+        "Recycle value: Components (400 coins) worth less than Item (640 coins)"
+      ]
+    },
+    {
+      "id": "damaged-rocketeer-driver",
+      "name": "Damaged Rocketeer Driver",
+      "value": 1000,
+      "action": "sell",
+      "analysis": [
+        "Recycles into: 3x ARC Alloy",
+        "Recycle value: Components (600 coins) worth less than Item (1000 coins)"
+      ]
+    },
+    {
       "id": "damaged-rocketeer-part",
       "name": "Damaged Rocketeer Driver",
       "value": 2000,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "damaged-snitch-scanner",
+      "name": "Damaged Snitch Scanner",
+      "value": 659,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -1597,6 +1831,17 @@
       ]
     },
     {
+      "id": "defibrillator-blueprint",
+      "name": "Defibrillator Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "defibrillator-recipe",
       "name": "Defibrillator Blueprint",
       "value": 5000,
@@ -1627,6 +1872,16 @@
       ]
     },
     {
+      "id": "diving-goggles",
+      "name": "Diving Goggles",
+      "value": 640,
+      "action": "sell",
+      "analysis": [
+        "Recycles into: 12x Rubber Parts",
+        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
+      ]
+    },
+    {
       "id": "diving-googles",
       "name": "Diving Goggles",
       "value": 640,
@@ -1635,6 +1890,16 @@
         "Rare rarity",
         "May have future use - review carefully",
         "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "dodgers-note",
+      "name": "Dodger's Note",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -1700,6 +1965,16 @@
       ]
     },
     {
+      "id": "duct-tape",
+      "name": "Duct Tape",
+      "value": 300,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "duct-tape-recipe",
       "name": "Duct Tape",
       "value": 300,
@@ -1716,6 +1991,16 @@
       "action": "keep",
       "analysis": [
         "Needed for project: Expedition Project"
+      ]
+    },
+    {
+      "id": "dusty-film-reel",
+      "name": "Dusty Film Reel",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -1749,6 +2034,38 @@
       ]
     },
     {
+      "id": "energy-clip",
+      "name": "Energy Clip",
+      "value": 200,
+      "action": "keep",
+      "analysis": [
+        "Ammunition - essential for weapons",
+        "Review based on your weapon loadout",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "equalizer",
+      "name": "Equalizer",
+      "value": 27500,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
+      ]
+    },
+    {
+      "id": "equalizer-blueprint",
+      "name": "Equalizer Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "equalizer-i",
       "name": "Equalizer",
       "value": 27500,
@@ -1769,6 +2086,16 @@
       ]
     },
     {
+      "id": "espresso-machine-parts",
+      "name": "Espresso Machine Parts",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "esr-analyzer",
       "name": "ESR Analyzer",
       "value": 0,
@@ -1785,6 +2112,16 @@
       "action": "keep",
       "analysis": [
         "Needed for project: Expedition Project"
+      ]
+    },
+    {
+      "id": "experimental-seed-sample",
+      "name": "Experimental Seed Sample",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -1850,6 +2187,17 @@
       ]
     },
     {
+      "id": "extended-barrel-blueprint",
+      "name": "Extended Barrel Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "extended-barrel-recipe",
       "name": "Extended Barrel Blueprint",
       "value": 5000,
@@ -1882,6 +2230,17 @@
       ]
     },
     {
+      "id": "extended-light-mag-ii-blueprint",
+      "name": "Extended Light Mag II Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "extended-light-mag-ii-recipe",
       "name": "Extended Light Mag II Blueprint",
       "value": 5000,
@@ -1899,6 +2258,17 @@
       "analysis": [
         "Weapon - review based on your current loadout",
         "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "extended-light-mag-iii-blueprint",
+      "name": "Extended Light Mag III Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1931,6 +2301,17 @@
       "analysis": [
         "Weapon - review based on your current loadout",
         "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "extended-medium-mag-ii-blueprint",
+      "name": "Extended Medium Mag II Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1988,6 +2369,17 @@
       ]
     },
     {
+      "id": "extended-shotgun-mag-ii-blueprint",
+      "name": "Extended Shotgun Mag II Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "extended-shotgun-mag-ii-recipe",
       "name": "Extended Shotgun Mag II Blueprint",
       "value": 5000,
@@ -2005,6 +2397,17 @@
       "analysis": [
         "Weapon - review based on your current loadout",
         "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "extended-shotgun-mag-iii-blueprint",
+      "name": "Extended Shotgun Mag III Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2169,8 +2572,8 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2193,6 +2596,36 @@
       "analysis": [
         "Legendary rarity - extremely valuable",
         "Keep all legendaries"
+      ]
+    },
+    {
+      "id": "first-wave-compass",
+      "name": "First Wave Compass",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "first-wave-rations",
+      "name": "First Wave Rations",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "first-wave-tape",
+      "name": "First Wave Tape",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -2395,6 +2828,16 @@
       ]
     },
     {
+      "id": "great-mullein",
+      "name": "Great Mullein",
+      "value": 300,
+      "action": "sell",
+      "analysis": [
+        "Recycles into: 2x Assorted Seeds",
+        "Recycle value: Components (200 coins) worth less than Item (300 coins)"
+      ]
+    },
+    {
       "id": "great-muullein",
       "name": "Great Mullein",
       "value": 300,
@@ -2520,6 +2963,17 @@
       "analysis": [
         "Rare rarity",
         "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "heavy-gun-parts-blueprint",
+      "name": "Heavy Gun Parts Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2671,6 +3125,17 @@
       ]
     },
     {
+      "id": "il-toro-blueprint",
+      "name": "Il Toro Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "il-toro-i",
       "name": "Il Toro I",
       "value": 5000,
@@ -2685,6 +3150,17 @@
       "id": "il-toro-ii",
       "name": "Il Toro II",
       "value": 7000,
+      "action": "keep",
+      "analysis": [
+        "Weapon - review based on your current loadout",
+        "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "il-toro-iii",
+      "name": "Il Toro III",
+      "value": 10000,
       "action": "keep",
       "analysis": [
         "Weapon - review based on your current loadout",
@@ -2788,6 +3264,17 @@
       ]
     },
     {
+      "id": "jolt-mine-blueprint",
+      "name": "Jolt Mine Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "jolt-mine-recipe",
       "name": "Jolt Mine Blueprint",
       "value": 5000,
@@ -2805,6 +3292,27 @@
       "analysis": [
         "No immediate use found",
         "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "jupiter",
+      "name": "Jupiter",
+      "value": 27500,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
+      ]
+    },
+    {
+      "id": "jupiter-blueprint",
+      "name": "Jupiter Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -2952,6 +3460,16 @@
       ]
     },
     {
+      "id": "library-book",
+      "name": "Book",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "lidar-scanner",
       "name": "Lidar Scanner",
       "value": 0,
@@ -2989,6 +3507,17 @@
       "analysis": [
         "Rare rarity",
         "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "light-gun-parts-blueprint",
+      "name": "Light Gun Parts Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3031,6 +3560,17 @@
       "analysis": [
         "Epic rarity",
         "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "lightweight-stock-blueprint",
+      "name": "Lightweight Stock Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3130,6 +3670,82 @@
       ]
     },
     {
+      "id": "looting-mk1",
+      "name": "Looting Mk. 1",
+      "value": 640,
+      "action": "sell",
+      "analysis": [
+        "Recycles into: 3x Plastic Parts, 3x Rubber Parts",
+        "Recycle value: Components (330 coins) worth less than Item (640 coins)"
+      ]
+    },
+    {
+      "id": "looting-mk2",
+      "name": "Looting Mk. 2",
+      "value": 2000,
+      "action": "keep",
+      "analysis": [
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "looting-mk3-cautious",
+      "name": "Looting Mk. 3 (Cautious)",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Epic rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "looting-mk3-safekeeper",
+      "name": "Looting Mk. 3 (Safekeeper)",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Epic rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "looting-mk3-safekeeper-blueprint",
+      "name": "Looting Mk. 3 (Safekeeper) Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "looting-mk3-survivor",
+      "name": "Looting Mk. 3 (Survivor)",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Epic rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "looting-mk3-survivor-blueprint",
+      "name": "Looting Mk. 3 (Survivor) Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "lure-grenade",
       "name": "Lure Grenade",
       "value": 1000,
@@ -3137,6 +3753,17 @@
       "analysis": [
         "Consumable item - grenades, healing items, etc.",
         "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "lure-grenade-blueprint",
+      "name": "Lure Grenade Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3165,10 +3792,11 @@
       "id": "magnet",
       "name": "Magnet",
       "value": 300,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Used in 4 crafting recipes",
+        "Common crafting ingredient",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -3189,6 +3817,26 @@
         "Epic rarity",
         "May have future use - review carefully",
         "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "major-aivas-mementos",
+      "name": "Major Aiva's Mementos",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "major-aivas-patch",
+      "name": "Major Aiva's Patch",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -3238,8 +3886,19 @@
       "value": 700,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "medium-gun-parts-blueprint",
+      "name": "Medium Gun Parts Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3317,6 +3976,16 @@
       ]
     },
     {
+      "id": "moisture-meter",
+      "name": "Moisture Meter",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "moss",
       "name": "Moss",
       "value": 500,
@@ -3388,6 +4057,17 @@
       ]
     },
     {
+      "id": "muzzle-brake-ii-blueprint",
+      "name": "Muzzle Brake II Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "muzzle-brake-ii-recipe",
       "name": "Muzzle Brake II Blueprint",
       "value": 5000,
@@ -3405,6 +4085,17 @@
       "analysis": [
         "Weapon - review based on your current loadout",
         "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "muzzle-brake-iii-blueprint",
+      "name": "Muzzle Brake III Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3440,9 +4131,39 @@
       ]
     },
     {
+      "id": "nutrient-meter",
+      "name": "Nutrient Meter",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "official-shutdown-documentation",
+      "name": "Official Shutdown Documentation",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "oil",
       "name": "Oil",
       "value": 300,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "old-world-books",
+      "name": "Old World Books",
+      "value": 0,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -3466,6 +4187,17 @@
       "analysis": [
         "No immediate use found",
         "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "osprey-blueprint",
+      "name": "Osprey Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -3530,6 +4262,17 @@
       "analysis": [
         "Epic rarity",
         "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "padded-stock-blueprint",
+      "name": "Padded Stock Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3610,10 +4353,11 @@
       "id": "plastic-parts",
       "name": "Plastic Parts",
       "value": 60,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Used in 3 crafting recipes",
+        "Common crafting ingredient",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -3659,8 +4403,38 @@
       ]
     },
     {
+      "id": "portable-tv",
+      "name": "Portable TV",
+      "value": 2000,
+      "action": "sell",
+      "analysis": [
+        "Recycles into: 2x Battery, 6x Wires",
+        "Recycle value: Components (1700 coins) worth less than Item (2000 coins)"
+      ]
+    },
+    {
+      "id": "possibly-toxic-plant",
+      "name": "Possibly Toxic Plant",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "poster-natural-wonder",
       "name": "Poster of Natural Wonder",
+      "value": 2000,
+      "action": "sell",
+      "analysis": [
+        "High value (2000 coins)",
+        "No crafting or upgrade use"
+      ]
+    },
+    {
+      "id": "poster-of-natural-wonders",
+      "name": "Poster of Natural Wonders",
       "value": 2000,
       "action": "sell",
       "analysis": [
@@ -3726,9 +4500,19 @@
       "value": 500,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 6 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "project-heartwood-blueprints",
+      "name": "Project Heartwood Blueprints",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -4052,6 +4836,16 @@
       ]
     },
     {
+      "id": "rocketeer-driver",
+      "name": "Rocketeer Driver",
+      "value": 3000,
+      "action": "sell",
+      "analysis": [
+        "Recycles into: 1x Advanced Electrical Components, 3x ARC Alloy",
+        "Recycle value: Components (2350 coins) worth less than Item (3000 coins)"
+      ]
+    },
+    {
       "id": "rocketeer-part",
       "name": "Rocketeer Driver",
       "value": 5000,
@@ -4120,6 +4914,17 @@
       "analysis": [
         "Rare rarity",
         "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "rubber-parts",
+      "name": "Rubber Parts",
+      "value": 50,
+      "action": "keep",
+      "analysis": [
+        "Used in 3 crafting recipes",
+        "Common crafting ingredient",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4265,6 +5070,26 @@
       ]
     },
     {
+      "id": "scout-patrol-note",
+      "name": "Scout Patrol Note",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "secret-meeting-info",
+      "name": "Secret Meeting Info",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "seeker-grenade",
       "name": "Seeker Grenade",
       "value": 640,
@@ -4286,12 +5111,32 @@
       ]
     },
     {
+      "id": "sensors",
+      "name": "Sensors",
+      "value": 500,
+      "action": "sell",
+      "analysis": [
+        "Recycles into: 1x Metal Parts, 1x Wires",
+        "Recycle value: Components (275 coins) worth less than Item (500 coins)"
+      ]
+    },
+    {
       "id": "sensors-recipe",
       "name": "Sensors",
       "value": 500,
       "action": "keep",
       "analysis": [
         "Needed for project: Expedition Project"
+      ]
+    },
+    {
+      "id": "sentinel-firing-core",
+      "name": "Sentinel Firing Core",
+      "value": 2000,
+      "action": "sell",
+      "analysis": [
+        "Recycles into: 2x ARC Alloy, 2x Mechanical Components",
+        "Recycle value: Components (1680 coins) worth less than Item (2000 coins)"
       ]
     },
     {
@@ -4327,7 +5172,7 @@
     },
     {
       "id": "shotgun-ammo",
-      "name": "Shotgun ammo",
+      "name": "Shotgun Ammo",
       "value": 20,
       "action": "keep",
       "analysis": [
@@ -4359,6 +5204,17 @@
       ]
     },
     {
+      "id": "shotgun-choke-ii-blueprint",
+      "name": "Shotgun Choke II Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "shotgun-choke-ii-recipe",
       "name": "Shotgun Choke II Blueprint",
       "value": 5000,
@@ -4376,6 +5232,17 @@
       "analysis": [
         "Weapon - review based on your current loadout",
         "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "shotgun-choke-iii-blueprint",
+      "name": "Shotgun Choke III Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4486,6 +5353,17 @@
       ]
     },
     {
+      "id": "silencer-i-blueprint",
+      "name": "Silencer I Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "silencer-i-recipe",
       "name": "Silencer I Blueprint",
       "value": 5000,
@@ -4503,6 +5381,17 @@
       "analysis": [
         "Weapon - review based on your current loadout",
         "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "silencer-ii-blueprint",
+      "name": "Silencer II Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4553,8 +5442,8 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4566,6 +5455,17 @@
       "analysis": [
         "Legendary rarity - extremely valuable",
         "Keep all legendaries"
+      ]
+    },
+    {
+      "id": "smoke-grenade-trap",
+      "name": "Smoke Grenade Trap",
+      "value": 640,
+      "action": "keep",
+      "analysis": [
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -4587,6 +5487,17 @@
       "analysis": [
         "Legendary rarity - extremely valuable",
         "Keep all legendaries"
+      ]
+    },
+    {
+      "id": "snap-hook-blueprint",
+      "name": "Snap Hook Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -4622,6 +5533,17 @@
     {
       "id": "spaceport-container-storage-key",
       "name": "Spaceport Container Storage Key",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "spaceport-control-tower-key",
+      "name": "Spaceport Control Tower Key",
       "value": 100,
       "action": "keep",
       "analysis": [
@@ -4749,6 +5671,17 @@
       ]
     },
     {
+      "id": "stable-stock-ii-blueprint",
+      "name": "Stable Stock II Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "stable-stock-ii-recipe",
       "name": "Stable Stock II Blueprint",
       "value": 5000,
@@ -4766,6 +5699,17 @@
       "analysis": [
         "Weapon - review based on your current loadout",
         "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "stable-stock-iii-blueprint",
+      "name": "Stable Stock III Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4797,6 +5741,16 @@
       "analysis": [
         "High value (3000 coins)",
         "No crafting or upgrade use"
+      ]
+    },
+    {
+      "id": "steel-spring",
+      "name": "Steel Spring",
+      "value": 300,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -4955,8 +5909,8 @@
       "value": 700,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5035,6 +5989,27 @@
       ]
     },
     {
+      "id": "tactical-mk1",
+      "name": "Tactical Mk. 1",
+      "value": 640,
+      "action": "sell",
+      "analysis": [
+        "Recycles into: 3x Plastic Parts, 3x Rubber Parts",
+        "Recycle value: Components (330 coins) worth less than Item (640 coins)"
+      ]
+    },
+    {
+      "id": "tactical-mk2",
+      "name": "Tactical Mk. 2",
+      "value": 2000,
+      "action": "keep",
+      "analysis": [
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "tactical-mk3-defensive",
       "name": "Tactical Mk.3 (Defensive)",
       "value": 5000,
@@ -5056,6 +6031,50 @@
       ]
     },
     {
+      "id": "tactical-mk3-healing",
+      "name": "Tactical Mk. 3 (Healing)",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Epic rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "tactical-mk3-healing-blueprint",
+      "name": "Tactical Mk. 3 (Healing) Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "tactical-mk3-revival",
+      "name": "Tactical Mk. 3 (Revival)",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Epic rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "tactical-mk3-revival-blueprint",
+      "name": "Tactical Mk. 3 (Revival) Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "tagging-grenade",
       "name": "Tagging Grenade",
       "value": 1000,
@@ -5063,6 +6082,17 @@
       "analysis": [
         "Consumable item - grenades, healing items, etc.",
         "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "tagging-grenade-blueprint",
+      "name": "Tagging Grenade Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5114,6 +6144,17 @@
       "analysis": [
         "Rare rarity",
         "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "tempest-blueprint",
+      "name": "Tempest Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5245,6 +6286,17 @@
       ]
     },
     {
+      "id": "torrente-blueprint",
+      "name": "Torrente Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "torrente-i",
       "name": "Torrente I",
       "value": 7000,
@@ -5289,6 +6341,28 @@
       ]
     },
     {
+      "id": "trailblazer",
+      "name": "Trailblazer",
+      "value": 2200,
+      "action": "keep",
+      "analysis": [
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "trailblazer-blueprint",
+      "name": "Trailblazer Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "trailblazer-grenade",
       "name": "Trailblazer Grenade",
       "value": 2200,
@@ -5317,6 +6391,17 @@
       "analysis": [
         "Consumable item - grenades, healing items, etc.",
         "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "trigger-nade-blueprint",
+      "name": "Trigger Nade Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5381,6 +6466,17 @@
       "analysis": [
         "High value (3000 coins)",
         "No crafting or upgrade use"
+      ]
+    },
+    {
+      "id": "venator-blueprint",
+      "name": "Venator Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -5460,6 +6556,17 @@
       ]
     },
     {
+      "id": "vertical-grip-ii-blueprint",
+      "name": "Vertical Grip II Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "vertical-grip-ii-recipe",
       "name": "Vertical Grip II Blueprint",
       "value": 5000,
@@ -5477,6 +6584,17 @@
       "analysis": [
         "Weapon - review based on your current loadout",
         "Consider tier and your play style",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "vertical-grip-iii-blueprint",
+      "name": "Vertical Grip III Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5511,6 +6629,17 @@
       ]
     },
     {
+      "id": "vita-shot-blueprint",
+      "name": "Vita Shot Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "vita-shot-recipe",
       "name": "Vita Shot Blueprint",
       "value": 5000,
@@ -5528,6 +6657,17 @@
       "analysis": [
         "Consumable item - grenades, healing items, etc.",
         "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "vita-spray-blueprint",
+      "name": "Vita Spray Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5670,6 +6810,16 @@
       ]
     },
     {
+      "id": "wires",
+      "name": "Wires",
+      "value": 200,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "wires-recipe",
       "name": "Wires",
       "value": 200,
@@ -5686,6 +6836,17 @@
       "analysis": [
         "Consumable item - grenades, healing items, etc.",
         "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "wolfpack-blueprint",
+      "name": "Wolfpack Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
