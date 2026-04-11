@@ -17,6 +17,12 @@
     "auto": true,
     "prune": true
   },
+  "plugin": [
+    "openslimedit@1.0.4",
+    "opencode-websearch@0.5.0",
+    "opencode-ignore@1.1.0",
+    "@nick-vi/opencode-type-inject@1.5.1"
+  ],
   "disabled_providers": ["openai"],
   "watcher": {
     "ignore": [
@@ -30,6 +36,24 @@
     ]
   },
   "experimental": {
-    "continue_loop_on_deny": false
+    "continue_loop_on_deny": false,
+    "batch_tool": true
+  },
+  "mcp": {
+    "gh_grep": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+      "enabled": true
+    },
+    "ref-tools": {
+      "type": "remote",
+      "url": "https://api.ref.tools/mcp",
+      "enabled": true,
+      "oauth": false,
+      "timeout": 30000,
+      "headers": {
+        "x-ref-api-key": "{env:REF_API_KEY}"
+      }
+    }
   }
 }
