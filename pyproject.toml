@@ -68,13 +68,12 @@ autoscrapper = [
 
 [tool.uv]
 link-mode = "symlink"
-prerelease = "if-necessary-or-explicit"
+compile-bytecode = true
 
 [tool.uv.pip]
 all-extras = true
 link-mode = "symlink"
 compile-bytecode = true
-
 
 [tool.ruff]
 extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
