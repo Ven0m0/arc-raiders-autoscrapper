@@ -17,7 +17,6 @@ def test_diff_quests_empty_lists() -> None:
     assert diff["added"] == []
     assert diff["removed"] == []
     assert diff["changed"] == []
-
 def test_diff_quests_ignores_invalid_entries() -> None:
     """Test that non-dict objects and dicts without valid IDs are ignored."""
     before: List[Any] = [
