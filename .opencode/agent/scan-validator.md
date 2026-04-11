@@ -1,4 +1,5 @@
 ---
+name: scan-validator
 description: Review scanner and interaction changes for timing, dispatch, and window-targeting regressions.
 mode: subagent
 ---
