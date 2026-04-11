@@ -202,8 +202,7 @@ def test_record_backend_info():
 
 
 def test_record_backend_info_no_version_attr():
-    mock_api = MagicMock()
-    del mock_api.Version
+    mock_api = MagicMock(spec=["GetAvailableLanguages"])
     mock_api.GetAvailableLanguages.return_value = ["eng"]
 
     tesseract._tessdata_dir = "/mock/tessdata"
