@@ -17,6 +17,8 @@ concurrency:
 jobs:
   update-data:
     runs-on: ubuntu-latest
+    env:
+      METAFORGE_SUPABASE_ANON_KEY: ${{ secrets.METAFORGE_SUPABASE_ANON_KEY || secrets.METAFORGE_API }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
