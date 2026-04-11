@@ -1,8 +1,10 @@
 import pytest
+from unittest.mock import patch
 from autoscrapper.core.item_actions import (
     normalize_item_name,
     clean_ocr_text,
     _normalize_action,
+    load_item_actions,
 )
 
 
@@ -56,3 +58,12 @@ def test_clean_ocr_text(raw, expected):
 )
 def test__normalize_action(value, expected):
     assert _normalize_action(value) == expected
+
+
+@patch("pathlib.Path.read_bytes")
+def test_load_item_actions_file_not_found(mock_read_bytes):
+    mock_read_bytes.side_effect = FileNotFoundError()
+
+    result = load_item_actions()
+
+    assert result == {}
