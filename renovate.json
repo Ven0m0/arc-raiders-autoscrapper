@@ -30,7 +30,7 @@
   "prHourlyLimit": 0,
   "rangeStrategy": "bump",
   "constraints": {
-    "python": "<3.14.4"
+    "python": ">=3.13 <3.14"
   },
   "pep621": {
     "enabled": true
@@ -50,18 +50,18 @@
   "postUpdateOptions": ["uvLockUpdate"],
   "packageRules": [
     {
-      "description": "Pin and constrain Python Docker image to 3.14.3",
+      "description": "Pin and constrain Python Docker image to 3.13",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["python"],
       "pinDigests": false,
-      "allowedVersions": "3.14.3"
+      "allowedVersions": "3.13.*"
     },
     {
-      "description": "Keep requires-python within supported Python 3.14 range",
+      "description": "Keep requires-python within supported Python 3.13 range",
       "matchManagers": ["pep621"],
       "matchPackageNames": ["python"],
       "matchDepTypes": ["requires-python"],
-      "allowedVersions": ">=3.14 <3.14.4"
+      "allowedVersions": ">=3.13 <3.14"
     },
     {
       "description": "Disable Docker digest pinning",

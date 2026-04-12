@@ -1,12 +1,12 @@
 param(
-  [string]$PythonVersion = "3.14.3"
+  [string]$PythonVersion = "3.13"
 )
 
 # AutoScrapper Windows Setup Script
-# Required: Python 3.14.3
+# Required: Python 3.13
 # Usage: .\scripts\setup-windows.ps1
 
-# Python 3.14.3 is required.
+# Python 3.13 is required.
 
 $ErrorActionPreference = "Stop"
 
