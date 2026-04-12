@@ -187,6 +187,7 @@ def resolve_action_taken(
                 matched_name=match_result.matched_name,
                 source_image=source_image,
                 from_context_menu=from_context_menu,
+                threshold=match_result.threshold,
             )
         except (OSError, ValueError) as exc:  # pragma: no cover - runtime dependent
             print(
