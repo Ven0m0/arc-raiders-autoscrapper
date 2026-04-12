@@ -208,7 +208,7 @@ def resolve_image_path(sample: OcrFailureSample, *, manifest_path: Path) -> Path
 
     manifest_parent = manifest_path.parent.resolve()
     manifest_candidate = (manifest_parent / image_path).resolve()
-    if manifest_candidate.is_relative_to(manifest_parent) and manifest_candidate.exists():
+    if manifest_candidate.is_relative_to(manifest_parent):
         return manifest_candidate
 
     return None
