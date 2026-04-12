@@ -20,10 +20,15 @@ CAPTURED_MANIFEST_PATH = CAPTURED_CORPUS_DIR / "samples.jsonl"
 FIXED_FAILURE_CORPUS_PATH = OCR_ARTIFACTS_DIR / "failure_corpus.jsonl"
 REPLAY_REPORTS_DIR = OCR_ARTIFACTS_DIR / "replay_reports"
 BENCHMARK_REPORTS_DIR = OCR_ARTIFACTS_DIR / "benchmark_reports"
+OCR_FAILURE_SAMPLE_SCHEMA_VERSION = 2
+OcrFailureLabelStatus = Literal["pending", "match", "no_match", "ambiguous"]
+_AUTHORITATIVE_LABEL_STATUSES = frozenset({"match", "no_match"})
+_VALID_LABEL_STATUSES = frozenset({"pending", "match", "no_match", "ambiguous"})
 
 
 @dataclass(frozen=True, slots=True)
 class OcrFailureSample:
+    schema_version: int
     sample_id: str
     captured_at: str
     outcome: str
@@ -32,8 +37,32 @@ class OcrFailureSample:
     cleaned_text: str
     chosen_name: str
     matched_name: str | None
+    label_status: OcrFailureLabelStatus = "pending"
     expected_name: str | None = None
     image_path: str | None = None
+    threshold: int | None = None
+
+    @property
+    def is_authoritative(self) -> bool:
+        return self.label_status in _AUTHORITATIVE_LABEL_STATUSES
+
+    @property
+    def expected_match_status(self) -> Literal["match", "no_match"] | None:
+        if self.label_status == "match":
+            return "match"
+        if self.label_status == "no_match":
+            return "no_match"
+        return None
+
+    @property
+    def expected_display(self) -> str:
+        if self.label_status == "match":
+            return self.expected_name or "<missing-match-label>"
+        if self.label_status == "no_match":
+            return "<no-match>"
+        if self.label_status == "ambiguous":
+            return "<ambiguous>"
+        return "<pending-label>"
 
 
 @dataclass(frozen=True, slots=True)
@@ -71,6 +100,7 @@ def _coerce_sample(entry: object) -> OcrFailureSample | None:
     if not isinstance(entry, dict):
         return None
 
+    schema_version = entry.get("schema_version", 1)
     sample_id = entry.get("sample_id")
     captured_at = entry.get("captured_at")
     outcome = entry.get("outcome")
@@ -79,9 +109,13 @@ def _coerce_sample(entry: object) -> OcrFailureSample | None:
     cleaned_text = entry.get("cleaned_text")
     chosen_name = entry.get("chosen_name")
     matched_name = entry.get("matched_name")
+    label_status = entry.get("label_status")
     expected_name = entry.get("expected_name")
     image_path = entry.get("image_path")
+    threshold = entry.get("threshold")
 
+    if not isinstance(schema_version, int) or schema_version < 1:
+        return None
     if not all(
         isinstance(value, str) and value
         for value in (
@@ -103,8 +137,26 @@ def _coerce_sample(entry: object) -> OcrFailureSample | None:
         return None
     if image_path is not None and not isinstance(image_path, str):
         return None
+    if threshold is not None and (not isinstance(threshold, int) or not 0 <= threshold <= 100):
+        return None
+
+    normalized_expected_name = expected_name.strip() if isinstance(expected_name, str) else None
+    if normalized_expected_name == "":
+        normalized_expected_name = None
+
+    normalized_label_status: OcrFailureLabelStatus
+    if label_status is None:
+        normalized_label_status = "match" if normalized_expected_name else "pending"
+    elif isinstance(label_status, str) and label_status in _VALID_LABEL_STATUSES:
+        normalized_label_status = label_status
+    else:
+        return None
+
+    if normalized_label_status == "match" and normalized_expected_name is None:
+        return None
 
     return OcrFailureSample(
+        schema_version=schema_version,
         sample_id=sample_id,
         captured_at=captured_at,
         outcome=outcome,
@@ -113,8 +165,10 @@ def _coerce_sample(entry: object) -> OcrFailureSample | None:
         cleaned_text=cleaned_text,
         chosen_name=chosen_name,
         matched_name=matched_name,
-        expected_name=expected_name,
+        label_status=normalized_label_status,
+        expected_name=normalized_expected_name,
         image_path=image_path,
+        threshold=threshold,
     )
 
 
@@ -125,6 +179,7 @@ def capture_skip_unlisted_sample(
     matched_name: str | None,
     source_image: np.ndarray | None,
     from_context_menu: bool,
+    threshold: int | None = None,
     paths: CorpusPaths | None = None,
 ) -> OcrFailureSample | None:
     cleaned_text = clean_ocr_text(raw_text)
@@ -156,6 +211,7 @@ def capture_skip_unlisted_sample(
     # Preserve the original OCR string when available; otherwise store the
     # cleaned fallback so replay/benchmark tooling still has a usable corpus row.
     sample = OcrFailureSample(
+        schema_version=OCR_FAILURE_SAMPLE_SCHEMA_VERSION,
         sample_id=sample_id,
         captured_at=_iso_now(),
         outcome="SKIP_UNLISTED",
@@ -164,7 +220,9 @@ def capture_skip_unlisted_sample(
         cleaned_text=cleaned_text,
         chosen_name=chosen_name,
         matched_name=matched_name,
+        label_status="pending",
         image_path=image_path,
+        threshold=threshold,
     )
 
     corpus_paths.manifest_path.parent.mkdir(parents=True, exist_ok=True)
