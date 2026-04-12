@@ -215,7 +215,7 @@ def _normalize_component_values(value: object) -> dict[str, int] | None:
             continue
         try:
             quantity = int(raw_quantity)
-        except TypeError, ValueError:
+        except (TypeError, ValueError):
             continue
         if quantity <= 0:
             continue
