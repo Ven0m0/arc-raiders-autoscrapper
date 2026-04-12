@@ -25,7 +25,7 @@ Put detailed rules in `AGENTS.md`; keep path-specific rules in `.github/instruct
 
 ## Guardrails
 
-- Keep Python version changes pinned to `3.13.x`; do **not** move to Python `3.14+` until breakage is resolved.
+- Keep Python version changes pinned to `3.13.x`; do **not** move to Python `3.14+` until the remaining Windows `tesserocr`/tooling migration work is resolved.
 - Keep `AGENTS.md` as the canonical repo guide; do not duplicate large rule sets here.
 - Do **not** hand-edit generated progress data or `src/autoscrapper/items/items_rules.default.json`; use `scripts/update_snapshot_and_defaults.py`.
 - Do **not** hand-edit `uv.lock`; use `uv add/remove/sync`.

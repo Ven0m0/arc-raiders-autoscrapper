@@ -30,7 +30,7 @@ It does **not** hook into the game process.
 
 ## Python Version Guardrails
 
-- Keep Python support pinned to `3.13.x`; do **not** move to Python `3.14+` until the dependency/tooling breakage is resolved.
+- Keep Python support pinned to `3.13.x`; do **not** move to Python `3.14+` until the remaining dependency/tooling breakage is resolved (notably the Windows `tesserocr` packaging path and coordinated tooling updates).
 - Treat Python-version changes as coordinated changes across `.python-version`, `pyproject.toml`, lockfiles, setup scripts, workflows, and the Windows `tesserocr` wheel URL.
 
 ## Commands
