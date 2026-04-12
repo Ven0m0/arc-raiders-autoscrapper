@@ -42,8 +42,7 @@ AUTOSCRAPPER_ASCII = r"""
 def _format_duration(seconds: float | None) -> str:
     if seconds is None:
         return "--:--"
-    if seconds < 0:
-        seconds = 0
+    seconds = max(seconds, 0)
     minutes, secs = divmod(int(seconds), 60)
     hours, minutes = divmod(minutes, 60)
     if hours:

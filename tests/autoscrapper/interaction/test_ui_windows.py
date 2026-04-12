@@ -18,7 +18,7 @@ def get_target_function():
         del sys.modules[target_module_name]
 
     with patch.dict(sys.modules, mock_modules):
-        import autoscrapper.interaction.ui_windows as ui_windows
+        from autoscrapper.interaction import ui_windows
 
         # Save a reference to the function
         func = ui_windows._is_mss_thread_handle_error
