@@ -1,4 +1,3 @@
-
 from typing import Any
 
 from autoscrapper.progress.update_report import diff_quests

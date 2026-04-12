@@ -21,8 +21,8 @@ _log = logging.getLogger(__name__)
 
 METAFORGE_API_DOCS_URL = "https://metaforge.app/arc-raiders/api"
 METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
-RAIDTHEORY_REPO_URL = "https://github.com/fgrzesiak/arcraiders-data"
-RAIDTHEORY_ARCHIVE_URL = "https://github.com/fgrzesiak/arcraiders-data/archive/refs/heads/main.zip"
+RAIDTHEORY_REPO_URL = "https://github.com/RaidTheory/arcraiders-data"
+RAIDTHEORY_ARCHIVE_URL = "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip"
 SUPABASE_URL = "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
 
 SUPABASE_ANON_KEY = os.environ.get("METAFORGE_SUPABASE_ANON_KEY")
@@ -215,7 +215,7 @@ def _normalize_component_values(value: object) -> dict[str, int] | None:
             continue
         try:
             quantity = int(raw_quantity)
-        except (TypeError, ValueError):
+        except TypeError, ValueError:
             continue
         if quantity <= 0:
             continue

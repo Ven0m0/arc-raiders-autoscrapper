@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 
-
 from .live_ui import _ScanLiveUI
 from .rich_support import Console
 

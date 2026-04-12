@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 
-
 def build_reverse_recipe_index(items: list[dict]) -> dict[str, list[str]]:
     """Build a reverse recipe index mapping ingredient IDs to output item IDs."""
     reverse_index: dict[str, list[str]] = {}

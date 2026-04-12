@@ -335,7 +335,9 @@ class TestOcrTitleStripCache:
 
         # Each ocr_title_strip call makes 2 image_to_string calls when empty:
         # once with upscale, once without (no-upscale fallback). 2 × 2 = 4.
-        assert mock_ocr.call_count == 4, "image_to_string called 4 times: 2 per invocation (upscale + no-upscale fallback)"
+        assert mock_ocr.call_count == 4, (
+            "image_to_string called 4 times: 2 per invocation (upscale + no-upscale fallback)"
+        )
 
     def test_non_empty_result_is_cached(self):
         """When item_name is non-empty, the second call must use the cache."""

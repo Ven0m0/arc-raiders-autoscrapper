@@ -69,6 +69,15 @@ _STAT_LINE_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
+# Roman numeral OCR misread corrections (adapted from ArcCompanion-public).
+# Tesseract confuses lowercase-l with uppercase-I, producing "Il" for "II",
+# "Ill" for "III", and "lV" for "IV".  Apply longest-match first.
+_ROMAN_NUMERAL_FIXES: tuple[tuple[re.Pattern[str], str], ...] = (
+    (re.compile(r"\bIll\b"), "III"),
+    (re.compile(r"\bIl\b"), "II"),
+    (re.compile(r"\blV\b"), "IV"),
+)
+
 
 def reset_ocr_caches() -> None:
     """Reset module-level OCR caches. Call at the start of each scan session.
@@ -207,9 +216,7 @@ def _compute_auto_tolerance(
     return tol, min_dist
 
 
-def _dominant_edge_bbox(
-    contour: np.ndarray, image_width: int, image_height: int
-) -> tuple[int, int, int, int] | None:
+def _dominant_edge_bbox(contour: np.ndarray, image_width: int, image_height: int) -> tuple[int, int, int, int] | None:
     points = contour.reshape(-1, 2)
     if points.size == 0:
         return None
@@ -647,6 +654,8 @@ def _crop_title_strip(infobox_bgr: np.ndarray) -> np.ndarray:
 
 def match_item_name_result(raw: str, threshold: int | None = None) -> ItemNameMatchResult:
     cleaned = clean_ocr_text(raw)
+    for _pattern, _replacement in _ROMAN_NUMERAL_FIXES:
+        cleaned = _pattern.sub(_replacement, cleaned)
     resolved_threshold = DEFAULT_ITEM_NAME_MATCH_THRESHOLD if threshold is None else threshold
     if not 0 <= resolved_threshold <= 100:
         raise ValueError("threshold must be between 0 and 100")
@@ -783,9 +792,7 @@ def recycle_confirm_button_center(
     return rect_center(recycle_confirm_button_rect(window_left, window_top, window_width, window_height))
 
 
-def preprocess_for_ocr(
-    roi_bgr: np.ndarray, *, restrict_otsu_to_left: bool = False, upscale: bool = True
-) -> np.ndarray:
+def preprocess_for_ocr(roi_bgr: np.ndarray, *, restrict_otsu_to_left: bool = False, upscale: bool = True) -> np.ndarray:
     if roi_bgr.size == 0:
         raise ValueError(f"preprocess_for_ocr: empty input array (shape={roi_bgr.shape})")
     gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 
-
 from rich.text import Text
 from textual import events
 from textual.app import ComposeResult

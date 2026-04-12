@@ -24,7 +24,7 @@ def _normalize_text(value: object) -> str:
 def _safe_float(value: object) -> float:
     try:
         return float(value)
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         return 0.0
 
 
