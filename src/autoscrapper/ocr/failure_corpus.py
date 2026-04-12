@@ -202,10 +202,16 @@ def resolve_image_path(sample: OcrFailureSample, *, manifest_path: Path) -> Path
     if image_path.is_absolute():
         return image_path
 
-    repo_candidate = REPO_ROOT / image_path
-    if repo_candidate.exists():
+    repo_candidate = (REPO_ROOT / image_path).resolve()
+    if repo_candidate.is_relative_to(REPO_ROOT) and repo_candidate.exists():
         return repo_candidate
-    return manifest_path.parent / image_path
+
+    manifest_parent = manifest_path.parent.resolve()
+    manifest_candidate = (manifest_parent / image_path).resolve()
+    if manifest_candidate.is_relative_to(manifest_parent):
+        return manifest_candidate
+
+    return None
 
 
 def write_report(directory: Path, prefix: str, payload: object) -> Path:
