@@ -30,7 +30,7 @@
   "prHourlyLimit": 0,
   "rangeStrategy": "bump",
   "constraints": {
-    "python": "<3.14"
+    "python": ">=3.13 <3.14"
   },
   "pep621": {
     "enabled": true
@@ -54,7 +54,7 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["python"],
       "pinDigests": false,
-      "allowedVersions": "3.13"
+      "allowedVersions": "3.13.*"
     },
     {
       "description": "Keep requires-python within supported Python 3.13 range",
