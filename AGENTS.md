@@ -5,7 +5,7 @@ Keep `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/CLAUDE
 
 ## Project
 
-Arc Raiders AutoScrapper is a Python 3.14.3 desktop automation app for Arc Raiders inventory management.
+Arc Raiders AutoScrapper is a Python 3.13 desktop automation app for Arc Raiders inventory management.
 It uses Textual for the TUI, screen capture + OCR for item detection, rule lookup for `KEEP | SELL | RECYCLE`, and optional desktop input automation.
 It does **not** hook into the game process.
 
