@@ -1,10 +1,43 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-11T14:15:32.310412Z",
+    "generatedAt": "2026-04-12T06:31:51.820969Z",
     "data": {
-      "lastUpdated": "2026-04-11T14:15:32.303187Z",
+      "lastUpdated": "2026-04-12T06:31:51.813592Z",
       "source": "https://metaforge.app/arc-raiders/api",
-      "version": "autoscrapper-data-1"
+      "version": "autoscrapper-data-1",
+      "itemCount": 573,
+      "questCount": 94,
+      "dataSources": {
+        "items": {
+          "provider": "metaforge+raidtheory",
+          "primary": {
+            "documentation": "https://metaforge.app/arc-raiders/api",
+            "apiBase": "https://metaforge.app/api/arc-raiders",
+            "error": null
+          },
+          "fallback": {
+            "repository": "https://github.com/RaidTheory/arcraiders-data",
+            "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
+            "supplementalCount": 26,
+            "error": null
+          }
+        },
+        "quests": {
+          "provider": "metaforge",
+          "primary": {
+            "documentation": "https://metaforge.app/arc-raiders/api",
+            "apiBase": "https://metaforge.app/api/arc-raiders",
+            "error": null
+          },
+          "fallback": {
+            "repository": "https://github.com/RaidTheory/arcraiders-data",
+            "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
+            "supplementalCount": 0,
+            "error": null
+          }
+        }
+      },
+      "hasPriceOverrides": false
     },
     "itemCount": 573,
     "allQuestsCompleted": true
