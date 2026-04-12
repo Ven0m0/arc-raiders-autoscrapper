@@ -22,11 +22,15 @@ If any file shows `UD` (unmerged): resolve it first.
 - For `.opencode/` or tooling configs deleted by us: `git rm <file>`
 - For source files: inspect and resolve manually
 
-### 2. Pull with autostash
+### 2. Stash and merge
 ```bash
-git pull --autostash --no-rebase upstream main
+git stash
+git merge upstream/main -X theirs
+git stash pop
 ```
-`--autostash` stashes and restores local changes automatically. `--no-rebase` forces merge mode regardless of `pull.rebase` git config, avoiding cascading conflicts in generated files when rebasing 200+ daily snapshot commits.
+`-X theirs` is safe here because all conflicts in this repo are in auto-generated data files (`progress/data/`, `items_rules.default.json`) where upstream is authoritative.
+
+> **Why not `git pull --autostash --rebase`?** The repo has many daily data-snapshot commits. Rebasing 200+ commits causes cascading conflicts in generated files. A single merge commit is cleaner.
 
 ### 3. Verify
 ```bash
