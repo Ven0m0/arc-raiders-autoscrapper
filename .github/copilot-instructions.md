@@ -8,7 +8,7 @@ Put detailed rules in `AGENTS.md`; keep path-specific rules in `.github/instruct
 ## Default Workflow
 
 - Use the `mcp-use` and `language-optimization` skills by default.
-- Add `ai-tuning`, `codebase-index`, `workflow-development`, or `docs-writer` only when the task matches.
+- Add `copilot-init`, `codebase-index`, `workflow-development`, or `docs-writer` only when the task matches.
 - Prefer MCP-first workflows: `octocode`, `exa`, `ref-tools`, `gh_grep`.
 - Make minimal, targeted edits and preserve existing conventions.
 

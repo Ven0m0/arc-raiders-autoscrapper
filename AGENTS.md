@@ -124,7 +124,7 @@ Notes:
 ## Agent Workflow
 
 - Make minimal, targeted edits.
-- Prefer MCP-first workflows and relevant project skills, especially `mcp-use`, `language-optimization`, `codebase-index`, `ai-tuning`, and `workflow-development`.
+- Prefer MCP-first workflows and relevant project skills, especially `mcp-use`, `language-optimization`, `codebase-index`, `copilot-init`, and `workflow-development`.
 - Read the relevant module before editing; update adjacent docs only when behavior or workflow changes.
 - Use script-driven or tool-driven updates for generated assets.
 - Surface unverified behavior clearly in summaries and PR text.
