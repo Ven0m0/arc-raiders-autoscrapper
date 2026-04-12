@@ -13,7 +13,7 @@ This repo uses `uv` to manage Python + dependencies.
 
 - `uv sync` is enough for cloud/CI tasks that only need the project plus dev tooling.
 - Linux desktop automation also needs the optional `linux-input` extra, which the setup script installs for you.
-- The repo is pinned to Python `3.14.3` via `.python-version`.
+- The repo is pinned to Python `3.13` via `.python-version`.
 
 ### Clone the repo
 From a terminal:
@@ -26,14 +26,14 @@ From a terminal:
 `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\setup-windows.ps1`
 
 - **Use a different supported Python version**:
-  - `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\setup-windows.ps1 -PythonVersion 3.14.3`
+  - `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\setup-windows.ps1 -PythonVersion 3.13`
 
 ### Linux
 **From the repo root, run the setup script**
 
 `bash scripts/setup-linux.sh`
 - **Use a different supported Python version**:
-  - `PYTHON_VERSION=3.14.3 bash scripts/setup-linux.sh`
+  - `PYTHON_VERSION=3.13 bash scripts/setup-linux.sh`
 - **Manual full Linux install**:
   - `uv sync --extra linux-input`
 

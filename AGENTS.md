@@ -20,7 +20,7 @@ It does **not** hook into the game process.
 
 | Area | Details |
 | --- | --- |
-| Runtime | Python `3.13.x`–`3.14.x` only, `uv` |
+| Runtime | Python `3.13.x` only, `uv` |
 | UI | `textual` |
 | OCR | `tesserocr`, `tessdata.fast-eng` |
 | Vision | `opencv-python-headless`, `Pillow`, `mss` |
@@ -30,9 +30,8 @@ It does **not** hook into the game process.
 
 ## Python Version Guardrails
 
-- Keep Python support bounded to `>=3.13, <=3.14`; do **not** move to Python `3.15+` until the dependency/tooling breakage is resolved.
-- Treat Python-version changes as coordinated changes across `.python-version`, `pyproject.toml`, lockfiles, setup scripts, and workflows.
-- The repo currently mixes `3.13` runtime metadata with some `3.14`-targeted tooling and Windows wheel constraints; verify all affected files before changing version policy.
+- Keep Python support pinned to `3.13.x`; do **not** move to Python `3.14+` until the dependency/tooling breakage is resolved.
+- Treat Python-version changes as coordinated changes across `.python-version`, `pyproject.toml`, lockfiles, setup scripts, workflows, and the Windows `tesserocr` wheel URL.
 
 ## Commands
 
