@@ -1,5 +1,5 @@
 ---
-description: Review rules and generated-data changes for precedence and regeneration regressions.
+description: Specialized reviewer for item rules and generated data changes. Focus on custom rule precedence, generated outputs, and fuzzy-threshold consistency.
 mode: subagent
 ---
 
