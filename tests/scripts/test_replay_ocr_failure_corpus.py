@@ -12,8 +12,8 @@ sys.modules.setdefault("pynput", MagicMock())
 sys.modules.setdefault("pynput.keyboard", MagicMock())
 sys.modules.setdefault("pynput.mouse", MagicMock())
 
-from autoscrapper.ocr.failure_corpus import OcrFailureLabelStatus, OcrFailureSample
-from autoscrapper.ocr.inventory_vision import ItemNameMatchResult
+from autoscrapper.ocr.failure_corpus import OcrFailureLabelStatus, OcrFailureSample  # noqa: E402
+from autoscrapper.ocr.inventory_vision import ItemNameMatchResult  # noqa: E402
 
 _REPLAY_SCRIPT_PATH = (
     Path(__file__).resolve().parents[2] / "scripts" / "replay_ocr_failure_corpus.py"
