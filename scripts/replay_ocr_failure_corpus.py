@@ -49,7 +49,9 @@ def _build_parser() -> argparse.ArgumentParser:
 
 def _default_thresholds() -> list[int]:
     current = DEFAULT_ITEM_NAME_MATCH_THRESHOLD
-    return sorted({value for value in (current + offset for offset in CANDIDATE_THRESHOLD_OFFSETS) if 0 <= value <= 100})
+    return sorted(
+        {value for value in (current + offset for offset in CANDIDATE_THRESHOLD_OFFSETS) if 0 <= value <= 100}
+    )
 
 
 def _authoritative_samples(samples: list[OcrFailureSample]) -> list[OcrFailureSample]:

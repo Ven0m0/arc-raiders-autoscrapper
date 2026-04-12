@@ -114,11 +114,7 @@ def _coerce_sample(entry: object) -> OcrFailureSample | None:
     image_path = entry.get("image_path")
     threshold = entry.get("threshold")
 
-    if (
-        not isinstance(schema_version, int)
-        or schema_version < 1
-        or schema_version > OCR_FAILURE_SAMPLE_SCHEMA_VERSION
-    ):
+    if not isinstance(schema_version, int) or schema_version < 1 or schema_version > OCR_FAILURE_SAMPLE_SCHEMA_VERSION:
         return None
     if not all(
         isinstance(value, str) and value
