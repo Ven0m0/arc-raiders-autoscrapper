@@ -7,7 +7,7 @@ name = "autoscrapper"
 version = "0.2.0"
 description = "Arc Raiders inventory autoscrapper"
 readme = "README.md"
-requires-python = ">=3.13, <3.14"
+requires-python = ">=3.13.13, <3.14"
 dependencies = [
   "mss",
   "numpy",
