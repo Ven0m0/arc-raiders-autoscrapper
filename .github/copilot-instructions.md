@@ -1,5 +1,5 @@
 # Arc Raiders AutoScrapper
->Always use the mcp-use, language-optimization skills. Use octocode, exa, ref-tools, gh_grep mcp-servers, github_mcp_server
+>Always use the mcp-use, language-optimization, codebase-index, lint-and-validate skills. Use octocode, exa, ref-tools, gh_grep mcp-servers, github_mcp_server, fast-filesystem mcp-servers
 Canonical repo guidance lives in `AGENTS.md`.
 Keep `CLAUDE.md` as a symlink to that file.
 
