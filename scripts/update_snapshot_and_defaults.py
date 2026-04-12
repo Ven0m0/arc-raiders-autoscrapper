@@ -124,7 +124,7 @@ def _is_ignorable_timestamp_only_json_diff(before: bytes, after: bytes) -> bool:
     try:
         before_json = orjson.loads(before)
         after_json = orjson.loads(after)
-    except orjson.JSONDecodeError, UnicodeDecodeError:
+    except (orjson.JSONDecodeError, UnicodeDecodeError):
         return False
 
     return _normalize_for_semantic_diff(before_json) == _normalize_for_semantic_diff(after_json)
@@ -244,7 +244,7 @@ def _git_sha() -> str:
             text=True,
             check=True,
         )
-    except subprocess.CalledProcessError, FileNotFoundError:
+    except (subprocess.CalledProcessError, FileNotFoundError):
         return "unknown"
     return completed.stdout.strip() or "unknown"
 

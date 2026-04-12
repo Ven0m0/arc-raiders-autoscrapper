@@ -189,7 +189,7 @@ def _load_config_dict() -> ConfigDict:
         raw = orjson.loads(path.read_bytes())
     except FileNotFoundError:
         return {}
-    except OSError, orjson.JSONDecodeError:
+    except (OSError, orjson.JSONDecodeError):
         return {}
 
     if not isinstance(raw, dict):
@@ -329,7 +329,7 @@ def _from_raw_progress_settings(raw: Any) -> ProgressSettings:
         for key, value in hideout_levels_raw.items():
             try:
                 level = int(value)
-            except TypeError, ValueError:
+            except (TypeError, ValueError):
                 continue
             hideout_levels[str(key)] = level
 
