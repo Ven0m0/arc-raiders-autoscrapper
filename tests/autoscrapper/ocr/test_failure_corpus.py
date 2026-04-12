@@ -394,3 +394,25 @@ def test_default_capture_paths() -> None:
     assert isinstance(paths, CorpusPaths)
     assert isinstance(paths.manifest_path, Path)
     assert isinstance(paths.images_dir, Path)
+
+
+def test_resolve_image_path_traversal(tmp_path: Path) -> None:
+    sample = OcrFailureSample(
+        sample_id="123",
+        captured_at="now",
+        outcome="SKIP",
+        source="infobox",
+        raw_text="raw",
+        cleaned_text="clean",
+        chosen_name="chosen",
+        matched_name=None,
+        image_path="../../etc/passwd",
+    )
+
+    # Using tmp_path as REPO_ROOT via patch
+    with patch("autoscrapper.ocr.failure_corpus.REPO_ROOT", tmp_path.resolve()):
+        manifest_path = tmp_path / "corpus" / "manifest.jsonl"
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+
+        resolved = resolve_image_path(sample, manifest_path=manifest_path)
+        assert resolved is None

@@ -27,7 +27,7 @@ def _collect_fixtures() -> list[tuple[Path, str]]:
     for sidecar in sorted(FIXTURES_DIR.glob("*.json")):
         try:
             data = json.loads(sidecar.read_text(encoding="utf-8"))
-        except json.JSONDecodeError, OSError:
+        except (json.JSONDecodeError, OSError):
             continue
         expected_name = data.get("expected_name")
         if not isinstance(expected_name, str) or not expected_name:
