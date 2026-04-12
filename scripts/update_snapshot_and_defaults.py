@@ -1,3 +1,9 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13, <3.14"
+# dependencies = ["orjson"]
+# ///
+
 from __future__ import annotations
 
 import argparse
