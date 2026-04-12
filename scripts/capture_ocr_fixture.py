@@ -1,15 +1,19 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13, <3.14"
+# dependencies = ["orjson", "Pillow>=12.2.0"]
+# ///
 """Capture an OCR fixture from an ocr_debug image for use in regression tests.
 
 Usage:
     uv run python scripts/capture_ocr_fixture.py <image_path> <expected_item_name>
 
 Arguments:
-    image_path          Path to the source image (e.g. ocr_debug/infobox_0.png)
+    image_path          Path to the source image (e.g. ocr_debug/infobox_0.webp)
     expected_item_name  The correct item name this image should produce (e.g. "Rusty Gear")
 
 Output:
-    tests/fixtures/ocr/<slug>.png   — copy of the source image
+    tests/fixtures/ocr/<slug>.webp   — copy of the source image
     tests/fixtures/ocr/<slug>.json  — sidecar with expected_name, source, captured_at
 
 Example:
@@ -57,7 +61,7 @@ def main(argv: list[str] | None = None) -> int:
     FIXTURES_DIR.mkdir(parents=True, exist_ok=True)
 
     slug = _slug(args.expected_item_name)
-    dest_image = FIXTURES_DIR / f"{slug}.png"
+    dest_image = FIXTURES_DIR / f"{slug}.webp"
     dest_sidecar = FIXTURES_DIR / f"{slug}.json"
 
     if dest_image.exists() or dest_sidecar.exists():
