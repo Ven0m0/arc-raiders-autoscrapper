@@ -21,7 +21,7 @@
   "formatter": {
     "biome": {
       "command": ["npx", "-y", "@biomejs/biome", "check", "--write", "--format-with-errors=true", "$FILE"],
-      "extensions": [".json"]
+      "extensions": [".json", ".js"]
     }
   },
   "watcher": { "ignore": ["node_modules/**", "dist/**", ".git/**", ".venv/**"] },
