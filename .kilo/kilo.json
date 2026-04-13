@@ -18,6 +18,12 @@
     "@gotgenes/opencode-agent-identity@3.0.1",
     "opencode-websearch@0.5.0"
   ],
+  "formatter": {
+    "biome": {
+      "command": ["npx", "-y", "@biomejs/biome", "check", "--write", "--format-with-errors=true", "$FILE"],
+      "extensions": [".json"]
+    }
+  },
   "watcher": { "ignore": ["node_modules/**", "dist/**", ".git/**", ".venv/**"] },
   "mcp": {
     "ref-tools": {
