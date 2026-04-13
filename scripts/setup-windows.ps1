@@ -1,3 +1,5 @@
+#Requires -Version 5.1
+#Requires -RunAsAdministrator
 param(
   [string]$PythonVersion = "3.13"
 )
