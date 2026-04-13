@@ -11,7 +11,7 @@ import orjson
 
 from .interaction.keybinds import DEFAULT_STOP_KEY, normalize_stop_key
 
-CONFIG_VERSION = 5
+CONFIG_VERSION = 6
 
 _MAX_DELAY_MS = 5000
 _MAX_RETRY_COUNT = 10
@@ -51,6 +51,17 @@ class ProgressSettings:
 @dataclass(frozen=True, slots=True)
 class UiSettings:
     default_rules_warning_shown: bool = False
+
+
+@dataclass(frozen=True, slots=True)
+class ApiSettings:
+    """ArcTracker API configuration."""
+
+    app_key: str = ""
+    user_key: str = ""
+    enabled: bool = False
+    prefer_api: bool = True
+    base_url: str = "https://arctracker.io"
 
 
 def _config_dir() -> Path:
@@ -139,6 +150,19 @@ def _migrate_v4_to_v5(payload: ConfigDict) -> ConfigDict:
     return payload
 
 
+def _migrate_v5_to_v6(payload: ConfigDict) -> ConfigDict:
+    """Add API settings section (v6)."""
+    if "api" not in payload:
+        payload["api"] = {
+            "app_key": "",
+            "user_key": "",
+            "enabled": False,
+            "prefer_api": True,
+            "base_url": "https://arctracker.io",
+        }
+    return payload
+
+
 type MigrateFn = Callable[[ConfigDict], ConfigDict]
 
 _MIGRATIONS: dict[int, MigrateFn] = {
@@ -146,6 +170,7 @@ _MIGRATIONS: dict[int, MigrateFn] = {
     2: _migrate_v2_to_v3,
     3: _migrate_v3_to_v4,
     4: _migrate_v4_to_v5,
+    5: _migrate_v5_to_v6,
 }
 
 
@@ -381,3 +406,30 @@ def save_ui_settings(settings: UiSettings) -> None:
     payload["version"] = CONFIG_VERSION
     payload["ui"] = asdict(settings)
     _save_config_dict(payload)
+
+
+def _from_raw_api_settings(raw: Any) -> ApiSettings:
+    if not isinstance(raw, dict):
+        return ApiSettings()
+    return ApiSettings(
+        app_key=str(raw.get("app_key", "")),
+        user_key=str(raw.get("user_key", "")),
+        enabled=_coerce_bool(raw.get("enabled"), False),
+        prefer_api=_coerce_bool(raw.get("prefer_api"), True),
+        base_url=str(raw.get("base_url", "https://arctracker.io")),
+    )
+
+
+def load_api_settings() -> ApiSettings:
+    return _from_raw_api_settings(_load_config_dict().get("api"))
+
+
+def save_api_settings(settings: ApiSettings) -> None:
+    payload = _load_config_dict()
+    payload["version"] = CONFIG_VERSION
+    payload["api"] = asdict(settings)
+    _save_config_dict(payload)
+
+
+def reset_api_settings() -> None:
+    save_api_settings(ApiSettings())

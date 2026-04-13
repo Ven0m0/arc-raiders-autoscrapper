@@ -23,6 +23,7 @@ from .progress import (
 )
 from .rules import RulesScreen
 from .scan import ScanScreen
+from .api_settings import ApiSettingsScreen
 from .settings import (
     ResetScanSettingsScreen,
     ScanControlsScreen,
@@ -393,22 +394,49 @@ class AutoScrapperApp(App[None]):
         self.pop_screen()
 
     def _scan_menu(self) -> MenuScreen:
+        from ..api import HAS_REQUESTS, create_client_from_config
+
+        # Check if API is configured
+        api_configured = False
+        if HAS_REQUESTS:
+            client = create_client_from_config()
+            api_configured = client.is_configured()
+
         items = [
             MenuItem(
                 "1",
-                "Scan now",
+                "Scan now (OCR)",
                 lambda screen: screen.app.push_screen(ScanScreen(dry_run=False)),
             ),
             MenuItem(
                 "2",
-                "Dry run (no clicks)",
+                "Dry run (OCR, no clicks)",
                 lambda screen: screen.app.push_screen(ScanScreen(dry_run=True)),
+            ),
+            MenuItem(
+                "3",
+                "Scan via API (ArcTracker.io)",
+                lambda screen: screen.app.push_screen(ScanScreen(dry_run=False, use_api=True)),
+                disabled=not api_configured,
+            ),
+            MenuItem(
+                "4",
+                "Dry run via API",
+                lambda screen: screen.app.push_screen(ScanScreen(dry_run=True, use_api=True)),
+                disabled=not api_configured,
             ),
             MenuItem("0", "Back", lambda screen: screen.app.pop_screen()),
         ]
         return MenuScreen("Scan", items, default_key="1")
 
     def _progress_menu(self) -> MenuScreen:
+        from ..api import HAS_REQUESTS, create_client_from_config
+
+        api_configured = False
+        if HAS_REQUESTS:
+            client = create_client_from_config()
+            api_configured = client.is_configured()
+
         items = [
             MenuItem(
                 "1",
@@ -430,9 +458,43 @@ class AutoScrapperApp(App[None]):
                 "Update rules from saved progress",
                 lambda screen: launch_generate_rules(screen.app),
             ),
+            MenuItem(
+                "5",
+                "Sync hideout from arctracker.io",
+                lambda screen: self._sync_hideout_from_api(screen),
+                disabled=not api_configured,
+            ),
+            MenuItem(
+                "6",
+                "Sync projects from arctracker.io",
+                lambda screen: self._sync_projects_from_api(screen),
+                disabled=not api_configured,
+            ),
             MenuItem("0", "Back", lambda screen: screen.app.pop_screen()),
         ]
         return MenuScreen("Progress", items, default_key="1")
+
+    def _sync_hideout_from_api(self, screen: "MenuScreen") -> None:
+        """Sync hideout progress from arctracker.io API."""
+        from ..api.datasource import sync_hideout_to_progress
+        from .common import MessageScreen
+
+        try:
+            sync_hideout_to_progress()
+            screen.app.push_screen(MessageScreen("Hideout progress synced from arctracker.io"))
+        except Exception as exc:
+            screen.app.push_screen(MessageScreen(f"Failed to sync hideout: {exc}"))
+
+    def _sync_projects_from_api(self, screen: "MenuScreen") -> None:
+        """Sync project progress from arctracker.io API."""
+        from ..api.datasource import sync_projects_to_progress
+        from .common import MessageScreen
+
+        try:
+            sync_projects_to_progress()
+            screen.app.push_screen(MessageScreen("Project progress synced from arctracker.io"))
+        except Exception as exc:
+            screen.app.push_screen(MessageScreen(f"Failed to sync projects: {exc}"))
 
     def _settings_menu(self) -> MenuScreen:
         items = [
@@ -458,6 +520,11 @@ class AutoScrapperApp(App[None]):
             ),
             MenuItem(
                 "5",
+                "API Settings (ArcTracker)",
+                lambda screen: screen.app.push_screen(ApiSettingsScreen()),
+            ),
+            MenuItem(
+                "6",
                 "Reset scan settings to defaults",
                 lambda screen: screen.app.push_screen(ResetScanSettingsScreen()),
             ),

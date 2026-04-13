@@ -17,6 +17,7 @@ dependencies = [
   "pydirectinput-rgx; sys_platform == 'win32'",
   "pywinctl",
   "rapidfuzz~=3.14.5",
+  "requests>=2.33.1",
   "rich",
   "textual",
   "tessdata.fast-eng",
