@@ -5,9 +5,7 @@ repos:
     hooks:
       # Run linter and auto-fix issues
       - id: ruff
-        args:
-          - --fix
-          - --exit-non-zero-on-fix
+        args: [--fix --exit-non-zero-on-fix] 
         stages: [pre-commit]
       # Format code
       - id: ruff-format
