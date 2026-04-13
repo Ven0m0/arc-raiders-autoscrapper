@@ -2,6 +2,10 @@
 
 Ven0m0/arc-raiders-autoscrapper#41
 
+add "requests beautifulsoup4" to @pyproject.toml and implement "https://github.com/Soygen/ARLO/blob/master/update_db.py" from "https://github.com/Soygen/ARLO"
+
+---
+
 ## OCR / Item Name Detection
 
 ### T001 — Calibrate OCR fuzzy threshold from live `SKIP_UNLISTED` data
