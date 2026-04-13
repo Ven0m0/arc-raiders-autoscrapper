@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from abc import abstractmethod
 from dataclasses import replace
 
 from textual import events
@@ -251,9 +252,11 @@ class ScanSettingsScreen(AppScreen):
         save_scan_settings(settings)
         self.app.push_screen(MessageScreen("Scan settings saved."))
 
+    @abstractmethod
     def _compose_form(self) -> ComposeResult:
         raise NotImplementedError
 
+    @abstractmethod
     def _load_into_fields(self) -> None:
         raise NotImplementedError
 

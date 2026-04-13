@@ -45,6 +45,14 @@ _OCR_DEBUG_DIR: Path | None = None
 _last_roi_hash: bytes | None = None
 _last_ocr_result: tuple[str, str] | None = None
 DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75
+# Hand-picked initial value; no live corpus exists yet.
+# To calibrate: capture SKIP_UNLISTED samples from a live run, label them with
+# label_status=match|no_match in artifacts/ocr/skip_unlisted/samples.jsonl, then run:
+#   uv run python scripts/replay_ocr_failure_corpus.py
+# Update this constant only when the replay confirms every labelled sample
+# stays unmatched or resolves to the correct item name at the new threshold.
+# Record the corpus commit hash here when you change the value, e.g.:
+#   Calibrated at corpus commit <hash>: threshold <N> passes all <M> samples.
 # Guarded fallback only uses these broad stat labels; extend this list if new
 # infobox stat headings start outranking item titles in OCR output.
 _STAT_LINE_KEYWORDS = (

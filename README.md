@@ -81,6 +81,7 @@ unavailable.
 | [MetaForge ARC Raiders API docs](https://metaforge.app/arc-raiders/api) | Primary item and quest source | Reads paginated `items` and `quests` responses from `https://metaforge.app/api/arc-raiders` |
 | `METAFORGE_SUPABASE_ANON_KEY` + MetaForge Supabase tables | Optional crafting and recycle relationships | Adds `recipe` and `recyclesInto` data when the anon key is available |
 | [fgrzesiak `arcraiders-data`](https://github.com/fgrzesiak/arcraiders-data) | Supplemental and fallback item and quest source | Merges missing records into MetaForge results, or replaces missing datasets when MetaForge is unavailable |
+| [Arc Raiders Wiki loot table](https://arcraiders.wiki/wiki/Loot) | Optional workshop/expedition/project-use enrichment | Adds a `wikiUses` field to each item when the `scraper` extra is installed |
 
 ### MetaForge API reference
 
@@ -119,6 +120,21 @@ MetaForge remains the preferred source when both providers return the same
 record ID. Generated `metadata.json` records which provider supplied the final
 item and quest datasets.
 
+### Arc Raiders Wiki enrichment
+
+When the optional `scraper` extra is installed (`uv sync --extra scraper`), the
+updater also fetches the [Arc Raiders Wiki loot table](https://arcraiders.wiki/wiki/Loot)
+and enriches each item with a `wikiUses` field containing workshop upgrade
+requirements, expedition requirements, and project-use data scraped from the
+`Uses` column of the loot table.
+
+MetaForge remains the authoritative source for items, sell prices, stack sizes,
+recycle components, and quests. Wiki enrichment adds supplemental data only;
+it does not replace any MetaForge field.  A failed wiki fetch is logged as a
+warning and the update continues without wiki data.  The `metadata.json`
+`dataSources.items.wikiEnrichment` block records the URL, whether the library
+was available, how many items received a `wikiUses` value, and any error.
+
 ### Run updater locally
 
 Use these commands from the repository root when you want to refresh generated
@@ -127,6 +143,9 @@ data on demand.
 - Install the optional MetaForge anon key only if you want crafting and recycle
   component enrichment:
   - `export METAFORGE_SUPABASE_ANON_KEY=...`
+- Install the optional `scraper` extra to enable Arc Raiders Wiki enrichment
+  (`wikiUses` field on items):
+  - `uv sync --extra scraper`
 - Real update (writes tracked files):
   - `uv run python scripts/update_snapshot_and_defaults.py`
 - Dry run (no tracked file writes):

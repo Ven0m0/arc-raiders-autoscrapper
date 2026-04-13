@@ -13,6 +13,7 @@ from ..core.item_actions import ActionMap, Decision, ItemActionResult, choose_de
 from ..interaction.inventory_grid import Cell, Grid
 from ..interaction.ui_windows import (
     SCROLL_CLICKS_PATTERN,
+    LiveWindow,
     abort_if_escape_pressed,
     capture_region,
     move_absolute,
@@ -44,7 +45,7 @@ class TimingConfig:
 
 @dataclass(frozen=True, slots=True)
 class ScanContext:
-    window: Any | None
+    window: LiveWindow | None
     stop_key: str
     win_left: int
     win_top: int
@@ -480,7 +481,7 @@ class _ScanRunner:
         window = self.context.window
         if window is not None and hasattr(window, "isAlive"):
             try:
-                if not window.isAlive:  # type: ignore[attr-defined]
+                if not window.isAlive:
                     raise RuntimeError("Target window closed during scan")
             except RuntimeError:
                 raise

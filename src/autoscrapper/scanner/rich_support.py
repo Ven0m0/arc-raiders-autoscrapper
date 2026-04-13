@@ -1,5 +1,25 @@
 from __future__ import annotations
 
+__all__ = [
+    "Align",
+    "Console",
+    "Group",
+    "Live",
+    "Panel",
+    "BarColumn",
+    "Progress",
+    "ProgressColumn",
+    "SpinnerColumn",
+    "Task",
+    "TaskProgressColumn",
+    "TextColumn",
+    "TimeElapsedColumn",
+    "TimeRemainingColumn",
+    "Table",
+    "Text",
+    "box",
+]
+
 try:
     from rich import box as box
     from rich.align import Align as Align
@@ -18,7 +38,7 @@ try:
         TimeRemainingColumn as TimeRemainingColumn,
     )
     from rich.table import Table as Table
-    from rich.text import Text as Text  # noqa: F401
+    from rich.text import Text as Text
 except ImportError:  # pragma: no cover - optional dependency
     Align = None
     Console = None
