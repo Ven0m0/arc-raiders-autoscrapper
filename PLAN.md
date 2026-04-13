@@ -107,7 +107,7 @@ extra `--model` flag.
 
 ---
 
-### T003 — Implement web-scraper data-update path from ARLO upstream source
+### T003 — Implement hybrid database updater from MetaForge API + Arc Raiders Wiki
 
 **Anchor:** `TODO.md:3` (GitHub issue #41)  
 **Severity:** medium  
@@ -116,29 +116,44 @@ extra `--model` flag.
 
 **Context**
 
-GitHub issue #41 requests adding `requests` + `beautifulsoup4` and implementing
-the item-database update logic from
-`https://github.com/Soygen/ARLO/blob/master/update_db.py`.  The current
-`scripts/update_snapshot_and_defaults.py` relies on the MetaForge API; a
-fallback scraper path allows data refreshes when that API is unavailable.
+GitHub issue #41 points at ARLO's `update_db.py`, which uses a hybrid updater:
+MetaForge API data for items, sell prices, stack sizes, recycle components, and
+quests, then Arc Raiders Wiki scraping for workshop upgrades, expedition
+requirements, and project-use enrichment.  This repo already has an updater in
+`src/autoscrapper/progress/data_update.py` and
+`scripts/update_snapshot_and_defaults.py` that merges MetaForge with the
+RaidTheory fallback; the missing piece is an optional wiki-enrichment phase that
+improves item-usage coverage without replacing the current primary/fallback
+pipeline.
 
 **Acceptance criteria**
 
 - Add `requests` and `beautifulsoup4` as optional extras in `pyproject.toml`
   (e.g. `[project.optional-dependencies] scraper = [...]`).
-- Implement `scripts/scrape_arlo_data.py` that fetches and normalises item data
-  into the same schema produced by `update_snapshot_and_defaults.py`.
-- The scraper is a maintenance script only; it must not be called from any
-  production scan code path.
-- `python3 -m uv run python scripts/scrape_arlo_data.py --dry-run` exits 0 and
-  prints the item count without writing files.
-- `README.md` documents the new extra and script.
+- Extend the existing maintenance update flow (not the live scan path) with a
+  hybrid-source mode patterned after ARLO's `update_db.py`.
+- MetaForge remains the primary source for items, sell prices, stack sizes,
+  recycle components, and quest requirements/rewards.
+- Arc Raiders Wiki scraping enriches the update output with normalized workshop
+  upgrades, expedition requirements, and project-use data keyed by canonical
+  item names.
+- The current MetaForge + RaidTheory fallback behavior remains intact when the
+  wiki scrape is unavailable or incomplete.
+- A dry-run entrypoint exits 0 and reports item/source coverage without writing
+  tracked files.
+- `metadata.json` (or a sibling report artifact) records which fields came from
+  MetaForge, RaidTheory fallback, and wiki enrichment.
+- `README.md` documents the new extra, data sources, and dry-run workflow.
 
 **Implementation hint**
 
-Model output schema on `update_snapshot_and_defaults.py`.  Use
-`requests.get(url, timeout=30)` + `BeautifulSoup(html, "html.parser")`.
-Validate output against the existing item JSON schema before writing.
+Start from `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/progress/data_update.py`
+and `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/update_snapshot_and_defaults.py`
+so the repo keeps one canonical updater.  Reuse ARLO's split of concerns:
+`requests.get(..., timeout=30)` for MetaForge/Wiki fetches,
+`BeautifulSoup(html, "html.parser")` for wiki parsing, and a name-based merge
+step that enriches the existing item snapshot with workshop / expedition /
+project-use fields instead of creating a parallel JSON pipeline.
 
 ---
 
