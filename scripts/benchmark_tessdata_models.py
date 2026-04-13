@@ -47,7 +47,7 @@ def _build_parser() -> argparse.ArgumentParser:
         "--manifest",
         type=Path,
         default=FIXED_FAILURE_CORPUS_PATH,
-        help="JSONL corpus with image_path and expected_name fields (default: %(default)s)",
+        help="JSONL corpus with authoritative match labels, image_path, and expected_name fields (default: %(default)s)",
     )
     parser.add_argument(
         "--worker",
@@ -65,7 +65,7 @@ def _build_parser() -> argparse.ArgumentParser:
 def _load_benchmark_samples(manifest_path: Path) -> list[tuple[object, Path]]:
     samples = []
     for sample in load_failure_corpus(manifest_path):
-        if not sample.expected_name:
+        if sample.expected_match_status != "match" or not sample.expected_name:
             continue
         image_path = resolve_image_path(sample, manifest_path=manifest_path)
         if image_path is None or not image_path.exists():
@@ -291,7 +291,7 @@ def main() -> int:
     print(f"report={report_path}")
     if fast_report["sample_count"] == 0:
         print(
-            "No labeled failure corpus entries were found; create a fixed corpus with image_path and expected_name before benchmarking."
+            "No authoritative matched failure corpus entries were found; create a fixed corpus with label_status=match, image_path, and expected_name before benchmarking."
         )
     return 0
 

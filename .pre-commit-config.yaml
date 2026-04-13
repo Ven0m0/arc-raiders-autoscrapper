@@ -65,7 +65,7 @@ repos:
 
   # Tombi - TOML linting and formatting
   - repo: https://github.com/tombi-toml/tombi-pre-commit
-    rev: v0.9.16
+    rev: v0.9.17
     hooks:
       - id: tombi-format
         exclude: ^(pyproject\.toml|uv\.lock)$
@@ -76,7 +76,7 @@ repos:
 
   # Renovate config validator
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 43.110.16
+    rev: 43.111.0
     hooks:
       - id: renovate-config-validator
         stages: [pre-commit]

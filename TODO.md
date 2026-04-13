@@ -1,5 +1,7 @@
 # TODO
 
+Ven0m0/arc-raiders-autoscrapper#41
+
 ## OCR / Item Name Detection
 
 ### T001 — Calibrate OCR fuzzy threshold from live `SKIP_UNLISTED` data

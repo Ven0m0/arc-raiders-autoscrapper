@@ -1,16 +1,12 @@
----
 name: Daily Data Update
-
-"on":
+on:
   schedule:
     - cron: "0 14 * * *"
   workflow_dispatch:
-
 permissions:
   actions: read
   contents: write
   pull-requests: write
-
 concurrency:
   group: daily-data-update
   cancel-in-progress: false

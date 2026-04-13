@@ -1,9 +1,6 @@
 ---
 name: language-optimization
-description: Optimize code for readability, performance, maintainability, and security across Bash, Python, and Rust. Use when asked to improve code quality, optimize performance, add type safety, or refactor for idioms.
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: "Bash, Read, Write, Edit, Glob, Grep"
+description: Optimize code for readability, performance, maintainability, and security across Python. Use when asked to improve code quality, optimize performance, add type safety, or refactor for idioms
 ---
 # Language Optimization
 Optimize code across languages following universal principles and language-specific idioms.
@@ -38,14 +35,8 @@ Think through optimization systematically:
 </instructions>
 <language_specific>
 
-## Bash/Shell
-- Standards: `instructions/bash.instructions.md`
-- Always: `set -euo pipefail`, quote variables, use `[[ ]]` not `[ ]`
-- Tools: `shellcheck`, `shellharden`
-- Prefer: `fd` over `find`, `rg` over `grep`, `sd` over `sed`
-
 ## Python
-- Standards: `instructions/python.instructions.md`
+- Standards: `.github/instructions/python.instructions.md`
 - Always: type hints on public functions, `T | None` not `Optional[T]`
 - Tools: `ruff` (lint+format), `mypy` (types), `pytest` (tests)
 - Prefer: generators over lists, `pathlib` over `os.path`, f-strings over `.format()`
@@ -87,19 +78,6 @@ def get_user(user_id: int, *, include_posts: bool = False) -> User | None:
         user.posts = db.posts(user_id)
     return user
 ```
-
-### Bash: Modern idioms
-```bash
-# Before
-files=$(find . -name "*.py")
-for f in $files; do
-    if [ -f "$f" ]; then
-        grep -l "TODO" "$f"
-    fi
-done
-# After
-fd -e py --type f -x rg -l "TODO" {}
-```
 </examples>
 
 ## Success Criteria
@@ -109,7 +87,3 @@ Optimization is complete when:
 - Test suite passes with no regressions
 - Performance improved (if that was the goal, with measurements)
 - Code follows language-specific idioms from `.github/instructions/`
-
-## References
-- Language standards: `.github/instructions/bash.instructions.md`, `.github/instructions/python.instructions.md`,
-- Issue-oriented follow-up: `.github/skills/fix-issue/`

@@ -1,6 +1,6 @@
 ---
 name: data-pipeline-reviewer
-description: Reviews changes to src/autoscrapper/progress/data_update.py for field mapping errors, fallback merge bugs, silent data loss, and generated-file bypass. Use after editing the MetaForge/fgrzesiak download and normalization pipeline.
+description: Reviews changes to src/autoscrapper/progress/data_update.py for field mapping errors, fallback merge bugs, silent data loss, and generated-file bypass. Use after editing the MetaForge/raidtheory download and normalization pipeline.
 ---
 
 You review changes to `src/autoscrapper/progress/data_update.py` for the following categories of bugs:

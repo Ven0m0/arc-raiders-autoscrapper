@@ -11,6 +11,7 @@ import pytest
 
 from autoscrapper.ocr.failure_corpus import (
     CorpusPaths,
+    OCR_FAILURE_SAMPLE_SCHEMA_VERSION,
     OcrFailureSample,
     _coerce_sample,
     _iso_now,
@@ -67,6 +68,7 @@ def test_sample_id_with_image() -> None:
 
 def test_coerce_sample_valid() -> None:
     valid_dict = {
+        "schema_version": OCR_FAILURE_SAMPLE_SCHEMA_VERSION,
         "sample_id": "123",
         "captured_at": "2023-01-01T00:00:00Z",
         "outcome": "SKIP",
@@ -75,14 +77,22 @@ def test_coerce_sample_valid() -> None:
         "cleaned_text": "clean",
         "chosen_name": "chosen",
         "matched_name": "match",
+        "label_status": "match",
         "expected_name": "expect",
         "image_path": "path/img.webp",
+        "threshold": 75,
     }
     sample = _coerce_sample(valid_dict)
     assert sample is not None
     assert isinstance(sample, OcrFailureSample)
+    assert sample.schema_version == OCR_FAILURE_SAMPLE_SCHEMA_VERSION
     assert sample.sample_id == "123"
     assert sample.matched_name == "match"
+    assert sample.label_status == "match"
+    assert sample.expected_match_status == "match"
+    assert sample.is_authoritative is True
+    assert sample.expected_display == "expect"
+    assert sample.threshold == 75
 
 
 def test_coerce_sample_invalid() -> None:
@@ -103,6 +113,7 @@ def test_coerce_sample_invalid() -> None:
 
     # Invalid source
     invalid_source = {
+        "schema_version": OCR_FAILURE_SAMPLE_SCHEMA_VERSION,
         "sample_id": "123",
         "captured_at": "2023-01-01T00:00:00Z",
         "outcome": "SKIP",
@@ -112,6 +123,85 @@ def test_coerce_sample_invalid() -> None:
         "chosen_name": "chosen",
     }
     assert _coerce_sample(invalid_source) is None
+
+
+def test_coerce_sample_defaults_old_unlabeled_rows_to_pending() -> None:
+    sample = _coerce_sample(
+        {
+            "sample_id": "123",
+            "captured_at": "2023-01-01T00:00:00Z",
+            "outcome": "SKIP_UNLISTED",
+            "source": "infobox",
+            "raw_text": "raw",
+            "cleaned_text": "clean",
+            "chosen_name": "chosen",
+            "matched_name": None,
+        }
+    )
+    assert sample is not None
+    assert sample.schema_version == 1
+    assert sample.label_status == "pending"
+    assert sample.expected_match_status is None
+    assert sample.expected_display == "<pending-label>"
+
+
+def test_coerce_sample_infers_match_label_for_old_fixed_corpus_rows() -> None:
+    sample = _coerce_sample(
+        {
+            "sample_id": "123",
+            "captured_at": "2023-01-01T00:00:00Z",
+            "outcome": "SKIP_UNLISTED",
+            "source": "infobox",
+            "raw_text": "raw",
+            "cleaned_text": "clean",
+            "chosen_name": "chosen",
+            "matched_name": "Arc Alloy",
+            "expected_name": "Arc Alloy",
+        }
+    )
+    assert sample is not None
+    assert sample.label_status == "match"
+    assert sample.expected_match_status == "match"
+    assert sample.expected_display == "Arc Alloy"
+
+
+def test_coerce_sample_no_match_label_is_authoritative() -> None:
+    sample = _coerce_sample(
+        {
+            "schema_version": OCR_FAILURE_SAMPLE_SCHEMA_VERSION,
+            "sample_id": "123",
+            "captured_at": "2023-01-01T00:00:00Z",
+            "outcome": "SKIP_UNLISTED",
+            "source": "context_menu",
+            "raw_text": "Unavailable",
+            "cleaned_text": "Unavailable",
+            "chosen_name": "Unavailable",
+            "matched_name": None,
+            "label_status": "no_match",
+        }
+    )
+    assert sample is not None
+    assert sample.is_authoritative is True
+    assert sample.expected_match_status == "no_match"
+    assert sample.expected_display == "<no-match>"
+
+
+def test_coerce_sample_rejects_match_label_without_expected_name() -> None:
+    sample = _coerce_sample(
+        {
+            "schema_version": OCR_FAILURE_SAMPLE_SCHEMA_VERSION,
+            "sample_id": "123",
+            "captured_at": "2023-01-01T00:00:00Z",
+            "outcome": "SKIP_UNLISTED",
+            "source": "context_menu",
+            "raw_text": "Arc Alloy",
+            "cleaned_text": "Arc Alloy",
+            "chosen_name": "Arc Alloy",
+            "matched_name": "Arc Alloy",
+            "label_status": "match",
+        }
+    )
+    assert sample is None
 
 
 def test_capture_skip_unlisted_sample(tmp_path: Path) -> None:
@@ -128,21 +218,29 @@ def test_capture_skip_unlisted_sample(tmp_path: Path) -> None:
             matched_name="Matched",
             source_image=image,
             from_context_menu=True,
+            threshold=75,
             paths=paths,
         )
 
         assert sample is not None
+        assert sample.schema_version == OCR_FAILURE_SAMPLE_SCHEMA_VERSION
         assert sample.source == "context_menu"
         assert sample.raw_text == "Raw Text"  # stripped
         assert sample.cleaned_text == "Raw Text"
+        assert sample.label_status == "pending"
+        assert sample.expected_display == "<pending-label>"
+        assert sample.threshold == 75
 
         assert manifest_path.exists()
         content = manifest_path.read_text("utf-8").strip()
         assert len(content.split("\n")) == 1
 
         data = orjson.loads(content)
+        assert data["schema_version"] == OCR_FAILURE_SAMPLE_SCHEMA_VERSION
         assert data["sample_id"] == sample.sample_id
         assert data["source"] == "context_menu"
+        assert data["label_status"] == "pending"
+        assert data["threshold"] == 75
 
         assert images_dir.exists()
         images = list(images_dir.glob("*.webp"))
@@ -160,12 +258,14 @@ def test_capture_skip_unlisted_sample_empty_text(tmp_path: Path) -> None:
         matched_name=None,
         source_image=None,
         from_context_menu=False,
+        threshold=70,
         paths=paths,
     )
 
     assert sample is not None
     assert sample.cleaned_text == "Fallback Name"
     assert sample.raw_text == "Fallback Name"  # sample_raw_text is empty, so it uses cleaned_text
+    assert sample.threshold == 70
 
 
 def test_capture_skip_unlisted_sample_completely_empty(tmp_path: Path) -> None:
@@ -189,6 +289,7 @@ def test_load_failure_corpus(tmp_path: Path) -> None:
     assert load_failure_corpus(manifest_path) == []
 
     valid_dict = {
+        "schema_version": OCR_FAILURE_SAMPLE_SCHEMA_VERSION,
         "sample_id": "123",
         "captured_at": "2023-01-01T00:00:00Z",
         "outcome": "SKIP",
@@ -226,6 +327,7 @@ def test_load_failure_corpus(tmp_path: Path) -> None:
 
 def test_resolve_image_path(tmp_path: Path) -> None:
     sample = OcrFailureSample(
+        schema_version=OCR_FAILURE_SAMPLE_SCHEMA_VERSION,
         sample_id="123",
         captured_at="now",
         outcome="SKIP",
@@ -240,6 +342,7 @@ def test_resolve_image_path(tmp_path: Path) -> None:
 
     abs_path = tmp_path / "img.webp"
     sample_abs = OcrFailureSample(
+        schema_version=OCR_FAILURE_SAMPLE_SCHEMA_VERSION,
         sample_id="123",
         captured_at="now",
         outcome="SKIP",
@@ -254,6 +357,7 @@ def test_resolve_image_path(tmp_path: Path) -> None:
 
     # Relative to manifest
     sample_rel = OcrFailureSample(
+        schema_version=OCR_FAILURE_SAMPLE_SCHEMA_VERSION,
         sample_id="123",
         captured_at="now",
         outcome="SKIP",
@@ -290,3 +394,25 @@ def test_default_capture_paths() -> None:
     assert isinstance(paths, CorpusPaths)
     assert isinstance(paths.manifest_path, Path)
     assert isinstance(paths.images_dir, Path)
+
+
+def test_resolve_image_path_traversal(tmp_path: Path) -> None:
+    sample = OcrFailureSample(
+        sample_id="123",
+        captured_at="now",
+        outcome="SKIP",
+        source="infobox",
+        raw_text="raw",
+        cleaned_text="clean",
+        chosen_name="chosen",
+        matched_name=None,
+        image_path="../../etc/passwd",
+    )
+
+    # Using tmp_path as REPO_ROOT via patch
+    with patch("autoscrapper.ocr.failure_corpus.REPO_ROOT", tmp_path.resolve()):
+        manifest_path = tmp_path / "corpus" / "manifest.jsonl"
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+
+        resolved = resolve_image_path(sample, manifest_path=manifest_path)
+        assert resolved is None
