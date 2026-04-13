@@ -9,7 +9,8 @@ from .report import _render_results
 from .rich_support import Console
 from .scan_loop import ScanContext, TimingConfig, detect_grid, scan_pages
 from .types import ScanStats
-from ..config import ScanSettings
+from ..api.client import create_client_from_config, APIOrchestrator
+from ..config import ScanSettings, load_api_settings
 from ..core.item_actions import (
     ActionMap,
     ITEM_RULES_PATH,
@@ -286,6 +287,35 @@ def scan_inventory(
         )
 
         actions: ActionMap = actions_override if actions_override is not None else load_item_actions(actions_path)
+
+        # Try to augment with API decisions if enabled (API takes precedence over local rules)
+        api_settings = load_api_settings()
+        if api_settings.enabled:
+            try:
+                api_client = create_client_from_config(api_settings)
+                if api_client.is_configured():
+                    orchestrator = APIOrchestrator(api_client)
+                    api_decisions = orchestrator.get_item_decisions(prefer_api=api_settings.prefer_api)
+                    if api_decisions:
+                        # Merge API decisions into actions (API takes precedence)
+                        for item_name, decision in api_decisions.items():
+                            normalized_name = item_name.strip().lower()
+                            if normalized_name:
+                                actions[normalized_name] = [decision]
+                        if progress_impl is not None:
+                            startup_events.append(
+                                (f"API: Loaded {len(api_decisions)} decisions from ArcTracker", "green")
+                            )
+                    else:
+                        if progress_impl is not None:
+                            startup_events.append(("API: No decisions available, using local rules only", "yellow"))
+                else:
+                    if progress_impl is not None:
+                        startup_events.append(("API: Not configured (missing keys), using local rules", "yellow"))
+            except Exception as exc:
+                # Log but don't fail - OCR fallback is automatic
+                if progress_impl is not None:
+                    startup_events.append((f"API: Error loading decisions ({exc}), using local rules", "yellow"))
 
         grid_roi = inventory_roi_rect(win_width, win_height)
         safe_point = safe_mouse_point(win_width, win_height)

@@ -156,9 +156,10 @@ class TextualScanProgress(ScanProgress):
 
 
 class ScanScreen(Screen):
-    def __init__(self, *, dry_run: bool) -> None:
+    def __init__(self, *, dry_run: bool, use_api: bool = False) -> None:
         super().__init__()
         self.dry_run = dry_run
+        self.use_api = use_api
         self._settings = load_scan_settings()
         self._state = ScanState()
         self._updates: "queue.Queue[ScanUpdate]" = queue.Queue()
@@ -172,11 +173,16 @@ class ScanScreen(Screen):
 
     def compose(self) -> ComposeResult:
         with Vertical(id="scan-layout"):
-            title = "Scan (Dry Run)" if self.dry_run else "Scan"
-            stop_label = stop_key_label(self._settings.stop_key)
+            if self.use_api:
+                title = "Scan via API (Dry Run)" if self.dry_run else "Scan via API"
+                hint = "Fetching stash data from arctracker.io API..."
+            else:
+                title = "Scan (Dry Run)" if self.dry_run else "Scan"
+                stop_label = stop_key_label(self._settings.stop_key)
+                hint = f"Alt-tab to ARC Raiders. Press {stop_label} in the game window to stop scanning."
             yield Static(title, classes="menu-title")
             yield Static(
-                f"Alt-tab to ARC Raiders. Press {stop_label} in the game window to stop scanning.",
+                hint,
                 classes="hint",
                 id="scan-hint",
             )
@@ -199,6 +205,11 @@ class ScanScreen(Screen):
             self.app.pop_screen()
 
     def _start_window_wait(self) -> None:
+        # API scan doesn't need window detection
+        if self.use_api:
+            self._start_scan(None)  # type: ignore
+            return
+
         self._window_wait_started = time.monotonic()
         self._updates.put(ScanUpdate(kind="phase", payload={"phase": "Waiting for Arc Raiders window…"}))
         self._window_wait_timer = self.set_interval(0.25, self._poll_for_window)
@@ -257,9 +268,59 @@ class ScanScreen(Screen):
         thread = threading.Thread(target=self._run_scan, args=(window_snapshot,), daemon=True)
         thread.start()
 
-    def _run_scan(self, window_snapshot: WindowSnapshot) -> None:
+    def _run_scan(self, window_snapshot: WindowSnapshot | None) -> None:
         settings = self._settings
         progress = TextualScanProgress(self._updates)
+
+        # API-based scan
+        if self.use_api:
+            progress.set_phase("Fetching from arctracker.io API...")
+            try:
+                from ..api.datasource import fetch_stash_as_scan_results
+                from ..core.item_actions import ITEM_RULES_PATH, load_item_actions
+
+                actions = load_item_actions(ITEM_RULES_PATH)
+                results, stats = fetch_stash_as_scan_results(
+                    actions=actions,
+                    dry_run=self.dry_run,
+                )
+
+                # Check if API fetch failed
+                if stats.stash_count_text == "api-error":
+                    progress.add_event("API fetch failed, falling back to OCR...", style="yellow")
+                    # Fall back to OCR scan
+                    self.use_api = False
+                    if window_snapshot is not None:
+                        self._run_scan(window_snapshot)
+                    else:
+                        self._updates.put(
+                            ScanUpdate(
+                                kind="error",
+                                payload={"message": "API fetch failed and no game window available for OCR fallback."},
+                            )
+                        )
+                    return
+
+            except Exception as exc:
+                progress.add_event(f"API error: {exc}", style="red")
+                # Fall back to OCR if possible
+                if window_snapshot is not None:
+                    progress.add_event("Falling back to OCR...", style="yellow")
+                    self.use_api = False
+                    self._run_scan(window_snapshot)
+                else:
+                    self._updates.put(
+                        ScanUpdate(
+                            kind="error",
+                            payload={"message": f"API error: {exc}\nNo game window available for OCR fallback."},
+                        )
+                    )
+                return
+
+            self._updates.put(ScanUpdate(kind="done", payload={"results": results, "stats": stats}))
+            return
+
+        # OCR-based scan (original implementation)
         progress.set_phase("Initializing OCR…")
         start_background_warmup()
         try:
