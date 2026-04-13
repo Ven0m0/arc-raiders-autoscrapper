@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "biomejs.biome",
-    "oxc.oxc-vscode",
     "detachhead.basedpyright",
     "charliermarsh.ruff",
     "the0807.uv-toolkit",
@@ -11,7 +10,6 @@
     "tombi-toml.tombi",
     "davidanson.vscode-markdownlint",
     "github.vscode-github-actions",
-    "oven.bun-vscode",
     "ast-grep.ast-grep-vscode"
   ]
 }
