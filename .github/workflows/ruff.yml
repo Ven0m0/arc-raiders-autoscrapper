@@ -22,7 +22,7 @@ jobs:
           persist-credentials: false
       - name: Install Tesseract OCR system dependencies
         run: |
-          sudo apt-get update -qq >/dev/null 2>&1 && sudo apt-get install -yqq --no-install-recommends tesseract-ocr libtesseract-dev libleptonica-dev python3-evdev python3-pil python3-pil.imagetk build-essential pkg-config
+          sudo apt-get update -qq >/dev/null 2>&1 && sudo apt-get install -yqq --no-install-recommends tesseract-ocr libtesseract-dev libleptonica-dev build-essential pkg-config python3-evdev
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
