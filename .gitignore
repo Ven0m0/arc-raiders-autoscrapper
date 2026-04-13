@@ -177,6 +177,7 @@ __marimo__/
 !.vscode/extensions.json
 .omc/
 .omg/
+undefined/
 
 # OpenCode plugin dir (track config, ignore build artifacts)
 .opencode/node_modules/
