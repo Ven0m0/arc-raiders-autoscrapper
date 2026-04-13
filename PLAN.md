@@ -38,21 +38,29 @@ T009  (independent)
 
 **Context**
 
-`DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75` is a hand-picked constant.
-`capture_skip_unlisted_sample()` in `scanner/actions.py:184-196` already emits
-raw OCR strings and match metadata to disk, but no replay harness exists to
-sweep candidate thresholds against that corpus.  A wrong threshold causes either
-false-positive matches (item misidentified → wrong action) or excessive
-`SKIP_UNLISTED` outcomes (items ignored that should be actioned).
+`DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75` is a hand-picked constant. The repo
+already has capture and replay tooling for this calibration loop:
+`autoscrapper/ocr/failure_corpus.py:capture_skip_unlisted_sample()` writes
+samples to `artifacts/ocr/skip_unlisted/samples.jsonl`, and
+`/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/replay_ocr_failure_corpus.py`
+can sweep candidate thresholds and write reports. The remaining gap is to use
+that existing corpus/replay path to validate the default threshold, confirm the
+captured fields and reported metrics are sufficient for decision-making, and
+extend the tooling only if the current output is missing data needed to judge
+false positives versus `SKIP_UNLISTED` outcomes (items ignored that should be
+actioned).
 
 **Acceptance criteria**
 
-- `capture_skip_unlisted_sample()` persists at minimum `raw_text`,
-  `chosen_name`, `matched_name`, and the image path to a JSON-lines file per
-  session.
-- A replay script accepts a corpus directory and a list of integer candidate
-  thresholds; it outputs per-threshold accuracy metrics (match rate,
-  false-positive count).
+- `capture_skip_unlisted_sample()` continues to persist the fields needed for
+  replay-based calibration, including at minimum `raw_text`, `chosen_name`,
+  `matched_name`, and the image path in the JSON-lines corpus.
+- `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/replay_ocr_failure_corpus.py`
+  is used as the primary replay harness; if it lacks any required metric or
+  input option, T001 scopes the minimal extension instead of introducing a
+  duplicate script.
+- Replay output supports comparing integer candidate thresholds with enough
+  accuracy data to identify false positives and unmatched cases.
 - `DEFAULT_ITEM_NAME_MATCH_THRESHOLD` changes only after replay confirms every
   existing corpus sample either stays unmatched or resolves to the correct item
   name.
@@ -64,10 +72,13 @@ false-positive matches (item misidentified → wrong action) or excessive
 
 **Implementation hint**
 
-Emit corpus from `scanner/actions.py:184` (`capture_skip_unlisted_sample()`) to
-a JSONL file under `ocr_debug/`.  Add `scripts/replay_threshold.py` that calls
+Extend `scanner/actions.py:184` (`capture_skip_unlisted_sample()`) via the
+existing corpus output at `artifacts/ocr/skip_unlisted/samples.jsonl` rather
+than introducing a new `ocr_debug/` sink. Reuse
+`/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/replay_ocr_failure_corpus.py`
+as the replay harness (or evolve it in place) so it calls
 `match_item_name_result(raw, threshold=t)` for each candidate `t` and computes
-accuracy.  Single source-of-truth constant: `ocr/inventory_vision.py:47`.
+accuracy. Single source-of-truth constant: `ocr/inventory_vision.py:47`.
 
 ---
 
@@ -101,9 +112,12 @@ replay can confirm whether the accuracy gain justifies the latency cost.
 
 **Implementation hint**
 
-`ocr/tesseract.py` initialises the API; swap the `dataPath` arg to point at the
-`best-eng` data directory.  Benchmark via the replay script from T001 with an
-extra `--model` flag.
+Start with `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/benchmark_tessdata_models.py`,
+which already benchmarks `tessdata.fast-eng` vs `tessdata.best-eng` by
+switching `TESSDATA_PREFIX` and writing a report. Use the corpus produced by
+T001 as input to that script if needed. Only add a replay-script `--model` flag
+or change `ocr/tesseract.py` directly if the existing benchmark script proves
+insufficient; if so, document the specific gap before extending the tooling.
 
 ---
 
@@ -340,8 +354,9 @@ discover the module's public API without reading every import.
 **Implementation hint**
 
 Add `__all__ = ["Align", "Console", "Group", ..., "Text"]` after the try/except
-imports.  Ruff F401 is satisfied by the explicit `as Name` form, so the noqa
-becomes redundant once `__all__` is present.
+imports. In this repo, the explicit `as Name` form alone does not satisfy Ruff
+F401 for `Text`; the `# noqa: F401` becomes redundant only once `Text` is
+included in `__all__` (or otherwise referenced) as a deliberate re-export.
 
 ---
 
@@ -360,7 +375,7 @@ becomes redundant once `__all__` is present.
 |------|--------------------------------------------|--------|------|------------|
 | T001 | Calibrate OCR fuzzy threshold from corpus  | medium | M    | —          |
 | T002 | Benchmark tessdata.best-eng vs fast-eng    | low    | S    | T001       |
-| T003 | Add ARLO web-scraper data-update path      | medium | M    | —          |
+| T003 | Hybrid database updater (API + Wiki)      | medium | M    | —          |
 | T004 | Promote ScanProgress/ScanSettingsScreen ABC| medium | S    | —          |
 | T005 | LiveWindow Protocol for isAlive access     | low    | S    | —          |
 | T006 | Add opencv-stubs dev dependency            | low    | S    | —          |
