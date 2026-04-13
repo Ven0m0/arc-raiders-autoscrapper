@@ -173,14 +173,19 @@ def sync_hideout_to_progress(api_settings: ApiSettings | None = None) -> Progres
     for module in modules:
         hideout_levels[module.module_id] = module.current_level
 
-    from datetime import datetime, timezone
+from datetime import datetime, timezone
 
+# ... (rest of imports)
+
+def sync_hideout_to_progress(api_settings: ApiSettings | None = None) -> ProgressSettings:
+    # ... (rest of function)
     updated = ProgressSettings(
         all_quests_completed=progress.all_quests_completed,
         active_quests=list(progress.active_quests),
         completed_quests=list(progress.completed_quests),
         hideout_levels=hideout_levels,
         last_updated=datetime.now(timezone.utc).isoformat(),
+    )
     )
 
     save_progress_settings(updated)
