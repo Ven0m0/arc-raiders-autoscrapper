@@ -27,6 +27,9 @@ SUPABASE_URL = "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
 WIKI_LOOT_URL = "https://arcraiders.wiki/wiki/Loot"
 WIKI_USER_AGENT = "arc-raiders-autoscrapper/1.0 (https://github.com/Ven0m0/arc-raiders-autoscrapper)"
 
+ARCTRACKER_BASE_URL = "https://arctracker.io"
+ARCTRACKER_API_DOCS_URL = "https://arctracker.io/developers/docs"
+
 SUPABASE_ANON_KEY = os.environ.get("METAFORGE_SUPABASE_ANON_KEY")
 
 try:
@@ -69,6 +72,127 @@ def _fetch_json(url: str, headers: dict[str, str] | None = None) -> object:
         return orjson.loads(_fetch_bytes(url, headers=headers))
     except orjson.JSONDecodeError as exc:
         raise DownloadError(f"Invalid JSON returned from {url}") from exc
+
+
+def _fetch_arctracker_items() -> list[dict]:
+    """Fetch all items from arctracker.io public API."""
+    url = f"{ARCTRACKER_BASE_URL}/api/items"
+    response = _fetch_json(url)
+    if not isinstance(response, dict):
+        raise DownloadError("Unexpected response from arctracker items endpoint")
+    data = response.get("data") or []
+    if not isinstance(data, list):
+        raise DownloadError("Unexpected arctracker items payload: data must be a list")
+    return [entry for entry in data if isinstance(entry, dict)]
+
+
+def _fetch_arctracker_quests() -> list[dict]:
+    """Fetch all quests from arctracker.io public API."""
+    url = f"{ARCTRACKER_BASE_URL}/api/quests"
+    response = _fetch_json(url)
+    if not isinstance(response, dict):
+        raise DownloadError("Unexpected response from arctracker quests endpoint")
+    data = response.get("data") or []
+    if not isinstance(data, list):
+        raise DownloadError("Unexpected arctracker quests payload: data must be a list")
+    return [entry for entry in data if isinstance(entry, dict)]
+
+
+def _fetch_arctracker_hideout() -> list[dict]:
+    """Fetch all hideout modules from arctracker.io public API."""
+    url = f"{ARCTRACKER_BASE_URL}/api/hideout"
+    response = _fetch_json(url)
+    if not isinstance(response, dict):
+        raise DownloadError("Unexpected response from arctracker hideout endpoint")
+    data = response.get("data") or []
+    if not isinstance(data, list):
+        raise DownloadError("Unexpected arctracker hideout payload: data must be a list")
+    return [entry for entry in data if isinstance(entry, dict)]
+
+
+def _fetch_arctracker_projects() -> list[dict]:
+    """Fetch all projects from arctracker.io public API."""
+    url = f"{ARCTRACKER_BASE_URL}/api/projects"
+    response = _fetch_json(url)
+    if not isinstance(response, dict):
+        raise DownloadError("Unexpected response from arctracker projects endpoint")
+    data = response.get("data") or []
+    if not isinstance(data, list):
+        raise DownloadError("Unexpected arctracker projects payload: data must be a list")
+    return [entry for entry in data if isinstance(entry, dict)]
+
+
+def _map_arctracker_item(arctracker_item: dict) -> dict | None:
+    """Map arctracker.io item format to internal format."""
+    item_id = arctracker_item.get("id")
+    item_name = arctracker_item.get("name")
+    if not isinstance(item_id, str) or not isinstance(item_name, str):
+        return None
+
+    return {
+        "id": item_id,
+        "name": item_name,
+        "type": arctracker_item.get("type") or "Unknown",
+        "rarity": (str(arctracker_item.get("rarity")).lower() if arctracker_item.get("rarity") else None),
+        "value": arctracker_item.get("value") or 0,
+        "weightKg": arctracker_item.get("weightKg") or 0,
+        "stackSize": arctracker_item.get("stackSize") or 1,
+        "craftBench": arctracker_item.get("craftBench") or None,
+        "updatedAt": arctracker_item.get("updatedAt") or datetime.now(timezone.utc).isoformat(),
+        "recipe": None,  # arctracker doesn't provide recipe data in public endpoint
+        "recyclesInto": None,  # arctracker doesn't provide recycle data in public endpoint
+    }
+
+
+def _map_arctracker_quest(arctracker_quest: dict) -> dict | None:
+    """Map arctracker.io quest format to internal format."""
+    quest_id = arctracker_quest.get("id")
+    quest_name = arctracker_quest.get("name")
+    if not isinstance(quest_id, str) or not isinstance(quest_name, str):
+        return None
+
+    # Extract objectives from multilingual object
+    objectives: list[str] = []
+    raw_objectives = arctracker_quest.get("objectives")
+    if isinstance(raw_objectives, dict):
+        # Try to get English objectives first
+        en_objectives = raw_objectives.get("en")
+        if isinstance(en_objectives, list):
+            objectives = [str(obj) for obj in en_objectives if isinstance(obj, str)]
+    elif isinstance(raw_objectives, list):
+        objectives = [str(obj) for obj in raw_objectives if isinstance(obj, str)]
+
+    # Extract rewards
+    reward_item_ids: list[str] = []
+    rewards: list[dict] = []
+    raw_rewards = arctracker_quest.get("rewards")
+    if isinstance(raw_rewards, list):
+        for reward in raw_rewards:
+            if isinstance(reward, dict):
+                item_id = reward.get("item_id") or reward.get("itemId")
+                if isinstance(item_id, str):
+                    reward_item_ids.append(item_id)
+                    reward_payload: dict[str, object] = {"item_id": item_id}
+                    quantity = reward.get("quantity")
+                    if quantity is not None:
+                        reward_payload["quantity"] = str(quantity)
+                    # Add item name if available
+                    item_name = reward.get("item_name") or reward.get("itemName")
+                    if isinstance(item_name, str):
+                        reward_payload["item"] = {"id": item_id, "name": item_name}
+                    rewards.append(reward_payload)
+
+    return {
+        "id": quest_id,
+        "name": quest_name,
+        "objectives": objectives,
+        "requirements": [],
+        "rewardItemIds": list(dict.fromkeys(reward_item_ids)),  # Remove duplicates while preserving order
+        "rewards": rewards,
+        "trader": arctracker_quest.get("trader") or "Unknown",
+        "xp": arctracker_quest.get("xp") or 0,
+        "sortOrder": arctracker_quest.get("sortOrder") or arctracker_quest.get("sort_order") or 0,
+    }
 
 
 def _fetch_metaforge_collection(resource: str) -> list[dict]:
@@ -649,6 +773,76 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
 
     mapped_quests = apply_quest_overrides(mapped_quests)
 
+    # Fetch arctracker.io data for enrichment
+    arctracker_items: list[dict] | None = None
+    arctracker_quests: list[dict] | None = None
+    arctracker_hideout: list[dict] | None = None
+    arctracker_projects: list[dict] | None = None
+    arctracker_items_error: str | None = None
+    arctracker_quests_error: str | None = None
+    arctracker_hideout_error: str | None = None
+    arctracker_projects_error: str | None = None
+
+    try:
+        arctracker_items = _fetch_arctracker_items()
+        _log.info("Fetched %d items from arctracker.io", len(arctracker_items))
+    except DownloadError as exc:
+        arctracker_items_error = str(exc)
+        _log.warning("ArcTracker items unavailable: %s", exc)
+
+    try:
+        arctracker_quests = _fetch_arctracker_quests()
+        _log.info("Fetched %d quests from arctracker.io", len(arctracker_quests))
+    except DownloadError as exc:
+        arctracker_quests_error = str(exc)
+        _log.warning("ArcTracker quests unavailable: %s", exc)
+
+    try:
+        arctracker_hideout = _fetch_arctracker_hideout()
+        _log.info("Fetched %d hideout modules from arctracker.io", len(arctracker_hideout))
+    except DownloadError as exc:
+        arctracker_hideout_error = str(exc)
+        _log.warning("ArcTracker hideout unavailable: %s", exc)
+
+    try:
+        arctracker_projects = _fetch_arctracker_projects()
+        _log.info("Fetched %d projects from arctracker.io", len(arctracker_projects))
+    except DownloadError as exc:
+        arctracker_projects_error = str(exc)
+        _log.warning("ArcTracker projects unavailable: %s", exc)
+
+    # Map arctracker data
+    mapped_arctracker_items = (
+        [mapped for item in arctracker_items if (mapped := _map_arctracker_item(item)) is not None]
+        if arctracker_items is not None
+        else []
+    )
+    mapped_arctracker_quests = (
+        [mapped for quest in arctracker_quests if (mapped := _map_arctracker_quest(quest)) is not None]
+        if arctracker_quests is not None
+        else []
+    )
+
+    # Merge arctracker data as supplemental (like RaidTheory fallback)
+    mapped_items, arctracker_supplemental_items = _merge_missing_entries(
+        mapped_items,
+        mapped_arctracker_items,
+    )
+    mapped_quests, arctracker_supplemental_quests = _merge_missing_entries(
+        mapped_quests,
+        mapped_arctracker_quests,
+    )
+
+    # Save hideout and projects data from arctracker
+    if arctracker_hideout:
+        (data_dir / "static" / "arctracker_hideout.json").write_bytes(
+            orjson.dumps(arctracker_hideout, option=orjson.OPT_INDENT_2)
+        )
+    if arctracker_projects:
+        (data_dir / "static" / "arctracker_projects.json").write_bytes(
+            orjson.dumps(arctracker_projects, option=orjson.OPT_INDENT_2)
+        )
+
     wiki_uses_map = _scrape_wiki_uses()
     wiki_error: str | None = None
     wiki_enriched_count = 0
@@ -679,6 +873,12 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
     elif supplemental_quest_count:
         quest_source = "metaforge+raidtheory"
 
+    # Update source names if arctracker contributed data
+    if arctracker_supplemental_items > 0:
+        item_source = f"{item_source}+arctracker"
+    if arctracker_supplemental_quests > 0:
+        quest_source = f"{quest_source}+arctracker"
+
     metadata = {
         "lastUpdated": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "source": METAFORGE_API_DOCS_URL,
@@ -698,6 +898,12 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
                     "archive": RAIDTHEORY_ARCHIVE_URL,
                     "supplementalCount": supplemental_item_count,
                     "error": fallback_error,
+                },
+                "arctrackerEnrichment": {
+                    "documentation": ARCTRACKER_API_DOCS_URL,
+                    "apiBase": ARCTRACKER_BASE_URL,
+                    "supplementalCount": arctracker_supplemental_items,
+                    "error": arctracker_items_error,
                 },
                 "wikiEnrichment": {
                     "url": WIKI_LOOT_URL,
@@ -719,6 +925,30 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
                     "archive": RAIDTHEORY_ARCHIVE_URL,
                     "supplementalCount": supplemental_quest_count,
                     "error": fallback_error,
+                },
+                "arctrackerEnrichment": {
+                    "documentation": ARCTRACKER_API_DOCS_URL,
+                    "apiBase": ARCTRACKER_BASE_URL,
+                    "supplementalCount": arctracker_supplemental_quests,
+                    "error": arctracker_quests_error,
+                },
+            },
+            "hideout": {
+                "arctracker": {
+                    "documentation": ARCTRACKER_API_DOCS_URL,
+                    "apiBase": ARCTRACKER_BASE_URL,
+                    "count": len(arctracker_hideout) if arctracker_hideout else 0,
+                    "error": arctracker_hideout_error,
+                    "file": "static/arctracker_hideout.json",
+                },
+            },
+            "projects": {
+                "arctracker": {
+                    "documentation": ARCTRACKER_API_DOCS_URL,
+                    "apiBase": ARCTRACKER_BASE_URL,
+                    "count": len(arctracker_projects) if arctracker_projects else 0,
+                    "error": arctracker_projects_error,
+                    "file": "static/arctracker_projects.json",
                 },
             },
         },
