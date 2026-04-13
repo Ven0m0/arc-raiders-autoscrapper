@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-12T06:31:51.820969Z",
+    "generatedAt": "2026-04-13T04:25:56.873661Z",
     "data": {
-      "lastUpdated": "2026-04-12T06:31:51.813592Z",
+      "lastUpdated": "2026-04-13T04:25:56.866471Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
       "itemCount": 573,
@@ -16,8 +16,8 @@
             "error": null
           },
           "fallback": {
-            "repository": "https://github.com/RaidTheory/arcraiders-data",
-            "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
+            "repository": "https://github.com/fgrzesiak/arcraiders-data",
+            "archive": "https://github.com/fgrzesiak/arcraiders-data/archive/refs/heads/main.zip",
             "supplementalCount": 26,
             "error": null
           }
@@ -30,8 +30,8 @@
             "error": null
           },
           "fallback": {
-            "repository": "https://github.com/RaidTheory/arcraiders-data",
-            "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
+            "repository": "https://github.com/fgrzesiak/arcraiders-data",
+            "archive": "https://github.com/fgrzesiak/arcraiders-data/archive/refs/heads/main.zip",
             "supplementalCount": 0,
             "error": null
           }
