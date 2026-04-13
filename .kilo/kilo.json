@@ -2,6 +2,11 @@
   "$schema": "https://app.kilo.ai/config.json",
   "instructions": ["AGENTS.md"],
   "permission": {
+    "edit": {
+      "dist/**": "deny",
+      "*.lock": "deny",
+      "*": "allow"
+    },
     "*": "allow",
     "sudo *": "deny",
     "rm -rf /": "deny",
