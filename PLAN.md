@@ -26,7 +26,7 @@ T015  (independent)
 T016  (independent)
 ```
 
-**Wave 1** (parallelisable): T001, T003, T004, T005, T006, T007, T008, T009, T010, T011, T012, T013, T014, T015  
+**Wave 1** (parallelisable): T001, T003, T004, T005, T006, T007, T008, T009, T010, T011, T012, T013, T014, T015, T016  
 **Wave 2** (unblocked after T001 lands): T002
 
 ---
