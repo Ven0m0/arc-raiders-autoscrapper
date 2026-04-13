@@ -39,7 +39,7 @@ class UpdateSnapshotScreen(AppScreen):
         except DownloadError as exc:
             status.update(f"Download failed: {exc}")
             return
-        except Exception as exc:  # noqa: BLE001
+        except (DownloadError, OSError) as exc:
             status.update(f"Update failed: {exc}")
             return
 

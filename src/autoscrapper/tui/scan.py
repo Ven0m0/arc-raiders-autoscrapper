@@ -194,7 +194,7 @@ class ScanScreen(Screen):
         self._scan_update_timer = self.set_interval(0.25, self._drain_updates)
         self._start_window_wait()
 
-    def on_screen_resume(self, _event) -> None:  # type: ignore[override]
+    def on_screen_resume(self) -> None:
         if self._scan_complete:
             self.app.pop_screen()
 

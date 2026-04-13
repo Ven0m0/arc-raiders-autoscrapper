@@ -24,8 +24,18 @@ METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
 RAIDTHEORY_REPO_URL = "https://github.com/fgrzesiak/arcraiders-data"
 RAIDTHEORY_ARCHIVE_URL = "https://github.com/fgrzesiak/arcraiders-data/archive/refs/heads/main.zip"
 SUPABASE_URL = "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
+WIKI_LOOT_URL = "https://arcraiders.wiki/wiki/Loot"
+WIKI_USER_AGENT = "arc-raiders-autoscrapper/1.0 (https://github.com/Ven0m0/arc-raiders-autoscrapper)"
 
 SUPABASE_ANON_KEY = os.environ.get("METAFORGE_SUPABASE_ANON_KEY")
+
+try:
+    import requests as _requests
+    from bs4 import BeautifulSoup as _BeautifulSoup
+
+    _SCRAPER_AVAILABLE = True
+except ImportError:
+    _SCRAPER_AVAILABLE = False
 
 
 class DownloadError(RuntimeError):
@@ -475,6 +485,103 @@ def _build_quests_by_trader(quests: list[dict]) -> dict[str, list[dict]]:
     return by_trader
 
 
+def _scrape_wiki_uses() -> dict[str, str]:
+    """
+    Scrape the Uses column from the Arc Raiders wiki loot table.
+
+    Returns a mapping of lowercased item name to a uses string describing
+    workshop upgrades, expedition requirements, and project-use data.
+    Requires the ``scraper`` optional extra (``requests`` + ``beautifulsoup4``).
+    Returns an empty dict when the extra is not installed or the page cannot be
+    reached.
+    """
+    if not _SCRAPER_AVAILABLE:
+        return {}
+
+    _log.info("Fetching wiki loot page from %s", WIKI_LOOT_URL)
+    try:
+        resp = _requests.get(
+            WIKI_LOOT_URL,
+            timeout=30,
+            headers={"User-Agent": WIKI_USER_AGENT},
+        )
+        resp.raise_for_status()
+    except Exception as exc:
+        _log.warning("Wiki fetch failed: %s", exc)
+        return {}
+
+    soup = _BeautifulSoup(resp.text, "html.parser")
+
+    loot_table = None
+    for table in soup.find_all("table"):
+        headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
+        if "item" in headers and "rarity" in headers and "recycles to" in headers:
+            loot_table = table
+            break
+
+    if loot_table is None:
+        _log.warning("Wiki loot table not found in page from %s", WIKI_LOOT_URL)
+        return {}
+
+    header_row = loot_table.find("tr")
+    if header_row is None:
+        return {}
+    headers = [th.get_text(strip=True).lower() for th in header_row.find_all("th")]
+
+    item_col: int | None = None
+    uses_col: int | None = None
+    for i, h in enumerate(headers):
+        if h == "item":
+            item_col = i
+        elif h == "uses":
+            uses_col = i
+
+    if item_col is None or uses_col is None:
+        _log.warning("Wiki loot table missing 'item' or 'uses' columns; found: %s", headers)
+        return {}
+
+    uses_map: dict[str, str] = {}
+    for row in loot_table.find_all("tr")[1:]:
+        cells = row.find_all("td")
+        if len(cells) <= max(item_col, uses_col):
+            continue
+
+        item_cell = cells[item_col]
+        name_link = item_cell.find("a")
+        name = name_link.get_text(strip=True) if name_link else item_cell.get_text(strip=True)
+        if not name:
+            continue
+
+        uses_cell = cells[uses_col]
+        uses_text = uses_cell.get_text(" ", strip=True)
+        uses_text = re.sub(r"\s+", " ", uses_text.replace("\u00d7", "x")).strip()
+        if uses_text:
+            uses_map[name.lower()] = uses_text
+
+    _log.info("Wiki: scraped uses data for %d items", len(uses_map))
+    return uses_map
+
+
+def _enrich_items_with_wiki(items: list[dict], uses_map: dict[str, str]) -> tuple[list[dict], int]:
+    """
+    Merge wiki uses data into items in-place.
+
+    Adds a ``wikiUses`` field to each item that has a matching entry in
+    *uses_map* (keyed by lowercased item name).  Returns the enriched list and
+    the number of items that received a non-empty ``wikiUses`` value.
+    """
+    enriched_count = 0
+    result: list[dict] = []
+    for item in items:
+        name = (item.get("name") or "").lower()
+        uses = uses_map.get(name, "")
+        if uses:
+            item = {**item, "wikiUses": uses}
+            enriched_count += 1
+        result.append(item)
+    return result, enriched_count
+
+
 def update_data_snapshot(data_dir: Path | None = None) -> dict:
     data_dir = data_dir or DATA_DIR
     (data_dir / "static").mkdir(parents=True, exist_ok=True)
@@ -542,6 +649,14 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
 
     mapped_quests = apply_quest_overrides(mapped_quests)
 
+    wiki_uses_map = _scrape_wiki_uses()
+    wiki_error: str | None = None
+    wiki_enriched_count = 0
+    if wiki_uses_map:
+        mapped_items, wiki_enriched_count = _enrich_items_with_wiki(mapped_items, wiki_uses_map)
+    elif _SCRAPER_AVAILABLE:
+        wiki_error = "Wiki fetch returned no usable data"
+
     (data_dir / "items.json").write_bytes(orjson.dumps(mapped_items, option=orjson.OPT_INDENT_2))
     (data_dir / "quests.json").write_bytes(orjson.dumps(mapped_quests, option=orjson.OPT_INDENT_2))
 
@@ -583,6 +698,13 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
                     "archive": RAIDTHEORY_ARCHIVE_URL,
                     "supplementalCount": supplemental_item_count,
                     "error": fallback_error,
+                },
+                "wikiEnrichment": {
+                    "url": WIKI_LOOT_URL,
+                    "available": _SCRAPER_AVAILABLE,
+                    "enrichedCount": wiki_enriched_count,
+                    "error": wiki_error,
+                    "fields": ["wikiUses"],
                 },
             },
             "quests": {

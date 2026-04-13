@@ -5,6 +5,7 @@ import sys
 import threading
 import time
 from dataclasses import dataclass
+from typing import Protocol
 
 import mss
 import numpy as np
@@ -13,6 +14,12 @@ import pywinctl as pwc
 from .inventory_grid import Cell
 from . import input_driver as pdi
 from .keybinds import DEFAULT_STOP_KEY
+
+
+class LiveWindow(Protocol):
+    """Minimal protocol for a window handle that exposes liveness state."""
+
+    isAlive: bool
 
 
 # Target window
