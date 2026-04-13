@@ -1,12 +1,17 @@
 {
   "$schema": "https://app.kilo.ai/config.json",
+  "instructions": [
+    ".kilo/rules/*.md",
+    "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"
+  ],
+  "skills": {
+    "paths": [
+      ".kilo/skill", ".opencode/skill", ".claude/skills"
+    ]
+  },
   "permission": {
     "*": "allow",
-    "edit": {
-      "dist/**": "deny",
-      "*.lock": "deny",
-      "*": "allow"
-    },
+    "edit": { "dist/**": "deny", "*.lock": "deny", "*": "allow" },
     "sudo *": "deny",
     "rm -rf /": "deny",
     "rm -rf /*": "deny",
@@ -28,7 +33,7 @@
       "extensions": [".json", ".js"]
     }
   },
-  "watcher": { "ignore": ["node_modules/**", "dist/**", ".git/**", ".venv/**"] },
+  "watcher": { "ignore": ["node_modules/**", "dist/**", ".git/**", ".venv/**", "__pycache__/**", ".ruff_cache/**",] },
   "mcp": {
     "ref-tools": {
       "type": "remote",
