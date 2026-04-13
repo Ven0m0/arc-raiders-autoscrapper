@@ -16,7 +16,7 @@ Detailed rules belong in `AGENTS.md`; path-specific rules belong in `.github/ins
 
 ## Stack
 
-- Python 3.14.3 + `uv`
+- Python 3.13 + `uv`
 - Textual TUI
 - OCR: `tesserocr` + `tessdata.fast-eng`
 - Vision: `opencv-python-headless`, `Pillow`, `mss`

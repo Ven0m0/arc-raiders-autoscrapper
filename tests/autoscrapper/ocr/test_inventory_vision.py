@@ -19,6 +19,7 @@ from autoscrapper.ocr.inventory_vision import (  # noqa: E402
     ItemNameMatchResult,
     _extract_cropped_title_from_data,
     _extract_title_from_data,
+    find_context_menu_crop,
     ocr_inventory_count,
     preprocess_for_ocr,
     reset_ocr_caches,
@@ -509,3 +510,80 @@ class TestOcrInventoryCount:
     def test_no_digits_returns_none(self):
         count, _ = self._call("no digits here")
         assert count is None
+
+
+# ---------------------------------------------------------------------------
+# find_context_menu_crop — right-edge geometry regression (Bug: title clipped)
+# ---------------------------------------------------------------------------
+
+
+class TestFindContextMenuCrop:
+    """Regression tests ensuring the context-menu crop reaches far enough right.
+
+    Root cause: _CONTEXT_MENU_X_OFFSET_NORM was 35/1920 (≈35 px at 1080p),
+    so right edge = cell_center_x + 35.  Item titles like "MATRIARCH REACTOR"
+    extend ~200-250 px past the cell centre — they were clipped, causing
+    title-unreadable / UNAVAILABLE outcomes.
+
+    Fix: X_OFFSET_NORM → 250/1920, WIDTH_NORM → 635/1920.
+    The right edge must now be ≥ 200 px past cell_center_x.
+    """
+
+    _W = 1920
+    _H = 1080
+
+    def _solid(self):
+        """Return a non-black 1920×1080 image so brightness guard passes."""
+        return np.full((self._H, self._W, 3), 80, dtype=np.uint8)
+
+    def _crop(self, cx: int, cy: int):
+        img = self._solid()
+        return find_context_menu_crop(img, cx, cy)
+
+    def test_right_edge_extends_at_least_200px_past_cell_centre(self):
+        """Right edge of crop must be ≥ 200 px past cell_center_x."""
+        cx, cy = 800, 540
+        result = self._crop(cx, cy)
+        assert result is not None, "crop should succeed on a bright image"
+        x, _, w, _ = result
+        right_edge = x + w
+        assert right_edge >= cx + 200, (
+            f"right edge {right_edge} is only {right_edge - cx} px past centre {cx}; "
+            "title text will be clipped"
+        )
+
+    def test_right_edge_extends_at_least_200px_near_left_screen(self):
+        """Same geometry holds when cell is near the left screen edge."""
+        cx, cy = 200, 300
+        result = self._crop(cx, cy)
+        assert result is not None
+        x, _, w, _ = result
+        right_edge = x + w
+        # Crop is clamped to screen, but must still extend past centre
+        assert right_edge >= cx + 200 or right_edge == self._W, (
+            "right edge must reach 200 px past centre or be clamped to screen width"
+        )
+
+    def test_crop_stays_within_image_bounds(self):
+        """Crop rectangle must not exceed image dimensions."""
+        for cx, cy in [(100, 100), (960, 540), (1800, 900)]:
+            result = self._crop(cx, cy)
+            if result is None:
+                continue
+            x, y, w, h = result
+            assert x >= 0 and y >= 0
+            assert x + w <= self._W
+            assert y + h <= self._H
+
+    def test_returns_none_on_dark_image(self):
+        """Polarity guard: black image (mean < 40) should return None."""
+        dark = np.zeros((self._H, self._W, 3), dtype=np.uint8)
+        result = find_context_menu_crop(dark, 800, 540)
+        assert result is None, "dark crop should be rejected by brightness guard"
+
+    def test_crop_width_large_enough_for_long_titles(self):
+        """Crop width must be ≥ 550 px (at 1920) to fit 'MATRIARCH REACTOR' text."""
+        result = self._crop(800, 540)
+        assert result is not None
+        _, _, w, _ = result
+        assert w >= 550, f"crop width {w} is too narrow for long item titles"

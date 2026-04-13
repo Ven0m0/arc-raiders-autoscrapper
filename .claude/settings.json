@@ -1,130 +1,148 @@
 {
-	"hooks": {
-		"PostToolUse": [
-			{
-				"matcher": "Edit|Write",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path','').replace('\\\\','/'); subprocess.run(['uv','run','ruff','check','--fix',f]) if f.endswith('.py') and ('/src/' in f or '/tests/' in f or '/scripts/' in f) else None\""
-					}
-				]
-			},
-			{
-				"matcher": "Edit|Write",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path',''); subprocess.run(['uv','run','pytest','tests/autoscrapper/ocr','-q','--tb=short']) if 'autoscrapper/ocr' in f else None\""
-					}
-				]
-			},
-			{
-				"matcher": "Edit|Write",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path',''); subprocess.run(['uv','run','pytest','tests/autoscrapper/','-q','--tb=short']) if 'autoscrapper/scanner' in f else None\""
-					}
-				]
-			},
-			{
-				"matcher": "Edit",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "python -c \"import sys,json; d=json.load(sys.stdin); f=d.get('file_path',''); c=d.get('new_string',''); ok='inventory_vision.py' in f and any(k in c for k in ['_NORM','_OFFSET_','_WIDTH_','_HEIGHT_']); print('REMINDER: coordinate space invariant — any bbox from OCR over a 2x image must be halved before use in original-space operations. Verify find_action_bbox_by_ocr callers.') if ok else None\""
-					}
-				]
-			},
-			{
-				"matcher": "Edit",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "python -c \"import sys,json; d=json.load(sys.stdin); f=d.get('file_path',''); c=d.get('new_string',''); ocr_files=any(x in f for x in ['inventory_vision.py','tesseract.py']); has_thresh=any(k in c for k in ['threshold','THRESHOLD','score_cutoff','fuzzy']); print('WARNING: threshold constant changed — see TODO T001. Corpus replay required before shipping a new value.') if ocr_files and has_thresh else None\""
-					}
-				]
-			},
-			{
-				"matcher": "Edit|Write",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "python -c \"import sys,json; d=json.load(sys.stdin); f=d.get('file_path','').replace('\\\\\\\\','/').replace('\\\\','/'); print('REMINDER: config.py changed — bump CONFIG_VERSION if you added/removed/renamed any dataclass field. Load-bearing: persisted configs silently lose new fields without a version bump.') if f.endswith('autoscrapper/config.py') else None\""
-					}
-				]
-			},
-			{
-				"matcher": "Edit|Write",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path','').replace('\\\\','/'); subprocess.run(['uv','run','ruff','format',f]) if f.endswith('.py') and ('/src/' in f or '/tests/' in f or '/scripts/' in f) else None\""
-					}
-				]
-			},
-			{
-				"matcher": "Edit|Write",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path','').replace('\\\\','/'); subprocess.run(['uv','run','basedpyright','src/']) if f.endswith('.py') and ('/src/' in f or '/tests/' in f) else None\""
-					}
-				]
-			}
-		],
-		"PreToolUse": [
-			{
-				"matcher": "Edit|Write",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "python -c \"import sys,json; d=json.load(sys.stdin); f=d.get('file_path',''); blocked=any(p in f for p in ['progress/data','items_rules.default.json']); print('BLOCK: use uv run python scripts/update_snapshot_and_defaults.py instead') if blocked else None; sys.exit(1 if blocked else 0)\""
-					}
-				]
-			},
-			{
-				"matcher": "Edit|Write",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "python -c \"import sys,json; d=json.load(sys.stdin); f=d.get('file_path',''); print('BLOCK: uv.lock must not be hand-edited. Run uv add/remove/sync instead.') if f.endswith('uv.lock') else None; sys.exit(1 if f.endswith('uv.lock') else 0)\""
-					}
-				]
-			}
-		]
-	},
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path','').replace('\\\\','/'); subprocess.run(['uv','run','ruff','check','--fix',f]) if f.endswith('.py') and ('/src/' in f or '/tests/' in f or '/scripts/' in f) else None\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path',''); subprocess.run(['uv','run','pytest','tests/autoscrapper/ocr','-q','--tb=short']) if 'autoscrapper/ocr' in f else None\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path',''); subprocess.run(['uv','run','pytest','tests/autoscrapper/','-q','--tb=short']) if 'autoscrapper/scanner' in f else None\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import sys,json; d=json.load(sys.stdin); f=d.get('file_path',''); c=d.get('new_string',''); ok='inventory_vision.py' in f and any(k in c for k in ['_NORM','_OFFSET_','_WIDTH_','_HEIGHT_']); print('REMINDER: coordinate space invariant — any bbox from OCR over a 2x image must be halved before use in original-space operations. Verify find_action_bbox_by_ocr callers.') if ok else None\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import sys,json; d=json.load(sys.stdin); f=d.get('file_path',''); c=d.get('new_string',''); ocr_files=any(x in f for x in ['inventory_vision.py','tesseract.py']); has_thresh=any(k in c for k in ['threshold','THRESHOLD','score_cutoff','fuzzy']); print('WARNING: threshold constant changed — see TODO T001. Corpus replay required before shipping a new value.') if ocr_files and has_thresh else None\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import sys,json; d=json.load(sys.stdin); f=d.get('file_path','').replace('\\\\\\\\','/').replace('\\\\','/'); print('REMINDER: config.py changed — bump CONFIG_VERSION if you added/removed/renamed any dataclass field. Load-bearing: persisted configs silently lose new fields without a version bump.') if f.endswith('autoscrapper/config.py') else None\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path','').replace('\\\\','/'); subprocess.run(['uv','run','ruff','format',f]) if f.endswith('.py') and ('/src/' in f or '/tests/' in f or '/scripts/' in f) else None\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('file_path','').replace('\\\\','/'); subprocess.run(['uv','run','basedpyright','src/']) if f.endswith('.py') and ('/src/' in f or '/tests/' in f) else None\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import sys,json; d=json.load(sys.stdin); f=d.get('file_path',''); blocked=any(p in f for p in ['progress/data','items_rules.default.json']); print('BLOCK: use uv run python scripts/update_snapshot_and_defaults.py instead') if blocked else None; sys.exit(1 if blocked else 0)\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import sys,json; d=json.load(sys.stdin); f=d.get('file_path',''); print('BLOCK: uv.lock must not be hand-edited. Run uv add/remove/sync instead.') if f.endswith('uv.lock') else None; sys.exit(1 if f.endswith('uv.lock') else 0)\""
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "token-pilot hook-read"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "token-pilot hook-edit"
+          }
+        ]
+      }
+    ]
+  },
   "prefersReducedMotion": true,
-	"permissions": {
-		"allow": [
-			"Bash(qlty check:*)",
-			"Bash(qlty metrics:*)",
-			"Bash(qlty smells:*)",
-			"Bash(uv run pytest:*)",
-			"Bash(uv run ruff check:*)",
-			"Bash(uv run ruff format:*)",
-			"Bash(uv run basedpyright:*)",
-			"Bash(uv run autoscrapper scan --dry-run:*)",
-			"Bash(uv sync:*)",
-			"Bash(python3 -m uv run pytest:*)",
-			"Bash(python3 -m uv run ruff check:*)",
-			"Bash(python3 -m uv run basedpyright:*)",
-			"Bash(git status:*)",
-			"Bash(git diff:*)",
-			"Bash(git log:*)",
-			"mcp__plugin_oh-my-claudecode_t__lsp_document_symbols",
-			"mcp__plugin_context-mode_context-mode__ctx_execute",
-			"mcp__claude_ai_gitmcp__fetch_generic_documentation",
-			"mcp__claude_ai_gitmcp__search_generic_code",
-			"mcp__plugin_context-mode_context-mode__ctx_fetch_and_index",
-			"mcp__plugin_context-mode_context-mode__ctx_search",
-			"mcp__plugin_context-mode_context-mode__ctx_batch_execute",
-			"mcp__plugin_oh-my-claudecode_t__state_clear",
-			"Skill(afc:triage)",
-			"Skill(commit-commands:commit-push-pr)",
+  "permissions": {
+    "allow": [
+      "Bash(qlty check:*)",
+      "Bash(qlty metrics:*)",
+      "Bash(qlty smells:*)",
+      "Bash(uv run pytest:*)",
+      "Bash(uv run ruff check:*)",
+      "Bash(uv run ruff format:*)",
+      "Bash(uv run basedpyright:*)",
+      "Bash(uv run autoscrapper scan --dry-run:*)",
+      "Bash(uv sync:*)",
+      "Bash(python3 -m uv run pytest:*)",
+      "Bash(python3 -m uv run ruff check:*)",
+      "Bash(python3 -m uv run basedpyright:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "mcp__plugin_oh-my-claudecode_t__lsp_document_symbols",
+      "mcp__plugin_context-mode_context-mode__ctx_execute",
+      "mcp__claude_ai_gitmcp__fetch_generic_documentation",
+      "mcp__claude_ai_gitmcp__search_generic_code",
+      "mcp__plugin_context-mode_context-mode__ctx_fetch_and_index",
+      "mcp__plugin_context-mode_context-mode__ctx_search",
+      "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
+      "mcp__plugin_oh-my-claudecode_t__state_clear",
+      "Skill(afc:triage)",
+      "Skill(commit-commands:commit-push-pr)",
       "mcp__cachebro__read_files",
       "mcp__cachebro__read_file"
-		]
-	}
+    ]
+  }
 }

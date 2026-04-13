@@ -7,7 +7,7 @@ name = "autoscrapper"
 version = "0.2.0"
 description = "Arc Raiders inventory autoscrapper"
 readme = "README.md"
-requires-python = ">=3.14.3, <3.14.4"
+requires-python = ">=3.13, <3.14"
 dependencies = [
   "mss",
   "numpy",
@@ -21,7 +21,7 @@ dependencies = [
   "textual",
   "tessdata.fast-eng",
   "tesserocr==2.10.0; sys_platform == 'linux'",
-  "tesserocr @ https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp314-cp314-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.14' and platform_machine == 'AMD64'",
+  "tesserocr @ https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp313-cp313-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.13' and platform_machine == 'AMD64'",
 ]
 
 [dependency-groups]
@@ -82,7 +82,7 @@ compile-bytecode = true
 [tool.ruff]
 extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
 line-length = 120
-target-version = "py314"
+target-version = "py313"
 fix = false
 show-fixes = true
 src = ["src", "tests", "scripts"]
@@ -106,7 +106,7 @@ addopts = "-v --tb=short"
 log_level = "WARNING"
 
 [tool.basedpyright]
-pythonVersion = "3.14"
+pythonVersion = "3.13"
 typeCheckingMode = "standard"
 reportMissingTypeStubs = false
 reportMissingModuleSource = false

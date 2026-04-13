@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refactor Python files to use 3.14+ syntax."""
+"""Refactor Python files to use modern Python syntax."""
 from __future__ import annotations
 
 import re

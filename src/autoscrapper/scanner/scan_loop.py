@@ -193,6 +193,7 @@ def _detect_consecutive_empty_stop_idx(
         x, y, w, h = cell.safe_rect
         slot_bgr = window_bgr[y : y + h, x : x + w]
         if slot_bgr.size == 0:
+            prev_empty = False  # zero-size crop breaks adjacency; don't carry prev state
             continue
         is_empty = is_slot_empty(slot_bgr)
         if is_empty and prev_empty:

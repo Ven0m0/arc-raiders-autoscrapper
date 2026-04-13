@@ -548,20 +548,21 @@ def find_infobox(bgr_image: np.ndarray) -> tuple[int, int, int, int] | None:
 
 
 # Positional fallback crop for the context-menu UI.
-# The dark context menu opens to the LEFT of the right-clicked cell.  The crop
-# must therefore be anchored to the LEFT of the cell centre.
-# Formula: x = cell_centre_x - crop_w + x_off
-#   crop_w ≈ 420 px (1920-normalised)
-#   x_off  =  35 px — keeps the crop's right edge ~35 px past the cell centre
-#              so the narrow right-side gap is included without clipping the menu.
+# Formula: right_edge = cell_center_x + x_off
+#          left_edge  = cell_center_x + x_off - crop_w
+# The item title (e.g. "MATRIARCH REACTOR", "BASTION CROSSBOW") extends
+# ~200-250 px to the RIGHT of the clicked cell centre, so the right edge of
+# the crop must reach at least +250 px past cell_center_x.
 # The item name header occupies the topmost row of the menu.  It sits roughly
 # 10 px above cell centre (one ~40 px row above the first action button, which
 # appears at crop-y≈10 when Y-offset=30).  Using -20 gives a 10 px safety
 # margin above the item name row.
 # Normalized context-menu crop offsets (calibrated at 1920x1080).
-_CONTEXT_MENU_X_OFFSET_NORM = 35 / 1920
-_CONTEXT_MENU_Y_OFFSET_NORM = -20 / 1080  # negative = crop starts above cell centre
-_CONTEXT_MENU_WIDTH_NORM = 420 / 1920
+# X_OFFSET is the distance from cell_center_x to the RIGHT edge of the crop.
+# WIDTH is total crop width; left edge = cell_center_x + X_OFFSET - WIDTH.
+_CONTEXT_MENU_X_OFFSET_NORM = 250 / 1920   # was 35/1920 — right edge 250 px past centre
+_CONTEXT_MENU_Y_OFFSET_NORM = -20 / 1080   # negative = crop starts above cell centre
+_CONTEXT_MENU_WIDTH_NORM = 635 / 1920      # was 420/1920 — left edge unchanged, right extended
 _CONTEXT_MENU_HEIGHT_NORM = 450 / 1080
 
 
@@ -589,9 +590,9 @@ def find_context_menu_crop(
     y_off = int(round(_CONTEXT_MENU_Y_OFFSET_NORM * img_h))
     crop_w = int(round(_CONTEXT_MENU_WIDTH_NORM * img_w))
     crop_h = int(round(_CONTEXT_MENU_HEIGHT_NORM * img_h))
-    # Menu opens LEFT of the cell; anchor the crop so its right edge sits
-    # x_off pixels past cell centre (giving a small safety margin), with the
-    # bulk of the 420-px-wide crop extending to the left of the cell centre.
+    # Anchor the crop so its right edge sits x_off pixels past cell centre,
+    # with the bulk of the crop extending to the left of the cell centre.
+    # right_edge = cell_center_x + x_off; left_edge = right_edge - crop_w
     x = max(0, cell_center_x - crop_w + x_off)
     y = max(0, cell_center_y + y_off)
     # Shift left/up if the crop would overflow the right or bottom edge so the full
