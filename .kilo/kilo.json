@@ -34,7 +34,9 @@
     "ref-tools": {
       "type": "remote",
       "url": "https://api.ref.tools/mcp",
-      "enabled": true
+      "enabled": true,
+      "headers": { "x-ref-api-key": "{env:REF_API_KEY}" },
+      "oauth": false
     },
     "github-mcp-server": {
       "type": "remote",
@@ -49,7 +51,9 @@
     "exa": {
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,get_code_context_exa,crawling_exa",
-      "enabled": true
+      "enabled": true,
+      "headers": { "x-api-key": "{env:EXA_API_KEY}" },
+      "oauth": false
     },
     "git-mcp": {
       "type": "remote",
@@ -78,9 +82,11 @@
       "command": ["tombi", "lsp"],
       "extensions": [".toml"]
     }
-  }
+  },
+  "compaction": { "auto": true, "prune": true },
   "experimental": {
     "continue_loop_on_deny": false,
+    "codebase_search": true,
     "mcp_timeout": 30000,
     "openTelemetry": false,
     "batch_tool": true
