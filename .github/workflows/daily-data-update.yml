@@ -31,7 +31,7 @@ jobs:
             uv.lock
             pyproject.toml
       - name: Install dependencies
-        run: uv sync --no-dev --frozen
+        run: uv sync --all-packages --frozen --no-dev
       - name: Update snapshot + default rules
         run: |
           uv run python scripts/update_snapshot_and_defaults.py \
