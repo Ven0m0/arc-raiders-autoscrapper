@@ -180,11 +180,16 @@ __marimo__/
 undefined/
 
 # OpenCode plugin dir (track config, ignore build artifacts)
+**/node_modules/
 .opencode/node_modules/
 .opencode/package.json
 .opencode/package-lock.json
 .opencode/bun.lock
 .opencode/chat/
+.kilo/node_modules/
+.kilo/package.json
+.kilo/package-lock.json
+.kilo/bun.lock
 .cachebro/
 ocr_debug/
 

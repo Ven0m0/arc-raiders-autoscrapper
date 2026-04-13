@@ -548,8 +548,7 @@ class TestFindContextMenuCrop:
         x, _, w, _ = result
         right_edge = x + w
         assert right_edge >= cx + 200, (
-            f"right edge {right_edge} is only {right_edge - cx} px past centre {cx}; "
-            "title text will be clipped"
+            f"right edge {right_edge} is only {right_edge - cx} px past centre {cx}; title text will be clipped"
         )
 
     def test_right_edge_extends_at_least_200px_near_left_screen(self):

@@ -568,9 +568,9 @@ def find_infobox(bgr_image: np.ndarray) -> tuple[int, int, int, int] | None:
 # Normalized context-menu crop offsets (calibrated at 1920x1080).
 # X_OFFSET is the distance from cell_center_x to the RIGHT edge of the crop.
 # WIDTH is total crop width; left edge = cell_center_x + X_OFFSET - WIDTH.
-_CONTEXT_MENU_X_OFFSET_NORM = 250 / 1920   # was 35/1920 — right edge 250 px past centre
-_CONTEXT_MENU_Y_OFFSET_NORM = -20 / 1080   # negative = crop starts above cell centre
-_CONTEXT_MENU_WIDTH_NORM = 635 / 1920      # was 420/1920 — left edge unchanged, right extended
+_CONTEXT_MENU_X_OFFSET_NORM = 250 / 1920  # was 35/1920 — right edge 250 px past centre
+_CONTEXT_MENU_Y_OFFSET_NORM = -20 / 1080  # negative = crop starts above cell centre
+_CONTEXT_MENU_WIDTH_NORM = 635 / 1920  # was 420/1920 — left edge unchanged, right extended
 _CONTEXT_MENU_HEIGHT_NORM = 450 / 1080
 
 
