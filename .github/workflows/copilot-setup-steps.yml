@@ -27,4 +27,4 @@ jobs:
             uv.lock
             pyproject.toml
       - name: Install project dependencies
-        run: uv sync --all-extras --all-packages --locked
+        run: uv sync --all-packages --locked
