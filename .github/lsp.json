@@ -20,10 +20,34 @@
       "args": ["--stdio"],
       "fileExtensions": { ".yaml": "yaml", ".yml": "yaml" }
     },
+    "toml": {
+      "command": "tombi",
+      "args": ["lsp"],
+      "extensionToLanguage": { ".toml": "toml" }
+    },
+    "markdown-oxide": {
+      "command": "markdown-oxide",
+      "args": [],
+      "extensionToLanguage": { ".md": "markdown" }
+    },
     "rust": {
       "command": "rust-analyzer",
       "args": [],
       "fileExtensions": { ".rs": "rust" }
+    },
+    "typescript": {
+      "command": "vtsls",
+      "args": ["--stdio"],
+      "extensionToLanguage": {
+        ".ts": "typescript",
+        ".tsx": "typescriptreact",
+        ".js": "javascript",
+        ".jsx": "javascriptreact",
+        ".mts": "typescript",
+        ".cts": "typescript",
+        ".mjs": "javascript",
+        ".cjs": "javascript"
+      }
     }
   }
 }
