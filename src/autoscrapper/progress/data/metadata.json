@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-13T09:34:41.750223Z",
+  "lastUpdated": "2026-04-14T12:11:49.711364Z",
   "source": "https://metaforge.app/arc-raiders/api",
   "version": "autoscrapper-data-1",
   "itemCount": 573,
@@ -18,10 +18,16 @@
         "supplementalCount": 26,
         "error": null
       },
+      "arctrackerEnrichment": {
+        "documentation": "https://arctracker.io/developers/docs",
+        "apiBase": "https://arctracker.io",
+        "supplementalCount": 0,
+        "error": null
+      },
       "wikiEnrichment": {
         "url": "https://arcraiders.wiki/wiki/Loot",
-        "available": true,
-        "enrichedCount": 106,
+        "available": false,
+        "enrichedCount": 0,
         "error": null,
         "fields": [
           "wikiUses"
@@ -40,6 +46,30 @@
         "archive": "https://github.com/fgrzesiak/arcraiders-data/archive/refs/heads/main.zip",
         "supplementalCount": 0,
         "error": null
+      },
+      "arctrackerEnrichment": {
+        "documentation": "https://arctracker.io/developers/docs",
+        "apiBase": "https://arctracker.io",
+        "supplementalCount": 0,
+        "error": null
+      }
+    },
+    "hideout": {
+      "arctracker": {
+        "documentation": "https://arctracker.io/developers/docs",
+        "apiBase": "https://arctracker.io",
+        "count": 0,
+        "error": null,
+        "file": "static/arctracker_hideout.json"
+      }
+    },
+    "projects": {
+      "arctracker": {
+        "documentation": "https://arctracker.io/developers/docs",
+        "apiBase": "https://arctracker.io",
+        "count": 0,
+        "error": null,
+        "file": "static/arctracker_projects.json"
       }
     }
   },
