@@ -215,7 +215,7 @@ OCR_ALIASES: dict[str, str] = {
 }
 
 def _fix_roman_ocr_suffix(name: str) -> str:
-    _ROMAN_ONLY = re.compile(r"^[ivx]+$", re.ASCII)
+_ROMAN_ONLY = re.compile(r"^[ivx]+$")
     for bad, good in OCR_ALIASES.items():
         if name.endswith(bad):
             if _ROMAN_ONLY.match(good.strip()):
