@@ -493,7 +493,7 @@ menu). F9 is unused by Arc Raiders.
 
 ### T016 — Integrate arctracker.io API for Direct Stash Sync
 
-**Anchor:** `PLAN2.md`  
+**Anchor:** `src/autoscrapper/api/`  
 **Severity:** medium  
 **Category:** feature  
 **Size:** L (100–500 LOC)
