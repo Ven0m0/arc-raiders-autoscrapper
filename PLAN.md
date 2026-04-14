@@ -1,7 +1,7 @@
 # Arc Raiders AutoScrapper — Technical Debt & Feature Plan
 
 Generated: 2026-04-13  
-Source: TODO.md + inline `# type: ignore` / `# noqa` audit of `src/`
+Source: TODO.md + inline `# type: ignore` / `# noqa` audit of `src/` + arctracker.io API integration
 
 ---
 
@@ -17,9 +17,16 @@ T006  (independent)
 T007  (independent)
 T008  (independent)
 T009  (independent)
+T010  (independent)
+T011  (independent)
+T012  (independent)
+T013  (independent)
+T014  (independent)
+T015  (independent)
+T016  (independent)
 ```
 
-**Wave 1** (parallelisable): T001, T003, T004, T005, T006, T007, T008, T009  
+**Wave 1** (parallelisable): T001, T003, T004, T005, T006, T007, T008, T009, T010, T011, T012, T013, T014, T015, T016  
 **Wave 2** (unblocked after T001 lands): T002
 
 ---
@@ -360,6 +367,180 @@ included in `__all__` (or otherwise referenced) as a deliberate re-export.
 
 ---
 
+### T010 — Fix stale infobox rect causing wrong OCR crops at session end
+
+**Anchor:** `src/autoscrapper/scanner/scan_loop.py`  
+**Severity:** high  
+**Category:** bug  
+**Size:** S (< 20 LOC)
+
+**Context**
+
+OCR retry passes in `_ScanRunner._ocr_infobox_with_retries` reuse the
+previously-detected infobox rect without re-detecting. When the context menu
+closed between attempts, the scanner cropped the "TAB | CLOSE" button bar at
+screen bottom, producing empty or garbage item names.
+
+**Acceptance criteria**
+
+- On retry (`ocr_attempt > 0`), re-capture the full window and call
+  `find_infobox()` to get a fresh rect.
+- Break early if detection returns `None` (menu closed).
+- `ocr_debug/` crops no longer contain "TAB CLOSE" text on retry attempts.
+
+---
+
+### T011 — Remove dead code block in `_extract_title_from_data`
+
+**Anchor:** `src/autoscrapper/ocr/inventory_vision.py:720–740`  
+**Severity:** low  
+**Category:** debt · cleanup  
+**Size:** S (< 20 LOC)
+
+**Context**
+
+Duplicate function body (including a `_group_score` re-definition) after a
+`return` statement — unreachable and misleading.
+
+**Acceptance criteria**
+
+- Delete lines 720–740 entirely.
+- `python3 -m uv run ruff check src/` passes.
+
+---
+
+### T012 — Add Roman numeral tier suffix correction for OCR misreads
+
+**Anchor:** `src/autoscrapper/core/item_actions.py`  
+**Severity:** medium  
+**Category:** ocr · bug  
+**Size:** S (< 20 LOC)
+
+**Context**
+
+Tesseract misreads Roman numeral suffixes on ALL-CAPS weapon names: `IV→1V`,
+`III→111`, `II→11`, `I→1`. This causes rule lookups to fail for tiered weapons.
+
+**Acceptance criteria**
+
+- Add `OCR_ALIASES` dict and `_fix_roman_ocr_suffix()` function called from
+  `normalize_item_name()`.
+- OCR-aliased names resolve correctly to the canonical item name.
+
+---
+
+### T013 — Filter weapon swap UI text from item name detection
+
+**Anchor:** `src/autoscrapper/ocr/inventory_vision.py`  
+**Severity:** medium  
+**Category:** ocr · bug  
+**Size:** S (< 20 LOC)
+
+**Context**
+
+Weapon infoboxes contain a "Swap with Primary Slot" UI line near the top. OCR
+picks this up as the item name instead of the weapon name.
+
+**Acceptance criteria**
+
+- Skip lines matching UI keywords (`swap with`, `swap`) on first pass.
+- On retry (`_retry_with_larger=True`), widen `top_fraction` to `0.35` to
+  capture the actual name below the UI element.
+
+---
+
+### T014 — Remove Supabase dependency from data_update.py
+
+**Anchor:** `src/autoscrapper/progress/data_update.py`  
+**Severity:** medium  
+**Category:** data · security  
+**Size:** M (20–100 LOC)
+
+**Context**
+
+Upstream fetches item components and recycle components from a Supabase endpoint
+using a hardcoded anon JWT. This creates a dependency on an external service that
+may change, and the hardcoded JWT is a credential that should never be committed.
+
+**Acceptance criteria**
+
+- Use `?includeComponents=true` on the MetaForge `/items` API instead.
+- Extract components inline from the response using `_extract_component_dict()`.
+- Remove all Supabase code (`SUPABASE_URL`, `SUPABASE_ANON_KEY`,
+  `_fetch_supabase_all`, `_build_component_map`).
+- `python3 -m uv run ruff check src/` passes.
+
+---
+
+### T015 — Change default stop key from Escape to F9
+
+**Anchor:** `src/autoscrapper/interaction/keybinds.py`  
+**Severity:** low  
+**Category:** ux  
+**Size:** S (< 20 LOC)
+
+**Context**
+
+`DEFAULT_STOP_KEY = "escape"` conflicts with in-game Escape usage (opens game
+menu). F9 is unused by Arc Raiders.
+
+**Acceptance criteria**
+
+- Change `DEFAULT_STOP_KEY = "f9"`.
+- Add `"f9": "F9"` to `_CANONICAL_DISPLAY`.
+
+---
+
+### T016 — Integrate arctracker.io API for Direct Stash Sync
+
+**Anchor:** `src/autoscrapper/api/`  
+**Severity:** medium  
+**Category:** feature  
+**Size:** L (100–500 LOC)
+
+**Context**
+
+Implement arctracker.io API integration to fetch user stash, hideout, and
+projects data directly, bypassing OCR and guaranteeing accurate data.
+
+**Authentication:** Dual-key system
+- App Key (`arc_k1_...`): Registered via Developer Dashboard
+- User Key (`arc_u1_...`): Created by users in Settings > Developer Access
+
+**Public endpoints** (no auth required): `/api/items`, `/api/quests`, `/api/hideout`, `/api/projects`  
+**User endpoints** (require both keys): `/api/v2/user/stash`, `/api/v2/user/hideout`, `/api/v2/user/projects`  
+**Rate limits:** 500 requests/hour per app
+
+**Acceptance criteria**
+
+1. `ArctrackerSettings` dataclass in `config.py` with `app_key`, `user_key`,
+   `enable_sync`, `auto_fetch_on_scan`. Bump `CONFIG_VERSION` to 6.
+2. `src/autoscrapper/api/` package with `client.py`, `models.py`, `datasource.py`.
+3. `ArctrackerClient` with rate limit tracking, retry logic, and error handling.
+4. TUI settings screen for API key configuration with "Test Connection" button.
+5. API-based scan mode as alternative to OCR; same decision rule application.
+6. Auto-sync hideout and project progress from API.
+7. Graceful fallback to OCR when API fails or rate limited.
+8. All existing OCR functionality continues to work unchanged.
+
+**Files to create:**
+- `src/autoscrapper/api/__init__.py`
+- `src/autoscrapper/api/client.py`
+- `src/autoscrapper/api/models.py`
+- `src/autoscrapper/api/datasource.py`
+- `tests/api/test_client.py`
+
+**Files to modify:**
+- `src/autoscrapper/config.py`
+- `src/autoscrapper/tui/settings.py`
+- `src/autoscrapper/tui/app.py`
+- `src/autoscrapper/tui/scan.py`
+- `src/autoscrapper/scanner/engine.py`
+- `src/autoscrapper/progress/progress_config.py`
+- `pyproject.toml`
+
+---
+
 ## Status Legend
 
 | Status | Meaning |
@@ -382,6 +563,13 @@ included in `__all__` (or otherwise referenced) as a deliberate re-export.
 | T007 | Fix on_screen_resume signature             | low    | S    | —          |
 | T008 | Narrow bare-Exception in MaintenanceScreen | medium | S    | —          |
 | T009 | Add __all__ to rich_support.py             | low    | S    | —          |
+| T010 | Fix stale infobox rect on OCR retry       | high   | S    | —          |
+| T011 | Remove dead code in _extract_title_from_data| low    | S    | —          |
+| T012 | Add Roman numeral OCR alias correction     | medium | S    | —          |
+| T013 | Filter weapon swap UI text from OCR        | medium | S    | —          |
+| T014 | Remove Supabase dependency from data_update| medium | M    | —          |
+| T015 | Change default stop key to F9              | low    | S    | —          |
+| T016 | Integrate arctracker.io API for stash sync | medium | L    | —          |
 
 **Recommended starting point:** T004 — zero external dependencies, fully
 validatable with `basedpyright + pytest`, no game window required.

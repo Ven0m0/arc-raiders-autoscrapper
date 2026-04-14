@@ -116,46 +116,7 @@ DEFAULT_STOP_KEY = "f9"
 
 ---
 
-## Priority 5 — Code Quality (fork already has some of these)
-
-### QUAL-01: Switch JSON parser to `orjson`
-**File:** `src/autoscrapper/core/item_actions.py` (and potentially others)  
-**Status:** ✅ Already done in Ven0m0 fork  
-**Note:** `orjson` is significantly faster for large rule files (5681 lines). Ensure `orjson` is in `pyproject.toml` dependencies.
-
-### QUAL-02: Use Python 3.12+ `type` alias syntax
-**File:** `src/autoscrapper/core/item_actions.py`  
-**Status:** ✅ Already done in Ven0m0 fork  
-```python
-type Decision = Literal["KEEP", "RECYCLE", "SELL"]
-type DecisionList = list[Decision]
-type ActionMap = dict[str, DecisionList]
-```
-
-### QUAL-03: `@dataclass(slots=True)` for `ItemActionResult`
-**File:** `src/autoscrapper/core/item_actions.py`  
-**Status:** ✅ Already done in Ven0m0 fork  
-Reduces memory overhead; each scan creates many `ItemActionResult` instances.
-
-### QUAL-04: Split `load_item_actions` error handling into two `except` clauses
-**File:** `src/autoscrapper/core/item_actions.py`  
-**Status:** ✅ Already done in Ven0m0 fork  
-Separate `FileNotFoundError` from `JSONDecodeError` for clearer error messages.
-
-### QUAL-05: Expand `ACTION_ALIASES` with additional entries
-**File:** `src/autoscrapper/core/item_actions.py`  
-**Status:** ✅ Already done in Ven0m0 fork  
-Fork adds `"sell_or_recycle": "SELL"`, `"sell or recycle": "SELL"`, `"crafting material": "KEEP"`.
-
-### QUAL-06: `load_item_actions` — check `isinstance(name, str)` before `normalize_item_name`
-**File:** `src/autoscrapper/core/item_actions.py`  
-**Issue (upstream):** `normalize_item_name(name)` is called before the `isinstance(name, str)` guard, causing a potential AttributeError if `name` is `None`.  
-**Fix:** Move `isinstance` check first.  
-**Status:** ✅ Already fixed in both local diff and Ven0m0 fork.
-
----
-
-## Priority 6 — Features (from issue #41 + related projects)
+## Priority 5 — Features (from issue #41 + related projects)
 
 ### FEAT-01: Integrate ARC Safe Recycle logic
 **Reference:** https://github.com/thanhn062/ARC-Safe-Recycle  
@@ -167,27 +128,11 @@ Fork adds `"sell_or_recycle": "SELL"`, `"sell or recycle": "SELL"`, `"crafting m
 **Issue:** Ven0m0/arc-raiders-autoscrapper#41  
 **Description:** Review raider-lens for overlay/display features that could complement the scanner's TUI output.
 
-### FEAT-03: Add CHANGELOG.md
-**Status:** ✅ Created locally (`CHANGELOG.md`)  
-**Action:** Commit and push `CHANGELOG.md` to the fork. It covers 9 versions from Nov 2025 to Apr 2026 with the full upstream history.
-
 ---
 
-## Priority 7 — CI / Dev Tooling (fork already ahead)
+## Priority 6 — CI / Dev Tooling
 
-### CI-01: Add pre-commit hooks
-**Status:** ✅ Already in Ven0m0 fork (`.pre-commit-config.yaml`)  
-Fork has: `ruff`, `gitleaks` (secret scanning), `zizmor` (GitHub Actions security), `tombi` (TOML linter), `shellcheck`  
-**Action:** Ensure local dev setup runs `pre-commit install`.
-
-### CI-02: Add Renovate for automated dependency updates
-**Status:** ✅ Already active in Ven0m0 fork (issue #22)  
-Pending: Python `>=3.13.13` update (PR #156 closed/blocked — recreate if needed).
-
-### CI-03: Add GitHub Copilot setup steps workflow
-**Status:** ✅ Already in Ven0m0 fork (`.github/workflows/copilot-setup-steps.yml`)
-
-### CI-04: Add `pytest` to dev dependencies
+### CI-01: Fix `pytest` dev dependency setup
 **File:** `pyproject.toml`  
 **Issue:** `pytest` is listed in `pyproject.toml` but not installed in the default venv — `uv run python -m pytest` fails with "No module named pytest".  
 **Fix:** Ensure `uv sync --extra dev` is documented in setup instructions, or add pytest to the base `[project.dependencies]`.
@@ -206,5 +151,4 @@ When syncing from `zappybiby/ArcRaiders-AutoScrapper` to `Ven0m0/arc-raiders-aut
 - [ ] DATA-01: Remove Supabase, use `includeComponents=true` (`data_update.py`)
 - [ ] DATA-02: Commit fresh data snapshot + regenerated default rules
 - [ ] UX-01: F9 as default stop key (`keybinds.py`)
-- [ ] FEAT-03: Commit `CHANGELOG.md`
-- [ ] CI-04: Fix `pytest` dev dependency setup
+- [ ] CI-01: Fix `pytest` dev dependency setup
