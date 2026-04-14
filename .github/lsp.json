@@ -23,12 +23,12 @@
     "toml": {
       "command": "tombi",
       "args": ["lsp"],
-      "extensionToLanguage": { ".toml": "toml" }
+      "fileExtensions": { ".toml": "toml" }
     },
     "markdown-oxide": {
       "command": "markdown-oxide",
       "args": [],
-      "extensionToLanguage": { ".md": "markdown" }
+      "fileExtensions": { ".md": "markdown" }
     },
     "rust": {
       "command": "rust-analyzer",
@@ -38,7 +38,7 @@
     "typescript": {
       "command": "vtsls",
       "args": ["--stdio"],
-      "extensionToLanguage": {
+      "fileExtensions": {
         ".ts": "typescript",
         ".tsx": "typescriptreact",
         ".js": "javascript",
