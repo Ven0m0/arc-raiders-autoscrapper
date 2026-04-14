@@ -171,7 +171,7 @@ bottom, producing empty or garbage item names.
 
 ```python
 # In the ocr_attempt > 0 branch:
-window_bgr = capture_region((win_left, win_top, win_width, win_height))
+window_bgr = capture_region((self.context.win_left, self.context.win_top, self.context.win_width, self.context.win_height))
 new_rect = find_infobox(window_bgr)
 if new_rect is None:
     break  # infobox closed; abort retry
