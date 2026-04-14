@@ -1,21 +1,23 @@
 # Arc Raiders AutoScrapper — Technical Debt & Feature Plan
 
 Generated: 2026-04-14  
-Source: TODO.md + inline `# type: ignore` / `# noqa` audit of `src/` + codebase status review
+Source: Inline `# type: ignore` / `# noqa` audit of `src/` + codebase status review
 
 ---
 
 ## Completed (removed from active tracking)
 
-| ID   | Title                                      | Notes                                    |
-|------|--------------------------------------------|------------------------------------------|
-| T004 | Promote ScanProgress to ABC                | Complete; ScanSettingsScreen partial → T017 |
-| T005 | LiveWindow Protocol for isAlive access     | `ui_windows.py:19` implemented           |
-| T006 | Add cv2 type stubs                         | `opencv-stubs` in dev deps               |
-| T007 | Fix on_screen_resume signature             | `scan.py:203` correct, no type: ignore   |
-| T008 | Narrow bare-Exception in MaintenanceScreen | `DownloadError | OSError` explicit catches |
-| T009 | Add `__all__` to rich_support.py           | Full `__all__` list at top of file       |
-| T011 | Remove dead code in `_extract_title_from_data` | Dead block already deleted            |
+| ID   | Title                                          | Notes                                                    |
+|------|------------------------------------------------|----------------------------------------------------------|
+| T004 | Promote ScanProgress to ABC                    | Complete; ScanSettingsScreen partial → T017              |
+| T005 | LiveWindow Protocol for isAlive access         | `ui_windows.py:19` implemented                           |
+| T006 | Add cv2 type stubs                             | `opencv-stubs` in dev deps                               |
+| T007 | Fix on_screen_resume signature                 | `scan.py:203` correct, no type: ignore                   |
+| T008 | Narrow bare-Exception in MaintenanceScreen     | `DownloadError | OSError` explicit catches               |
+| T009 | Add `__all__` to rich_support.py               | Full `__all__` list at top of file                       |
+| T011 | Remove dead code in `_extract_title_from_data` | Dead block already deleted                               |
+| —    | Permissive `clean_ocr_text` regex (OCR-03)     | `item_actions.py:57` already uses permissive char class  |
+| —    | Dead code in `inventory_vision.py` (BUG-02)    | Already removed from fork                                |
 
 ---
 
@@ -23,7 +25,7 @@ Source: TODO.md + inline `# type: ignore` / `# noqa` audit of `src/` + codebase 
 
 ```
 T001 ──► T002
-T014 ──► T003  (Supabase removal unblocks hybrid updater)
+T014 ──► T003  (Supabase removal must land before hybrid updater)
 
 T010 (independent)
 T012 (independent)
@@ -33,9 +35,14 @@ T016 (independent)
 T017 (independent)
 T018 (independent)
 T019 (independent)
+T020 (independent)
+T021 (independent)
+T022 (independent)
 ```
 
-**Wave 1** (parallelisable): T010, T012, T013, T014, T015, T016, T017, T018, T019, T001  
+> **Arrow convention:** `A ──► B` means A must complete before B starts (A unblocks B).
+
+**Wave 1** (parallelisable): T010, T012, T013, T014, T015, T016, T017, T018, T019, T020, T021, T022, T001  
 **Wave 2**: T003 (after T014), T002 (after T001)
 
 ---
@@ -77,7 +84,7 @@ the default threshold.
 
 Reuse `scripts/replay_ocr_failure_corpus.py` — call
 `match_item_name_result(raw, threshold=t)` per candidate and compute accuracy.
-Single source-of-truth constant: `ocr/inventory_vision.py:47`.
+Single source-of-truth constant: `src/autoscrapper/ocr/inventory_vision.py:47`.
 
 ---
 
@@ -124,7 +131,7 @@ Start with `scripts/benchmark_tessdata_models.py`.
 The repo already has `scripts/update_snapshot_and_defaults.py` and optional
 `scraper` dependencies (`requests`, `beautifulsoup4`) in `pyproject.toml`. The
 missing piece is an optional wiki-enrichment phase for workshop upgrades,
-expedition requirements, and project-use data. T014 (Supabase removal) should
+expedition requirements, and project-use data. T014 (Supabase removal) must
 land first to avoid conflicts in `data_update.py`.
 
 **Acceptance criteria**
@@ -404,6 +411,108 @@ workflow and complement the OCR failure corpus.
 
 ---
 
+### T020 — Integrate ARC Safe Recycle cross-check logic
+
+**Anchor:** `src/autoscrapper/core/item_actions.py`  
+**Severity:** medium  
+**Category:** feature · safety  
+**Size:** M (20–100 LOC)  
+**Reference:** https://github.com/thanhn062/ARC-Safe-Recycle · Ven0m0/arc-raiders-autoscrapper#41
+
+**Context**
+
+The scanner can recycle items needed for active quests. Integrating the
+logic from ARC Safe Recycle would cross-reference each RECYCLE decision against
+active quest requirements and override to KEEP when a conflict is detected.
+
+**Acceptance criteria**
+
+- Before emitting a RECYCLE decision, query active quest item requirements from
+  the progress snapshot.
+- If the item is needed, override decision to KEEP and annotate the reason
+  (`quest: <quest_name>`).
+- The check is skipped when the progress snapshot is absent (graceful degradation).
+- `pytest` covers the override path and the graceful-degradation path.
+
+---
+
+### T021 — Review Raider Lens for overlay/display integration
+
+**Anchor:** `src/autoscrapper/tui/`  
+**Severity:** low  
+**Category:** feature · ux  
+**Size:** M (20–100 LOC)  
+**Reference:** https://github.com/eli1776/raider-lens · Ven0m0/arc-raiders-autoscrapper#41
+
+**Context**
+
+Raider Lens provides overlay and display features that could complement the
+scanner's TUI output. This task covers a review of the raider-lens codebase
+followed by a lightweight prototype or design document.
+
+**Acceptance criteria**
+
+- Produce a written assessment of which raider-lens features are reusable
+  without coupling to its OCR/capture stack.
+- Prototype at least one overlay feature (e.g., item decision badge) that
+  integrates with the existing Textual TUI.
+- No changes to existing scan performance or OCR correctness.
+
+---
+
+### T022 — Verify pytest is accessible in all install paths
+
+**Anchor:** `pyproject.toml`  
+**Severity:** low  
+**Category:** ci · tooling  
+**Size:** S (< 20 LOC)
+
+**Context**
+
+`pytest>=9.0.3` is in both `[project.optional-dependencies.dev]` and
+`[dependency-groups.dev]`. Setup docs (`README.md`, `scripts/setup-linux.sh`)
+should reference `uv sync --group dev` so pytest is available without extra
+flags.
+
+**Acceptance criteria**
+
+- `README.md` and both setup scripts reference `uv sync --group dev`.
+- `uv run pytest` succeeds from a clean environment after following the docs.
+
+---
+
+## Upstream Sync Checklist
+
+When merging from `zappybiby/ArcRaiders-AutoScrapper`, apply in order:
+
+- [ ] **T010 / BUG-01** — Fix stale infobox rect (`scan_loop.py`)
+- [x] ~~**BUG-02** — Dead code removal (`inventory_vision.py`)~~ — already removed
+- [ ] **T012 / OCR-01** — Roman numeral alias correction (`item_actions.py`) — partial
+- [ ] **T013 / OCR-02** — Weapon swap UI keyword filter (`inventory_vision.py`)
+- [x] ~~**OCR-03** — Permissive `clean_ocr_text` regex~~ — already in fork
+- [ ] **T014 / DATA-01** — Remove Supabase, use `includeComponents=true` (`data_update.py`)
+- [ ] **DATA-02** — Commit fresh data snapshot + regenerated default rules
+- [ ] **T015 / UX-01** — F9 as default stop key (`keybinds.py`)
+- [ ] **T022 / CI-01** — Verify pytest install path in setup docs
+
+---
+
+## Maintenance Notes
+
+### Data snapshot refresh
+
+The bundled snapshot at `src/autoscrapper/progress/data/` should be regenerated
+before each release:
+
+```bash
+python3 -m uv run python scripts/update_snapshot_and_defaults.py
+```
+
+Do not hand-edit snapshot files directly; see AGENTS.md for the invariant.
+Current snapshot: last updated 2026-04-13T06:31:59Z (547 items, 94 quests).
+
+---
+
 ## Status Legend
 
 | Status | Meaning |
@@ -415,20 +524,23 @@ workflow and complement the OCR failure corpus.
 
 ## Task Summary
 
-| ID   | Title (short)                              | Sev    | Size | Status | Blocked by |
-|------|--------------------------------------------|--------|------|--------|------------|
-| T001 | Calibrate OCR fuzzy threshold from corpus  | medium | M    | [ ]    | —          |
-| T002 | Benchmark tessdata.best-eng vs fast-eng    | low    | S    | [!]    | T001       |
-| T003 | Hybrid database updater (API + Wiki)       | medium | M    | [!]    | T014       |
-| T010 | Fix stale infobox rect on OCR retry        | high   | S    | [ ]    | —          |
-| T012 | Add Roman numeral OCR alias in item_actions| medium | S    | [ ]    | —          |
-| T013 | Filter weapon swap UI text from OCR        | medium | S    | [ ]    | —          |
-| T014 | Remove Supabase dependency from data_update| medium | M    | [ ]    | —          |
-| T015 | Change default stop key to F9              | low    | S    | [ ]    | —          |
-| T016 | Integrate arctracker.io API for stash sync | medium | L    | [~]    | —          |
-| T017 | Fix ScanSettingsScreen ABC inheritance     | low    | S    | [ ]    | —          |
-| T018 | Headless scan mode with JSON/CSV output    | low    | M    | [ ]    | —          |
-| T019 | Per-session decision log for rule refinement| low   | S    | [ ]    | —          |
+| ID   | Title (short)                                  | Sev    | Size | Status | Blocked by |
+|------|------------------------------------------------|--------|------|--------|------------|
+| T001 | Calibrate OCR fuzzy threshold from corpus      | medium | M    | [ ]    | —          |
+| T002 | Benchmark tessdata.best-eng vs fast-eng        | low    | S    | [!]    | T001       |
+| T003 | Hybrid database updater (API + Wiki)           | medium | M    | [!]    | T014       |
+| T010 | Fix stale infobox rect on OCR retry            | high   | S    | [ ]    | —          |
+| T012 | Add Roman numeral OCR alias in item_actions    | medium | S    | [ ]    | —          |
+| T013 | Filter weapon swap UI text from OCR            | medium | S    | [ ]    | —          |
+| T014 | Remove Supabase dependency from data_update    | medium | M    | [ ]    | —          |
+| T015 | Change default stop key to F9                  | low    | S    | [ ]    | —          |
+| T016 | Integrate arctracker.io API for stash sync     | medium | L    | [~]    | —          |
+| T017 | Fix ScanSettingsScreen ABC inheritance         | low    | S    | [ ]    | —          |
+| T018 | Headless scan mode with JSON/CSV output        | low    | M    | [ ]    | —          |
+| T019 | Per-session decision log for rule refinement   | low    | S    | [ ]    | —          |
+| T020 | ARC Safe Recycle cross-check integration       | medium | M    | [ ]    | —          |
+| T021 | Review Raider Lens overlay integration         | low    | M    | [ ]    | —          |
+| T022 | Verify pytest accessible in all install paths  | low    | S    | [ ]    | —          |
 
 **Recommended starting points:**
 - **T010** — high-severity bug, zero external dependencies, small change.
