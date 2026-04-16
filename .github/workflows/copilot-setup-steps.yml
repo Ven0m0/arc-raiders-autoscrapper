@@ -33,7 +33,7 @@ jobs:
             pkg-config \
             tesseract-ocr libwebp7
       - name: Install uv and Python 3.13
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@v8
         with:
           python-version: "3.13"
           enable-cache: true
