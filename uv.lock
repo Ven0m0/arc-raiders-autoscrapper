@@ -97,7 +97,7 @@ requires-dist = [
     { name = "tesserocr", marker = "sys_platform == 'linux'", specifier = "==2.10.0" },
     { name = "tesserocr", marker = "python_full_version == '3.13.*' and platform_machine == 'AMD64' and sys_platform == 'win32'", url = "https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp313-cp313-win_amd64.whl" },
     { name = "textual" },
-    { name = "ty", marker = "extra == 'dev'", specifier = ">=0.0.29" },
+    { name = "ty", marker = "extra == 'dev'", specifier = ">=0.0.31" },
     { name = "vulture", marker = "extra == 'dev'", specifier = ">=2.16" },
 ]
 provides-extras = ["dev", "linux-input", "scraper", "rapidocr"]
@@ -111,7 +111,7 @@ dev = [
     { name = "pytest", specifier = ">=9.0.3" },
     { name = "ruff", specifier = ">=0.15.10" },
     { name = "tombi", specifier = ">=0.9.17" },
-    { name = "ty", specifier = ">=0.0.29" },
+    { name = "ty", specifier = ">=0.0.31" },
     { name = "vulture", specifier = ">=2.16" },
 ]
 
