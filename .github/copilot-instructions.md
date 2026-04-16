@@ -17,11 +17,9 @@ symlink to that file.
 ## Working norms
 
 - Runtime: Python 3.13 with `uv`; prefer `python3 -m uv ...` in automation.
-- Validate Python changes with `python3 -m uv run ruff check src/ tests/
-  scripts/`, `python3 -m uv run basedpyright src/`, and
-  `python3 -m uv run pytest`.
-- Validate workflow changes with `python3 -m uv run prek run --files
-  .github/workflows/<name>.yml`.
+- Validate Python changes with `python3 -m uv run ruff check src/ tests/ scripts/`,
+  `python3 -m uv run basedpyright src/`, and `python3 -m uv run pytest`.
+- Validate workflow changes with `python3 -m uv run prek run --files .github/workflows/<name>.yml`.
 - For docs and agent-guidance changes, verify paths, links, commands, and the
   instruction hierarchy.
 
