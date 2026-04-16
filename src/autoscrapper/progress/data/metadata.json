@@ -1,21 +1,21 @@
 {
-  "lastUpdated": "2026-04-14T12:11:49.711364Z",
+  "lastUpdated": "2026-04-16T06:41:40.815860Z",
   "source": "https://metaforge.app/arc-raiders/api",
   "version": "autoscrapper-data-1",
-  "itemCount": 573,
+  "itemCount": 529,
   "questCount": 94,
   "dataSources": {
     "items": {
-      "provider": "metaforge+raidtheory",
+      "provider": "raidtheory-fallback",
       "primary": {
         "documentation": "https://metaforge.app/arc-raiders/api",
         "apiBase": "https://metaforge.app/api/arc-raiders",
-        "error": null
+        "error": "Failed to reach https://metaforge.app/api/arc-raiders/items?page=1&limit=100: <urlopen error [Errno -3] Temporary failure in name resolution>"
       },
       "fallback": {
         "repository": "https://github.com/fgrzesiak/arcraiders-data",
         "archive": "https://github.com/fgrzesiak/arcraiders-data/archive/refs/heads/main.zip",
-        "supplementalCount": 26,
+        "supplementalCount": 529,
         "error": null
       },
       "arctrackerEnrichment": {
@@ -35,16 +35,16 @@
       }
     },
     "quests": {
-      "provider": "metaforge",
+      "provider": "raidtheory-fallback",
       "primary": {
         "documentation": "https://metaforge.app/arc-raiders/api",
         "apiBase": "https://metaforge.app/api/arc-raiders",
-        "error": null
+        "error": "Failed to reach https://metaforge.app/api/arc-raiders/quests?page=1&limit=100: <urlopen error [Errno -3] Temporary failure in name resolution>"
       },
       "fallback": {
         "repository": "https://github.com/fgrzesiak/arcraiders-data",
         "archive": "https://github.com/fgrzesiak/arcraiders-data/archive/refs/heads/main.zip",
-        "supplementalCount": 0,
+        "supplementalCount": 94,
         "error": null
       },
       "arctrackerEnrichment": {
