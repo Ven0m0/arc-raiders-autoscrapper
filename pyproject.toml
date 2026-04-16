@@ -8,7 +8,7 @@ version = "0.2.0"
 description = "Arc Raiders inventory autoscrapper"
 readme = "README.md"
 keywords = ["ocr", "arc-raiders", "tesseract", "text-recognition"]
-requires-python = ">=3.13,<3.14"
+requires-python = ">=3.13.13,<3.14"
 dependencies = [
   "mss>=10.1.0",
   "numpy>=2.4.4",
