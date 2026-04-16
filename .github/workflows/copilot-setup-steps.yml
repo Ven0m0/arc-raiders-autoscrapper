@@ -10,11 +10,9 @@ on:
 
 permissions:
   contents: read
-
 concurrency:
   group: copilot-setup-${{ github.ref }}
   cancel-in-progress: true
-
 env:
   DEBIAN_FRONTEND: noninteractive
   DEBCONF_NOWARNINGS: yes
