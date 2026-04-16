@@ -126,20 +126,6 @@ class ProjectProgress:
 
 
 @dataclass(frozen=True, slots=True)
-class RateLimitInfo:
-    """Rate limit information from API response headers."""
-
-    limit: int
-    remaining: int
-    reset_timestamp: int
-
-    @property
-    def is_limited(self) -> bool:
-        """Check if rate limit has been exceeded."""
-        return self.remaining <= 0
-
-
-@dataclass(frozen=True, slots=True)
 class PublicItem:
     """A public item from the /api/items endpoint (no auth required)."""
 

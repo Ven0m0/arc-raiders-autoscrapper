@@ -5,13 +5,13 @@
       "tools": [
         "*"
       ],
-      "url": "https://api.githubcopilot.com/mcp/insiders",
+      "url": "https://api.githubcopilot.com/mcp/",
       "headers": {
         "X-MCP-Toolsets": "default,actions,code_security,copilot,git,github_support_docs_search,stargazers,dependabot"
       }
     },
     "playwright": {
-      "type": "local",
+      "type": "stdio",
       "command": "npx",
       "args": [
         "-y",
@@ -54,7 +54,7 @@
       }
     },
     "fast-filesystem": {
-      "type": "local",
+      "type": "stdio",
       "command": "npx",
       "args": [
         "-y",
@@ -79,7 +79,7 @@
       ]
     },
     "octocode": {
-      "type": "local",
+      "type": "stdio",
       "command": "npx",
       "args": [
         "-y",

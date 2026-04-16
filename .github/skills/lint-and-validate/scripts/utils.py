@@ -6,7 +6,7 @@ import sys
 def fix_windows_console_encoding() -> None:
     """Fix Windows console encoding for Unicode output."""
     try:
-        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # type: ignore[union-attr]
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")  # type: ignore[union-attr]
     except AttributeError:
         pass  # Python < 3.7

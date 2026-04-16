@@ -188,10 +188,6 @@ class Grid:
         idx = row * self.COLS + col
         return self._cells[idx]
 
-    def center_by_index(self, index: int) -> tuple[float, float]:
-        """Center (cx, cy) of cell with given row-major index."""
-        return self.cell_by_index(index).center
-
     def center(self, row: int, col: int) -> tuple[float, float]:
         """Center (cx, cy) of cell at (row, col)."""
         return self.cell(row, col).center

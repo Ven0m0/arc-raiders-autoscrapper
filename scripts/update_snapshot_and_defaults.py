@@ -89,7 +89,7 @@ def _normalize_for_semantic_diff(value: object) -> object:
     if isinstance(value, dict):
         normalized: dict[str, object] = {}
         for key, nested_value in value.items():
-            if key in VOLATILE_TIMESTAMP_KEYS:
+            if not isinstance(key, str) or key in VOLATILE_TIMESTAMP_KEYS:
                 continue
             normalized[key] = _normalize_for_semantic_diff(nested_value)
         return normalized
