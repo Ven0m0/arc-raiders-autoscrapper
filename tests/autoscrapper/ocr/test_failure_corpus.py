@@ -398,6 +398,7 @@ def test_default_capture_paths() -> None:
 
 def test_resolve_image_path_traversal(tmp_path: Path) -> None:
     sample = OcrFailureSample(
+        schema_version=2,
         sample_id="123",
         captured_at="now",
         outcome="SKIP",

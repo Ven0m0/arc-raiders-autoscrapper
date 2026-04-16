@@ -22,6 +22,7 @@ if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
 from autoscrapper.progress.data_update import update_data_snapshot  # noqa: E402
+from autoscrapper.api.client import ArcTrackerClient  # noqa: E402
 from autoscrapper.progress.rules_generator import (  # noqa: E402
     generate_rules_from_active,
     write_rules,
@@ -46,32 +47,6 @@ TARGET_RELATIVE_FILES = (
 )
 EXCLUDED_LEVEL2_IDS = {"stash", "workbench"}
 VOLATILE_TIMESTAMP_KEYS = {"generatedAt", "lastUpdated", "lastupdated"}
-
-
-def _load_workshop_level2_map(hideout_modules_path: Path) -> dict[str, int]:
-    modules = load_json(hideout_modules_path, [])
-    out: dict[str, int] = {}
-    if not isinstance(modules, list):
-        return out
-
-    for module in modules:
-        if not isinstance(module, dict):
-            continue
-        module_id = module.get("id")
-        if not isinstance(module_id, str) or not module_id:
-            continue
-        if module_id in EXCLUDED_LEVEL2_IDS:
-            continue
-        max_level = module.get("maxLevel", 0)
-        try:
-            max_level_int = int(max_level)
-        except (TypeError, ValueError):
-            continue
-        if max_level_int <= 0:
-            continue
-        out[module_id] = min(2, max_level_int)
-
-    return out
 
 
 def _load_state(data_dir: Path, rules_path: Path) -> dict:
@@ -169,12 +144,43 @@ def _copy_support_files_for_temp_run(source_data_dir: Path, temp_data_dir: Path)
         temp_static.mkdir(parents=True, exist_ok=True)
 
 
+def _fetch_default_user_context() -> tuple[dict[str, int], list[str]]:
+    """Fetch default hideout levels and completed projects from public API."""
+    client = ArcTrackerClient()
+
+    # Default hideout levels: assume level 2 for all standard modules
+    hideout_levels: dict[str, int] = {}
+    public_hideout = client.get_public_hideout()
+    # Public API returns { "hideoutModules": { "id": { ... } } }
+    modules_dict = (public_hideout or {}).get("hideoutModules")
+    if isinstance(modules_dict, dict):
+        for module_id, module in modules_dict.items():
+            if not module_id or module_id in EXCLUDED_LEVEL2_IDS:
+                continue
+            max_level = module.get("maxLevel", 0)
+            hideout_levels[module_id] = min(2, max_level)
+
+    # Default completed projects: assume all projects are completed for rules
+    completed_projects: list[str] = []
+    public_projects = client.get_public_projects()
+    # Public API returns { "projects": { "id": { ... } } }
+    projects_dict = (public_projects or {}).get("projects")
+    if isinstance(projects_dict, dict):
+        for project_id in projects_dict:
+            if project_id:
+                completed_projects.append(project_id)
+
+    return hideout_levels, completed_projects
+
+
 def _update_in_place(data_dir: Path, rules_path: Path) -> dict:
     snapshot_metadata = update_data_snapshot(data_dir)
-    hideout_levels = _load_workshop_level2_map(data_dir / "static" / "hideout_modules.json")
+    hideout_levels, completed_projects = _fetch_default_user_context()
+
     rules_payload = generate_rules_from_active(
         active_quests=[],
         hideout_levels=hideout_levels,
+        completed_projects=completed_projects,
         all_quests_completed=True,
         data_dir=data_dir,
     )
@@ -197,10 +203,12 @@ def _update_dry_run(source_data_dir: Path) -> dict:
         _copy_support_files_for_temp_run(source_data_dir, temp_data_dir)
 
         snapshot_metadata = update_data_snapshot(temp_data_dir)
-        hideout_levels = _load_workshop_level2_map(temp_data_dir / "static" / "hideout_modules.json")
+        hideout_levels, completed_projects = _fetch_default_user_context()
+
         rules_payload = generate_rules_from_active(
             active_quests=[],
             hideout_levels=hideout_levels,
+            completed_projects=completed_projects,
             all_quests_completed=True,
             data_dir=temp_data_dir,
         )

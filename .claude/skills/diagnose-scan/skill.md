@@ -13,6 +13,20 @@ Run a dry-run scan and automatically route the results to the right specialist.
 uv run autoscrapper scan --dry-run 2>&1 | tee /tmp/scan-diag.txt
 ```
 
+Debug images land in `ocr_debug/` with timestamps:
+
+| File pattern | What it shows |
+|---|---|
+| `*_infobox_detect_overlay.png` | Infobox detection — green = detected, red = missed |
+| `*_ctx_menu_processed.png` | Context menu crop after binarization — should show clear text |
+| `*_infobox_action_sell_processed.png` | Sell/recycle button OCR region — check text is legible |
+
+Common failure indicators in the images:
+- Infobox not detected → wrong crop region or window resize
+- Garbled text → binarization threshold or upscale issue
+- Item name "unreadable" → check fuzzy match score in logs (low score = preprocessing issue, not a rules issue)
+- Action button wrong text → binarization inverted (black-on-white vs white-on-black)
+
 ### Step 2 — Classify the failure
 
 Read `/tmp/scan-diag.txt` and determine failure type:

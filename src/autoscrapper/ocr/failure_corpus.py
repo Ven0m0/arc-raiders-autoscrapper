@@ -4,7 +4,7 @@ from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from hashlib import blake2b
 from pathlib import Path
-from typing import Literal
+from typing import Literal, cast
 
 import cv2
 import numpy as np
@@ -129,8 +129,17 @@ def _coerce_sample(entry: object) -> OcrFailureSample | None:
         )
     ):
         return None
+    # Narrow types that all() cannot narrow for basedpyright
+    assert isinstance(sample_id, str)
+    assert isinstance(captured_at, str)
+    assert isinstance(outcome, str)
+    assert isinstance(source, str)
+    assert isinstance(raw_text, str)
+    assert isinstance(cleaned_text, str)
+    assert isinstance(chosen_name, str)
     if source not in {"infobox", "context_menu"}:
         return None
+    source_typed = cast(Literal["infobox", "context_menu"], source)
     if matched_name is not None and not isinstance(matched_name, str):
         return None
     if expected_name is not None and not isinstance(expected_name, str):
@@ -148,7 +157,7 @@ def _coerce_sample(entry: object) -> OcrFailureSample | None:
     if label_status is None:
         normalized_label_status = "match" if normalized_expected_name else "pending"
     elif isinstance(label_status, str) and label_status in _VALID_LABEL_STATUSES:
-        normalized_label_status = label_status
+        normalized_label_status = cast("OcrFailureLabelStatus", label_status)
     else:
         return None
 
@@ -160,7 +169,7 @@ def _coerce_sample(entry: object) -> OcrFailureSample | None:
         sample_id=sample_id,
         captured_at=captured_at,
         outcome=outcome,
-        source=source,
+        source=source_typed,
         raw_text=raw_text,
         cleaned_text=cleaned_text,
         chosen_name=chosen_name,
@@ -204,7 +213,7 @@ def capture_skip_unlisted_sample(
         corpus_paths.images_dir.mkdir(parents=True, exist_ok=True)
         image_name = f"{sample_id}.webp"
         absolute_image_path = corpus_paths.images_dir / image_name
-        if cv2.imwrite(str(absolute_image_path), source_image, [cv2.IMWRITE_WEBP_QUALITY, 80]):
+        if cv2.imwrite(str(absolute_image_path), source_image, [cv2.IMWRITE_WEBP_QUALITY, 101]):
             image_path = absolute_image_path.relative_to(REPO_ROOT).as_posix()
 
     sample_raw_text = raw_text.strip()

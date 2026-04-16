@@ -87,3 +87,8 @@ repos:
         args: [-x, --severity=warning]
         files: \.(sh|bash)$
         stages: [pre-commit]
+
+  - repo: https://github.com/yawlabs/ctxlint
+      rev: v0.9.0
+          hooks:
+                - id: ctxlint

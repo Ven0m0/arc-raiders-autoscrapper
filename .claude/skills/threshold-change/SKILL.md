@@ -85,6 +85,6 @@ uv run autoscrapper scan --dry-run
 
 ## Related
 
-- `corpus-replay` skill — detailed replay procedure
+- `threshold-corpus-replay` skill — detailed replay procedure
 - `ocr-reviewer` agent — review the surrounding code change
 - T001 in `src/autoscrapper/core/item_actions.py`

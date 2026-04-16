@@ -28,7 +28,7 @@ from ..ocr.inventory_vision import (
     find_infobox,
     is_slot_empty,
     ocr_context_menu,
-    ocr_infobox,
+    ocr_infobox_with_context,
     reset_ocr_caches,
 )
 
@@ -210,7 +210,7 @@ class _ScanRunner:
         *,
         context: ScanContext,
         initial_cells: list[Cell],
-        scroll_sequence: Iterable[int],
+        scroll_sequence: Iterator[int],
         config: _ScanLoopConfig,
         progress_impl: ScanProgress | None,
         startup_events: list[tuple[str, str]],
@@ -454,9 +454,16 @@ class _ScanRunner:
             else:
                 infobox_bgr = window_bgr[y : y + h, x : x + w]
 
-            infobox_ocr = (
-                ocr_context_menu(infobox_bgr) if capture_result.context_menu_fallback else ocr_infobox(infobox_bgr)
-            )
+            assert infobox_bgr is not None  # always set above; guards type narrowing
+            use_fallback_psm = ocr_attempt > 0
+            if capture_result.context_menu_fallback:
+                infobox_ocr = ocr_context_menu(infobox_bgr, use_fallback_psm=use_fallback_psm)
+            else:
+                infobox_ocr = ocr_infobox_with_context(
+                    window_bgr,
+                    infobox_rect,
+                    use_fallback_psm=use_fallback_psm,
+                )
             preprocess_time += infobox_ocr.preprocess_time
             ocr_time += infobox_ocr.ocr_time
             item_name = infobox_ocr.item_name

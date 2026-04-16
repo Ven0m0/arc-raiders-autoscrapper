@@ -5,7 +5,7 @@ import sys
 import threading
 import time
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Any, Protocol
 
 import mss
 import numpy as np
@@ -105,7 +105,7 @@ def get_active_target_window(target_app: str = TARGET_APP) -> pwc.Window | None:
         title = getattr(win, "title") or ""
     if not title and hasattr(win, "getTitle"):
         try:
-            title = win.getTitle() or ""
+            title = getattr(win, "getTitle")() or ""
         except Exception:
             title = ""
     title_lower = title.lower()
@@ -193,7 +193,13 @@ def window_display_info(
     display_name = display_names[0]
     size = pwc.getScreenSize(display_name)
     work_area = pwc.getWorkArea(display_name)
-    return display_name, size, work_area
+    if size is None or work_area is None:
+        raise RuntimeError(f"Unable to get display metrics for {display_name!r}")
+    return (
+        display_name,
+        (int(size[0]), int(size[1])),
+        (int(work_area[0]), int(work_area[1]), int(work_area[2]), int(work_area[3])),
+    )
 
 
 def window_monitor_rect(win: pwc.Window) -> tuple[int, int, int, int]:
@@ -225,7 +231,7 @@ def window_monitor_rect(win: pwc.Window) -> tuple[int, int, int, int]:
     raise RuntimeError("Unable to map target window to a monitor via mss.")
 
 
-def _get_mss() -> "mss.base.MSSBase":
+def _get_mss() -> Any:
     """
     Lazily create a thread-local MSS instance for screen capture.
 

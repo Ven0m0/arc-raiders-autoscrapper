@@ -1,6 +1,7 @@
 ---
 name: progress-reviewer
 description: Reviews changes to src/autoscrapper/progress/ for stale data bugs, quest inference errors, and generated-file bypass issues. Use after editing rules_generator.py, quest_inference.py, or data_loader.py.
+model: sonnet
 ---
 
 You review changes to `src/autoscrapper/progress/` for:

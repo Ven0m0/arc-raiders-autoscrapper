@@ -1,7 +1,6 @@
 # AGENTS.md
 
-Canonical agent guide for this repository.
-Keep `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/CLAUDE.md` as a symlink to this file; do not maintain separate content.
+Canonical agent guide for this repository. `CLAUDE.md` is a symlink to this file.
 
 ## Project
 
@@ -88,11 +87,14 @@ Notes:
 - Preserve custom-over-default rule precedence.
 - Do **not** hand-edit `src/autoscrapper/progress/data/*` or `src/autoscrapper/items/items_rules.default.json`; regenerate via `scripts/update_snapshot_and_defaults.py`.
 - Bump the config version in `src/autoscrapper/config.py` when changing persisted config fields.
-- `initialize_ocr()` must run on the main thread before the scan thread starts.
+- `initialize_ocr()` must run on the main thread before the scan thread starts; it eagerly inits all four PSM APIs (`SINGLE_BLOCK`, `SINGLE_LINE`, `SINGLE_WORD`, `SPARSE_TEXT`).
+- Each Tesseract API instance has its own lock (`_api_lock`, `_api_line_lock`, `_api_single_word_lock`, `_api_sparse_lock`); do **not** collapse them back to a single shared lock.
 - Image-processing coordinates are capture-space pixels; screen-space translation belongs in `src/autoscrapper/interaction/ui_windows.py`.
-- The dark context menu opens to the **left** of the clicked cell; `_CONTEXT_MENU_*` constants in `inventory_vision.py` are normalized by 1920.
+- The dark context menu opens to the **left** of the clicked cell; `_CONTEXT_MENU_*` constants in `inventory_vision.py` are normalized by 1920. The positional offsets are still uncalibrated — prefer `find_infobox` path and live recalibration via `/calibrate-vision` before shipping positional-crop changes.
+- `ocr_infobox_with_context(window_bgr, rect)` is the preferred infobox OCR call (passes full window for upward title-band extension). Use `ocr_infobox(crop)` only when the full window is not available.
+- `find_context_menu_crop` rejects crops with `dark_fraction < 0.20` on the left half (gray < 40); this threshold is calibration-sensitive — do not tighten without corpus replay.
 - Keep the fuzzy-match threshold shared between OCR matching and rule lookup. Changing `threshold`/`score_cutoff` values (T001) requires corpus replay before shipping.
-- `ocr_debug/` is disposable debug output and is safe to clear between sessions.
+- `ocr_debug/` is disposable debug output and is safe to clear between sessions. Failure-path artifacts (`title_strip_fail_raw`, `title_strip_fail_processed`, `ctx_menu_lines_fail.json`) are written automatically and consumed by `/add-fixture` and `/triage-failures`.
 
 ## Hotspots
 
@@ -106,13 +108,67 @@ Notes:
 - `upstream` → `https://github.com/zappybiby/ArcRaiders-AutoScrapper.git` (canonical source)
 - `origin` → your fork; sync from upstream before pushing: `git pull --autostash upstream main`
 
+## Git Workflow
+
+- Conventional commits: `feat:`, `fix:`, `chore:`, `docs:` prefixes on commit messages and branch names.
+- Sync from upstream before pushing: `git pull --autostash upstream main`
+
+## Windows Setup
+
+- Tesseract system deps installed via `pwsh -NoProfile -ExecutionPolicy Bypass -File scripts\setup-windows.ps1`
+- tesserocr wheel is pinned in `pyproject.toml` via a Windows-specific GitHub release URL; do not upgrade without testing.
+
 ## Agent Workflow
 
 - Make minimal, targeted edits.
-- Prefer project skills in `.github/skills/` when relevant, especially `mcp-use`, `codebase-index`, `language-optimization`, `ai-tuning`, and `workflow-development`.
-- Read the relevant module before editing; update adjacent docs only when the behavior or workflow changes.
+- Use project skills in `.claude/skills/` and specialist agents in `.claude/agents/` when the task matches — see table below.
+- Read the relevant module before editing; update adjacent docs only when behavior or workflow changes.
 - Use script-driven or tool-driven changes instead of manual rewrites for generated assets.
 - Call out any unverified behavior clearly in summaries and PR text.
+- **Search**: Use `Grep` (ripgrep) for text search — never bash `grep`. Use AST-grep for structural/syntactic search. Use LSP symbol tools for definition/reference navigation.
+- **File writing on WSL**: "Error writing file" on `/mnt/c/...` paths means the parent directory doesn't exist — run `mkdir -p <dir>` via Bash before `Write`. Always use the `Write` tool, never bash echo/heredoc.
+
+## Skills & Agents
+
+Invoke skills with `/skill-name`. Use agents via `Agent(subagent_type="agent-name")`.
+
+### Workflow Skills (`.claude/skills/`)
+
+| Skill | When to use |
+| --- | --- |
+| `/diagnose-scan` | First stop for any scan failure — runs dry-run, classifies output, dispatches to specialist |
+| `/verify` | Full lint + types + tests before committing |
+| `/ci-promote` | Pre-push checklist + PR creation |
+| `/data-snapshot-updater` | Regenerate progress data and default rules from Metaforge |
+| `/upstream-sync` | Sync fork from upstream before pushing |
+| `/threshold-change` | Safe fuzzy-threshold tuning with before/after corpus replay |
+| `/threshold-corpus-replay` | Validate a specific threshold candidate against corpus |
+| `/ocr-corpus-replay` | Validate OCR code changes against failure corpus |
+| `/calibrate-vision` | Recalibrate context-menu crop constants in `inventory_vision.py` |
+| `/add-fixture` | Lock in a new OCR regression fixture from `ocr_debug/` |
+| `/add-rule` | Add or edit a custom item rule |
+| `/config-bump` | Safely version-bump a config field change with migration |
+| `/scan-report` | Classify and summarize last dry-run output from `/tmp/scan-diag.txt` |
+| `/triage-failures` | Analyze OCR failure corpus for systematic misread patterns |
+| `/clean-debug` | Prune stale `ocr_debug/` images |
+| `/benchmark` | Benchmark tessdata model variants (fast vs best) |
+
+Context docs (not user-invocable, referenced by other skills): `ocr-debug`, `scan-failed`, `ocr-unavailable`.
+
+### Specialist Agents (`.claude/agents/`)
+
+| Agent | When to use |
+| --- | --- |
+| `ocr-reviewer` | After editing `ocr/` or `scanner/` — coordinate space bugs, upscale artifacts, threshold regressions |
+| `scan-validator` | After editing `scanner/` or `interaction/` — timing, page detection, action dispatch |
+| `rules-reviewer` | After editing `item_actions.py` or `rules_store.py` — precedence bugs, action mapping |
+| `config-reviewer` | After editing `config.py` — version bump, migration path, serialization |
+| `tui-reviewer` | After editing `tui/` — threading violations, reactive state bugs, worker lifecycle |
+| `progress-reviewer` | After editing `progress/` — quest inference, crafting overrides, generated-file bypass |
+| `data-pipeline-reviewer` | After editing `data_update.py` — field mapping, pagination, merge bugs |
+| `api-reviewer` | After editing `api/` — slot mapping, None-guards, Cell coordinate plumbing |
+| `security-reviewer` | After editing `interaction/` or `scanner/` — input validation, window targeting |
+| `visual-analysis-ocr` | Inspect `ocr_debug/` PNG images for visual diagnosis |
 
 <!-- rtk-instructions v2 -->
 # RTK (Rust Token Killer) - Token-Optimized Commands

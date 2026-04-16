@@ -14,9 +14,11 @@ Scan output shows item label `UNAVAILABLE` (or the scan skips items as `SKIP_UNL
 
 **How it happens:** `ocr_context_menu` iterates context-menu lines top-to-bottom looking for a fuzzy match against known item names. When the item title region is absent or illegible (clipped crop, low contrast, upscale artefact), the loop falls through to a later line. The game's "Unavailable" button text can fuzzy-match a known item name via `fuzz.WRatio` partial matching at ≥75 score with ≥60% coverage, so it gets accepted as `item_name`.
 
-## Fix path (already applied 2026-04-11)
+## Required guards
 
-`inventory_vision.py` `ocr_context_menu` now rejects any match where `result.chosen_name.lower().startswith("unavailable")`. If you see this recur, check whether the guard was removed or bypassed.
+`inventory_vision.py` `ocr_context_menu` must reject any match where `result.chosen_name.lower().startswith("unavailable")`. The `_ACTION_PREFIXES` list must also include `"unavailable"` as a line-level skip before fuzzy matching.
+
+If this symptom recurs, both guards may have been removed or bypassed — check both.
 
 ## Triage checklist
 

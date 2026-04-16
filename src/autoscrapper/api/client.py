@@ -164,7 +164,7 @@ class ArcTrackerClient:
         self._item_name_to_id: dict[str, str] = {}
         self._load_item_mapping()
 
-        if HAS_REQUESTS:
+        if requests is not None:
             self._session = requests.Session()
             self._session.headers.update(
                 {

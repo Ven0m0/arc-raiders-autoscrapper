@@ -20,6 +20,7 @@ from autoscrapper.ocr.inventory_vision import (  # noqa: E402
     _extract_cropped_title_from_data,
     _extract_title_from_data,
     find_context_menu_crop,
+    isolate_menu_panel,
     ocr_inventory_count,
     preprocess_for_ocr,
     reset_ocr_caches,
@@ -525,7 +526,7 @@ class TestFindContextMenuCrop:
     extend ~200-250 px past the cell centre — they were clipped, causing
     title-unreadable / UNAVAILABLE outcomes.
 
-    Fix: X_OFFSET_NORM → 250/1920, WIDTH_NORM → 635/1920.
+    Fix: X_OFFSET_NORM → 250/1920, WIDTH_NORM → 450/1920.
     The right edge must now be ≥ 200 px past cell_center_x.
     """
 
@@ -533,8 +534,16 @@ class TestFindContextMenuCrop:
     _H = 1080
 
     def _solid(self):
-        """Return a non-black 1920×1080 image so brightness guard passes."""
-        return np.full((self._H, self._W, 3), 80, dtype=np.uint8)
+        """Return a dark-panel-like 1920×1080 image so both brightness guards pass.
+
+        The context-menu dark-fraction guard requires ≥20% of left-half pixels to
+        be below gray 40.  Use a bimodal image: every 4th row is dark (value 20),
+        remaining rows bright (value 100).  This gives ~25% dark pixels (≥20%)
+        and a mean brightness of ~80 (≥40), matching the real context-menu UI.
+        """
+        img = np.full((self._H, self._W, 3), 100, dtype=np.uint8)
+        img[::4, :] = 20  # every 4th row dark → ≈25% dark pixels
+        return img
 
     def _crop(self, cx: int, cy: int):
         img = self._solid()
@@ -581,8 +590,86 @@ class TestFindContextMenuCrop:
         assert result is None, "dark crop should be rejected by brightness guard"
 
     def test_crop_width_large_enough_for_long_titles(self):
-        """Crop width must be ≥ 550 px (at 1920) to fit 'MATRIARCH REACTOR' text."""
+        """Crop width must be ≥ 400 px (at 1920) to fit 'MATRIARCH REACTOR' text."""
         result = self._crop(800, 540)
         assert result is not None
         _, _, w, _ = result
-        assert w >= 550, f"crop width {w} is too narrow for long item titles"
+        assert w >= 400, f"crop width {w} is too narrow for long item titles"
+
+
+# ---------------------------------------------------------------------------
+# isolate_menu_panel — panel bounding-rect detection
+# ---------------------------------------------------------------------------
+
+
+class TestIsolateMenuPanel:
+    """Unit tests for isolate_menu_panel().
+
+    The function must find the largest white/cream rectangle (context menu
+    panel) in a mixed crop and return its bounding rect, or None when no
+    qualifying panel is present.
+    """
+
+    def _make_mixed_crop(
+        self,
+        crop_w: int = 450,
+        crop_h: int = 450,
+        panel_x: int = 80,
+        panel_w: int = 220,
+    ) -> np.ndarray:
+        """Synthetic crop: dark background + bright white panel + dark sidebar.
+
+        Layout mirrors real game crop:
+        - Left strip (0..panel_x): dark sidebar area (value 30)
+        - Panel (panel_x..panel_x+panel_w): white/cream background (value 235)
+          with a few dark text-like pixels (value 40) scattered inside
+        - Right strip (panel_x+panel_w..crop_w): dark inventory grid (value 35)
+        """
+        img = np.full((crop_h, crop_w, 3), 30, dtype=np.uint8)
+        # Bright panel region
+        img[:, panel_x : panel_x + panel_w] = 235
+        # Simulate dark text rows inside the panel (doesn't break bright detection)
+        for row in [30, 90, 150, 210, 270]:
+            img[row, panel_x + 10 : panel_x + panel_w - 10] = 40
+        # Small bright spot in sidebar (10x10) — must be rejected
+        img[20:30, 5:15] = 240
+        return img
+
+    def test_returns_rect_for_bright_panel_on_mixed_background(self):
+        """Panel must be detected and rect must overlap the known bright region."""
+        img = self._make_mixed_crop()
+        result = isolate_menu_panel(img)
+        assert result is not None, "should detect the bright menu panel"
+        x, _y, w, _h = result
+        # Rect must overlap the panel column range (80..300)
+        assert x < 300 and x + w > 80, f"returned rect x={x} w={w} does not overlap panel columns 80-300"
+
+    def test_returns_none_for_uniform_dark_image(self):
+        """No bright panel in a uniform dark image — expect None."""
+        img = np.full((450, 450, 3), 30, dtype=np.uint8)
+        assert isolate_menu_panel(img) is None
+
+    def test_returns_none_for_too_small_bright_region(self):
+        """A bright rect covering < 15% of crop area must not be returned."""
+        crop_h, crop_w = 450, 450
+        img = np.full((crop_h, crop_w, 3), 30, dtype=np.uint8)
+        # 50x50 = 2500 px² < 15% of 202500 = 30375
+        img[10:60, 10:60] = 240
+        assert isolate_menu_panel(img) is None
+
+    def test_returns_none_for_empty_array(self):
+        """Empty array must return None without raising."""
+        img = np.zeros((0, 0, 3), dtype=np.uint8)
+        assert isolate_menu_panel(img) is None
+
+    def test_rect_within_crop_bounds(self):
+        """Returned rect must be fully inside the input image."""
+        img = self._make_mixed_crop()
+        result = isolate_menu_panel(img)
+        if result is None:
+            pytest.skip("panel not detected — bounds check irrelevant")
+        x, y, w, h = result
+        crop_h, crop_w = img.shape[:2]
+        assert x >= 0 and y >= 0
+        assert x + w <= crop_w
+        assert y + h <= crop_h

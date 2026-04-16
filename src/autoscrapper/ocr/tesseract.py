@@ -12,9 +12,14 @@ import tessdata
 from tesserocr import PSM, PyTessBaseAPI, RIL, iterate_level
 
 _api_lock = threading.Lock()
+_api_line_lock = threading.Lock()
+_api_single_word_lock = threading.Lock()
+_api_sparse_lock = threading.Lock()
 _api_init_lock = threading.Lock()
 _api: PyTessBaseAPI | None = None
 _api_line: PyTessBaseAPI | None = None
+_api_single_word: PyTessBaseAPI | None = None
+_api_sparse: PyTessBaseAPI | None = None
 _tessdata_dir: str | None = None
 _backend_info: "OcrBackendInfo | None" = None
 
@@ -66,7 +71,7 @@ def _candidate_tessdata_paths() -> list[Path]:
     return unique
 
 
-def _create_api(*, psm: int = PSM.SINGLE_BLOCK) -> PyTessBaseAPI:
+def _create_api(*, psm: PSM = PSM.SINGLE_BLOCK) -> PyTessBaseAPI:
     """
     Build a shared PyTessBaseAPI instance configured for English.
     """
@@ -144,12 +149,50 @@ def _get_api_line() -> PyTessBaseAPI:
     return _api_line
 
 
+def _get_api_single_word() -> PyTessBaseAPI:
+    """
+    Lazily initialize and return the shared single-word Tesseract API instance (PSM.SINGLE_WORD).
+
+    Used as a PSM fallback on OCR retry attempts for the title strip when
+    SINGLE_LINE produces no match.
+    """
+    global _api_single_word
+    if _api_single_word is not None:
+        return _api_single_word
+
+    with _api_init_lock:
+        if _api_single_word is None:
+            _api_single_word = _create_api(psm=PSM.SINGLE_WORD)
+            _record_backend_info(_api_single_word)
+    return _api_single_word
+
+
+def _get_api_sparse() -> PyTessBaseAPI:
+    """
+    Lazily initialize and return the shared sparse-text Tesseract API instance (PSM.SPARSE_TEXT).
+
+    Used as a PSM fallback on OCR retry attempts for context-menu crops when
+    SINGLE_BLOCK produces no match.
+    """
+    global _api_sparse
+    if _api_sparse is not None:
+        return _api_sparse
+
+    with _api_init_lock:
+        if _api_sparse is None:
+            _api_sparse = _create_api(psm=PSM.SPARSE_TEXT)
+            _record_backend_info(_api_sparse)
+    return _api_sparse
+
+
 def initialize_ocr() -> OcrBackendInfo:
     """
     Force initialization so the OCR backend is ready before the first OCR call.
     """
     api = _get_api()
     _get_api_line()
+    _get_api_single_word()
+    _get_api_sparse()
     _record_backend_info(api)
     if _backend_info is None:  # pragma: no cover - defensive
         raise RuntimeError("OCR backend initialized but metadata is missing.")
@@ -239,28 +282,62 @@ def _build_data_dict(iterator) -> dict[str, list]:
     return data
 
 
-def image_to_string(image: np.ndarray, *, single_line: bool = False) -> str:
+def image_to_string(
+    image: np.ndarray,
+    *,
+    single_line: bool = False,
+    use_single_word: bool = False,
+) -> str:
     """
-    OCR the provided image and return raw UTF-8 text. Uses _api_line singleton if single_line is True.
+    OCR the provided image and return raw UTF-8 text.
+
+    - ``use_single_word=True`` → PSM.SINGLE_WORD (fallback on retry for title strips).
+    - ``single_line=True``     → PSM.SINGLE_LINE (default title-strip mode).
+    - Neither set              → PSM.SINGLE_BLOCK.
     """
-    api = _get_api_line() if single_line else _get_api()
+    if use_single_word:
+        api = _get_api_single_word()
+        lock = _api_single_word_lock
+    elif single_line:
+        api = _get_api_line()
+        lock = _api_line_lock
+    else:
+        api = _get_api()
+        lock = _api_lock
     pil_img = _as_pil_image(np.ascontiguousarray(image))
 
-    with _api_lock:
+    with lock:
         api.SetImage(pil_img)
         text = api.GetUTF8Text() or ""
 
     return text
 
 
-def image_to_data(image: np.ndarray, *, single_line: bool = False) -> dict[str, list]:
+def image_to_data(
+    image: np.ndarray,
+    *,
+    single_line: bool = False,
+    use_sparse: bool = False,
+) -> dict[str, list]:
     """
     OCR the provided image and return a dict shaped like pytesseract Output.DICT.
+
+    - ``use_sparse=True``  → PSM.SPARSE_TEXT (fallback on retry for context-menu crops).
+    - ``single_line=True`` → PSM.SINGLE_LINE.
+    - Neither set          → PSM.SINGLE_BLOCK.
     """
-    api = _get_api_line() if single_line else _get_api()
+    if use_sparse:
+        api = _get_api_sparse()
+        lock = _api_sparse_lock
+    elif single_line:
+        api = _get_api_line()
+        lock = _api_line_lock
+    else:
+        api = _get_api()
+        lock = _api_lock
     pil_img = _as_pil_image(np.ascontiguousarray(image))
 
-    with _api_lock:
+    with lock:
         api.SetImage(pil_img)
         api.Recognize()
         iterator = api.GetIterator()

@@ -1,0 +1,60 @@
+{
+  "mcpServers": {
+    "fast-filesystem": {
+      "command": "bunx",
+      "args": [
+        "--bun",
+        "fast-filesystem-mcp@latest"
+      ],
+      "type": "stdio"
+    },
+    "octocode": {
+      "command": "bunx",
+      "args": [
+        "--bun",
+        "octocode-mcp@latest"
+      ],
+      "type": "stdio"
+    },
+    "ast-grep": {
+      "command": "bunx",
+      "args": [
+        "@notprolands/ast-grep-mcp@latest"
+      ],
+      "type": "stdio"
+    },
+    "ref-tools": {
+      "url": "https://api.ref.tools/mcp",
+      "type": "http"
+    },
+    "serena": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+        "--context=claude-code",
+        "--project-from-cwd"
+      ],
+      "type": "stdio"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "type": "stdio",
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server-supabase@latest", "--read-only"],
+      "type": "stdio",
+      "env": {
+        "SUPABASE_URL": "${METAFORGE_SUPABASE_URL}",
+        "SUPABASE_SERVICE_ROLE_KEY": "${METAFORGE_SUPABASE_ANON_KEY}"
+      }
+    }
+  }
+}

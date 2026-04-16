@@ -217,8 +217,10 @@ def test_record_backend_info_no_version_attr():
 
 @patch("autoscrapper.ocr.tesseract._get_api")
 @patch("autoscrapper.ocr.tesseract._get_api_line")
+@patch("autoscrapper.ocr.tesseract._get_api_single_word")
+@patch("autoscrapper.ocr.tesseract._get_api_sparse")
 @patch("autoscrapper.ocr.tesseract._record_backend_info")
-def test_initialize_ocr(mock_record, mock_get_line, mock_get):
+def test_initialize_ocr(mock_record, mock_get_sparse, mock_get_single_word, mock_get_line, mock_get):
     mock_api = MagicMock()
     mock_get.return_value = mock_api
 
@@ -231,7 +233,9 @@ def test_initialize_ocr(mock_record, mock_get_line, mock_get):
     assert info.tesseract_version == "1.0"
     mock_get.assert_called_once()
     mock_get_line.assert_called_once()
-    mock_record.assert_called_once_with(mock_api)
+    mock_get_single_word.assert_called_once()
+    mock_get_sparse.assert_called_once()
+    mock_record.assert_called_with(mock_api)
 
 
 @patch("autoscrapper.ocr.tesseract._create_api")

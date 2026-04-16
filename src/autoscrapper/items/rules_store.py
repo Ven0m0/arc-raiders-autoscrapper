@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 import orjson
 from ..core.item_actions import clean_ocr_text
@@ -76,7 +77,8 @@ def save_rules(payload: dict, path: Path) -> None:
     items = payload.get("items")
     if not isinstance(items, list):
         items = []
-    metadata = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
+    meta_raw = payload.get("metadata")
+    metadata: dict[str, Any] = meta_raw if isinstance(meta_raw, dict) else {}
     metadata["itemCount"] = len(items)
     payload = {"metadata": metadata, "items": items}
     path.parent.mkdir(parents=True, exist_ok=True)

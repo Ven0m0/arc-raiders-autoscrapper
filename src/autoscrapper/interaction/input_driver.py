@@ -9,7 +9,7 @@ if sys.platform == "win32":
     import ctypes
     from ctypes import wintypes
 
-    import pydirectinput as _pydirectinput
+    import pydirectinput as _pydirectinput  # type: ignore[import]
 
     _pydirectinput.FAILSAFE = False
     _pydirectinput.PAUSE = 0
@@ -147,8 +147,8 @@ elif sys.platform.startswith("linux"):
         if _LISTENER is not None:
             return
         with _LISTENER_LOCK:
-            if _LISTENER is not None:
-                return
+            if _LISTENER is not None:  # double-checked locking; re-check inside lock
+                return  # pyright: ignore[reportUnreachable]
 
             def on_press(key) -> None:
                 canonical = _canonical_linux_key(key)

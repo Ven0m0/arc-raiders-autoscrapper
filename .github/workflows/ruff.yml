@@ -35,3 +35,7 @@ jobs:
         run: uv sync --all-extras --frozen
       - name: Run Ruff
         run: uv run ruff check src/ tests/ scripts/
+      - name: Run basedpyright
+        run: uv run basedpyright src/
+      - name: Run pytest
+        run: uv run pytest

@@ -47,9 +47,10 @@ class APIDataSource:
             decision = decision_list[0] if decision_list else None
 
             # Create a synthetic cell for the result
-            # We don't have actual cell coordinates, so use index-based
-            page = idx // 20  # 20 items per page (4x5 grid)
-            cell_index = idx % 20
+            # Use the actual slot index from the API if available, else fallback to iteration index
+            slot_idx = item.slot if item.slot is not None else idx
+            page = slot_idx // 20  # 20 items per page (4x5 grid)
+            cell_index = slot_idx % 20
             row = cell_index // 4
             col = cell_index % 4
             cell = Cell(

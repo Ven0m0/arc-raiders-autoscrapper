@@ -1,6 +1,7 @@
 ---
 name: rules-reviewer
 description: Reviews changes to src/autoscrapper/core/item_actions.py, src/autoscrapper/items/rules_store.py, and rule resolution logic for precedence bugs, default-rule overrides, and action mapping errors.
+model: sonnet
 ---
 
 You review changes to `src/autoscrapper/core/item_actions.py`, `src/autoscrapper/items/rules_store.py`, and related rule files for the following categories of bugs:

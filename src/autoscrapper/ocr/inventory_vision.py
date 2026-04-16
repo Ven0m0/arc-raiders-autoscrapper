@@ -570,8 +570,18 @@ def find_infobox(bgr_image: np.ndarray) -> tuple[int, int, int, int] | None:
 # WIDTH is total crop width; left edge = cell_center_x + X_OFFSET - WIDTH.
 _CONTEXT_MENU_X_OFFSET_NORM = 250 / 1920  # was 35/1920 — right edge 250 px past centre
 _CONTEXT_MENU_Y_OFFSET_NORM = -20 / 1080  # negative = crop starts above cell centre
-_CONTEXT_MENU_WIDTH_NORM = 635 / 1920  # was 420/1920 — left edge unchanged, right extended
+_CONTEXT_MENU_WIDTH_NORM = 450 / 1920  # narrowed from 635/1920 — removes background grid on right
 _CONTEXT_MENU_HEIGHT_NORM = 450 / 1080
+# Gray threshold used by isolate_menu_panel() to detect the white/cream context
+# menu background.  The panel body is ~220-250; background is 20-40.  190 gives
+# a comfortable margin for anti-aliased edges and variable monitor brightness.
+_MENU_PANEL_GRAY_THRESH = 190
+# Fraction of the context-menu crop occupied by the title band.
+# At 1080p the crop is ~450px tall; the dark title band is ~40px raw
+# plus padding above.  0.18 * 450 = 81px gives safe margin without
+# capturing the first menu option text.  SINGLE_LINE PSM in
+# ocr_title_strip mitigates any partial line contamination.
+_CTX_MENU_TITLE_HEIGHT_REL = 0.18
 
 
 def find_context_menu_crop(
@@ -617,19 +627,78 @@ def find_context_menu_crop(
     if w < min_dim or h < min_dim:
         return None
     # Brightness guard: verify the left half of the crop contains UI
-    # content rather than empty stash background.  The context menu
-    # (whether the old light-cream style or the current dark UI) has
-    # text and panel elements that raise mean brightness above ~40,
-    # while the empty stash/inventory background sits below ~30.
-    # The previous threshold of 120 was calibrated for the old light
-    # cream menu and incorrectly rejected the game's current dark
-    # context menu (mean brightness ~60-100).
+    # content rather than empty stash background.  The context menu panel
+    # has a white/cream background (~gray 220-250) with dark text; combined
+    # with the dark sidebar icons on the left the left-half mean sits well
+    # above the empty stash background (~gray < 30).
     crop_left_half = bgr_image[y:y2, x : x + max(1, w // 2)]
     if crop_left_half.size > 0:
-        mean_brightness = float(np.mean(cv2.cvtColor(crop_left_half, cv2.COLOR_BGR2GRAY)))
+        gray_half = cv2.cvtColor(crop_left_half, cv2.COLOR_BGR2GRAY)
+        mean_brightness = float(np.mean(gray_half))
         if mean_brightness < 40.0:
             return None
+        # Reject crops that landed entirely on the inventory grid rather than
+        # the context-menu area.  The left half of a valid context-menu crop
+        # always includes the dark sidebar icon column (gray < 40); inventory
+        # grid cells are filled with mid-tone artwork and produce far fewer
+        # true-black pixels.  Note: the dark fraction comes from the SIDEBAR,
+        # not from the menu panel itself (which is bright white/cream).
+        dark_fraction = float(np.sum(gray_half < 40) / gray_half.size)
+        if dark_fraction < 0.20:
+            return None
     return x, y, w, h
+
+
+def isolate_menu_panel(crop_bgr: np.ndarray) -> tuple[int, int, int, int] | None:
+    """
+    Detect and return the bounding rect of the white/cream context-menu panel
+    within a wider crop that may also contain sidebar icons and inventory grid.
+
+    The context menu panel has a white/cream background (~gray 220-250) with
+    dark text.  The surrounding sidebar icons and inventory grid are dark
+    (~gray 20-60).  We find the largest bright rectangle that spans most of
+    the crop height.
+
+    Returns ``(x, y, w, h)`` relative to ``crop_bgr``, or ``None`` if no
+    qualifying panel is found (caller falls back to unmasked processing).
+    """
+    if crop_bgr.size == 0:
+        return None
+    gray = cv2.cvtColor(crop_bgr, cv2.COLOR_BGR2GRAY)
+    # Threshold: pixels brighter than _MENU_PANEL_GRAY_THRESH belong to the
+    # panel background (white/cream).  THRESH_BINARY keeps bright pixels as
+    # 255 so the panel body becomes a solid white blob in the mask.
+    _, bright_mask = cv2.threshold(gray, _MENU_PANEL_GRAY_THRESH, 255, cv2.THRESH_BINARY)
+    # Morphological close bridges the dark text rows inside the panel so the
+    # whole panel merges into one contour.  25x25 easily spans text-row gaps
+    # (~2 px) without reaching across the dark sidebar gap to neighbouring
+    # bright regions.
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (25, 25))
+    closed = cv2.morphologyEx(bright_mask, cv2.MORPH_CLOSE, kernel)
+    contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    if not contours:
+        return None
+    crop_h, crop_w = crop_bgr.shape[:2]
+    crop_area = max(1, crop_h * crop_w)
+    best: tuple[int, int, int, int] | None = None
+    best_area = 0
+    for cnt in contours:
+        bx, by, bw, bh = cv2.boundingRect(cnt)
+        area = bw * bh
+        # Must cover at least 15% of the crop area (rejects small bright spots).
+        if area < 0.15 * crop_area:
+            continue
+        # Must not be a thin horizontal/vertical strip (reject bright UI strips).
+        aspect = bw / max(1, bh)
+        if not (0.3 <= aspect <= 3.0):
+            continue
+        # Must span at least 50% of the crop height (panel is tall).
+        if bh < 0.50 * crop_h:
+            continue
+        if area > best_area:
+            best_area = area
+            best = (bx, by, bw, bh)
+    return best
 
 
 def title_roi(infobox_rect: tuple[int, int, int, int]) -> tuple[int, int, int, int]:
@@ -860,9 +929,26 @@ def _save_debug_image(name: str, image: np.ndarray) -> None:
     filename = f"{timestamp}_{time.time_ns() % 1_000_000_000:09d}_{name}.webp"
     path = _OCR_DEBUG_DIR / filename
     try:
-        cv2.imwrite(str(path), image, [cv2.IMWRITE_WEBP_QUALITY, 80])
+        cv2.imwrite(str(path), image, [cv2.IMWRITE_WEBP_QUALITY, 101])
     except Exception as exc:  # pragma: no cover - filesystem dependent
         print(f"[vision_ocr] failed to save debug image {path}: {exc}", flush=True)
+
+
+def _save_debug_json(name: str, data: object) -> None:
+    """
+    Write a debug JSON file if a debug directory has been configured.
+    """
+    if _OCR_DEBUG_DIR is None:
+        return
+    import json  # local import — only needed when debug is active
+
+    timestamp = time.strftime("%Y%m%d_%H%M%S")
+    filename = f"{timestamp}_{time.time_ns() % 1_000_000_000:09d}_{name}.json"
+    path = _OCR_DEBUG_DIR / filename
+    try:
+        path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    except Exception as exc:  # pragma: no cover - filesystem dependent
+        print(f"[vision_ocr] failed to save debug json {path}: {exc}", flush=True)
 
 
 def _extract_title_from_data(
@@ -1078,9 +1164,17 @@ def find_action_bbox_by_ocr(
     return bbox, processed
 
 
-def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
+def ocr_title_strip(
+    title_strip_bgr: np.ndarray,
+    *,
+    use_fallback_psm: bool = False,
+) -> InfoboxOcrResult:
     """
     OCR a pre-cropped infobox title strip to derive the item title.
+
+    Pass ``use_fallback_psm=True`` on retry attempts to switch from
+    PSM.SINGLE_LINE to PSM.SINGLE_WORD, which handles titles that
+    Tesseract struggles to segment under SINGLE_LINE.
     """
     if title_strip_bgr.size == 0:
         return InfoboxOcrResult(
@@ -1095,7 +1189,9 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
     global _last_ocr_result, _last_roi_hash
     # Hash the raw BGR input so that two different raw strips that happen to produce
     # the same binarized image are not incorrectly served each other's result.
-    roi_hash = _hash_roi(title_strip_bgr)
+    # Encode PSM mode into the hash so a fallback-PSM retry never serves a cached
+    # result from a normal-PSM call (or vice versa).
+    roi_hash = _hash_roi(title_strip_bgr) + (b"\x01" if use_fallback_psm else b"\x00")
     preprocess_start = time.perf_counter()
     processed = preprocess_for_ocr(title_strip_bgr)
     _save_debug_image("infobox_processed", processed)
@@ -1114,7 +1210,11 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
     ocr_time = 0.0
     try:
         ocr_start = time.perf_counter()
-        raw_text = image_to_string(processed, single_line=True)
+        raw_text = image_to_string(
+            processed,
+            single_line=not use_fallback_psm,
+            use_single_word=use_fallback_psm,
+        )
         ocr_time = time.perf_counter() - ocr_start
     except Exception as exc:  # pragma: no cover - OCR backend dependent
         _last_roi_hash = None  # invalidate cache so next call does not re-serve stale result
@@ -1135,23 +1235,31 @@ def ocr_title_strip(title_strip_bgr: np.ndarray) -> InfoboxOcrResult:
 
     match_result = match_item_name_result(raw_text)
     raw_item_text = match_result.cleaned_text
-    item_name = match_result.chosen_name
-    if not item_name:
+    item_name = match_result.matched_name or ""
+    if not match_result.matched_name:
         # Fallback: retry without 2x upscale. Upscale-induced interpolation
         # artefacts can confuse Tesseract on certain low-contrast strips.
         processed_no_up = preprocess_for_ocr(title_strip_bgr, upscale=False)
         try:
-            raw_text_no_up = image_to_string(processed_no_up, single_line=True)
+            raw_text_no_up = image_to_string(
+                processed_no_up,
+                single_line=not use_fallback_psm,
+                use_single_word=use_fallback_psm,
+            )
         except Exception:  # pragma: no cover
             raw_text_no_up = ""
         fallback = match_item_name_result(raw_text_no_up)
-        if fallback.chosen_name:
+        if fallback.matched_name:
             raw_item_text = fallback.cleaned_text
-            item_name = fallback.chosen_name
+            item_name = fallback.matched_name
             processed = processed_no_up
     if item_name:
         _last_roi_hash = roi_hash
         _last_ocr_result = (item_name, raw_item_text)
+    else:
+        # Emit debug artifacts so failures can be promoted to fixtures.
+        _save_debug_image("title_strip_fail_raw", title_strip_bgr)
+        _save_debug_image("title_strip_fail_processed", processed)
     return InfoboxOcrResult(
         item_name=item_name,
         raw_item_text=raw_item_text,
@@ -1172,13 +1280,50 @@ def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
     return ocr_title_strip(title_strip_bgr)
 
 
+def ocr_infobox_with_context(
+    window_bgr: np.ndarray,
+    infobox_rect: tuple[int, int, int, int],
+    *,
+    use_fallback_psm: bool = False,
+) -> InfoboxOcrResult:
+    """
+    OCR the item title using window context to extend the crop upward.
+
+    ``find_infobox`` detects only the cream-coloured details region, missing
+    the darker title band above it.  This variant extends the slice upward by
+    up to 35 % of the detected height so the title band is included before the
+    strip is passed to Tesseract.
+
+    Unlike ``ocr_infobox``, this function requires the full ``window_bgr`` and
+    the original ``infobox_rect`` from ``find_infobox`` so the extension can be
+    anchored correctly.
+    """
+    x, y, w, h = infobox_rect
+    # Extend upward to capture the title band that sits above the detected area.
+    extension = int(round(0.35 * h))
+    y_ext = max(0, y - extension)
+    actual_ext = y - y_ext  # may be less than extension when near the window top
+    crop_bgr = window_bgr[y_ext : y + h, x : x + w]
+    _save_debug_image("infobox_raw", crop_bgr)
+    # Title strip = extended portion + a small buffer into the original top so
+    # the full item-name header is covered even when the extension undershoots.
+    title_h = max(1, actual_ext + int(round(0.10 * h)))
+    title_strip_bgr = crop_bgr[:title_h, :]
+    _save_debug_image("infobox_title_raw", title_strip_bgr)
+    return ocr_title_strip(title_strip_bgr, use_fallback_psm=use_fallback_psm)
+
+
 def build_skip_unlisted_corpus_image(infobox_bgr: np.ndarray, *, from_context_menu: bool) -> np.ndarray:
     if from_context_menu:
         return np.ascontiguousarray(infobox_bgr)
     return np.ascontiguousarray(_crop_title_strip(infobox_bgr))
 
 
-def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
+def ocr_context_menu(
+    context_crop_bgr: np.ndarray,
+    *,
+    use_fallback_psm: bool = False,
+) -> InfoboxOcrResult:
     """
     OCR a dark context-menu crop to extract the item name.
 
@@ -1186,6 +1331,10 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
     searches every text line top-to-bottom for one that fuzzy-matches a known
     item name via ``match_item_name``.  This handles menus that mix action
     labels ("Move to Backpack", "Sell", "Recycle") with the item title.
+
+    Pass ``use_fallback_psm=True`` on retry attempts to switch from
+    PSM.SINGLE_BLOCK to PSM.SPARSE_TEXT, which handles crops where the menu
+    layout is non-standard and block segmentation produces no usable text.
     """
     if context_crop_bgr.size == 0:
         return InfoboxOcrResult(
@@ -1197,9 +1346,41 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
             source="context_menu",
             ocr_failed=True,
         )
+    global _last_roi_hash, _last_ocr_result
     preprocess_start = time.perf_counter()
     _save_debug_image("ctx_menu_raw", context_crop_bgr)
-    processed = preprocess_for_ocr(context_crop_bgr, restrict_otsu_to_left=True)
+    # --- Title-band OCR pass ---
+    # The title band (top ~18%) has DARK background with LIGHT text —
+    # opposite polarity to the cream menu body.  isolate_menu_panel
+    # excludes it (gray < 190), so we OCR it separately first.
+    # ocr_title_strip auto-inverts dark backgrounds via preprocess_for_ocr.
+    ctx_h = context_crop_bgr.shape[0]
+    title_band_h = max(1, int(round(ctx_h * _CTX_MENU_TITLE_HEIGHT_REL)))
+    title_band_bgr = context_crop_bgr[:title_band_h, :]
+    if title_band_bgr.size > 0:
+        # Preserve the global OCR cache so the infobox path is unaffected.
+        _saved_hash, _saved_result = _last_roi_hash, _last_ocr_result
+        title_result = ocr_title_strip(title_band_bgr, use_fallback_psm=use_fallback_psm)
+        # Restore cache — context-menu title strips should not evict
+        # infobox cache entries.
+        _last_roi_hash, _last_ocr_result = _saved_hash, _saved_result
+        if title_result.item_name:
+            _save_debug_image("ctx_menu_title_band_processed", title_result.processed)
+            preprocess_time = time.perf_counter() - preprocess_start
+            return InfoboxOcrResult(
+                item_name=title_result.item_name,
+                raw_item_text=title_result.raw_item_text,
+                processed=title_result.processed,
+                preprocess_time=preprocess_time,
+                ocr_time=title_result.ocr_time,
+                source="context_menu",  # NOT "infobox" — correct provenance
+            )
+    panel_rect = isolate_menu_panel(context_crop_bgr)
+    if panel_rect is not None:
+        px, py, pw, ph = panel_rect
+        context_crop_bgr = context_crop_bgr[py : py + ph, px : px + pw]
+        _save_debug_image("ctx_menu_panel_isolated", context_crop_bgr)
+    processed = preprocess_for_ocr(context_crop_bgr, restrict_otsu_to_left=(panel_rect is None))
     _save_debug_image("ctx_menu_processed", processed)
 
     preprocess_time = time.perf_counter() - preprocess_start
@@ -1207,7 +1388,7 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
     ocr_time = 0.0
     try:
         ocr_start = time.perf_counter()
-        data = image_to_data(processed)
+        data = image_to_data(processed, use_sparse=use_fallback_psm)
         ocr_time = time.perf_counter() - ocr_start
     except Exception as exc:  # pragma: no cover - OCR backend failure path
         print(
@@ -1302,6 +1483,17 @@ def ocr_context_menu(context_crop_bgr: np.ndarray) -> InfoboxOcrResult:
             raw_item_text = " ".join(p for p in raw_parts if p).strip()
             break
 
+    if not item_name:
+        # Dump every OCR'd line so misread crops can be triaged and promoted
+        # to regression fixtures via /add-fixture.
+        line_data = [
+            {
+                "text": " ".join((data["text"][i] or "").strip() for i in sorted(groups[k]) if data["text"][i]),
+                "top": min(int(data["top"][i]) for i in groups[k]),
+            }
+            for k in sorted(groups.keys(), key=lambda k: _line_top(groups[k]))
+        ]
+        _save_debug_json("ctx_menu_lines_fail", line_data)
     return InfoboxOcrResult(
         item_name=item_name,
         raw_item_text=raw_item_text,

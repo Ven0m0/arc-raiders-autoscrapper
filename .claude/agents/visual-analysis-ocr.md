@@ -1,6 +1,7 @@
 ---
 name: visual-analysis-ocr
 description: Visual analysis and OCR specialist. Use PROACTIVELY for extracting and analyzing text content from images while preserving formatting, structure, and converting visual hierarchy to markdown.
+model: sonnet
 tools: Read, Write
 ---
 

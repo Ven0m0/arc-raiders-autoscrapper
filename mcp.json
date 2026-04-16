@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "fast-filesystem": {
+      "command": "bunx",
+      "args": [
+        "--bun",
+        "fast-filesystem-mcp@latest"
+      ],
+      "type": "stdio"
+    },
+    "octocode": {
+      "command": "bunx",
+      "args": [
+        "--bun",
+        "octocode-mcp@latest"
+      ],
+      "type": "stdio"
+    },
+    "ast-grep": {
+      "command": "bunx",
+      "args": [
+        "@notprolands/ast-grep-mcp@latest"
+      ],
+      "type": "stdio"
+    },
+    "ref-tools": {
+      "url": "https://api.ref.tools/mcp",
+      "type": "sse"
+    }
+  }
+}

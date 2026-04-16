@@ -118,6 +118,7 @@ activemq-data/
 .env
 .envrc
 .venv
+.venv-linux
 env/
 venv/
 ENV/
@@ -166,6 +167,7 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Local contributor docs (not tracked)
+CLAUDE.local.md
 .claude/*
 !.claude/settings.json
 !.claude/agents/

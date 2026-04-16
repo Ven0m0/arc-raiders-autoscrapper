@@ -1,0 +1,38 @@
+name: Biome
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+concurrency:
+  group: biome-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  biome:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install Biome
+        run: npm install --global @biomejs/biome
+      - name: Run Biome check
+        run: biome check --write .
+      - name: Check for unexpected changes
+        run: |
+          if ! git diff --quiet; then
+            echo "❌ Biome found formatting/linting issues"
+            git diff
+            exit 1
+          fi
+          echo "✅ Biome check passed"
