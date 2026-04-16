@@ -23,11 +23,7 @@ jobs:
   copilot-setup-steps:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-
+      - uses: actions/checkout@v6
       - name: Install Linux system dependencies
         run: |
           sudo apt-get update -qq
@@ -38,7 +34,6 @@ jobs:
             libtesseract-dev \
             pkg-config \
             tesseract-ocr
-
       - name: Install uv and Python 3.13
         uses: astral-sh/setup-uv@v7
         with:
@@ -47,6 +42,5 @@ jobs:
           cache-dependency-glob: |
             uv.lock
             pyproject.toml
-
       - name: Install project dependencies
-        run: uv sync --frozen
+        run: uv sync --all-groups --all-extras --all-packages --frozen
