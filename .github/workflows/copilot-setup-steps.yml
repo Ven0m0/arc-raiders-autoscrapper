@@ -30,6 +30,12 @@ jobs:
           cache-dependency-glob: |
             uv.lock
             pyproject.toml
+      - name: Install repository toolchain
+        uses: jdx/mise-action@v4.0.1
+        with:
+          install: true
+          cache: true
+          experimental: true
       - name: Install project dependencies
         run: uv sync --all-extras --all-packages --all-groups --frozen
       - name: Install llm tooling
