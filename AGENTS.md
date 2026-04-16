@@ -46,17 +46,21 @@ Prefer `python3 -m uv ...` in automation because `uv` may not be on `PATH`.
 | Tool | Purpose | Config |
 | --- | --- | --- |
 | `basedpyright` | Type checking (replaces mypy) | `[tool.basedpyright]` in `pyproject.toml` |
+| `ty` | Secondary type checker (Astral) — catches narrowing gaps basedpyright misses | runs via PostToolUse hook |
 | `ruff` | Lint (`E`, `F` rules) + format | `[tool.ruff]` in `pyproject.toml` |
 
 - **basedpyright** runs on every `.py` edit via PostToolUse hook in `.claude/settings.json`. It logs errors to the terminal — no auto-fix.
+- **ty** also runs on every `.py` edit. Known false positives: `dict[object, object]` key narrowing after `isinstance(value, dict)` — fix with `isinstance(key, str)` guard; `dict[Never, Never]` after type-narrowed isinstance — suppress with `# type: ignore[union-attr]`; `sys.stdout.reconfigure` — suppress same way.
 - **ruff** auto-fixes lint issues and formats on every edit via the same hook.
-- mypy was removed; basedpyright covers equivalent type safety with faster feedback.
+- mypy was removed; basedpyright + ty together cover equivalent type safety.
+- If `python3 -m uv run <cmd>` fails with "No module named uv", use `uv run <cmd>` directly.
 
 ## Validation
 
 | Change type | Minimum validation |
 | --- | --- |
 | Python source | `python3 -m uv run ruff check src/ tests/` + `python3 -m uv run pytest` |
+| Dead code pass | `/dead-code-sweep` — run deadcode + vulture, grep before removing (deadcode misses cross-module script usage) |
 | Tech debt / quality pass | `qlty check -a` + `qlty metrics -a` + `qlty smells -a` |
 | OCR / scanner / interaction / input | Standard validation + `python3 -m uv run autoscrapper scan --dry-run` against a live Arc Raiders window |
 | Generated data / default rules | Use the updater script; usually run `--dry-run` first |
@@ -152,6 +156,7 @@ Invoke skills with `/skill-name`. Use agents via `Agent(subagent_type="agent-nam
 | `/triage-failures` | Analyze OCR failure corpus for systematic misread patterns |
 | `/clean-debug` | Prune stale `ocr_debug/` images |
 | `/benchmark` | Benchmark tessdata model variants (fast vs best) |
+| `/dead-code-sweep` | Find and remove genuine dead code (deadcode + vulture, with false-positive guidance) |
 
 Context docs (not user-invocable, referenced by other skills): `ocr-debug`, `scan-failed`, `ocr-unavailable`.
 
