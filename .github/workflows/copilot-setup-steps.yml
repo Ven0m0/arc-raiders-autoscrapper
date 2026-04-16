@@ -1,4 +1,4 @@
-name: "Copilot Setup Steps"
+name: Copilot Setup Steps
 on:
   workflow_dispatch:
   push:
@@ -7,21 +7,38 @@ on:
   pull_request:
     paths:
       - .github/workflows/copilot-setup-steps.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: copilot-setup-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
-  DEBIAN_FRONTEND: noninteractive 
+  DEBIAN_FRONTEND: noninteractive
   DEBCONF_NOWARNINGS: yes
+
 jobs:
   copilot-setup-steps:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
-      - uses: actions/checkout@v6
-      - name: Install Tesseract OCR system dependencies
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Linux system dependencies
         run: |
-          sudo apt-get update -qq >/dev/null 2>&1
-          sudo apt-get install -yqq --no-install-recommends tesseract-ocr libtesseract-dev libleptonica-dev \
-            build-essential pkg-config python3-evdev ripgrep fd-find shellcheck shfmt
+          sudo apt-get update -qq
+          sudo apt-get install -yqq --no-install-recommends \
+            build-essential \
+            libevdev-dev \
+            libleptonica-dev \
+            libtesseract-dev \
+            pkg-config \
+            tesseract-ocr
+
       - name: Install uv and Python 3.13
         uses: astral-sh/setup-uv@v7
         with:
@@ -30,18 +47,6 @@ jobs:
           cache-dependency-glob: |
             uv.lock
             pyproject.toml
-      - name: Install repository toolchain
-        uses: jdx/mise-action@v4.0.1
-        with:
-          install: true
-          cache: true
-          experimental: true
+
       - name: Install project dependencies
-        run: uv sync --all-extras --all-packages --all-groups --frozen
-      - name: Install llm tooling
-        run: |
-          uv tool install basedpyright
-          uv tool install ruff
-          uv tool install ty
-          npm i -g vscode-langservers-extracted bash-language-server yaml-language-server \
-            @ast-grep/cli @biomejs/biome
+        run: uv sync --frozen
