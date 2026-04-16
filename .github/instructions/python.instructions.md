@@ -2,76 +2,45 @@
 applyTo: "**/{*.py,pyproject.toml}"
 ---
 
-# Python Standards
+## Python toolchain
 
-## Toolchain
+- Target Python 3.13 only; the repo is pinned via `.python-version` and
+  `pyproject.toml`.
+- Install dependencies with `uv sync`; use `uv sync --extra linux-input` only
+  when Linux input automation is required.
+- Lint with `uv run ruff check src/ tests/ scripts/`.
+- Format with `uv run ruff format src/ tests/ scripts/`.
+- Type-check with `uv run basedpyright src/`.
+- Test with `uv run pytest`.
 
-- **Lint/Fmt**: `ruff check --fix && ruff format` (PEP 8, 4-space, 80 chars)
-- **Types**: `mypy --strict` (no `Any`; full annotations)
-- **Test**: `pytest -v --cov` (95%+ coverage, edge cases)
-- **Deps**: `uv sync && uv audit` (security checks)
+## Style and typing
 
-## Core Rules
+- Match the repository's Ruff formatting: 120-character lines and double
+  quotes.
+- Add explicit type hints to public functions and dataclass fields.
+- Prefer `T | None` over `Optional[T]`.
+- Use `pathlib`, context managers, and specific exceptions.
+- Keep business logic simple and avoid hidden global state.
 
-- **Style**: PEP 8, PEP 257 (docstrings), PEP 484 (type hints)
-- **Types**: Modern generics (`list[str]`); `Protocol` for interfaces; no `Any`
-- **Security**: Input validation, no hardcoded secrets, OWASP awareness
-- **Perf**: O(n) algorithms; `lru_cache` for expensive ops; generators for large data
-- **Arch**: SOLID principles, dependency injection, clean architecture
+## Repo invariants
 
-## Patterns
+- Preserve custom-over-default rule precedence.
+- Do not hand-edit `src/autoscrapper/progress/data/*` or
+  `src/autoscrapper/items/items_rules.default.json`; regenerate them with
+  `uv run python scripts/update_snapshot_and_defaults.py`.
+- Bump `CONFIG_VERSION` and add a migration when persisted config fields
+  change.
+- `initialize_ocr()` must run on the main thread before scan threads start.
+- Capture-space image coordinates must stay separate from screen-space input
+  coordinates.
+- `inventory_vision.py` upscales OCR images 2x; convert OCR boxes back to
+  original-space coordinates before reusing them.
+- Keep OCR item-name matching and rule lookup on the same fuzzy-match
+  threshold.
 
-**Type Safety:**
+## Validation
 
-```python
-from typing import Protocol, TypeVar
-
-Entity = TypeVar("Entity")
-
-class Repository(Protocol):
-  def get(self, id: str) -> Entity | None: ...
-  def save(self, entity: Entity) -> None: ...
-```
-
-**Performance:**
-
-```python
-from functools import lru_cache
-
-@lru_cache(maxsize=128)
-def expensive(n: int) -> int:
-  return sum(range(n))
-
-def stream_file(path: str) -> Iterator[str]:
-  with open(path) as f:
-    for line in f:
-      yield line.strip()
-```
-
-## 🔐 Security Rules
-
-- Never use `eval()` or `exec()` with user input
-- Use parameterized queries for SQL
-- Validate all external inputs
-- Use `secrets` module for tokens, not `random`
-
-## Forbidden
-
-- Bare `except:` → catch specific exceptions
-- `Any` type → use concrete types or `Protocol`
-- Hardcoded secrets → use env vars
-- O(n²) loops → use sets/dicts for lookups
-- Global mutable state → use DI/parameters
-
-## 📦 Import Order
-
-1. Standard library (`os`, `sys`, `typing`)
-2. Third-party (`fastapi`, `pydantic`)
-3. Local application imports
-
-## ⚡ Best Practices
-
-- Use context managers (`with` statements)
-- Prefer list comprehensions over loops
-- Use `pathlib` for file paths
-- Use `dataclasses` or Pydantic for data structures
+- Python source changes: run Ruff, BasedPyright, and pytest.
+- OCR, scanner, interaction, or input changes: also run
+  `uv run autoscrapper scan --dry-run` against a live Arc Raiders window.
+- Do not claim end-to-end validation unless a live game window was used.
