@@ -31,7 +31,7 @@ jobs:
             libleptonica-dev \
             libtesseract-dev \
             pkg-config \
-            tesseract-ocr
+            tesseract-ocr libwebp7
       - name: Install uv and Python 3.13
         uses: astral-sh/setup-uv@v7
         with:
