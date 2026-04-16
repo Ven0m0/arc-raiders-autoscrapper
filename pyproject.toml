@@ -1,5 +1,5 @@
 [build-system]
-requires = ["uv_build>=0.11.6", "setuptools>=82.0.1", "wheel"]
+requires = ["uv_build>=0.11.7", "setuptools>=82.0.1", "wheel"]
 build-backend = "uv_build"
 
 [project]
@@ -43,7 +43,7 @@ dev = [
     "pytest>=9.0.3",
     "ruff>=0.15.10",
     "tombi>=0.9.17",
-    "ty>=0.0.29",
+    "ty>=0.0.31",
     "vulture>=2.16",
 ]
 
@@ -52,7 +52,7 @@ dev = [
 # so pip and uv users install the same local tooling.
 dev = [
     "basedpyright>=1.39.0",
-    "ty>=0.0.29",
+    "ty>=0.0.31",
     "deadcode>=2.4.1",
     "prek>=0.3.9",
     "pytest>=9.0.3",
