@@ -29,8 +29,7 @@ applyTo: ".github/workflows/*.yml"
 
 ## Validation and security
 
-- Validate workflow edits with `uv run prek run --files
-  .github/workflows/<name>.yml`.
+- Validate workflow edits with `uv run prek run --files .github/workflows/<name>.yml`.
 - Fix Zizmor findings instead of suppressing them when a safe workflow change is
   available.
 - Do not install unrelated tooling in setup workflows; keep Copilot bootstrap

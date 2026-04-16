@@ -40,4 +40,5 @@ expand if failures suggest a wider regression.
   your change.
 - If unrelated failures already exist, call them out explicitly in your final
   summary.
-- Do not claim end-to-end OCR validation unless you used a live game window.
+- Do not claim end-to-end OCR validation unless you used a live game
+  window.
