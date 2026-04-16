@@ -20,7 +20,7 @@ jobs:
           export DEBIAN_FRONTEND=noninteractive DEBCONF_NOWARNINGS=yes
           sudo apt-get update -qq >/dev/null 2>&1
           sudo apt-get install -yqq --no-install-recommends tesseract-ocr libtesseract-dev libleptonica-dev \
-            build-essential pkg-config python3-evdev ripgrep fd-find
+            build-essential pkg-config python3-evdev ripgrep fd-find shellcheck shfmt
       - name: Install uv and Python 3.13
         uses: astral-sh/setup-uv@v7
         with:
@@ -30,4 +30,11 @@ jobs:
             uv.lock
             pyproject.toml
       - name: Install project dependencies
-        run: uv sync --all-packages --locked
+        run: uv sync --all-extras --all-packages --all-groups --frozen
+      - name: Install llm tooling
+        run: |
+          uv tool install basedpyright
+          uv tool install ruff
+          uv tool install ty
+          npm i -g vscode-langservers-extracted bash-language-server yaml-language-server \
+            @ast-grep/cli @biomejs/biome
