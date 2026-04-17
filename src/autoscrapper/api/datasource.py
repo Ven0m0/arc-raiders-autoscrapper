@@ -160,16 +160,16 @@ def sync_hideout_to_progress(api_settings: ApiSettings | None = None) -> Progres
         base_url=api_settings.base_url,
     )
 
+    progress = load_progress_settings()
+
     if not client.is_configured():
         _log.warning("api: Cannot sync hideout - API not configured")
-        return load_progress_settings()
+        return progress
 
     modules = client.get_user_hideout()
     if not modules:
         _log.warning("api: No hideout data returned from API")
-        return load_progress_settings()
-
-    progress = load_progress_settings()
+        return progress
     hideout_levels = dict(progress.hideout_levels)
 
     for module in modules:
@@ -207,16 +207,16 @@ def sync_projects_to_progress(api_settings: ApiSettings | None = None) -> Progre
         base_url=api_settings.base_url,
     )
 
+    progress = load_progress_settings()
+
     if not client.is_configured():
         _log.warning("api: Cannot sync projects - API not configured")
-        return load_progress_settings()
+        return progress
 
     projects = client.get_user_projects()
     if not projects:
         _log.warning("api: No project data returned from API")
-        return load_progress_settings()
-
-    progress = load_progress_settings()
+        return progress
 
     updated = ProgressSettings(
         all_quests_completed=progress.all_quests_completed,
