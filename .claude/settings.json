@@ -57,14 +57,7 @@
     ]
   },
   "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [
-    "fast-filesystem",
-    "octocode",
-    "ast-grep",
-    "ref-tools",
-    "github",
-    "supabase"
-  ],
+  "enabledMcpjsonServers": ["fast-filesystem", "octocode", "ast-grep", "ref-tools", "github", "supabase"],
   "hooks": {
     "PostToolUse": [
       {

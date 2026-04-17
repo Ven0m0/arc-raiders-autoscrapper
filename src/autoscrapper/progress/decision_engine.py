@@ -56,7 +56,7 @@ class DecisionEngine:
         quests: list[dict],
         projects: list[dict],
     ) -> None:
-        self.items = {item.get("id"): item for item in items}
+        self.items = {item.get("id", ""): item for item in items}
         self.hideout_modules = hideout_modules
         self.quests = quests
         self.projects = projects
@@ -132,7 +132,7 @@ class DecisionEngine:
         item_type = str(item.get("type", "")).lower()
         rarity = str(item.get("rarity", "")).lower()
 
-        override_reasons = KEEP_ITEM_OVERRIDES.get(_normalize_item_id(item.get("id")))
+        override_reasons = KEEP_ITEM_OVERRIDES.get(_normalize_item_id(item.get("id", "")))
         if override_reasons is not None:
             return self.finalize_decision(
                 item,
@@ -232,8 +232,8 @@ class DecisionEngine:
                 item,
                 DecisionReason(
                     decision="keep",
-                    reasons=[f"Required for quest: {', '.join(quest_use['quest_names'])}"],
-                    dependencies=quest_use["quest_names"],
+                    reasons=[f"Required for quest: {', '.join(quest_use['quest_names']) if isinstance(quest_use['quest_names'], list) else ''}"],
+                    dependencies=quest_use["quest_names"] if isinstance(quest_use["quest_names"], list) else None,
                 ),
             )
 
@@ -243,8 +243,8 @@ class DecisionEngine:
                 item,
                 DecisionReason(
                     decision="keep",
-                    reasons=[f"Needed for project: {', '.join(project_use['project_names'])}"],
-                    dependencies=project_use["project_names"],
+                    reasons=[f"Needed for project: {', '.join(project_use['project_names']) if isinstance(project_use['project_names'], list) else ''}"],
+                    dependencies=project_use["project_names"] if isinstance(project_use["project_names"], list) else None,
                 ),
             )
 
@@ -254,8 +254,8 @@ class DecisionEngine:
                 item,
                 DecisionReason(
                     decision="keep",
-                    reasons=["Required for hideout upgrade: " + ", ".join(upgrade_use["module_names"])],
-                    dependencies=upgrade_use["module_names"],
+                    reasons=["Required for hideout upgrade: " + ", ".join(upgrade_use["module_names"]) if isinstance(upgrade_use["module_names"], list) else ""],
+                    dependencies=upgrade_use["module_names"] if isinstance(upgrade_use["module_names"], list) else None,
                 ),
             )
 
@@ -327,7 +327,7 @@ class DecisionEngine:
     def is_used_in_active_quests(self, item: dict, user_progress: dict) -> dict[str, list[str] | bool]:
         quest_names: list[str] = []
         completed = set(user_progress.get("completedQuests", []))
-        item_id = item.get("id")
+        item_id = item.get("id", "")
 
         if item_id:
             for quest in self._quest_requirements.get(item_id, []):
@@ -339,7 +339,7 @@ class DecisionEngine:
     def is_used_in_active_projects(self, item: dict, user_progress: dict) -> dict[str, list[str] | bool]:
         project_names: list[str] = []
         completed = set(user_progress.get("completedProjects", []))
-        item_id = item.get("id")
+        item_id = item.get("id", "")
 
         if item_id:
             for project in self._project_requirements.get(item_id, []):
@@ -351,7 +351,7 @@ class DecisionEngine:
     def is_needed_for_upgrades(self, item: dict, user_progress: dict) -> dict[str, list[str] | bool]:
         module_names: list[str] = []
         hideout_levels = user_progress.get("hideoutLevels", {})
-        item_id = item.get("id")
+        item_id = item.get("id", "")
 
         if item_id:
             for module, level in self._upgrade_requirements.get(item_id, []):
@@ -363,7 +363,7 @@ class DecisionEngine:
         return {"is_needed": bool(module_names), "module_names": module_names}
 
     def evaluate_crafting_value(self, item: dict) -> CraftingValue:
-        recipe_count = len(self.reverse_recipe_index.get(item.get("id"), []))
+        recipe_count = len(self.reverse_recipe_index.get(item.get("id", ""), []))
         rarity = str(item.get("rarity", "")).lower()
         is_rare = rarity in {"rare", "epic", "legendary"}
         return CraftingValue(

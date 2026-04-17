@@ -23,10 +23,7 @@
     "value": 300,
     "weightKg": 0.2,
     "stackSize": 5,
-    "craftBench": [
-      "in_raid",
-      "med_station"
-    ],
+    "craftBench": ["in_raid", "med_station"],
     "updatedAt": "02/24/2026",
     "recipe": {
       "chemicals": 3,
@@ -661,11 +658,7 @@
     "value": 250,
     "weightKg": 0.1,
     "stackSize": 5,
-    "craftBench": [
-      "in_raid",
-      "med_station",
-      "workbench"
-    ],
+    "craftBench": ["in_raid", "med_station", "workbench"],
     "updatedAt": "02/24/2026",
     "recipe": {
       "fabric": 5
@@ -891,10 +884,7 @@
     "value": 1000,
     "weightKg": 0.3,
     "stackSize": 3,
-    "craftBench": [
-      "in_raid",
-      "workbench"
-    ],
+    "craftBench": ["in_raid", "workbench"],
     "updatedAt": "03/17/2026",
     "recipe": {
       "blaze-grenade": 1,
@@ -2879,10 +2869,7 @@
     "value": 475,
     "weightKg": 8,
     "stackSize": 1,
-    "craftBench": [
-      "weapon_bench",
-      "workbench"
-    ],
+    "craftBench": ["weapon_bench", "workbench"],
     "updatedAt": "03/17/2026",
     "recipe": {
       "metal-parts": 5,
@@ -3300,10 +3287,7 @@
     "value": 300,
     "weightKg": 0.25,
     "stackSize": 3,
-    "craftBench": [
-      "in_raid",
-      "workbench"
-    ],
+    "craftBench": ["in_raid", "workbench"],
     "updatedAt": "03/17/2026",
     "recipe": {
       "gas-grenade": 1,
@@ -3425,10 +3409,7 @@
     "value": 450,
     "weightKg": 3,
     "stackSize": 1,
-    "craftBench": [
-      "weapon_bench",
-      "workbench"
-    ],
+    "craftBench": ["weapon_bench", "workbench"],
     "updatedAt": "03/17/2026",
     "recipe": {
       "metal-parts": 2,
@@ -3595,10 +3576,7 @@
     "value": 900,
     "weightKg": 0.15,
     "stackSize": 5,
-    "craftBench": [
-      "in_raid",
-      "med_station"
-    ],
+    "craftBench": ["in_raid", "med_station"],
     "updatedAt": "03/22/2026",
     "recipe": {
       "durable-cloth": 1,
@@ -4000,10 +3978,7 @@
     "value": 840,
     "weightKg": 7,
     "stackSize": 1,
-    "craftBench": [
-      "weapon_bench",
-      "workbench"
-    ],
+    "craftBench": ["weapon_bench", "workbench"],
     "updatedAt": "03/17/2026",
     "recipe": {
       "metal-parts": 6,
@@ -4247,11 +4222,7 @@
     "value": 270,
     "weightKg": 0.1,
     "stackSize": 5,
-    "craftBench": [
-      "explosives_bench",
-      "in_raid",
-      "workbench"
-    ],
+    "craftBench": ["explosives_bench", "in_raid", "workbench"],
     "updatedAt": "02/24/2026",
     "recipe": {
       "chemicals": 3,
@@ -4270,10 +4241,7 @@
     "value": 640,
     "weightKg": 5,
     "stackSize": 1,
-    "craftBench": [
-      "equipment_bench",
-      "workbench"
-    ],
+    "craftBench": ["equipment_bench", "workbench"],
     "updatedAt": "02/24/2026",
     "recipe": {
       "arc-alloy": 2,
@@ -4323,10 +4291,7 @@
     "value": 300,
     "weightKg": 0.15,
     "stackSize": 5,
-    "craftBench": [
-      "in_raid",
-      "utility_bench"
-    ],
+    "craftBench": ["in_raid", "utility_bench"],
     "updatedAt": "02/24/2026",
     "recipe": {
       "chemicals": 5,
@@ -4345,10 +4310,7 @@
     "value": 640,
     "weightKg": 1,
     "stackSize": 1,
-    "craftBench": [
-      "equipment_bench",
-      "workbench"
-    ],
+    "craftBench": ["equipment_bench", "workbench"],
     "updatedAt": "03/17/2026",
     "recipe": {
       "plastic-parts": 6,
@@ -4500,10 +4462,7 @@
     "value": 1000,
     "weightKg": 0.25,
     "stackSize": 3,
-    "craftBench": [
-      "in_raid",
-      "workbench"
-    ],
+    "craftBench": ["in_raid", "workbench"],
     "updatedAt": "03/17/2026",
     "recipe": {
       "lure-grenade": 1,
@@ -5513,10 +5472,7 @@
     "value": 2000,
     "weightKg": 0.01,
     "stackSize": 1,
-    "craftBench": [
-      "in_raid",
-      "utility_bench"
-    ],
+    "craftBench": ["in_raid", "utility_bench"],
     "updatedAt": "03/22/2026",
     "recipe": {
       "advanced-electrical-components": 1,
@@ -6269,11 +6225,7 @@
     "value": 520,
     "weightKg": 0.15,
     "stackSize": 5,
-    "craftBench": [
-      "in_raid",
-      "med_station",
-      "workbench"
-    ],
+    "craftBench": ["in_raid", "med_station", "workbench"],
     "updatedAt": "02/24/2026",
     "recipe": {
       "arc-powercell": 1,
@@ -6645,10 +6597,7 @@
     "value": 640,
     "weightKg": 0.3,
     "stackSize": 3,
-    "craftBench": [
-      "in_raid",
-      "workbench"
-    ],
+    "craftBench": ["in_raid", "workbench"],
     "updatedAt": "03/17/2026",
     "recipe": {
       "smoke-grenade": 1,
@@ -7071,10 +7020,7 @@
     "value": 800,
     "weightKg": 5,
     "stackSize": 1,
-    "craftBench": [
-      "weapon_bench",
-      "workbench"
-    ],
+    "craftBench": ["weapon_bench", "workbench"],
     "updatedAt": "03/17/2026",
     "recipe": {
       "metal-parts": 8,
