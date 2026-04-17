@@ -545,8 +545,8 @@ def _map_metaforge_item(
         "stackSize": stat_block.get("stackSize") or 1,
         "craftBench": metaforge_item.get("workbench") or None,
         "updatedAt": metaforge_item.get("updated_at") or datetime.now(timezone.utc).isoformat(),
-        "recipe": crafting_map.get(metaforge_item.get("id")) or None,
-        "recyclesInto": recycle_map.get(metaforge_item.get("id")) or None,
+        "recipe": crafting_map.get(metaforge_item.get("id", "")) or None,
+        "recyclesInto": recycle_map.get(metaforge_item.get("id", "")) or None,
     }
 
 
@@ -610,6 +610,10 @@ def _build_quests_by_trader(quests: list[dict]) -> dict[str, list[dict]]:
 
 
 def _scrape_wiki_uses() -> dict[str, str]:
+    global _requests, _BeautifulSoup
+    if _SCRAPER_AVAILABLE:
+        import requests as _requests
+        from bs4 import BeautifulSoup as _BeautifulSoup
     """
     Scrape the Uses column from the Arc Raiders wiki loot table.
 
