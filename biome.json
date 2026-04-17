@@ -7,8 +7,11 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**/*.json", "**/*.jsonc"],
-    "ignores": [
+    "includes": [
+      "**/*.json",
+      "**/*.jsonc"
+    ],
+    "ignore": [
       "src/autoscrapper/progress/data/**",
       "src/autoscrapper/items/items_rules.default.json",
       "**/package-lock.json",
