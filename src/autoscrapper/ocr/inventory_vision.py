@@ -406,7 +406,7 @@ def find_infobox_with_debug(
     lower = np.clip(color - tolerance, 0, 255).astype(np.uint8)
     upper = np.clip(color + tolerance, 0, 255).astype(np.uint8)
 
-    mask = cv2.inRange(bgr_image, lower, upper)
+    mask = cv2.inRange(bgr_image, lower, upper)  # type: ignore[arg-type]
     close_kernel = np.ones((close_k, close_k), dtype=np.uint8)
     open_kernel = np.ones((3, 3), dtype=np.uint8)
 
@@ -875,7 +875,7 @@ def preprocess_for_ocr(roi_bgr: np.ndarray, *, restrict_otsu_to_left: bool = Fal
         raise ValueError(f"preprocess_for_ocr: empty input array (shape={roi_bgr.shape})")
     gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
     if upscale:
-        gray = cv2.resize(gray, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
+        gray = cv2.resize(gray, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)  # type: ignore[arg-type]
     if restrict_otsu_to_left:
         # Compute the Otsu threshold from the left half only (context-menu panel
         # side) so that bright inventory-grid icons on the right do not bias the

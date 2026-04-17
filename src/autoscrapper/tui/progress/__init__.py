@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any, cast
+
 from rich.text import Text
 from textual import events
 from textual.app import ComposeResult
@@ -332,7 +334,7 @@ class ActiveQuestsScreen(ProgressScreen):
             return
         self.app.push_screen(WorkshopLevelsScreen(self.state, wizard_mode=True))
 
-    def action_toggle(self) -> None:
+    def action_toggle(self) -> None:  # type: ignore[override]
         self._toggle_selected()
 
     def action_cycle_sort(self) -> None:
@@ -612,7 +614,8 @@ class ProgressSummaryScreen(ProgressScreen):
             return
 
         write_rules(output, ITEM_RULES_CUSTOM_PATH)
-        item_count = output.get("metadata", {}).get("itemCount", 0)
+        output_d = cast("dict[str, Any]", output)
+        item_count = cast("dict[str, Any]", output_d.get("metadata", {})).get("itemCount", 0)
         default_payload = load_rules(DEFAULT_RULES_PATH)
         changes = collect_rule_changes(default_payload, output)
         default_items = default_payload.get("items")
@@ -694,7 +697,8 @@ def launch_generate_rules(app) -> None:
         return
 
     write_rules(output, ITEM_RULES_CUSTOM_PATH)
-    item_count = output.get("metadata", {}).get("itemCount", 0)
+    metadata = cast("dict[str, Any]", cast("dict[str, Any]", output).get("metadata") or {})
+    item_count = metadata.get("itemCount", 0)
     app.push_screen(MessageScreen(f"Rules regenerated. Items: {item_count}."))
 
 

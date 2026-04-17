@@ -21,7 +21,7 @@ def _normalize_text(value: object) -> str:
     return value.strip()
 
 
-def _safe_float(value: object) -> float:
+def _safe_float(value: Any) -> float:
     try:
         return float(value)
     except (TypeError, ValueError):
@@ -351,7 +351,7 @@ def _render_item_list(items: Sequence[Mapping[str, object]], limit: int = 10) ->
     return lines
 
 
-def build_markdown_summary(report: Mapping[str, object], *, sample_limit: int = 10) -> str:
+def build_markdown_summary(report: Mapping[str, Any], *, sample_limit: int = 10) -> str:
     snapshot = report.get("snapshot") or {}
     quests = report.get("quests") or {}
     rules = report.get("rules") or {}

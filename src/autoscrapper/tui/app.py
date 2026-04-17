@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 import time
+from typing import cast
 
 from rich.text import Text
 from textual import events
@@ -34,7 +35,7 @@ from .settings import (
 from .status import build_status_panel, has_progress
 from ..warmup import start_background_warmup, warmup_status
 
-MenuAction = Callable[["MenuScreen"], None]
+MenuAction = Callable[["MenuScreen"], object]
 _SPLASH_MAX_SECONDS = 8.0
 _SPLASH_TICK_SECONDS = 0.08
 _SPLASH_BAR_WIDTH = 36
@@ -194,7 +195,7 @@ class MenuScreen(AppScreen):
         with Vertical(id="menu-root"):
             if self.show_status:
                 yield StatusPanel(id="status")
-            yield Static(self.title, classes="menu-title")
+            yield Static(self.title or "", classes="menu-title")
             yield OptionList(id="menu")
         yield Footer()
 
@@ -285,12 +286,16 @@ class HomeScreen(MenuScreen):
             MenuItem(
                 "1",
                 "Scan",
-                lambda screen: screen.app.push_screen(screen.app._scan_menu()),
+                lambda screen: cast("AutoScrapperApp", screen.app).push_screen(
+                    cast("AutoScrapperApp", screen.app)._scan_menu()
+                ),
             ),
             MenuItem(
                 "2",
                 "Generate Personalized Rule List (Quests / Workshop Level)",
-                lambda screen: screen.app.push_screen(screen.app._progress_menu()),
+                lambda screen: cast("AutoScrapperApp", screen.app).push_screen(
+                    cast("AutoScrapperApp", screen.app)._progress_menu()
+                ),
             ),
             MenuItem(
                 "3",
@@ -300,12 +305,16 @@ class HomeScreen(MenuScreen):
             MenuItem(
                 "4",
                 "Settings",
-                lambda screen: screen.app.push_screen(screen.app._settings_menu()),
+                lambda screen: cast("AutoScrapperApp", screen.app).push_screen(
+                    cast("AutoScrapperApp", screen.app)._settings_menu()
+                ),
             ),
             MenuItem(
                 "5",
                 "Maintenance",
-                lambda screen: screen.app.push_screen(screen.app._maintenance_menu()),
+                lambda screen: cast("AutoScrapperApp", screen.app).push_screen(
+                    cast("AutoScrapperApp", screen.app)._maintenance_menu()
+                ),
             ),
             MenuItem("q", "Quit", lambda screen: screen.app.exit()),
         ]
@@ -333,7 +342,7 @@ class MaintenanceMenuScreen(MenuScreen):
             MenuItem(
                 "1",
                 "Update game data snapshot",
-                lambda screen: screen.app._open_snapshot_update(),
+                lambda screen: cast("AutoScrapperApp", screen.app)._open_snapshot_update(),
                 disabled=update_used,
             ),
             MenuItem(
@@ -386,7 +395,7 @@ class AutoScrapperApp(App[None]):
         while not isinstance(self.screen, HomeScreen):
             self.pop_screen()
 
-    def action_back(self) -> None:
+    def action_back(self) -> None:  # type: ignore[override]
         if isinstance(self.screen, ScanScreen):
             return
         if isinstance(self.screen, HomeScreen):

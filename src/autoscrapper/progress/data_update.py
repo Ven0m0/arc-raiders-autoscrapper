@@ -3,9 +3,7 @@ from __future__ import annotations
 import concurrent.futures
 import io
 import logging
-import os
 import re
-import time
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -23,14 +21,12 @@ METAFORGE_API_DOCS_URL = "https://metaforge.app/arc-raiders/api"
 METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
 RAIDTHEORY_REPO_URL = "https://github.com/fgrzesiak/arcraiders-data"
 RAIDTHEORY_ARCHIVE_URL = "https://github.com/fgrzesiak/arcraiders-data/archive/refs/heads/main.zip"
-SUPABASE_URL = "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
 WIKI_LOOT_URL = "https://arcraiders.wiki/wiki/Loot"
 WIKI_USER_AGENT = "arc-raiders-autoscrapper/1.0 (https://github.com/Ven0m0/arc-raiders-autoscrapper)"
 
 ARCTRACKER_BASE_URL = "https://arctracker.io"
 ARCTRACKER_API_DOCS_URL = "https://arctracker.io/developers/docs"
 
-SUPABASE_ANON_KEY = os.environ.get("METAFORGE_SUPABASE_ANON_KEY")
 
 try:
     import requests as _requests
@@ -38,6 +34,8 @@ try:
 
     _SCRAPER_AVAILABLE = True
 except ImportError:
+    _requests = None  # type: ignore[assignment]
+    _BeautifulSoup = None  # type: ignore[assignment]
     _SCRAPER_AVAILABLE = False
 
 
@@ -195,11 +193,11 @@ def _map_arctracker_quest(arctracker_quest: dict) -> dict | None:
     }
 
 
-def _fetch_metaforge_collection(resource: str) -> list[dict]:
+def _fetch_metaforge_collection(resource: str, extra_params: str = "") -> list[dict]:
     rows: list[dict] = []
     limit = 100
 
-    url = f"{METAFORGE_API_BASE}/{resource}?page=1&limit={limit}"
+    url = f"{METAFORGE_API_BASE}/{resource}?page=1&limit={limit}{extra_params}"
     response = _fetch_json(url)
     if not isinstance(response, dict):
         raise DownloadError(f"Unexpected response for {resource}")
@@ -231,7 +229,7 @@ def _fetch_metaforge_collection(resource: str) -> list[dict]:
     if total_pages is not None and total_pages > 1:
 
         def fetch_page(page: int) -> list[dict]:
-            page_url = f"{METAFORGE_API_BASE}/{resource}?page={page}&limit={limit}"
+            page_url = f"{METAFORGE_API_BASE}/{resource}?page={page}&limit={limit}{extra_params}"
             try:
                 page_response = _fetch_json(page_url)
                 if not isinstance(page_response, dict):
@@ -256,7 +254,7 @@ def _fetch_metaforge_collection(resource: str) -> list[dict]:
         current_page = 2
         has_next = True
         while has_next:
-            url = f"{METAFORGE_API_BASE}/{resource}?page={current_page}&limit={limit}"
+            url = f"{METAFORGE_API_BASE}/{resource}?page={current_page}&limit={limit}{extra_params}"
             response = _fetch_json(url)
             if not isinstance(response, dict):
                 raise DownloadError(f"Unexpected response for {resource} on page {current_page} ({url})")
@@ -274,52 +272,30 @@ def _fetch_metaforge_collection(resource: str) -> list[dict]:
 
 
 def _fetch_all_items() -> list[dict]:
-    return _fetch_metaforge_collection("items")
+    return _fetch_metaforge_collection("items", "&includeComponents=true")
 
 
 def _fetch_all_quests() -> list[dict]:
     return _fetch_metaforge_collection("quests")
 
 
-def _fetch_supabase_all(table: str) -> list[dict]:
-    if not SUPABASE_ANON_KEY:
-        raise DownloadError("METAFORGE_SUPABASE_ANON_KEY environment variable is not set")
-
-    headers = {
-        "apikey": SUPABASE_ANON_KEY,
-        "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
-    }
-    page_size = 1000
-    offset = 0
-    all_rows: list[dict] = []
-
-    while True:
-        t0 = time.monotonic()
-        url = f"{SUPABASE_URL}/{table}?select=*&limit={page_size}&offset={offset}"
-        batch = _fetch_json(url, headers=headers)
-        if not isinstance(batch, list):
-            raise DownloadError(f"Unexpected response for {table}: expected array")
-        all_rows.extend(batch)
-        if len(batch) < page_size:
-            break
-        offset += page_size
-        elapsed = time.monotonic() - t0
-        if elapsed < 0.1:
-            time.sleep(0.1 - elapsed)
-
-    return all_rows
-
-
-def _build_component_map(components: list[dict]) -> dict[str, dict[str, int]]:
-    component_map: dict[str, dict[str, int]] = {}
-    for component in components:
-        item_id = component.get("item_id")
-        component_id = component.get("component_id")
-        quantity = component.get("quantity")
-        if not item_id or not component_id or quantity is None:
-            continue
-        component_map.setdefault(item_id, {})[component_id] = int(quantity)
-    return component_map
+def _extract_component_dict(value: object) -> dict[str, int] | None:
+    if isinstance(value, dict) and value:
+        try:
+            return {str(k): int(v) for k, v in value.items() if v is not None}
+        except (TypeError, ValueError):
+            return None
+    if isinstance(value, list):
+        result: dict[str, int] = {}
+        for entry in value:
+            if not isinstance(entry, dict):
+                continue
+            comp_id = entry.get("component_id") or entry.get("id") or entry.get("componentId")
+            qty = entry.get("quantity") or entry.get("amount")
+            if comp_id and qty is not None:
+                result[str(comp_id)] = int(qty)
+        return result or None
+    return None
 
 
 def _normalize_external_id(value: object) -> str | None:
@@ -529,11 +505,7 @@ def _merge_missing_entries(primary: list[dict], fallback: list[dict]) -> tuple[l
     return merged, supplemental_count
 
 
-def _map_metaforge_item(
-    metaforge_item: dict,
-    crafting_map: dict[str, dict[str, int]],
-    recycle_map: dict[str, dict[str, int]],
-) -> dict:
+def _map_metaforge_item(metaforge_item: dict) -> dict:
     stat_block = metaforge_item.get("stat_block") or {}
     return {
         "id": metaforge_item.get("id"),
@@ -545,8 +517,12 @@ def _map_metaforge_item(
         "stackSize": stat_block.get("stackSize") or 1,
         "craftBench": metaforge_item.get("workbench") or None,
         "updatedAt": metaforge_item.get("updated_at") or datetime.now(timezone.utc).isoformat(),
-        "recipe": crafting_map.get(metaforge_item.get("id")) or None,
-        "recyclesInto": recycle_map.get(metaforge_item.get("id")) or None,
+        "recipe": _extract_component_dict(metaforge_item.get("components") or metaforge_item.get("recipe")),
+        "recyclesInto": _extract_component_dict(
+            metaforge_item.get("recycleComponents")
+            or metaforge_item.get("recycle_components")
+            or metaforge_item.get("recyclesInto")
+        ),
     }
 
 
@@ -622,6 +598,7 @@ def _scrape_wiki_uses() -> dict[str, str]:
     if not _SCRAPER_AVAILABLE:
         return {}
 
+    assert _requests is not None and _BeautifulSoup is not None
     _log.info("Fetching wiki loot page from %s", WIKI_LOOT_URL)
     try:
         resp = _requests.get(
@@ -734,24 +711,8 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
         fallback_error = str(exc)
         _log.warning("RaidTheory fallback unavailable: %s", exc)
 
-    try:
-        components = _fetch_supabase_all("arc_item_components")
-    except DownloadError as exc:
-        _log.warning("Skipping crafting component data (Supabase unavailable): %s", exc)
-        components = []
-    try:
-        recycle_components = _fetch_supabase_all("arc_item_recycle_components")
-    except DownloadError as exc:
-        _log.warning("Skipping recycle component data (Supabase unavailable): %s", exc)
-        recycle_components = []
-
-    crafting_map = _build_component_map(components)
-    recycle_map = _build_component_map(recycle_components)
-
     mapped_metaforge_items = (
-        [_map_metaforge_item(item, crafting_map, recycle_map) for item in metaforge_items]
-        if metaforge_items is not None
-        else []
+        [_map_metaforge_item(item) for item in metaforge_items] if metaforge_items is not None else []
     )
     mapped_metaforge_quests = (
         [_map_metaforge_quest(quest) for quest in metaforge_quests] if metaforge_quests is not None else []

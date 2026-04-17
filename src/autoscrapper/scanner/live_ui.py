@@ -3,6 +3,7 @@ from __future__ import annotations
 import time
 from collections import Counter, deque
 from datetime import datetime, timedelta
+from typing import cast
 
 
 from .outcomes import _outcome_style
@@ -103,7 +104,7 @@ class _ScanLiveUI:
             BarColumn(bar_width=None),
             TextColumn("{task.completed}/{task.total}", style="cyan"),
             TaskProgressColumn(),
-            _ItemsPerSecondColumn() if _ItemsPerSecondColumn is not None else Text(""),
+            _ItemsPerSecondColumn() if _ItemsPerSecondColumn is not None else cast("ProgressColumn", Text("")),
             TextColumn("[dim]elapsed[/]"),
             TimeElapsedColumn(),
             TextColumn("[dim]left[/]"),

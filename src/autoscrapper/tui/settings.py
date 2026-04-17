@@ -193,7 +193,7 @@ class ScanSettingsScreen(AppScreen):
         self.settings = load_scan_settings()
 
     def compose(self) -> ComposeResult:
-        yield Static(self.TITLE, classes="menu-title")
+        yield Static(self.TITLE or "", classes="menu-title")
         with Vertical(id="settings-shell"):
             with Vertical(id="settings-form"):
                 yield from self._compose_form()
@@ -215,7 +215,7 @@ class ScanSettingsScreen(AppScreen):
             candidates.append(widget)
         return candidates
 
-    def _move_focus(self, delta: int) -> None:
+    def _cycle_focus(self, delta: int) -> None:
         candidates = self._focus_candidates()
         if not candidates:
             return
@@ -231,10 +231,10 @@ class ScanSettingsScreen(AppScreen):
         target.scroll_visible(immediate=True)
 
     def action_focus_next_field(self) -> None:
-        self._move_focus(1)
+        self._cycle_focus(1)
 
     def action_focus_previous_field(self) -> None:
-        self._move_focus(-1)
+        self._cycle_focus(-1)
 
     def _parse_int_field(self, field_id: str, *, label: str, min_value: int) -> int | None:
         raw = self.query_one(field_id, Input).value.strip()

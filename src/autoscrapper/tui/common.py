@@ -43,7 +43,7 @@ class MessageScreen(ModalScreen[None]):
 
     def compose(self) -> ComposeResult:
         with Vertical(id="message-box"):
-            yield Static(self.title, classes="modal-title")
+            yield Static(self.title or "", classes="modal-title")
             yield Static(self.message, id="message-text")
             yield Button("OK", id="ok", variant="primary")
 

@@ -14,7 +14,8 @@ def apply_quest_overrides(quests: list[dict]) -> list[dict]:
     """Apply quest overrides without mutating the original list."""
     updated = []
     for quest in quests:
-        override_trader = QUEST_TRADER_OVERRIDES.get(quest.get("id"))
+        quest_id = quest.get("id")
+        override_trader = QUEST_TRADER_OVERRIDES.get(quest_id) if isinstance(quest_id, str) else None
         if override_trader:
             updated.append({**quest, "trader": override_trader})
         else:

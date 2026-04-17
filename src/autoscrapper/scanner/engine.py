@@ -3,6 +3,7 @@ from __future__ import annotations
 import math
 import time
 from pathlib import Path
+from typing import cast
 
 from .progress import NullScanProgress, RichScanProgress, ScanProgress
 from .report import _render_results
@@ -25,6 +26,7 @@ from ..interaction.inventory_grid import (
 )
 from ..interaction.keybinds import DEFAULT_STOP_KEY, normalize_stop_key
 from ..interaction.ui_windows import (
+    LiveWindow,
     WindowSnapshot,
     WINDOW_TIMEOUT,
     abort_if_escape_pressed,
@@ -341,7 +343,7 @@ def scan_inventory(
         items_label = stash_items if stash_items is not None else "?"
 
         context = ScanContext(
-            window=window,
+            window=cast("LiveWindow | None", window),
             stop_key=stop_key,
             win_left=win_left,
             win_top=win_top,

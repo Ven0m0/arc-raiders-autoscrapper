@@ -2,9 +2,26 @@ from __future__ import annotations
 
 from collections import defaultdict
 from dataclasses import dataclass
+from typing import TypedDict
 
 from .recipe_utils import build_reverse_recipe_index
 from .weapon_grouping import WeaponGrouper
+
+
+class _QuestUseResult(TypedDict):
+    is_used: bool
+    quest_names: list[str]
+
+
+class _ProjectUseResult(TypedDict):
+    is_used: bool
+    project_names: list[str]
+
+
+class _UpgradeUseResult(TypedDict):
+    is_needed: bool
+    module_names: list[str]
+
 
 KEEP_ITEM_OVERRIDES = {
     "assorted-seeds": [
@@ -324,7 +341,7 @@ class DecisionEngine:
             ),
         )
 
-    def is_used_in_active_quests(self, item: dict, user_progress: dict) -> dict[str, list[str] | bool]:
+    def is_used_in_active_quests(self, item: dict, user_progress: dict) -> _QuestUseResult:
         quest_names: list[str] = []
         completed = set(user_progress.get("completedQuests", []))
         item_id = item.get("id")
@@ -336,7 +353,7 @@ class DecisionEngine:
 
         return {"is_used": bool(quest_names), "quest_names": quest_names}
 
-    def is_used_in_active_projects(self, item: dict, user_progress: dict) -> dict[str, list[str] | bool]:
+    def is_used_in_active_projects(self, item: dict, user_progress: dict) -> _ProjectUseResult:
         project_names: list[str] = []
         completed = set(user_progress.get("completedProjects", []))
         item_id = item.get("id")
@@ -348,7 +365,7 @@ class DecisionEngine:
 
         return {"is_used": bool(project_names), "project_names": project_names}
 
-    def is_needed_for_upgrades(self, item: dict, user_progress: dict) -> dict[str, list[str] | bool]:
+    def is_needed_for_upgrades(self, item: dict, user_progress: dict) -> _UpgradeUseResult:
         module_names: list[str] = []
         hideout_levels = user_progress.get("hideoutLevels", {})
         item_id = item.get("id")
@@ -363,7 +380,8 @@ class DecisionEngine:
         return {"is_needed": bool(module_names), "module_names": module_names}
 
     def evaluate_crafting_value(self, item: dict) -> CraftingValue:
-        recipe_count = len(self.reverse_recipe_index.get(item.get("id"), []))
+        item_id: str | None = item.get("id")
+        recipe_count = len(self.reverse_recipe_index.get(item_id, []) if item_id is not None else [])
         rarity = str(item.get("rarity", "")).lower()
         is_rare = rarity in {"rare", "epic", "legendary"}
         return CraftingValue(

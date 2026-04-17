@@ -133,7 +133,7 @@ class ApiSettingsScreen(AppScreen):
         self.settings = load_api_settings()
 
     def compose(self) -> ComposeResult:
-        yield Static(self.TITLE, classes="menu-title")
+        yield Static(self.TITLE or "", classes="menu-title")
         with Vertical(id="api-settings-shell"):
             with Vertical(id="api-settings-form"):
                 yield from self._compose_form()
@@ -155,7 +155,7 @@ class ApiSettingsScreen(AppScreen):
             candidates.append(widget)
         return candidates
 
-    def _move_focus(self, delta: int) -> None:
+    def _cycle_focus(self, delta: int) -> None:
         candidates = self._focus_candidates()
         if not candidates:
             return
@@ -171,10 +171,10 @@ class ApiSettingsScreen(AppScreen):
         target.scroll_visible(immediate=True)
 
     def action_focus_next_field(self) -> None:
-        self._move_focus(1)
+        self._cycle_focus(1)
 
     def action_focus_previous_field(self) -> None:
-        self._move_focus(-1)
+        self._cycle_focus(-1)
 
     def _compose_form(self) -> ComposeResult:
         yield Static(

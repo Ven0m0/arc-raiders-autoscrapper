@@ -23,6 +23,8 @@ from ..items.rules_store import (
     save_custom_rules,
 )
 
+SortMode = Literal["name_asc", "action", "modified"]
+
 
 def _display_action(item: dict) -> str:
     action = item.get("action")
@@ -421,12 +423,12 @@ class RulesScreen(AppScreen):
     }
     """
 
-    SORT_LABELS: dict[str, str] = {
+    SORT_LABELS: dict[SortMode, str] = {
         "name_asc": "Name",
         "action": "Action",
         "modified": "Changed",
     }
-    SORT_SEQUENCE: tuple[str, ...] = ("name_asc", "action", "modified")
+    SORT_SEQUENCE: tuple[SortMode, ...] = ("name_asc", "action", "modified")
     ACTION_SORT_ORDER: dict[str, int] = {"keep": 0, "sell": 1, "recycle": 2}
 
     def __init__(self) -> None:
@@ -445,7 +447,7 @@ class RulesScreen(AppScreen):
         self.filtered: list[int] = []
         self.modified_map: dict[int, bool] = {}
         self.search_query = ""
-        self.sort_mode: Literal["name_asc", "action", "modified"] = "name_asc"
+        self.sort_mode: SortMode = "name_asc"
         self.selected_index: int | None = None
         self.mode: str = "edit"
         self.current_action: str = "keep"
@@ -824,7 +826,7 @@ class RulesScreen(AppScreen):
     def _confirm_reset_default(self) -> None:
         self.app.push_screen(ConfirmResetRulesScreen(), self._handle_reset_confirmation)
 
-    def _handle_reset_confirmation(self, confirmed: bool) -> None:
+    def _handle_reset_confirmation(self, confirmed: bool | None) -> None:
         if confirmed:
             self._reset_default()
 
@@ -964,7 +966,7 @@ class RulesScreen(AppScreen):
         if event.input.id == "new-rule-name":
             self._add_rule()
 
-    def _set_sort_mode(self, mode: str) -> None:
+    def _set_sort_mode(self, mode: SortMode) -> None:
         if mode not in self.SORT_LABELS:
             return
         if mode == self.sort_mode:
