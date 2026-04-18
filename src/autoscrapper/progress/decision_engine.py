@@ -243,8 +243,8 @@ class DecisionEngine:
                 item,
                 DecisionReason(
                     decision="keep",
-                    reasons=[f"Needed for project: {', '.join(project_use['project_names']) if isinstance(project_use['project_names'], list) else ''}"],
-                    dependencies=project_use["project_names"] if isinstance(project_use["project_names"], list) else None,
+                    reasons=[f"Needed for project: {', '.join(project_use['project_names'])}"],
+                    dependencies=project_use["project_names"],
                 ),
             )
 
