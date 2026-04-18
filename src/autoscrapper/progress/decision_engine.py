@@ -56,7 +56,7 @@ class DecisionEngine:
         quests: list[dict],
         projects: list[dict],
     ) -> None:
-        self.items = {item.get("id", ""): item for item in items}
+        self.items = {item_id: item for item in items if (item_id := item.get("id"))}
         self.hideout_modules = hideout_modules
         self.quests = quests
         self.projects = projects
