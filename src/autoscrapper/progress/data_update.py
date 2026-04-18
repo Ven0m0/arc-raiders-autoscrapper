@@ -610,10 +610,6 @@ def _build_quests_by_trader(quests: list[dict]) -> dict[str, list[dict]]:
 
 
 def _scrape_wiki_uses() -> dict[str, str]:
-    global _requests, _BeautifulSoup
-    if _SCRAPER_AVAILABLE:
-        import requests as _requests
-        from bs4 import BeautifulSoup as _BeautifulSoup
     """
     Scrape the Uses column from the Arc Raiders wiki loot table.
 
