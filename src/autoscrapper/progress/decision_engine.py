@@ -254,8 +254,11 @@ class DecisionEngine:
                 item,
                 DecisionReason(
                     decision="keep",
-                    reasons=["Required for hideout upgrade: " + ", ".join(upgrade_use["module_names"]) if isinstance(upgrade_use["module_names"], list) else ""],
-                    dependencies=upgrade_use["module_names"] if isinstance(upgrade_use["module_names"], list) else None,
+                    reasons=[
+                        "Required for hideout upgrade: "
+                        + ", ".join(upgrade_use["module_names"])
+                    ],
+                    dependencies=upgrade_use["module_names"],
                 ),
             )
 
