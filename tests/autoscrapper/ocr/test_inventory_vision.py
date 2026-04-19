@@ -21,6 +21,7 @@ from autoscrapper.ocr.inventory_vision import (  # noqa: E402
     _extract_title_from_data,
     find_context_menu_crop,
     isolate_menu_panel,
+    match_item_name_result,
     ocr_inventory_count,
     preprocess_for_ocr,
     reset_ocr_caches,
@@ -673,3 +674,41 @@ class TestIsolateMenuPanel:
         assert x >= 0 and y >= 0
         assert x + w <= crop_w
         assert y + h <= crop_h
+
+# ---------------------------------------------------------------------------
+# match_item_name_result — case-insensitivity regression
+# ---------------------------------------------------------------------------
+
+
+class TestMatchItemNameCaseInsensitive:
+    """Game renders context-menu titles in ALL CAPS; rules catalog stores Title Case.
+
+    fuzz.WRatio is case-sensitive, so without processor=str.lower the raw OCR
+    string scores ~17 against its canonical name and falls below the 75 threshold.
+    These samples all come from the ocr_debug/ctx_menu_lines_fail corpus.
+    """
+
+    @pytest.mark.parametrize(
+        ("raw", "expected"),
+        [
+            ("MATRIARCH REACTOR", "Matriarch Reactor"),
+            ("FABRIC", "Fabric"),
+            ("HORNET DRIVER", "Hornet Driver"),
+            ("BOMBARDIER CELL", "Bombardier Cell"),
+            ("DURABLE CLOTH", "Durable Cloth"),
+            ("ARC ALLOY", "ARC Alloy"),
+            # Icon-bleed prefix noise must still resolve once case is normalized
+            ("ry MATRIARCH REACTOR", "Matriarch Reactor"),
+            ("50 50 FABRIC", "Fabric"),
+            ("4 Is 7 HORNET DRIVER", "Hornet Driver"),
+            ("ee: BOMBARDIER CELL", "Bombardier Cell"),
+            ("7 Mn DURABLE CLOTH", "Durable Cloth"),
+            ("Naw ARC ALLOY", "ARC Alloy"),
+        ],
+    )
+    def test_all_caps_title_matches_catalog(self, raw: str, expected: str) -> None:
+        result = match_item_name_result(raw)
+        assert result.matched_name == expected, (
+            f"raw={raw!r} expected={expected!r} got={result.matched_name!r}"
+        )
+

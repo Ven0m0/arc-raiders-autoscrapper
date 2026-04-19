@@ -749,6 +749,7 @@ def match_item_name_result(raw: str, threshold: int | None = None) -> ItemNameMa
         cleaned,
         rules_store.get_item_names(),
         scorer=fuzz.WRatio,
+        processor=str.lower,
         score_cutoff=resolved_threshold,
     )
     if match is None:
@@ -1360,10 +1361,12 @@ def ocr_context_menu(
     if title_band_bgr.size > 0:
         # Preserve the global OCR cache so the infobox path is unaffected.
         _saved_hash, _saved_result = _last_roi_hash, _last_ocr_result
-        title_result = ocr_title_strip(title_band_bgr, use_fallback_psm=use_fallback_psm)
-        # Restore cache — context-menu title strips should not evict
-        # infobox cache entries.
-        _last_roi_hash, _last_ocr_result = _saved_hash, _saved_result
+        try:
+            title_result = ocr_title_strip(title_band_bgr, use_fallback_psm=use_fallback_psm)
+        finally:
+            # Restore cache — context-menu title strips must not evict infobox
+            # cache entries even if ocr_title_strip raises.
+            _last_roi_hash, _last_ocr_result = _saved_hash, _saved_result
         if title_result.item_name:
             _save_debug_image("ctx_menu_title_band_processed", title_result.processed)
             preprocess_time = time.perf_counter() - preprocess_start
