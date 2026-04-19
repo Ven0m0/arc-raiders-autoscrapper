@@ -675,6 +675,7 @@ class TestIsolateMenuPanel:
         assert x + w <= crop_w
         assert y + h <= crop_h
 
+
 # ---------------------------------------------------------------------------
 # match_item_name_result — case-insensitivity regression
 # ---------------------------------------------------------------------------
@@ -708,7 +709,4 @@ class TestMatchItemNameCaseInsensitive:
     )
     def test_all_caps_title_matches_catalog(self, raw: str, expected: str) -> None:
         result = match_item_name_result(raw)
-        assert result.matched_name == expected, (
-            f"raw={raw!r} expected={expected!r} got={result.matched_name!r}"
-        )
-
+        assert result.matched_name == expected, f"raw={raw!r} expected={expected!r} got={result.matched_name!r}"

@@ -2,7 +2,13 @@ import json
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from autoscrapper.config import CONFIG_VERSION, _load_config_dict, _migrate_config
+from autoscrapper.config import (
+    _coerce_non_negative_int,
+    _coerce_positive_int,
+    CONFIG_VERSION,
+    _load_config_dict,
+    _migrate_config,
+)
 
 
 def test_migrate_config_no_version():
@@ -148,3 +154,27 @@ def test_load_config_dict_success(mock_config_path):
     result = _load_config_dict()
     assert result["version"] == CONFIG_VERSION
     assert result["scan"]["debug_ocr"] is True
+
+
+def test_coerce_positive_int():
+    assert _coerce_positive_int(5) == 5
+    assert _coerce_positive_int("5") == 5
+    assert _coerce_positive_int(0) is None
+    assert _coerce_positive_int("0") is None
+    assert _coerce_positive_int(-1) is None
+    assert _coerce_positive_int("-1") is None
+    assert _coerce_positive_int(None) is None
+    assert _coerce_positive_int("abc") is None
+    assert _coerce_positive_int([]) is None
+
+
+def test_coerce_non_negative_int():
+    assert _coerce_non_negative_int(5) == 5
+    assert _coerce_non_negative_int("5") == 5
+    assert _coerce_non_negative_int(0) == 0
+    assert _coerce_non_negative_int("0") == 0
+    assert _coerce_non_negative_int(-1) is None
+    assert _coerce_non_negative_int("-1") is None
+    assert _coerce_non_negative_int(None) is None
+    assert _coerce_non_negative_int("abc") is None
+    assert _coerce_non_negative_int([]) is None
