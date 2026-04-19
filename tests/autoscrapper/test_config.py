@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from autoscrapper.config import CONFIG_VERSION, _load_config_dict, _migrate_config
+from autoscrapper.config import CONFIG_VERSION, _load_config_dict, _migrate_config, ProgressSettings, has_saved_progress
 
 
 def test_migrate_config_no_version():
@@ -148,3 +148,39 @@ def test_load_config_dict_success(mock_config_path):
     result = _load_config_dict()
     assert result["version"] == CONFIG_VERSION
     assert result["scan"]["debug_ocr"] is True
+
+
+def test_has_saved_progress_empty():
+    """Test that has_saved_progress returns False for empty settings."""
+    settings = ProgressSettings()
+    assert not has_saved_progress(settings)
+
+
+def test_has_saved_progress_all_quests():
+    """Test that has_saved_progress returns True if all_quests_completed is True."""
+    settings = ProgressSettings(all_quests_completed=True)
+    assert has_saved_progress(settings)
+
+
+def test_has_saved_progress_active_quests():
+    """Test that has_saved_progress returns True if there are active quests."""
+    settings = ProgressSettings(active_quests=["Quest 1"])
+    assert has_saved_progress(settings)
+
+
+def test_has_saved_progress_completed_quests():
+    """Test that has_saved_progress returns True if there are completed quests."""
+    settings = ProgressSettings(completed_quests=["Quest 2"])
+    assert has_saved_progress(settings)
+
+
+def test_has_saved_progress_hideout_levels():
+    """Test that has_saved_progress returns True if there are hideout levels."""
+    settings = ProgressSettings(hideout_levels={"stash": 1})
+    assert has_saved_progress(settings)
+
+
+def test_has_saved_progress_only_last_updated():
+    """Test that has_saved_progress returns False if only last_updated is set."""
+    settings = ProgressSettings(last_updated="2023-01-01")
+    assert not has_saved_progress(settings)
