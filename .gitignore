@@ -208,3 +208,5 @@ artifacts/
 !.qlty/hooks/**
 !.qlty/qlty.toml
 !.qlty/.gitignore
+
+.token-pilot/hook-denied.jsonl

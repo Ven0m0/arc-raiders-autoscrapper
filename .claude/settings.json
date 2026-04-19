@@ -53,7 +53,11 @@
       "Skill(afc:triage)",
       "Skill(commit-commands:commit-push-pr)",
       "mcp__cachebro__read_files",
-      "mcp__cachebro__read_file"
+      "mcp__cachebro__read_file",
+      "mcp__token-pilot__read_for_edit",
+      "mcp__token-pilot__find_usages",
+      "mcp__token-pilot__smart_read",
+      "mcp__plugin_oh-my-claudecode_t__state_list_active"
     ]
   },
   "enableAllProjectMcpServers": true,
@@ -62,8 +66,7 @@
     "octocode",
     "ast-grep",
     "ref-tools",
-    "github",
-    "supabase"
+    "github"
   ],
   "hooks": {
     "PostToolUse": [
@@ -139,7 +142,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cmd=$(jq -r '.tool_input.command // empty' 2>/dev/null); if echo \"$cmd\" | grep -qE '^git commit'; then branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); if echo \"$branch\" | grep -qE '^(main|master)$'; then echo '{\"systemMessage\":\"⚠️ Warning: You are committing to main/master. Ensure this is intended.\"}'; else echo '{\"continue\":true}'; fi; else echo '{\"continue\":true}'; fi",
+            "command": "cmd=$(jq -r '.tool_input.command // empty' 2>/dev/null); if echo \"$cmd\" | grep -qE '^git commit'; then branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); if echo \"$branch\" | grep -qE '^(main|master)$'; then echo '{\"systemMessage\":\"\u26a0\ufe0f Warning: You are committing to main/master. Ensure this is intended.\"}'; else echo '{\"continue\":true}'; fi; else echo '{\"continue\":true}'; fi",
             "statusMessage": "Checking git branch..."
           }
         ]

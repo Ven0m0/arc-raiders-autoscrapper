@@ -8,7 +8,6 @@ import pytest
 from autoscrapper.progress.data_update import (
     DownloadError,
     RAIDTHEORY_REPO_URL,
-    _fetch_supabase_all,
     _load_raidtheory_fallback_data,
     update_data_snapshot,
 )
@@ -56,16 +55,7 @@ def fallback_quests():
     ]
 
 
-def test_fetch_supabase_all_missing_key():
-    with mock.patch("autoscrapper.progress.data_update.SUPABASE_ANON_KEY", None):
-        with pytest.raises(
-            DownloadError,
-            match="METAFORGE_SUPABASE_ANON_KEY environment variable is not set",
-        ):
-            _fetch_supabase_all("some_table")
-
-
-def test_update_data_snapshot_handles_missing_key(tmp_path):
+def test_update_data_snapshot_runs_without_supabase(tmp_path):
     with (
         mock.patch("autoscrapper.progress.data_update._fetch_all_items", return_value=[]),
         mock.patch("autoscrapper.progress.data_update._fetch_all_quests", return_value=[]),
@@ -73,17 +63,11 @@ def test_update_data_snapshot_handles_missing_key(tmp_path):
             "autoscrapper.progress.data_update._load_raidtheory_fallback_data",
             return_value=([], []),
         ),
-        mock.patch("autoscrapper.progress.data_update.SUPABASE_ANON_KEY", None),
-        mock.patch("autoscrapper.progress.data_update._log") as mock_log,
     ):
         metadata = update_data_snapshot(tmp_path)
 
     assert metadata["itemCount"] == 0
     assert metadata["questCount"] == 0
-    assert mock_log.warning.call_count == 2
-    warning_messages = [call.args[0] for call in mock_log.warning.call_args_list]
-    assert any("Skipping crafting component data" in msg for msg in warning_messages)
-    assert any("Skipping recycle component data" in msg for msg in warning_messages)
 
 
 def test_load_raidtheory_fallback_data_maps_archive_entries():
@@ -174,7 +158,6 @@ def test_update_data_snapshot_uses_raidtheory_fallback_and_tracks_sources(tmp_pa
             "autoscrapper.progress.data_update._load_raidtheory_fallback_data",
             return_value=(fallback_items, fallback_quests),
         ),
-        mock.patch("autoscrapper.progress.data_update.SUPABASE_ANON_KEY", None),
     ):
         metadata = update_data_snapshot(tmp_path)
 

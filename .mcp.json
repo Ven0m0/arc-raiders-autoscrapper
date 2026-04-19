@@ -1,33 +1,34 @@
 {
   "mcpServers": {
     "fast-filesystem": {
+      "type": "stdio",
       "command": "bunx",
       "args": [
         "--bun",
         "fast-filesystem-mcp@latest"
-      ],
-      "type": "stdio"
+      ]
     },
     "octocode": {
+      "type": "stdio",
       "command": "bunx",
       "args": [
         "--bun",
         "octocode-mcp@latest"
-      ],
-      "type": "stdio"
+      ]
     },
     "ast-grep": {
+      "type": "stdio",
       "command": "bunx",
       "args": [
         "@notprolands/ast-grep-mcp@latest"
-      ],
-      "type": "stdio"
+      ]
     },
     "ref-tools": {
-      "url": "https://api.ref.tools/mcp",
-      "type": "http"
+      "type": "http",
+      "url": "https://api.ref.tools/mcp"
     },
     "serena": {
+      "type": "stdio",
       "command": "uvx",
       "args": [
         "--from",
@@ -36,25 +37,26 @@
         "start-mcp-server",
         "--context=claude-code",
         "--project-from-cwd"
-      ],
-      "type": "stdio"
+      ]
     },
     "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
       "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
     },
-    "supabase": {
-      "command": "npx",
-      "args": ["-y", "@supabase/mcp-server-supabase@latest", "--read-only"],
+    "context7": {
       "type": "stdio",
-      "env": {
-        "SUPABASE_URL": "${METAFORGE_SUPABASE_URL}",
-        "SUPABASE_SERVICE_ROLE_KEY": "${METAFORGE_SUPABASE_ANON_KEY}"
-      }
+      "command": "bunx",
+      "args": [
+        "--bun",
+        "@upstash/context7-mcp"
+      ]
     }
   }
 }
