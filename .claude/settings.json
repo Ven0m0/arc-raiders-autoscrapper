@@ -164,6 +164,16 @@
             "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-pre-grep"
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "statusMessage": "Checking push target remote...",
+            "command": "cmd=$(jq -r '.tool_input.command // empty' 2>/dev/null); if echo \"$cmd\" | grep -qE '(^|\\s)(rtk )?git push'; then remote=$(echo \"$cmd\" | grep -oP '(?<=(git push )|(push ))[^\\s-]\\S*' | grep -v '^-' | head -1); remote=${remote:-origin}; url=$(git remote get-url \"$remote\" 2>/dev/null); if ! echo \"$url\" | grep -qi 'Ven0m0/arc-raiders-autoscrapper'; then echo \"{\\\"continue\\\":false,\\\"stopReason\\\":\\\"Blocked: '$remote' points to '$url', not Ven0m0/arc-raiders-autoscrapper. Check git remote -v.\\\"}\" ; else echo '{\"continue\":true}'; fi; else echo '{\"continue\":true}'; fi"
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
@@ -172,7 +182,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cmd=$(jq -r '.tool_input.command // empty' 2>/dev/null); if echo \"$cmd\" | grep -qE '^git commit'; then branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); if echo \"$branch\" | grep -qE '^(main|master)$'; then echo '{\"systemMessage\":\"⚠️ Warning: You are committing to main/master. Ensure this is intended.\"}'; else echo '{\"continue\":true}'; fi; else echo '{\"continue\":true}'; fi",
+            "command": "cmd=$(jq -r '.tool_input.command // empty' 2>/dev/null); if echo \"$cmd\" | grep -qE '^git commit'; then branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); if echo \"$branch\" | grep -qE '^(main|master)$'; then echo '{\"systemMessage\":\"\u26a0\ufe0f Warning: You are committing to main/master. Ensure this is intended.\"}'; else echo '{\"continue\":true}'; fi; else echo '{\"continue\":true}'; fi",
             "statusMessage": "Checking git branch..."
           }
         ]
@@ -184,6 +194,16 @@
           {
             "type": "command",
             "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-session-start"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "root=$(git rev-parse --show-toplevel 2>/dev/null); [ -z \"$root\" ] && exit 0; st=$(git -C \"$root\" status --short 2>/dev/null); [ -n \"$st\" ] && echo \"{\\\"systemMessage\\\":\\\"\u26a0\ufe0f Uncommitted changes in repo:\\n$st\\\"}\" || true"
           }
         ]
       }
