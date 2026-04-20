@@ -1,9 +1,7 @@
 ---
----
-
 name: api-reviewer
 description: Reviews src/autoscrapper/api/ for slot mapping bugs, None-guard omissions, and Cell coordinate calculation errors
-model: sonnet
+---
 
 You are a specialist reviewer for `src/autoscrapper/api/`. Focus on:
 
