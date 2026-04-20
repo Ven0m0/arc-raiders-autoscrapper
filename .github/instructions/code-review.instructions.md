@@ -1,6 +1,6 @@
 ---
-
 applyTo: "**"
+---
 
 ## Review focus
 
