@@ -3,6 +3,15 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 from autoscrapper.config import CONFIG_VERSION, _load_config_dict, _migrate_config
+from dataclasses import asdict
+from autoscrapper.config import (
+    ScanSettings,
+    ProgressSettings,
+    ApiSettings,
+    reset_scan_settings,
+    reset_progress_settings,
+    reset_api_settings,
+)
 
 
 def test_migrate_config_no_version():
@@ -148,3 +157,51 @@ def test_load_config_dict_success(mock_config_path):
     result = _load_config_dict()
     assert result["version"] == CONFIG_VERSION
     assert result["scan"]["debug_ocr"] is True
+
+
+@patch("autoscrapper.config._save_config_dict")
+@patch("autoscrapper.config._load_config_dict")
+def test_reset_scan_settings(mock_load, mock_save):
+    """Test that reset_scan_settings calls save_scan_settings with default ScanSettings."""
+    mock_load.return_value = {"version": 1, "some_other_key": "value"}
+    reset_scan_settings()
+
+    mock_load.assert_called_once()
+    mock_save.assert_called_once()
+
+    saved_payload = mock_save.call_args[0][0]
+    assert saved_payload["version"] == CONFIG_VERSION
+    assert saved_payload["some_other_key"] == "value"
+    assert saved_payload["scan"] == asdict(ScanSettings())
+
+
+@patch("autoscrapper.config._save_config_dict")
+@patch("autoscrapper.config._load_config_dict")
+def test_reset_progress_settings(mock_load, mock_save):
+    """Test that reset_progress_settings updates the progress section with default ProgressSettings."""
+    mock_load.return_value = {"version": 1, "some_other_key": "value"}
+    reset_progress_settings()
+
+    mock_load.assert_called_once()
+    mock_save.assert_called_once()
+
+    saved_payload = mock_save.call_args[0][0]
+    assert saved_payload["version"] == CONFIG_VERSION
+    assert saved_payload["some_other_key"] == "value"
+    assert saved_payload["progress"] == asdict(ProgressSettings())
+
+
+@patch("autoscrapper.config._save_config_dict")
+@patch("autoscrapper.config._load_config_dict")
+def test_reset_api_settings(mock_load, mock_save):
+    """Test that reset_api_settings calls save_api_settings with default ApiSettings."""
+    mock_load.return_value = {"version": 1, "some_other_key": "value"}
+    reset_api_settings()
+
+    mock_load.assert_called_once()
+    mock_save.assert_called_once()
+
+    saved_payload = mock_save.call_args[0][0]
+    assert saved_payload["version"] == CONFIG_VERSION
+    assert saved_payload["some_other_key"] == "value"
+    assert saved_payload["api"] == asdict(ApiSettings())
