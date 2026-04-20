@@ -1,8 +1,8 @@
 ---
-
 name: copilot-init
 description: Refresh Copilot bootstrap guidance for this Python 3.13 / uv OCR repo. Use when asked to initialize Copilot guidance, update `copilot-setup-steps`, or improve repo-specific agent guidance.
 allowed-tools: 'Read, Write, Edit, Glob, Grep, Bash'
+---
 
 # Copilot init
 
