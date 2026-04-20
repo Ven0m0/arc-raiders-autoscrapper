@@ -3,7 +3,7 @@ OpenCV, screen capture, and optional desktop input automation. Start with
 `/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/AGENTS.md`
 for the full repo map, validation rules, and invariants.
 
-## Start here
+## Rule
 
 Use this file for startup guidance only. Keep detailed repo rules in
 `AGENTS.md`, and keep path-specific instructions in

@@ -209,4 +209,5 @@ artifacts/
 !.qlty/qlty.toml
 !.qlty/.gitignore
 
-.token-pilot/hook-denied.jsonl
+.token-pilot/
+.kilocode/package-lock.json
