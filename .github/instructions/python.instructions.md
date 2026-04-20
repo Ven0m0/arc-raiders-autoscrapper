@@ -1,6 +1,6 @@
 ---
-
 applyTo: "**/{*.py,pyproject.toml}"
+---
 
 ## Python toolchain
 
