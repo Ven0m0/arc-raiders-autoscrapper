@@ -1,8 +1,8 @@
 ---
-
 name: workflow-development
 description: Create, debug, and optimize GitHub Actions workflows for this Python 3.13 / uv repository.
 allowed-tools: "Bash, Read, Write, Edit, Glob, Grep"
+---
 
 # Workflow Development
 
