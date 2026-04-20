@@ -17,6 +17,6 @@
   "sealed_files": ["tests/", ".omc/self-improve/scripts/benchmark.py", "pyproject.toml", "uv.lock"],
   "regression_threshold": 0.05,
   "circuit_breaker_threshold": 3,
-  "auto_push": false,
+  "auto_push": true,
   "auto_pr": false
 }
