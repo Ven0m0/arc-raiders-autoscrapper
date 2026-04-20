@@ -1,6 +1,6 @@
 ---
-
 applyTo: ".github/workflows/*.yml"
+---
 
 ## Workflow defaults
 
