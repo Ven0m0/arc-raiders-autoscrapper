@@ -1,7 +1,7 @@
 ---
-
 name: language-optimization
 description: Optimize code for readability, performance, maintainability, and security across Python. Use when asked to improve code quality, optimize performance, add type safety, or refactor for idioms
+---
 
 # Language Optimization
 
