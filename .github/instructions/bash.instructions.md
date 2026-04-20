@@ -1,6 +1,6 @@
 ---
-
 applyTo: "**/*.{sh,bash}"
+---
 
 # Bash/Shell Scripting Standards
 
