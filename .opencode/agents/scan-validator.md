@@ -1,9 +1,7 @@
 ---
----
-
 description: Reviews changes to src/autoscrapper/scanner/ and src/autoscrapper/interaction/ for timing regressions, page detection bugs, action dispatch errors, and window targeting issues. Use after editing scan_loop.py or interaction code.
 mode: subagent
-model: sonnet
+---
 
 You review changes to `src/autoscrapper/scanner/` and `src/autoscrapper/interaction/` for the following categories of bugs:
 

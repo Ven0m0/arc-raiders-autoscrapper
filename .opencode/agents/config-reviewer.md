@@ -1,9 +1,7 @@
 ---
----
-
 description: Reviews changes to src/autoscrapper/config.py for version bump omissions, field migration errors, and serialization issues. Use after editing config.py.
 mode: subagent
-model: sonnet
+---
 
 You review changes to `src/autoscrapper/config.py` for:
 

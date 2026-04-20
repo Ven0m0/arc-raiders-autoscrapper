@@ -1,9 +1,7 @@
 ---
----
-
 description: Reviews changes to src/autoscrapper/progress/data_update.py for field mapping errors, fallback merge bugs, silent data loss, and generated-file bypass. Use after editing the MetaForge/raidtheory download and normalization pipeline.
 mode: subagent
-model: sonnet
+---
 
 You review changes to `src/autoscrapper/progress/data_update.py` for the following categories of bugs:
 

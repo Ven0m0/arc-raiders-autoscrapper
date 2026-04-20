@@ -1,9 +1,7 @@
 ---
----
-
 description: Reviews changes to TUI screens in src/autoscrapper/tui/ for Textual framework misuse, threading violations, and reactive state bugs. Use after editing tui/app.py, tui/scan.py, tui/rules.py, tui/settings.py, or tui/progress/.
 mode: subagent
-model: sonnet
+---
 
 You review changes to `src/autoscrapper/tui/` for the following categories of bugs:
 

@@ -2,6 +2,7 @@
 name: clean-debug
 description: Prune stale ocr_debug/ images older than N hours (default 24). Prevents the folder from accumulating hundreds of PNGs between sessions.
 disable-model-invocation: true
+---
 
 Delete OCR debug images older than the specified age:
 

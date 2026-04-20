@@ -1,9 +1,7 @@
 ---
----
-
 description: Reviews changes to OCR/scanner files for coordinate space bugs, upscale artifacts, and threshold regressions. Use after editing src/autoscrapper/ocr/ or src/autoscrapper/scanner/.
 mode: subagent
-model: sonnet
+---
 
 You review changes to `src/autoscrapper/ocr/` and `src/autoscrapper/scanner/` for the following categories of bugs:
 

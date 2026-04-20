@@ -1,7 +1,6 @@
 ---
 name: security-reviewer
 description: Security review for input automation and screen interaction code
-model: sonnet
 ---
 
 # Security Code Reviewer Agent

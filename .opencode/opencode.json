@@ -33,6 +33,16 @@
       "src/autoscrapper/items/items_rules.default.json"
     ]
   },
+  "formatter": {
+    "biome": {
+      "command": ["npx", "-y", "@biomejs/biome", "check", "--write", "--format-with-errors=true", "$FILE"],
+      "extensions": [".json", ".js"]
+    },
+    "ruff": {
+      "command": ["uv", "run", "ruff", "format", "$FILE"],
+      "extensions": [".py", ".pyi"]
+    }
+  },
   "experimental": {
     "continue_loop_on_deny": false,
     "batch_tool": true

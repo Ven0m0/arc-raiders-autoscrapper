@@ -1,9 +1,7 @@
 ---
----
-
 description: Security review for input automation and screen interaction code
 mode: subagent
-model: sonnet
+---
 
 # Security Code Reviewer Agent
 

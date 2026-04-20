@@ -1,7 +1,7 @@
 ---
-
 name: verify
 description: Use when user wants to Run the full validation suite (lint + types + tests) before marking any code change done.
+---
 
 Run these commands in sequence from the project root. Stop and report on the first failure.
 
