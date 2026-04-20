@@ -1,4 +1,5 @@
 ---
+---
 
 name: rules-reviewer
 description: Reviews changes to src/autoscrapper/core/item_actions.py, src/autoscrapper/items/rules_store.py, and rule resolution logic for precedence bugs, default-rule overrides, and action mapping errors.

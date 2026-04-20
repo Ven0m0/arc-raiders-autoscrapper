@@ -158,5 +158,6 @@ data on demand.
   (wikiUses field on items):
 `uv sync --extra scraper`
 Real update (writes tracked files):
+`uv run python scripts/update_snapshot_and_defaults.py`
 Dry run (no tracked file writes):
 `uv run python scripts/update_snapshot_and_defaults.py --dry-run`

@@ -5,6 +5,27 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [Unreleased]
+
+### Fixed
+
+- OCR: robust title-band extraction for rarity-coloured context-menu items; improved action-prefix filter
+- Security: path traversal vulnerability in failure corpus file handling (was reachable via crafted corpus filenames)
+- Type safety: resolved 81 basedpyright errors across `progress`, `tui`, `ocr`, and `scanner` modules
+- Python 3 exception syntax errors in several exception-handling clauses
+
+### Added
+
+- OCR corpus label metadata for improved debug categorisation
+- Test coverage: `find_context_menu_crop` bounds, `find_infobox_with_debug` error paths, `isolate_menu_panel` edge cases, `__main__.py` entry-point, `OcrFailureSample.is_authoritative` property
+
+### Tooling
+
+- Kilo code-editor support: `.kilo/` suite with agents, skills, biome + ruff formatter config
+- Claude Code: push-guard hook, dirty-state check hook, and `test-generator` agent
+- Pre-commit: fixed `uv` invocation, optimised hook config, bumped all hook revisions
+- Agent/skill YAML frontmatter restored across `.kilo/`, `.opencode/`, and `.claude/` agent directories (closing `---` was stripped by rumdl)
+
 ## [0.9.0] – 2026-04-02
 
 ### Changed
@@ -149,13 +170,13 @@ dxcam screen capture with monitor display logging
 OCR debug hooks and raw-text fallback for unreadable cells
 Basic README with setup and usage instructions
 
-[Unreleased]: https://github.com/zappybiby/ArcRaiders-AutoScrapper/compare/HEAD...HEAD
-[0.9.0]: https://github.com/zappybiby/ArcRaiders-AutoScrapper/commits/main
-[0.8.0]: https://github.com/zappybiby/ArcRaiders-AutoScrapper/compare/1a2d903...cc22f46
-[0.7.0]: https://github.com/zappybiby/ArcRaiders-AutoScrapper/compare/a47c087...8a445ff
-[0.6.0]: https://github.com/zappybiby/ArcRaiders-AutoScrapper/compare/a47c087...25bd0da
-[0.5.0]: https://github.com/zappybiby/ArcRaiders-AutoScrapper/compare/7db7bc7...ab7ba16
-[0.4.0]: https://github.com/zappybiby/ArcRaiders-AutoScrapper/compare/cb7b036...bf28b9e
-[0.3.0]: https://github.com/zappybiby/ArcRaiders-AutoScrapper/compare/e00320c...2bacaaa
-[0.2.0]: https://github.com/zappybiby/ArcRaiders-AutoScrapper/compare/c75e3d8...e00320c
-[0.1.0]: https://github.com/zappybiby/ArcRaiders-AutoScrapper/commit/c75e3d8
+[Unreleased]: https://github.com/Ven0m0/arc-raiders-autoscrapper/compare/main...HEAD
+[0.9.0]: https://github.com/Ven0m0/arc-raiders-autoscrapper/commits/main
+[0.8.0]: https://github.com/Ven0m0/arc-raiders-autoscrapper/compare/1a2d903...cc22f46
+[0.7.0]: https://github.com/Ven0m0/arc-raiders-autoscrapper/compare/a47c087...8a445ff
+[0.6.0]: https://github.com/Ven0m0/arc-raiders-autoscrapper/compare/a47c087...25bd0da
+[0.5.0]: https://github.com/Ven0m0/arc-raiders-autoscrapper/compare/7db7ba6...ab7ba16
+[0.4.0]: https://github.com/Ven0m0/arc-raiders-autoscrapper/compare/cb7b036...bf28b9e
+[0.3.0]: https://github.com/Ven0m0/arc-raiders-autoscrapper/compare/e00320c...2bacaaa
+[0.2.0]: https://github.com/Ven0m0/arc-raiders-autoscrapper/compare/c75e3d8...e00320c
+[0.1.0]: https://github.com/Ven0m0/arc-raiders-autoscrapper/commit/c75e3d8
