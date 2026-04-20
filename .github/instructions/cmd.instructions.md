@@ -1,6 +1,6 @@
 ---
-
 applyTo: "**/*.{bat,cmd}"
+---
 
 # CMD/Batch Scripting Standards
 
