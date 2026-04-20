@@ -1,7 +1,7 @@
 ---
-
 name: mcp-use
 description: Proactively discover and use MCP servers and MCP tools before native CLI tools. Use when searching, reading, editing, refactoring, planning, or researching so Copilot gets higher-signal results with less context waste
+---
 
 # MCP Use
 
