@@ -194,3 +194,13 @@ When you update docs or agent guidance, keep the hierarchy clear. Put stable,
 repo-wide rules here, keep startup instructions short in
 `.github/copilot-instructions.md`, and avoid duplicating large rule blocks
 across multiple files.
+
+## Git and remote rules
+
+The only permitted remote for pushes and pull requests is the owner's personal
+fork: `https://github.com/Ven0m0/arc-raiders-autoscrapper`.
+
+Never push branches or create pull requests against the upstream repository at
+`https://github.com/zappybiby/ArcRaiders-AutoScrapper`. If `gh pr create`
+would default to that upstream, pass `--repo Ven0m0/arc-raiders-autoscrapper`
+explicitly or push without opening a PR.
