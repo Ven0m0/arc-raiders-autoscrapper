@@ -1,7 +1,7 @@
 ---
-
 name: codebase-index
 description: Index and search the Arc Raiders AutoScrapper codebase efficiently. Use when you need the repo map, hotspots, or the right module for a change.
+---
 
 ## Codebase index
 
