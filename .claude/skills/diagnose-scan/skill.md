@@ -1,7 +1,7 @@
 ---
-
 name: diagnose-scan
 description: Run a dry-run scan, capture output, then route to the correct reviewer agent based on failure type (OCR errors → ocr-reviewer, timing/detection → scan-validator, rules → rules-reviewer).
+---
 
 ## Diagnose Scan Failures
 
