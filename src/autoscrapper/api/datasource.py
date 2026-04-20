@@ -91,7 +91,7 @@ class APIDataSource:
         _log.info("api: Fetched %d items from stash", len(results))
         return results
 
-    def get_stats(self) -> "ScanStats":
+    def get_stats(self) -> ScanStats:
         """Get scan stats for API fetch."""
         from ..scanner.types import ScanStats
 
@@ -110,7 +110,7 @@ def fetch_stash_as_scan_results(
     actions: ActionMap,
     api_settings: ApiSettings | None = None,
     dry_run: bool = False,
-) -> tuple[list[ItemActionResult], "ScanStats"]:
+) -> tuple[list[ItemActionResult], ScanStats]:
     """Fetch stash from API and convert to scan results format.
 
     Args:

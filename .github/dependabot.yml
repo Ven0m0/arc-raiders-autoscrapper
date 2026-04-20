@@ -28,7 +28,6 @@ updates:
     versioning-strategy: auto
     rebase-strategy: auto
     target-branch: main
-
   # GitHub Actions
   - package-ecosystem: github-actions
     directory: /

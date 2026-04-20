@@ -21,7 +21,7 @@ _api_line: PyTessBaseAPI | None = None
 _api_single_word: PyTessBaseAPI | None = None
 _api_sparse: PyTessBaseAPI | None = None
 _tessdata_dir: str | None = None
-_backend_info: "OcrBackendInfo | None" = None
+_backend_info: OcrBackendInfo | None = None
 
 
 @dataclass(frozen=True, slots=True)

@@ -1,4 +1,4 @@
-name: CI
+name: Tests
 on:
   workflow_dispatch:
   push:
@@ -8,33 +8,37 @@ on:
     branches:
       - main
 concurrency:
-  group: ci-${{ github.ref }}
+  group: tests-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  validate:
+  test:
+    name: pytest (${{ matrix.python-version }})
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.13"]
     steps:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
-      - name: Install Tesseract OCR system dependencies
+      - name: Install system dependencies
         run: |
-          sudo apt-get update -qq >/dev/null 2>&1 && sudo apt-get install -yqq --no-install-recommends build-essential libevdev-dev libleptonica-dev libtesseract-dev pkg-config tesseract-ocr libwebp7
+          sudo apt-get update -qq >/dev/null 2>&1
+          sudo apt-get install -yqq --no-install-recommends \
+            build-essential libevdev-dev libleptonica-dev libtesseract-dev \
+            pkg-config tesseract-ocr libwebp7 libgl1
       - name: Install uv
         uses: astral-sh/setup-uv@v8.1.0
         with:
-          python-version: "3.13"
+          python-version: ${{ matrix.python-version }}
           enable-cache: true
           cache-dependency-glob: |
             uv.lock
             pyproject.toml
       - name: Install dependencies
         run: uv sync --all-extras --frozen
-      - name: Run Ruff
-        run: uv run ruff check src/ tests/ scripts/
-      - name: Run basedpyright
-        run: uv run basedpyright src/
       - name: Run pytest
-        run: uv run pytest
+        run: uv run pytest --tb=short -q

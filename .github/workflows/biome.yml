@@ -10,7 +10,6 @@ on:
 concurrency:
   group: biome-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   biome:
     runs-on: ubuntu-latest
