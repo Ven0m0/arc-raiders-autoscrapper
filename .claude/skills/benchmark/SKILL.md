@@ -1,7 +1,7 @@
 ---
-
 name: benchmark
 description: Use when user wants to Benchmark Tesseract tessdata model variants (fast vs best) for accuracy and speed tradeoffs
+---
 
 Run the Tesseract model benchmark against the current fixture corpus:
 
