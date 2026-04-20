@@ -606,7 +606,7 @@ class TestFindContextMenuCrop:
         assert result is not None
         x, _, w, _ = result
         assert x + w == self._W, "crop right edge should align with screen right edge"
-        expected_w = int(round(450 / 1920 * self._W))
+        expected_w = int(round(_vision._CONTEXT_MENU_WIDTH_NORM * self._W))
         assert w == expected_w, "crop width must be preserved despite shifting"
 
     def test_shifts_up_at_bottom_screen_edge(self):
