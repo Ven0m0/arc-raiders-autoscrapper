@@ -108,6 +108,8 @@ preview = true
 quote-style = "double"
 indent-style = "space"
 preview = true
+line-ending = "auto"
+docstring-code-format = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
