@@ -91,7 +91,7 @@ def _coerce_positive_int(value: Any) -> int | None:
 
 
 def _coerce_non_negative_int(value: Any) -> int | None:
-    if value is None:
+    if value is None or isinstance(value, (bool, float)):
         return None
     try:
         result = int(value)
