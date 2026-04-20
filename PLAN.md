@@ -1,12 +1,12 @@
 ---
-
 title: Consolidated implementation plan
 status: active
 updated: 2026-04-20
 merged_from:
-legacy root plan
-legacy API vision note
-archived .kilo draft plans
+- legacy root plan
+- legacy API vision note
+- archived .kilo draft plans
+---
 
 ## Purpose
 
