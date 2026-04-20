@@ -113,7 +113,7 @@ def _format_exception_for_ui(exc: BaseException, *, context: str) -> str:
 
 
 class TextualScanProgress(ScanProgress):
-    def __init__(self, updates: "queue.Queue[ScanUpdate]") -> None:
+    def __init__(self, updates: queue.Queue[ScanUpdate]) -> None:
         self._updates = updates
 
     def _emit(self, kind: str, **payload: object) -> None:
@@ -162,7 +162,7 @@ class ScanScreen(Screen):
         self.use_api = use_api
         self._settings = load_scan_settings()
         self._state = ScanState()
-        self._updates: "queue.Queue[ScanUpdate]" = queue.Queue()
+        self._updates: queue.Queue[ScanUpdate] = queue.Queue()
         self._scan_complete = False
         self._scan_update_timer = None
         self._window_wait_timer = None

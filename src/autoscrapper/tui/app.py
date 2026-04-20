@@ -483,7 +483,7 @@ class AutoScrapperApp(App[None]):
         ]
         return MenuScreen("Progress", items, default_key="1")
 
-    def _sync_hideout_from_api(self, screen: "MenuScreen") -> None:
+    def _sync_hideout_from_api(self, screen: MenuScreen) -> None:
         """Sync hideout progress from arctracker.io API."""
         from ..api.datasource import sync_hideout_to_progress
         from .common import MessageScreen
@@ -494,7 +494,7 @@ class AutoScrapperApp(App[None]):
         except Exception as exc:
             screen.app.push_screen(MessageScreen(f"Failed to sync hideout: {exc}"))
 
-    def _sync_projects_from_api(self, screen: "MenuScreen") -> None:
+    def _sync_projects_from_api(self, screen: MenuScreen) -> None:
         """Sync project progress from arctracker.io API."""
         from ..api.datasource import sync_projects_to_progress
         from .common import MessageScreen

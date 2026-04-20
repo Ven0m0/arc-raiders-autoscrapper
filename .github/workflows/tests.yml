@@ -1,0 +1,46 @@
+name: Tests
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  PYTEST_TIMEOUT: 120
+jobs:
+  test:
+    name: pytest (${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.13"]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -qq >/dev/null 2>&1
+          sudo apt-get install -yqq --no-install-recommends \
+            build-essential libevdev-dev libleptonica-dev libtesseract-dev \
+            pkg-config tesseract-ocr libwebp7 libgl1-mesa-glx
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+          cache-dependency-glob: |
+            uv.lock
+            pyproject.toml
+      - name: Install dependencies
+        run: uv sync --all-extras --frozen
+      - name: Run pytest
+        run: uv run pytest --tb=short -q --timeout=${{ env.PYTEST_TIMEOUT }}

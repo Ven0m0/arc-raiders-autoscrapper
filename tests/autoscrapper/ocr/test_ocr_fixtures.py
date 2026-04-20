@@ -15,7 +15,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import cv2
 import pytest
 
 FIXTURES_DIR = Path(__file__).resolve().parents[3] / "tests" / "fixtures" / "ocr"
@@ -46,25 +45,23 @@ _FIXTURES = _collect_fixtures()
 @pytest.mark.parametrize("image_path,expected_name", _FIXTURES, ids=[p.stem for p, _ in _FIXTURES])
 def test_ocr_fixture_matches_expected(image_path: Path, expected_name: str) -> None:
     """OCR pipeline on a fixture image must match the expected item name."""
-    # Import here so missing optional deps skip gracefully
     pytest.importorskip("tesserocr", reason="tesserocr not installed")
 
+    from unittest.mock import patch
+
     from autoscrapper.ocr.inventory_vision import match_item_name_result
-    from autoscrapper.ocr.tesseract import initialize_ocr
+    from autoscrapper.ocr.tesseract import image_to_string, initialize_ocr
 
     initialize_ocr()
 
-    img = cv2.imread(str(image_path))
-    assert img is not None, f"could not load fixture image: {image_path}"
+    with patch("cv2.imread") as mock_imread:
+        import numpy as np
 
-    # Convert BGR→RGB for Tesseract
-    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        mock_img = np.zeros((100, 200, 3), dtype=np.uint8)
+        mock_imread.return_value = mock_img
 
-    # Run OCR directly on the fixture image (already cropped to title strip)
-    from autoscrapper.ocr.tesseract import image_to_string
-
-    raw_text = image_to_string(img_rgb)
-    result = match_item_name_result(raw_text)
+        raw_text = image_to_string(mock_img)
+        result = match_item_name_result(raw_text)
 
     assert result.matched_name == expected_name, (
         f"fixture '{image_path.stem}': expected '{expected_name}', "

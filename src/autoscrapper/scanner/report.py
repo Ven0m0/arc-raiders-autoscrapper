@@ -19,7 +19,7 @@ def _summarize_results(results: list[ItemActionResult]) -> Counter:
 def _render_scan_overview(
     results: list[ItemActionResult],
     stats: ScanStats,
-    console: "Console | None",
+    console: Console | None,
 ) -> None:
     """
     Display high-level scan metrics (stash total, processed count, pages, time).
@@ -58,7 +58,7 @@ def _render_scan_overview(
     console.print(table)
 
 
-def _render_summary(summary: Counter, console: "Console | None") -> None:
+def _render_summary(summary: Counter, console: Console | None) -> None:
     ordered_keys = [k for k in ("KEEP", "RECYCLE", "SELL") if k in summary]
     ordered_keys += [k for k in ("DRY-KEEP", "DRY-RECYCLE", "DRY-SELL") if k in summary]
     if "UNREADABLE" in summary:
