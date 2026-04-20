@@ -3,25 +3,17 @@
     "fast-filesystem": {
       "type": "stdio",
       "command": "bunx",
-      "args": [
-        "--bun",
-        "fast-filesystem-mcp@latest"
-      ]
+      "args": ["--bun", "fast-filesystem-mcp@latest"]
     },
     "octocode": {
       "type": "stdio",
       "command": "bunx",
-      "args": [
-        "--bun",
-        "octocode-mcp@latest"
-      ]
+      "args": ["--bun", "octocode-mcp@latest"]
     },
     "ast-grep": {
       "type": "stdio",
       "command": "bunx",
-      "args": [
-        "@notprolands/ast-grep-mcp@latest"
-      ]
+      "args": ["@notprolands/ast-grep-mcp@latest"]
     },
     "ref-tools": {
       "type": "http",
@@ -42,10 +34,7 @@
     "github": {
       "type": "stdio",
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-github"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
@@ -53,10 +42,7 @@
     "context7": {
       "type": "stdio",
       "command": "bunx",
-      "args": [
-        "--bun",
-        "@upstash/context7-mcp"
-      ]
+      "args": ["--bun", "@upstash/context7-mcp"]
     }
   }
 }

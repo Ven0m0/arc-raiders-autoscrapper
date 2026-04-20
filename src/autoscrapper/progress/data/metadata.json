@@ -29,9 +29,7 @@
         "available": true,
         "enrichedCount": 90,
         "error": null,
-        "fields": [
-          "wikiUses"
-        ]
+        "fields": ["wikiUses"]
       }
     },
     "quests": {

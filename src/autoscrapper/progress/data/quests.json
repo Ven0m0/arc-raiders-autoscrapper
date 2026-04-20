@@ -2,15 +2,9 @@
   {
     "id": "a-bad-feeling",
     "name": "A Bad Feeling",
-    "objectives": [
-      "Find and search any ARC Probe or ARC Courier"
-    ],
+    "objectives": ["Find and search any ARC Probe or ARC Courier"],
     "requirements": [],
-    "rewardItemIds": [
-      "duct-tape-recipe",
-      "spring",
-      "metal-parts"
-    ],
+    "rewardItemIds": ["duct-tape-recipe", "spring", "metal-parts"],
     "rewards": [
       {
         "id": "1dcfa564-efc5-4e00-aac9-aefe21a8eb31",
@@ -63,11 +57,7 @@
       "Search for any traces of the agricultural research project"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "advanced-mechanical-components",
-      "spring",
-      "medium-gun-parts"
-    ],
+    "rewardItemIds": ["advanced-mechanical-components", "spring", "medium-gun-parts"],
     "rewards": [
       {
         "id": "48ba0f87-b088-4986-bf01-8ab9c8f989e2",
@@ -113,16 +103,9 @@
   {
     "id": "a-better-use",
     "name": "A Better Use",
-    "objectives": [
-      "Request in a Supply Drop from a Call Station",
-      "Loot a Supply Drop"
-    ],
+    "objectives": ["Request in a Supply Drop from a Call Station", "Loot a Supply Drop"],
     "requirements": [],
-    "rewardItemIds": [
-      "stable-stock-i",
-      "extended-light-mag-i",
-      "muzzle-brake-ii"
-    ],
+    "rewardItemIds": ["stable-stock-i", "extended-light-mag-i", "muzzle-brake-ii"],
     "rewards": [
       {
         "id": "ae5fd179-4083-44b6-ba75-b08ee74033f5",
@@ -176,10 +159,7 @@
       "Deliver the Dusty Film Reel to Shani"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "patchwork-warden-color",
-      "coins"
-    ],
+    "rewardItemIds": ["patchwork-warden-color", "coins"],
     "rewards": [
       {
         "id": "afbea550-a188-4784-b459-1f801b912d36",
@@ -220,11 +200,7 @@
       "Nail down the roof plates on the Raider structure near Trapper's Glade"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "heavy-fuze-grenade",
-      "shrapnel-grenade",
-      "snap-blast-grenade"
-    ],
+    "rewardItemIds": ["heavy-fuze-grenade", "shrapnel-grenade", "snap-blast-grenade"],
     "rewards": [
       {
         "id": "e11f919c-d454-49f0-8654-be84fd2a4471",
@@ -270,10 +246,7 @@
   {
     "id": "after-rain-comes",
     "name": "After Rain Comes",
-    "objectives": [
-      "Find the flooded solar panels nearby the Grandioso Apartments",
-      "Repair the solar panels"
-    ],
+    "objectives": ["Find the flooded solar panels nearby the Grandioso Apartments", "Repair the solar panels"],
     "requirements": [
       {
         "id": "8e3a9f13-e8a5-40fc-8b65-0e547cf02061",
@@ -300,11 +273,7 @@
         "quantity": 2
       }
     ],
-    "rewardItemIds": [
-      "antiseptic",
-      "durable-cloth",
-      "blue-light-stick"
-    ],
+    "rewardItemIds": ["antiseptic", "durable-cloth", "blue-light-stick"],
     "rewards": [
       {
         "id": "b42d4c9b-fbd2-4111-9088-4c7577b22d42",
@@ -358,11 +327,7 @@
       "Deliver 1 LiDAR Scanners to Shani"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "smoke-grenade",
-      "zipline",
-      "dam-testing-annex-key"
-    ],
+    "rewardItemIds": ["smoke-grenade", "zipline", "dam-testing-annex-key"],
     "rewards": [
       {
         "id": "3701c5c3-49b9-463a-b934-77239b2847ab",
@@ -414,10 +379,7 @@
       "Deliver the Possibly Toxic Plant to Lance"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "vita-shot",
-      "antiseptic"
-    ],
+    "rewardItemIds": ["vita-shot", "antiseptic"],
     "rewards": [
       {
         "id": "09b44846-db2a-4908-9c09-ef5520b9948a",
@@ -451,15 +413,9 @@
   {
     "id": "a-prime-specimen",
     "name": "A Prime Specimen",
-    "objectives": [
-      "Obtain 2 ARC Powercells",
-      "Interact with any ARC Deforester"
-    ],
+    "objectives": ["Obtain 2 ARC Powercells", "Interact with any ARC Deforester"],
     "requirements": [],
-    "rewardItemIds": [
-      "patrol-car-key",
-      "door-blocker"
-    ],
+    "rewardItemIds": ["patrol-car-key", "door-blocker"],
     "rewards": [
       {
         "id": "dae83aa7-2836-4dca-9862-9eaaf92de313",
@@ -498,10 +454,7 @@
       "Delivery the ESR Analyzer to Lance"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "tactical-mk-3-healing",
-      "surge-shield-recharger"
-    ],
+    "rewardItemIds": ["tactical-mk-3-healing", "surge-shield-recharger"],
     "rewards": [
       {
         "id": "eb2b01df-83fc-4c83-ae59-a0d02a5f240a",
@@ -543,12 +496,7 @@
       "Search the Controlled Access Zone for any clues about the foreman's reconstruction project"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "anvil-ii",
-      "anvil-splitter",
-      "extended-barrel",
-      "heavy-ammo"
-    ],
+    "rewardItemIds": ["anvil-ii", "anvil-splitter", "extended-barrel", "heavy-ammo"],
     "rewards": [
       {
         "id": "6f40e2c4-cda5-4412-9371-1aa2c6bad557",
@@ -613,11 +561,7 @@
       "Find and unlock the rear door of an armored patrol car"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "blue-yellow-aviator-color",
-      "defibrillator",
-      "smoke-grenade"
-    ],
+    "rewardItemIds": ["blue-yellow-aviator-color", "defibrillator", "smoke-grenade"],
     "rewards": [
       {
         "id": "f2186917-7e65-40fd-a6ea-509d9eb0ab5d",
@@ -670,11 +614,7 @@
       "Hoist the flag on the small platform overlooking the Red Lake"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "duct-tape-recipe",
-      "mod-components",
-      "aviator-outfit"
-    ],
+    "rewardItemIds": ["duct-tape-recipe", "mod-components", "aviator-outfit"],
     "rewards": [
       {
         "id": "323948bd-705f-4d95-ae86-91a0e150a953",
@@ -727,12 +667,7 @@
       "Search the truck for clues about the saboteur's identity"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "tactical-mk-2",
-      "pulse-mine",
-      "gas-mine",
-      "zipline"
-    ],
+    "rewardItemIds": ["tactical-mk-2", "pulse-mine", "gas-mine", "zipline"],
     "rewards": [
       {
         "id": "264da55a-dc2c-466b-a112-3583a60c1c3b",
@@ -797,12 +732,7 @@
       "Inspect the grave"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "blue-light-stick",
-      "rosary",
-      "noisemaker",
-      "goggles-radio-renegade-variant"
-    ],
+    "rewardItemIds": ["blue-light-stick", "rosary", "noisemaker", "goggles-radio-renegade-variant"],
     "rewards": [
       {
         "id": "7ae88050-9463-4c10-83b7-447749b48978",
@@ -867,11 +797,7 @@
       "On Buried City, mark the building with the mural in the Buried Properties"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "stable-stock-iii",
-      "medium-ammo",
-      "renegade-i"
-    ],
+    "rewardItemIds": ["stable-stock-iii", "medium-ammo", "renegade-i"],
     "rewards": [
       {
         "id": "6867b691-ce6d-4c52-81ac-d57d6cd5a116",
@@ -923,10 +849,7 @@
       "Search for bee hives around the Olive Grove"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "advanced-electrical-components",
-      "sensors-recipe"
-    ],
+    "rewardItemIds": ["advanced-electrical-components", "sensors-recipe"],
     "rewards": [
       {
         "id": "3810858b-2467-44a6-9b1e-03b72540a32c",
@@ -960,15 +883,9 @@
   {
     "id": "bombing-run",
     "name": "Bombing Run",
-    "objectives": [
-      "Destroy a Bombardier",
-      "Deliver a Bombardier Cell to Shani"
-    ],
+    "objectives": ["Destroy a Bombardier", "Deliver a Bombardier Cell to Shani"],
     "requirements": [],
-    "rewardItemIds": [
-      "finger-gun-single-shot-emote",
-      "raider-tokens"
-    ],
+    "rewardItemIds": ["finger-gun-single-shot-emote", "raider-tokens"],
     "rewards": [
       {
         "id": "2e92d563-15f7-4d91-89ef-2f6b62061e34",
@@ -1013,11 +930,7 @@
       "Deliver First Wave Rations to Tian Wen"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "compensator-ii",
-      "medium-ammo",
-      "arpeggio-i"
-    ],
+    "rewardItemIds": ["compensator-ii", "medium-ammo", "arpeggio-i"],
     "rewards": [
       {
         "id": "38ee0ec0-8d68-439d-8b8f-a6335051fec1",
@@ -1071,11 +984,7 @@
       "Deliver 3 books to Apollo"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "explosive-mine",
-      "jolt-mine",
-      "heavy-fuze-grenade"
-    ],
+    "rewardItemIds": ["explosive-mine", "jolt-mine", "heavy-fuze-grenade"],
     "rewards": [
       {
         "id": "24f8e064-5ce4-4ede-88f4-7f4c35191991",
@@ -1127,11 +1036,7 @@
       "Deliver 2 Journals to Celeste"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "exodus-modules",
-      "heavy-gun-parts",
-      "magnetic-accelerator"
-    ],
+    "rewardItemIds": ["exodus-modules", "heavy-gun-parts", "magnetic-accelerator"],
     "rewards": [
       {
         "id": "23f60ae6-17bd-45cf-8cd9-d8da7d478181",
@@ -1208,11 +1113,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "lure-grenade",
-      "noisemaker",
-      "tagging-grenade"
-    ],
+    "rewardItemIds": ["lure-grenade", "noisemaker", "tagging-grenade"],
     "rewards": [
       {
         "id": "ea4e7c86-730b-4956-b02f-48ce19b39a27",
@@ -1258,10 +1159,7 @@
   {
     "id": "clearer-skies",
     "name": "Clearer Skies",
-    "objectives": [
-      "Destroy 3 ARC enemies",
-      "Get 3 ARC Alloy for Shani"
-    ],
+    "objectives": ["Destroy 3 ARC enemies", "Get 3 ARC Alloy for Shani"],
     "requirements": [
       {
         "id": "dc69ffa8-bcbf-4e37-b599-f17f43d45046",
@@ -1276,11 +1174,7 @@
         "quantity": 3
       }
     ],
-    "rewardItemIds": [
-      "sterilized-bandage",
-      "light-shield",
-      "black-hiker-colour"
-    ],
+    "rewardItemIds": ["sterilized-bandage", "light-shield", "black-hiker-colour"],
     "rewards": [
       {
         "id": "0ed1e108-9b8d-491e-9ae4-980df4feb5bb",
@@ -1326,15 +1220,9 @@
   {
     "id": "cold-storage",
     "name": "Cold Storage",
-    "objectives": [
-      "In one round",
-      "Search any J Kozma Ventures Container"
-    ],
+    "objectives": ["In one round", "Search any J Kozma Ventures Container"],
     "requirements": [],
-    "rewardItemIds": [
-      "raider-hatch-key",
-      "gas-mine"
-    ],
+    "rewardItemIds": ["raider-hatch-key", "gas-mine"],
     "rewards": [
       {
         "id": "206fc685-bc2e-4072-91f8-99a24697a0c9",
@@ -1376,11 +1264,7 @@
       "Deliver Spotter Relay to Shani"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "firecracker",
-      "fireworks-box",
-      "red-radio-renegade-color"
-    ],
+    "rewardItemIds": ["firecracker", "fireworks-box", "red-radio-renegade-color"],
     "rewards": [
       {
         "id": "f6aff188-a77b-4048-a1a6-81d1467cad51",
@@ -1434,11 +1318,7 @@
       "Boot the antenna terminal near the Red Tower"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "anvil-iii",
-      "heavy-ammo",
-      "crimson-racer-aviator-colour"
-    ],
+    "rewardItemIds": ["anvil-iii", "heavy-ammo", "crimson-racer-aviator-colour"],
     "rewards": [
       {
         "id": "43fc1c42-bda8-47f6-bb81-31a8f15a2201",
@@ -1490,10 +1370,7 @@
       "Use the Magnetic Decryptor on the top floor of the Arrival Building"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "trailblazer-grenade",
-      "defibrillator"
-    ],
+    "rewardItemIds": ["trailblazer-grenade", "defibrillator"],
     "rewards": [
       {
         "id": "836a16b9-c45f-4c41-b10e-8f0950dc8ca4",
@@ -1532,10 +1409,7 @@
       "Locate the Dead Drop inside the Santa Maria Houses in Old Town"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "advanced-electrical-components",
-      "speaker-component"
-    ],
+    "rewardItemIds": ["advanced-electrical-components", "speaker-component"],
     "rewards": [
       {
         "id": "10a4860c-674e-42a5-bb3b-458ef544e895",
@@ -1569,12 +1443,7 @@
   {
     "id": "doctors-orders",
     "name": "Doctor's Orders",
-    "objectives": [
-      "Obtain 1 Syringe",
-      "Obtain 2 Antiseptic",
-      "Obtain 1 Durable Cloth",
-      "Obtain 1 Great Mullein"
-    ],
+    "objectives": ["Obtain 1 Syringe", "Obtain 2 Antiseptic", "Obtain 1 Durable Cloth", "Obtain 1 Great Mullein"],
     "requirements": [
       {
         "id": "3ab5c8c2-0573-46c0-aedf-27526268ef34",
@@ -1625,11 +1494,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "adrenaline-shot",
-      "sterilized-bandage",
-      "surge-shield-recharger"
-    ],
+    "rewardItemIds": ["adrenaline-shot", "sterilized-bandage", "surge-shield-recharger"],
     "rewards": [
       {
         "id": "7e399c7b-a4f4-4847-888b-9ace1f8d25d4",
@@ -1675,14 +1540,9 @@
   {
     "id": "dormant-barons",
     "name": "Dormant Barons",
-    "objectives": [
-      "Find and loot a Baron Husk"
-    ],
+    "objectives": ["Find and loot a Baron Husk"],
     "requirements": [],
-    "rewardItemIds": [
-      "door-blocker",
-      "lil-smoke-grenade"
-    ],
+    "rewardItemIds": ["door-blocker", "lil-smoke-grenade"],
     "rewards": [
       {
         "id": "621a41a7-9d21-4bb2-a122-d9eda561accb",
@@ -1723,10 +1583,7 @@
       "Collect the reward"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "medium-shield",
-      "combat-mk-1"
-    ],
+    "rewardItemIds": ["medium-shield", "combat-mk-1"],
     "rewards": [
       {
         "id": "7644473c-3190-4ad5-a907-9d9cf9b5ccca",
@@ -1785,11 +1642,7 @@
       "Deliver Major Aiva's Patch to Celeste."
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "crude-explosives",
-      "music-box",
-      "processor"
-    ],
+    "rewardItemIds": ["crude-explosives", "music-box", "processor"],
     "rewards": [
       {
         "id": "3a9f2caa-a869-49cc-bd38-86c5e0f0ea9f",
@@ -1841,10 +1694,7 @@
       "Get the Espresso Machine Parts for Apollo"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "coffee-pot",
-      "adrenaline-shot"
-    ],
+    "rewardItemIds": ["coffee-pot", "adrenaline-shot"],
     "rewards": [
       {
         "id": "2218412f-4404-4d93-a617-7bf45c5801e5",
@@ -1884,11 +1734,7 @@
       "On Buried City, install a LiDAR Scanner on top of the Galleria sign"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "tagging-grenade",
-      "vita-spray",
-      "yellow-light-stick"
-    ],
+    "rewardItemIds": ["tagging-grenade", "vita-spray", "yellow-light-stick"],
     "rewards": [
       {
         "id": "23cbf8f0-aeb3-4e89-904a-5a0f5dd86c95",
@@ -1952,10 +1798,7 @@
         "quantity": 3
       }
     ],
-    "rewardItemIds": [
-      "extended-shotgun-mag-ii",
-      "extended-medium-mag-ii"
-    ],
+    "rewardItemIds": ["extended-shotgun-mag-ii", "extended-medium-mag-ii"],
     "rewards": [
       {
         "id": "b43904df-2d96-4ae0-afe7-3036773def99",
@@ -2010,11 +1853,7 @@
         "quantity": 4
       }
     ],
-    "rewardItemIds": [
-      "medium-gun-parts",
-      "advanced-mechanical-components",
-      "helmet-radio-renegade-variant"
-    ],
+    "rewardItemIds": ["medium-gun-parts", "advanced-mechanical-components", "helmet-radio-renegade-variant"],
     "rewards": [
       {
         "id": "46f48ad2-c610-4afc-b5dc-99906a3caed3",
@@ -2066,10 +1905,7 @@
       "Boot the main frame data terminal in the Cultural Archives service backrooms"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "showstopper",
-      "trailblazer-grenade"
-    ],
+    "rewardItemIds": ["showstopper", "trailblazer-grenade"],
     "rewards": [
       {
         "id": "3b17dee4-c4a2-4756-aebe-86db2ea6dbe4",
@@ -2112,10 +1948,7 @@
       "Bring the Secret Meeting Info to Shani"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "aphelion-rifle",
-      "energy-ammo"
-    ],
+    "rewardItemIds": ["aphelion-rifle", "energy-ammo"],
     "rewards": [
       {
         "id": "87ae969b-1271-436b-ba78-e6bcd8b22f5e",
@@ -2155,11 +1988,7 @@
       "On Buried City, visit the barricaded area on floor 6 of the Space Travel Building."
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "speaker-component",
-      "lure-grenade-recipe",
-      "electrical-components"
-    ],
+    "rewardItemIds": ["speaker-component", "lure-grenade-recipe", "electrical-components"],
     "rewards": [
       {
         "id": "3369cd02-78ae-4fa1-883b-a81201b6b94d",
@@ -2212,10 +2041,7 @@
       "Photograph the abandoned housing project"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "tangerine-warden-color",
-      "power-rod"
-    ],
+    "rewardItemIds": ["tangerine-warden-color", "power-rod"],
     "rewards": [
       {
         "id": "43bb79e1-839c-41ab-ac33-4516caaea46a",
@@ -2249,15 +2075,9 @@
   {
     "id": "hatch-repairs",
     "name": "Hatch Repairs",
-    "objectives": [
-      "Repair the leaking hydraulic pipes near a Raider Hatch",
-      "Loot an ARC husk"
-    ],
+    "objectives": ["Repair the leaking hydraulic pipes near a Raider Hatch", "Loot an ARC husk"],
     "requirements": [],
-    "rewardItemIds": [
-      "raider-hatch-key",
-      "binoculars"
-    ],
+    "rewardItemIds": ["raider-hatch-key", "binoculars"],
     "rewards": [
       {
         "id": "66d2a7a9-5fb4-4660-9923-99fa4f0ad1a8",
@@ -2310,11 +2130,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "mechanical-components",
-      "simple-gun-parts",
-      "burltetta-recipe"
-    ],
+    "rewardItemIds": ["mechanical-components", "simple-gun-parts", "burltetta-recipe"],
     "rewards": [
       {
         "id": "3e9ca817-41f9-4b57-b375-75905bdef44c",
@@ -2360,15 +2176,9 @@
   {
     "id": "in-my-image",
     "name": "In My Image",
-    "objectives": [
-      "Deploy into Stella Montis",
-      "Find and search 3 Androids"
-    ],
+    "objectives": ["Deploy into Stella Montis", "Find and search 3 Androids"],
     "requirements": [],
-    "rewardItemIds": [
-      "green-light-stick",
-      "looting-mk-2"
-    ],
+    "rewardItemIds": ["green-light-stick", "looting-mk-2"],
     "rewards": [
       {
         "id": "de6c3d8e-49b8-4f2d-8d14-2c4d89d15460",
@@ -2402,10 +2212,7 @@
   {
     "id": "into-the-fray",
     "name": "Into the Fray",
-    "objectives": [
-      "Destroy a Leaper",
-      "Obtain a Leaper Pulse Unit"
-    ],
+    "objectives": ["Destroy a Leaper", "Obtain a Leaper Pulse Unit"],
     "requirements": [
       {
         "id": "78ce6f9c-0410-436e-b108-afa97f44039c",
@@ -2420,12 +2227,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "burgerboy-backpack-charm",
-      "vulcano-iii",
-      "radio-renegade-outfit",
-      "shotgun-ammo"
-    ],
+    "rewardItemIds": ["burgerboy-backpack-charm", "vulcano-iii", "radio-renegade-outfit", "shotgun-ammo"],
     "rewards": [
       {
         "id": "9c5e8089-447a-4f8c-8dbe-c9ee2691dff6",
@@ -2488,10 +2290,7 @@
       "Find Bilgunn's shelter, and search for any clues of his presence."
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "pulse-mine",
-      "flame-spray"
-    ],
+    "rewardItemIds": ["pulse-mine", "flame-spray"],
     "rewards": [
       {
         "id": "215b16a8-060a-4cc9-b860-d6fc2c5019d2",
@@ -2532,11 +2331,7 @@
       "Return the helmet to the memorial"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "duct-tape-recipe",
-      "magnet",
-      "simple-gun-parts"
-    ],
+    "rewardItemIds": ["duct-tape-recipe", "magnet", "simple-gun-parts"],
     "rewards": [
       {
         "id": "3fd923b5-1e87-4edc-8be6-41934582dec8",
@@ -2591,10 +2386,7 @@
       "Bring the Official Shutdown Documentation to Shani"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "yellow-light-stick-blueprint",
-      "white-indigo-warden-color"
-    ],
+    "rewardItemIds": ["yellow-light-stick-blueprint", "white-indigo-warden-color"],
     "rewards": [
       {
         "id": "c7149989-fdc6-4e00-a401-82ab2a98574a",
@@ -2636,11 +2428,7 @@
       "Document the pharmacist's skills"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "defibrillator",
-      "surge-shield-recharger",
-      "sterilized-bandage"
-    ],
+    "rewardItemIds": ["defibrillator", "surge-shield-recharger", "sterilized-bandage"],
     "rewards": [
       {
         "id": "49f51118-8d22-4276-bf95-621f68bab2ab",
@@ -2693,9 +2481,7 @@
       "Establish a connection from the terminal"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "snap-hook"
-    ],
+    "rewardItemIds": ["snap-hook"],
     "rewards": [
       {
         "id": "b054a81a-08c4-4a46-bb7c-2c992b595697",
@@ -2723,10 +2509,7 @@
       "Follow the Clues"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "angled-grip-ii",
-      "shotgun-choke-ii"
-    ],
+    "rewardItemIds": ["angled-grip-ii", "shotgun-choke-ii"],
     "rewards": [
       {
         "id": "7d492de5-0a15-4a03-ba62-98756e4590b0",
@@ -2760,17 +2543,9 @@
   {
     "id": "market-correction",
     "name": "Market Correction",
-    "objectives": [
-      "In One Round -",
-      "Locate the cache near Marano Station.",
-      "Sabotage the cache"
-    ],
+    "objectives": ["In One Round -", "Locate the cache near Marano Station.", "Sabotage the cache"],
     "requirements": [],
-    "rewardItemIds": [
-      "compensator-i",
-      "extended-light-mag-i",
-      "silencer-ii"
-    ],
+    "rewardItemIds": ["compensator-i", "extended-light-mag-i", "silencer-ii"],
     "rewards": [
       {
         "id": "1f668ea9-4dac-48f1-afd3-aca099719d27",
@@ -2822,11 +2597,7 @@
       "On Dam Battlegrounds, search 2 containers in the Research & Administration building's medical room"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "defibrillator",
-      "vita-shot",
-      "banana-backpack-charm"
-    ],
+    "rewardItemIds": ["defibrillator", "vita-shot", "banana-backpack-charm"],
     "rewards": [
       {
         "id": "69fbfd5e-8ae5-4b9e-a122-cb57882c274f",
@@ -2872,10 +2643,7 @@
   {
     "id": "mixed-signals",
     "name": "Mixed Signals",
-    "objectives": [
-      "Destroy an ARC Surveyor",
-      "Obtain 1 Surveyor Vault"
-    ],
+    "objectives": ["Destroy an ARC Surveyor", "Obtain 1 Surveyor Vault"],
     "requirements": [
       {
         "id": "231279c0-568e-4d7c-9854-60716126c483",
@@ -2890,10 +2658,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "photoelectric-cloak",
-      "raider-hatch-key"
-    ],
+    "rewardItemIds": ["photoelectric-cloak", "raider-hatch-key"],
     "rewards": [
       {
         "id": "41344032-88b4-4992-ac12-05dc8329688a",
@@ -2946,11 +2711,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "showstopper",
-      "smoke-grenade",
-      "fireworks-box"
-    ],
+    "rewardItemIds": ["showstopper", "smoke-grenade", "fireworks-box"],
     "rewards": [
       {
         "id": "122c7f26-ce55-4181-aebf-47c6171ab5f5",
@@ -3001,10 +2762,7 @@
       "Repair the antenna on the roof of the Field Depot (In one Round)"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "black-and-white-origin-color",
-      "defibrillator"
-    ],
+    "rewardItemIds": ["black-and-white-origin-color", "defibrillator"],
     "rewards": [
       {
         "id": "464f2960-6bc8-4769-988c-c03bdcd1f1ee",
@@ -3038,14 +2796,9 @@
   {
     "id": "on-deaf-ears",
     "name": "On Deaf Ears",
-    "objectives": [
-      "Find the researcher's guest logs on the reception computers"
-    ],
+    "objectives": ["Find the researcher's guest logs on the reception computers"],
     "requirements": [],
-    "rewardItemIds": [
-      "lure-grenade",
-      "noisemaker"
-    ],
+    "rewardItemIds": ["lure-grenade", "noisemaker"],
     "rewards": [
       {
         "id": "4b4f06fe-c5aa-4ff1-ad51-f2267a3c8016",
@@ -3087,11 +2840,7 @@
       "Find the container covered in tarp, and mark it"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "sterilized-bandage",
-      "surge-shield-recharger",
-      "tactical-mk-3-healing"
-    ],
+    "rewardItemIds": ["sterilized-bandage", "surge-shield-recharger", "tactical-mk-3-healing"],
     "rewards": [
       {
         "id": "ff9b5eae-436b-4ca8-8133-a192252e0c3a",
@@ -3143,11 +2892,7 @@
       "Complete the antenna installation on the roof"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "jolt-mine",
-      "raider-hatch-key",
-      "buried-city-town-hall-key"
-    ],
+    "rewardItemIds": ["jolt-mine", "raider-hatch-key", "buried-city-town-hall-key"],
     "rewards": [
       {
         "id": "28533e49-45c6-41bd-bb5a-2576486d23bb",
@@ -3193,10 +2938,7 @@
   {
     "id": "out-of-the-shadows",
     "name": "Out of the Shadows",
-    "objectives": [
-      "Destroy a Rocketeer",
-      "Obtain a Rocketeer Driver"
-    ],
+    "objectives": ["Destroy a Rocketeer", "Obtain a Rocketeer Driver"],
     "requirements": [
       {
         "id": "04662365-f4a1-4fd9-a967-4f381fc55271",
@@ -3211,10 +2953,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "surge-shield-recharger",
-      "wolfpack"
-    ],
+    "rewardItemIds": ["surge-shield-recharger", "wolfpack"],
     "rewards": [
       {
         "id": "afcfd0d9-bc75-4a01-990a-024739195659",
@@ -3255,11 +2994,7 @@
       "Deliver Dodger's Note to Tian Wen"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "extended-medium-mag-iii",
-      "silencer-ii",
-      "gothic-graffiti-aviator-color"
-    ],
+    "rewardItemIds": ["extended-medium-mag-iii", "silencer-ii", "gothic-graffiti-aviator-color"],
     "rewards": [
       {
         "id": "166011a2-9723-453c-9052-4f9bb31437dd",
@@ -3312,11 +3047,7 @@
       "Find the researcher's flat and search for any research data"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "advanced-electrical-components",
-      "seeker-grenade",
-      "raider-hatch-key"
-    ],
+    "rewardItemIds": ["advanced-electrical-components", "seeker-grenade", "raider-hatch-key"],
     "rewards": [
       {
         "id": "55d63fa2-aa96-43d8-b183-08ba727e2614",
@@ -3362,15 +3093,9 @@
   {
     "id": "picking-up-the-pieces",
     "name": "Picking Up The Pieces",
-    "objectives": [
-      "Visit any area on your map with a loot category icon",
-      "Loot 3 containers"
-    ],
+    "objectives": ["Visit any area on your map with a loot category icon", "Loot 3 containers"],
     "requirements": [],
-    "rewardItemIds": [
-      "medium-ammo",
-      "rattler-iii"
-    ],
+    "rewardItemIds": ["medium-ammo", "rattler-iii"],
     "rewards": [
       {
         "id": "a72a187b-6d02-4ae7-b582-5c3bc8a4e1ce",
@@ -3411,12 +3136,7 @@
       "Enable the power switch on the Fuse Bo"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "explosive-compound",
-      "oil",
-      "bag-radio-renegade-variant",
-      "wires-recipe"
-    ],
+    "rewardItemIds": ["explosive-compound", "oil", "bag-radio-renegade-variant", "wires-recipe"],
     "rewards": [
       {
         "id": "3ce10e27-1702-4964-af97-539902352fb1",
@@ -3480,11 +3200,7 @@
       "Search for the records"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "adrenaline-shot",
-      "tactical-mk-3-healing",
-      "heavy-shield"
-    ],
+    "rewardItemIds": ["adrenaline-shot", "tactical-mk-3-healing", "heavy-shield"],
     "rewards": [
       {
         "id": "76b34db8-c579-42cd-9c4b-330712233896",
@@ -3537,11 +3253,7 @@
       "Investigate the unknown ARC machines"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "door-blocker",
-      "zipline",
-      "barricade-kit"
-    ],
+    "rewardItemIds": ["door-blocker", "zipline", "barricade-kit"],
     "rewards": [
       {
         "id": "61762de3-37b1-423b-b57d-2be07dc7d4b8",
@@ -3587,15 +3299,9 @@
   {
     "id": "safe-passage",
     "name": "Safe Passage",
-    "objectives": [
-      "Destroy 2 ARC enemies using any explosive grenade"
-    ],
+    "objectives": ["Destroy 2 ARC enemies using any explosive grenade"],
     "requirements": [],
-    "rewardItemIds": [
-      "shrapnel-grenade",
-      "lil-smoke-grenade",
-      "barricade-kit"
-    ],
+    "rewardItemIds": ["shrapnel-grenade", "lil-smoke-grenade", "barricade-kit"],
     "rewards": [
       {
         "id": "3b6676e4-b717-4a56-95a5-7e36153475eb",
@@ -3641,14 +3347,9 @@
   {
     "id": "settled-in-full",
     "name": "Settled in Full",
-    "objectives": [
-      "Destroy a Bastion",
-      "Deliver a Bastion Cell to Tian Wen"
-    ],
+    "objectives": ["Destroy a Bastion", "Deliver a Bastion Cell to Tian Wen"],
     "requirements": [],
-    "rewardItemIds": [
-      "raider-tokens"
-    ],
+    "rewardItemIds": ["raider-tokens"],
     "rewards": [
       {
         "id": "15aad7e7-1f3f-4f21-80c2-f3bf07baebd6",
@@ -3702,12 +3403,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "light-ammo",
-      "extended-light-mag-ii",
-      "silencer-ii",
-      "burletta-iiii"
-    ],
+    "rewardItemIds": ["light-ammo", "extended-light-mag-ii", "silencer-ii", "burletta-iiii"],
     "rewards": [
       {
         "id": "27aa790d-0d6a-4c38-bb96-3f64e8f6a04a",
@@ -3771,11 +3467,7 @@
       "Investigate any suspicious objects"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "spring",
-      "mod-components",
-      "duct-tape-recipe"
-    ],
+    "rewardItemIds": ["spring", "mod-components", "duct-tape-recipe"],
     "rewards": [
       {
         "id": "ef00e0ac-9ef0-4d78-88e4-b2ba392ee331",
@@ -3821,15 +3513,9 @@
   {
     "id": "sparks-fly",
     "name": "Sparks Fly",
-    "objectives": [
-      "Destroy a Hornet with a Trigger Nade or Snap Blast grenade"
-    ],
+    "objectives": ["Destroy a Hornet with a Trigger Nade or Snap Blast grenade"],
     "requirements": [],
-    "rewardItemIds": [
-      "processor",
-      "trigger-nade-recipe",
-      "crude-explosives"
-    ],
+    "rewardItemIds": ["processor", "trigger-nade-recipe", "crude-explosives"],
     "rewards": [
       {
         "id": "2e349990-8fce-4ca5-b727-3a61c897ba54",
@@ -3885,11 +3571,7 @@
       "Deliver the Project Heartwood Blueprints to Tian Wen"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "seeker-grenade",
-      "lure-grenade",
-      "snap-hook"
-    ],
+    "rewardItemIds": ["seeker-grenade", "lure-grenade", "snap-hook"],
     "rewards": [
       {
         "id": "08422ac9-e96a-48a1-9336-31472a051868",
@@ -3944,10 +3626,7 @@
       "Shut down the EMP trap"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "advanced-mechanical-components",
-      "medium-gun-parts"
-    ],
+    "rewardItemIds": ["advanced-mechanical-components", "medium-gun-parts"],
     "rewards": [
       {
         "id": "92122893-7311-473d-8a4f-cbf3a52fa527",
@@ -3986,11 +3665,7 @@
       "Find and turn the valve in the tunnels under Spaceport"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "synthesized-fuel",
-      "spaceport-trench-tower-key",
-      "blue-radio-renegade-color"
-    ],
+    "rewardItemIds": ["synthesized-fuel", "spaceport-trench-tower-key", "blue-radio-renegade-color"],
     "rewards": [
       {
         "id": "55f335d9-fe29-40df-b278-5938be8fdba7",
@@ -4043,11 +3718,7 @@
       "Deliver a Firefly Burner to Apollo"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "fireworks-box-blueprint",
-      "seeker-grenade",
-      "blaze-grenade"
-    ],
+    "rewardItemIds": ["fireworks-box-blueprint", "seeker-grenade", "blaze-grenade"],
     "rewards": [
       {
         "id": "37d1654a-9004-4dd4-b6f4-f488869b2ee3",
@@ -4101,11 +3772,7 @@
       "Find and photograph the blueprints in the bunker"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "heavy-fuze-grenade",
-      "deadline",
-      "showstopper"
-    ],
+    "rewardItemIds": ["heavy-fuze-grenade", "deadline", "showstopper"],
     "rewards": [
       {
         "id": "6fca14ab-7c0c-477b-87d9-4d52a546fea7",
@@ -4183,11 +3850,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "tagging-grenade",
-      "firecracker",
-      "faded-flush-aviator-color"
-    ],
+    "rewardItemIds": ["tagging-grenade", "firecracker", "faded-flush-aviator-color"],
     "rewards": [
       {
         "id": "2273098e-31cc-484b-8b9f-895c0a12e3c2",
@@ -4239,9 +3902,7 @@
       "Deliver Major Aiva's Mementos to Tian Wen"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "hullcracker-blueprint"
-    ],
+    "rewardItemIds": ["hullcracker-blueprint"],
     "rewards": [
       {
         "id": "b10dfc87-5cc0-4c33-8ba1-8a36866680db",
@@ -4263,17 +3924,9 @@
   {
     "id": "the-right-tool",
     "name": "The Right Tool",
-    "objectives": [
-      "Destroy a Fireball",
-      "Destroy a Hornet",
-      "Destroy a Turret"
-    ],
+    "objectives": ["Destroy a Fireball", "Destroy a Hornet", "Destroy a Turret"],
     "requirements": [],
-    "rewardItemIds": [
-      "stitcher-ii",
-      "cheer-emote",
-      "extended-light-mag-i"
-    ],
+    "rewardItemIds": ["stitcher-ii", "cheer-emote", "extended-light-mag-i"],
     "rewards": [
       {
         "id": "645b2df6-8164-477f-af49-d84c1566158b",
@@ -4324,10 +3977,7 @@
       "Search for the seed vault in the 'room with a great view'"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "succulent-backpack-charm",
-      "coins"
-    ],
+    "rewardItemIds": ["succulent-backpack-charm", "coins"],
     "rewards": [
       {
         "id": "64e14f95-582f-4aa8-a267-be1a039906a3",
@@ -4383,12 +4033,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "air-freshener",
-      "noisemaker",
-      "warden-outfit",
-      "dam-staff-room-key"
-    ],
+    "rewardItemIds": ["air-freshener", "noisemaker", "warden-outfit", "dam-staff-room-key"],
     "rewards": [
       {
         "id": "1e2af30d-a660-49dc-a114-f9b3ad5b7ea1",
@@ -4492,12 +4137,7 @@
         "quantity": 2
       }
     ],
-    "rewardItemIds": [
-      "defibrillator",
-      "dam-control-center-tower-key",
-      "orange-camo-origin-outfit",
-      "raider-hatch-key"
-    ],
+    "rewardItemIds": ["defibrillator", "dam-control-center-tower-key", "orange-camo-origin-outfit", "raider-hatch-key"],
     "rewards": [
       {
         "id": "077065cf-f3ce-490d-803c-0fb089b702d3",
@@ -4555,10 +4195,7 @@
   {
     "id": "trash-into-treasure",
     "name": "Trash Into Treasure",
-    "objectives": [
-      "Obtain 6 Wires",
-      "Obtain 1 Battery"
-    ],
+    "objectives": ["Obtain 6 Wires", "Obtain 1 Battery"],
     "requirements": [
       {
         "id": "456e81e1-2e37-4d89-b8ff-7f165358d3d4",
@@ -4585,10 +4222,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "tactical-mk-1",
-      "adrenaline-shot"
-    ],
+    "rewardItemIds": ["tactical-mk-1", "adrenaline-shot"],
     "rewards": [
       {
         "id": "711ae573-dfc9-41bc-8adf-601b6bb5df8b",
@@ -4622,9 +4256,7 @@
   {
     "id": "tribute-to-toledo",
     "name": "Tribute to Toledo",
-    "objectives": [
-      "Get a Power Rod for Celeste"
-    ],
+    "objectives": ["Get a Power Rod for Celeste"],
     "requirements": [
       {
         "id": "f1a604e7-4b19-4d8f-a859-0abf9676c838",
@@ -4639,11 +4271,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "advanced-mechanical-components",
-      "magnet",
-      "synthesized-fuel"
-    ],
+    "rewardItemIds": ["advanced-mechanical-components", "magnet", "synthesized-fuel"],
     "rewards": [
       {
         "id": "b5e6ce57-7803-4984-b809-cd2ae8583824",
@@ -4689,15 +4317,9 @@
   {
     "id": "turnabout",
     "name": "Turnabout",
-    "objectives": [
-      "Go to the North Trench Tower",
-      "Locate and upload the Blackmail Files to Celeste"
-    ],
+    "objectives": ["Go to the North Trench Tower", "Locate and upload the Blackmail Files to Celeste"],
     "requirements": [],
-    "rewardItemIds": [
-      "heavy-gun-parts",
-      "medium-gun-parts"
-    ],
+    "rewardItemIds": ["heavy-gun-parts", "medium-gun-parts"],
     "rewards": [
       {
         "id": "36dfa2f5-e34a-4eea-9d51-ef1783cd84da",
@@ -4766,11 +4388,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "il-toro-i",
-      "shotgun-choke-ii",
-      "shotgun-ammo"
-    ],
+    "rewardItemIds": ["il-toro-i", "shotgun-choke-ii", "shotgun-ammo"],
     "rewards": [
       {
         "id": "0ee5f3f3-a1c1-411e-b3e4-dbf0bd3f91ae",
@@ -4823,11 +4441,7 @@
       "Upload the data to the computer terminal in any Field Depot"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "advanced-mechanical-components",
-      "canister",
-      "heavy-gun-parts"
-    ],
+    "rewardItemIds": ["advanced-mechanical-components", "canister", "heavy-gun-parts"],
     "rewards": [
       {
         "id": "301ddd29-01ba-419e-bd78-1cbcbbf329e3",
@@ -4879,11 +4493,7 @@
       "Search for any traces of a security breach in the Arrival Building Data Office"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "vita-shot",
-      "surge-shield-recharger",
-      "tactical-mk-3-revival"
-    ],
+    "rewardItemIds": ["vita-shot", "surge-shield-recharger", "tactical-mk-3-revival"],
     "rewards": [
       {
         "id": "efa11c09-9799-4e0e-80ec-f4ceaaeb3412",
@@ -4935,11 +4545,7 @@
       "Sample the water"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "simple-gun-parts",
-      "mechanical-components",
-      "spring"
-    ],
+    "rewardItemIds": ["simple-gun-parts", "mechanical-components", "spring"],
     "rewards": [
       {
         "id": "544ff8e0-aeb5-4706-a359-8566bc237648",
@@ -4985,9 +4591,7 @@
   {
     "id": "what-goes-around",
     "name": "What Goes Around",
-    "objectives": [
-      "Destroy any ARC enemy using a Fireball Burner"
-    ],
+    "objectives": ["Destroy any ARC enemy using a Fireball Burner"],
     "requirements": [
       {
         "id": "9a8a0af6-0493-4bea-ba18-a4c25b1a8a8c",
@@ -5002,11 +4606,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "noisemaker",
-      "blaze-grenade",
-      "cans-backpack-attachment"
-    ],
+    "rewardItemIds": ["noisemaker", "blaze-grenade", "cans-backpack-attachment"],
     "rewards": [
       {
         "id": "09da2aed-0d20-4355-9a1e-f210d3af9468",
@@ -5058,11 +4658,7 @@
       "On Spaceport, search for anything significant in Bilguun's Hideout, next to the Container Storage"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "vertical-grip-ii",
-      "stable-stock-ii",
-      "muzzle-brake-ii"
-    ],
+    "rewardItemIds": ["vertical-grip-ii", "stable-stock-ii", "muzzle-brake-ii"],
     "rewards": [
       {
         "id": "459242ca-6f7b-4e7e-b4bb-f7c3c395eadc",
@@ -5115,10 +4711,7 @@
       "Inspect the communications device"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "medium-shield",
-      "looting-mk-2"
-    ],
+    "rewardItemIds": ["medium-shield", "looting-mk-2"],
     "rewards": [
       {
         "id": "5b20c967-2032-4cdd-b0b9-c260e3f5a3e7",
@@ -5173,11 +4766,7 @@
         "quantity": 1
       }
     ],
-    "rewardItemIds": [
-      "spring",
-      "wires-recipe",
-      "tactical-mk-2"
-    ],
+    "rewardItemIds": ["spring", "wires-recipe", "tactical-mk-2"],
     "rewards": [
       {
         "id": "e742de30-20e6-47a2-93cc-d853cae22290",
@@ -5232,9 +4821,7 @@
       "Deliver the Charged Battery to the drop-off point in the corner"
     ],
     "requirements": [],
-    "rewardItemIds": [
-      "vita-spray-recipe"
-    ],
+    "rewardItemIds": ["vita-spray-recipe"],
     "rewards": [
       {
         "id": "0bab6773-e29c-4bab-a3fe-b08011ef3f42",
