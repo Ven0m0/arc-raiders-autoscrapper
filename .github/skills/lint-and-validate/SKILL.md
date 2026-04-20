@@ -1,7 +1,7 @@
 ---
-
 name: lint-and-validate
 description: Use when user wants to Run the Arc Raiders AutoScrapper validation stack after edits. Use for linting, typing, tests, workflow checks, and broader repo validation.
+---
 
 ## Lint and validate
 
