@@ -1,7 +1,7 @@
 ---
-
 name: gh-cli
 description: Routes GitHub tasks to the right `gh` or `git` command family. Use when working with repositories, issues, pull requests, Actions, releases, or GitHub search from the terminal.
+---
 
 # GitHub CLI (gh)
 
