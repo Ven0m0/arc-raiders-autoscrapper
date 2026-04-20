@@ -25,12 +25,12 @@ def test_main_sys_argv_no_args() -> None:
             mock_run_tui.assert_called_once()
 
 
-def test_main_help(capsys) -> None:
-    for arg in ["-h", "--help", "help"]:
-        result = main([arg])
-        assert result == 0
-        captured = capsys.readouterr()
-        assert "Usage: autoscrapper" in captured.out
+@pytest.mark.parametrize("arg", ["-h", "--help", "help"])
+def test_main_help(capsys, arg) -> None:
+    result = main([arg])
+    assert result == 0
+    captured = capsys.readouterr()
+    assert "Usage: autoscrapper" in captured.out
 
 
 def test_main_scan() -> None:
