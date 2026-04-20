@@ -31,7 +31,7 @@ jobs:
             libleptonica-dev \
             libtesseract-dev \
             pkg-config \
-            tesseract-ocr libwebp7
+            tesseract-ocr
       - name: Install uv and Python 3.13
         uses: astral-sh/setup-uv@v8
         with:
@@ -41,4 +41,4 @@ jobs:
             uv.lock
             pyproject.toml
       - name: Install project dependencies
-        run: uv sync --all-groups --all-extras --all-packages --frozen
+        run: uv sync --all-groups --all-extras --all-packages --locked
