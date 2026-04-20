@@ -1,7 +1,7 @@
 ---
-
 name: repo-janitor
 description: "Orchestrates a six-step sequential repository cleanup: separating code from docs, organizing folder structure, removing legacy code, removing script clutter, pruning documentation sprawl, and cleaning documentation content (emojis, hyperbole, 'comprehensive'). Use when asked to clean up a repository, organize a project, remove legacy code, prune AI-generated docs, clean documentation style, run janitor, or perform a full repo cleanup. Triggers on: 'clean up repo', 'janitor', 'organize repository', 'remove legacy', 'prune docs', 'doc sprawl', 'clean docs', 'remove emojis from docs', 'repo cleanup', 'tidy repo', 'remove script clutter'."
+---
 
 # Repo Janitor
 
