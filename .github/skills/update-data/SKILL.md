@@ -1,7 +1,7 @@
 ---
-
 name: update-data
 description: Use when user wants to Safely regenerate progress/data/*.json and items_rules.default.json via the update script
+---
 
 Generated data files must **never** be hand-edited. Always regenerate via the script:
 
