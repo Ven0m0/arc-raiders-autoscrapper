@@ -2,6 +2,7 @@
 name: ci-promote
 description: Use when user wants to Run full validation, push branch, and open a PR with appropriate context notes
 disable-model-invocation: true
+---
 
 Pre-push checklist - run all steps before opening PR:
 
