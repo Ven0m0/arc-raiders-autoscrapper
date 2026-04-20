@@ -81,7 +81,7 @@ def _coerce_bool(value: Any, default: bool) -> bool:
 
 
 def _coerce_positive_int(value: Any) -> int | None:
-    if value is None:
+    if value is None or isinstance(value, (bool, float)):
         return None
     try:
         result = int(value)
