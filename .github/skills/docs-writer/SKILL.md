@@ -1,8 +1,8 @@
 ---
-
 name: docs-writer
 description: Write, review, or edit technical documentation for any `.md` files or `docs/` directory. Use when asked to write docs, update README, or improve documentation quality.
 allowed-tools: "Read, Write, Edit, Glob, Grep"
+---
 
 # docs-writer skill instructions
 
