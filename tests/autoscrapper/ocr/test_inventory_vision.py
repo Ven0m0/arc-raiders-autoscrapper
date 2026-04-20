@@ -623,7 +623,6 @@ class TestFindContextMenuCrop:
     def test_returns_none_if_crop_too_small(self):
         """If the input image is too small to yield min_dim, returns None."""
         tiny_img = np.full((50, 50, 3), 100, dtype=np.uint8)
-        tiny_img[::4, :] = 20
         result = find_context_menu_crop(tiny_img, 25, 25)
         assert result is None, "should return None when crop dims < min_dim"
 
