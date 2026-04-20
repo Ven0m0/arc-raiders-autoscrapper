@@ -41,7 +41,7 @@ MIN_REQUEST_INTERVAL_SECONDS = 8.0
 type ItemDecision = Literal["KEEP", "SELL", "RECYCLE"]
 
 
-@functools.lru_cache(maxsize=1)
+@functools.cache
 def _get_cached_item_mappings() -> tuple[MappingProxyType[str, str], MappingProxyType[str, str]]:
     """Load and cache item ID to display name mapping from items.json."""
     id_to_name: dict[str, str] = {}
