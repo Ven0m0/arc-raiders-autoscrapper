@@ -1,16 +1,49 @@
 repos:
   # Ruff - Python linting and formatting
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.10
+    rev: v0.15.11
     hooks:
       # Run linter and auto-fix issues
       - id: ruff
         args: [--fix --exit-non-zero-on-fix]
+        types_or: [python, pyi]
         stages: [pre-commit]
       # Format code
       - id: ruff-format
+        types_or: [python, pyi]
         stages: [pre-commit]
 
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.12
+    hooks:
+      - id: actionlint
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.21.0
+    hooks:
+      - id: yamlfmt
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.21.2
+    hooks:
+      - id: pyupgrade
+  
+  - repo: local
+    hooks:
+      - id: uv-lock-upgrade
+        name: Run uv lock --upgrade
+        entry: uv lock --upgrade
+        language: python
+        pass_filenames: false
+      - id: pre-commit autoupdate
+        name: autoupdate pre-commit
+        entry: pre-commit autoupdate
+        language: system
+        pass_filenames: false
+      - id: biome-check
+        name: biome check
+        entry: bunx @biomejs/biome check --write
+        language: node
+        types_or: [javascript, typescript, jsx, tsx, json, jsonc]
+        pass_filenames: true
   # Pre-commit hooks (official)
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -29,7 +62,8 @@ repos:
         stages: [pre-commit]
       - id: check-xml
         stages: [pre-commit]
-
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
       # Security checks
       - id: detect-private-key
         stages: [pre-commit]
@@ -81,7 +115,7 @@ repos:
 
   # Shellcheck - Shell script linting
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.10.0.1
+    rev: v0.11.0
     hooks:
       - id: shellcheck
         args: [-x, --severity=warning]
@@ -92,3 +126,20 @@ repos:
     rev: v0.9.0
     hooks:
       - id: ctxlint
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.37.1
+    hooks:
+      - id: check-dependabot
+      - id: check-github-actions
+      - id: check-github-workflows
+  - repo: https://github.com/mangiucugna/gha-updater-pre-commit
+    rev: v0.1
+    hooks:
+      - id: gha-update
+
+  - repo: https://github.com/rvben/rumdl-pre-commit
+    rev: v0.1.76
+    hooks:
+      - id: rumdl
+      - id: rumdl-fmt
