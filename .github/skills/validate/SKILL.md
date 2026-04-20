@@ -1,8 +1,8 @@
 ---
-
 name: validate
 description: Run the correct validation checks for changed files in this repository (Python, workflows, guidance, and generated data).
 allowed-tools: 'Read, Bash, Grep, Glob'
+---
 
 # Validate
 
