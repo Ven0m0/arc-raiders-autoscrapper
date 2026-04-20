@@ -177,7 +177,22 @@ CLAUDE.local.md
 .claude/afc/
 .vscode/*
 !.vscode/extensions.json
-.omc/
+# .omc: track config/skills/wiki/memory; ignore runtime state
+.omc/state/
+.omc/sessions/
+.omc/plans/
+.omc/notepad.md
+.omc/self-improve/state/
+.omc/self-improve/tracking/
+.omc/self-improve/plans/
+.omc/self-improve/scripts/
+!.omc/skills/
+!.omc/skills/**
+!.omc/self-improve/config/
+!.omc/self-improve/config/**
+!.omc/wiki/
+!.omc/wiki/**
+!.omc/project-memory.json
 .omg/
 undefined/
 

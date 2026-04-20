@@ -1,0 +1,22 @@
+{
+  "si_claude_setting": true,
+  "number_of_agents": 2,
+  "number_of_max_critics": 2,
+  "current_repo_url": "https://github.com/Ven0m0/arc-raiders-autoscrapper.git",
+  "fork_url": "https://github.com/Ven0m0/arc-raiders-autoscrapper.git",
+  "upstream_url": "https://github.com/zappybiby/ArcRaiders-AutoScrapper.git",
+  "target_branch": "main",
+  "benchmark_command": "python3 .omc/self-improve/scripts/benchmark.py",
+  "benchmark_format": "json",
+  "benchmark_direction": "higher_is_better",
+  "max_iterations": 20,
+  "plateau_threshold": 0.01,
+  "plateau_window": 3,
+  "target_value": 1.0,
+  "primary_metric": "primary",
+  "sealed_files": ["tests/", ".omc/self-improve/scripts/benchmark.py", "pyproject.toml", "uv.lock"],
+  "regression_threshold": 0.05,
+  "circuit_breaker_threshold": 3,
+  "auto_push": false,
+  "auto_pr": false
+}

@@ -1,0 +1,419 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1776692943894,
+  "projectRoot": "/mnt/c/Users/ven0m0/project/arc-raiders-autoscrapper",
+  "techStack": {
+    "languages": [
+      {
+        "name": "Python",
+        "version": null,
+        "confidence": "high",
+        "markers": ["pyproject.toml"]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "pytest",
+        "version": null,
+        "category": "testing"
+      }
+    ],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": "pytest",
+    "lintCommand": "ruff check",
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": ["scripts", "src", "tests"],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [
+    {
+      "timestamp": 1776724097344,
+      "source": "manual",
+      "category": "git",
+      "content": "Push guard enforced at hook level: PreToolUse Bash hook blocks any git push to a remote that isn't Ven0m0/arc-raiders-autoscrapper. upstream_url=zappybiby/ArcRaiders-AutoScrapper (pull only), fork=Ven0m0/arc-raiders-autoscrapper (push target). Never create PRs at upstream."
+    },
+    {
+      "timestamp": 1776724097881,
+      "source": "manual",
+      "category": "build",
+      "content": "biome pre-commit hook exits 1 with \"no files processed\" when ALL staged JSON files are in biome's ignore list (progress/data/, items_rules.default.json). Fix: entry in .pre-commit-config.yaml must include --no-errors-on-unmatched. Also: scripts with shebangs need executable bit via `git add --chmod=+x &lt;file&gt;` or pre-commit check-shebang hook blocks commit."
+    }
+  ],
+  "directoryMap": {
+    "artifacts": {
+      "path": "artifacts",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1776692943785,
+      "keyFiles": ["update-report.json", "update-report.md"]
+    },
+    "ocr_debug": {
+      "path": "ocr_debug",
+      "purpose": null,
+      "fileCount": 1411,
+      "lastAccessed": 1776692943837,
+      "keyFiles": [
+        "20260420_115151_417751100_inventory_count_raw.webp",
+        "20260420_115151_457427500_inventory_count_processed.webp",
+        "20260420_115152_979226200_ctx_menu_raw.webp",
+        "20260420_115153_133407600_infobox_processed.webp",
+        "20260420_115153_191117100_title_strip_fail_raw.webp"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 6,
+      "lastAccessed": 1776692943848,
+      "keyFiles": [
+        "benchmark_tessdata_models.py",
+        "capture_ocr_fixture.py",
+        "replay_ocr_failure_corpus.py",
+        "setup-linux.sh",
+        "setup-windows.ps1"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 0,
+      "lastAccessed": 1776692943853,
+      "keyFiles": []
+    },
+    "tests": {
+      "path": "tests",
+      "purpose": "Test files",
+      "fileCount": 0,
+      "lastAccessed": 1776692943858,
+      "keyFiles": []
+    },
+    "tests/scripts": {
+      "path": "tests/scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 1,
+      "lastAccessed": 1776692943894,
+      "keyFiles": ["test_replay_ocr_failure_corpus.py"]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "src/autoscrapper/ocr/inventory_vision.py",
+      "accessCount": 213,
+      "lastAccessed": 1776411025475,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 52,
+      "lastAccessed": 1776352072301,
+      "type": "directory"
+    },
+    {
+      "path": "src/autoscrapper/scanner/scan_loop.py",
+      "accessCount": 36,
+      "lastAccessed": 1776713081660,
+      "type": "file"
+    },
+    {
+      "path": "tests/autoscrapper/ocr/test_inventory_vision.py",
+      "accessCount": 30,
+      "lastAccessed": 1776327265359,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/ocr/tesseract.py",
+      "accessCount": 30,
+      "lastAccessed": 1776351316965,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/ocr/failure_corpus.py",
+      "accessCount": 30,
+      "lastAccessed": 1776351373224,
+      "type": "directory"
+    },
+    {
+      "path": ".claude/settings.json",
+      "accessCount": 27,
+      "lastAccessed": 1776348123741,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/scanner/engine.py",
+      "accessCount": 15,
+      "lastAccessed": 1776411400457,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/ocr",
+      "accessCount": 13,
+      "lastAccessed": 1776345266797,
+      "type": "directory"
+    },
+    {
+      "path": "src",
+      "accessCount": 13,
+      "lastAccessed": 1776346266484,
+      "type": "directory"
+    },
+    {
+      "path": "mcp.json",
+      "accessCount": 8,
+      "lastAccessed": 1776308625304,
+      "type": "file"
+    },
+    {
+      "path": "tests/scripts/test_replay_ocr_failure_corpus.py",
+      "accessCount": 4,
+      "lastAccessed": 1776219780419,
+      "type": "file"
+    },
+    {
+      "path": ".claude/skills/data-snapshot-updater/SKILL.md",
+      "accessCount": 4,
+      "lastAccessed": 1776294779716,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/scanner",
+      "accessCount": 4,
+      "lastAccessed": 1776320602898,
+      "type": "directory"
+    },
+    {
+      "path": ".claude/skills/upstream-sync/SKILL.md",
+      "accessCount": 4,
+      "lastAccessed": 1776352084001,
+      "type": "file"
+    },
+    {
+      "path": "tests/autoscrapper/ocr/test_failure_corpus.py",
+      "accessCount": 3,
+      "lastAccessed": 1776219780465,
+      "type": "file"
+    },
+    {
+      "path": ".claude/agents/api-reviewer.md",
+      "accessCount": 3,
+      "lastAccessed": 1776319336119,
+      "type": "file"
+    },
+    {
+      "path": "lsp.json",
+      "accessCount": 2,
+      "lastAccessed": 1776269424950,
+      "type": "file"
+    },
+    {
+      "path": ".claude/skills/ocr-corpus-replay/SKILL.md",
+      "accessCount": 2,
+      "lastAccessed": 1776287170844,
+      "type": "file"
+    },
+    {
+      "path": ".claude/skills/benchmark/SKILL.md",
+      "accessCount": 2,
+      "lastAccessed": 1776287516118,
+      "type": "file"
+    },
+    {
+      "path": ".claude/skills/ci-promote/SKILL.md",
+      "accessCount": 2,
+      "lastAccessed": 1776287516314,
+      "type": "file"
+    },
+    {
+      "path": ".claude/skills/scan-report/SKILL.md",
+      "accessCount": 2,
+      "lastAccessed": 1776287539819,
+      "type": "file"
+    },
+    {
+      "path": "pyproject.toml",
+      "accessCount": 2,
+      "lastAccessed": 1776319827266,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/ocr/AGENTS.md",
+      "accessCount": 2,
+      "lastAccessed": 1776320584219,
+      "type": "file"
+    },
+    {
+      "path": "scripts/replay_ocr_failure_corpus.py",
+      "accessCount": 2,
+      "lastAccessed": 1776320614312,
+      "type": "file"
+    },
+    {
+      "path": "scripts/update_snapshot_and_defaults.py",
+      "accessCount": 2,
+      "lastAccessed": 1776351076200,
+      "type": "file"
+    },
+    {
+      "path": "ocr_debug/20260414_141645_303593800_ctx_menu_raw.webp",
+      "accessCount": 1,
+      "lastAccessed": 1776181605996,
+      "type": "file"
+    },
+    {
+      "path": "ocr_debug/20260414_141645_339823100_ctx_menu_processed.webp",
+      "accessCount": 1,
+      "lastAccessed": 1776181606052,
+      "type": "file"
+    },
+    {
+      "path": "ocr_debug/20260414_141631_902596900_ctx_menu_raw.webp",
+      "accessCount": 1,
+      "lastAccessed": 1776181650987,
+      "type": "file"
+    },
+    {
+      "path": "ocr_debug/20260414_141631_935734800_ctx_menu_processed.webp",
+      "accessCount": 1,
+      "lastAccessed": 1776181651018,
+      "type": "file"
+    },
+    {
+      "path": "scripts/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222408480,
+      "type": "file"
+    },
+    {
+      "path": "tests/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222409008,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222445529,
+      "type": "file"
+    },
+    {
+      "path": "tests/autoscrapper/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222445935,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/api/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222569372,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/core/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222569825,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/interaction/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222570321,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/items/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222570737,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/scanner/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222571674,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/progress/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222572103,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/tui/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222572559,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/tui/progress/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222634370,
+      "type": "file"
+    },
+    {
+      "path": "src/autoscrapper/progress/data/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222634853,
+      "type": "file"
+    },
+    {
+      "path": "tests/autoscrapper/core/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222635337,
+      "type": "file"
+    },
+    {
+      "path": "tests/autoscrapper/interaction/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222635826,
+      "type": "file"
+    },
+    {
+      "path": "tests/autoscrapper/items/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222636207,
+      "type": "file"
+    },
+    {
+      "path": "tests/autoscrapper/ocr/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222636717,
+      "type": "file"
+    },
+    {
+      "path": "tests/autoscrapper/progress/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222637182,
+      "type": "file"
+    },
+    {
+      "path": "tests/autoscrapper/scanner/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222637612,
+      "type": "file"
+    },
+    {
+      "path": "tests/scripts/AGENTS.md",
+      "accessCount": 1,
+      "lastAccessed": 1776222638030,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
