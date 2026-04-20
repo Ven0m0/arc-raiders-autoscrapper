@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "git-mcp": {
-      "type": "http",
-      "url": "https://gitmcp.io/Ven0m0/arc-raiders-autoscrapper"
-    }
-  }
-}
