@@ -1,6 +1,6 @@
 ---
-
 applyTo: "**"
+---
 
 ## Repo quality standards
 
