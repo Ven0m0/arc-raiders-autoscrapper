@@ -43,7 +43,7 @@ def _fetch_bytes(url: str, headers: dict[str, str] | None = None) -> bytes:
         "User-Agent": (
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
             "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/132.0.0.0 Safari/537.36"
+            "Chrome/147.0.0.0 Safari/537.36"
         ),
     }
     if headers:
