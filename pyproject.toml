@@ -131,3 +131,7 @@ min_confidence = 80
 extend-exclude = '''
 ^scripts/(setup-linux\.sh|setup-windows\.ps1)$
 '''
+
+[tool.uv]
+link-mode = "symlink"
+compile-bytecode = true
