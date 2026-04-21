@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-20T10:44:54.336441Z",
+    "generatedAt": "2026-04-21T02:02:00.718812Z",
     "data": {
-      "lastUpdated": "2026-04-20T10:44:45.504689Z",
+      "lastUpdated": "2026-04-21T02:02:00.710243Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
       "itemCount": 573,
@@ -16,8 +16,8 @@
             "error": null
           },
           "fallback": {
-            "repository": "https://github.com/fgrzesiak/arcraiders-data",
-            "archive": "https://github.com/fgrzesiak/arcraiders-data/archive/refs/heads/main.zip",
+            "repository": "https://github.com/RaidTheory/arcraiders-data",
+            "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
             "supplementalCount": 26,
             "error": null
           },
@@ -45,8 +45,8 @@
             "error": null
           },
           "fallback": {
-            "repository": "https://github.com/fgrzesiak/arcraiders-data",
-            "archive": "https://github.com/fgrzesiak/arcraiders-data/archive/refs/heads/main.zip",
+            "repository": "https://github.com/RaidTheory/arcraiders-data",
+            "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
             "supplementalCount": 0,
             "error": null
           },
@@ -120,7 +120,7 @@
       "value": 1750,
       "action": "keep",
       "analysis": [
-        "Required for hideout upgrade: Gear Bench (Level 3), Utility Station (Level 3)"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -381,10 +381,9 @@
       "id": "arc-alloy",
       "name": "ARC Alloy",
       "value": 200,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -424,9 +423,7 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Required for hideout upgrade: Refiner (Level 2)"
       ]
     },
     {
@@ -444,10 +441,9 @@
       "id": "arc-powercell",
       "name": "ARC Powercell",
       "value": 270,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Required for hideout upgrade: Refiner (Level 1)"
       ]
     },
     {
@@ -616,10 +612,9 @@
       "id": "battery",
       "name": "Battery",
       "value": 250,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -1497,9 +1492,7 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -1508,9 +1501,7 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Required for hideout upgrade: Medical Lab (Level 2)"
       ]
     },
     {
@@ -1655,9 +1646,7 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Required for hideout upgrade: Utility Station (Level 2)"
       ]
     },
     {
@@ -1809,9 +1798,7 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Required for hideout upgrade: Scrappy (Level 2)"
       ]
     },
     {
@@ -1879,10 +1866,9 @@
       "id": "durable-cloth",
       "name": "Durable Cloth",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -1899,10 +1885,9 @@
       "id": "electrical-components",
       "name": "Electrical Components",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -1972,9 +1957,7 @@
       "value": 2750,
       "action": "keep",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -2231,10 +2214,9 @@
       "id": "fabric",
       "name": "Fabric",
       "value": 50,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Required for hideout upgrade: Gear Bench (Level 1), Medical Lab (Level 1)"
       ]
     },
     {
@@ -2359,10 +2341,9 @@
       "id": "fireball-burner",
       "name": "Fireball Burner",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Required for hideout upgrade: Refiner (Level 2)"
       ]
     },
     {
@@ -2829,9 +2810,7 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Required for hideout upgrade: Gear Bench (Level 2)"
       ]
     },
     {
@@ -2908,9 +2887,7 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -3199,7 +3176,7 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Required for hideout upgrade: Utility Station (Level 3)"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -3246,10 +3223,9 @@
       "id": "light-bulb",
       "name": "Light Bulb",
       "value": 2000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "High value (2000 coins)",
-        "No crafting or upgrade use"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -3448,9 +3424,7 @@
       "value": 5500,
       "action": "keep",
       "analysis": [
-        "Used in 1 crafting recipes",
-        "Rare crafting material",
-        "Override: treat 'Your Call' as Keep"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -3508,10 +3482,9 @@
       "id": "mechanical-components",
       "name": "Mechanical Components",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Required for hideout upgrade: Gunsmith (Level 2)"
       ]
     },
     {
@@ -3571,10 +3544,9 @@
       "id": "metal-parts",
       "name": "Metal Parts",
       "value": 75,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -3951,10 +3923,9 @@
       "id": "plastic-parts",
       "name": "Plastic Parts",
       "value": 60,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Required for hideout upgrade: Gear Bench (Level 1), Utility Station (Level 1)"
       ]
     },
     {
@@ -3982,10 +3953,9 @@
       "id": "pop-trigger",
       "name": "Pop Trigger",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Required for hideout upgrade: Explosives Station (Level 2)"
       ]
     },
     {
@@ -4056,9 +4026,7 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Required for hideout upgrade: Gear Bench (Level 2)"
       ]
     },
     {
@@ -4506,10 +4474,9 @@
       "id": "rubber-parts-recipe",
       "name": "Rubber Parts",
       "value": 50,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -4618,9 +4585,7 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Required for hideout upgrade: Gunsmith (Level 2)"
       ]
     },
     {
@@ -4691,9 +4656,7 @@
       "value": 500,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -5011,10 +4974,9 @@
       "id": "snitch-scanner",
       "name": "Snitch Scanner",
       "value": 2000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Required for hideout upgrade: Utility Station (Level 2)"
       ]
     },
     {
@@ -5118,10 +5080,9 @@
       "id": "spring",
       "name": "Steel Spring",
       "value": 300,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Needed for project: Expedition Project"
       ]
     },
     {
@@ -5371,9 +5332,7 @@
       "value": 700,
       "action": "keep",
       "analysis": [
-        "Used in 1 crafting recipes",
-        "Rare crafting material",
-        "Override: treat 'Your Call' as Keep"
+        "Required for hideout upgrade: Explosives Station (Level 2)"
       ]
     },
     {
@@ -5606,10 +5565,9 @@
       "id": "tick-pod",
       "name": "Tick Pod",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Required for hideout upgrade: Medical Lab (Level 2)"
       ]
     },
     {
@@ -5618,9 +5576,7 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Required for hideout upgrade: Refiner (Level 2)"
       ]
     },
     {
@@ -6089,9 +6045,7 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Required for hideout upgrade: Gunsmith (Level 2)"
       ]
     },
     {
@@ -6130,10 +6084,9 @@
       "id": "wires-recipe",
       "name": "Wires",
       "value": 200,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Needed for project: Expedition Project"
       ]
     },
     {
