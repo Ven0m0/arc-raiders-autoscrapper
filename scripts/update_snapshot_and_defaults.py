@@ -22,7 +22,6 @@ if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
 from autoscrapper.progress.data_update import update_data_snapshot  # noqa: E402
-from autoscrapper.api.client import ArcTrackerClient  # noqa: E402
 from autoscrapper.progress.rules_generator import (  # noqa: E402
     generate_rules_from_active,
     write_rules,
@@ -144,38 +143,47 @@ def _copy_support_files_for_temp_run(source_data_dir: Path, temp_data_dir: Path)
         temp_static.mkdir(parents=True, exist_ok=True)
 
 
-def _fetch_default_user_context() -> tuple[dict[str, int], list[str]]:
-    """Fetch default hideout levels and completed projects from public API."""
-    client = ArcTrackerClient()
-
-    # Default hideout levels: assume level 2 for all standard modules
+def _fetch_default_user_context(data_dir: Path) -> tuple[dict[str, int], list[str]]:
+    """Load default hideout levels and completed projects from snapshot static files."""
     hideout_levels: dict[str, int] = {}
-    public_hideout = client.get_public_hideout()
-    # Public API returns { "hideoutModules": { "id": { ... } } }
-    modules_dict = (public_hideout or {}).get("hideoutModules")
-    if isinstance(modules_dict, dict):
-        for module_id, module in modules_dict.items():
-            if not module_id or module_id in EXCLUDED_LEVEL2_IDS:
-                continue
-            max_level = module.get("maxLevel", 0)
-            hideout_levels[module_id] = min(2, max_level)
-
-    # Default completed projects: assume all projects are completed for rules
     completed_projects: list[str] = []
-    public_projects = client.get_public_projects()
-    # Public API returns { "projects": { "id": { ... } } }
-    projects_dict = (public_projects or {}).get("projects")
-    if isinstance(projects_dict, dict):
-        for project_id in projects_dict:
-            if project_id:
-                completed_projects.append(project_id)
+
+    hideout_path = data_dir / "static" / "arctracker_hideout.json"
+    if hideout_path.exists():
+        try:
+            raw = orjson.loads(hideout_path.read_bytes())
+            if isinstance(raw, list):
+                for module in raw:
+                    if not isinstance(module, dict):
+                        continue
+                    module_id = module.get("id")
+                    if not module_id or module_id in EXCLUDED_LEVEL2_IDS:
+                        continue
+                    max_level = module.get("maxLevel") or 0
+                    hideout_levels[str(module_id)] = min(2, int(max_level))
+        except Exception:
+            pass
+
+    projects_path = data_dir / "static" / "arctracker_projects.json"
+    if projects_path.exists():
+        try:
+            raw = orjson.loads(projects_path.read_bytes())
+            if isinstance(raw, list):
+                for project in raw:
+                    if not isinstance(project, dict):
+                        continue
+                    project_id = project.get("id")
+                    if project_id:
+                        completed_projects.append(str(project_id))
+        except Exception:
+            pass
 
     return hideout_levels, completed_projects
 
 
 def _update_in_place(data_dir: Path, rules_path: Path) -> dict:
     snapshot_metadata = update_data_snapshot(data_dir)
-    hideout_levels, completed_projects = _fetch_default_user_context()
+    hideout_levels, completed_projects = _fetch_default_user_context(data_dir)
 
     rules_payload = generate_rules_from_active(
         active_quests=[],
@@ -203,7 +211,7 @@ def _update_dry_run(source_data_dir: Path) -> dict:
         _copy_support_files_for_temp_run(source_data_dir, temp_data_dir)
 
         snapshot_metadata = update_data_snapshot(temp_data_dir)
-        hideout_levels, completed_projects = _fetch_default_user_context()
+        hideout_levels, completed_projects = _fetch_default_user_context(temp_data_dir)
 
         rules_payload = generate_rules_from_active(
             active_quests=[],

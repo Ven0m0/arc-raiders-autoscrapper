@@ -91,15 +91,15 @@ Default rules are regenerated with this baseline:
 
 ### Data sources
 
-The updater uses a layered source strategy. MetaForge is preferred; arctracker.io and RaidTheory supplement or fill gaps; the Arc Raiders Wiki adds optional enrichment.
+The updater uses a layered source strategy. MetaForge is preferred; arctracker.io and RaidTheory supplement or fill gaps; the Arc Raiders Wiki adds `wikiUses` enrichment.
 
 | Source | Purpose | Behaviour |
 |---|---|---|
 | [MetaForge ARC Raiders API](https://metaforge.app/arc-raiders/api) | Primary item and quest source | Reads paginated `/items` and `/quests` from `https://metaforge.app/api/arc-raiders` |
 | MetaForge Supabase (optional) | Crafting and recycle relationships | Adds recipe and `recyclesInto` data when `METAFORGE_SUPABASE_ANON_KEY` is set |
 | [arctracker.io](https://arctracker.io) | Secondary item, quest, hideout, and project source | Public API at `https://arctracker.io/api/*`; supplements MetaForge and activates as fallback |
-| [fgrzesiak/arcraiders-data](https://github.com/fgrzesiak/arcraiders-data) | Fallback item and quest source | Downloaded as a zip archive; fills missing records when MetaForge or arctracker are unavailable |
-| [Arc Raiders Wiki loot table](https://arcraiders.wiki/wiki/Loot) | Optional workshop/expedition/project-use enrichment | Adds a `wikiUses` field when the `scraper` extra is installed |
+| [RaidTheory/arcraiders-data](https://github.com/RaidTheory/arcraiders-data) | Fallback item and quest source | Downloaded as a zip archive; fills missing records when MetaForge or arctracker are unavailable |
+| [Arc Raiders Wiki loot table](https://arcraiders.wiki/wiki/Loot) | Optional workshop/expedition/project-use enrichment | Adds a `wikiUses` field to each item (always active) |
 
 ### MetaForge API reference
 
@@ -155,9 +155,9 @@ export ARCTRACKER_APP_KEY=...
 export ARCTRACKER_USER_KEY=...
 ```
 
-### RaidTheory fallback
+### RaidTheory
 
-The updater downloads the [`fgrzesiak/arcraiders-data`](https://github.com/fgrzesiak/arcraiders-data) repository archive and uses it in two cases:
+The updater downloads the [`RaidTheory/arcraiders-data`](https://github.com/RaidTheory/arcraiders-data) repository archive and uses it in two cases:
 
 1. Appends item or quest records that are missing from MetaForge and arctracker.io.
 2. Falls back to the RaidTheory dataset when both upstream sources fail.
@@ -167,7 +167,7 @@ MetaForge remains the preferred source when multiple providers return the same r
 
 ### Arc Raiders Wiki enrichment
 
-When the optional `scraper` extra is installed (`uv sync --extra scraper`), the updater also fetches the [Arc Raiders Wiki loot table](https://arcraiders.wiki/wiki/Loot) and adds a `wikiUses` field to each item containing workshop upgrade requirements, expedition requirements, and project-use data from the loot table.
+The updater fetches the [Arc Raiders Wiki loot table](https://arcraiders.wiki/wiki/Loot) and adds a `wikiUses` field to each item containing workshop upgrade requirements, expedition requirements, and project-use data from the loot table.
 
 Wiki enrichment is supplemental — it does not replace any MetaForge field. A failed wiki fetch is logged as a warning and the update continues without wiki data. The `metadata.json` `dataSources.items.wikiEnrichment` block records the URL, availability, match count, and any error.
 
@@ -176,9 +176,6 @@ Wiki enrichment is supplemental — it does not replace any MetaForge field. A f
 ```bash
 # Optional: enable crafting/recycle enrichment from MetaForge Supabase
 export METAFORGE_SUPABASE_ANON_KEY=...
-
-# Optional: enable Arc Raiders Wiki enrichment (wikiUses field)
-uv sync --extra scraper
 
 # Real update (writes tracked files):
 uv run python scripts/update_snapshot_and_defaults.py
