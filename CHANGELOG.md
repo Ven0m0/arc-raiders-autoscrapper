@@ -22,6 +22,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Tooling
 
 - Kilo code-editor support: `.kilo/` suite with agents, skills, biome + ruff formatter config
+- OpenCode support: `.opencode/` suite fully configured as kilo replacement — agents, 16 slash-commands (`add-fixture`, `add-rule`, `benchmark`, `calibrate-vision`, `ci-promote`, `clean-debug`, `config-bump`, `dead-code-sweep`, `diagnose-scan`, `metaforge`, `ocr-corpus-replay`, `patch-update`, `precommit-fix`, `scan-report`, `threshold-change`, `triage-failures`, `todo-scan`, `verify`), and `precommit-fix` skill
 - Claude Code: push-guard hook, dirty-state check hook, and `test-generator` agent
 - Pre-commit: fixed `uv` invocation, optimised hook config, bumped all hook revisions
 - Agent/skill YAML frontmatter restored across `.kilo/`, `.opencode/`, and `.claude/` agent directories (closing `---` was stripped by rumdl)
