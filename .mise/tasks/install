@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-[[ -f pyproject.toml ]] && uv sync || true
+export DEBIAN_FRONTEND=noninteractive DEBCONF_NOWARNINGS=yes
+sudo apt-get update -qq && sudo apt-get DEBIAN_FRONTEND=noninteractive DEBCONF_NOWARNINGS=yes install -yqq --no-install-recommends \
+  build-essential libleptonica-dev libtesseract-dev pkg-config tesseract-ocr
+[[ -f pyproject.toml ]] && uv sync --frozen || true
