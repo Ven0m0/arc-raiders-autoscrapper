@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import Any, cast
 
 import concurrent.futures
 import io
@@ -11,11 +12,15 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 import orjson
+import requests as _requests
+from bs4 import BeautifulSoup as _BeautifulSoup
 
 from .data_loader import DATA_DIR
 from .quest_overrides import apply_quest_overrides
 
 _log = logging.getLogger(__name__)
+
+_SCRAPER_AVAILABLE = True
 
 METAFORGE_API_DOCS_URL = "https://metaforge.app/arc-raiders/api"
 METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
@@ -26,17 +31,6 @@ WIKI_USER_AGENT = "arc-raiders-autoscrapper/1.0 (https://github.com/Ven0m0/arc-r
 
 ARCTRACKER_BASE_URL = "https://arctracker.io"
 ARCTRACKER_API_DOCS_URL = "https://arctracker.io/developers/docs"
-
-
-try:
-    import requests as _requests
-    from bs4 import BeautifulSoup as _BeautifulSoup
-
-    _SCRAPER_AVAILABLE = True
-except ImportError:
-    _requests = None  # type: ignore[assignment]
-    _BeautifulSoup = None  # type: ignore[assignment]
-    _SCRAPER_AVAILABLE = False
 
 
 class DownloadError(RuntimeError):
@@ -65,7 +59,7 @@ def _fetch_bytes(url: str, headers: dict[str, str] | None = None) -> bytes:
         raise DownloadError(f"Failed to reach {url}: {exc}") from exc
 
 
-def _fetch_json(url: str, headers: dict[str, str] | None = None) -> object:
+def _fetch_json(url: str, headers: dict[str, str] | None = None) -> Any:
     try:
         return orjson.loads(_fetch_bytes(url, headers=headers))
     except orjson.JSONDecodeError as exc:
@@ -281,8 +275,9 @@ def _fetch_all_quests() -> list[dict]:
 
 def _extract_component_dict(value: object) -> dict[str, int] | None:
     if isinstance(value, dict) and value:
+        value_d = cast(dict[str, Any], value)
         try:
-            return {str(k): int(v) for k, v in value.items() if v is not None}
+            return {str(k): int(v) for k, v in value_d.items() if v is not None}
         except (TypeError, ValueError):
             return None
     if isinstance(value, list):
@@ -290,8 +285,9 @@ def _extract_component_dict(value: object) -> dict[str, int] | None:
         for entry in value:
             if not isinstance(entry, dict):
                 continue
-            comp_id = entry.get("component_id") or entry.get("id") or entry.get("componentId")
-            qty = entry.get("quantity") or entry.get("amount")
+            entry_d = cast(dict[str, Any], entry)
+            comp_id = entry_d.get("component_id") or entry_d.get("id") or entry_d.get("componentId")
+            qty = entry_d.get("quantity") or entry_d.get("amount")
             if comp_id and qty is not None:
                 result[str(comp_id)] = int(qty)
         return result or None
@@ -308,7 +304,8 @@ def _extract_english_text(value: object) -> str | None:
     if isinstance(value, str) and value:
         return value
     if isinstance(value, dict):
-        english_value = value.get("en")
+        value_d = cast(dict[str, Any], value)
+        english_value = value_d.get("en")
         if isinstance(english_value, str) and english_value:
             return english_value
     return None
@@ -318,8 +315,9 @@ def _normalize_component_values(value: object) -> dict[str, int] | None:
     if not isinstance(value, dict):
         return None
 
+    value_d = cast(dict[str, Any], value)
     normalized: dict[str, int] = {}
-    for raw_item_id, raw_quantity in value.items():
+    for raw_item_id, raw_quantity in value_d.items():
         item_id = _normalize_external_id(raw_item_id)
         if item_id is None:
             continue
@@ -343,13 +341,14 @@ def _normalize_raidtheory_rewards(value: object, item_names: dict[str, str]) -> 
     for reward in value:
         if not isinstance(reward, dict):
             continue
-        item_id = _normalize_external_id(reward.get("itemId") or reward.get("item_id"))
+        reward_d = cast(dict[str, Any], reward)
+        item_id = _normalize_external_id(reward_d.get("itemId") or reward_d.get("item_id"))
         if item_id is None:
             continue
         reward_ids.append(item_id)
 
         reward_payload: dict[str, object] = {"item_id": item_id}
-        quantity = reward.get("quantity")
+        quantity = reward_d.get("quantity")
         if quantity is not None:
             reward_payload["quantity"] = str(quantity)
 

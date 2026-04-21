@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -44,7 +46,7 @@ def generate_rules_from_active(
 
     quests_by_trader = group_quests_by_trader(game_data.quests)
     quest_index = build_quest_index(quests_by_trader)
-    active_resolved: list[dict] = []
+    active_resolved: list[dict[str, Any]] = []
     if active_quests:
         active_resolved, missing = resolve_active_quests(active_quests, quest_index)
         if missing:
@@ -81,7 +83,7 @@ def generate_rules_from_active(
     ]
     out_items.sort(key=lambda entry: str(entry.get("id", "")))
 
-    metadata = {
+    metadata: dict[str, Any] = {
         "generatedAt": _iso_now(),
         "data": game_data.metadata,
         "itemCount": len(out_items),

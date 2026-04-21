@@ -4,7 +4,7 @@ from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from hashlib import blake2b
 from pathlib import Path
-from typing import Literal, cast
+from typing import Any, Literal, cast
 
 import cv2
 import numpy as np
@@ -100,19 +100,20 @@ def _coerce_sample(entry: object) -> OcrFailureSample | None:
     if not isinstance(entry, dict):
         return None
 
-    schema_version = entry.get("schema_version", 1)
-    sample_id = entry.get("sample_id")
-    captured_at = entry.get("captured_at")
-    outcome = entry.get("outcome")
-    source = entry.get("source")
-    raw_text = entry.get("raw_text")
-    cleaned_text = entry.get("cleaned_text")
-    chosen_name = entry.get("chosen_name")
-    matched_name = entry.get("matched_name")
-    label_status = entry.get("label_status")
-    expected_name = entry.get("expected_name")
-    image_path = entry.get("image_path")
-    threshold = entry.get("threshold")
+    entry_d = cast(dict[str, Any], entry)
+    schema_version = entry_d.get("schema_version", 1)
+    sample_id = entry_d.get("sample_id")
+    captured_at = entry_d.get("captured_at")
+    outcome = entry_d.get("outcome")
+    source = entry_d.get("source")
+    raw_text = entry_d.get("raw_text")
+    cleaned_text = entry_d.get("cleaned_text")
+    chosen_name = entry_d.get("chosen_name")
+    matched_name = entry_d.get("matched_name")
+    label_status = entry_d.get("label_status")
+    expected_name = entry_d.get("expected_name")
+    image_path = entry_d.get("image_path")
+    threshold = entry_d.get("threshold")
 
     if not isinstance(schema_version, int) or schema_version < 1 or schema_version > OCR_FAILURE_SAMPLE_SCHEMA_VERSION:
         return None

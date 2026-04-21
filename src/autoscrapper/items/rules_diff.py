@@ -6,7 +6,7 @@ from __future__ import annotations
 # Only action changes are emitted.
 
 from dataclasses import dataclass
-from collections.abc import Mapping
+from typing import Any, cast
 
 
 @dataclass(frozen=True, slots=True)
@@ -37,11 +37,11 @@ def _first_nonempty_text(value: object) -> str | None:
     return None
 
 
-def _extract_action(item: Mapping[str, object]) -> str | None:
+def _extract_action(item: dict[str, Any]) -> str | None:
     return _first_nonempty_text(item.get("action")) or _first_nonempty_text(item.get("decision"))
 
 
-def _extract_reasons(item: Mapping[str, object]) -> list[str]:
+def _extract_reasons(item: dict[str, Any]) -> list[str]:
     reasons_raw = item.get("analysis")
     reasons: list[str] = []
     if isinstance(reasons_raw, list):
@@ -52,13 +52,14 @@ def _extract_reasons(item: Mapping[str, object]) -> list[str]:
 
 
 def _build_default_indexes(
-    items: list[object],
-) -> tuple[dict[str, Mapping[str, object]], dict[str, Mapping[str, object]]]:
-    by_id: dict[str, Mapping[str, object]] = {}
-    by_name: dict[str, Mapping[str, object]] = {}
+    items: list[Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    by_id: dict[str, Any] = {}
+    by_name: dict[str, Any] = {}
     for item in items:
         if not isinstance(item, dict):
             continue
+        item = cast(dict[str, Any], item)
         item_id = _normalize_key(item.get("id"))
         if item_id:
             by_id[item_id] = item
@@ -69,10 +70,10 @@ def _build_default_indexes(
 
 
 def _match_default_item(
-    updated_item: Mapping[str, object],
-    default_by_id: Mapping[str, Mapping[str, object]],
-    default_by_name: Mapping[str, Mapping[str, object]],
-) -> Mapping[str, object] | None:
+    updated_item: dict[str, Any],
+    default_by_id: dict[str, Any],
+    default_by_name: dict[str, Any],
+) -> dict[str, Any] | None:
     item_id = _normalize_key(updated_item.get("id"))
     if item_id:
         default_item = default_by_id.get(item_id)
@@ -84,9 +85,7 @@ def _match_default_item(
     return default_by_name.get(name)
 
 
-def collect_rule_changes(
-    default_payload: Mapping[str, object], updated_payload: Mapping[str, object]
-) -> list[RuleChange]:
+def collect_rule_changes(default_payload: dict[str, Any], updated_payload: dict[str, Any]) -> list[RuleChange]:
     default_items = default_payload.get("items")
     updated_items = updated_payload.get("items")
     if not isinstance(default_items, list) or not isinstance(updated_items, list):
@@ -98,6 +97,7 @@ def collect_rule_changes(
     for updated_item in updated_items:
         if not isinstance(updated_item, dict):
             continue
+        updated_item = cast(dict[str, Any], updated_item)
         default_item = _match_default_item(updated_item, default_by_id, default_by_name)
         if default_item is None:
             continue

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import orjson
 from ..core.item_actions import clean_ocr_text
@@ -53,10 +53,11 @@ def using_custom_rules() -> bool:
 
 def _coerce_payload(raw: object) -> dict:
     if isinstance(raw, dict):
-        items = raw.get("items")
+        raw_d = cast(dict[str, Any], raw)
+        items = raw_d.get("items")
         if not isinstance(items, list):
             items = []
-        metadata = raw.get("metadata") if isinstance(raw.get("metadata"), dict) else {}
+        metadata = raw_d.get("metadata") if isinstance(raw_d.get("metadata"), dict) else {}
         return {"metadata": metadata, "items": items}
 
     if isinstance(raw, list):

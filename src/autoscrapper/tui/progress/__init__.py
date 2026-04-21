@@ -334,7 +334,7 @@ class ActiveQuestsScreen(ProgressScreen):
             return
         self.app.push_screen(WorkshopLevelsScreen(self.state, wizard_mode=True))
 
-    def action_toggle(self) -> None:  # type: ignore[override]
+    async def action_toggle(self, attribute_name: str = "") -> None:
         self._toggle_selected()
 
     def action_cycle_sort(self) -> None:

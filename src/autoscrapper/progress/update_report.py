@@ -4,7 +4,7 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 from collections.abc import Mapping, Sequence
-from typing import Any
+from typing import Any, cast
 
 import orjson
 
@@ -52,22 +52,24 @@ def load_json(path: Path, default: Any) -> Any:
 
 
 def diff_quests(before_quests: Sequence[object], after_quests: Sequence[object]) -> dict:
-    before_by_id: dict[str, Mapping[str, object]] = {}
-    after_by_id: dict[str, Mapping[str, object]] = {}
+    before_by_id: dict[str, Any] = {}
+    after_by_id: dict[str, Any] = {}
 
     for quest in before_quests:
         if not isinstance(quest, dict):
             continue
-        quest_id = _normalize_text(quest.get("id"))
+        quest_d = cast(dict[str, Any], quest)
+        quest_id = _normalize_text(quest_d.get("id"))
         if quest_id:
-            before_by_id[quest_id] = quest
+            before_by_id[quest_id] = quest_d
 
     for quest in after_quests:
         if not isinstance(quest, dict):
             continue
-        quest_id = _normalize_text(quest.get("id"))
+        quest_d = cast(dict[str, Any], quest)
+        quest_id = _normalize_text(quest_d.get("id"))
         if quest_id:
-            after_by_id[quest_id] = quest
+            after_by_id[quest_id] = quest_d
 
     before_ids = set(before_by_id.keys())
     after_ids = set(after_by_id.keys())
@@ -147,22 +149,24 @@ def diff_rules(before_payload: Mapping[str, object], after_payload: Mapping[str,
     before_items = before_items_raw if isinstance(before_items_raw, list) else []
     after_items = after_items_raw if isinstance(after_items_raw, list) else []
 
-    before_by_key: dict[str, Mapping[str, object]] = {}
-    after_by_key: dict[str, Mapping[str, object]] = {}
+    before_by_key: dict[str, Any] = {}
+    after_by_key: dict[str, Any] = {}
 
     for item in before_items:
         if not isinstance(item, dict):
             continue
-        key = _item_key(item)
+        item_d = cast(dict[str, Any], item)
+        key = _item_key(item_d)
         if key:
-            before_by_key[key] = item
+            before_by_key[key] = item_d
 
     for item in after_items:
         if not isinstance(item, dict):
             continue
-        key = _item_key(item)
+        item_d = cast(dict[str, Any], item)
+        key = _item_key(item_d)
         if key:
-            after_by_key[key] = item
+            after_by_key[key] = item_d
 
     before_keys = set(before_by_key.keys())
     after_keys = set(after_by_key.keys())
@@ -291,7 +295,7 @@ def graph_gap_report(quests: Sequence[object], quest_graph: Mapping[str, object]
         _normalize_quest_name(node_name) for node_name in node_values if _normalize_quest_name(node_name)
     }
 
-    quest_entries = [quest for quest in quests if isinstance(quest, dict)]
+    quest_entries: list[dict[str, Any]] = [cast(dict[str, Any], quest) for quest in quests if isinstance(quest, dict)]
     quest_names_normalized = {
         _normalize_quest_name(quest.get("name")) for quest in quest_entries if _normalize_quest_name(quest.get("name"))
     }

@@ -323,9 +323,9 @@ class HomeScreen(MenuScreen):
         self._refresh_items()
         super().on_mount()
 
-    def on_screen_resume(self, event: events.ScreenResume) -> None:
+    def on_screen_resume(self, _event: events.ScreenResume) -> None:
         self._refresh_items()
-        super().on_screen_resume(event)
+        super().on_screen_resume(_event)
 
     def action_back(self) -> None:
         # Home is the root screen; Back should be a no-op here.
@@ -362,9 +362,9 @@ class MaintenanceMenuScreen(MenuScreen):
         self._refresh_items()
         super().on_mount()
 
-    def on_screen_resume(self, event: events.ScreenResume) -> None:
+    def on_screen_resume(self, _event: events.ScreenResume) -> None:
         self._refresh_items()
-        super().on_screen_resume(event)
+        super().on_screen_resume(_event)
 
 
 class AutoScrapperApp(App[None]):
@@ -395,7 +395,7 @@ class AutoScrapperApp(App[None]):
         while not isinstance(self.screen, HomeScreen):
             self.pop_screen()
 
-    def action_back(self) -> None:  # type: ignore[override]
+    async def action_back(self) -> None:
         if isinstance(self.screen, ScanScreen):
             return
         if isinstance(self.screen, HomeScreen):

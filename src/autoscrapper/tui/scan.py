@@ -8,7 +8,7 @@ import threading
 import time
 import traceback
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from rich.text import Text
 from textual.app import ComposeResult
@@ -76,7 +76,7 @@ def _item_label(result: Any) -> str:
 
 
 def _com_error_details(exc: BaseException) -> tuple[int, str, str] | None:
-    args = getattr(exc, "args", ())
+    args = cast(tuple[Any, ...], getattr(exc, "args", ()))
     if len(args) < 2 or not isinstance(args[0], int) or not isinstance(args[1], str):
         return None
     hresult = args[0]

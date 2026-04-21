@@ -51,40 +51,16 @@ def _format_duration(seconds: float | None) -> str:
     return f"{minutes:02d}:{secs:02d}"
 
 
-if ProgressColumn is not None and Task is not None and Text is not None:  # pragma: no cover
-
-    class _ItemsPerSecondColumn(ProgressColumn):
-        def render(self, task: Task) -> Text:
-            speed = getattr(task, "finished_speed", None) or task.speed
-            if speed is None:
-                return Text("-- it/s", style="dim")
-            return Text(f"{speed:0.2f} it/s", style="dim")
-
-else:  # pragma: no cover - rich missing
-    _ItemsPerSecondColumn = None  # type: ignore[assignment]
+class _ItemsPerSecondColumn(ProgressColumn):
+    def render(self, task: Task) -> Text:
+        speed = getattr(task, "finished_speed", None) or task.speed
+        if speed is None:
+            return Text("-- it/s", style="dim")
+        return Text(f"{speed:0.2f} it/s", style="dim")
 
 
 class _ScanLiveUI:
     def __init__(self) -> None:
-        if (
-            Console is None
-            or Group is None
-            or Live is None
-            or Panel is None
-            or Progress is None
-            or BarColumn is None
-            or SpinnerColumn is None
-            or TextColumn is None
-            or TaskProgressColumn is None
-            or TimeElapsedColumn is None
-            or TimeRemainingColumn is None
-            or Align is None
-            or Table is None
-            or Text is None
-            or box is None
-        ):
-            raise RuntimeError("Rich is required for the live scan UI.")
-
         self.console: Console = Console()
         self._events: deque[tuple[Text, Text]] = deque(maxlen=6)
         self._counts: Counter = Counter()

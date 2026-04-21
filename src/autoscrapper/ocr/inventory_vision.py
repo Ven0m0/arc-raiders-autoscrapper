@@ -966,7 +966,7 @@ def preprocess_for_ocr(
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(tile_cols, tile_rows))
         gray = clahe.apply(gray)
     if upscale:
-        gray = cv2.resize(gray, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)  # type: ignore[arg-type]
+        gray = cv2.resize(gray, (0, 0), fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
     if restrict_otsu_to_left:
         # Compute the Otsu threshold from the left half only (context-menu panel
         # side) so that bright inventory-grid icons on the right do not bias the

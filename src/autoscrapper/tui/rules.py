@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Literal
+from typing import Any, Literal, cast
 
 from rich.text import Text
 from textual import events
@@ -524,6 +524,7 @@ class RulesScreen(AppScreen):
         for item in items:
             if not isinstance(item, dict):
                 continue
+            item = cast(dict[str, Any], item)
             action = _normalized_action(item)
             if not action:
                 continue
@@ -541,6 +542,7 @@ class RulesScreen(AppScreen):
         for item in items:
             if not isinstance(item, dict):
                 continue
+            item = cast(dict[str, Any], item)
             item_id = _lookup_key(item.get("id"))
             if item_id:
                 by_id[item_id] = item
