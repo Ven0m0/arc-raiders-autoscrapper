@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 
 [[ -f pyproject.toml ]] && uv sync || true
-[[ -f package.json ]] && bun install --frozen-lockfile || true
