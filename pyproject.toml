@@ -10,7 +10,7 @@ readme = "README.md"
 keywords = ["ocr", "arc-raiders", "tesseract", "text-recognition"]
 requires-python = ">=3.13,<3.14"
 dependencies = [
-  "mss>=10.1.0",
+  "mss>=10.2.0",
   "numpy>=2.4.4",
   "opencv-python-headless>=4.13.0.92",
   "orjson>=3.11.8",
@@ -37,7 +37,7 @@ dev = [
     "prek>=0.3.10",
     "pytest>=9.0.3",
     "ruff>=0.15.11",
-    "tombi>=0.9.20",
+    "tombi>=0.9.22",
     "ty>=0.0.32",
     "vulture>=2.16",
 ]
@@ -63,7 +63,7 @@ scraper = [
 ]
 rapidocr = [
     "rapidocr>=3.8.1",
-    "onnxruntime>=1.24.4",
+    "onnxruntime>=1.25.0",
 ]
 
 [project.scripts]
