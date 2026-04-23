@@ -13,7 +13,7 @@ repos:
         types_or: [python, pyi]
         stages: [pre-commit]
   - repo: https://github.com/DetachHead/basedpyright-prek-mirror
-    rev: 1.39.2
+    rev: 1.39.3
     hooks:
       - id: basedpyright
   - repo: https://github.com/rhysd/actionlint
