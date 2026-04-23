@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, cast
 
 from datetime import datetime, timezone
 from pathlib import Path
@@ -52,8 +52,9 @@ def generate_rules_from_active(
         if missing:
             raise ValueError(f"Active quests not found: {', '.join(missing)}")
 
+    completed_quests: list[str]
     if all_quests_completed:
-        completed_quests = [quest.get("id") for quest in game_data.quests if quest.get("id")]
+        completed_quests = [quest.get("id") for quest in game_data.quests if quest.get("id") is not None]
     elif completed_quests_override is not None:
         completed_quests = completed_quests_override
     else:

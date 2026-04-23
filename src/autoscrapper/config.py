@@ -285,44 +285,44 @@ def _from_raw_scan_settings(raw: Any) -> ScanSettings:
 
     infobox_retries = _coerce_positive_int(infobox_retries_raw)
     if infobox_retries is None:
-        infobox_retries = ScanSettings.infobox_retries
+        infobox_retries = 3
     infobox_retries = _clamp_retry_count(infobox_retries, "infobox_retries")
 
     infobox_retry_interval_ms = _coerce_non_negative_int(infobox_retry_interval_ms_raw)
     if infobox_retry_interval_ms is None:
-        infobox_retry_interval_ms = ScanSettings.infobox_retry_interval_ms
+        infobox_retry_interval_ms = 50
     infobox_retry_interval_ms = _clamp_delay_ms(infobox_retry_interval_ms, "infobox_retry_interval_ms")
 
     ocr_unreadable_retries = _coerce_non_negative_int(ocr_unreadable_retries_raw)
     if ocr_unreadable_retries is None:
-        ocr_unreadable_retries = ScanSettings.ocr_unreadable_retries
+        ocr_unreadable_retries = 1
     ocr_unreadable_retries = _clamp_retry_count(ocr_unreadable_retries, "ocr_unreadable_retries")
 
     ocr_retry_interval_ms = _coerce_non_negative_int(ocr_retry_interval_ms_raw)
     if ocr_retry_interval_ms is None:
-        ocr_retry_interval_ms = ScanSettings.ocr_retry_interval_ms
+        ocr_retry_interval_ms = 50
     ocr_retry_interval_ms = _clamp_delay_ms(ocr_retry_interval_ms, "ocr_retry_interval_ms")
 
     input_action_delay_ms = _coerce_non_negative_int(input_action_delay_ms_raw)
     if input_action_delay_ms is None:
-        input_action_delay_ms = ScanSettings.input_action_delay_ms
+        input_action_delay_ms = 100
     input_action_delay_ms = _clamp_delay_ms(input_action_delay_ms, "input_action_delay_ms")
 
     cell_infobox_left_right_click_gap_ms = _coerce_non_negative_int(cell_infobox_left_right_click_gap_ms_raw)
     if cell_infobox_left_right_click_gap_ms is None:
-        cell_infobox_left_right_click_gap_ms = ScanSettings.cell_infobox_left_right_click_gap_ms
+        cell_infobox_left_right_click_gap_ms = 250
     cell_infobox_left_right_click_gap_ms = _clamp_delay_ms(
         cell_infobox_left_right_click_gap_ms, "cell_infobox_left_right_click_gap_ms"
     )
 
     item_infobox_settle_delay_ms = _coerce_non_negative_int(item_infobox_settle_delay_ms_raw)
     if item_infobox_settle_delay_ms is None:
-        item_infobox_settle_delay_ms = ScanSettings.item_infobox_settle_delay_ms
+        item_infobox_settle_delay_ms = 200
     item_infobox_settle_delay_ms = _clamp_delay_ms(item_infobox_settle_delay_ms, "item_infobox_settle_delay_ms")
 
     post_sell_recycle_delay_ms = _coerce_non_negative_int(post_sell_recycle_delay_ms_raw)
     if post_sell_recycle_delay_ms is None:
-        post_sell_recycle_delay_ms = ScanSettings.post_sell_recycle_delay_ms
+        post_sell_recycle_delay_ms = 100
     post_sell_recycle_delay_ms = _clamp_delay_ms(post_sell_recycle_delay_ms, "post_sell_recycle_delay_ms")
 
     return ScanSettings(
