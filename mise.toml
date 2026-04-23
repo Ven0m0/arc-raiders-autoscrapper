@@ -5,7 +5,7 @@ yes = true
 auto_install = true
 
 [settings.python]
-uv_venv_auto = true
+uv_venv_auto = "create|source"
 uv_venv_create_args = "--system-site-packages --seed"
 
 [settings.pipx]
@@ -19,5 +19,6 @@ prek = "latest"
 
 [env]
 UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
+UV_LINK_MODE = "symlink"
 _.python.venv = ".venv"
 _.file = { path = ".env", tools = true }
