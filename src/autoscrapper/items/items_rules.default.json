@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-21T02:02:00.718812Z",
+    "generatedAt": "2026-04-23T14:50:20.920660Z",
     "data": {
-      "lastUpdated": "2026-04-21T02:02:00.710243Z",
+      "lastUpdated": "2026-04-23T14:50:20.912152Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
       "itemCount": 573,
@@ -1266,7 +1266,7 @@
     {
       "id": "celeste-journal",
       "name": "Celeste's Journal",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -1785,7 +1785,7 @@
     {
       "id": "dodgers-note",
       "name": "Dodger's Note",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -1874,7 +1874,7 @@
     {
       "id": "dusty-film-reel",
       "name": "Dusty Film Reel",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -1934,7 +1934,7 @@
     {
       "id": "espresso-machine-parts",
       "name": "Espresso Machine Parts",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -1963,7 +1963,7 @@
     {
       "id": "experimental-seed-sample",
       "name": "Experimental Seed Sample",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -2392,7 +2392,7 @@
     {
       "id": "first-wave-compass",
       "name": "First Wave Compass",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -2402,7 +2402,7 @@
     {
       "id": "first-wave-rations",
       "name": "First Wave Rations",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -2412,7 +2412,7 @@
     {
       "id": "first-wave-tape",
       "name": "First Wave Tape",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -3191,7 +3191,7 @@
     {
       "id": "library-book",
       "name": "Book",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -3441,7 +3441,7 @@
     {
       "id": "major-aivas-mementos",
       "name": "Major Aiva's Mementos",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -3451,7 +3451,7 @@
     {
       "id": "major-aivas-patch",
       "name": "Major Aiva's Patch",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -3585,7 +3585,7 @@
     {
       "id": "moisture-meter",
       "name": "Moisture Meter",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -3721,7 +3721,7 @@
     {
       "id": "nutrient-meter",
       "name": "Nutrient Meter",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -3731,7 +3731,7 @@
     {
       "id": "official-shutdown-documentation",
       "name": "Official Shutdown Documentation",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -3751,7 +3751,7 @@
     {
       "id": "old-world-books",
       "name": "Old World Books",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -3972,7 +3972,7 @@
     {
       "id": "possibly-toxic-plant",
       "name": "Possibly Toxic Plant",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -4063,7 +4063,7 @@
     {
       "id": "project-heartwood-blueprints",
       "name": "Project Heartwood Blueprints",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -4612,7 +4612,7 @@
     {
       "id": "scout-patrol-note",
       "name": "Scout Patrol Note",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -4622,7 +4622,7 @@
     {
       "id": "secret-meeting-info",
       "name": "Secret Meeting Info",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
