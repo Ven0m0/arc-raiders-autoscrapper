@@ -28,10 +28,6 @@
     "github:joshuadavidthomas/opencode-agent-memory",
     "opencode-agent-skills",
     "github:kdcokenny/opencode-background-agents",
-    "github:Opencode-DCP/opencode-dynamic-context-pruning",
-    "github:JRedeker/opencode-shell-strategy",
-    "github:VincentHardouin/opencode-snip",
-    "github:itertea/opencode-rtk-rewrite",
     "github:spoons-and-mirrors/subtask2"
   ],
   "formatter": {
@@ -54,11 +50,6 @@
     "github": {
       "type": "remote",
       "url": "https://api.githubcopilot.com/mcp/",
-      "enabled": true
-    },
-    "git-mcp": {
-      "type": "http",
-      "url": "https://gitmcp.io/gh/Ven0m0/arc-raiders-autoscrapper",
       "enabled": true
     },
     "gh_grep": {
