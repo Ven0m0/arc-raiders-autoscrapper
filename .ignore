@@ -218,3 +218,5 @@ node_modules/
 *.backup
 *.bak
 .mypy_cache/
+
+!.codemogger/index.db-wal
