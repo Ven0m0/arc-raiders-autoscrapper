@@ -48,6 +48,12 @@
       "url": "https://api.ref.tools/mcp",
       "enabled": true
     },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": { "Authorization": "Bearer {env:CONTEXT7_API_KEY}" },
+      "enabled": true
+    },
     "github": {
       "type": "remote",
       "url": "https://api.githubcopilot.com/mcp/",
@@ -67,7 +73,7 @@
     "fast-filesystem": {
       "type": "local",
       "command": ["npx", "-y", "fast-filesystem@latest"],
-      "enabled": true
+      "enabled": false
     },
     "serena": {
       "type": "local",
@@ -86,6 +92,11 @@
     "octocode": {
       "type": "local",
       "command": ["npx", "-y", "octocode-mcp@latest"],
+      "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "-y", "@playwright/mcp@latest", "--headless"],
       "enabled": true
     }
   },
