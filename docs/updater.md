@@ -16,8 +16,7 @@ uv run python scripts/update_snapshot_and_defaults.py --dry-run
 # Real update — writes tracked files
 uv run python scripts/update_snapshot_and_defaults.py
 
-# Optional: enable MetaForge Supabase enrichment (recipe/recyclesInto fields)
-export METAFORGE_SUPABASE_ANON_KEY=...
+# Real update (writes tracked files)
 uv run python scripts/update_snapshot_and_defaults.py
 ```
 

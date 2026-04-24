@@ -95,8 +95,7 @@ The updater uses a layered source strategy. MetaForge is preferred; arctracker.i
 
 | Source | Purpose | Behaviour |
 |---|---|---|
-| [MetaForge ARC Raiders API](https://metaforge.app/arc-raiders/api) | Primary item and quest source | Reads paginated `/items` and `/quests` from `https://metaforge.app/api/arc-raiders` |
-| MetaForge Supabase (optional) | Crafting and recycle relationships | Adds recipe and `recyclesInto` data when `METAFORGE_SUPABASE_ANON_KEY` is set |
+| [arctracker.io](https://arctracker.io) | Secondary item, quest, hideout, and project source | Public API at `https://arctracker.io/api/*`; supplements MetaForge and activates as fallback |
 | [arctracker.io](https://arctracker.io) | Secondary item, quest, hideout, and project source | Public API at `https://arctracker.io/api/*`; supplements MetaForge and activates as fallback |
 | [RaidTheory/arcraiders-data](https://github.com/RaidTheory/arcraiders-data) | Fallback item and quest source | Downloaded as a zip archive; fills missing records when MetaForge or arctracker are unavailable |
 | [Arc Raiders Wiki loot table](https://arcraiders.wiki/wiki/Loot) | Optional workshop/expedition/project-use enrichment | Adds a `wikiUses` field to each item (always active) |
@@ -174,10 +173,9 @@ Wiki enrichment is supplemental — it does not replace any MetaForge field. A f
 ### Run the updater locally
 
 ```bash
-# Optional: enable crafting/recycle enrichment from MetaForge Supabase
-export METAFORGE_SUPABASE_ANON_KEY=...
-
+```bash
 # Real update (writes tracked files):
+uv run python scripts/update_snapshot_and_defaults.py
 uv run python scripts/update_snapshot_and_defaults.py
 
 # Dry run (no tracked file writes):

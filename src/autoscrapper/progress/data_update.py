@@ -14,9 +14,9 @@ from urllib.request import Request, urlopen
 import orjson
 import requests as _requests
 from bs4 import BeautifulSoup as _BeautifulSoup
-
 from .data_loader import DATA_DIR
 from .quest_overrides import apply_quest_overrides
+
 
 _log = logging.getLogger(__name__)
 
@@ -30,7 +30,13 @@ WIKI_LOOT_URL = "https://arcraiders.wiki/wiki/Loot"
 WIKI_USER_AGENT = "arc-raiders-autoscrapper/1.0 (https://github.com/Ven0m0/arc-raiders-autoscrapper)"
 
 ARCTRACKER_BASE_URL = "https://arctracker.io"
+ARCTRACKER_BASE_URL = "https://arctracker.io"
 ARCTRACKER_API_DOCS_URL = "https://arctracker.io/developers/docs"
+
+# Arc-Lens scraping constants (ported from https://github.com/eetusa/arc-lens)
+ARC_LENS_WIKI_URL = "https://arcraiders.wiki"
+ARC_LENS_META_URL = "https://metaforge.app/api"
+ARC_LENS_MAPS = ["dam", "spaceport", "buried-city", "blue-gate", "stella-montis"]
 
 
 class DownloadError(RuntimeError):

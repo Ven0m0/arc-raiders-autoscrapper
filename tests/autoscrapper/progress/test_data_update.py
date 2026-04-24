@@ -55,7 +55,7 @@ def fallback_quests():
     ]
 
 
-def test_update_data_snapshot_runs_without_supabase(tmp_path):
+def test_update_data_snapshot_runs_without_external_deps(tmp_path):
     with (
         mock.patch("autoscrapper.progress.data_update._fetch_all_items", return_value=[]),
         mock.patch("autoscrapper.progress.data_update._fetch_all_quests", return_value=[]),
