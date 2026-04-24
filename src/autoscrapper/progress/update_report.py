@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 from datetime import datetime, timezone
 from pathlib import Path
 from collections.abc import Mapping, Sequence
@@ -8,17 +7,7 @@ from typing import Any, cast
 
 import orjson
 
-
-def _normalize_quest_name(value: object) -> str:
-    normalized = str(value or "").lower().replace("'", "").replace("\u2019", "")
-    normalized = re.sub(r"[^a-z0-9]+", " ", normalized)
-    return re.sub(r"\s+", " ", normalized).strip()
-
-
-def _normalize_text(value: object) -> str:
-    if not isinstance(value, str):
-        return ""
-    return value.strip()
+from ..utils.normalization import normalize_quest_name, normalize_text
 
 
 def _safe_float(value: Any) -> float:
@@ -29,10 +18,10 @@ def _safe_float(value: Any) -> float:
 
 
 def _item_key(item: Mapping[str, object]) -> str:
-    item_id = _normalize_text(item.get("id"))
+    item_id = normalize_text(item.get("id"))
     if item_id:
         return f"id:{item_id}"
-    name = _normalize_text(item.get("name"))
+    name = normalize_text(item.get("name"))
     if name:
         return f"name:{name.lower()}"
     return ""
@@ -59,7 +48,7 @@ def diff_quests(before_quests: Sequence[object], after_quests: Sequence[object])
         if not isinstance(quest, dict):
             continue
         quest_d = cast(dict[str, Any], quest)
-        quest_id = _normalize_text(quest_d.get("id"))
+        quest_id = normalize_text(quest_d.get("id"))
         if quest_id:
             before_by_id[quest_id] = quest_d
 
@@ -67,7 +56,7 @@ def diff_quests(before_quests: Sequence[object], after_quests: Sequence[object])
         if not isinstance(quest, dict):
             continue
         quest_d = cast(dict[str, Any], quest)
-        quest_id = _normalize_text(quest_d.get("id"))
+        quest_id = normalize_text(quest_d.get("id"))
         if quest_id:
             after_by_id[quest_id] = quest_d
 
@@ -292,17 +281,17 @@ def graph_gap_report(quests: Sequence[object], quest_graph: Mapping[str, object]
     nodes = quest_graph.get("nodes")
     node_values = nodes.values() if isinstance(nodes, dict) else []
     node_names_normalized = {
-        _normalize_quest_name(node_name) for node_name in node_values if _normalize_quest_name(node_name)
+        normalize_quest_name(node_name) for node_name in node_values if normalize_quest_name(node_name)
     }
 
     quest_entries: list[dict[str, Any]] = [cast(dict[str, Any], quest) for quest in quests if isinstance(quest, dict)]
     quest_names_normalized = {
-        _normalize_quest_name(quest.get("name")) for quest in quest_entries if _normalize_quest_name(quest.get("name"))
+        normalize_quest_name(quest.get("name")) for quest in quest_entries if normalize_quest_name(quest.get("name"))
     }
 
     missing_quests: list[dict] = []
     for quest in quest_entries:
-        quest_name = _normalize_quest_name(quest.get("name"))
+        quest_name = normalize_quest_name(quest.get("name"))
         if not quest_name or quest_name in node_names_normalized:
             continue
         missing_quests.append({
