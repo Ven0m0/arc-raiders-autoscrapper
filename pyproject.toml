@@ -21,7 +21,6 @@ dependencies = [
   "rich>=15.0.0",
   "textual",
   "tessdata.fast-eng>=1.0.0",
-  # TODO: analyze and benchmark tessdata.best-eng https://github.com/tesseract-ocr/tessdata https://github.com/tesseract-ocr/tessdata_best
   "tesserocr==2.10.0; sys_platform == 'linux'",
   "tesserocr @ https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp313-cp313-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.13' and platform_machine == 'AMD64'",
   "pynput>=1.8.1; sys_platform == 'linux'",
