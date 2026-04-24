@@ -2,6 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:best-practices",
+    "config:recommended",
     ":configMigration",
     "abandonments:recommended",
     "group:all",
@@ -18,7 +19,7 @@
   "automerge": true,
   "automergeStrategy": "squash",
   "forkProcessing": "enabled",
-  "abandonmentThreshold": "1 year",
+  "abandonmentThreshold": "2 years",
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
