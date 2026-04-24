@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@opencode-ai/plugin": "1.14.22",
-    "@kilocode/plugin": "7.1.23",
+    "@kilocode/plugin": "7.2.14",
     "cachebro": "^0.2.1",
     "codemogger": "^0.1.4",
     "diff": "^9.0.0",

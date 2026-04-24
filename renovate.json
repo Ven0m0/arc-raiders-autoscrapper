@@ -70,11 +70,11 @@
       "description": "Restrict mise Python to 3.13.x, exclude 3.14+",
       "matchManagers": ["mise"],
       "matchPackageNames": ["python"],
-      "allowedVersions": "<3.14"
+      "allowedVersions": "3.13.13"
     },
     {
       "description": "Restrict Python version to exclude 3.14+ for pyenv, pep723 and custom managers",
-      "matchManagers": ["pyenv", "pep723", "custom.regex"],
+      "matchManagers": ["pyenv", "pep723", "custom.regex", "mise"],
       "matchPackageNames": ["python"],
       "allowedVersions": "<3.14"
     },
