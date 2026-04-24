@@ -24,3 +24,15 @@ UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
 UV_LINK_MODE = "symlink"
 _.python.venv = { path = ".venv", create = true, uv_create_args = ["--seed", "--system-site-packages"] }
 _.file = { path = ".env", tools = true }
+
+[tasks.install]
+description = 'Mise ci install'
+file = '.mise/tasks/install'
+
+[tasks.test]
+description = "Run tests"
+run = "pytest tests/"
+
+[tasks.lint]
+description = "Lint the code"
+run = "ruff ."
