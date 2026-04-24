@@ -12,7 +12,7 @@ updated: 2026-04-24
 4. Regenerate data with `scripts/update_snapshot_and_defaults.py` when needed
 5. Run validation before marking done:
    - `uv run ruff check src/ tests/ scripts/`
-   - `uv run ty check .`
+   - `uv run ty check src/`
    - `uv run basedpyright src/`
    - `uv run pytest`
 
