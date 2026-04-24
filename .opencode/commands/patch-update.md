@@ -1,4 +1,6 @@
----description: Patch Update---
+---
+description: Patch Update
+---
 # Patch Update
 
 Full pipeline for new game patch or Metaforge data changes.
