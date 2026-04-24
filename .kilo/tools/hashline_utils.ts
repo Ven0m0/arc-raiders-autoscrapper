@@ -40,7 +40,6 @@ export function computeLegacyHash(lineNum: number, content: string): string {
  * Output format: "{line}#{hash}|{content}"
  */
 export function formatHashLines(content: string, startLine = 1): string {
-  if (!content) return "";
   return content
     .split("\n")
     .map((line, i) => `${startLine + i}#${computeHash(startLine + i, line)}|${line}`)
