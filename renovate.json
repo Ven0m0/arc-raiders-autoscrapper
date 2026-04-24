@@ -2,13 +2,11 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:best-practices",
-    "config:recommended",
     ":configMigration",
     "abandonments:recommended",
     "group:all",
     "packages:linters",
     "schedule:weekly",
-    ":dependencyDashboard",
     ":automergeMinor",
     ":ignoreModulesAndTests",
     "docker:enableMajor",
@@ -75,6 +73,12 @@
       "allowedVersions": "<3.14"
     },
     {
+      "description": "Restrict .python-version (pyenv) to exclude 3.14+",
+      "matchManagers": ["pyenv"],
+      "matchPackageNames": ["python"],
+      "allowedVersions": "<3.14"
+    },
+    {
       "description": "Disable Docker digest pinning",
       "matchDatasources": ["docker"],
       "pinDigests": false
@@ -126,7 +130,6 @@
     {
       "customType": "regex",
       "managerFilePatterns": ["**/.github/workflows/*.yml", "**/.github/workflows/*.yaml"],
-      "datasourceTemplate": "github-releases",
       "matchStrings": [
         "# renovate: datasource=(?<datasource>[^\\s]+) depName=(?<depName>[^\\s]+)(?: version=[^\\s]+)?\\s+[A-Za-z0-9_]+_VERSION:\\s*['\"]?(?<currentValue>[^'\"\\s]+)['\"]?"
       ]
