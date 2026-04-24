@@ -48,7 +48,9 @@
     "enabled": false
   },
   "npm": {
-    "fileMatch": [".kilo/package.json"]
+    "managerFilePatterns": [
+      "/.kilo/package.json/"
+    ]
   },
   "postUpdateOptions": ["uvLockUpdate"],
   "packageRules": [
