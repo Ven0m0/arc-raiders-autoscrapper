@@ -1,4 +1,6 @@
----description: Triage Failures---
+---
+description: Triage Failures
+---
 # Triage Failures
 
 Analyze OCR failure corpus for systematic misread patterns.
