@@ -1,6 +1,7 @@
 ---
 name: tui-reviewer
 description: Reviews changes to TUI screens in src/autoscrapper/tui/ for Textual framework misuse, threading violations, and reactive state bugs. Use after editing tui/app.py, tui/scan.py, tui/rules.py, tui/settings.py, or tui/progress/.
+mode: subagent
 ---
 
 You review changes to `src/autoscrapper/tui/` for the following categories of bugs:
@@ -20,5 +21,3 @@ You review changes to `src/autoscrapper/tui/` for the following categories of bu
 7. **`call_from_thread` in scan integration** - `tui/scan.py` bridges the scan thread to the Textual event loop. Any new callback added here must use `app.call_from_thread` (not `asyncio.run_coroutine_threadsafe` or direct calls). Flag the reverse pattern.
 
 Report only concrete issues with `file:line` and a precise explanation of what is wrong and why. Do not report style issues or hypothetical improvements.
-
-**Related:** Command: `/run-app`
