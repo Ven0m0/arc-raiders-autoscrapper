@@ -98,7 +98,6 @@ id_ed25519
 apikeys.txt
 
 # Backups / temp artifacts
-
 *.bak
 *.gho
 *.ori
@@ -113,10 +112,10 @@ apikeys.txt
 *swp.*
 .~lock.*
 *.lock
+*.lockb
 *.lck
 
 # Logs / runtime
-
 *.log
 *.log.*
 log.*
@@ -134,7 +133,6 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 false.*
 
 # OS / Desktop cruft
-
 .directory
 .Trash-*
 .Trashes
@@ -170,27 +168,13 @@ Icon?
 *.db-wal
 *.db-shm
 
-# Lockfiles (additions)
-uv.lock
-bun.lockb
-
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
 
-# Session/temp dirs (additions)
-.omc/state/
-.omc/sessions/
-.omc/plans/
-.omc/self-improve/state/
-.omc/self-improve/tracking/
-.omc/self-improve/plans/
-.omc/self-improve/scripts/
-
 # Python
-
 __pycache__/
 .pytest_cache/
 *.py[cod]
@@ -200,7 +184,6 @@ __pycache__/
 .ruff_cache/
 
 # Node / JS / TS
-
 node_modules/
 npm-debug.log*
 .babel.cache
@@ -211,7 +194,6 @@ npm-debug.log*
 # Java
 .idea/
 .gradle-cache/
-
 
 logs
 yarn-debug.log*
