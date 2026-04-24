@@ -1,4 +1,6 @@
----description: Setup Linux---
+---
+description: Setup Linux
+---
 # Setup Linux
 
 Setup the development environment on Linux.
