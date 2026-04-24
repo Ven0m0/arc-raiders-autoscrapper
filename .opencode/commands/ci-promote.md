@@ -1,4 +1,6 @@
----description: CI Promote---
+---
+description: CI Promote
+---
 # CI Promote
 
 Run full validation, push branch, and open a PR.
