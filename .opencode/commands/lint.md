@@ -1,4 +1,6 @@
----description: Lint Code---
+---
+description: Lint Code
+---
 # Lint Code
 
 Run Ruff linter on the codebase.
