@@ -15,10 +15,10 @@ const SLIM_DESCRIPTIONS: Record<string, string> = {
   list: "List directory.",
   fetch: "Fetch URL.",
   json_repair: "Repair malformed JSON strings or files.",
-  hashline_edit: "Edit files via hash-anchored line references.",
-  hashline_read: "Read file with hash-annotated line numbers.",
-  hashline_grep: "Search files, return hash-annotated matches.",
-  ast_grep: "AST pattern search across 25 languages.",
+  hl_edit: "Edit files via hash-anchored line references.",
+  hl_read: "Read file with hash-annotated line numbers.",
+  hl_grep: "Search files, return hash-annotated matches.",
+  sg: "AST pattern search across 25 languages.",
 };
 
 interface ToolDefinitionInput {

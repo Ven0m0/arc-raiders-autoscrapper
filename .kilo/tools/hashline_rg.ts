@@ -88,7 +88,7 @@ async function dirListing(dir: string, indent = ""): Promise<string> {
 
 export const read = tool({
   description:
-    "Read a file with LINE#HASH|content annotations for use with hashline_edit. " +
+    "Read a file with LINE#HASH|content annotations for use with hl_edit. " +
     "Each line is tagged so you can reference it precisely in edits. " +
     "Supports pagination via offset/limit for large files. " +
     "On a directory path, returns a tree listing with file sizes.",
@@ -270,7 +270,7 @@ async function fsFallback(pattern: string, searchPath: string, include?: string,
 export const grep = tool({
   description:
     "Search files and return results with LINE#HASH|content annotations. " +
-    "Results can be used directly as anchors for hashline_edit — no separate read needed. " +
+    "Results can be used directly as anchors for hl_edit — no separate read needed. " +
     "Uses rg (ripgrep) when available, falls back to fs-based search.",
   args: {
     pattern: tool.schema.string().describe("Regex search pattern"),
