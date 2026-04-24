@@ -1,11 +1,6 @@
 {
   "$schema": "https://app.kilo.ai/config.json",
-  "instructions": [
-    ".kilo/rules/*.md",
-    ".kilo/CROSS_REFERENCE.md",
-    "AGENTS.md",
-    ".kilo/rules/shell-strategy.md"
-  ],
+  "instructions": [".kilo/rules/*.md", ".kilo/CROSS_REFERENCE.md", "AGENTS.md", ".kilo/rules/shell-strategy.md"],
   "skills": {
     "paths": [".kilo/skills", ".opencode/skills", ".claude/skills", ".github/skills"]
   },
