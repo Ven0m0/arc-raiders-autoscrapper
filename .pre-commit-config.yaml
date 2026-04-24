@@ -46,7 +46,7 @@ repos:
         name: biome check
         entry: biome check --write --no-errors-on-unmatched
         language: node
-        additional_dependencies: ["@biomejs/biome@2.4.12"]
+        additional_dependencies: ["@biomejs/biome@2.4.13"]
         files: \.(?:[cm]?[jt]sx?|jsonc?)$
         pass_filenames: true
   # Pre-commit hooks (official)
