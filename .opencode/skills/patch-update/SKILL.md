@@ -1,7 +1,7 @@
 ---
-
 name: patch-update
 description: Use when user wants to Full new-game-patch pipeline - fetch Metaforge data, regenerate default rules, run verify, report items with no rule coverage.
+---
 
 Run after a game patch or when Metaforge data is known to have changed.
 

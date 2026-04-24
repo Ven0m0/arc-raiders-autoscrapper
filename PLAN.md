@@ -90,16 +90,19 @@ Dependencies inside each wave are explicit.
  <task-ref id="T029" />
  <task-ref id="T030" />
  <task-ref id="T031" depends-on="T001" />
- <task-ref id="T032" />
- <task-ref id="T033" />
- <wave id="3" goal="finish alternate data-source features">
- <task-ref id="T016" />
- <task-ref id="T018" />
- <task-ref id="T019" />
- <task-ref id="T020" />
- <wave id="4" goal="evaluate optional UX research work">
- <task-ref id="T021" />
-</waves>
+  <task-ref id="T032" />
+  <task-ref id="T033" />
+  </wave>
+  <wave id="3" goal="finish alternate data-source features">
+  <task-ref id="T016" />
+  <task-ref id="T018" />
+  <task-ref id="T019" />
+  <task-ref id="T020" />
+  </wave>
+  <wave id="4" goal="evaluate optional UX research work">
+  <task-ref id="T021" />
+  </wave>
+  </waves>
 
 ## Active tasks
 
@@ -125,33 +128,37 @@ speculative backlog entries from older drafts were removed.
  <why>This closes a common OCR-to-rule mismatch for tiered weapon names.</why>
  <item>Normalization corrects common OCR suffix errors such as 1V and 111.</item>
  <item>Canonical item matching still uses the existing shared fuzzy threshold.</item>
- <item>Tests cover corrected and unchanged names.</item>
+  <item>Tests cover corrected and unchanged names.</item>
+  </task>
 
-<task id="T013" priority="medium" size="S" status="ready">
+  <task id="T013" priority="medium" size="S" status="ready">
  <title>Filter weapon swap UI text from item-name detection.</title>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/inventory_vision.py</file>
  <why>This prevents overlay text from being mistaken for the actual item title.</why>
  <item>Known swap-related UI strings are ignored on the first title pass.</item>
  <item>The retry path expands enough to reach the real item name below the UI line.</item>
- <item>The change does not weaken unrelated title extraction logic.</item>
+  <item>The change does not weaken unrelated title extraction logic.</item>
+  </task>
 
-<task id="T014" priority="high" size="M" status="ready">
+  <task id="T014" priority="high" size="M" status="ready">
  <title>Remove the Supabase dependency from data snapshot updates.</title>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/progress/data_update.py</file>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/update_snapshot_and_defaults.py</file>
  <why>This removes a committed credential and keeps the updater on supported sources.</why>
  <item>MetaForge item fetching uses includeComponents instead of Supabase.</item>
  <item>All Supabase constants and helpers are deleted.</item>
- <item>The snapshot updater runs without any Supabase call path.</item>
+  <item>The snapshot updater runs without any Supabase call path.</item>
+  </task>
 
-<task id="T015" priority="low" size="S" status="ready">
+  <task id="T015" priority="low" size="S" status="ready">
  <title>Change the default stop key from Escape to F9.</title>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/interaction/keybinds.py</file>
  <why>This avoids colliding with the in-game Escape menu.</why>
  <item>The default stop key is F9.</item>
- <item>The display mapping shows F9 correctly anywhere the key is rendered.</item>
+  <item>The display mapping shows F9 correctly anywhere the key is rendered.</item>
+  </task>
 
-<task id="T016" priority="medium" size="L" status="in-progress">
+  <task id="T016" priority="medium" size="L" status="in-progress">
  <title>Complete Direct Stash Sync through arctracker.io.</title>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/api/__init__.py</file>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/api/client.py</file>
@@ -176,17 +183,19 @@ speculative backlog entries from older drafts were removed.
  <item>API scan mode applies the same decision logic as OCR scan mode.</item>
  <item>Hideout and project progress can sync from the API.</item>
  <item>Failures fall back cleanly to OCR instead of breaking scans.</item>
- <item>Tests cover rate-limit and error paths.</item>
+  <item>Tests cover rate-limit and error paths.</item>
+  </task>
 
-<task id="T017" priority="low" size="S" status="ready">
+  <task id="T017" priority="low" size="S" status="ready">
  <title>Make ScanSettingsScreen a real abstract base class.</title>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/tui/settings.py</file>
  <why>This turns a silent design bug into an enforced contract.</why>
  <item>The class inherits from ABC.</item>
  <item>Abstract methods are enforced at instantiation time.</item>
- <item>No new type-checking regressions are introduced.</item>
+  <item>No new type-checking regressions are introduced.</item>
+  </task>
 
-<task id="T018" priority="medium" size="M" status="ready">
+  <task id="T018" priority="medium" size="M" status="ready">
  <title>Add a headless scan mode with structured output.</title>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/scanner/cli.py</file>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/tests/</file>
@@ -194,33 +203,37 @@ speculative backlog entries from older drafts were removed.
  <item>Headless mode runs without launching the TUI.</item>
  <item>JSONL output includes item, decision, page, cell, and timestamp fields.</item>
  <item>CSV output writes the same data to an explicit file path.</item>
- <item>Existing scan behavior remains unchanged when flags are absent.</item>
+  <item>Existing scan behavior remains unchanged when flags are absent.</item>
+  </task>
 
-<task id="T019" priority="medium" size="S" status="ready">
+  <task id="T019" priority="medium" size="S" status="ready">
  <title>Write a per-session decision log for later rule review.</title>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/scanner/</file>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/README.md</file>
  <why>This creates a durable record of decisions without replacing the OCR failure corpus.</why>
  <item>Each session can append JSONL decision records when logging is enabled.</item>
  <item>The log includes timestamp, raw text, decision, location, score, and source.</item>
- <item>The feature is opt-in and does not slow normal scans.</item>
+  <item>The feature is opt-in and does not slow normal scans.</item>
+  </task>
 
-<task id="T020" priority="medium" size="M" status="ready">
+  <task id="T020" priority="medium" size="M" status="ready">
  <title>Add safe recycle protection against active quest requirements.</title>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/progress/</file>
  <why>This prevents the scanner from recycling items that active quests still need.</why>
  <item>Recycle decisions are cross-checked against active quest requirements.</item>
  <item>Conflicts override the decision to KEEP and record the quest reason.</item>
- <item>The feature degrades gracefully when progress data is absent.</item>
+  <item>The feature degrades gracefully when progress data is absent.</item>
+  </task>
 
-<task id="T021" priority="low" size="M" status="research">
+  <task id="T021" priority="low" size="M" status="research">
  <title>Assess Raider Lens overlay ideas before integration.</title>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/tui/</file>
  <why>This is optional exploratory work and should not start until higher-value tasks land.</why>
  <item>A written assessment identifies what can be reused safely.</item>
- <item>Any prototype stays isolated from OCR correctness and scan performance risk.</item>
+  <item>Any prototype stays isolated from OCR correctness and scan performance risk.</item>
+  </task>
 
-<task id="T022" priority="low" size="S" status="ready">
+  <task id="T022" priority="low" size="S" status="ready">
  <title>Make pytest available in documented install paths.</title>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/pyproject.toml</file>
  <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/setup-linux.sh</file>
@@ -432,4 +445,5 @@ removal.
  <pick rank="4" task="T014">Security and maintenance fix that unblocks downstream data work.</pick>
  <pick rank="5" task="T017">Very small correctness improvement with immediate type-safety value.</pick>
  <pick rank="6" task="T012">Small OCR normalization fix with direct user impact.</pick>
-</next-picks>
+  </next-picks>
+</file>

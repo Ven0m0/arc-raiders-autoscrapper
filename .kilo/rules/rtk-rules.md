@@ -23,8 +23,8 @@ rtk gh pr list
 rtk gain # Show token savings
 rtk gain --history # Command history with savings
 rtk discover # Find missed RTK opportunities
-rtk proxy <cmd> # Run raw (no filtering, for debugging)
+rtk proxy COMMAND # Run raw (no filtering, for debugging)
 
 ## Why
 
-RTK filters and compresses command output before it reaches the LLM context, saving 60-90% tokens on common operations. Always use `rtk <cmd>` instead of raw commands.
+RTK filters and compresses command output before it reaches the LLM context, saving 60-90% tokens on common operations. Always use `rtk COMMAND` instead of raw commands.

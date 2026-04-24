@@ -1,8 +1,8 @@
 ---
-
 name: scan-failed
 description: Use when user wants to Context for diagnosing scans where OCR read items correctly but sell/recycle decisions were wrong - rule precedence, fuzzy threshold, progress overrides
 user-invocable: false
+---
 
 ## When OCR is correct but the action was wrong
 

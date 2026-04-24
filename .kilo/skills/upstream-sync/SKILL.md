@@ -18,7 +18,7 @@ git remote -v | grep upstream
 
 If missing, add it:
 
-git remote add upstream <https://github.com/zappybiby/ArcRaiders-AutoScrapper.git>
+git remote add upstream https://github.com/zappybiby/ArcRaiders-AutoScrapper.git
 
 ### 2. Fetch and sync
 
@@ -35,7 +35,7 @@ git status
 
 ## Edit conflicted files, then
 
-git add <resolved-files>
+git add RESOLVED_FILES
 git merge --continue
 
 ### 4. Push

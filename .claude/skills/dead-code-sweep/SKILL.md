@@ -20,7 +20,7 @@ Before removing anything, verify each reported symbol is actually unused:
 
 ## Check all callers of a symbol
 
-grep -rn "symbol_name" src/ tests/ scripts/
+grep -rn 'symbol_name' src/ tests/ scripts/
 
 **Known false positive patterns - do NOT remove these:**
 
@@ -32,7 +32,7 @@ grep -rn "symbol_name" src/ tests/ scripts/
 
 **Verification workflow for each candidate:**
 
-1. `grep -rn "ClassName\|method_name\|CONSTANT_NAME" src/ tests/ scripts/ .github/` - if any matches beyond definition, it's live
+1. `grep -rn 'ClassName\|method_name\|CONSTANT_NAME' src/ tests/ scripts/ .github/` - if any matches beyond definition, it's live
 2. If a class: check if it's a dataclass (`@dataclass`), NamedTuple, or Protocol
 3. If a function: check if it's registered as a Textual action or event handler
 
@@ -49,8 +49,8 @@ Both must pass before committing.
 
 ### Step 4 - Commit
 
-git add <changed files>
-git commit -m "chore: remove dead code (<symbols removed>)"
+git add CHANGED_FILES
+git commit -m "chore: remove dead code (SYMBOLS_REMOVED)"
 
 ### Notes from prior sweeps
 

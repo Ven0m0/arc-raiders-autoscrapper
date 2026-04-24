@@ -105,27 +105,27 @@ Apply this heuristic to pick the single best next item:
 
 Output format:
 
-### TODO Scan Report - <repo name> - <date>
+### TODO Scan Report - REPO_NAME - DATE
 
-#### Code TODOs (<N> found)
+#### Code TODOs (N_FOUND found)
 
 - [CRITICAL] src/foo/bar.py:42 - FIXME: null check missing before deref
 - [NORMAL] src/baz/qux.py:17 - TODO: add retry logic for API timeout
 ...
 
-#### GitHub Issues (<N> found)
+#### GitHub Issues (N_FOUND found)
 
 - #123 [bug] TODO: fix login race condition
 
 #### Recommended Next Step
 
-**<file>:<line> - <todo text>**
-Reason: <1-2 sentence explanation using signals above>
+**FILE:LINE - TODO_TEXT**
+Reason: 1-2 sentence explanation using signals above
 
 Alternatives:
 
-1. <second candidate>
-2. <third candidate>
+1. SECOND_CANDIDATE
+2. THIRD_CANDIDATE
 
 ### Notes
 

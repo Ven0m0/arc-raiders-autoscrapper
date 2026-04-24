@@ -1,8 +1,8 @@
 ---
-
 name: upstream-sync
 description: Use when user wants to Sync fork from upstream (zappybiby/ArcRaiders-AutoScrapper) before pushing. Run this before any push or PR creation to avoid merge conflicts.
 disable-model-invocation: true
+---
 
 # Upstream Sync
 
@@ -18,7 +18,7 @@ git remote -v | grep upstream
 
 If missing, add it:
 
-git remote add upstream <https://github.com/zappybiby/ArcRaiders-AutoScrapper.git>
+git remote add upstream https://github.com/zappybiby/ArcRaiders-AutoScrapper.git
 
 ### 2. Fetch and sync
 
@@ -35,7 +35,7 @@ git status
 
 ## Edit conflicted files, then
 
-git add <resolved-files>
+git add RESOLVED_FILES
 git merge --continue
 
 ### 4. Push
