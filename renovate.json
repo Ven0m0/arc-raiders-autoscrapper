@@ -12,7 +12,8 @@
     ":ignoreModulesAndTests",
     "docker:enableMajor",
     "preview:dockerCompose",
-    ":enablePreCommit"
+    ":enablePreCommit",
+    ":preserveSemverRanges"
   ],
   "automerge": true,
   "automergeStrategy": "squash",
@@ -30,10 +31,10 @@
   "prHourlyLimit": 0,
   "rangeStrategy": "bump",
   "constraints": {
-    "python": ">=3.13 <3.14"
+    "python": "<3.14"
   },
   "pep621": {
-    "enabled": false
+    "enabled": true
   },
   "pep723": {
     "enabled": true
@@ -64,13 +65,13 @@
       "matchManagers": ["pep621"],
       "matchPackageNames": ["python"],
       "matchDepTypes": ["requires-python"],
-      "allowedVersions": ">=3.13 <3.14"
+      "allowedVersions": "<3.14"
     },
     {
       "description": "Restrict mise Python to 3.13.x, exclude 3.14+",
       "matchManagers": ["mise"],
       "matchPackageNames": ["python"],
-      "allowedVersions": ">=3.13 <3.14"
+      "allowedVersions": "<3.14"
     },
     {
       "description": "Disable Docker digest pinning",
