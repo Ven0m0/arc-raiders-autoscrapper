@@ -1,4 +1,4 @@
-# Custom Tools and Plugins Usage
+## Custom Tools and Plugins Usage
 
 This document registers custom Kilo tools and plugins located in the repository's `.kilo/plugins/` and `.kilo/tools/` directories.
 
@@ -39,7 +39,7 @@ Reference paths are relative to the `.kilo/` directory. OpenCode/Bun resolves `.
 
 ### Loading Standalone Tools
 
-The `.kilo/tools/` directory contains standalone tool modules that each `export default tool({...})`. They must be wrapped in a plugin to be loaded.
+The `.kilo/tools/` directory contains standalone tool modules that export tool definitions (either as `export default tool({...})` or named exports). They must be wrapped in a plugin to be loaded.
 
 **Option A — Create a single aggregator plugin** (recommended)
 
@@ -50,12 +50,9 @@ import type { Plugin } from '@opencode-ai/plugin';
 import fastedit from '../tools/fastedit';
 import jsonRepair from '../tools/json_repair';
 import hashlineEdit from '../tools/hashline_edit';
-import hashlineRg from '../tools/hashline_rg';
+import { read as hashline_read, grep as hashline_grep } from '../tools/hashline_rg';
 import interactiveBash from '../tools/interactive_bash';
 import astGrep from '../tools/ast_grep';
-
-// hashline_rg exports two tools; keep both
-const { hashline_read, hashline_grep } = hashlineRg as any;
 
 const CustomToolsPlugin: Plugin = async () => ({
   tool: {

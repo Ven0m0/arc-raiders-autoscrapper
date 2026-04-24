@@ -182,10 +182,8 @@ const CodemoggerPlugin: Plugin = async ({ worktree }) => {
          .then((idx) => idx.index(root))
          .catch(() => {});
      },
-   };
- };
+    };
+  };
 
 export default CodemoggerPlugin;
 
-
-export default CodemoggerPlugin;
