@@ -1,4 +1,6 @@
----description: Update Generated Data---
+---
+description: Update Generated Data
+---
 # Update Generated Data
 
 Regenerate snapshot data and default rules.
