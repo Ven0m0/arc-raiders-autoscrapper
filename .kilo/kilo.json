@@ -94,7 +94,7 @@
       "command": ["npx", "-y", "octocode-mcp@latest"],
       "enabled": true
     },
-    "octocode": {
+    "playwright": {
       "type": "local",
       "command": ["npx", "-y", "@playwright/mcp@latest", "--headless"],
       "enabled": true
