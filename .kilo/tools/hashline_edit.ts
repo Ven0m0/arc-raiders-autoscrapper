@@ -433,7 +433,7 @@ export default tool({
       return args.rename ? `Moved ${args.filePath} → ${dest}` : `Updated ${dest} (${changedCount} line(s) changed)`;
     } catch (e) {
       if (e instanceof HashMismatchError)
-        return `Error: hash mismatch\n${e.message}\n\nTip: copy updated LINE#ID tags from the output above.`;
+        return `Error: hash mismatch — file changed since last read.\n${e.message}\n\nFix: re-read the file, then resubmit edits using the updated LINE#ID tags shown above (>>> marks changed lines).`;
       return `Error: ${e instanceof Error ? e.message : String(e)}`;
     }
   },

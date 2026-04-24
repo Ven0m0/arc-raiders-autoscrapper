@@ -1,17 +1,13 @@
-import { randomBytes } from "node:crypto";
-import { existsSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { tool } from "@opencode-ai/plugin";
+import { IncrementalJsonRepair } from "repair-json-stream/incremental";
+import { extractJson, extractAllJson, stripLlmWrapper } from "repair-json-stream/extract";
 
 const CHUNK = 65536; // 64 KB push chunks for streaming repair
 
 export default tool({
-  description:
-    "Repair malformed/incomplete JSON from LLM output or files. " +
-    "Streaming-optimised (64 KB chunks, IncrementalJsonRepair). " +
-    "Use `inputs` array for parallel repair. " +
-    "Modes: repair | extract | extract_all | strip.",
+  description: "Repair malformed/incomplete JSON. Modes: repair|extract|extract_all|strip. Accepts string or file path.",
 
   args: {
     input: tool.schema
@@ -77,114 +73,76 @@ export default tool({
       return `Error: ${error instanceof Error ? error.message : String(error)}`;
     }
 
-    // ── build runner script ──────────────────────────────────────────────────
-    const id = randomBytes(6).toString("hex");
-    const scriptPath = join(tmpdir(), `jr_runner_${id}.mjs`);
-    const inputPath = join(tmpdir(), `jr_input_${id}.json`);
-
-    writeFileSync(inputPath, JSON.stringify(texts), "utf8");
-
-    const fmtFn = pretty
-      ? `(s) => { try { return JSON.stringify(JSON.parse(s), null, 2) } catch { return s } }`
-      : `(s) => { try { return JSON.stringify(JSON.parse(s)) } catch { return s } }`;
-
-    const repairFn = verbose
-      ? `
-function streamRepair(text) {
-  const log = []
-  const r = new IncrementalJsonRepair({ onRepair: (a, i, c) => log.push({ action: a, idx: i, ctx: c }) })
-  let out = ""
-  for (let i = 0; i < text.length; i += CHUNK) out += r.push(text.slice(i, i + CHUNK))
-  out += r.end()
-  return { result: fmt(out), repairs: log }
-}`
-      : `
-function streamRepair(text) {
-  const r = new IncrementalJsonRepair()
-  let out = ""
-  for (let i = 0; i < text.length; i += CHUNK) out += r.push(text.slice(i, i + CHUNK))
-  out += r.end()
-  return fmt(out)
-}`;
-
-    const processFn =
-      mode === "repair"
-        ? `
-async function process(text) {
-  return streamRepair(text)
-}`
-        : mode === "extract"
-          ? `
-async function process(text) {
-  const out = extractJson(text)
-  if (!out) throw new Error("no JSON found in input")
-  return fmt(out)
-}`
-          : mode === "extract_all"
-            ? `
-async function process(text) {
-  const blocks = extractAllJson(text)
-  if (!blocks.length) throw new Error("no JSON blocks found in input")
-  const parsed = blocks.map(b => { try { return JSON.parse(b) } catch { return b } })
-  return ${pretty ? "JSON.stringify(parsed, null, 2)" : "JSON.stringify(parsed)"}
-}`
-            : /* strip */ `
-async function process(text) {
-  const stripped = stripLlmWrapper(text)
-  return streamRepair(stripped)
-}`;
-
-    const extractImport =
-      mode === "extract" || mode === "extract_all" || mode === "strip"
-        ? `import { extractJson, extractAllJson, stripLlmWrapper } from "repair-json-stream/extract"`
-        : "";
-
-    const script = `
-import { readFileSync } from "fs"
-import { IncrementalJsonRepair } from "repair-json-stream/incremental"
-${extractImport}
-
-const CHUNK = ${CHUNK}
-const texts = JSON.parse(readFileSync(${JSON.stringify(inputPath)}, "utf8"))
-const fmt = ${fmtFn}
-${repairFn}
-${processFn}
-
-const results = await Promise.all(texts.map(t =>
-  process(t).catch(e => ({ error: e.message }))
-))
-
-if (results.length === 1) {
-  const r = results[0]
-  if (r && typeof r === "object" && "error" in r) {
-    process.stderr.write("Error: " + r.error + "\\n")
-    process.exit(1)
-  }
-  console.log(typeof r === "string" ? r : JSON.stringify(r, null, 2))
-} else {
-  console.log(${pretty ? "JSON.stringify(results, null, 2)" : "JSON.stringify(results)"})
-}
-`;
-
-    writeFileSync(scriptPath, script, "utf8");
-
-    try {
-      const result = await Bun.$`bun run ${scriptPath}`.text();
-      return result.trim();
-    } catch (error: unknown) {
-      const stderr =
-        typeof error === "object" && error !== null && "stderr" in error
-          ? String((error as { stderr?: unknown }).stderr ?? "").trim()
-          : "";
-      return `Error: ${stderr || String(error)}`;
-    } finally {
-      for (const p of [scriptPath, inputPath]) {
-        try {
-          if (existsSync(p)) unlinkSync(p);
-        } catch {
-          // silently ignore cleanup errors
-        }
+    // ── format helper ────────────────────────────────────────────────────────
+    const fmt = (s: string): string => {
+      try {
+        return pretty ? JSON.stringify(JSON.parse(s), null, 2) : JSON.stringify(JSON.parse(s));
+      } catch {
+        return s;
       }
+    };
+
+    // ── streaming repair ─────────────────────────────────────────────────────
+    type RepairLog = { action: unknown; idx: unknown; ctx: unknown };
+    type RepairResult = string | { result: string; repairs: RepairLog[] };
+
+    function streamRepair(text: string): RepairResult {
+      if (verbose) {
+        const log: RepairLog[] = [];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const r = new IncrementalJsonRepair({ onRepair: (a: any, i: any, c: any) => log.push({ action: a, idx: i, ctx: c }) });
+        let out = "";
+        for (let i = 0; i < text.length; i += CHUNK) out += r.push(text.slice(i, i + CHUNK));
+        out += r.end();
+        return { result: fmt(out), repairs: log };
+      }
+      const r = new IncrementalJsonRepair();
+      let out = "";
+      for (let i = 0; i < text.length; i += CHUNK) out += r.push(text.slice(i, i + CHUNK));
+      out += r.end();
+      return fmt(out);
     }
+
+    // ── mode dispatch ─────────────────────────────────────────────────────────
+    function process(text: string): RepairResult | string {
+      if (mode === "repair") return streamRepair(text);
+      if (mode === "extract") {
+        const out = extractJson(text);
+        if (!out) throw new Error("no JSON found in input");
+        return fmt(out);
+      }
+      if (mode === "extract_all") {
+        const blocks = extractAllJson(text);
+        if (!blocks.length) throw new Error("no JSON blocks found in input");
+        const parsed = blocks.map((b: string) => {
+          try {
+            return JSON.parse(b);
+          } catch {
+            return b;
+          }
+        });
+        return pretty ? JSON.stringify(parsed, null, 2) : JSON.stringify(parsed);
+      }
+      // strip
+      return streamRepair(stripLlmWrapper(text));
+    }
+
+    // ── run in parallel, collect results ─────────────────────────────────────
+    const results = await Promise.all(
+      texts.map((t) =>
+        Promise.resolve()
+          .then(() => process(t))
+          .catch((e: unknown) => ({ error: e instanceof Error ? e.message : String(e) })),
+      ),
+    );
+
+    if (results.length === 1) {
+      const r = results[0];
+      if (r && typeof r === "object" && "error" in r) {
+        return `Error: ${(r as { error: string }).error}`;
+      }
+      return typeof r === "string" ? r : JSON.stringify(r, null, 2);
+    }
+    return pretty ? JSON.stringify(results, null, 2) : JSON.stringify(results);
   },
 });

@@ -5,7 +5,7 @@
  * Uses the same hash algorithm as hashline_edit.ts via shared utilities.
  */
 
-import { existsSync, readdirSync, statSync } from "node:fs";
+import { readdirSync, statSync } from "node:fs";
 import { extname, isAbsolute, join, relative, resolve } from "node:path";
 import { tool } from "@opencode-ai/plugin";
 import { spawn } from "bun";
@@ -44,12 +44,13 @@ function isBinaryExt(p: string): boolean {
   return BINARY_EXTS.has(extname(p).toLowerCase());
 }
 
-async function isBinaryContent(p: string): Promise<boolean> {
-  const buf = new Uint8Array(await Bun.file(p).slice(0, 8192).arrayBuffer());
-  return buf.includes(0);
-}
-
 // ── Directory listing ───────────────────────────────────────────────────────
+
+function fmtSize(bytes: number): string {
+  if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)}MB`;
+  if (bytes >= 1024) return `${(bytes / 1024).toFixed(1)}KB`;
+  return `${bytes}B`;
+}
 
 async function dirListing(dir: string, indent = ""): Promise<string> {
   let entries: ReturnType<typeof readdirSync>;
@@ -73,8 +74,8 @@ async function dirListing(dir: string, indent = ""): Promise<string> {
       lines.push(await dirListing(full, `${indent}  `));
     } else {
       try {
-        const count = (await Bun.file(full).text()).split("\n").length;
-        lines.push(`${indent}${e.name} (${count} lines)`);
+        const { size } = statSync(full);
+        lines.push(`${indent}${e.name} (${fmtSize(size)})`);
       } catch {
         lines.push(`${indent}${e.name} (unreadable)`);
       }
@@ -90,7 +91,7 @@ export const read = tool({
     "Read a file with LINE#HASH|content annotations for use with hashline_edit. " +
     "Each line is tagged so you can reference it precisely in edits. " +
     "Supports pagination via offset/limit for large files. " +
-    "On a directory path, returns a tree listing with line counts.",
+    "On a directory path, returns a tree listing with file sizes.",
   args: {
     filePath: tool.schema.string().describe("Path to a file or directory"),
     offset: tool.schema.number().optional().describe("Start line (1-indexed, default 1)"),
@@ -100,28 +101,42 @@ export const read = tool({
     const base = context.directory || context.worktree;
     const resolved = isAbsolute(args.filePath) ? args.filePath : resolve(base, args.filePath);
 
-    if (!existsSync(resolved)) return `Error: not found: ${args.filePath}`;
+    let st: ReturnType<typeof statSync>;
+    try {
+      st = statSync(resolved);
+    } catch {
+      return `Error: not found: ${args.filePath}`;
+    }
 
-    const st = statSync(resolved);
     if (st.isDirectory()) {
       const listing = await dirListing(resolved);
       return listing || "(empty directory)";
     }
 
     if (isBinaryExt(resolved)) return `Error: binary file: ${args.filePath}`;
-    if (await isBinaryContent(resolved)) return `Error: binary file: ${args.filePath}`;
 
-    let content: string;
+    // Read file once; check binary content from first 8 KB
+    let buffer: ArrayBuffer;
     try {
-      content = await Bun.file(resolved).text();
+      buffer = await Bun.file(resolved).arrayBuffer();
     } catch {
       return `Error: cannot read: ${args.filePath}`;
     }
+    const peek = new Uint8Array(buffer, 0, Math.min(buffer.byteLength, 8192));
+    if (peek.includes(0)) return `Error: binary file: ${args.filePath}`;
+
+    // Decode and normalize line endings for display consistency with hashline_edit
+    const content = new TextDecoder("utf-8", { fatal: false })
+      .decode(buffer)
+      .replace(/\r\n/g, "\n")
+      .replace(/\r/g, "\n");
 
     const allLines = content.split("\n");
     const total = allLines.length;
     const offset = Math.max(1, args.offset ?? 1);
-    const limit = args.limit ?? 2000;
+    const limit = Math.max(1, args.limit ?? 2000);
+
+    if (offset > total) return `Error: offset ${offset} exceeds file length (${total} lines)`;
 
     const startIdx = offset - 1;
     const slice = allLines
@@ -208,25 +223,46 @@ function globToRe(pat: string): RegExp {
   return new RegExp(`^${esc}$`);
 }
 
+const FS_FALLBACK_BATCH = 32;
+
 async function fsFallback(pattern: string, searchPath: string, include?: string, ctx = 2): Promise<GrepMatch[]> {
   const re = new RegExp(pattern);
   const includeRe = include ? globToRe(include) : undefined;
-  const all: GrepMatch[] = [];
+
+  // Collect all candidate file paths
+  const filePaths: string[] = [];
   for await (const fp of walkFiles(searchPath, includeRe)) {
-    if (isBinaryExt(fp)) continue;
-    try {
-      const lines = (await Bun.file(fp).text()).split("\n");
-      const matchIdx = lines.flatMap((l, i) => (re.test(l) ? [i] : []));
-      if (!matchIdx.length) continue;
-      const included = new Set(
-        matchIdx.flatMap((i) =>
-          Array.from({ length: 2 * ctx + 1 }, (_, k) => i - ctx + k).filter((j) => j >= 0 && j < lines.length),
-        ),
-      );
-      const matchSet = new Set(matchIdx);
-      for (const i of [...included].sort((a, b) => a - b))
-        all.push({ file: fp, line: i + 1, isMatch: matchSet.has(i), content: lines[i] });
-    } catch {}
+    if (!isBinaryExt(fp)) filePaths.push(fp);
+  }
+
+  // Process in parallel batches to avoid too many open handles
+  const all: GrepMatch[] = [];
+  for (let i = 0; i < filePaths.length; i += FS_FALLBACK_BATCH) {
+    const batch = filePaths.slice(i, i + FS_FALLBACK_BATCH);
+    const batchResults = await Promise.all(
+      batch.map(async (fp): Promise<GrepMatch[]> => {
+        try {
+          const lines = (await Bun.file(fp).text()).split("\n");
+          const matchIdx: number[] = [];
+          for (let li = 0; li < lines.length; li++) {
+            if (re.test(lines[li])) matchIdx.push(li);
+          }
+          if (!matchIdx.length) return [];
+          const included = new Set(
+            matchIdx.flatMap((mi) =>
+              Array.from({ length: 2 * ctx + 1 }, (_, k) => mi - ctx + k).filter((j) => j >= 0 && j < lines.length),
+            ),
+          );
+          const matchSet = new Set(matchIdx);
+          return [...included]
+            .sort((a, b) => a - b)
+            .map((li): GrepMatch => ({ file: fp, line: li + 1, isMatch: matchSet.has(li), content: lines[li] }));
+        } catch {
+          return [];
+        }
+      }),
+    );
+    for (const results of batchResults) all.push(...results);
   }
   return all;
 }
@@ -248,11 +284,11 @@ export const grep = tool({
     const ctx = args.context ?? 2;
     const pattern = args.pattern.replace(/\\\|/g, "|");
 
-    // Try rg
+    // Try rg — stderr ignored to avoid blocking on stderr pipe
     try {
       const rgArgs = ["--line-number", "--with-filename", `--context=${ctx}`, "--color=never"];
       if (args.include) rgArgs.push("--glob", args.include);
-      const proc = spawn(["rg", ...rgArgs, pattern, searchPath], { stdout: "pipe", stderr: "pipe" });
+      const proc = spawn(["rg", ...rgArgs, pattern, searchPath], { stdout: "pipe", stderr: "ignore" });
       const out = await new Response(proc.stdout).text();
       const code = await proc.exited;
       if (code === 1 || !out.trim()) return `No matches found for: ${args.pattern}`;

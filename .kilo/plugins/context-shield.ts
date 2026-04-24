@@ -32,7 +32,56 @@ const DEFAULT_CONFIG: ShieldConfig = {
   compactTargetBytes: 4 * 1024,
 };
 
-const SKIP_COMPACTION_FOR = new Set(["read", "edit", "write", "apply_patch", "multiedit", "lsp"]);
+const CACHE_TTL_MS = 5_000;
+interface CacheEntry {
+  config: ShieldConfig;
+  expiresAt: number;
+}
+const configCache = new Map<string, CacheEntry>();
+
+// Tools whose output must NOT be compacted — either because compaction would destroy
+// structured/hash-annotated output, or because they return short messages already.
+const SKIP_COMPACTION_FOR = new Set([
+  "write",
+  "apply_patch",
+  "multiedit",
+  "lsp",
+  // custom tools: hash-annotated output (compacting destroys LINE#HASH anchors)
+  "hashline_read",
+  "hashline_grep",
+  "hashline_edit",
+  // custom tools: already compact/structured
+  "json_repair",
+  "ast_grep",
+  "codemogger_index",
+  "codemogger_search",
+  "cshield_toggle",
+]);
+
+// Slim descriptions replace verbose tool help text to save per-turn tokens.
+// Guard in tool.definition hook ensures we only override tools that actually exist.
+const SLIM_DESCRIPTIONS: Record<string, string> = {
+  read: "Read file content.",
+  edit: "Edit file. oldString can be line range '55-64'.",
+  apply_patch: "Apply a patch to files.",
+  write: "Write file.",
+  bash: "Run shell command.",
+  execute_bash: "Run shell command.",
+  glob: "Find files.",
+  grep: "Search in files.",
+  list: "List directory.",
+  fetch: "Fetch URL.",
+  json_repair: "Repair malformed JSON strings or files.",
+  hashline_edit: "Edit files via hash-anchored line references.",
+  hashline_read: "Read file with hash-annotated line numbers.",
+  hashline_grep: "Search files, return hash-annotated matches.",
+  ast_grep: "AST pattern search across 25 languages.",
+  codemogger_index: "Index directory for semantic code search.",
+  codemogger_search: "Semantic/keyword/hybrid search over indexed code.",
+};
+
+// Regex for expanding line-range oldString in native edit (e.g. "55" or "55-64")
+const LINE_RANGE_RE = /^(\d+)(?:\s*-\s*(\d+))?$/;
 
 const TASK_ROUTING_TAG = "CONTEXT-SHIELD SUBAGENT ROUTING";
 const TASK_ROUTING_BLOCK = `<context-shield-routing>
@@ -64,27 +113,36 @@ function clamp(value: number, min: number, max: number): number {
 }
 
 function readConfig(directory: string): ShieldConfig {
+  const now = Date.now();
+  const cached = configCache.get(directory);
+  if (cached && now < cached.expiresAt) return cached.config;
+
   const configPath = getConfigPath(directory);
+  let config: ShieldConfig;
   if (!fs.existsSync(configPath)) {
-    return { ...DEFAULT_CONFIG };
+    config = { ...DEFAULT_CONFIG };
+  } else {
+    try {
+      const parsed = JSON.parse(fs.readFileSync(configPath, "utf-8")) as Partial<ShieldConfig>;
+      config = {
+        enabled: parsed.enabled ?? DEFAULT_CONFIG.enabled,
+        readLimit: clamp(parsed.readLimit ?? DEFAULT_CONFIG.readLimit, 50, 2000),
+        compactThresholdBytes: clamp(parsed.compactThresholdBytes ?? DEFAULT_CONFIG.compactThresholdBytes, 2048, 256000),
+        compactTargetBytes: clamp(parsed.compactTargetBytes ?? DEFAULT_CONFIG.compactTargetBytes, 1024, 64000),
+      };
+    } catch {
+      config = { ...DEFAULT_CONFIG };
+    }
   }
 
-  try {
-    const parsed = JSON.parse(fs.readFileSync(configPath, "utf-8")) as Partial<ShieldConfig>;
-    return {
-      enabled: parsed.enabled ?? DEFAULT_CONFIG.enabled,
-      readLimit: clamp(parsed.readLimit ?? DEFAULT_CONFIG.readLimit, 50, 2000),
-      compactThresholdBytes: clamp(parsed.compactThresholdBytes ?? DEFAULT_CONFIG.compactThresholdBytes, 2048, 256000),
-      compactTargetBytes: clamp(parsed.compactTargetBytes ?? DEFAULT_CONFIG.compactTargetBytes, 1024, 64000),
-    };
-  } catch {
-    return { ...DEFAULT_CONFIG };
-  }
+  configCache.set(directory, { config, expiresAt: now + CACHE_TTL_MS });
+  return config;
 }
 
 function writeConfig(directory: string, config: ShieldConfig): void {
   ensureStateDir(directory);
   fs.writeFileSync(getConfigPath(directory), JSON.stringify(config, null, 2));
+  configCache.delete(directory);
 }
 
 function toBytes(value: string): number {
@@ -233,47 +291,6 @@ function trackUsage(toolName: string, usage: { originalBytes: number; emittedByt
   if (usage.compacted) bucket.compacted += 1;
 }
 
-function formatStats(): string {
-  const entries = Object.entries(stats.tools).sort((a, b) => b[1].originalBytes - a[1].originalBytes);
-
-  const total = entries.reduce(
-    (acc, [, item]) => {
-      acc.calls += item.calls;
-      acc.compacted += item.compacted;
-      acc.originalBytes += item.originalBytes;
-      acc.emittedBytes += item.emittedBytes;
-      return acc;
-    },
-    { calls: 0, compacted: 0, originalBytes: 0, emittedBytes: 0 },
-  );
-
-  const savedBytes = Math.max(total.originalBytes - total.emittedBytes, 0);
-  const savedPct = total.originalBytes === 0 ? 0 : Math.round((savedBytes / total.originalBytes) * 100);
-  const uptimeMinutes = ((Date.now() - stats.startedAt) / 60000).toFixed(1);
-
-  const lines: string[] = [
-    "## Context shield stats",
-    "",
-    `- Uptime: ${uptimeMinutes} min`,
-    `- Calls observed: ${total.calls}`,
-    `- Compacted calls: ${total.compacted}`,
-    `- Original output: ${formatBytes(total.originalBytes)}`,
-    `- Emitted output: ${formatBytes(total.emittedBytes)}`,
-    `- Saved: ${formatBytes(savedBytes)} (${savedPct}%)`,
-  ];
-
-  if (entries.length > 0) {
-    lines.push("", "| Tool | Calls | Compacted | Original | Emitted |", "|---|---:|---:|---:|---:|");
-    for (const [toolName, item] of entries) {
-      lines.push(
-        `| ${toolName} | ${item.calls} | ${item.compacted} | ${formatBytes(item.originalBytes)} | ${formatBytes(item.emittedBytes)} |`,
-      );
-    }
-  }
-
-  return lines.join("\n");
-}
-
 function isToolOutputShape(output: unknown): output is { output: string; metadata?: unknown } {
   return (
     !!output &&
@@ -294,31 +311,91 @@ function isMcpResultShape(output: unknown): output is { content: Array<Record<st
 
 export const OpenCodeContextShieldPlugin: Plugin = async ({ directory }) => {
   return {
+    // ── Slim verbose tool descriptions to save per-turn tokens ─────────────
+    "tool.definition": async (input, output) => {
+      const def = output as unknown as { description?: string };
+      if (!def.description) return; // only override tools that exist in this environment
+      const inp = input as unknown as { toolID?: string };
+      const desc = SLIM_DESCRIPTIONS[inp.toolID ?? ""];
+      if (desc) def.description = desc;
+    },
+
+    // ── Pre-execution: limit reads, inject task routing, expand line ranges ─
     "tool.execute.before": async (input, output) => {
       const config = readConfig(directory);
-      if (!config.enabled) return;
 
-      const args = output.args as Record<string, unknown>;
+      if (config.enabled) {
+        const args = output.args as Record<string, unknown>;
 
-      if (input.tool === "read") {
-        const currentLimit = typeof args["limit"] === "number" ? args["limit"] : undefined;
-        if (currentLimit === undefined || currentLimit > config.readLimit) {
-          args["limit"] = config.readLimit;
+        if (input.tool === "read") {
+          const currentLimit = typeof args["limit"] === "number" ? args["limit"] : undefined;
+          if (currentLimit === undefined || currentLimit > config.readLimit) {
+            args["limit"] = config.readLimit;
+          }
+        }
+
+        if (input.tool === "task") {
+          const currentPrompt = typeof args["prompt"] === "string" ? args["prompt"] : "";
+          if (currentPrompt && !currentPrompt.includes(TASK_ROUTING_TAG)) {
+            args["prompt"] = `${currentPrompt}\n\n${TASK_ROUTING_BLOCK}`;
+          }
         }
       }
 
-      if (input.tool === "task") {
-        const currentPrompt = typeof args["prompt"] === "string" ? args["prompt"] : "";
-        if (currentPrompt && !currentPrompt.includes(TASK_ROUTING_TAG)) {
-          args["prompt"] = `${currentPrompt}\n\n${TASK_ROUTING_BLOCK}`;
+      // Expand line-range oldString for native edit (e.g. "55-64" → actual lines).
+      // This runs regardless of shield enabled state so editing always works.
+      if (input.tool === "edit") {
+        const args = output.args as Record<string, unknown>;
+        const oldString = typeof args["oldString"] === "string" ? args["oldString"] : null;
+        const filePath = typeof args["filePath"] === "string" ? args["filePath"] : null;
+        if (oldString && filePath) {
+          const resolved = path.isAbsolute(filePath) ? path.normalize(filePath) : path.resolve(directory, filePath);
+          try {
+            const content = await Bun.file(resolved).text();
+            if (!content.includes(oldString)) {
+              const m = oldString.trim().match(LINE_RANGE_RE);
+              if (m) {
+                const lines = content.split("\n");
+                const start = parseInt(m[1], 10);
+                const end = m[2] ? parseInt(m[2], 10) : start;
+                if (start >= 1 && end <= lines.length && start <= end) {
+                  args["oldString"] = lines.slice(start - 1, end).join("\n");
+                }
+              }
+            }
+          } catch {}
         }
       }
     },
 
+    // ── Post-execution: slim outputs, then compact if needed ───────────────
     "tool.execute.after": async (input, output) => {
+      // Compress native edit success message — "OK" is enough
+      if (input.tool === "edit") {
+        const o = output as unknown as { output?: string };
+        if (typeof o.output === "string" && o.output.startsWith("Edit applied successfully.")) {
+          o.output = "OK";
+        }
+        return;
+      }
+
+      // Compact native read output: shorten absolute path, strip footer
+      if (input.tool === "read") {
+        const o = output as unknown as { output?: string };
+        if (typeof o.output === "string" && !o.output.includes("<type>directory</type>")) {
+          const pathMatch = o.output.match(/<path>(.+?)<\/path>/);
+          if (pathMatch) {
+            const relPath = path.relative(directory, path.normalize(pathMatch[1]));
+            o.output = o.output.replace(`<path>${pathMatch[1]}</path>`, `<path>${relPath}</path>`);
+            o.output = o.output.replace("<type>file</type>\n", "");
+            o.output = o.output.replace(/\n\n\(End of file - total \d+ lines\)\n/, "\n");
+          }
+        }
+        return;
+      }
+
       const config = readConfig(directory);
-      if (!config.enabled) return;
-      if (SKIP_COMPACTION_FOR.has(input.tool)) return;
+      if (!config.enabled || SKIP_COMPACTION_FOR.has(input.tool)) return;
 
       const payload = output as unknown;
 

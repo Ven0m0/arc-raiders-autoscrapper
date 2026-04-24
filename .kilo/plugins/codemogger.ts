@@ -12,8 +12,7 @@
  * Requires:  "codemogger": "^0.1.4"  in opencode/package.json
  */
 
-import { existsSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { resolve } from "node:path";
 import type { Plugin } from "@opencode-ai/plugin";
 import { tool } from "@opencode-ai/plugin";
 
@@ -46,15 +45,10 @@ async function getIndex(worktree: string): Promise<import("codemogger").CodeInde
 const CodemoggerPlugin: Plugin = async ({ worktree }) => {
   const root = resolve(worktree);
 
-  // Auto-index in background on first session if DB doesn't exist yet
-  const dbExists = existsSync(join(root, ".codemogger", "index.db"));
-  if (!dbExists) {
-    getIndex(root)
-      .then((idx) => idx.index(root))
-      .catch(() => {
-        // silent - tool call will surface errors
-      });
-  }
+  // Always index in background on session start — only changed files are re-processed
+  getIndex(root)
+    .then((idx) => idx.index(root))
+    .catch(() => {}); // silent — codemogger_index tool surfaces errors
 
   return {
     tool: {
