@@ -1,4 +1,6 @@
----description: Scan Report---
+---
+description: Scan Report
+---
 # Scan Report
 
 Summarize the last dry-run scan output.
