@@ -198,6 +198,8 @@ CLAUDE.local.md
 !.omc/project-memory.json
 .omg/
 undefined/
+!.serena/project.yml
+!.serena/.gitignore
 
 # OpenCode plugin dir (track config, ignore build artifacts)
 **/node_modules/
