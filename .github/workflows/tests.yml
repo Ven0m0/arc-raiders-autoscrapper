@@ -24,12 +24,13 @@ jobs:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
+      - name: Configure fast apt mirror
+        uses: vegardit/fast-apt-mirror.sh@v1
       - name: Install system dependencies
-        run: |
-          sudo apt-get update -qq >/dev/null 2>&1
-          sudo apt-get install -yqq --no-install-recommends \
-            build-essential libevdev-dev libleptonica-dev libtesseract-dev \
-            pkg-config tesseract-ocr libwebp7 libgl1
+        uses: gerlero/apt-install@v1
+        with:
+          packages: build-essential libevdev-dev libleptonica-dev libtesseract-dev pkg-config tesseract-ocr libwebp7 libgl1
+          install-recommends: false
       - name: Install uv
         uses: astral-sh/setup-uv@v8.1.0
         with:
