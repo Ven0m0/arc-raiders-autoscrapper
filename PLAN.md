@@ -398,13 +398,13 @@ updated: 2026-04-24
 | Size | S |
 | Status | ready |
 
-**Files:** `src/autoscrapper/progress/progress_config.py`, `src/autoscrapper/progress/quest_inference.py`, `src/autoscrapper/progress/update_report.py`, `src/autoscrapper/core/item_actions.py`
+**Files:** `src/autoscrapper/progress/progress_config.py`, `src/autoscrapper/progress/quest_inference.py`, `src/autoscrapper/progress/update_report.py`
 
-**Why:** Same `_normalize_quest_name` function duplicated across 4 files; violates DRY principle
+**Why:** Same `_normalize_quest_name` function duplicated across 3 files; violates DRY principle
 
 **Done when:**
 - [ ] Create shared normalization utility in `src/autoscrapper/utils/normalization.py`
-- [ ] All 4 files import from shared location
+- [ ] All 3 files import from shared location
 - [ ] Tests verify identical behavior after consolidation
 - [ ] No performance regression
 
@@ -606,9 +606,9 @@ updated: 2026-04-24
 | Module | Lines | Risk |
 |--------|-------|------|
 | `progress/decision_engine.py` | 434 | Core business logic |
-| `interaction/inventory_grid.py` | ~200 | Coordinate calculations |
-| `scanner/actions.py` | ~150 | Action execution |
-| `progress/recipe_utils.py` | ~100 | Recipe processing |
+| `interaction/inventory_grid.py` | 360 | Coordinate calculations |
+| `scanner/actions.py` | 217 | Action execution |
+| `progress/recipe_utils.py` | 14 | Recipe utilities |
 
 ### Performance Opportunities
 
