@@ -57,14 +57,14 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["python"],
       "pinDigests": false,
-      "allowedVersions": ">=3.13, <3.14"
+      "allowedVersions": ">=3.13, !=3.14.*"
     },
     {
       "description": "Allow any Python version >=3.13 but exclude 3.14.x series",
       "matchManagers": ["pep621"],
       "matchPackageNames": ["python"],
       "matchDepTypes": ["requires-python"],
-      "allowedVersions": ">=3.13, <3.14"
+      "allowedVersions": ">=3.13, !=3.14.*"
     },
     {
       "description": "Disable Docker digest pinning",
