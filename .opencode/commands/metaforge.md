@@ -1,4 +1,6 @@
----description: MetaForge Lookup---
+---
+description: MetaForge Lookup
+---
 # MetaForge Lookup
 
 Fetch Arc Raiders game data from MetaForge API.
