@@ -29,7 +29,8 @@
     "./plugins/codemogger",
     "./plugins/openslimedit",
     "./plugins/trim-tool-name",
-    "./plugins/custom-tools"
+    "./plugins/custom-tools",
+    "./plugins/json-healer"
   ],
   "formatter": {
     "biome": {

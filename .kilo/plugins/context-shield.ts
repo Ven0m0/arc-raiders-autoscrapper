@@ -32,6 +32,13 @@ const DEFAULT_CONFIG: ShieldConfig = {
   compactTargetBytes: 4 * 1024,
 };
 
+const CACHE_TTL_MS = 5_000;
+interface CacheEntry {
+  config: ShieldConfig;
+  expiresAt: number;
+}
+const configCache = new Map<string, CacheEntry>();
+
 const SKIP_COMPACTION_FOR = new Set(["read", "edit", "write", "apply_patch", "multiedit", "lsp"]);
 
 const TASK_ROUTING_TAG = "CONTEXT-SHIELD SUBAGENT ROUTING";
@@ -64,27 +71,36 @@ function clamp(value: number, min: number, max: number): number {
 }
 
 function readConfig(directory: string): ShieldConfig {
+  const now = Date.now();
+  const cached = configCache.get(directory);
+  if (cached && now < cached.expiresAt) return cached.config;
+
   const configPath = getConfigPath(directory);
+  let config: ShieldConfig;
   if (!fs.existsSync(configPath)) {
-    return { ...DEFAULT_CONFIG };
+    config = { ...DEFAULT_CONFIG };
+  } else {
+    try {
+      const parsed = JSON.parse(fs.readFileSync(configPath, "utf-8")) as Partial<ShieldConfig>;
+      config = {
+        enabled: parsed.enabled ?? DEFAULT_CONFIG.enabled,
+        readLimit: clamp(parsed.readLimit ?? DEFAULT_CONFIG.readLimit, 50, 2000),
+        compactThresholdBytes: clamp(parsed.compactThresholdBytes ?? DEFAULT_CONFIG.compactThresholdBytes, 2048, 256000),
+        compactTargetBytes: clamp(parsed.compactTargetBytes ?? DEFAULT_CONFIG.compactTargetBytes, 1024, 64000),
+      };
+    } catch {
+      config = { ...DEFAULT_CONFIG };
+    }
   }
 
-  try {
-    const parsed = JSON.parse(fs.readFileSync(configPath, "utf-8")) as Partial<ShieldConfig>;
-    return {
-      enabled: parsed.enabled ?? DEFAULT_CONFIG.enabled,
-      readLimit: clamp(parsed.readLimit ?? DEFAULT_CONFIG.readLimit, 50, 2000),
-      compactThresholdBytes: clamp(parsed.compactThresholdBytes ?? DEFAULT_CONFIG.compactThresholdBytes, 2048, 256000),
-      compactTargetBytes: clamp(parsed.compactTargetBytes ?? DEFAULT_CONFIG.compactTargetBytes, 1024, 64000),
-    };
-  } catch {
-    return { ...DEFAULT_CONFIG };
-  }
+  configCache.set(directory, { config, expiresAt: now + CACHE_TTL_MS });
+  return config;
 }
 
 function writeConfig(directory: string, config: ShieldConfig): void {
   ensureStateDir(directory);
   fs.writeFileSync(getConfigPath(directory), JSON.stringify(config, null, 2));
+  configCache.delete(directory);
 }
 
 function toBytes(value: string): number {
