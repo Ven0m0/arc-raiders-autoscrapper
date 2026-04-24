@@ -282,9 +282,31 @@ function applyEdits(content: string, edits: Edit[]): string {
   return lines.join("\n");
 }
 
+// ── Line-range edit (fastedit mode) ────────────────────────────────────────
+
+function applyLineRange(content: string, startLine: number, endLine: number, newCode: string): string {
+  const s = startLine;
+  const e = endLine;
+  if (s < 1) throw new Error(`start_line must be >= 1`);
+  if (s > e + 1) throw new Error(`start_line (${s}) must be <= end_line+1 (${e + 1})`);
+  const lines = content.length === 0 ? [] : content.split("\n");
+  if (s > lines.length) throw new Error(`start_line ${s} exceeds file length (${lines.length} lines)`);
+  if (e > lines.length && s <= e) throw new Error(`end_line ${e} exceeds file length (${lines.length} lines)`);
+  const before = lines.slice(0, s - 1);
+  const after = s <= e ? lines.slice(e) : lines.slice(s - 1);
+  return [...before, ...(newCode ? [newCode] : []), ...after].join("\n");
+}
+
 // ── Tool description ────────────────────────────────────────────────────────
 
-const DESCRIPTION = `Edit files using LINE#ID hash-anchored references to prevent stale edits.
+const DESCRIPTION = `Edit files using LINE#ID hash-anchored references (default) or line-number ranges (quick mode).
+
+QUICK MODE — use start_line/end_line/new_code instead of edits[]:
+  Replace lines 5-10: { start_line: 5, end_line: 10, new_code: "..." }
+  Delete lines 5-10:  { start_line: 5, end_line: 10, new_code: "" }
+  Insert before line 5: { start_line: 5, end_line: 4, new_code: "..." }
+
+HASH MODE — use edits[] with LINE#ID anchors (concurrent-safe, prevents stale edits):
 
 WORKFLOW:
 1. Read the file — each line appears as {line}#{hash}|{content}
@@ -324,6 +346,20 @@ export default tool({
     filePath: tool.schema.string().describe("Absolute path to the file"),
     delete: tool.schema.boolean().optional().describe("Delete the file (edits must be [])"),
     rename: tool.schema.string().optional().describe("Move file to this path after edits"),
+    start_line: tool.schema
+      .number()
+      .min(1)
+      .optional()
+      .describe("Quick mode: first line to replace (1-indexed). Omit to use edits[]."),
+    end_line: tool.schema
+      .number()
+      .min(0)
+      .optional()
+      .describe("Quick mode: last line to replace (inclusive). Use start_line-1 to insert without deleting."),
+    new_code: tool.schema
+      .string()
+      .optional()
+      .describe("Quick mode: replacement content. Empty string to delete the range."),
     edits: tool.schema
       .array(
         tool.schema.object({
@@ -339,13 +375,20 @@ export default tool({
             .optional(),
         }),
       )
-      .describe("Edit operations. Empty array when delete=true."),
+      .optional()
+      .describe("Hash-anchor edit operations. Empty array when delete=true."),
   },
   async execute(args) {
     try {
+      const hasLineRange = args.start_line !== undefined;
+      const editsArr = args.edits ?? [];
+      const hasEdits = editsArr.length > 0;
+
+      if (hasLineRange && hasEdits)
+        return "Error: use either start_line/end_line/new_code or edits[], not both";
       if (args.delete && args.rename) return "Error: delete and rename cannot be combined";
-      if (args.delete && args.edits.length) return "Error: delete=true requires edits=[]";
-      if (!args.delete && !args.edits.length) return "Error: edits must not be empty";
+      if (args.delete && hasEdits) return "Error: delete=true requires edits=[]";
+      if (!args.delete && !hasLineRange && !hasEdits) return "Error: provide edits[] or start_line/end_line/new_code";
 
       const file = Bun.file(args.filePath);
       const exists = await file.exists();
@@ -356,17 +399,24 @@ export default tool({
         return `Deleted ${args.filePath}`;
       }
 
-      const rawEdits = args.edits as RawEdit[];
-      const edits = normalizeEdits(rawEdits);
-
-      // Allow creating a new file only with unanchored append/prepend
-      const canCreate = edits.every((e) => (e.op === "append" || e.op === "prepend") && !e.pos);
-      if (!exists && !canCreate) return `Error: file not found: ${args.filePath}`;
-
       const rawContent = exists ? Buffer.from(await file.arrayBuffer()).toString("utf8") : "";
       const { content: canonical, hadBom, crlf } = canonicalize(rawContent);
 
-      const newContent = applyEdits(canonical, edits);
+      let newContent: string;
+
+      if (hasLineRange) {
+        if (!exists) return `Error: file not found: ${args.filePath}`;
+        const startLine = args.start_line as number;
+        const endLine = args.end_line ?? startLine;
+        const newCode = args.new_code ?? "";
+        newContent = applyLineRange(canonical, startLine, endLine, newCode);
+      } else {
+        const rawEdits = editsArr as RawEdit[];
+        const edits = normalizeEdits(rawEdits);
+        const canCreate = edits.every((e) => (e.op === "append" || e.op === "prepend") && !e.pos);
+        if (!exists && !canCreate) return `Error: file not found: ${args.filePath}`;
+        newContent = applyEdits(canonical, edits);
+      }
 
       if (newContent === canonical && !args.rename)
         return `Error: no changes — edits produced identical content. Re-read the file first.`;
@@ -376,7 +426,6 @@ export default tool({
       await Bun.write(dest, writeContent);
       if (args.rename && args.rename !== args.filePath && exists) await file.delete();
 
-      // Return hashline-annotated diff summary for context
       const oldLines = canonical.split("\n");
       const newLines = newContent.split("\n");
       const changedCount =
