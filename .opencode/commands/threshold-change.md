@@ -1,4 +1,6 @@
----description: Change Threshold---
+---
+description: Change Threshold
+---
 # Change Threshold
 
 Safely adjust fuzzy-match threshold or OCR confidence cutoff.
