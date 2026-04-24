@@ -6,7 +6,7 @@
     "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"
   ],
   "skills": {
-    "paths": [".kilo/skills", ".opencode/skill", ".claude/skills", ".github/skills"]
+    "paths": [".kilo/skills", ".opencode/skills", ".claude/skills", ".github/skills"]
   },
   "permission": {
     "*": "allow",
