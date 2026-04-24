@@ -1,449 +1,629 @@
 ---
-title: Consolidated implementation plan
+title: Implementation Plan
 status: active
-updated: 2026-04-20
-merged_from:
-- legacy root plan
-- legacy API vision note
-- archived .kilo draft plans
+updated: 2026-04-24
 ---
 
-## Purpose
+## Workflow
 
-This file is the single source of truth for active implementation work. It
-replaces the previous draft plans and the API vision note with one ordered,
-actionable roadmap.
+1. Read `AGENTS.md` and `.github/instructions/python.instructions.md` first
+2. Make minimal, targeted changes
+3. Never hand-edit `src/autoscrapper/progress/data/` or `items_rules.default.json`
+4. Regenerate data with `scripts/update_snapshot_and_defaults.py` when needed
+5. Run validation before marking done:
+   - `uv run ruff check src/ tests/ scripts/`
+   - `uv run ty check src/`
+   - `uv run basedpyright src/`
+   - `uv run pytest`
 
-## Workflow contract
+## Delivery Waves
 
-Use this section as the operating contract for any agent that implements work
-from this plan.
+| Wave | Goal | Tasks |
+|------|------|-------|
+| 1 | Data pipeline & integrations | T014, T034, T003, T001, T002 |
+| 2 | OCR accuracy improvements | T027, T012, T013, T028, T029, T030, T031, T032 |
+| 3 | Code quality & architecture | T035, T036, T037, T038 |
+| 4 | Test coverage | T039, T040, T041 |
+| 5 | Feature completion | T017, T019, T020, T022 |
+| 6 | Performance & optimization | T042, T043, T044 |
+| 7 | Research | T021 |
 
-<workflow>
- <read-first>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/AGENTS.md</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/.github/instructions/python.instructions.md</file>
- </read-first>
- <guardrails>
- <rule>Make minimal, targeted changes.</rule>
- <rule>Do not hand-edit generated files under /home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/progress/data/ or /home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/items/items_rules.default.json.</rule>
- <rule>Regenerate bundled data with /home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/update_snapshot_and_defaults.py when data snapshots or default rules change.</rule>
- <rule>Keep OCR threshold changes aligned between OCR matching and rule lookup, and require corpus replay before shipping a new default threshold.</rule>
- <rule>Do not claim live scan validation unless a real Arc Raiders window was used.</rule>
- </guardrails>
- <task-selection>
- <rule>Pick the highest-priority ready task with no unmet dependency.</rule>
- <rule>Prefer tasks that remove user-facing bugs, security risk, or blockers before new feature work.</rule>
- <rule>Finish the current task completely before opening a parallel track in the same hotspot.</rule>
- </task-selection>
- <execution>
- <step order="1">Read the target files and confirm nearby invariants.</step>
- <step order="2">Implement only the scoped change for the selected task.</step>
- <step order="3">Run the required validation for the files you changed.</step>
- <step order="4">Update this file only if task state, ordering, or acceptance criteria changed.</step>
- </execution>
- <validation>
- <python-change>
- <command>python3 -m uv run ruff check src/ tests/ scripts/</command>
- <command>python3 -m uv run basedpyright src/</command>
- <command>python3 -m uv run pytest</command>
- </python-change>
- <workflow-change>
- <command>python3 -m uv run prek run --files .github/workflows/&lt;name&gt;.yml</command>
- </workflow-change>
- <docs-change>
- <check>Verify file paths, commands, and cross-references manually.</check>
- </docs-change>
- </validation>
- <definition-of-done>
- <item>The scoped acceptance criteria are met.</item>
- <item>Validation appropriate to the changed files has run.</item>
- <item>Unverified behavior is called out explicitly in the summary or PR text.</item>
- </definition-of-done>
-</workflow>
+## Next Picks
 
-## Delivery order
+| Rank | Task | Description |
+|------|------|-------------|
+| 1 | T034 | Arc-Lens scraping integration - high-value data pipeline |
+| 2 | T014 | Security fix removing Supabase dependency |
+| 3 | T035 | Consolidate duplicated normalization functions |
+| 4 | T027 | Feed item names to Tesseract as user_words |
+| 5 | T039 | Add tests for decision_engine.py - core business logic |
+| 6 | T012 | Roman numeral OCR alias correction |
 
-Implement work in waves so the repo stabilizes before larger feature additions.
-Dependencies inside each wave are explicit.
+---
 
-<waves>
- <wave id="1" goal="stabilize current OCR and scanning behavior">
- <task-ref id="T010" />
- <task-ref id="T012" />
- <task-ref id="T013" />
- <task-ref id="T015" />
- <task-ref id="T017" />
- <task-ref id="T022" />
- <task-ref id="T023" />
- <task-ref id="T024" depends-on="T023" />
- <task-ref id="T025" depends-on="T023" />
- <task-ref id="T026" />
- <task-ref id="T027" />
- <task-ref id="T028" />
- </wave>
- <wave id="2" goal="harden data sourcing and calibration">
- <task-ref id="T014" />
- <task-ref id="T003" depends-on="T014" />
- <task-ref id="T001" />
- <task-ref id="T002" depends-on="T001" />
- <task-ref id="T029" />
- <task-ref id="T030" />
- <task-ref id="T031" depends-on="T001" />
-  <task-ref id="T032" />
-  <task-ref id="T033" />
-  </wave>
-  <wave id="3" goal="finish alternate data-source features">
-  <task-ref id="T016" />
-  <task-ref id="T018" />
-  <task-ref id="T019" />
-  <task-ref id="T020" />
-  </wave>
-  <wave id="4" goal="evaluate optional UX research work">
-  <task-ref id="T021" />
-  </wave>
-  </waves>
+## Tasks
 
-## Active tasks
+### T001 - Calibrate OCR threshold from failure corpus
 
-This section keeps only active work. Completed items, duplicate notes, and
-speculative backlog entries from older drafts were removed.
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | M |
+| Status | ready |
 
-<task id="T010" priority="high" size="S" status="ready">
- <title>Refresh the infobox rect on OCR retries.</title>
- <files>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/scanner/scan_loop.py</file>
- </files>
- <why>This fixes the stale crop bug that can OCR the footer instead of the active infobox.</why>
- <done-when>
- <item>Retry passes capture the window again and re-run infobox detection.</item>
- <item>The retry exits cleanly if the infobox is gone.</item>
- <item>Debug crops no longer show footer text such as TAB or CLOSE during retry.</item>
- </done-when>
-</task>
+**Files:** `src/autoscrapper/ocr/failure_corpus.py`, `scripts/replay_ocr_failure_corpus.py`
 
-<task id="T012" priority="medium" size="S" status="ready">
- <title>Add Roman numeral OCR alias correction to rule lookup.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/core/item_actions.py</file>
- <why>This closes a common OCR-to-rule mismatch for tiered weapon names.</why>
- <item>Normalization corrects common OCR suffix errors such as 1V and 111.</item>
- <item>Canonical item matching still uses the existing shared fuzzy threshold.</item>
-  <item>Tests cover corrected and unchanged names.</item>
-  </task>
+**Why:** Replace hand-picked threshold with corpus-backed evidence
 
-  <task id="T013" priority="medium" size="S" status="ready">
- <title>Filter weapon swap UI text from item-name detection.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/inventory_vision.py</file>
- <why>This prevents overlay text from being mistaken for the actual item title.</why>
- <item>Known swap-related UI strings are ignored on the first title pass.</item>
- <item>The retry path expands enough to reach the real item name below the UI line.</item>
-  <item>The change does not weaken unrelated title extraction logic.</item>
-  </task>
+**Done when:**
+- [ ] Corpus samples capture fields needed for accuracy scoring
+- [ ] Replay script compares thresholds and reports accuracy
+- [ ] Default changes only when replay shows no regression
 
-  <task id="T014" priority="high" size="M" status="ready">
- <title>Remove the Supabase dependency from data snapshot updates.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/progress/data_update.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/update_snapshot_and_defaults.py</file>
- <why>This removes a committed credential and keeps the updater on supported sources.</why>
- <item>MetaForge item fetching uses includeComponents instead of Supabase.</item>
- <item>All Supabase constants and helpers are deleted.</item>
-  <item>The snapshot updater runs without any Supabase call path.</item>
-  </task>
+---
 
-  <task id="T015" priority="low" size="S" status="ready">
- <title>Change the default stop key from Escape to F9.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/interaction/keybinds.py</file>
- <why>This avoids colliding with the in-game Escape menu.</why>
- <item>The default stop key is F9.</item>
-  <item>The display mapping shows F9 correctly anywhere the key is rendered.</item>
-  </task>
+### T002 - Benchmark tessdata.best-eng vs tessdata.fast-eng
 
-  <task id="T016" priority="medium" size="L" status="in-progress">
- <title>Complete Direct Stash Sync through arctracker.io.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/api/__init__.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/api/client.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/api/datasource.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/api/models.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/config.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/tui/api_settings.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/tui/scan.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/scanner/engine.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/progress/progress_config.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/tests/api/test_client.py</file>
- <why>This adds a non-OCR scan path and progress sync path while preserving OCR fallback.</why>
- <api-contract>
- <auth>Use the dual-key user flow for user endpoints.</auth>
- <endpoint>GET /api/v2/user/stash</endpoint>
- <endpoint>GET /api/v2/user/hideout</endpoint>
- <endpoint>GET /api/v2/user/projects</endpoint>
- <rate-limit>Track and respect the 500 requests per hour app limit.</rate-limit>
- </api-contract>
- <item>The client handles auth, rate-limit state, retry behavior, and common failure codes.</item>
- <item>The settings UI lets users configure keys and test connectivity.</item>
- <item>API scan mode applies the same decision logic as OCR scan mode.</item>
- <item>Hideout and project progress can sync from the API.</item>
- <item>Failures fall back cleanly to OCR instead of breaking scans.</item>
-  <item>Tests cover rate-limit and error paths.</item>
-  </task>
+| Attribute | Value |
+|-----------|-------|
+| Priority | low |
+| Size | S |
+| Status | blocked on T001 |
 
-  <task id="T017" priority="low" size="S" status="ready">
- <title>Make ScanSettingsScreen a real abstract base class.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/tui/settings.py</file>
- <why>This turns a silent design bug into an enforced contract.</why>
- <item>The class inherits from ABC.</item>
- <item>Abstract methods are enforced at instantiation time.</item>
-  <item>No new type-checking regressions are introduced.</item>
-  </task>
+**Files:** `src/autoscrapper/ocr/tesseract.py`, `scripts/benchmark_tessdata_models.py`
 
-  <task id="T018" priority="medium" size="M" status="ready">
- <title>Add a headless scan mode with structured output.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/scanner/cli.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/tests/</file>
- <why>This lets users automate scans without the Textual UI.</why>
- <item>Headless mode runs without launching the TUI.</item>
- <item>JSONL output includes item, decision, page, cell, and timestamp fields.</item>
- <item>CSV output writes the same data to an explicit file path.</item>
-  <item>Existing scan behavior remains unchanged when flags are absent.</item>
-  </task>
+**Why:** Only worth doing after threshold corpus is stable
 
-  <task id="T019" priority="medium" size="S" status="ready">
- <title>Write a per-session decision log for later rule review.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/scanner/</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/README.md</file>
- <why>This creates a durable record of decisions without replacing the OCR failure corpus.</why>
- <item>Each session can append JSONL decision records when logging is enabled.</item>
- <item>The log includes timestamp, raw text, decision, location, score, and source.</item>
-  <item>The feature is opt-in and does not slow normal scans.</item>
-  </task>
+**Done when:**
+- [ ] Benchmark uses same corpus from T001
+- [ ] Compare accuracy and latency for both models
+- [ ] Change models only if latency trade-off is acceptable
 
-  <task id="T020" priority="medium" size="M" status="ready">
- <title>Add safe recycle protection against active quest requirements.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/progress/</file>
- <why>This prevents the scanner from recycling items that active quests still need.</why>
- <item>Recycle decisions are cross-checked against active quest requirements.</item>
- <item>Conflicts override the decision to KEEP and record the quest reason.</item>
-  <item>The feature degrades gracefully when progress data is absent.</item>
-  </task>
+---
 
-  <task id="T021" priority="low" size="M" status="research">
- <title>Assess Raider Lens overlay ideas before integration.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/tui/</file>
- <why>This is optional exploratory work and should not start until higher-value tasks land.</why>
- <item>A written assessment identifies what can be reused safely.</item>
-  <item>Any prototype stays isolated from OCR correctness and scan performance risk.</item>
-  </task>
+### T003 - Hybrid MetaForge plus wiki pipeline
 
-  <task id="T022" priority="low" size="S" status="ready">
- <title>Make pytest available in documented install paths.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/pyproject.toml</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/setup-linux.sh</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/setup-windows.ps1</file>
- <why>This removes setup drift for contributors and CI-like local environments.</why>
- <item>The docs point contributors to the install path that includes pytest.</item>
- <item>Fresh setup instructions align with the dependency groups in pyproject.toml.</item>
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | M |
+| Status | blocked on T014 |
 
-<task id="T001" priority="medium" size="M" status="ready">
- <title>Calibrate the default OCR item-name threshold from the live failure corpus.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/failure_corpus.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/replay_ocr_failure_corpus.py</file>
- <why>This replaces a hand-picked threshold with corpus-backed evidence.</why>
- <item>Corpus samples capture the fields needed to score matching accuracy.</item>
- <item>The replay script compares candidate integer thresholds and reports accuracy.</item>
- <item>The default threshold changes only when replay shows no regression.</item>
+**Why:** Extend updater after unsupported Supabase dependency is removed
 
-<task id="T002" priority="low" size="S" status="blocked" depends-on="T001">
- <title>Benchmark tessdata.best-eng against tessdata.fast-eng.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/tesseract.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/scripts/benchmark_tessdata_models.py</file>
- <why>This is only worth doing after the threshold corpus is stable.</why>
- <item>The benchmark uses the same corpus produced by T001.</item>
- <item>Accuracy and per-image latency are compared for both models.</item>
- <item>The repo changes models only if the latency trade-off is acceptable.</item>
+**Done when:**
+- [ ] MetaForge primary and RaidTheory fallback remain intact
+- [ ] Wiki enrichment fills gaps for workshop, expedition, project-use data
+- [ ] Dry-run output reports coverage without writing tracked files
+- [ ] Metadata records origin of enriched fields
 
-<task id="T003" priority="medium" size="M" status="blocked" depends-on="T014">
- <title>Enrich snapshot updates with a hybrid MetaForge plus wiki pipeline.</title>
- <why>This extends the updater after the unsupported Supabase dependency is gone.</why>
- <item>MetaForge remains primary and RaidTheory fallback remains intact.</item>
- <item>Wiki enrichment fills gaps for workshop, expedition, and project-use data.</item>
- <item>Dry-run output reports coverage without writing tracked files.</item>
- <item>Metadata records the origin of enriched fields.</item>
+---
 
-<task id="T023" priority="high" size="S" status="ready">
- <title>Replace mean-based polarity check with population-based detection in preprocess_for_ocr.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/inventory_vision.py</file>
- <why>Live ocr_debug/ artifacts show many title_strip_fail_processed.webp samples where the centre-mean check inverts the wrong polarity (biased by bright icons or dark gradients), feeding Tesseract white-on-black text and producing garbage OCR. tessdoc/ImproveQuality requires dark text on light background.</why>
- <reference>tesseract-ocr/tessdoc ImproveQuality.md (binarisation, polarity)</reference>
- <done-when>
- <item>preprocess_for_ocr counts foreground vs background pixels after Otsu and inverts when fg &gt; bg, replacing the np.mean(centre) &lt; 128 heuristic at L884-895.</item>
- <item>Logic is symmetric across dark and light UI themes (dark context menu vs cream item card).</item>
- <item>scripts/replay_ocr_failure_corpus.py shows zero regressions and a measurable win on inversion-class failures.</item>
- <item>A fresh autoscrapper scan --dry-run against a live Arc Raiders window produces fewer title_strip_fail_*.webp dumps than the pre-change baseline.</item>
- </done-when>
-</task>
+### T012 - Roman numeral OCR alias correction
 
-<task id="T024" priority="high" size="S" status="ready" depends-on="T023">
- <title>Dual-polarity OCR with fuzzy-score arbitration for title strips.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/inventory_vision.py</file>
- <why>Belt-and-suspenders for T023. When the first OCR pass yields no fuzzy match, run Tesseract on both polarities and keep the result with the higher WRatio score. Eliminates remaining inversion failures even when pixel populations are near-tied.</why>
- <done-when>
- <item>ocr_title_strip retry path runs both binary and bitwise_not(binary) when no fuzzy match is found.</item>
- <item>The candidate with the higher match score is kept; ties favour the original polarity.</item>
- <item>Cache key includes polarity so dual-pass results are not collapsed.</item>
- <item>Corpus replay shows no regressions.</item>
- </done-when>
-</task>
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | S |
+| Status | ready |
 
-<task id="T025" priority="high" size="S" status="ready" depends-on="T023">
- <title>Auto-dump polarity-flip OCR failures to the failure corpus.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/inventory_vision.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/failure_corpus.py</file>
- <why>Closes the feedback loop on T023/T024 by collecting evidence whenever the polarity heuristic flips and the result still fails to match.</why>
- <done-when>
- <item>When polarity inversion fires and the OCR still fails fuzzy match, raw ROI plus both binarisations are written to artifacts/ocr/polarity_failures/.</item>
- <item>Existing ocr_debug dump path is unchanged.</item>
- <item>Disk writes are gated behind the existing debug flag.</item>
- </done-when>
-</task>
+**File:** `src/autoscrapper/core/item_actions.py`
 
-<task id="T026" priority="high" size="S" status="ready">
- <title>Add tessedit_char_whitelist for item-name OCR passes.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/tesseract.py</file>
- <why>Tesseract considers the full Latin alphabet including diacritics and produces I/l/1, O/0, S/5 confusions that are currently patched up with regex. Whitelisting reduces that error surface.</why>
- <reference>tesseract-ocr/tessdoc ImproveQuality.md (dictionaries and whitelists)</reference>
- <done-when>
- <item>image_to_string and image_to_data wrappers accept a whitelist arg and call api.SetVariable("tessedit_char_whitelist", ...) before each run, clearing after.</item>
- <item>Item-name passes use uppercase, lowercase, digits, space, hyphen, apostrophe, period.</item>
- <item>Numeric and quantity ROIs keep their existing digit-only whitelist (gate per call, do not regress).</item>
- <item>Roman numeral regex still runs as a safety net.</item>
- </done-when>
-</task>
+**Why:** Close OCR-to-rule mismatch for tiered weapon names
 
-<task id="T027" priority="high" size="M" status="ready">
- <title>Feed rules_store.get_item_names() to Tesseract as user_words and disable the system dawg.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/tesseract.py</file>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/items/rules_store.py</file>
- <why>Tesseract's LSTM has no domain prior; "BASTION CROSSBOW" competes with "BASKET CROSSBOW" purely on pixels. tessdoc explicitly recommends user_words for non-prose vocabulary.</why>
- <done-when>
- <item>initialize_ocr writes known item-name tokens to a temp file and loads them via SetVariable("user_words_suffix", ...).</item>
- <item>load_system_dawg is set to 0 to remove English-dictionary noise.</item>
- <item>Re-init occurs after rules_store custom-overrides change, with an integration test.</item>
- <item>Corpus replay shows no regressions.</item>
- </done-when>
-</task>
+**Done when:**
+- [ ] Normalization corrects common OCR suffix errors (1V, 111)
+- [ ] Canonical matching uses existing fuzzy threshold
+- [ ] Tests cover corrected and unchanged names
 
-<task id="T028" priority="medium" size="S" status="ready">
- <title>Pad all four sides of OCR title-strip ROIs.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/inventory_vision.py</file>
- <why>tessdoc warns that tightly-cropped text reduces accuracy. _crop_title_strip currently only adds left padding via _TITLE_LEFT_PAD.</why>
- <done-when>
- <item>Top, bottom, and right edges receive symmetric _TITLE_PAD pixels of median background colour.</item>
- <item>The retry path keeps its existing extra expansion behaviour.</item>
- <item>Corpus replay shows no regressions.</item>
- </done-when>
-</task>
+---
 
-<task id="T029" priority="medium" size="M" status="ready">
- <title>Add Sauvola binarisation as a parallel candidate for uneven illumination.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/inventory_vision.py</file>
- <why>Otsu fails on title-band glow and rarity gradients. Sauvola is locally adaptive and fixes those without breaking the easy cases.</why>
- <done-when>
- <item>preprocess_for_ocr_sauvola is implemented either via a 30-line numpy Sauvola or via Tesseract 5's thresholding_method=2 SetVariable hook.</item>
- <item>When the Otsu pass yields no fuzzy match, Sauvola runs and the higher-WRatio result wins.</item>
- <item>No new mandatory dependency is added.</item>
- </done-when>
-</task>
+### T013 - Filter weapon swap UI text from item-name detection
 
-<task id="T030" priority="medium" size="S" status="ready">
- <title>Confidence-gated retry instead of match-only retry.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/inventory_vision.py</file>
- <why>Current retry only fires when the fuzzy match fails, missing high-fuzzy/low-confidence cases that produce subtly wrong item names.</why>
- <done-when>
- <item>Primary read switches to image_to_data and computes mean per-character confidence on title-line words.</item>
- <item>Retries fire when mean_conf is below 60 even if a fuzzy match exists.</item>
- <item>Highest-confidence result wins.</item>
- </done-when>
-</task>
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | S |
+| Status | ready |
 
-<task id="T031" priority="medium" size="S" status="ready" depends-on="T001">
- <title>Glyph-aware fuzzy distance for OCR-prone confusions.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/inventory_vision.py</file>
- <why>WRatio penalises O/0, I/1, l/I, 5/S equally with real edits, forcing a loose threshold that admits false matches.</why>
- <done-when>
- <item>match_item_name_result canonicalises 0 to O, 1 to I, 5 to S, 8 to B on both query and choices before scoring.</item>
- <item>Default threshold tightens by approximately 5 points without losing recall in corpus replay.</item>
- <item>OCR matching threshold and rule-lookup threshold remain shared.</item>
- </done-when>
-</task>
+**File:** `src/autoscrapper/ocr/inventory_vision.py`
 
-<task id="T032" priority="low" size="XS" status="ready">
- <title>Set user_defined_dpi=300 on the Tesseract API.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/tesseract.py</file>
- <why>Numpy arrays carry no DPI header so Tesseract guesses, affecting LSTM scale priors. Combined with the existing 2x upscale, an explicit 300 DPI hint is correct.</why>
- <done-when>
- <item>initialize_ocr sets user_defined_dpi to 300.</item>
- <item>No corpus regression.</item>
- </done-when>
-</task>
+**Why:** Prevent overlay text from being mistaken for item title
 
-<task id="T033" priority="low" size="S" status="ready">
- <title>Conditional CLAHE before binarisation when contrast is low.</title>
- <file>/home/runner/work/arc-raiders-autoscrapper/arc-raiders-autoscrapper/src/autoscrapper/ocr/inventory_vision.py</file>
- <why>CLAHE on already-clean images degrades; gating on np.std(gray) &lt; 25 keeps it as a targeted contrast booster.</why>
- <done-when>
- <item>preprocess_for_ocr applies cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8)) only when np.std(gray) &lt; 25.</item>
- <item>Corpus replay shows wins on low-contrast samples and no regressions elsewhere.</item>
- </done-when>
-</task>
+**Done when:**
+- [ ] Known swap-related UI strings ignored on first title pass
+- [ ] Retry path expands to reach real item name below UI line
+- [ ] Change does not weaken unrelated title extraction
 
-## Tasks (derived from TODO.md)
+---
 
-### T002 · Integrate Arc-Lens data scraping pipeline
+### T014 - Remove Supabase dependency
 
-**File:** `TODO.md:1-6`
-**Severity:** medium · **Category:** feature · **Size:** L
+| Attribute | Value |
+|-----------|-------|
+| Priority | high |
+| Size | M |
+| Status | ready |
 
-**Blocks:** —  **Blocked by:** —
+**Files:** `src/autoscrapper/progress/data_update.py`, `scripts/update_snapshot_and_defaults.py`
 
-**Context:**
-```
-### implement [arc-lens scraping](https://github.com/eetusa/arc-lens)
+**Why:** Remove committed credential, keep updater on supported sources
+
+**Done when:**
+- [ ] MetaForge item fetching uses `includeComponents` instead of Supabase
+- [ ] All Supabase constants and helpers deleted
+- [ ] Snapshot updater runs without any Supabase call path
+
+---
+
+### T017 - Make ScanSettingsScreen a real ABC
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | low |
+| Size | S |
+| Status | ready |
+
+**File:** `src/autoscrapper/tui/settings.py`
+
+**Why:** Turn silent design bug into enforced contract
+
+**Done when:**
+- [ ] Class inherits from `ABC`
+- [ ] Abstract methods enforced at instantiation
+- [ ] No new type-checking regressions
+
+---
+
+### T019 - Per-session decision log
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | S |
+| Status | ready |
+
+**File:** `src/autoscrapper/scanner/`
+
+**Why:** Create durable record without replacing OCR failure corpus
+
+**Done when:**
+- [ ] Session appends JSONL decision records when logging enabled
+- [ ] Log includes timestamp, raw text, decision, location, score, source
+- [ ] Feature is opt-in, does not slow normal scans
+
+---
+
+### T020 - Safe recycle protection against quest requirements
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | M |
+| Status | ready |
+
+**File:** `src/autoscrapper/progress/`
+
+**Why:** Prevent recycling items that active quests still need
+
+**Done when:**
+- [ ] Recycle decisions cross-checked against active quest requirements
+- [ ] Conflicts override decision to KEEP and record quest reason
+- [ ] Feature degrades gracefully when progress data absent
+
+---
+
+### T021 - Assess Raider Lens overlay ideas
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | low |
+| Size | M |
+| Status | research |
+
+**File:** `src/autoscrapper/tui/`
+
+**Why:** Optional exploratory work, do not start until higher-value tasks land
+
+**Done when:**
+- [ ] Written assessment identifies what can be reused safely
+- [ ] Prototype stays isolated from OCR and scan performance risk
+
+---
+
+### T022 - Pytest in documented install paths
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | low |
+| Size | S |
+| Status | ready |
+
+**Files:** `pyproject.toml`, `scripts/setup-linux.sh`, `scripts/setup-windows.ps1`
+
+**Why:** Remove setup drift for contributors and CI environments
+
+**Done when:**
+- [ ] Docs point contributors to install path including pytest
+- [ ] Fresh setup aligns with dependency groups in pyproject.toml
+
+---
+
+### T027 - Feed item names to Tesseract as user_words
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | high |
+| Size | M |
+| Status | ready |
+
+**Files:** `src/autoscrapper/ocr/tesseract.py`, `src/autoscrapper/items/rules_store.py`
+
+**Why:** Tesseract LSTM has no domain prior; user_words recommended for non-prose vocabulary
+
+**Done when:**
+- [ ] `initialize_ocr` writes item-name tokens to temp file, loads via `user_words_suffix`
+- [ ] `load_system_dawg` set to 0 to remove English-dictionary noise
+- [ ] Re-init after rules_store custom-overrides change, with integration test
+- [ ] Corpus replay shows no regressions
+
+---
+
+### T028 - Pad all four sides of OCR title-strip ROIs
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | S |
+| Status | ready |
+
+**File:** `src/autoscrapper/ocr/inventory_vision.py`
+
+**Why:** Tightly-cropped text reduces accuracy per tessdoc
+
+**Done when:**
+- [ ] Top, bottom, right edges receive symmetric _TITLE_PAD pixels of median background
+- [ ] Retry path keeps existing extra expansion behaviour
+- [ ] Corpus replay shows no regressions
+
+---
+
+### T029 - Sauvola binarisation for uneven illumination
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | M |
+| Status | ready |
+
+**File:** `src/autoscrapper/ocr/inventory_vision.py`
+
+**Why:** Otsu fails on title-band glow and rarity gradients; Sauvola is locally adaptive
+
+**Done when:**
+- [ ] `preprocess_for_ocr_sauvola` implemented via numpy or Tesseract `thresholding_method=2`
+- [ ] When Otsu yields no fuzzy match, Sauvola runs and higher-WRatio result wins
+- [ ] No new mandatory dependency added
+
+---
+
+### T030 - Confidence-gated retry
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | S |
+| Status | ready |
+
+**File:** `src/autoscrapper/ocr/inventory_vision.py`
+
+**Why:** Current retry misses high-fuzzy/low-confidence cases producing wrong item names
+
+**Done when:**
+- [ ] Primary read uses `image_to_data`, computes mean per-character confidence
+- [ ] Retries fire when mean_conf below 60 even if fuzzy match exists
+- [ ] Highest-confidence result wins
+
+---
+
+### T031 - Glyph-aware fuzzy distance
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | S |
+| Status | blocked on T001 |
+
+**File:** `src/autoscrapper/ocr/inventory_vision.py`
+
+**Why:** WRatio penalises O/0, I/1, 5/S equally, forcing loose threshold
+
+**Done when:**
+- [ ] `match_item_name_result` canonicalises 0-O, 1-I, 5-S, 8-B on query and choices
+- [ ] Default threshold tightens ~5 points without losing recall
+- [ ] OCR and rule-lookup thresholds remain shared
+
+---
+
+### T032 - Set user_defined_dpi=300 on Tesseract API
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | low |
+| Size | XS |
+| Status | ready |
+
+**File:** `src/autoscrapper/ocr/tesseract.py`
+
+**Why:** Numpy arrays carry no DPI header; explicit 300 DPI hint correct with 2x upscale
+
+**Done when:**
+- [ ] `initialize_ocr` sets `user_defined_dpi` to 300
+- [ ] No corpus regression
+
+---
+
+### T034 - Integrate Arc-Lens data scraping pipeline
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | high |
+| Size | L |
+| Status | ready |
+
+**Files:** New `scripts/vendor/arc-lens/`, `scripts/update_snapshot_and_defaults.py`
+
+**Why:** Integrate Arc-Lens community scrapers for fresh MetaForge/raidtheory data and edge-case sources (trophies, wiki content)
+
+**References:**
 - https://github.com/eetusa/arc-lens/blob/master/scripts/metaforge-scraper.js
-- https://github.com/eetusa/arc-lens/blob/master/scripts/project-scraper.js
 - https://github.com/eetusa/arc-lens/blob/master/scripts/quest-scraper.js
-- https://github.com/eetusa/arc-lens/blob/master/scripts/trophy-display-scraper.js
-- https://github.com/eetusa/arc-llens/blob/master/scripts/wiki-scraper.js
-```
+- https://github.com/eetusa/arc-lens/blob/master/scripts/wiki-scraper.js
 
-**Intent:** Integrate the Arc-Lens community data scraping tools to keep the MetaForge/raidtheory data pipeline fresh and to cover edge-case data sources (trophies, wiki-exclusive content) without reinventing scraping logic.
+**Done when:**
+- [ ] Vendor arc-lens scrapers under `scripts/vendor/arc-lens/` with attribution
+- [ ] Port JS scrapers to Python using `requests` + `BeautifulSoup`
+- [ ] Wire into `update_snapshot_and_defaults.py` as optional data source
+- [ ] Add `--source arc-lens` flag to run only Arc-Lens pipeline
+- [ ] Document what each scraper contributes
+- [ ] Pipeline fails gracefully if Arc-Lens data unavailable
 
-**Acceptance criteria:**
-- [ ] Vendor the `arc-lens` scraper scripts under `scripts/vendor/arc-lens/` with attribution
-- [ ] Port the JavaScript scrapers to Python (or embed via Node if multi-runtime is acceptable)
-- [ ] Wire the scrapers into the existing `scripts/update_snapshot_and_defaults.py` pipeline as optional data sources
-- [ ] Add a `--source arc-lens` flag to run only the Arc-Lens pipeline
-- [ ] Document what each scraper contributes and how to update them from upstream
-- [ ] Ensure the pipeline fails gracefully if Arc-Lens data is unavailable
+---
 
-**Implementation:**
-- Create `scripts/vendor/arc-lens/` directory and mirror the JS scraper structure
-- Port `metaforge-scraper.js` → `metaforge_scraper.py` using `requests` + `BeautifulSoup` (existing deps)
-- Port `quest-scraper.js` → `quest_scraper.py` and merge into `progress/data_update.py` as an alternate fetch path
-- Add ArcLensScraper interface with `fetch_all()` method returning normalized JSON matching existing data loader schema
-- Inject via dependency injection into `update_snapshot_and_defaults.py` behind a feature flag
-- Write integration test in `tests/test_arc_lens_integration.py` mocking HTTP responses
-- Estimated LOC: 200–400 (port + glue + tests)
+### T035 - Consolidate duplicated normalization functions
 
-## Suggested next picks
+| Attribute | Value |
+|-----------|-------|
+| Priority | high |
+| Size | S |
+| Status | ready |
 
-Start with the smallest high-value ready items, then move into blocker
-removal.
+**Files:** `src/autoscrapper/progress/progress_config.py`, `src/autoscrapper/progress/quest_inference.py`, `src/autoscrapper/progress/update_report.py`
 
-<next-picks>
- <pick rank="1" task="T023">Color-inversion fix; visible failure mode in ocr_debug/, smallest diff with biggest accuracy win.</pick>
- <pick rank="2" task="T010">High-severity bug, small change, isolated blast radius.</pick>
- <pick rank="3" task="T026">Whitelist tightening pairs cleanly with T023 in the same OCR review pass.</pick>
- <pick rank="4" task="T014">Security and maintenance fix that unblocks downstream data work.</pick>
- <pick rank="5" task="T017">Very small correctness improvement with immediate type-safety value.</pick>
- <pick rank="6" task="T012">Small OCR normalization fix with direct user impact.</pick>
-  </next-picks>
-</file>
+**Why:** Same `_normalize_quest_name` function duplicated across 3 files; violates DRY principle
+
+**Done when:**
+- [ ] Create shared normalization utility in `src/autoscrapper/utils/normalization.py`
+- [ ] All 3 files import from shared location
+- [ ] Tests verify identical behavior after consolidation
+- [ ] No performance regression
+
+---
+
+### T036 - Refactor oversized modules
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | L |
+| Status | ready |
+
+**Files:** `src/autoscrapper/ocr/inventory_vision.py` (1781 lines), `src/autoscrapper/progress/decision_engine.py` (434 lines)
+
+**Why:** inventory_vision.py mixes infobox detection, OCR preprocessing, item matching, debug saving; decision_engine.py mixes quest/hideout/crafting logic
+
+**Done when:**
+- [ ] `inventory_vision.py` split into: preprocessing.py, detection.py, matching.py
+- [ ] `decision_engine.py` split into: quest_logic.py, hideout_logic.py, crafting_logic.py
+- [ ] All imports updated, tests pass
+- [ ] No functional changes
+
+---
+
+### T037 - Replace broad exception handling
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | M |
+| Status | ready |
+
+**Files:** `src/autoscrapper/api/client.py`, `src/autoscrapper/progress/data_update.py`
+
+**Why:** Heavy use of `except Exception` masks real bugs and makes debugging difficult
+
+**Done when:**
+- [ ] API client raises specific exceptions (RateLimitError, AuthError, NotFoundError)
+- [ ] Data update catches specific exceptions per operation
+- [ ] Each exception type includes contextual error message
+- [ ] Tests verify proper exception handling
+
+---
+
+### T038 - Introduce async/await patterns
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | L |
+| Status | ready |
+
+**Files:** `src/autoscrapper/scanner/scan_loop.py`, `src/autoscrapper/api/client.py`, `src/autoscrapper/interaction/`
+
+**Why:** Blocking sleep operations and sequential cell scanning limit throughput
+
+**Done when:**
+- [ ] API client uses `aiohttp` or `httpx` for async requests
+- [ ] Scanner supports concurrent cell processing (configurable parallelism)
+- [ ] Rate limiting uses async-aware throttling
+- [ ] Benchmark shows measurable throughput improvement
+
+---
+
+### T039 - Add tests for decision_engine.py
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | high |
+| Size | M |
+| Status | ready |
+
+**Files:** New `tests/progress/test_decision_engine.py`
+
+**Why:** Core business logic completely untested (434 lines of decision-making)
+
+**Done when:**
+- [ ] Unit tests for all decision paths (KEEP, SELL, RECYCLE)
+- [ ] Tests for quest requirement conflicts
+- [ ] Tests for hideout upgrade priority logic
+- [ ] Tests for crafting value evaluation
+- [ ] >80% coverage of decision_engine.py
+
+---
+
+### T040 - Add tests for inventory_grid.py
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | high |
+| Size | M |
+| Status | ready |
+
+**Files:** New `tests/interaction/test_inventory_grid.py`
+
+**Why:** Grid coordinate calculations are critical and currently untested
+
+**Done when:**
+- [ ] Tests for cell coordinate calculations
+- [ ] Tests for grid detection edge cases
+- [ ] Tests for row/column boundary detection
+- [ ] Tests for different screen resolutions
+
+---
+
+### T041 - Add integration tests for OCR pipeline
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | L |
+| Status | ready |
+
+**Files:** New `tests/ocr/test_ocr_pipeline_integration.py`
+
+**Why:** No end-to-end test from image input to item decision
+
+**Done when:**
+- [ ] Fixture with sample inventory images
+- [ ] Test full flow: image -> OCR -> fuzzy match -> decision
+- [ ] Test polarity detection, retry logic, confidence gating
+- [ ] Mock Tesseract for deterministic tests
+
+---
+
+### T042 - Implement rule caching
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | medium |
+| Size | S |
+| Status | ready |
+
+**Files:** `src/autoscrapper/core/item_actions.py`, `src/autoscrapper/items/rules_store.py`
+
+**Why:** Rules reloaded from disk on every call; significant overhead during scans
+
+**Done when:**
+- [ ] Rules cached in memory with TTL
+- [ ] Cache invalidated on file modification
+- [ ] Cache statistics available (hit rate, size)
+- [ ] Benchmark shows scan speed improvement
+
+---
+
+### T043 - Optimize OCR image processing
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | high |
+| Size | M |
+| Status | ready |
+
+**Files:** `src/autoscrapper/ocr/inventory_vision.py`
+
+**Why:** 2x upscaling every ROI and duplicate connectedComponents calls are expensive
+
+**Done when:**
+- [ ] Cache preprocessed images between infobox and context menu passes
+- [ ] Remove duplicate connectedComponentsWithStats calls
+- [ ] Consider lazy upscaling only when needed
+- [ ] Benchmark shows <20% OCR latency reduction
+
+---
+
+### T044 - Add game data caching
+
+| Attribute | Value |
+|-----------|-------|
+| Priority | low |
+| Size | S |
+| Status | ready |
+
+**Files:** `src/autoscrapper/progress/data_loader.py`
+
+**Why:** Game data re-parsed on every access; JSON files rarely change
+
+**Done when:**
+- [ ] Parsed data cached with file mtime invalidation
+- [ ] Cache shared across scan sessions
+- [ ] Memory usage monitored (no unbounded growth)
+
+---
+
+## Analysis Findings
+
+### Code Quality Issues
+
+| Issue | Location | Impact |
+|-------|----------|--------|
+| Duplicated `_normalize_quest_name` | 4 files in `progress/` | Medium - violates DRY |
+| Broad `except Exception` handling | `api/client.py`, `data_update.py` | Medium - masks bugs |
+| 1781-line `inventory_vision.py` | OCR module | High - maintainability |
+| 434-line `decision_engine.py` | Progress module | Medium - separation of concerns |
+
+### Missing Test Coverage (Critical)
+
+| Module | Lines | Risk |
+|--------|-------|------|
+| `progress/decision_engine.py` | 434 | Core business logic |
+| `interaction/inventory_grid.py` | 360 | Coordinate calculations |
+| `scanner/actions.py` | 217 | Action execution |
+| `progress/recipe_utils.py` | 14 | Recipe utilities |
+
+### Performance Opportunities
+
+| Opportunity | Current State | Target |
+|-------------|---------------|--------|
+| OCR image caching | None | Share between passes |
+| Rule loading | Disk read every call | In-memory cache |
+| Cell scanning | Sequential | Parallel (configurable) |
+| API requests | Blocking sync | Async with `httpx` |
+
+### Architecture Improvements
+
+| Improvement | Current | Proposed |
+|-------------|---------|----------|
+| OCR backend | Locked to Tesseract | Protocol-based |
+| Input drivers | Conditional imports | Strategy pattern |
+| Module size | 1781 lines | <500 lines each |
+| Error handling | Broad exceptions | Specific types |
