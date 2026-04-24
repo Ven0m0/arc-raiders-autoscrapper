@@ -22,9 +22,26 @@ All tools are registered in `.kilo/kilo.json` and loaded via `.kilo/plugins/cust
 
 **hashline_edit hash mode** — use `edits[]` with `LINE#HASH|` anchors when multiple agents may edit the same file concurrently; prevents stale-read collisions.
 
+**hashline_read / hashline_grep output** — output contains `LINE#HASH|content` annotations. Do NOT summarize or truncate these results — the hash anchors are consumed verbatim by `hashline_edit`. Context-shield is configured to skip compaction for these tools.
+
 **ast_grep** — patterns use meta-variables: `$VAR` (single node), `$$$` (multiple nodes). Example: `console.log($MSG)`.
 
-**codemogger** — project root is auto-indexed on session start if `.codemogger/` is absent. Call `codemogger_index` to force a refresh. Call `codemogger_search` first to check if the index exists; it will tell you to run `codemogger_index` if not.
+**codemogger** — project root is auto-indexed on every session start (only changed files re-processed). Call `codemogger_index` to force a full refresh. Use `codemogger_search` for semantic or keyword lookup before reaching for `grep`.
+
+**json_repair** — no subprocess, no temp files; repair runs inline via `IncrementalJsonRepair`. Safe to call on large inputs. Also used by the `json-healer` plugin for automatic response healing.
+
+## Plugin Architecture
+
+| Plugin | Purpose |
+|--------|---------|
+| `context-shield` | Compacts large tool outputs; applies slim descriptions to all built-in and custom tools; expands line-range `oldString` for native `edit`; suppresses verbose edit/read confirmation messages. **Also absorbs all openslimedit functionality** — there is no separate openslimedit plugin. |
+| `json-healer` | Transparent response healing: auto-repairs malformed JSON in string-valued tool arguments and string tool outputs before/after each tool call. Falls through silently if repair fails or result isn't valid JSON. |
+| `codemogger` | Semantic code search; indexes worktree in background on session start. Re-indexes on `file.edited` events. |
+| `custom-tools` | Registers `json_repair`, `hashline_edit`, `hashline_read`, `hashline_grep`, `ast_grep`. |
+
+### SKIP_COMPACTION_FOR (context-shield)
+
+Context-shield never compacts output from: `write`, `apply_patch`, `multiedit`, `lsp`, `hashline_read`, `hashline_grep`, `hashline_edit`, `json_repair`, `ast_grep`, `codemogger_index`, `codemogger_search`, `cshield_toggle`.
 
 ## Naming
 
