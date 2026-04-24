@@ -6,6 +6,7 @@
   },
   "permission": {
     "*": "allow",
+    "read": { "*.env": "deny", "*.lock": "deny", "*": "allow" },
     "edit": { "dist/**": "deny", "*.lock": "deny", "*": "allow" },
     "sudo *": "deny",
     "rm -rf /": "deny",
