@@ -17,7 +17,7 @@
   "automerge": true,
   "automergeStrategy": "squash",
   "forkProcessing": "enabled",
-  "abandonmentThreshold": "2 years",
+  "abandonmentThreshold": "1 year",
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
@@ -33,7 +33,7 @@
     "python": ">=3.13 <3.14"
   },
   "pep621": {
-    "enabled": true
+    "enabled": false
   },
   "pep723": {
     "enabled": true
