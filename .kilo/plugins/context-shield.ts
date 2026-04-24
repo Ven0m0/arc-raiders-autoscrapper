@@ -398,14 +398,6 @@ export const OpenCodeContextShieldPlugin: Plugin = async ({ directory }) => {
           return `[context-shield] ${enabled ? "enabled" : "disabled"}`;
         },
       }),
-
-      cshield_stats: tool({
-        description: "Show context shield savings stats for this opencode process.",
-        args: {},
-        async execute() {
-          return formatStats();
-        },
-      }),
     },
   };
 };

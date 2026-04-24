@@ -10,13 +10,11 @@ All tools are registered in `.kilo/kilo.json` and loaded via `.kilo/plugins/cust
 | `hashline_edit` | `tools/hashline_edit.ts` | Edit files — quick mode via `start_line`/`end_line`/`new_code`, or concurrent-safe mode via `LINE#HASH\|` anchors |
 | `hashline_read` | `tools/hashline_rg.ts` | Read file with `LINE#HASH\|` annotations |
 | `hashline_grep` | `tools/hashline_rg.ts` | Grep returning `LINE#HASH\|` annotated matches |
-| `ast_grep` | `tools/ast_grep.ts` | AST-aware code search/replace via `sg` CLI (25 languages) |
+| `ast_grep` | `tools/ast_grep.ts` | AST-aware structural code search via `sg` CLI (25 languages) |
 | `cshield_toggle` | `plugins/context-shield.ts` | Toggle output compaction on/off |
-| `cshield_stats` | `plugins/context-shield.ts` | Show token savings stats |
 | `gitingest` | `plugins/gitingest.ts` | Fetch full GitHub repo via gitingest.com |
 | `codemogger_index` | `plugins/codemogger.ts` | Build/update local semantic code index |
 | `codemogger_search` | `plugins/codemogger.ts` | Semantic/keyword/hybrid search over indexed code |
-| `codemogger_status` | `plugins/codemogger.ts` | List indexed codebases |
 
 ## Usage Notes
 
@@ -26,7 +24,7 @@ All tools are registered in `.kilo/kilo.json` and loaded via `.kilo/plugins/cust
 
 **ast_grep** — patterns use meta-variables: `$VAR` (single node), `$$$` (multiple nodes). Example: `console.log($MSG)`.
 
-**codemogger** — project root is auto-indexed on session start if `.codemogger/` is absent. Call `codemogger_index` to force a refresh.
+**codemogger** — project root is auto-indexed on session start if `.codemogger/` is absent. Call `codemogger_index` to force a refresh. Call `codemogger_search` first to check if the index exists; it will tell you to run `codemogger_index` if not.
 
 ## Naming
 

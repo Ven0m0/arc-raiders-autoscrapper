@@ -151,26 +151,6 @@ const CodemoggerPlugin: Plugin = async ({ worktree }) => {
         },
       }),
 
-      codemogger_status: tool({
-        description:
-          "List indexed codebases and their file/chunk counts. " + "Use to verify the index exists before searching.",
-        args: {},
-        async execute() {
-          const idx = await getIndex(root);
-          const codebases = await idx.listCodebases();
-
-          if (codebases.length === 0) {
-            return "No codebases indexed yet. Call codemogger_index to build the index.";
-          }
-
-          const lines = [`${codebases.length} indexed codebase(s):\n`];
-          for (const c of codebases) {
-            lines.push(`  ${c.rootDir}`);
-            lines.push(`    chunks: ${c.chunkCount}  last indexed: ${new Date(c.updatedAt).toLocaleString()}`);
-          }
-          return lines.join("\n");
-        },
-      }),
     },
 
     // Re-index changed files when a file is edited in the session
