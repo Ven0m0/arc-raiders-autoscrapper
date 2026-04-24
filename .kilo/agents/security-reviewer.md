@@ -1,6 +1,7 @@
 ---
 name: security-reviewer
 description: Security review for input automation and screen interaction code
+mode: subagent
 ---
 
 # Security Code Reviewer Agent
@@ -66,5 +67,3 @@ Checklist:
 - Dry-run flag handling modifications
 
 Invoke: `/suggest-agent security-reviewer` or auto-assign on interaction/scanner file edits
-
-**Related:** Skills: `ci-promote`, `upstream-sync` | Commands: `/ci-promote`, `/verify`

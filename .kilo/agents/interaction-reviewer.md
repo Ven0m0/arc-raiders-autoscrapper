@@ -1,6 +1,6 @@
 ---
 name: interaction-reviewer
-description: Reviewer for input/interaction changes — platform guards, grid detection, coordinate transforms, dry-run safety.
+description: Specialized reviewer for input and interaction changes. Focus on platform guards, grid detection, coordinate transforms, and dry-run safety.
 mode: subagent
 ---
 
@@ -27,5 +27,3 @@ When reviewing changes to `interaction/` or `input-driver/`:
 ## Validation
 
 Run: `uv run autoscrapper scan --dry-run`
-
-**Related:** Skills: `diagnose-scan`, `calibrate-vision` | Commands: `/diagnose-scan`, `/calibrate-vision`, `/scan-dryrun`
