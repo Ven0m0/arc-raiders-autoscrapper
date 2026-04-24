@@ -16,7 +16,7 @@
     ":(){:|:&};:": "deny",
     "doom_loop": "deny"
   },
-  "disabled_providers": ["openai", "google"],
+  "disabled_providers": ["openai"],
   "plugin": [
     "opencode-ignore@1.1.0",
     "@gotgenes/opencode-agent-identity@3.0.1",
