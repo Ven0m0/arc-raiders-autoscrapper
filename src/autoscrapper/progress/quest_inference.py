@@ -3,21 +3,16 @@ from __future__ import annotations
 from collections import deque
 from collections.abc import Iterable
 import logging
-import re
 
+from ..utils.normalization import normalize_quest_name
 from .progress_config import (
     build_quest_index,
     group_quests_by_trader,
     resolve_active_quests,
 )
 
+
 _log = logging.getLogger(__name__)
-
-
-def _normalize_quest_name(value: str) -> str:
-    normalized = str(value or "").lower().replace("'", "").replace("\u2019", "")
-    normalized = re.sub(r"[^a-z0-9]+", " ", normalized)
-    return re.sub(r"\s+", " ", normalized).strip()
 
 
 def _build_predecessors_by_id(quests: list[dict], quest_graph: dict[str, object]) -> dict[str, set[str]]:
@@ -32,7 +27,7 @@ def _build_predecessors_by_id(quests: list[dict], quest_graph: dict[str, object]
         quest_name = quest.get("name")
         if not quest_id or not quest_name:
             continue
-        normalized_name = _normalize_quest_name(str(quest_name))
+        normalized_name = normalize_quest_name(str(quest_name))
         existing = quest_id_by_name.get(normalized_name)
         if existing and existing != str(quest_id):
             _log.warning(
@@ -49,7 +44,7 @@ def _build_predecessors_by_id(quests: list[dict], quest_graph: dict[str, object]
     for node_id, node_name in nodes.items():
         if not isinstance(node_id, str):
             continue
-        resolved = quest_id_by_name.get(_normalize_quest_name(str(node_name)))
+        resolved = quest_id_by_name.get(normalize_quest_name(str(node_name)))
         if resolved:
             node_to_quest_id[node_id] = resolved
         else:
