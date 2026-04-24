@@ -9,6 +9,7 @@ const SLIM_DESCRIPTIONS: Record<string, string> = {
   apply_patch: 'Apply a patch to files.',
   write: 'Write file.',
   bash: 'Run shell command.',
+  execute_bash: 'Run shell command.',
   glob: 'Find files.',
   grep: 'Search in files.',
   list: 'List directory.',
@@ -46,6 +47,10 @@ export const OpenSlimeditPlugin: Plugin = async ({ directory }) => {
 
   return {
     'tool.definition': async (input: ToolDefinitionInput, output: ToolDefinitionOutput) => {
+      // Guard: only override descriptions for tools that actually exist in this environment.
+      // Without this check the hook can register phantom tools (e.g. 'bash' in cloud agents
+      // where the shell tool is absent), which the LLM then calls and fails.
+      if (!output.description) return;
       const desc = SLIM_DESCRIPTIONS[input.toolID];
       if (desc) {
         output.description = desc;

@@ -4,7 +4,7 @@
     ".kilo/rules/*.md",
     ".kilo/CROSS_REFERENCE.md",
     "AGENTS.md",
-    "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"
+    ".kilo/rules/shell-strategy.md"
   ],
   "skills": {
     "paths": [".kilo/skills", ".opencode/skills", ".claude/skills", ".github/skills"]

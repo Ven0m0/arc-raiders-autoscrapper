@@ -22,7 +22,7 @@ interface StatsState {
   tools: Record<string, ToolStats>;
 }
 
-const STATE_DIR = '.opencode/state';
+const STATE_DIR = '.kilo/state';
 const CONFIG_FILE = 'context-shield.json';
 
 const DEFAULT_CONFIG: ShieldConfig = {
