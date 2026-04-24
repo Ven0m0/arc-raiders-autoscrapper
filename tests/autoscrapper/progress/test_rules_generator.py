@@ -47,7 +47,7 @@ def test_iso_now() -> None:
 
 
 def test_write_rules(tmp_path: Path) -> None:
-    output = {"test": "data"}
+    output: dict[str, object] = {"test": "data"}
     file_path = tmp_path / "subdir" / "rules.json"
     write_rules(output, file_path)
 
@@ -97,18 +97,21 @@ def test_generate_rules_with_active_quests(mock_load: MagicMock, mock_game_data:
 
     assert result["metadata"]["itemCount"] == 3
     assert "activeQuests" in result["metadata"]
-    assert result["metadata"]["activeQuests"][0]["name"] == "Quest 1"
+    active_quests_list: list[dict[str, object]] = result["metadata"]["activeQuests"]
+    assert len(active_quests_list) > 0
+    assert active_quests_list[0]["name"] == "Quest 1"
 
+    items_list: list[dict[str, object]] = result["items"]
     # Item 1 is required for active Quest 1 (keep)
-    item1_rule = next(item for item in result["items"] if item["id"] == "item1")
+    item1_rule = next(item for item in items_list if item["id"] == "item1")
     assert item1_rule["action"] == "keep"
 
     # Item 2 is not required for Quest 1 but it's required for uncompleted Quest 2.
-    item2_rule = next(item for item in result["items"] if item["id"] == "item2")
+    item2_rule = next(item for item in items_list if item["id"] == "item2")
     assert item2_rule["action"] == "keep"
 
     # Item 3 is completely unused, should be sell
-    item3_rule = next(item for item in result["items"] if item["id"] == "item3")
+    item3_rule = next(item for item in items_list if item["id"] == "item3")
     assert item3_rule["action"] == "sell"
 
 
