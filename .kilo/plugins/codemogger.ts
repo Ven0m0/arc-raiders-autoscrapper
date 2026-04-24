@@ -18,22 +18,35 @@ import { tool } from "@opencode-ai/plugin";
 
 // ── lazy singleton ────────────────────────────────────────────────────────────
 
+const EMBED_MODEL = "Xenova/all-MiniLM-L6-v2";
+
 let _index: import("codemogger").CodeIndex | null = null;
 let _initPromise: Promise<import("codemogger").CodeIndex> | null = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let _pipe: any = null;
+
+const localEmbed: import("codemogger").Embedder = async (texts) => {
+  if (!_pipe) {
+    const { pipeline } = await import("@huggingface/transformers");
+    _pipe = await pipeline("feature-extraction", EMBED_MODEL);
+  }
+  const BATCH = 128;
+  const all: number[][] = [];
+  for (let i = 0; i < texts.length; i += BATCH) {
+    const out = await _pipe(texts.slice(i, i + BATCH), { pooling: "mean", normalize: true });
+    all.push(...(out.tolist() as number[][]));
+  }
+  return all;
+};
 
 async function getIndex(worktree: string): Promise<import("codemogger").CodeIndex> {
   if (_index) return _index;
   if (_initPromise) return _initPromise;
 
   _initPromise = (async () => {
-    const { CodeIndex, projectDbPath, LOCAL_MODEL_NAME, localEmbed } =
-      (await import("codemogger")) as typeof import("codemogger") & {
-        LOCAL_MODEL_NAME: string;
-        localEmbed: import("codemogger").Embedder;
-      };
-
+    const { CodeIndex, projectDbPath } = await import("codemogger");
     const dbPath = projectDbPath(worktree);
-    _index = new CodeIndex({ dbPath, embedder: localEmbed, embeddingModel: LOCAL_MODEL_NAME });
+    _index = new CodeIndex({ dbPath, embedder: localEmbed, embeddingModel: EMBED_MODEL });
     return _index;
   })();
 
