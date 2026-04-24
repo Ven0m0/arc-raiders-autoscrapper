@@ -69,6 +69,12 @@
       "allowedVersions": ">=3.13 <3.14"
     },
     {
+      "description": "Restrict mise Python to 3.13.x, exclude 3.14+",
+      "matchManagers": ["mise"],
+      "matchPackageNames": ["python"],
+      "allowedVersions": ">=3.13 <3.14"
+    },
+    {
       "description": "Disable Docker digest pinning",
       "matchDatasources": ["docker"],
       "pinDigests": false
