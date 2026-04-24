@@ -2,6 +2,7 @@
   "$schema": "https://app.kilo.ai/config.json",
   "instructions": [
     ".kilo/rules/*.md",
+    ".kilo/CROSS_REFERENCE.md",
     "AGENTS.md",
     "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"
   ],
