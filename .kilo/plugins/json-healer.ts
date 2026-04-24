@@ -36,7 +36,8 @@ function repairIfNeeded(s: string): string {
 }
 
 const JsonHealerPlugin: Plugin = async () => ({
-  "tool.execute.before": async (_input, output) => {
+  "tool.execute.before": async (input, output) => {
+    if (["bash", "execute_bash", "write", "edit", "apply_patch"].includes(input.tool)) return;
     const args = output.args as Record<string, unknown>;
     for (const key of Object.keys(args)) {
       const val = args[key];
