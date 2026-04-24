@@ -1,17 +1,17 @@
 import type { Plugin } from "@opencode-ai/plugin";
 import jsonRepair from "../tools/json_repair";
-import hashlineEdit from "../tools/hashline_edit";
-import { read as hashline_read, grep as hashline_grep } from "../tools/hashline_rg";
-import { search as astGrepSearch, replace as astGrepReplace } from "../tools/ast_grep";
+import hlEdit from "../tools/hashline_edit";
+import { read as hlRead, grep as hlGrep } from "../tools/hashline_rg";
+import { search as sgSearch, replace as sgReplace } from "../tools/ast_grep";
 
 const CustomToolsPlugin: Plugin = async () => ({
   tool: {
     json_repair: jsonRepair,
-    hashline_edit: hashlineEdit,
-    hashline_read,
-    hashline_grep,
-    ast_grep: astGrepSearch,
-    ast_grep_replace: astGrepReplace,
+    hl_edit: hlEdit,
+    hl_read: hlRead,
+    hl_grep: hlGrep,
+    sg: sgSearch,
+    sgr: sgReplace,
   },
 });
 
