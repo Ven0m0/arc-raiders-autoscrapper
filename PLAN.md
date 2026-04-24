@@ -382,16 +382,43 @@ speculative backlog entries from older drafts were removed.
  </done-when>
 </task>
 
-## Out of scope (OCR)
+## Tasks (derived from TODO.md)
 
-The following alternatives were evaluated and rejected. Do not adopt without
-new evidence.
+### T002 · Integrate Arc-Lens data scraping pipeline
 
-<out-of-scope>
- <item>EasyOCR or PaddleOCR engine swap. The Tesseract pipeline is mature; switching engines invalidates the failure corpus and threshold calibration.</item>
- <item>ONNX visual icon matching (per arcraiders-stash-scanner analysis). Heavy dependency for marginal gain over rules-store names.</item>
- <item>LSTM retraining. tessdoc explicitly discourages it unless the script or font is novel.</item>
-</out-of-scope>
+**File:** `TODO.md:1-6`
+**Severity:** medium · **Category:** feature · **Size:** L
+
+**Blocks:** —  **Blocked by:** —
+
+**Context:**
+```
+### implement [arc-lens scraping](https://github.com/eetusa/arc-lens)
+- https://github.com/eetusa/arc-lens/blob/master/scripts/metaforge-scraper.js
+- https://github.com/eetusa/arc-lens/blob/master/scripts/project-scraper.js
+- https://github.com/eetusa/arc-lens/blob/master/scripts/quest-scraper.js
+- https://github.com/eetusa/arc-lens/blob/master/scripts/trophy-display-scraper.js
+- https://github.com/eetusa/arc-llens/blob/master/scripts/wiki-scraper.js
+```
+
+**Intent:** Integrate the Arc-Lens community data scraping tools to keep the MetaForge/raidtheory data pipeline fresh and to cover edge-case data sources (trophies, wiki-exclusive content) without reinventing scraping logic.
+
+**Acceptance criteria:**
+- [ ] Vendor the `arc-lens` scraper scripts under `scripts/vendor/arc-lens/` with attribution
+- [ ] Port the JavaScript scrapers to Python (or embed via Node if multi-runtime is acceptable)
+- [ ] Wire the scrapers into the existing `scripts/update_snapshot_and_defaults.py` pipeline as optional data sources
+- [ ] Add a `--source arc-lens` flag to run only the Arc-Lens pipeline
+- [ ] Document what each scraper contributes and how to update them from upstream
+- [ ] Ensure the pipeline fails gracefully if Arc-Lens data is unavailable
+
+**Implementation:**
+- Create `scripts/vendor/arc-lens/` directory and mirror the JS scraper structure
+- Port `metaforge-scraper.js` → `metaforge_scraper.py` using `requests` + `BeautifulSoup` (existing deps)
+- Port `quest-scraper.js` → `quest_scraper.py` and merge into `progress/data_update.py` as an alternate fetch path
+- Add ArcLensScraper interface with `fetch_all()` method returning normalized JSON matching existing data loader schema
+- Inject via dependency injection into `update_snapshot_and_defaults.py` behind a feature flag
+- Write integration test in `tests/test_arc_lens_integration.py` mocking HTTP responses
+- Estimated LOC: 200–400 (port + glue + tests)
 
 ## Suggested next picks
 
@@ -406,9 +433,3 @@ removal.
  <pick rank="5" task="T017">Very small correctness improvement with immediate type-safety value.</pick>
  <pick rank="6" task="T012">Small OCR normalization fix with direct user impact.</pick>
 </next-picks>
-
-## Superseded material
-
-The older draft plans contained duplicated arctracker notes, completed items,
-and broad speculative backlog entries. Those details are intentionally removed
-here so this file stays implementation-focused.
