@@ -1,4 +1,6 @@
----description: Clean Debug Images---
+---
+description: Clean Debug Images
+---
 # Clean Debug Images
 
 Prune stale OCR debug images from `ocr_debug/`.
