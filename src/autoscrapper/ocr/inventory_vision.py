@@ -1154,8 +1154,6 @@ def _extract_title_from_data(
         return "", ""
 
     CONFIDENCE_THRESHOLD = 60.0
-    best_result: tuple[str, str, float] = ("", "", -1.0)
-
     for key in ranked_keys:
         text, raw = _group_text(key)
         if not text:
@@ -1163,15 +1161,8 @@ def _extract_title_from_data(
         if _looks_like_stat_line(text):
             continue
         result = match_item_name_result(text)
-        conf = scored[key]
-        if result.matched_name is not None:
-            if conf >= CONFIDENCE_THRESHOLD:
-                return result.chosen_name, raw
-            if conf > best_result[2]:
-                best_result = (result.chosen_name, raw, conf)
-
-    if best_result[2] >= 0:
-        return best_result[0], best_result[1]
+        if result.matched_name is not None and scored[key] >= CONFIDENCE_THRESHOLD:
+            return result.chosen_name, raw
 
     primary_text, primary_raw = _group_text(ranked_keys[0])
     primary_result = match_item_name_result(primary_text)

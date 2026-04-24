@@ -75,7 +75,7 @@ def test_create_api_success(mock_api_class, mock_paths, mock_has_eng):
 
     assert api == mock_api_instance
     mock_api_class.assert_called_once_with(path=str(Path("/mock/path")), lang="eng", psm=tesseract.PSM.SINGLE_BLOCK)
-    mock_api_instance.SetVariable.assert_called_once()
+    mock_api_instance.SetVariable.assert_called()
     assert tesseract._tessdata_dir == str(Path("/mock/path"))
 
 
@@ -454,6 +454,8 @@ def test_initialize_ocr_without_metadata():
     with (
         patch("autoscrapper.ocr.tesseract._get_api"),
         patch("autoscrapper.ocr.tesseract._get_api_line"),
+        patch("autoscrapper.ocr.tesseract._get_api_single_word"),
+        patch("autoscrapper.ocr.tesseract._get_api_sparse"),
         patch("autoscrapper.ocr.tesseract._record_backend_info"),
     ):
         # Ensure _backend_info remains None

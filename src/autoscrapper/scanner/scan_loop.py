@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from itertools import cycle
 from pathlib import Path
-from typing import Any
+from typing import Any, TextIO
 
 from .actions import ActionExecutionContext, resolve_action_taken
 from .outcomes import _describe_action
@@ -114,6 +114,7 @@ class _ScanLoopConfig:
 
 
 _decision_log_file: str | None = None
+_decision_log_handle: TextIO | None = None
 
 
 def _get_decision_log_path() -> str | None:
@@ -121,7 +122,7 @@ def _get_decision_log_path() -> str | None:
 
 
 def _init_decision_log() -> str | None:
-    global _decision_log_file
+    global _decision_log_file, _decision_log_handle
     if _decision_log_file is not None:
         return _decision_log_file
     log_dir = Path(tempfile.gettempdir()) / "autoscrapper_decisions"
@@ -129,9 +130,21 @@ def _init_decision_log() -> str | None:
         log_dir.mkdir(parents=True, exist_ok=True)
         timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
         _decision_log_file = str(log_dir / f"decisions_{timestamp}.jsonl")
+        _decision_log_handle = open(_decision_log_file, "a")
         return _decision_log_file
     except Exception:
         return None
+
+
+def _close_decision_log() -> None:
+    global _decision_log_file, _decision_log_handle
+    if _decision_log_handle is not None:
+        try:
+            _decision_log_handle.close()
+        except Exception:
+            pass
+        _decision_log_handle = None
+    _decision_log_file = None
 
 
 def _write_decision_log(
@@ -142,7 +155,7 @@ def _write_decision_log(
     score: int,
     source: str,
 ) -> None:
-    if _decision_log_file is None:
+    if _decision_log_handle is None:
         return
     try:
         record = {
@@ -153,8 +166,8 @@ def _write_decision_log(
             "score": score,
             "source": source,
         }
-        with open(_decision_log_file, "a") as f:
-            f.write(json.dumps(record) + "\n")
+        _decision_log_handle.write(json.dumps(record) + "\n")
+        _decision_log_handle.flush()
     except Exception:
         pass
 
@@ -777,4 +790,7 @@ def scan_pages(
         progress_impl=progress_impl,
         startup_events=startup_events,
     )
-    return runner.run()
+    try:
+        return runner.run()
+    finally:
+        _close_decision_log()
