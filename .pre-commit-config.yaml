@@ -16,14 +16,6 @@ repos:
     rev: 1.39.3
     hooks:
       - id: basedpyright
-  - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.12
-    hooks:
-      - id: actionlint
-  - repo: https://github.com/google/yamlfmt
-    rev: v0.21.0
-    hooks:
-      - id: yamlfmt
 
   - repo: local
     hooks:
@@ -75,10 +67,6 @@ repos:
       - id: shellcheck
         args: [-x, --severity=warning]
         files: \.(sh|bash)$
-  - repo: https://github.com/yawlabs/ctxlint
-    rev: v0.9.18
-    hooks:
-      - id: ctxlint
   - repo: https://github.com/python-jsonschema/check-jsonschema
     rev: 0.37.1
     hooks:
