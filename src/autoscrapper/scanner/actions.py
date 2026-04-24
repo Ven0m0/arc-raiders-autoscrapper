@@ -4,7 +4,7 @@ import numpy as np
 
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Literal
 
 from ..config import ScanSettings
 from ..interaction.ui_windows import (
@@ -111,7 +111,7 @@ def _apply_destructive_decision(
         return "SKIP_NO_INFOBOX"
     action_bbox_rel: tuple[int, int, int, int] | None = None
     if infobox_bgr is not None:
-        target = "sell" if decision == "SELL" else "recycle"
+        target: Literal["sell", "recycle"] = "sell" if decision == "SELL" else "recycle"
         action_bbox_rel, _processed = find_action_bbox_by_ocr(infobox_bgr, target)
     if action_bbox_rel is None:
         return "SKIP_NO_ACTION_BBOX"

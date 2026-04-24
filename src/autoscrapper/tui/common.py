@@ -11,7 +11,9 @@ from textual.widgets import Button, Static
 
 
 class AppScreen(Screen):
-    BINDINGS: ClassVar[list[Binding]] = [Binding("escape,ctrl+b", "back", "Back", priority=True)]
+    BINDINGS: ClassVar[list[Binding | tuple[str, str] | tuple[str, str, str]]] = [
+        Binding("escape,ctrl+b", "back", "Back", priority=True)
+    ]
 
     def action_back(self) -> None:
         self.app.pop_screen()

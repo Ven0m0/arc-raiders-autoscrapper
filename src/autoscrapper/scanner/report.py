@@ -8,8 +8,8 @@ from .types import ScanStats
 from ..core.item_actions import ItemActionResult
 
 
-def _summarize_results(results: list[ItemActionResult]) -> Counter:
-    summary = Counter()
+def _summarize_results(results: list[ItemActionResult]) -> Counter[str]:
+    summary: Counter[str] = Counter()
     for result in results:
         label, _ = _describe_action(result.action_taken)
         summary[label] += 1

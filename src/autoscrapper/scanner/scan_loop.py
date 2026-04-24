@@ -121,7 +121,7 @@ def _queue_event(
         startup_events.append((message, style))
 
 
-def _scroll_clicks_sequence(click_pattern: Iterable[int]) -> Iterator[int]:
+def _scroll_clicks_sequence(click_pattern: Iterable[int | str]) -> Iterator[int]:
     """
     Yield repeating calibrated scroll counts.
     """

@@ -47,7 +47,7 @@ def test_item_label_uses_unreadable_when_both_none():
     result = ItemActionResult(
         page=0,
         cell=cell,
-        item_name=None,
+        item_name="",
         decision=None,
         action_taken="",
         raw_item_text=None,
