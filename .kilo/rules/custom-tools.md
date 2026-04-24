@@ -11,10 +11,17 @@ All tools are registered in `.kilo/kilo.json` and loaded via `.kilo/plugins/cust
 | `hashline_read` | `tools/hashline_rg.ts` | Read file with `LINE#HASH\|` annotations |
 | `hashline_grep` | `tools/hashline_rg.ts` | Grep returning `LINE#HASH\|` annotated matches |
 | `ast_grep` | `tools/ast_grep.ts` | AST-aware structural code search via `sg` CLI (25 languages) |
+| `ast_grep_replace` | `tools/ast_grep.ts` | AST-aware in-place code rewrite; dry-run by default |
 | `cshield_toggle` | `plugins/context-shield.ts` | Toggle output compaction on/off |
 | `gitingest` | `plugins/gitingest.ts` | Fetch full GitHub repo via gitingest.com |
 | `codemogger_index` | `plugins/codemogger.ts` | Build/update local semantic code index |
 | `codemogger_search` | `plugins/codemogger.ts` | Semantic/keyword/hybrid search over indexed code |
+
+## Tool Routing (follow these rules)
+
+**`ast_grep` / `ast_grep_replace` before `grep`** — When searching for code structure (function definitions, call expressions, class declarations, import statements, variable patterns), ALWAYS use `ast_grep` instead of `grep`. Reserve `grep` for plain-text, comment, or string-literal searches where AST structure does not matter.
+
+**`json_repair` for broken JSON** — When `read` returns a JSON file that fails to parse, or you receive a malformed JSON string, call `json_repair` with the file path or string BEFORE attempting any manual edits. Use `mode=extract` to pull the first JSON block out of mixed prose/markdown output.
 
 ## Usage Notes
 
@@ -24,7 +31,7 @@ All tools are registered in `.kilo/kilo.json` and loaded via `.kilo/plugins/cust
 
 **hashline_read / hashline_grep output** — output contains `LINE#HASH|content` annotations. Do NOT summarize or truncate these results — the hash anchors are consumed verbatim by `hashline_edit`. Context-shield is configured to skip compaction for these tools.
 
-**ast_grep** — patterns use meta-variables: `$VAR` (single node), `$$$` (multiple nodes). Example: `console.log($MSG)`.
+**ast_grep / ast_grep_replace** — patterns use meta-variables: `$VAR` (single node), `$$$` (multiple nodes). Example: `console.log($MSG)`. Use `ast_grep_replace` with `dryRun=false` to apply rewrites.
 
 **codemogger** — project root is auto-indexed on every session start (only changed files re-processed). Call `codemogger_index` to force a full refresh. Use `codemogger_search` for semantic or keyword lookup before reaching for `grep`.
 
