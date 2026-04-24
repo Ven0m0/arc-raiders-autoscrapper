@@ -50,12 +50,9 @@ import type { Plugin } from '@opencode-ai/plugin';
 import fastedit from '../tools/fastedit';
 import jsonRepair from '../tools/json_repair';
 import hashlineEdit from '../tools/hashline_edit';
-import hashlineRg from '../tools/hashline_rg';
+import { read as hashline_read, grep as hashline_grep } from '../tools/hashline_rg';
 import interactiveBash from '../tools/interactive_bash';
-import astGrep from '../tools/ast_grep';
-
-// hashline_rg exports two tools; keep both
-const { hashline_read, hashline_grep } = hashlineRg as any;
+import ast_grep from '../tools/ast_grep';
 
 const CustomToolsPlugin: Plugin = async () => ({
   tool: {
