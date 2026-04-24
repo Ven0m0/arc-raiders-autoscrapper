@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+import json
 import logging
+import tempfile
 import time
 from collections.abc import Iterable, Iterator
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from itertools import cycle
-from typing import Any
+from pathlib import Path
+from typing import Any, TextIO
 
 from .actions import ActionExecutionContext, resolve_action_taken
 from .outcomes import _describe_action
@@ -106,6 +110,66 @@ class _ScanLoopConfig:
     ocr_unreadable_retries: int
     profile_timing: bool
     items_total: int | None
+    decision_log_enabled: bool = False
+
+
+_decision_log_file: str | None = None
+_decision_log_handle: TextIO | None = None
+
+
+def _get_decision_log_path() -> str | None:
+    return _decision_log_file
+
+
+def _init_decision_log() -> str | None:
+    global _decision_log_file, _decision_log_handle
+    if _decision_log_file is not None:
+        return _decision_log_file
+    log_dir = Path(tempfile.gettempdir()) / "autoscrapper_decisions"
+    try:
+        log_dir.mkdir(parents=True, exist_ok=True)
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+        _decision_log_file = str(log_dir / f"decisions_{timestamp}.jsonl")
+        _decision_log_handle = open(_decision_log_file, "a")
+        return _decision_log_file
+    except Exception:
+        return None
+
+
+def _close_decision_log() -> None:
+    global _decision_log_file, _decision_log_handle
+    if _decision_log_handle is not None:
+        try:
+            _decision_log_handle.close()
+        except Exception:
+            pass
+        _decision_log_handle = None
+    _decision_log_file = None
+
+
+def _write_decision_log(
+    timestamp: str,
+    raw_text: str,
+    decision: str,
+    location: str,
+    score: int,
+    source: str,
+) -> None:
+    if _decision_log_handle is None:
+        return
+    try:
+        record = {
+            "timestamp": timestamp,
+            "raw_text": raw_text,
+            "decision": decision,
+            "location": location,
+            "score": score,
+            "source": source,
+        }
+        _decision_log_handle.write(json.dumps(record) + "\n")
+        _decision_log_handle.flush()
+    except Exception:
+        pass
 
 
 def _queue_event(
@@ -571,6 +635,18 @@ class _ScanRunner:
         cell_scan: _CellScanResult,
     ) -> None:
         self.state.results.append(cell_scan.result)
+
+        if self.config.decision_log_enabled:
+            location = f"p{page + 1}r{cell.row}c{cell.col}"
+            _write_decision_log(
+                timestamp=datetime.now(timezone.utc).isoformat(),
+                raw_text=cell_scan.result.raw_item_text or "",
+                decision=cell_scan.result.decision or "none",
+                location=location,
+                score=0,
+                source="scan",
+            )
+
         if self.progress_impl is None:
             return
 
@@ -689,17 +765,21 @@ def scan_pages(
     infobox_retries: int,
     ocr_unreadable_retries: int,
     profile_timing: bool,
+    decision_log_enabled: bool = False,
     progress_impl: ScanProgress | None,
     startup_events: list[tuple[str, str]],
     items_total: int | None,
 ) -> ScanRunState:
     reset_ocr_caches()
+    if decision_log_enabled:
+        _init_decision_log()
     config = _ScanLoopConfig(
         pages_to_scan=pages_to_scan,
         infobox_retries=infobox_retries,
         ocr_unreadable_retries=ocr_unreadable_retries,
         profile_timing=profile_timing,
         items_total=items_total,
+        decision_log_enabled=decision_log_enabled,
     )
     scroll_sequence = _scroll_clicks_sequence(SCROLL_CLICKS_PATTERN)
     runner = _ScanRunner(
@@ -710,4 +790,7 @@ def scan_pages(
         progress_impl=progress_impl,
         startup_events=startup_events,
     )
-    return runner.run()
+    try:
+        return runner.run()
+    finally:
+        _close_decision_log()

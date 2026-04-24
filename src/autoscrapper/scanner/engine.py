@@ -200,6 +200,7 @@ def scan_inventory(
     actions_path: Path = ITEM_RULES_PATH,
     actions_override: ActionMap | None = None,
     profile_timing: bool = False,
+    decision_log_enabled: bool = False,
     progress: ScanProgress | None = None,
     window_snapshot: WindowSnapshot | None = None,
 ) -> tuple[list[ItemActionResult], ScanStats]:
@@ -387,6 +388,7 @@ def scan_inventory(
             infobox_retries=infobox_retries,
             ocr_unreadable_retries=ocr_unreadable_retries,
             profile_timing=profile_timing,
+            decision_log_enabled=decision_log_enabled,
             progress_impl=progress_impl,
             startup_events=startup_events,
             items_total=items_total,

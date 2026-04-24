@@ -37,6 +37,7 @@ class ScanSettings:
     post_sell_recycle_delay_ms: int = 100
     debug_ocr: bool = False
     profile: bool = False
+    decision_log_enabled: bool = False
 
 
 @dataclass(frozen=True, slots=True)

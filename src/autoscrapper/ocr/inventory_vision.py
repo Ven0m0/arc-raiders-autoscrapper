@@ -79,10 +79,13 @@ _STAT_LINE_PATTERN = re.compile(
 
 # Roman numeral OCR misread corrections (adapted from ArcCompanion-public).
 # Tesseract confuses lowercase-l with uppercase-I, producing "Il" for "II",
-# "Ill" for "III", and "lV" for "IV".  Apply longest-match first.
+# "Ill" for "III", and "lV" for "IV".  Also digit-1 variants like "1V" and "111".
+# Apply longest-match first.
 _ROMAN_NUMERAL_FIXES: tuple[tuple[re.Pattern[str], str], ...] = (
     (re.compile(r"\bIll\b"), "III"),
+    (re.compile(r"\b111\b"), "III"),
     (re.compile(r"\bIl\b"), "II"),
+    (re.compile(r"\b1V\b"), "IV"),
     (re.compile(r"\blV\b"), "IV"),
 )
 
@@ -1149,6 +1152,18 @@ def _extract_title_from_data(
     ranked_keys = sorted(groups, key=lambda k: (-scored[k], _group_top(k)))
     if not ranked_keys:
         return "", ""
+
+    CONFIDENCE_THRESHOLD = 60.0
+    for key in ranked_keys:
+        text, raw = _group_text(key)
+        if not text:
+            continue
+        if _looks_like_stat_line(text):
+            continue
+        result = match_item_name_result(text)
+        if result.matched_name is not None and scored[key] >= CONFIDENCE_THRESHOLD:
+            return result.chosen_name, raw
+
     primary_text, primary_raw = _group_text(ranked_keys[0])
     primary_result = match_item_name_result(primary_text)
     if primary_result.matched_name is not None or not _looks_like_stat_line(primary_text):
@@ -1619,6 +1634,8 @@ def ocr_context_menu(
         "detach mods",
         "repair",
         "upgrade",
+        "weapon swap",
+        "swap weapon",
     )
 
     item_name = ""
