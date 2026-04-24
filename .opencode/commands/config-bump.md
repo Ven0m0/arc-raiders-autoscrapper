@@ -1,4 +1,6 @@
----description: Config Bump---
+---
+description: Config Bump
+---
 # Config Bump
 
 Safely add, remove, or rename config fields.
