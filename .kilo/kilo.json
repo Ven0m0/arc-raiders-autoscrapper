@@ -15,14 +15,12 @@
     ":(){:|:&};:": "deny",
     "doom_loop": "deny"
   },
-  "disabled_providers": ["openai"],
+  "disabled_providers": ["openai", "google"],
   "plugin": [
     "opencode-ignore@1.1.0",
     "@gotgenes/opencode-agent-identity@3.0.1",
-    "opencode-websearch@0.5.0",
     "opencode-kcp-plugin@latest",
-    "github:joshuadavidthomas/opencode-agent-memory",
-    "opencode-agent-skills",
+    "opencode-agent-skills@latest",
     "github:kdcokenny/opencode-background-agents",
     "github:spoons-and-mirrors/subtask2",
     "./plugins/context-shield",
@@ -68,7 +66,7 @@
     "fast-filesystem": {
       "type": "local",
       "command": ["npx", "-y", "fast-filesystem@latest"],
-      "enabled": false
+      "enabled": true
     },
     "serena": {
       "type": "local",
@@ -82,7 +80,7 @@
         "ide",
         "--project-from-cwd"
       ],
-      "enabled": true
+      "enabled": false
     },
     "octocode": {
       "type": "local",
