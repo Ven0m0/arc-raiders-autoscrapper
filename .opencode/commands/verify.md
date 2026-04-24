@@ -1,4 +1,6 @@
----description: Verify Changes---
+---
+description: Verify Changes
+---
 # Verify Changes
 
 Run the full validation suite (lint + types + tests).
