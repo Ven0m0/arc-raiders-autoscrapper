@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import sys
+import tempfile
 import threading
 from dataclasses import dataclass
 from pathlib import Path
@@ -22,6 +23,8 @@ _api_single_word: PyTessBaseAPI | None = None
 _api_sparse: PyTessBaseAPI | None = None
 _tessdata_dir: str | None = None
 _backend_info: OcrBackendInfo | None = None
+_user_words_path: Path | None = None
+_pending_user_words: list[str] | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -71,13 +74,28 @@ def _candidate_tessdata_paths() -> list[Path]:
     return unique
 
 
-def _create_api(*, psm: PSM = PSM.SINGLE_BLOCK) -> PyTessBaseAPI:
+def _create_api(*, psm: PSM = PSM.SINGLE_BLOCK, user_words: list[str] | None = None) -> PyTessBaseAPI:
     """
     Build a shared PyTessBaseAPI instance configured for English.
     """
-    global _tessdata_dir
+    global _tessdata_dir, _user_words_path, _pending_user_words
     errors: list[tuple[Path, Exception]] = []
     candidates = _candidate_tessdata_paths()
+
+    words_to_use = user_words if user_words is not None else _pending_user_words
+    temp_file = None
+    if words_to_use:
+        temp_file = tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False)
+        try:
+            for word in words_to_use:
+                if word:
+                    temp_file.write(word + "\n")
+            temp_file.close()
+            _user_words_path = Path(temp_file.name)
+        except Exception:
+            if temp_file and not temp_file.closed:
+                temp_file.close()
+            _user_words_path = None
 
     for candidate in candidates:
         if not _has_eng(candidate):
@@ -89,6 +107,10 @@ def _create_api(*, psm: PSM = PSM.SINGLE_BLOCK) -> PyTessBaseAPI:
                 "tessedit_char_whitelist",
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 '-/(),.!?:&+",
             )
+            api.SetVariable("user_defined_dpi", "300")
+            api.SetVariable("load_system_dawg", "0")
+            if _user_words_path and _user_words_path.exists():
+                api.SetVariable("user_words_suffix", str(_user_words_path))
             _tessdata_dir = str(candidate)
             return api
         except Exception as exc:
@@ -189,6 +211,10 @@ def initialize_ocr() -> OcrBackendInfo:
     """
     Force initialization so the OCR backend is ready before the first OCR call.
     """
+    global _pending_user_words
+    from ..items.rules_store import get_item_names
+
+    _pending_user_words = list(get_item_names())
     api = _get_api()
     _get_api_line()
     _get_api_single_word()
