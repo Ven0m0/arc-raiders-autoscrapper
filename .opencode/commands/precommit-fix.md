@@ -1,4 +1,6 @@
----description: Fix Pre-commit Issues---
+---
+description: Fix Pre-commit Issues
+---
 # Fix Pre-commit Issues
 
 Diagnose and fix pre-commit hook failures.
