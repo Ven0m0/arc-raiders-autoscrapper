@@ -73,8 +73,8 @@
       "allowedVersions": "<3.14"
     },
     {
-      "description": "Restrict .python-version (pyenv) to exclude 3.14+",
-      "matchManagers": ["pyenv"],
+      "description": "Restrict Python version to exclude 3.14+ for pyenv, pep723 and custom managers",
+      "matchManagers": ["pyenv", "pep723", "regex"],
       "matchPackageNames": ["python"],
       "allowedVersions": "<3.14"
     },
