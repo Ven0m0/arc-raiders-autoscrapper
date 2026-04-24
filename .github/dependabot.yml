@@ -1,7 +1,6 @@
 version: 2
 enable-beta-ecosystems: true
 updates:
-  # UV ecosystem (primary for this project)
   - package-ecosystem: uv
     directory: /
     schedule:
@@ -27,8 +26,25 @@ updates:
           - patch
     versioning-strategy: auto
     rebase-strategy: auto
-    target-branch: main
-  # GitHub Actions
+
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "chore"
+      include: scope
+    labels:
+      - dependencies
+      - python
+    ignore:
+      - dependency-name: pip
+    open-pull-requests-limit: 10
+    groups:
+      pip-all:
+        patterns: ["*"]
+        update-types: [minor, patch]
+    
   - package-ecosystem: github-actions
     directory: /
     schedule:
@@ -53,3 +69,50 @@ updates:
           - patch
     rebase-strategy: auto
     target-branch: main
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    versioning-strategy: increase-if-necessary
+    commit-message:
+      prefix: "chore"
+      include: scope
+    labels:
+      - dependencies
+      - javascript
+    open-pull-requests-limit: 10
+    groups:
+      npm-all:
+        patterns: ["*"]
+        update-types: [minor, patch]
+
+  - package-ecosystem: bun
+    directory: /
+    schedule:
+      interval: weekly
+    versioning-strategy: increase-if-necessary
+    commit-message:
+      prefix: "chore"
+      include: scope
+    labels:
+      - dependencies
+      - javascript
+    open-pull-requests-limit: 10
+    groups:
+      bun-all:
+        patterns: ["*"]
+        update-types: [minor, patch]
+
+  - package-ecosystem: gitsubmodule
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "chore"
+    labels:
+      - dependencies
+      - submodule
+    groups:
+      gitsubmodule-all:
+        patterns: ["*"]
