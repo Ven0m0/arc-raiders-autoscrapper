@@ -1,19 +1,19 @@
-import * as path from 'node:path';
-import type { Plugin } from '@opencode-ai/plugin';
+import * as path from "node:path";
+import type { Plugin } from "@opencode-ai/plugin";
 
 const LINE_RANGE_RE = /^(\d+)(?:\s*-\s*(\d+))?$/;
 
 const SLIM_DESCRIPTIONS: Record<string, string> = {
-  read: 'Read file content.',
+  read: "Read file content.",
   edit: "Edit file. oldString can be line range '55-64'.",
-  apply_patch: 'Apply a patch to files.',
-  write: 'Write file.',
-  bash: 'Run shell command.',
-  execute_bash: 'Run shell command.',
-  glob: 'Find files.',
-  grep: 'Search in files.',
-  list: 'List directory.',
-  fetch: 'Fetch URL.',
+  apply_patch: "Apply a patch to files.",
+  write: "Write file.",
+  bash: "Run shell command.",
+  execute_bash: "Run shell command.",
+  glob: "Find files.",
+  grep: "Search in files.",
+  list: "List directory.",
+  fetch: "Fetch URL.",
 };
 
 interface ToolDefinitionInput {
@@ -46,7 +46,7 @@ export const OpenSlimeditPlugin: Plugin = async ({ directory }) => {
   }
 
   return {
-    'tool.definition': async (input: ToolDefinitionInput, output: ToolDefinitionOutput) => {
+    "tool.definition": async (input: ToolDefinitionInput, output: ToolDefinitionOutput) => {
       // Guard: only override descriptions for tools that actually exist in this environment.
       // Without this check the hook can register phantom tools (e.g. 'bash' in cloud agents
       // where the shell tool is absent), which the LLM then calls and fails.
@@ -58,16 +58,16 @@ export const OpenSlimeditPlugin: Plugin = async ({ directory }) => {
     },
 
     // Compact tool output: shorten read paths, strip footer, compress edit results
-    'tool.execute.after': async (input: ToolExecutionInput, output: ToolExecutionOutput) => {
-      if (input.tool === 'edit') {
-        if (output.output.startsWith('Edit applied successfully.')) {
-          output.output = 'OK';
+    "tool.execute.after": async (input: ToolExecutionInput, output: ToolExecutionOutput) => {
+      if (input.tool === "edit") {
+        if (output.output.startsWith("Edit applied successfully.")) {
+          output.output = "OK";
         }
         return;
       }
 
-      if (input.tool !== 'read') return;
-      if (output.output.includes('<type>directory</type>')) return;
+      if (input.tool !== "read") return;
+      if (output.output.includes("<type>directory</type>")) return;
 
       const pathMatch = output.output.match(/<path>(.+?)<\/path>/);
       if (!pathMatch) return;
@@ -75,13 +75,13 @@ export const OpenSlimeditPlugin: Plugin = async ({ directory }) => {
       const absPath = path.normalize(pathMatch[1]);
       const relPath = path.relative(directory, absPath);
       output.output = output.output.replace(`<path>${pathMatch[1]}</path>`, `<path>${relPath}</path>`);
-      output.output = output.output.replace('<type>file</type>\n', '');
-      output.output = output.output.replace(/\n\n\(End of file - total \d+ lines\)\n/, '\n');
+      output.output = output.output.replace("<type>file</type>\n", "");
+      output.output = output.output.replace(/\n\n\(End of file - total \d+ lines\)\n/, "\n");
     },
 
     // Expand line ranges in oldString
-    'tool.execute.before': async (input: ToolExecutionInput, output: ToolExecuteBeforeOutput) => {
-      if (input.tool !== 'edit') return;
+    "tool.execute.before": async (input: ToolExecutionInput, output: ToolExecuteBeforeOutput) => {
+      if (input.tool !== "edit") return;
       const args = output.args;
       if (!args.oldString || !args.filePath) return;
 
@@ -98,12 +98,12 @@ export const OpenSlimeditPlugin: Plugin = async ({ directory }) => {
       const match = args.oldString.trim().match(LINE_RANGE_RE);
       if (!match) return;
 
-      const lines = content.split('\n');
+      const lines = content.split("\n");
       const startLine = parseInt(match[1], 10);
       const endLine = match[2] ? parseInt(match[2], 10) : startLine;
 
       if (startLine >= 1 && endLine <= lines.length && startLine <= endLine) {
-        args.oldString = lines.slice(startLine - 1, endLine).join('\n');
+        args.oldString = lines.slice(startLine - 1, endLine).join("\n");
       }
     },
   };

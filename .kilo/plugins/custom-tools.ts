@@ -1,9 +1,9 @@
-import type { Plugin } from '@opencode-ai/plugin';
-import fastedit from '../tools/fastedit';
-import jsonRepair from '../tools/json_repair';
-import hashlineEdit from '../tools/hashline_edit';
-import { read as hashline_read, grep as hashline_grep } from '../tools/hashline_rg';
-import astGrep from '../tools/ast_grep';
+import type { Plugin } from "@opencode-ai/plugin";
+import fastedit from "../tools/fastedit";
+import jsonRepair from "../tools/json_repair";
+import hashlineEdit from "../tools/hashline_edit";
+import { read as hashline_read, grep as hashline_grep } from "../tools/hashline_rg";
+import astGrep from "../tools/ast_grep";
 
 const CustomToolsPlugin: Plugin = async () => ({
   tool: {

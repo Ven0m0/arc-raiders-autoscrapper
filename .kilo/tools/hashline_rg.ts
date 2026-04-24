@@ -5,39 +5,39 @@
  * Uses the same hash algorithm as hashline_edit.ts via shared utilities.
  */
 
-import { existsSync, readdirSync, statSync } from 'node:fs';
-import { extname, isAbsolute, join, relative, resolve } from 'node:path';
-import { tool } from '@opencode-ai/plugin';
-import { spawn } from 'bun';
-import { computeHash, formatHashLines } from './hashline_utils.ts';
+import { existsSync, readdirSync, statSync } from "node:fs";
+import { extname, isAbsolute, join, relative, resolve } from "node:path";
+import { tool } from "@opencode-ai/plugin";
+import { spawn } from "bun";
+import { computeHash, formatHashLines } from "./hashline_utils.ts";
 
 // ── Binary detection ────────────────────────────────────────────────────────
 
 const BINARY_EXTS = new Set([
-  '.png',
-  '.jpg',
-  '.jpeg',
-  '.gif',
-  '.webp',
-  '.svg',
-  '.pdf',
-  '.zip',
-  '.tar',
-  '.gz',
-  '.7z',
-  '.exe',
-  '.dll',
-  '.so',
-  '.wasm',
-  '.class',
-  '.jar',
-  '.pyc',
-  '.mp3',
-  '.mp4',
-  '.wav',
-  '.ttf',
-  '.otf',
-  '.woff',
+  ".png",
+  ".jpg",
+  ".jpeg",
+  ".gif",
+  ".webp",
+  ".svg",
+  ".pdf",
+  ".zip",
+  ".tar",
+  ".gz",
+  ".7z",
+  ".exe",
+  ".dll",
+  ".so",
+  ".wasm",
+  ".class",
+  ".jar",
+  ".pyc",
+  ".mp3",
+  ".mp4",
+  ".wav",
+  ".ttf",
+  ".otf",
+  ".woff",
 ]);
 
 function isBinaryExt(p: string): boolean {
@@ -51,12 +51,12 @@ async function isBinaryContent(p: string): Promise<boolean> {
 
 // ── Directory listing ───────────────────────────────────────────────────────
 
-async function dirListing(dir: string, indent = ''): Promise<string> {
+async function dirListing(dir: string, indent = ""): Promise<string> {
   let entries: ReturnType<typeof readdirSync>;
   try {
     entries = readdirSync(dir, { withFileTypes: true });
   } catch {
-    return '';
+    return "";
   }
 
   entries.sort((a, b) => {
@@ -66,35 +66,35 @@ async function dirListing(dir: string, indent = ''): Promise<string> {
 
   const lines: string[] = [];
   for (const e of entries) {
-    if (e.name.startsWith('.') || e.name === 'node_modules') continue;
+    if (e.name.startsWith(".") || e.name === "node_modules") continue;
     const full = join(dir, e.name);
     if (e.isDirectory()) {
       lines.push(`${indent}${e.name}/`);
       lines.push(await dirListing(full, `${indent}  `));
     } else {
       try {
-        const count = (await Bun.file(full).text()).split('\n').length;
+        const count = (await Bun.file(full).text()).split("\n").length;
         lines.push(`${indent}${e.name} (${count} lines)`);
       } catch {
         lines.push(`${indent}${e.name} (unreadable)`);
       }
     }
   }
-  return lines.filter(Boolean).join('\n');
+  return lines.filter(Boolean).join("\n");
 }
 
 // ── hashline_read ───────────────────────────────────────────────────────────
 
 export const read = tool({
   description:
-    'Read a file with LINE#HASH|content annotations for use with hashline_edit. ' +
-    'Each line is tagged so you can reference it precisely in edits. ' +
-    'Supports pagination via offset/limit for large files. ' +
-    'On a directory path, returns a tree listing with line counts.',
+    "Read a file with LINE#HASH|content annotations for use with hashline_edit. " +
+    "Each line is tagged so you can reference it precisely in edits. " +
+    "Supports pagination via offset/limit for large files. " +
+    "On a directory path, returns a tree listing with line counts.",
   args: {
-    filePath: tool.schema.string().describe('Path to a file or directory'),
-    offset: tool.schema.number().optional().describe('Start line (1-indexed, default 1)'),
-    limit: tool.schema.number().optional().describe('Max lines to return (default 2000)'),
+    filePath: tool.schema.string().describe("Path to a file or directory"),
+    offset: tool.schema.number().optional().describe("Start line (1-indexed, default 1)"),
+    limit: tool.schema.number().optional().describe("Max lines to return (default 2000)"),
   },
   async execute(args, context) {
     const base = context.directory || context.worktree;
@@ -105,7 +105,7 @@ export const read = tool({
     const st = statSync(resolved);
     if (st.isDirectory()) {
       const listing = await dirListing(resolved);
-      return listing || '(empty directory)';
+      return listing || "(empty directory)";
     }
 
     if (isBinaryExt(resolved)) return `Error: binary file: ${args.filePath}`;
@@ -118,7 +118,7 @@ export const read = tool({
       return `Error: cannot read: ${args.filePath}`;
     }
 
-    const allLines = content.split('\n');
+    const allLines = content.split("\n");
     const total = allLines.length;
     const offset = Math.max(1, args.offset ?? 1);
     const limit = args.limit ?? 2000;
@@ -128,7 +128,7 @@ export const read = tool({
       .slice(startIdx, startIdx + limit)
       .map((l) => (l.length > 2000 ? `${l.slice(0, 2000)}...[truncated]` : l));
 
-    const annotated = formatHashLines(slice.join('\n'), offset);
+    const annotated = formatHashLines(slice.join("\n"), offset);
 
     const showEnd = startIdx + slice.length;
     return total > limit || offset > 1 ? `(lines ${offset}-${showEnd} of ${total})\n${annotated}` : annotated;
@@ -146,8 +146,8 @@ interface GrepMatch {
 
 function parseRgOutput(out: string): GrepMatch[] {
   const results: GrepMatch[] = [];
-  for (const raw of out.split('\n')) {
-    if (!raw || raw === '--') continue;
+  for (const raw of out.split("\n")) {
+    if (!raw || raw === "--") continue;
     const m = raw.match(/^(.+?):(\d+):(.*)$/);
     if (m) {
       results.push({ file: m[1], line: parseInt(m[2], 10), isMatch: true, content: m[3] });
@@ -160,7 +160,7 @@ function parseRgOutput(out: string): GrepMatch[] {
 }
 
 function formatGrepResults(matches: GrepMatch[], base: string): string {
-  if (!matches.length) return '';
+  if (!matches.length) return "";
   const byFile = new Map<string, GrepMatch[]>();
   for (const m of matches) {
     const rel = isAbsolute(m.file) ? relative(base, m.file) : m.file;
@@ -179,9 +179,9 @@ function formatGrepResults(matches: GrepMatch[], base: string): string {
         const tag = `${m.line}#${computeHash(m.line, m.content)}|${m.content}`;
         lines.push(m.isMatch ? `> ${tag}` : `  ${tag}`);
       }
-      return lines.join('\n');
+      return lines.join("\n");
     })
-    .join('\n\n');
+    .join("\n\n");
 }
 
 async function* walkFiles(dir: string, includeRe?: RegExp): AsyncGenerator<string> {
@@ -192,7 +192,7 @@ async function* walkFiles(dir: string, includeRe?: RegExp): AsyncGenerator<strin
     return;
   }
   for (const e of entries) {
-    if (e.name.startsWith('.') || e.name === 'node_modules') continue;
+    if (e.name.startsWith(".") || e.name === "node_modules") continue;
     const full = join(dir, e.name);
     if (e.isDirectory()) {
       yield* walkFiles(full, includeRe);
@@ -202,9 +202,9 @@ async function* walkFiles(dir: string, includeRe?: RegExp): AsyncGenerator<strin
 
 function globToRe(pat: string): RegExp {
   const esc = pat
-    .replace(/[.+^${}()|[\]\\]/g, '\\$&')
-    .replace(/\*/g, '.*')
-    .replace(/\?/g, '.');
+    .replace(/[.+^${}()|[\]\\]/g, "\\$&")
+    .replace(/\*/g, ".*")
+    .replace(/\?/g, ".");
   return new RegExp(`^${esc}$`);
 }
 
@@ -215,13 +215,13 @@ async function fsFallback(pattern: string, searchPath: string, include?: string,
   for await (const fp of walkFiles(searchPath, includeRe)) {
     if (isBinaryExt(fp)) continue;
     try {
-      const lines = (await Bun.file(fp).text()).split('\n');
+      const lines = (await Bun.file(fp).text()).split("\n");
       const matchIdx = lines.flatMap((l, i) => (re.test(l) ? [i] : []));
       if (!matchIdx.length) continue;
       const included = new Set(
         matchIdx.flatMap((i) =>
-          Array.from({ length: 2 * ctx + 1 }, (_, k) => i - ctx + k).filter((j) => j >= 0 && j < lines.length)
-        )
+          Array.from({ length: 2 * ctx + 1 }, (_, k) => i - ctx + k).filter((j) => j >= 0 && j < lines.length),
+        ),
       );
       const matchSet = new Set(matchIdx);
       for (const i of [...included].sort((a, b) => a - b))
@@ -233,26 +233,26 @@ async function fsFallback(pattern: string, searchPath: string, include?: string,
 
 export const grep = tool({
   description:
-    'Search files and return results with LINE#HASH|content annotations. ' +
-    'Results can be used directly as anchors for hashline_edit — no separate read needed. ' +
-    'Uses rg (ripgrep) when available, falls back to fs-based search.',
+    "Search files and return results with LINE#HASH|content annotations. " +
+    "Results can be used directly as anchors for hashline_edit — no separate read needed. " +
+    "Uses rg (ripgrep) when available, falls back to fs-based search.",
   args: {
-    pattern: tool.schema.string().describe('Regex search pattern'),
-    path: tool.schema.string().optional().describe('Directory or file to search (default: project root)'),
+    pattern: tool.schema.string().describe("Regex search pattern"),
+    path: tool.schema.string().optional().describe("Directory or file to search (default: project root)"),
     include: tool.schema.string().optional().describe("Glob file filter e.g. '*.ts'"),
-    context: tool.schema.number().optional().describe('Context lines around matches (default 2)'),
+    context: tool.schema.number().optional().describe("Context lines around matches (default 2)"),
   },
   async execute(args, context) {
     const base = context.directory || context.worktree;
     const searchPath = args.path ? (isAbsolute(args.path) ? args.path : resolve(base, args.path)) : base;
     const ctx = args.context ?? 2;
-    const pattern = args.pattern.replace(/\\\|/g, '|');
+    const pattern = args.pattern.replace(/\\\|/g, "|");
 
     // Try rg
     try {
-      const rgArgs = ['--line-number', '--with-filename', `--context=${ctx}`, '--color=never'];
-      if (args.include) rgArgs.push('--glob', args.include);
-      const proc = spawn(['rg', ...rgArgs, pattern, searchPath], { stdout: 'pipe', stderr: 'pipe' });
+      const rgArgs = ["--line-number", "--with-filename", `--context=${ctx}`, "--color=never"];
+      if (args.include) rgArgs.push("--glob", args.include);
+      const proc = spawn(["rg", ...rgArgs, pattern, searchPath], { stdout: "pipe", stderr: "pipe" });
       const out = await new Response(proc.stdout).text();
       const code = await proc.exited;
       if (code === 1 || !out.trim()) return `No matches found for: ${args.pattern}`;
