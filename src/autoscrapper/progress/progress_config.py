@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import re
 
+from ..utils.normalization import normalize_quest_name
+
 
 def _norm_key(key: str) -> str:
     normalized = str(key).strip().lower().replace("_", " ").replace("-", " ")
@@ -60,12 +62,6 @@ def normalize_hideout_levels(input_levels: dict[str, int] | None, hideout_module
     return out
 
 
-def _normalize_quest_name(value: str) -> str:
-    normalized = str(value or "").lower().replace("'", "").replace("\u2019", "")
-    normalized = re.sub(r"[^a-z0-9]+", " ", normalized)
-    return re.sub(r"\s+", " ", normalized).strip()
-
-
 def group_quests_by_trader(quests: list[dict]) -> dict[str, list[dict]]:
     quests_by_trader: dict[str, list[dict]] = {}
     for quest in quests:
@@ -92,7 +88,7 @@ def build_quest_index(
             if quest_id:
                 by_id[quest_id] = meta
             if quest_name:
-                by_name[_normalize_quest_name(quest_name)] = meta
+                by_name[normalize_quest_name(quest_name)] = meta
 
     return by_id, by_name
 
@@ -106,7 +102,7 @@ def resolve_active_quests(
 
     for entry in active_list:
         by_id_match = by_id.get(entry)
-        by_name_match = by_name.get(_normalize_quest_name(entry))
+        by_name_match = by_name.get(normalize_quest_name(entry))
         found = by_id_match or by_name_match
         if found:
             resolved.append({
