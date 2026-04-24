@@ -1,8 +1,8 @@
 ---
-
 name: add-fixture
 description: Add a new OCR regression fixture from an ocr_debug image. Use when a scan misidentified an item and you want to lock in the correct result as a test case.
 disable-model-invocation: true
+---
 
 # Add OCR Fixture
 
@@ -18,7 +18,7 @@ uv run autoscrapper scan --dry-run
 
 ## Add the fixture
 
-uv run python scripts/capture_ocr_fixture.py <path_to_image> "<Expected Item Name>"
+uv run python scripts/capture_ocr_fixture.py IMAGE_PATH EXPECTED_NAME
 
 **Example:**
 

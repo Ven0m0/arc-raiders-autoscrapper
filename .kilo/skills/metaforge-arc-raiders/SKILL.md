@@ -1,6 +1,6 @@
 ---
 name: metaforge-arc-raiders
-description: |
+description: Fetch Arc Raiders game data from the MetaForge community API - items, quests, ARCs, traders, and event timers.
 ---
 
  Fetch Arc Raiders game data from the MetaForge community API - items, quests,

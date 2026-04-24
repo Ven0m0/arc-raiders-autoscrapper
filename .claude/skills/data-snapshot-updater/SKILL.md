@@ -1,7 +1,9 @@
 ---
 name: data-snapshot-updater
 description: Use when user wants to Update Metaforge snapshots and bundled default rules
+disable-model-invocation: true
 context: fork
+agent: code
 ---
 
 # Data Snapshot Updater Skill

@@ -1,8 +1,8 @@
 ---
-
 name: ocr-debug
 description: Use when user wants to Context for debugging OCR misreads - coordinate spaces, preprocessing pipeline, cache state, and common failure patterns in inventory_vision.py
 user-invocable: false
+---
 
 ## Coordinate spaces in inventory_vision.py
 

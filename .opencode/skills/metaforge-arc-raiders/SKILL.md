@@ -1,14 +1,14 @@
 ---
-
 name: metaforge-arc-raiders
 description: |
  Fetch Arc Raiders game data from the MetaForge community API - items, quests,
  ARCs (enemies), traders, and event timers. Use when you need to: look up item
  stats/rarity/value/workbench by type or rarity; find quest requirements and
  rewards by trader; check trader buy prices; or get upcoming in-game event
- schedules. Base URL: <https://metaforge.app/api/arc-raiders>. No auth required.
+ schedules. Base URL: https://metaforge.app/api/arc-raiders. No auth required.
  Attribution to metaforge.app/arc-raiders required in public projects.
  Commercial use requires contacting MetaForge via Discord first.
+---
 
 # MetaForge Arc Raiders API
 

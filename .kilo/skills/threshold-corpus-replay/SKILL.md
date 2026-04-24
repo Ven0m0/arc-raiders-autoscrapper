@@ -26,7 +26,7 @@ uv run autoscrapper scan --dry-run
 2. Set the candidate value in a local branch.
 3. Run the replay script:
 
-uv run python scripts/replay_corpus.py --threshold <candidate_value>
+uv run python scripts/replay_corpus.py --threshold CANDIDATE_VALUE
 
 If `replay_corpus.py` does not exist yet, use the manual approach:
 

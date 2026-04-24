@@ -13,14 +13,14 @@ Use this file for startup guidance only. Keep detailed repo rules in `AGENTS.md`
 
 | Command | Purpose |
 |---------|---------|
-| `python3 -m uv sync` | Install dependencies |
-| `python3 -m uv sync --extra linux-input` | Install Linux input extra |
-| `python3 -m uv run ruff check src/ tests/ scripts/` | Lint Python |
-| `python3 -m uv run ruff format src/ tests/ scripts/` | Format Python |
-| `python3 -m uv run basedpyright src/` | Type-check Python |
-| `python3 -m uv run pytest` | Run tests |
-| `python3 -m uv run autoscrapper` | Launch TUI |
-| `python3 -m uv run autoscrapper scan --dry-run` | Safe dry-run scan |
+| `uv sync` | Install dependencies |
+| `uv sync --extra linux-input` | Install Linux input extra |
+| `uv run ruff check src/ tests/ scripts/` | Lint Python |
+| `uv run ruff format src/ tests/ scripts/` | Format Python |
+| `uv run basedpyright src/` | Type-check Python |
+| `uv run pytest` | Run tests |
+| `uv run autoscrapper` | Launch TUI |
+| `uv run autoscrapper scan --dry-run` | Safe dry-run scan |
 
 ## High-Risk Invariants
 

@@ -1,8 +1,8 @@
 ---
-
 name: threshold-corpus-replay
 description: Use when user wants to Replay OCR corpus against a candidate threshold value to validate before shipping a threshold change. Use specifically for changes to fuzzy match threshold or score_cutoff. For general OCR code changes, use /ocr-corpus-replay instead.
 disable-model-invocation: true
+---
 
 # Threshold Corpus Replay
 
@@ -26,7 +26,7 @@ uv run autoscrapper scan --dry-run
 2. Set the candidate value in a local branch.
 3. Run the replay script:
 
-uv run python scripts/replay_corpus.py --threshold <candidate_value>
+uv run python scripts/replay_corpus.py --threshold CANDIDATE_VALUE
 
 If `replay_corpus.py` does not exist yet, use the manual approach:
 

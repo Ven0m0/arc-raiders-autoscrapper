@@ -18,7 +18,7 @@ uv run autoscrapper scan --dry-run
 
 ## Add the fixture
 
-uv run python scripts/capture_ocr_fixture.py <path_to_image> "<Expected Item Name>"
+uv run python scripts/capture_ocr_fixture.py IMAGE_PATH EXPECTED_NAME
 
 **Example:**
 

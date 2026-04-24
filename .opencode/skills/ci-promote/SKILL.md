@@ -1,12 +1,13 @@
 ---
-
 name: ci-promote
 description: Use when user wants to Run full validation, push branch, and open a PR with appropriate context notes
 disable-model-invocation: true
+---
 
 Pre-push checklist - run all steps before opening PR:
 
 ```bash
+---
 
 # 1. Tests
 uv run pytest
@@ -26,7 +27,7 @@ If OCR or scanner files changed (`inventory_vision.py`, `scan_loop.py`, `tessera
 Push and open PR:
 
 git push -u origin HEAD
-gh pr create --title "<title>" --body "<body>"
+gh pr create --title 'REPLACE_WITH_TITLE' --body 'REPLACE_WITH_BODY'
 
 PR body checklist:
 

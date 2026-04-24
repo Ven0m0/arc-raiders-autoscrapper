@@ -1,8 +1,8 @@
 ---
-
 name: calibrate-vision
 description: Workflow for recalibrating the context-menu crop constants in inventory_vision.py. Use when the context menu is being cropped at the wrong position, missed entirely, or when the game UI layout changes. Constants are normalized to 1920x1080.
 disable-model-invocation: true
+---
 
 # Calibrate Vision Constants
 

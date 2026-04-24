@@ -1,8 +1,8 @@
 ---
-
 name: config-bump
 description: "Workflow for safely adding, removing, or renaming persisted config fields in config.py. Use whenever editing dataclass fields in src/autoscrapper/config.py. Covers incrementing CONFIG_VERSION, writing a migration function, and validating the round-trip."
 disable-model-invocation: true
+---
 
 # Config Bump
 
@@ -56,7 +56,7 @@ uv run pytest tests/autoscrapper/test_config.py -v
 The test suite covers round-trip serialization, version migration, and field clamping. All tests must pass.
 
 ### 5. Verify loading from old config
-If you have a real config file at `%APPDATA%\autoscrapper\config.json` (Windows), confirm it loads without errors after the bump:
+If you have a real config file, confirm it loads without errors after the bump:
 
 uv run autoscrapper scan --dry-run
 

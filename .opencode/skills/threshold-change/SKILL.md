@@ -1,8 +1,8 @@
 ---
-
 name: threshold-change
 description: Safe workflow for changing fuzzy-match threshold or OCR confidence cutoff values. Use whenever editing threshold/score_cutoff in core/item_actions.py or ocr/inventory_vision.py. Corpus replay required before shipping - see T001.
 disable-model-invocation: true
+---
 
 # Threshold Change
 

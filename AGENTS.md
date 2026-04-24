@@ -5,7 +5,7 @@ This is the canonical repository guide for contributors and coding agents workin
 ### Quick Start
 
 - **Python**: 3.13
-- **Package manager**: `uv` (prefer `python3 -m uv ...` in automation — uv may not be on PATH)
+- **Package manager**: `uv` (prefer `uv ...` in automation — uv may not be on PATH)
 - **UI**: Textual (TUI)
 - **Runtime**: Desktop automation for Arc Raiders inventory management (no game process hooking)
 
@@ -44,21 +44,21 @@ Arc Raiders AutoScrapper automates inventory management via:
 
 | Task | Command |
 |------|---------|
-| Install dependencies | `python3 -m uv sync` |
-| Install Linux input extra | `python3 -m uv sync --extra linux-input` |
-| Run TUI | `python3 -m uv run autoscrapper` |
-| Run scan | `python3 -m uv run autoscrapper scan` |
-| Run dry-run scan | `python3 -m uv run autoscrapper scan --dry-run` |
-| Lint Python | `python3 -m uv run ruff check src/ tests/ scripts/` |
-| Format Python | `python3 -m uv run ruff format src/ tests/ scripts/` |
-| Type-check Python | `python3 -m uv run basedpyright src/` |
-| Run tests | `python3 -m uv run pytest` |
-| Validate workflow | `python3 -m uv run prek run --files .github/workflows/<name>.yml` |
-| Run repo checks | `python3 -m uv run prek run --all-files` |
-| Refresh generated data | `python3 -m uv run python scripts/update_snapshot_and_defaults.py` |
-| Dry-run data refresh | `python3 -m uv run python scripts/update_snapshot_and_defaults.py --dry-run` |
+| Install dependencies | `uv sync` |
+| Install Linux input extra | `uv sync --extra linux-input` |
+| Run TUI | `uv run autoscrapper` |
+| Run scan | `uv run autoscrapper scan` |
+| Run dry-run scan | `uv run autoscrapper scan --dry-run` |
+| Lint Python | `uv run ruff check src/ tests/ scripts/` |
+| Format Python | `uv run ruff format src/ tests/ scripts/` |
+| Type-check Python | `uv run basedpyright src/` |
+| Run tests | `uv run pytest` |
+| Validate workflow | `uv run prek run --files .github/workflows/<name>.yml` |
+| Run repo checks | `uv run prek run --all-files` |
+| Refresh generated data | `uv run python scripts/update_snapshot_and_defaults.py` |
+| Dry-run data refresh | `uv run python scripts/update_snapshot_and_defaults.py --dry-run` |
 
-If `python3 -m uv run <cmd>` fails with `No module named uv`, use `uv run <cmd>` directly.
+If `uv run <cmd>` fails with `No module named uv`, use `uv run <cmd>` directly.
 
 ### Validation Expectations
 
@@ -130,10 +130,10 @@ Use these built-in skills for common workflows:
 
 Run before committing:
 ```bash
-python3 -m uv run ruff check src/ tests/ scripts/
-python3 -m uv run ruff format src/ tests/ scripts/
-python3 -m uv run basedpyright src/
-python3 -m uv run pytest
+uv run ruff check src/ tests/ scripts/
+uv run ruff format src/ tests/ scripts/
+uv run basedpyright src/
+uv run pytest
 ```
 
 ### Documentation Updates
