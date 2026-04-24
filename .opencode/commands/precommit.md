@@ -1,4 +1,6 @@
----description: Run Prek---
+---
+description: Run Prek
+---
 # Run Prek
 
 Run prek hooks on all files.
