@@ -1,4 +1,6 @@
----description: Benchmark Tesseract---
+---
+description: Benchmark Tesseract
+---
 # Benchmark Tesseract
 
 Benchmark tessdata model variants (fast vs best).
