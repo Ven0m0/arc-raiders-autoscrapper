@@ -147,6 +147,47 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 .DS_Store
+Icon?
+._*
+
+# Archives (additions)
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# Large data files
+*.parquet
+*.arrow
+*.bin
+*.pb
+*.onnx
+
+# Databases
+*.sqlite
+*.db
+*.db-wal
+*.db-shm
+
+# Lockfiles (additions)
+uv.lock
+bun.lockb
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Session/temp dirs (additions)
+.omc/state/
+.omc/sessions/
+.omc/plans/
+.omc/self-improve/state/
+.omc/self-improve/tracking/
+.omc/self-improve/plans/
+.omc/self-improve/scripts/
 
 # Python
 

@@ -51,7 +51,6 @@ import fastedit from '../tools/fastedit';
 import jsonRepair from '../tools/json_repair';
 import hashlineEdit from '../tools/hashline_edit';
 import { read as hashline_read, grep as hashline_grep } from '../tools/hashline_rg';
-import interactiveBash from '../tools/interactive_bash';
 import astGrep from '../tools/ast_grep';
 
 const CustomToolsPlugin: Plugin = async () => ({
@@ -61,7 +60,6 @@ const CustomToolsPlugin: Plugin = async () => ({
     hashline_edit: hashlineEdit,
     hashline_read,
     hashline_grep,
-    interactive_bash: interactiveBash,
     ast_grep: astGrep,
   },
 });
@@ -106,10 +104,9 @@ Repeat for each tool.
 |------|--------|-------------|
 | `fastedit` | `fastedit.ts` | Fast line-range file replacement/deletion/insertion by line numbers |
 | `json_repair` | `json_repair.ts` | Repair malformed/incomplete JSON from LLM streams; supports multiple modes |
-| `hashline_edit` | `hashline_edit.ts` | Hash-anchored, lock-free multi-file editing with LINE#HASH| references |
-| `hashline_read` | `hashline_rg.ts` | Read file with LINE#HASH| annotations |
-| `hashline_grep` | `hashline_rg.ts` | Grep-like search returning LINE#HASH| annotated matches |
-| `interactive_bash` | `interactive_bash.ts` | Run interactive tmux subcommands (TUI apps: vim, htop, etc.) |
+| `hashline_edit` | `hashline_edit.ts` | Hash-anchored, lock-free multi-file editing with LINE#HASH\| references |
+| `hashline_read` | `hashline_rg.ts` | Read file with LINE#HASH\| annotations |
+| `hashline_grep` | `hashline_rg.ts` | Grep-like search returning LINE#HASH\| annotated matches |
 | `ast_grep` | `ast_grep.ts` | AST-based code search using the `sg` CLI (pattern matching across languages) |
 
 > **Note:** `hashline_utils.ts` is a shared utility module — not a tool.
@@ -140,10 +137,6 @@ Use `json_repair` when an LLM returns incomplete or malformed JSON (common in st
 - `extract` — extract first JSON block from prose/markdown/thinking tags
 - `extract_all` — extract all JSON blocks as array
 - `strip` — strip LLM wrapper tags then repair
-
-### When to Use `interactive_bash`
-
-Use `interactive_bash` for commands that require a pseudo-TTY (e.g., running `vim`, `htop`, `top`, or any interactive tool). Do not use for regular non-interactive shell commands — use `bash` instead.
 
 ### When to Use `ast_grep`
 

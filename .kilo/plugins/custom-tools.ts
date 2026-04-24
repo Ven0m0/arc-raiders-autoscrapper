@@ -3,7 +3,6 @@ import fastedit from '../tools/fastedit';
 import jsonRepair from '../tools/json_repair';
 import hashlineEdit from '../tools/hashline_edit';
 import { read as hashline_read, grep as hashline_grep } from '../tools/hashline_rg';
-import interactiveBash from '../tools/interactive_bash';
 import astGrep from '../tools/ast_grep';
 
 const CustomToolsPlugin: Plugin = async () => ({
@@ -13,7 +12,6 @@ const CustomToolsPlugin: Plugin = async () => ({
     hashline_edit: hashlineEdit,
     hashline_read,
     hashline_grep,
-    interactive_bash: interactiveBash,
     ast_grep: astGrep,
   },
 });

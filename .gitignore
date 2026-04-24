@@ -155,6 +155,9 @@ cython_debug/
 # Ruff stuff:
 .ruff_cache/
 
+# Codemogger index
+.codemogger/index.db-wal
+
 # PyPI configuration file
 .pypirc
 
