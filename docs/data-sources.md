@@ -39,8 +39,6 @@ Pages are fetched concurrently (up to 10 workers). MetaForge can change or remov
 endpoints without warning; cache results locally and attribute MetaForge when
 republishing derived data.
 
-Optional Supabase enrichment adds `recipe` and `recyclesInto` fields when
-`METAFORGE_SUPABASE_ANON_KEY` is set.
 
 ## arctracker.io
 
