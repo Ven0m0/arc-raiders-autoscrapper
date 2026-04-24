@@ -30,7 +30,7 @@
   "prHourlyLimit": 0,
   "rangeStrategy": "bump",
   "constraints": {
-    "python": ">=3.13 <3.14"
+    "python": ">=3.13, !=3.14.*"
   },
   "pep621": {
     "enabled": true
@@ -47,21 +47,24 @@
   "pipenv": {
     "enabled": false
   },
+  "npm": {
+    "fileMatch": [".kilo/package.json"]
+  },
   "postUpdateOptions": ["uvLockUpdate"],
   "packageRules": [
     {
-      "description": "Pin and constrain Python Docker image to 3.13",
+      "description": "Allow Python Docker images >=3.13 but exclude 3.14.x series",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["python"],
       "pinDigests": false,
-      "allowedVersions": "3.13.*"
+      "allowedVersions": ">=3.13, !=3.14.*"
     },
     {
-      "description": "Keep requires-python within supported Python 3.13 range",
+      "description": "Allow any Python version >=3.13 but exclude 3.14.x series",
       "matchManagers": ["pep621"],
       "matchPackageNames": ["python"],
       "matchDepTypes": ["requires-python"],
-      "allowedVersions": ">=3.13 <3.14"
+      "allowedVersions": ">=3.13, !=3.14.*"
     },
     {
       "description": "Disable Docker digest pinning",

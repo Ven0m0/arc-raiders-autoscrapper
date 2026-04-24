@@ -6,7 +6,7 @@
     "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"
   ],
   "skills": {
-    "paths": [".kilo/skills", ".opencode/skill", ".claude/skills", ".github/skills"]
+    "paths": [".kilo/skills", ".opencode/skills", ".claude/skills", ".github/skills"]
   },
   "permission": {
     "*": "allow",
@@ -21,7 +21,6 @@
   },
   "disabled_providers": ["openai"],
   "plugin": [
-    "openslimedit@1.0.4",
     "opencode-ignore@1.1.0",
     "@gotgenes/opencode-agent-identity@3.0.1",
     "opencode-websearch@0.5.0",
@@ -29,7 +28,13 @@
     "github:joshuadavidthomas/opencode-agent-memory",
     "opencode-agent-skills",
     "github:kdcokenny/opencode-background-agents",
-    "github:spoons-and-mirrors/subtask2"
+    "github:spoons-and-mirrors/subtask2",
+    "./plugins/context-shield",
+    "./plugins/gitingest",
+    "./plugins/codemogger",
+    "./plugins/openslimedit",
+    "./plugins/trim-tool-name",
+    "./plugins/custom-tools"
   ],
   "formatter": {
     "biome": {

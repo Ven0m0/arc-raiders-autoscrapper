@@ -175,14 +175,15 @@ const CodemoggerPlugin: Plugin = async ({ worktree }) => {
     },
 
     // Re-index changed files when a file is edited in the session
-    'file.edited': async ({ path: filePath }) => {
-      if (!filePath) return;
-      // Fire-and-forget incremental re-index of the worktree
-      getIndex(root)
-        .then((idx) => idx.index(root))
-        .catch(() => {});
-    },
+     'file.edited': async ({ path: filePath }) => {
+       if (!filePath) return;
+       // Fire-and-forget incremental re-index of the worktree
+       getIndex(root)
+         .then((idx) => idx.index(root))
+         .catch(() => {});
+     },
+    };
   };
-};
 
 export default CodemoggerPlugin;
+

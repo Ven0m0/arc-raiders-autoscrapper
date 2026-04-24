@@ -5,3 +5,5 @@ export const TrimToolNamePlugin = async () => ({
     }
   },
 });
+
+export default TrimToolNamePlugin;
