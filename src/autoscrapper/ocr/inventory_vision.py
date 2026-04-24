@@ -44,6 +44,10 @@ INVENTORY_COUNT_RECT_NORM = (0.0734, 0.1583, 0.0760, 0.0231)
 _OCR_DEBUG_DIR: Path | None = None
 _last_roi_hash: bytes | None = None
 _last_ocr_result: tuple[str, str] | None = None
+
+# Preprocessing cache: (roi_hash, params_hash) -> processed_image
+_preprocess_cache: dict[tuple[bytes, bytes], np.ndarray] = {}
+_PREPROCESS_CACHE_MAX_SIZE = 50
 DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75
 # Hand-picked initial value; no live corpus exists yet.
 # To calibrate: capture SKIP_UNLISTED samples from a live run, label them with
@@ -93,14 +97,16 @@ _ROMAN_NUMERAL_FIXES: tuple[tuple[re.Pattern[str], str], ...] = (
 def reset_ocr_caches() -> None:
     """Reset module-level OCR caches. Call at the start of each scan session.
 
-    Resets memoization caches (_last_roi_hash, _last_ocr_result, and rules_store._ITEM_NAMES).
+    Resets memoization caches (_last_roi_hash, _last_ocr_result, rules_store._ITEM_NAMES,
+    and _preprocess_cache).
     Does NOT reset _OCR_DEBUG_DIR — that is session-scoped configuration set by
     enable_ocr_debug(), not a cache, and must persist across scans within a
     process lifetime so debug output is not silently dropped mid-session.
     """
-    global _last_roi_hash, _last_ocr_result
+    global _last_roi_hash, _last_ocr_result, _preprocess_cache
     _last_roi_hash = None
     _last_ocr_result = None
+    _preprocess_cache.clear()
     rules_store.reset_item_names_cache()
 
 
@@ -957,8 +963,33 @@ def preprocess_for_ocr(
     robust_polarity: bool = True,
     close_gaps: bool = True,
 ) -> np.ndarray:
+    """Preprocess image for OCR with optional result caching.
+
+    Caches results based on ROI content hash and preprocessing parameters
+    to avoid redundant processing during retry paths.
+    """
+    global _preprocess_cache
+
     if roi_bgr.size == 0:
         raise ValueError(f"preprocess_for_ocr: empty input array (shape={roi_bgr.shape})")
+
+    # Compute cache key from ROI hash and parameters
+    roi_hash = _hash_roi(roi_bgr)
+    params_bytes = f"{restrict_otsu_to_left}:{upscale}:{apply_clahe}:{robust_polarity}:{close_gaps}".encode()
+    cache_key = (roi_hash, params_bytes)
+
+    # Check cache
+    cached = _preprocess_cache.get(cache_key)
+    if cached is not None:
+        return cached.copy()  # Return a copy to prevent mutation
+
+    # Limit cache size to prevent unbounded growth
+    if len(_preprocess_cache) >= _PREPROCESS_CACHE_MAX_SIZE:
+        # Clear oldest half of cache (simple LRU approximation)
+        keys_to_remove = list(_preprocess_cache.keys())[: _PREPROCESS_CACHE_MAX_SIZE // 2]
+        for key in keys_to_remove:
+            del _preprocess_cache[key]
+
     gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
     if apply_clahe:
         # Normalize local luminance so Otsu stays stable on rarity-colored
@@ -1019,6 +1050,9 @@ def preprocess_for_ocr(
         # so 1x2 px ≈ 0.5 px in source coords.
         kernel = np.ones((1, 2), np.uint8)
         binary = cv2.morphologyEx(binary, cv2.MORPH_CLOSE, kernel)
+
+    # Store in cache (store a copy to prevent external mutation)
+    _preprocess_cache[cache_key] = binary.copy()
     return binary
 
 
