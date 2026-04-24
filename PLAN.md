@@ -22,7 +22,7 @@ updated: 2026-04-24
 |------|------|-------|
 | 1 | Data pipeline & integrations | T014, T034, T003, T001, T002 |
 | 2 | OCR accuracy improvements | T027, T012, T013, T028, T029, T030, T031, T032 |
-| 3 | Code quality & architecture | T035, T036, T037, T038 |
+3 | Code quality & architecture | T036, T037, T038
 | 4 | Test coverage | T039, T040, T041 |
 | 5 | Feature completion | T017, T019, T020, T022 |
 | 6 | Performance & optimization | T042, T043, T044 |
@@ -34,10 +34,10 @@ updated: 2026-04-24
 |------|------|-------------|
 | 1 | T034 | Arc-Lens scraping integration - high-value data pipeline |
 | 2 | T014 | Security fix removing Supabase dependency |
-| 3 | T035 | Consolidate duplicated normalization functions |
-| 4 | T027 | Feed item names to Tesseract as user_words |
-| 5 | T039 | Add tests for decision_engine.py - core business logic |
-| 6 | T012 | Roman numeral OCR alias correction |
+| 3 | T027 | Feed item names to Tesseract as user_words |
+| 4 | T039 | Add tests for decision_engine.py - core business logic |
+| 5 | T012 | Roman numeral OCR alias correction |
+
 
 ---
 
