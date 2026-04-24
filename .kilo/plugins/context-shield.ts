@@ -1,7 +1,7 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-import type { Plugin } from '@opencode-ai/plugin';
-import { tool } from '@opencode-ai/plugin';
+import * as fs from "node:fs";
+import * as path from "node:path";
+import type { Plugin } from "@opencode-ai/plugin";
+import { tool } from "@opencode-ai/plugin";
 
 interface ShieldConfig {
   enabled: boolean;
@@ -22,8 +22,8 @@ interface StatsState {
   tools: Record<string, ToolStats>;
 }
 
-const STATE_DIR = '.opencode/state';
-const CONFIG_FILE = 'context-shield.json';
+const STATE_DIR = ".kilo/state";
+const CONFIG_FILE = "context-shield.json";
 
 const DEFAULT_CONFIG: ShieldConfig = {
   enabled: true,
@@ -32,9 +32,9 @@ const DEFAULT_CONFIG: ShieldConfig = {
   compactTargetBytes: 4 * 1024,
 };
 
-const SKIP_COMPACTION_FOR = new Set(['read', 'edit', 'write', 'apply_patch', 'multiedit', 'lsp']);
+const SKIP_COMPACTION_FOR = new Set(["read", "edit", "write", "apply_patch", "multiedit", "lsp"]);
 
-const TASK_ROUTING_TAG = 'CONTEXT-SHIELD SUBAGENT ROUTING';
+const TASK_ROUTING_TAG = "CONTEXT-SHIELD SUBAGENT ROUTING";
 const TASK_ROUTING_BLOCK = `<context-shield-routing>
 ${TASK_ROUTING_TAG}
 - Use batched/parallel tool calls when work is independent.
@@ -70,7 +70,7 @@ function readConfig(directory: string): ShieldConfig {
   }
 
   try {
-    const parsed = JSON.parse(fs.readFileSync(configPath, 'utf-8')) as Partial<ShieldConfig>;
+    const parsed = JSON.parse(fs.readFileSync(configPath, "utf-8")) as Partial<ShieldConfig>;
     return {
       enabled: parsed.enabled ?? DEFAULT_CONFIG.enabled,
       readLimit: clamp(parsed.readLimit ?? DEFAULT_CONFIG.readLimit, 50, 2000),
@@ -88,7 +88,7 @@ function writeConfig(directory: string, config: ShieldConfig): void {
 }
 
 function toBytes(value: string): number {
-  return Buffer.byteLength(value, 'utf-8');
+  return Buffer.byteLength(value, "utf-8");
 }
 
 function formatBytes(bytes: number): string {
@@ -99,7 +99,7 @@ function formatBytes(bytes: number): string {
 function truncateToBytes(text: string, maxBytes: number): string {
   if (toBytes(text) <= maxBytes) return text;
 
-  const suffix = '\n...[context-shield truncated summary]';
+  const suffix = "\n...[context-shield truncated summary]";
   let low = 0;
   let high = text.length;
 
@@ -160,27 +160,27 @@ function compactOutput(input: { tool: string; output: string; config: ShieldConf
     };
   }
 
-  const lines = input.output.split('\n');
+  const lines = input.output.split("\n");
   const headLines = lines.slice(0, 24);
   const tailLines = lines.slice(Math.max(lines.length - 24, 0));
   const omitted = Math.max(lines.length - headLines.length - tailLines.length, 0);
   const signals = collectSignals(lines);
 
   const out: string[] = [];
-  out.push('[context-shield] Compacted large tool output to reduce context usage.');
+  out.push("[context-shield] Compacted large tool output to reduce context usage.");
   out.push(`tool: ${input.tool}`);
   out.push(`original_size: ${formatBytes(originalBytes)} (${lines.length} lines)`);
 
   if (signals.length > 0) {
-    out.push('signals:');
+    out.push("signals:");
     for (const signal of signals) {
       out.push(`- ${signal}`);
     }
   }
 
   if (headLines.length > 0) {
-    out.push('head:');
-    out.push(headLines.join('\n'));
+    out.push("head:");
+    out.push(headLines.join("\n"));
   }
 
   if (omitted > 0) {
@@ -188,13 +188,13 @@ function compactOutput(input: { tool: string; output: string; config: ShieldConf
   }
 
   if (tailLines.length > 0) {
-    out.push('tail:');
-    out.push(tailLines.join('\n'));
+    out.push("tail:");
+    out.push(tailLines.join("\n"));
   }
 
-  out.push('tip: narrow the next tool call (path, query, range, or filters) to avoid noisy output.');
+  out.push("tip: narrow the next tool call (path, query, range, or filters) to avoid noisy output.");
 
-  const compacted = truncateToBytes(out.join('\n'), input.config.compactTargetBytes);
+  const compacted = truncateToBytes(out.join("\n"), input.config.compactTargetBytes);
   const emittedBytes = toBytes(compacted);
   if (emittedBytes >= originalBytes) {
     return {
@@ -244,7 +244,7 @@ function formatStats(): string {
       acc.emittedBytes += item.emittedBytes;
       return acc;
     },
-    { calls: 0, compacted: 0, originalBytes: 0, emittedBytes: 0 }
+    { calls: 0, compacted: 0, originalBytes: 0, emittedBytes: 0 },
   );
 
   const savedBytes = Math.max(total.originalBytes - total.emittedBytes, 0);
@@ -252,8 +252,8 @@ function formatStats(): string {
   const uptimeMinutes = ((Date.now() - stats.startedAt) / 60000).toFixed(1);
 
   const lines: string[] = [
-    '## Context shield stats',
-    '',
+    "## Context shield stats",
+    "",
     `- Uptime: ${uptimeMinutes} min`,
     `- Calls observed: ${total.calls}`,
     `- Compacted calls: ${total.compacted}`,
@@ -263,59 +263,59 @@ function formatStats(): string {
   ];
 
   if (entries.length > 0) {
-    lines.push('', '| Tool | Calls | Compacted | Original | Emitted |', '|---|---:|---:|---:|---:|');
+    lines.push("", "| Tool | Calls | Compacted | Original | Emitted |", "|---|---:|---:|---:|---:|");
     for (const [toolName, item] of entries) {
       lines.push(
-        `| ${toolName} | ${item.calls} | ${item.compacted} | ${formatBytes(item.originalBytes)} | ${formatBytes(item.emittedBytes)} |`
+        `| ${toolName} | ${item.calls} | ${item.compacted} | ${formatBytes(item.originalBytes)} | ${formatBytes(item.emittedBytes)} |`,
       );
     }
   }
 
-  return lines.join('\n');
+  return lines.join("\n");
 }
 
 function isToolOutputShape(output: unknown): output is { output: string; metadata?: unknown } {
   return (
     !!output &&
-    typeof output === 'object' &&
-    'output' in output &&
-    typeof (output as { output: unknown }).output === 'string'
+    typeof output === "object" &&
+    "output" in output &&
+    typeof (output as { output: unknown }).output === "string"
   );
 }
 
 function isMcpResultShape(output: unknown): output is { content: Array<Record<string, unknown>>; metadata?: unknown } {
   return (
     !!output &&
-    typeof output === 'object' &&
-    'content' in output &&
+    typeof output === "object" &&
+    "content" in output &&
     Array.isArray((output as { content: unknown }).content)
   );
 }
 
 export const OpenCodeContextShieldPlugin: Plugin = async ({ directory }) => {
   return {
-    'tool.execute.before': async (input, output) => {
+    "tool.execute.before": async (input, output) => {
       const config = readConfig(directory);
       if (!config.enabled) return;
 
       const args = output.args as Record<string, unknown>;
 
-      if (input.tool === 'read') {
-        const currentLimit = typeof args['limit'] === 'number' ? args['limit'] : undefined;
+      if (input.tool === "read") {
+        const currentLimit = typeof args["limit"] === "number" ? args["limit"] : undefined;
         if (currentLimit === undefined || currentLimit > config.readLimit) {
-          args['limit'] = config.readLimit;
+          args["limit"] = config.readLimit;
         }
       }
 
-      if (input.tool === 'task') {
-        const currentPrompt = typeof args['prompt'] === 'string' ? args['prompt'] : '';
+      if (input.tool === "task") {
+        const currentPrompt = typeof args["prompt"] === "string" ? args["prompt"] : "";
         if (currentPrompt && !currentPrompt.includes(TASK_ROUTING_TAG)) {
-          args['prompt'] = `${currentPrompt}\n\n${TASK_ROUTING_BLOCK}`;
+          args["prompt"] = `${currentPrompt}\n\n${TASK_ROUTING_BLOCK}`;
         }
       }
     },
 
-    'tool.execute.after': async (input, output) => {
+    "tool.execute.after": async (input, output) => {
       const config = readConfig(directory);
       if (!config.enabled) return;
       if (SKIP_COMPACTION_FOR.has(input.tool)) return;
@@ -331,7 +331,7 @@ export const OpenCodeContextShieldPlugin: Plugin = async ({ directory }) => {
 
         payload.output = compacted.output;
         const metadata =
-          payload.metadata && typeof payload.metadata === 'object' && !Array.isArray(payload.metadata)
+          payload.metadata && typeof payload.metadata === "object" && !Array.isArray(payload.metadata)
             ? (payload.metadata as Record<string, unknown>)
             : {};
 
@@ -350,12 +350,12 @@ export const OpenCodeContextShieldPlugin: Plugin = async ({ directory }) => {
 
       if (isMcpResultShape(payload)) {
         const textParts = payload.content
-          .filter((item: Record<string, unknown>) => item['type'] === 'text' && typeof item['text'] === 'string')
-          .map((item: Record<string, unknown>) => item['text'] as string);
+          .filter((item: Record<string, unknown>) => item["type"] === "text" && typeof item["text"] === "string")
+          .map((item: Record<string, unknown>) => item["text"] as string);
 
         if (textParts.length === 0) return;
 
-        const merged = textParts.join('\n\n');
+        const merged = textParts.join("\n\n");
         const compacted = compactOutput({
           tool: input.tool,
           output: merged,
@@ -363,12 +363,12 @@ export const OpenCodeContextShieldPlugin: Plugin = async ({ directory }) => {
         });
 
         if (compacted.compacted) {
-          const nonText = payload.content.filter((item: Record<string, unknown>) => item['type'] !== 'text');
-          payload.content = [{ type: 'text', text: compacted.output }, ...nonText];
+          const nonText = payload.content.filter((item: Record<string, unknown>) => item["type"] !== "text");
+          payload.content = [{ type: "text", text: compacted.output }, ...nonText];
         }
 
         const metadata =
-          payload.metadata && typeof payload.metadata === 'object' && !Array.isArray(payload.metadata)
+          payload.metadata && typeof payload.metadata === "object" && !Array.isArray(payload.metadata)
             ? (payload.metadata as Record<string, unknown>)
             : {};
 
@@ -387,23 +387,15 @@ export const OpenCodeContextShieldPlugin: Plugin = async ({ directory }) => {
 
     tool: {
       cshield_toggle: tool({
-        description: 'Toggle context shield output compaction on/off. Returns new state.',
+        description: "Toggle context shield output compaction on/off. Returns new state.",
         args: {
-          enabled: tool.schema.boolean().optional().describe('Set enabled state (toggles if omitted)'),
+          enabled: tool.schema.boolean().optional().describe("Set enabled state (toggles if omitted)"),
         },
         async execute(args: { enabled?: boolean }) {
           const config = readConfig(directory);
           const enabled = args.enabled ?? !config.enabled;
           writeConfig(directory, { ...config, enabled });
-          return `[context-shield] ${enabled ? 'enabled' : 'disabled'}`;
-        },
-      }),
-
-      cshield_stats: tool({
-        description: 'Show context shield savings stats for this opencode process.',
-        args: {},
-        async execute() {
-          return formatStats();
+          return `[context-shield] ${enabled ? "enabled" : "disabled"}`;
         },
       }),
     },
