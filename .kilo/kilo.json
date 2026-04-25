@@ -20,6 +20,8 @@
   "plugin": [
     "opencode-ignore@1.1.0",
     "opencode-agent-skills@0.6.5",
+    "@gotgenes/opencode-agent-identity@3.0.1",
+    "opencode-websearch@0.5.0",
     "github:kdcokenny/opencode-background-agents",
     "github:spoons-and-mirrors/subtask2",
     "./plugins/context-shield",
