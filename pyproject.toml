@@ -24,7 +24,8 @@ dependencies = [
   "tesserocr==2.10.0; sys_platform == 'linux'",
   "tesserocr @ https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp313-cp313-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.13' and platform_machine == 'AMD64'",
   "pynput>=1.8.1; sys_platform == 'linux'",
-  "requests>=2.33.1",
+  "httpx>=0.28.0",
+  "uvloop>=0.21.0",
   "beautifulsoup4>=4.14.3",
 ]
 
@@ -40,7 +41,6 @@ dev = [
     "tombi>=0.9.22",
     "ty>=0.0.32",
     "types-pynput>=1.8.1.20260408",
-    "types-requests>=2.33.0.20260408",
     "vulture>=2.16",
 ]
 
@@ -58,14 +58,13 @@ dev = [
     "tombi>=0.9.22",
     "ty>=0.0.32",
     "types-pynput>=1.8.1.20260408",
-    "types-requests>=2.33.0.20260408",
     "vulture>=2.16",
 ]
 linux-input = [
     "pynput; sys_platform == 'linux'",
 ]
 scraper = [
-    "requests>=2.33.1",
+    "httpx>=0.28.0",
     "beautifulsoup4>=4.14.3",
 ]
 rapidocr = [

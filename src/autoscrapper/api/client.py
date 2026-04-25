@@ -9,6 +9,7 @@ from types import MappingProxyType
 import time
 from typing import TYPE_CHECKING, Any
 
+import httpx
 import orjson
 
 from .models import (
@@ -27,15 +28,6 @@ from .models import (
 if TYPE_CHECKING:
     from ..config import ApiSettings
     from ..core.item_actions import ActionMap
-
-# requests is in optional-dependencies "scraper"
-try:
-    import requests
-
-    HAS_REQUESTS = True
-except ImportError:
-    requests = None  # type: ignore
-    HAS_REQUESTS = False
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "progress" / "data"
 
@@ -85,15 +77,13 @@ class ArcTrackerClient:
         self.user_key = user_key
         self.base_url = base_url.rstrip("/")
         self.rate_limit = RateLimitState()
-        self._session: Any = None
-        self._item_id_to_name, self._item_name_to_id = _get_cached_item_mappings()
-
-        if requests is not None:
-            self._session = requests.Session()
-            self._session.headers.update({
+        self._session = httpx.Client(
+            headers={
                 "Accept": "application/json",
                 "User-Agent": "ArcRaiders-AutoScrapper/0.2.0",
-            })
+            }
+        )
+        self._item_id_to_name, self._item_name_to_id = _get_cached_item_mappings()
 
     def _wait_for_rate_limit(self) -> None:
         """Pre-emptively throttle requests to respect rate limits."""
@@ -141,10 +131,6 @@ class ArcTrackerClient:
         **kwargs: Any,
     ) -> dict[str, Any] | None:
         """Make an HTTP request with rate limiting and error handling."""
-        if not HAS_REQUESTS:
-            _log.warning("api: requests library not available")
-            return None
-
         if require_auth and (not self.app_key or not self.user_key):
             _log.debug("api: Auth required but keys not configured")
             return None
@@ -178,16 +164,12 @@ class ArcTrackerClient:
 
             response.raise_for_status()
             return response.json()
+        except httpx.TimeoutException:
+            _log.warning("api: Request timeout to %s", endpoint)
+        except httpx.RequestError as exc:
+            _log.warning("api: Request failed: %s", exc)
         except Exception as exc:
-            if HAS_REQUESTS and requests is not None:
-                if isinstance(exc, requests.Timeout):
-                    _log.warning("api: Request timeout to %s", endpoint)
-                elif isinstance(exc, requests.RequestException):
-                    _log.warning("api: Request failed: %s", exc)
-                else:
-                    _log.warning("api: Unexpected error: %s", exc)
-            else:
-                _log.warning("api: Unexpected error: %s", exc)
+            _log.warning("api: Unexpected error: %s", exc)
 
         return None
 
@@ -454,11 +436,11 @@ class ArcTrackerClient:
 
     def is_configured(self) -> bool:
         """Check if API client has necessary configuration."""
-        return HAS_REQUESTS and bool(self.app_key and self.user_key)
+        return bool(self.app_key and self.user_key)
 
     def is_public_available(self) -> bool:
         """Check if public API endpoints are reachable."""
-        return HAS_REQUESTS
+        return True
 
 
 class APIOrchestrator:

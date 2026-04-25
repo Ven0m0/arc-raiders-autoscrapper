@@ -3,7 +3,6 @@
 from .client import (
     APIOrchestrator,
     ArcTrackerClient,
-    HAS_REQUESTS,
     create_client_from_config,
 )
 from .datasource import (
@@ -36,7 +35,6 @@ __all__ = [
     "APIDataSource",
     "ArcTrackerClient",
     "Blueprint",
-    "HAS_REQUESTS",
     "HideoutModule",
     "ItemDecision",
     "ProjectPhase",

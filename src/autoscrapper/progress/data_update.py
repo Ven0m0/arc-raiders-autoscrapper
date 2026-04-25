@@ -12,7 +12,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 import orjson
-import requests as _requests
+import httpx
 from bs4 import BeautifulSoup as _BeautifulSoup
 from .data_loader import DATA_DIR
 from .quest_overrides import apply_quest_overrides
@@ -601,12 +601,11 @@ def _scrape_wiki_uses() -> dict[str, str]:
     if not _SCRAPER_AVAILABLE:
         return {}
 
-    assert _requests is not None and _BeautifulSoup is not None
     _log.info("Fetching wiki loot page from %s", WIKI_LOOT_URL)
     try:
-        resp = _requests.get(
+        resp = httpx.get(
             WIKI_LOOT_URL,
-            timeout=30,
+            timeout=30.0,
             headers={"User-Agent": WIKI_USER_AGENT},
         )
         resp.raise_for_status()
