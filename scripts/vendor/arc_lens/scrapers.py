@@ -11,7 +11,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Any
 
-import requests
+import httpx
 from bs4 import BeautifulSoup
 
 RATE_LIMIT_MS = 500
@@ -129,8 +129,8 @@ class MapMarker:
 class BaseScraper(ABC):
     """Base class for all scrapers."""
 
-    def __init__(self, session: requests.Session | None = None, delay_ms: int = RATE_LIMIT_MS) -> None:
-        self.session = session or requests.Session()
+    def __init__(self, client: httpx.Client | None = None, delay_ms: int = RATE_LIMIT_MS) -> None:
+        self._client = client if client else httpx.Client()
         self.delay_ms = delay_ms
         self._last_request_time: float = 0.0
 
@@ -141,10 +141,10 @@ class BaseScraper(ABC):
             time.sleep((self.delay_ms - elapsed) / 1000)
         self._last_request_time = time.perf_counter()
 
-    def _get(self, url: str, **kwargs: Any) -> requests.Response:
+    def _get(self, url: str, **kwargs: Any) -> httpx.Response:
         """Make a GET request with rate limiting and error handling."""
         self._rate_limit()
-        response = self.session.get(url, timeout=30, **kwargs)
+        response = self._client.get(url, timeout=30, **kwargs)
         response.raise_for_status()
         return response
 
