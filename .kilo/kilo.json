@@ -89,8 +89,7 @@
     },
     "octocode": {
       "type": "local",
-      "command": "npx",
-      "args": ["-y", "octocode-mcp@latest"],
+      "command": ["npx", "-y", "octocode-mcp@latest"],
       "enabled": true
     },
     "playwright": {
@@ -100,8 +99,7 @@
     },
     "gitnexus": {
       "type": "local",
-      "command": "npx",
-      "args": ["-y", "gitnexus@latest", "mcp"],
+      "command": ["npx", "-y", "gitnexus@latest", "mcp"],
       "enabled": true
     }
   },
