@@ -403,13 +403,11 @@ class AutoScrapperApp(App[None]):
         self.pop_screen()
 
     def _scan_menu(self) -> MenuScreen:
-        from ..api import HAS_REQUESTS, create_client_from_config
+        from ..api import create_client_from_config
 
         # Check if API is configured
-        api_configured = False
-        if HAS_REQUESTS:
-            client = create_client_from_config()
-            api_configured = client.is_configured()
+        client = create_client_from_config()
+        api_configured = client.is_configured()
 
         items = [
             MenuItem(
@@ -439,12 +437,10 @@ class AutoScrapperApp(App[None]):
         return MenuScreen("Scan", items, default_key="1")
 
     def _progress_menu(self) -> MenuScreen:
-        from ..api import HAS_REQUESTS, create_client_from_config
+        from ..api import create_client_from_config
 
-        api_configured = False
-        if HAS_REQUESTS:
-            client = create_client_from_config()
-            api_configured = client.is_configured()
+        client = create_client_from_config()
+        api_configured = client.is_configured()
 
         items = [
             MenuItem(
