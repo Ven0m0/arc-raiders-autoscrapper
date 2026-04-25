@@ -19,8 +19,6 @@
   "disabled_providers": ["openai", "google"],
   "plugin": [
     "opencode-ignore@1.1.0",
-    "@gotgenes/opencode-agent-identity@3.0.1",
-    "opencode-kcp-plugin@latest",
     "opencode-agent-skills@0.6.5",
     "github:kdcokenny/opencode-background-agents",
     "github:spoons-and-mirrors/subtask2",
