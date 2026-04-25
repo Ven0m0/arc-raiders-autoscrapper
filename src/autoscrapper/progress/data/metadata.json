@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-24T21:56:22.396050Z",
+  "lastUpdated": "2026-04-25T07:08:17.240932Z",
   "source": "https://metaforge.app/arc-raiders/api",
   "version": "autoscrapper-data-1",
   "itemCount": 573,
@@ -23,6 +23,30 @@
         "apiBase": "https://arctracker.io",
         "supplementalCount": 0,
         "error": null
+      },
+      "arclensEnrichment": {
+        "supplementalCount": 0,
+        "error": "Arc-Lens scrapers not available"
+      },
+      "fieldLevelMerge": {
+        "enabled": true,
+        "entriesEnriched": 362,
+        "sources": [
+          "raidtheory-fallback",
+          "arctracker",
+          "arclens"
+        ],
+        "fields": [
+          "type",
+          "rarity",
+          "value",
+          "weightKg",
+          "stackSize",
+          "craftBench",
+          "recipe",
+          "recyclesInto",
+          "wikiUses"
+        ]
       },
       "wikiEnrichment": {
         "url": "https://arcraiders.wiki/wiki/Loot",
@@ -52,6 +76,28 @@
         "apiBase": "https://arctracker.io",
         "supplementalCount": 0,
         "error": null
+      },
+      "arclensEnrichment": {
+        "supplementalCount": 0,
+        "error": "Arc-Lens scrapers not available"
+      },
+      "fieldLevelMerge": {
+        "enabled": true,
+        "entriesEnriched": 0,
+        "sources": [
+          "raidtheory-fallback",
+          "arctracker",
+          "arclens"
+        ],
+        "fields": [
+          "objectives",
+          "requirements",
+          "trader",
+          "xp",
+          "sortOrder",
+          "rewardItemIds",
+          "rewards"
+        ]
       }
     },
     "hideout": {
@@ -70,6 +116,10 @@
         "count": 0,
         "error": null,
         "file": "static/arctracker_projects.json"
+      },
+      "arclens": {
+        "count": 0,
+        "error": "Arc-Lens scrapers not available"
       }
     }
   },

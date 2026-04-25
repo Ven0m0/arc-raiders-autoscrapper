@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-24T21:56:22.409341Z",
+    "generatedAt": "2026-04-25T07:08:17.250891Z",
     "data": {
-      "lastUpdated": "2026-04-24T21:56:22.396050Z",
+      "lastUpdated": "2026-04-25T07:08:17.240932Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
       "itemCount": 573,
@@ -26,6 +26,30 @@
             "apiBase": "https://arctracker.io",
             "supplementalCount": 0,
             "error": null
+          },
+          "arclensEnrichment": {
+            "supplementalCount": 0,
+            "error": "Arc-Lens scrapers not available"
+          },
+          "fieldLevelMerge": {
+            "enabled": true,
+            "entriesEnriched": 362,
+            "sources": [
+              "raidtheory-fallback",
+              "arctracker",
+              "arclens"
+            ],
+            "fields": [
+              "type",
+              "rarity",
+              "value",
+              "weightKg",
+              "stackSize",
+              "craftBench",
+              "recipe",
+              "recyclesInto",
+              "wikiUses"
+            ]
           },
           "wikiEnrichment": {
             "url": "https://arcraiders.wiki/wiki/Loot",
@@ -55,6 +79,28 @@
             "apiBase": "https://arctracker.io",
             "supplementalCount": 0,
             "error": null
+          },
+          "arclensEnrichment": {
+            "supplementalCount": 0,
+            "error": "Arc-Lens scrapers not available"
+          },
+          "fieldLevelMerge": {
+            "enabled": true,
+            "entriesEnriched": 0,
+            "sources": [
+              "raidtheory-fallback",
+              "arctracker",
+              "arclens"
+            ],
+            "fields": [
+              "objectives",
+              "requirements",
+              "trader",
+              "xp",
+              "sortOrder",
+              "rewardItemIds",
+              "rewards"
+            ]
           }
         },
         "hideout": {
@@ -73,6 +119,10 @@
             "count": 0,
             "error": null,
             "file": "static/arctracker_projects.json"
+          },
+          "arclens": {
+            "count": 0,
+            "error": "Arc-Lens scrapers not available"
           }
         }
       },
@@ -109,8 +159,8 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 2 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -166,11 +216,10 @@
       "id": "alarm-clock",
       "name": "Alarm Clock",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 6x Plastic Parts, 1x Processor",
+        "Recycle value: Components (860 coins) worth less than Item (1000 coins)"
       ]
     },
     {
@@ -186,7 +235,7 @@
     {
       "id": "ancient-fort-security-code",
       "name": "Ancient Fort Security Code",
-      "value": 0,
+      "value": 100,
       "action": "keep",
       "analysis": [
         "Key - opens locked areas and containers",
@@ -399,11 +448,10 @@
       "id": "arc-coolant",
       "name": "ARC Coolant",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 16x Chemicals",
+        "Recycle value: Components (800 coins) worth less than Item (1000 coins)"
       ]
     },
     {
@@ -430,11 +478,10 @@
       "id": "arc-performance-steel",
       "name": "ARC Performance Steel",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 12x Metal Parts",
+        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
       ]
     },
     {
@@ -450,22 +497,20 @@
       "id": "arc-synthetic-resin",
       "name": "ARC Synthetic Resin",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 14x Plastic Parts",
+        "Recycle value: Components (840 coins) worth less than Item (1000 coins)"
       ]
     },
     {
       "id": "arc-thermo-lining",
       "name": "ARC Thermo Lining",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 16x Fabric",
+        "Recycle value: Components (800 coins) worth less than Item (1000 coins)"
       ]
     },
     {
@@ -520,11 +565,10 @@
       "id": "assessor-matrix",
       "name": "Assessor Matrix",
       "value": 5000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 3x Advanced ARC Powercell, 1x Advanced Mechanical Components",
+        "Recycle value: Components (3670 coins) worth less than Item (5000 coins)"
       ]
     },
     {
@@ -679,11 +723,10 @@
       "id": "bicycle-pump",
       "name": "Bicycle Pump",
       "value": 2000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 4x Canister, 10x Metal Parts",
+        "Recycle value: Components (1950 coins) worth less than Item (2000 coins)"
       ]
     },
     {
@@ -743,8 +786,8 @@
       "value": 1600,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -965,22 +1008,20 @@
       "id": "broken-flashlight",
       "name": "Broken Flashlight",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 2x Battery, 6x Metal Parts",
+        "Recycle value: Components (950 coins) worth less than Item (1000 coins)"
       ]
     },
     {
       "id": "broken-guidance-system",
       "name": "Broken Guidance System",
       "value": 2000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 4x Processor",
+        "Recycle value: Components (2000 coins) worth less than Item (2000 coins)"
       ]
     },
     {
@@ -1132,8 +1173,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 2x ARC Alloy",
+        "Recycle value: Components (400 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -1152,8 +1193,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 8x Plastic Parts",
+        "Recycle value: Components (480 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -1162,8 +1203,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 8x Metal Parts",
+        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -1181,10 +1222,11 @@
       "id": "canister",
       "name": "Canister",
       "value": 300,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Used in 5 crafting recipes",
+        "Common crafting ingredient",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -1382,8 +1424,8 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1449,7 +1491,7 @@
       "value": 3000,
       "action": "keep",
       "analysis": [
-        "Used in 1 crafting recipes",
+        "Used in 3 crafting recipes",
         "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
@@ -1468,11 +1510,10 @@
       "id": "coolant",
       "name": "Coolant",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 5x Chemicals, 2x Oil",
+        "Recycle value: Components (850 coins) worth less than Item (1000 coins)"
       ]
     },
     {
@@ -1530,8 +1571,8 @@
       "value": 270,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 4x Plastic Parts",
+        "Recycle value: Components (240 coins) worth less than Item (270 coins)"
       ]
     },
     {
@@ -1616,8 +1657,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 2x ARC Alloy",
+        "Recycle value: Components (400 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -1626,8 +1667,8 @@
       "value": 293,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 1x ARC Alloy",
+        "Recycle value: Components (200 coins) worth less than Item (293 coins)"
       ]
     },
     {
@@ -1636,8 +1677,8 @@
       "value": 270,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 1x ARC Alloy",
+        "Recycle value: Components (200 coins) worth less than Item (270 coins)"
       ]
     },
     {
@@ -1675,8 +1716,8 @@
       "value": 270,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 1x ARC Alloy",
+        "Recycle value: Components (200 coins) worth less than Item (270 coins)"
       ]
     },
     {
@@ -1685,8 +1726,8 @@
       "value": 270,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 1x ARC Alloy",
+        "Recycle value: Components (200 coins) worth less than Item (270 coins)"
       ]
     },
     {
@@ -1695,8 +1736,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 2x ARC Alloy",
+        "Recycle value: Components (400 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -1848,8 +1889,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 9x Plastic Parts",
+        "Recycle value: Components (540 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -1944,7 +1985,7 @@
     {
       "id": "esr-analyzer",
       "name": "ESR Analyzer",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -2444,17 +2485,16 @@
       "id": "flow-controller",
       "name": "Flow Controller",
       "value": 3000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 1x Advanced Mechanical Components",
+        "Recycle value: Components (1750 coins) worth less than Item (3000 coins)"
       ]
     },
     {
       "id": "flushing-terminal-key",
       "name": "Flushing Terminal Key",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -2465,32 +2505,30 @@
       "id": "fossilized-lightning",
       "name": "Fossilized Lightning",
       "value": 4000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 3x Explosive Compound",
+        "Recycle value: Components (3000 coins) worth less than Item (4000 coins)"
       ]
     },
     {
       "id": "free-loadout-augment",
       "name": "Free Loadout Augment",
       "value": 100,
-      "action": "sell",
+      "action": "recycle",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 6x Plastic Parts",
+        "Recycle value: Components (360 coins) worth MORE than Item (100 coins)"
       ]
     },
     {
       "id": "frequency-modulation-box",
       "name": "Frequency Modulation Box",
       "value": 3000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 1x Advanced Electrical Components, 1x Speaker Component",
+        "Recycle value: Components (2250 coins) worth less than Item (3000 coins)"
       ]
     },
     {
@@ -2517,11 +2555,10 @@
       "id": "frying-pan",
       "name": "Frying Pan",
       "value": 640,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 8x Metal Parts",
+        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -2530,8 +2567,8 @@
       "value": 1000,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 12x Metal Parts",
+        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
       ]
     },
     {
@@ -2581,11 +2618,10 @@
       "id": "geiger-counter",
       "name": "Geiger Counter",
       "value": 3500,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 3x Battery, 1x Exodus Modules",
+        "Recycle value: Components (3500 coins) worth less than Item (3500 coins)"
       ]
     },
     {
@@ -2624,8 +2660,8 @@
       "value": 300,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 2x Assorted Seeds",
+        "Recycle value: Components (200 coins) worth less than Item (300 coins)"
       ]
     },
     {
@@ -2746,8 +2782,8 @@
       "value": 700,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 4 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2819,8 +2855,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 11x Chemicals",
+        "Recycle value: Components (550 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -2896,8 +2932,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 7x Metal Parts",
+        "Recycle value: Components (525 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -2963,8 +2999,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 12x Chemicals",
+        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -2980,33 +3016,30 @@
       "id": "industrial-charger",
       "name": "Industrial Charger",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 5x Metal Parts, 1x Voltage Converter",
+        "Recycle value: Components (875 coins) worth less than Item (1000 coins)"
       ]
     },
     {
       "id": "industrial-magnet",
       "name": "Industrial Magnet",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 2x Magnet, 4x Metal Parts",
+        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
       ]
     },
     {
       "id": "ion-sputter",
       "name": "Ion Sputter",
       "value": 6000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 1x Exodus Modules, 4x Voltage Converter",
+        "Recycle value: Components (4750 coins) worth less than Item (6000 coins)"
       ]
     },
     {
@@ -3201,7 +3234,7 @@
     {
       "id": "lidar-scanner",
       "name": "Lidar Scanner",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -3234,8 +3267,8 @@
       "value": 700,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 2 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3412,10 +3445,11 @@
       "id": "magnet",
       "name": "Magnet",
       "value": 300,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Used in 6 crafting recipes",
+        "Common crafting ingredient",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -3431,11 +3465,10 @@
       "id": "magnetron",
       "name": "Magnetron",
       "value": 6000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 1x Magnetic Accelerator",
+        "Recycle value: Components (5500 coins) worth less than Item (6000 coins)"
       ]
     },
     {
@@ -3504,8 +3537,8 @@
       "value": 700,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 7 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3536,8 +3569,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 8x Metal Parts",
+        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -3553,22 +3586,20 @@
       "id": "microscope",
       "name": "Microscope",
       "value": 3000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 1x Advanced Mechanical Components, 3x Magnet",
+        "Recycle value: Components (2650 coins) worth less than Item (3000 coins)"
       ]
     },
     {
       "id": "mini-centrifuge",
       "name": "Mini Centrifuge",
       "value": 3000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 1x Advanced Mechanical Components, 2x Canister",
+        "Recycle value: Components (2350 coins) worth less than Item (3000 coins)"
       ]
     },
     {
@@ -3577,8 +3608,8 @@
       "value": 1750,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 14 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3598,8 +3629,8 @@
       "value": 500,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3714,8 +3745,8 @@
       "value": 270,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 3x Metal Parts",
+        "Recycle value: Components (225 coins) worth less than Item (270 coins)"
       ]
     },
     {
@@ -3742,10 +3773,11 @@
       "id": "oil",
       "name": "Oil",
       "value": 300,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Used in 3 crafting recipes",
+        "Common crafting ingredient",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -3911,7 +3943,7 @@
     {
       "id": "pilgrims-peak-security-code",
       "name": "Pilgrim's Peak Security Code",
-      "value": 0,
+      "value": 100,
       "action": "keep",
       "analysis": [
         "Key - opens locked areas and containers",
@@ -3942,11 +3974,10 @@
       "id": "polluted-air-filter",
       "name": "Polluted Air Filter",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 6x Fabric, 2x Oil",
+        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
       ]
     },
     {
@@ -4035,8 +4066,8 @@
       "value": 5500,
       "action": "keep",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
+        "Used in 2 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4055,8 +4086,8 @@
       "value": 500,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 9 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4168,7 +4199,7 @@
     {
       "id": "raiders-refuge-security-code",
       "name": "Raider's Refuge Security Code",
-      "value": 0,
+      "value": 100,
       "action": "keep",
       "analysis": [
         "Key - opens locked areas and containers",
@@ -4279,7 +4310,7 @@
     {
       "id": "reinforced-reception-security-code",
       "name": "Reinforced Reception Security Code",
-      "value": 0,
+      "value": 100,
       "action": "keep",
       "analysis": [
         "Key - opens locked areas and containers",
@@ -4383,19 +4414,18 @@
       "value": 1000,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 1x Durable Cloth, 1x Magnet",
+        "Recycle value: Components (940 coins) worth less than Item (1000 coins)"
       ]
     },
     {
       "id": "rocket-thruster",
       "name": "Rocket Thruster",
       "value": 2000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 6x Metal Parts, 2x Synthesized Fuel",
+        "Recycle value: Components (1850 coins) worth less than Item (2000 coins)"
       ]
     },
     {
@@ -4423,8 +4453,8 @@
       "value": 500,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 2 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4442,11 +4472,10 @@
       "id": "rotary-encoder",
       "name": "Rotary Encoder",
       "value": 3000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 2x Electrical Components, 2x Processor",
+        "Recycle value: Components (2280 coins) worth less than Item (3000 coins)"
       ]
     },
     {
@@ -4506,8 +4535,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 6x Metal Parts",
+        "Recycle value: Components (450 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -4516,8 +4545,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 8x Metal Parts",
+        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -4526,19 +4555,18 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 10x Fabric",
+        "Recycle value: Components (500 coins) worth less than Item (640 coins)"
       ]
     },
     {
       "id": "ruined-riot-shield",
       "name": "Ruined Riot Shield",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 10x Plastic Parts",
+        "Recycle value: Components (600 coins) worth less than Item (1000 coins)"
       ]
     },
     {
@@ -4547,8 +4575,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 5x Fabric, 1x Magnet",
+        "Recycle value: Components (550 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -4557,8 +4585,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 8x Metal Parts",
+        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -4594,19 +4622,18 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 8x Metal Parts",
+        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
       ]
     },
     {
       "id": "sample-cleaner",
       "name": "Sample Cleaner",
       "value": 3000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 14x Assorted Seeds, 2x Electrical Components",
+        "Recycle value: Components (2680 coins) worth less than Item (3000 coins)"
       ]
     },
     {
@@ -4793,11 +4820,10 @@
       "id": "showstopper",
       "name": "Showstopper",
       "value": 2100,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 1x Electrical Components, 1x Voltage Converter",
+        "Recycle value: Components (1140 coins) worth less than Item (2100 coins)"
       ]
     },
     {
@@ -4826,8 +4852,8 @@
       "value": 3000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4835,11 +4861,10 @@
       "id": "signal-amplifier",
       "name": "Signal Amplifier",
       "value": 3000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 2x Electrical Components, 2x Voltage Converter",
+        "Recycle value: Components (2280 coins) worth less than Item (3000 coins)"
       ]
     },
     {
@@ -4912,10 +4937,11 @@
       "id": "simple-gun-parts",
       "name": "Simple Gun Parts",
       "value": 330,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Used in 7 crafting recipes",
+        "Common crafting ingredient",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -4924,8 +4950,8 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5039,8 +5065,8 @@
       "value": 500,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 3 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5048,22 +5074,20 @@
       "id": "spectrometer",
       "name": "Spectrometer",
       "value": 3000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 1x Advanced Electrical Components",
+        "Recycle value: Components (1750 coins) worth less than Item (3000 coins)"
       ]
     },
     {
       "id": "spectrum-analyzer",
       "name": "Spectrum Analyzer",
       "value": 3500,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 1x Exodus Modules",
+        "Recycle value: Components (2750 coins) worth less than Item (3500 coins)"
       ]
     },
     {
@@ -5072,8 +5096,8 @@
       "value": 1000,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 1x ARC Alloy, 1x Electrical Components",
+        "Recycle value: Components (840 coins) worth less than Item (1000 coins)"
       ]
     },
     {
@@ -5089,11 +5113,10 @@
       "id": "spring-cushion",
       "name": "Spring Cushion",
       "value": 2000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 2x Durable Cloth",
+        "Recycle value: Components (1280 coins) worth less than Item (2000 coins)"
       ]
     },
     {
@@ -5155,7 +5178,7 @@
     {
       "id": "stack-of-movie-tapes",
       "name": "Stack of Movie Tapes",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -5288,7 +5311,7 @@
     {
       "id": "surge-coil",
       "name": "Surge Coil",
-      "value": 0,
+      "value": 2100,
       "action": "keep",
       "analysis": [
         "Rare rarity",
@@ -5341,8 +5364,8 @@
       "value": 500,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5467,8 +5490,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 12x Fabric",
+        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -5477,19 +5500,18 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 11x Fabric",
+        "Recycle value: Components (550 coins) worth less than Item (640 coins)"
       ]
     },
     {
       "id": "telemetry-transceiver",
       "name": "Telemetry Transceiver",
       "value": 3000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 1x Advanced Electrical Components, 1x Processor",
+        "Recycle value: Components (2250 coins) worth less than Item (3000 coins)"
       ]
     },
     {
@@ -5593,11 +5615,10 @@
       "id": "torn-blanket",
       "name": "Torn Blanket",
       "value": 640,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 12x Fabric",
+        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -5746,22 +5767,20 @@
       "id": "turbo-pump",
       "name": "Turbo Pump",
       "value": 2000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 1x Mechanical Components, 3x Oil",
+        "Recycle value: Components (1540 coins) worth less than Item (2000 coins)"
       ]
     },
     {
       "id": "unusable-weapon",
       "name": "Unusable Weapon",
       "value": 2000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 4x Metal Parts, 5x Simple Gun Parts",
+        "Recycle value: Components (1950 coins) worth less than Item (2000 coins)"
       ]
     },
     {
@@ -5770,8 +5789,8 @@
       "value": 6000,
       "action": "keep",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5966,8 +5985,8 @@
       "value": 500,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Used in 2 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -6052,22 +6071,20 @@
       "id": "water-filter",
       "name": "Water Filter",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 3x Canister",
+        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
       ]
     },
     {
       "id": "water-pump",
       "name": "Water Pump",
       "value": 1000,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 4x Metal Parts, 2x Oil",
+        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
       ]
     },
     {
