@@ -155,9 +155,6 @@ cython_debug/
 # Ruff stuff:
 .ruff_cache/
 
-# Codemogger index
-!.codemogger/index.db-wal
-
 # PyPI configuration file
 .pypirc
 
@@ -199,7 +196,6 @@ CLAUDE.local.md
 .omg/
 undefined/
 !.serena/project.yml
-!.serena/.gitignore
 
 # OpenCode plugin dir (track config, ignore build artifacts)
 **/node_modules/
@@ -212,6 +208,7 @@ undefined/
 .kilo/package.json
 .kilo/package-lock.json
 .kilo/bun.lock
+.kilo/state/context-shield.json
 .cachebro/
 ocr_debug/
 
