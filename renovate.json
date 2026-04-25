@@ -32,11 +32,15 @@
   "constraints": {
     "python": "<3.14"
   },
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "pep621": {
     "enabled": true
   },
   "pep723": {
-    "enabled": true
+    "enabled": true,
+    "managerFilePatterns": ["scripts/update_snapshot_and_defaults.py"]
   },
   "pip_requirements": {
     "enabled": false
