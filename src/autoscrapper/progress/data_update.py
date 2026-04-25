@@ -510,6 +510,134 @@ def _merge_missing_entries(primary: list[dict], fallback: list[dict]) -> tuple[l
     return merged, supplemental_count
 
 
+def _merge_item_fields(primary: list[dict], supplemental: list[dict]) -> tuple[list[dict], int]:
+    """Merge item fields from supplemental sources to fill in missing data.
+
+    For each item in primary that has missing or empty fields, try to fill them
+    in from supplemental sources that have the same item (by id or normalized name).
+
+    Returns a tuple of (merged items list, count of entries that had fields filled).
+    """
+    supplemental_by_id: dict[str, dict] = {}
+    supplemental_by_name: dict[str, dict] = {}
+
+    for entry in supplemental:
+        entry_id = entry.get("id")
+        if isinstance(entry_id, str) and entry_id:
+            supplemental_by_id[entry_id] = entry
+        name_key = _normalize_entry_name(entry.get("name"))
+        if name_key:
+            supplemental_by_name[name_key] = entry
+
+    result: list[dict] = []
+    entries_with_fills = 0
+    for entry in primary:
+        entry_id = entry.get("id")
+        name_key = _normalize_entry_name(entry.get("name"))
+
+        supp: dict | None = None
+        if isinstance(entry_id, str) and entry_id in supplemental_by_id:
+            supp = supplemental_by_id[entry_id]
+        elif name_key and name_key in supplemental_by_name:
+            supp = supplemental_by_name[name_key]
+
+        if supp is None:
+            result.append(entry)
+            continue
+
+        merged = dict(entry)
+        filled_fields = 0
+
+        for field in (
+            "type",
+            "rarity",
+            "value",
+            "weightKg",
+            "stackSize",
+            "craftBench",
+            "recipe",
+            "recyclesInto",
+            "wikiUses",
+        ):
+            primary_val = merged.get(field)
+            if not primary_val or primary_val == 0 or primary_val == "Unknown":
+                supp_val = supp.get(field)
+                if supp_val and supp_val != 0 and supp_val != "Unknown":
+                    merged[field] = supp_val
+                    filled_fields += 1
+
+        result.append(merged)
+        if filled_fields > 0:
+            entries_with_fills += 1
+            _log.debug("Filled %d fields for item %s from supplemental source", filled_fields, entry_id)
+
+    return result, entries_with_fills
+
+
+def _merge_quest_fields(primary: list[dict], supplemental: list[dict]) -> tuple[list[dict], int]:
+    """Merge quest fields from supplemental sources to fill in missing data.
+
+    For each quest in primary that has missing or empty fields, try to fill them
+    in from supplemental sources that have the same quest (by id or normalized name).
+
+    Returns a tuple of (merged quests list, count of entries that had fields filled).
+    """
+    supplemental_by_id: dict[str, dict] = {}
+    supplemental_by_name: dict[str, dict] = {}
+
+    for entry in supplemental:
+        entry_id = entry.get("id")
+        if isinstance(entry_id, str) and entry_id:
+            supplemental_by_id[entry_id] = entry
+        name_key = _normalize_entry_name(entry.get("name"))
+        if name_key:
+            supplemental_by_name[name_key] = entry
+
+    result: list[dict] = []
+    entries_with_fills = 0
+    for entry in primary:
+        entry_id = entry.get("id")
+        name_key = _normalize_entry_name(entry.get("name"))
+
+        supp: dict | None = None
+        if isinstance(entry_id, str) and entry_id in supplemental_by_id:
+            supp = supplemental_by_id[entry_id]
+        elif name_key and name_key in supplemental_by_name:
+            supp = supplemental_by_name[name_key]
+
+        if supp is None:
+            result.append(entry)
+            continue
+
+        merged = dict(entry)
+        filled_fields = 0
+
+        for field in ("objectives", "requirements", "trader", "xp", "sortOrder"):
+            primary_val = merged.get(field)
+            if not primary_val or primary_val == 0 or primary_val == "Unknown":
+                supp_val = supp.get(field)
+                if supp_val and supp_val != 0 and supp_val != "Unknown":
+                    merged[field] = supp_val
+                    filled_fields += 1
+
+        if not merged.get("rewardItemIds") or not merged.get("rewards"):
+            supp_reward_ids = supp.get("rewardItemIds", [])
+            supp_rewards = supp.get("rewards", [])
+            if supp_reward_ids and not merged.get("rewardItemIds"):
+                merged["rewardItemIds"] = supp_reward_ids
+                filled_fields += 1
+            if supp_rewards and not merged.get("rewards"):
+                merged["rewards"] = supp_rewards
+                filled_fields += 1
+
+        result.append(merged)
+        if filled_fields > 0:
+            entries_with_fills += 1
+            _log.debug("Filled %d fields for quest %s from supplemental source", filled_fields, entry_id)
+
+    return result, entries_with_fills
+
+
 def _map_metaforge_item(metaforge_item: dict) -> dict:
     stat_block = metaforge_item.get("stat_block") or {}
     return {
@@ -713,6 +841,28 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
         fallback_error = str(exc)
         _log.warning("RaidTheory fallback unavailable: %s", exc)
 
+    # Map fallback items/quests for field-level merging (preserve for later use)
+    mapped_fallback_items = (
+        [mapped for item in fallback_items if (mapped := _map_raidtheory_item(item)) is not None]
+        if fallback_items
+        else []
+    )
+    mapped_fallback_quests = [
+        mapped_quest
+        for quest in fallback_quests
+        if (
+            mapped_quest := _map_raidtheory_quest(
+                quest,
+                {
+                    item["id"]: item["name"]
+                    for item in mapped_fallback_items
+                    if isinstance(item.get("id"), str) and isinstance(item.get("name"), str)
+                },
+            )
+        )
+        is not None
+    ]
+
     mapped_metaforge_items = (
         [_map_metaforge_item(item) for item in metaforge_items] if metaforge_items is not None else []
     )
@@ -796,6 +946,20 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
         mapped_arctracker_quests,
     )
 
+    # Field-level merge: fill in missing fields from all supplemental sources
+    # Combine fallback and arctracker data for field-level enrichment
+    combined_item_supplemental = list(mapped_fallback_items) + list(mapped_arctracker_items)
+    combined_quest_supplemental = list(mapped_fallback_quests) + list(mapped_arctracker_quests)
+
+    # Track field-level merge stats
+    item_field_merge_count = 0
+    quest_field_merge_count = 0
+
+    if combined_item_supplemental:
+        mapped_items, item_field_merge_count = _merge_item_fields(mapped_items, combined_item_supplemental)
+    if combined_quest_supplemental:
+        mapped_quests, quest_field_merge_count = _merge_quest_fields(mapped_quests, combined_quest_supplemental)
+
     # Save hideout and projects data from arctracker
     if arctracker_hideout:
         (data_dir / "static" / "arctracker_hideout.json").write_bytes(
@@ -868,6 +1032,22 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
                     "supplementalCount": arctracker_supplemental_items,
                     "error": arctracker_items_error,
                 },
+                "fieldLevelMerge": {
+                    "enabled": True,
+                    "entriesEnriched": item_field_merge_count,
+                    "sources": ["raidtheory-fallback", "arctracker"],
+                    "fields": [
+                        "type",
+                        "rarity",
+                        "value",
+                        "weightKg",
+                        "stackSize",
+                        "craftBench",
+                        "recipe",
+                        "recyclesInto",
+                        "wikiUses",
+                    ],
+                },
                 "wikiEnrichment": {
                     "url": WIKI_LOOT_URL,
                     "available": _SCRAPER_AVAILABLE,
@@ -894,6 +1074,12 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
                     "apiBase": ARCTRACKER_BASE_URL,
                     "supplementalCount": arctracker_supplemental_quests,
                     "error": arctracker_quests_error,
+                },
+                "fieldLevelMerge": {
+                    "enabled": True,
+                    "entriesEnriched": quest_field_merge_count,
+                    "sources": ["raidtheory-fallback", "arctracker"],
+                    "fields": ["objectives", "requirements", "trader", "xp", "sortOrder", "rewardItemIds", "rewards"],
                 },
             },
             "hideout": {
