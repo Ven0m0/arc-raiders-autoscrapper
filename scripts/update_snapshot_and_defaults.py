@@ -367,7 +367,7 @@ def main() -> int:
         import vendor.arc_lens.scrapers  # noqa: F401
 
         ARC_LENS_AVAILABLE = True
-    except ImportError:
+    except Exception:
         ARC_LENS_AVAILABLE = False
 
     if getattr(args, "source", "metaforge") == "arc-lens" and not ARC_LENS_AVAILABLE:
