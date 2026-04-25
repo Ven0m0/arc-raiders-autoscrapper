@@ -24,13 +24,19 @@ jobs:
       - name: Install Tesseract OCR system dependencies
         uses: gerlero/apt-install@v1
         with:
-          packages: build-essential libevdev-dev libleptonica-dev libtesseract-dev pkg-config tesseract-ocr libwebp7
+          packages: build-essential libevdev-dev python3-evdev libleptonica-dev libtesseract-dev pkg-config tesseract-ocr 
           install-recommends: false
+      - name: "Set up Python"
+        uses: actions/setup-python@v6
+        with:
+          python-version-file: "pyproject.toml"
       - name: Install uv
         uses: astral-sh/setup-uv@v8.1.0
         with:
-          python-version: "3.13"
           enable-cache: true
+          activate-environment: true
+          ignore-nothing-to-cache: true
+          ignore-empty-workdir: true
           cache-dependency-glob: |
             uv.lock
             pyproject.toml
