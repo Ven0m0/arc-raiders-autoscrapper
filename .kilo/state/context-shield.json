@@ -1,6 +1,0 @@
-{
-  "enabled": false,
-  "readLimit": 800,
-  "compactThresholdBytes": 8192,
-  "compactTargetBytes": 4096
-}
