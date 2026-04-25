@@ -31,9 +31,7 @@ jobs:
           #cache-python: true
           enable-cache: true
           activate-environment: true
-          ignore-nothing-to-cache: true
-          ignore-empty-workdir: true
-          resolution-strategy: requires-python
+          ignore-nothing-to-cache: true       
           cache-dependency-glob: |
             uv.lock
             pyproject.toml
