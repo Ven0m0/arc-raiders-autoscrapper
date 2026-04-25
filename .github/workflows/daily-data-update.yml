@@ -24,7 +24,7 @@ jobs:
       - name: Install Linux system dependencies
         uses: gerlero/apt-install@v1
         with:
-          packages: build-essential python3-evdev libleptonica-dev libtesseract-dev pkg-config tesseract-ocr
+          packages: build-essential libevdev-dev python3-evdev libleptonica-dev libtesseract-dev pkg-config tesseract-ocr
           install-recommends: false
       - name: "Set up Python"
         uses: actions/setup-python@v6
