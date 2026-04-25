@@ -354,7 +354,25 @@ def main() -> int:
         action="store_true",
         help="Generate report against a temporary snapshot without writing tracked files.",
     )
+    parser.add_argument(
+        "--source",
+        choices=["metaforge", "arc-lens"],
+        default="metaforge",
+        help="Data source to use for update (default: metaforge).",
+    )
     args = parser.parse_args()
+
+    # Check if arc-lens source is requested but not available
+    try:
+        import vendor.arc_lens.scrapers  # noqa: F401
+
+        ARC_LENS_AVAILABLE = True
+    except ImportError:
+        ARC_LENS_AVAILABLE = False
+
+    if getattr(args, "source", "metaforge") == "arc-lens" and not ARC_LENS_AVAILABLE:
+        print("Error: arc-lens scrapers not available.", file=sys.stderr)
+        return 1
 
     data_dir = args.data_dir.resolve()
     rules_path = args.rules_path.resolve()
