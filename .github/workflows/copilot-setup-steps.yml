@@ -22,20 +22,21 @@ jobs:
       - name: Install Linux system dependencies
         uses: gerlero/apt-install@v1
         with:
-          packages: build-essential libleptonica-dev libtesseract-dev pkg-config tesseract-ocr
+          packages: build-essential python3-evdev libevdev-dev libleptonica-dev libtesseract-dev pkg-config tesseract-ocr
           install-recommends: false
-      - name: Install uv and Python 3.13
+      - name: "Set up Python"
+        uses: actions/setup-python@v6
+        with:
+          python-version-file: "pyproject.toml"
+      - name: Install uv
         uses: astral-sh/setup-uv@v8.1.0
         with:
-          python-version: "3.13"
           enable-cache: true
+          activate-environment: true
+          ignore-nothing-to-cache: true
+          ignore-empty-workdir: true
           cache-dependency-glob: |
             uv.lock
             pyproject.toml
       - name: Install project dependencies
         run: uv sync --frozen
-      - name: Verify core Python tooling
-        run: |
-          uv run ruff --version
-          uv run basedpyright --version
-          uv run pytest --version
