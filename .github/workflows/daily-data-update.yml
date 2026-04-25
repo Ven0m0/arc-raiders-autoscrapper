@@ -19,19 +19,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-
+      - name: Configure fast apt mirror
+        uses: vegardit/fast-apt-mirror.sh@v1
+      - name: Install Linux system dependencies
+        uses: gerlero/apt-install@v1
+        with:
+          packages: build-essential python3-evdev libleptonica-dev libtesseract-dev pkg-config tesseract-ocr
+          install-recommends: false
       - name: "Set up Python"
         uses: actions/setup-python@v6
         with:
           python-version-file: "pyproject.toml"
-          
       - name: Install uv
         uses: astral-sh/setup-uv@v8.1.0
         with:
-          #cache-python: true
           enable-cache: true
           activate-environment: true
-          ignore-nothing-to-cache: true       
+          ignore-nothing-to-cache: true
+          ignore-empty-workdir: true
           cache-dependency-glob: |
             uv.lock
             pyproject.toml
@@ -92,7 +97,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           gh auth setup-git
-
           git switch -C bot/daily-data-update
           git add \
             src/autoscrapper/progress/data/items.json \
@@ -100,12 +104,10 @@ jobs:
             src/autoscrapper/progress/data/quests_by_trader.json \
             src/autoscrapper/progress/data/metadata.json \
             src/autoscrapper/items/items_rules.default.json
-
           if git diff --cached --quiet; then
             echo "has_commit=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-
           git commit -m "chore(data): daily Metaforge snapshot + default rules"
           git push --force-with-lease origin HEAD:bot/daily-data-update
           echo "has_commit=true" >> "$GITHUB_OUTPUT"
