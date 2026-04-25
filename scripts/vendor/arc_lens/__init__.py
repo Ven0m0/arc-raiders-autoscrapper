@@ -9,9 +9,28 @@ Based on https://github.com/eetusa/arc-lens
 
 from __future__ import annotations
 
+from .scrapers import (
+    BaseScraper,
+    MapMarker,
+    MetaforgeScraper,
+    ScrapedItem,
+    ScrapedProject,
+    ScrapedQuest,
+    ScrapingError,
+    WikiItemScraper,
+    WikiProjectScraper,
+    WikiQuestScraper,
+)
+
 __all__ = [
+    "BaseScraper",
     "WikiItemScraper",
     "WikiQuestScraper",
     "WikiProjectScraper",
     "MetaforgeScraper",
+    "ScrapedItem",
+    "ScrapedQuest",
+    "ScrapedProject",
+    "MapMarker",
+    "ScrapingError",
 ]
