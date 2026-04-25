@@ -16,6 +16,14 @@
     ":(){:|:&};:": "deny",
     "doom_loop": "deny"
   },
+  "provider": {
+    "openai": {
+      "options": { "apiKey": "{env:OPENAI_API_KEY}" }
+    },
+    "anthropic": {
+      "options": { "apiKey": "{env:ANTHROPIC_API_KEY}" }
+    }
+  },
   "disabled_providers": ["openai", "google"],
   "plugin": [
     "opencode-ignore@1.1.0",
