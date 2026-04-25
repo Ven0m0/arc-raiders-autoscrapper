@@ -141,3 +141,10 @@ extend-exclude = '''
 [tool.uv]
 link-mode = "symlink"
 compile-bytecode = true
+preview = true
+torch-backend = "auto"
+
+[tool.uv.pip]
+link-mode = "symlink"
+all-extras = true
+compile-bytecode = true
