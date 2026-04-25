@@ -27,7 +27,10 @@
     "./plugins/codemogger",
     "./plugins/trim-tool-name",
     "./plugins/custom-tools",
-    "./plugins/json-healer"
+    "./plugins/json-healer",
+    "opencode-betterglob",
+    "opencode-bettergrep",
+    "opencode-betterread"
   ],
   "formatter": {
     "biome": {
