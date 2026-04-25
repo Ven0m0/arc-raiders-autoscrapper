@@ -1,39 +1,4 @@
----
-title: Implementation Plan
-status: active
-updated: 2026-04-24
----
 
-<!-- AGENT GUIDE: Read AGENTS.md first. Never hand-edit data/ or items_rules.default.json -->
-
-## Workflow
-
-1. Read `AGENTS.md` before starting
-2. Make minimal, targeted changes
-3. Never hand-edit `src/autoscrapper/progress/data/` or `items_rules.default.json`
-4. Regenerate data with `scripts/update_snapshot_and_defaults.py` when needed
-5. Run validation: `uv run ruff check src/ tests/ && uv run ty check src/ && uv run basedpyright src/ && uv run pytest`
-
-## Delivery Waves
-
-| Wave | Goal | Tasks | Parallel |
-|------|------|-------|----------|
-| 1 | Data pipeline | T014, T034, T003 | T014∥T034 |
-| 2 | OCR accuracy | T027, T012, T013, T028, T030, T032 | All parallel |
-| 3 | Code quality | T036, T037 | Parallel |
-| 4 | Test coverage | T039, T040, T041 | Parallel |
-| 5 | Features | T019, T020 | Parallel |
-| 6 | Performance | T042, T043 | Parallel |
-
-## Priority Queue
-
-| # | Task | Why |
-|---|------|-----|
-| 1 | T014 | Unblocks T003, removes security risk |
-| 2 | T034 | High-value data pipeline |
-| 3 | T027 | High OCR accuracy impact |
-| 4 | T039 | Critical untested business logic |
-| 5 | T012 | Quick win for weapon recognition |
 
 ---
 
@@ -49,7 +14,7 @@ updated: 2026-04-24
 
 **Files:** `src/autoscrapper/progress/data_update.py`
 
-**Done:**
+**Todo:**
 - [ ] MetaForge primary + RaidTheory fallback intact
 - [ ] Wiki enrichment for workshop/expedition/project data
 - [ ] Dry-run reports coverage
@@ -62,14 +27,14 @@ updated: 2026-04-24
 |------|-------|
 | Priority | medium |
 | Size | S |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **File:** `src/autoscrapper/core/item_actions.py`
 
 **Done:**
-- [ ] Normalization corrects OCR suffix errors (1V, 111)
-- [ ] Canonical matching uses existing fuzzy threshold
-- [ ] Tests cover corrected and unchanged names
+- [x] Normalization corrects OCR suffix errors (1V, 111)
+- [x] Canonical matching uses existing fuzzy threshold
+- [x] Tests cover corrected and unchanged names
 
 ---
 
@@ -78,14 +43,14 @@ updated: 2026-04-24
 |------|-------|
 | Priority | medium |
 | Size | S |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **File:** `src/autoscrapper/ocr/inventory_vision.py`
 
 **Done:**
-- [ ] Swap UI strings ignored on first title pass
-- [ ] Retry path reaches real item name below UI line
-- [ ] No regression in unrelated title extraction
+- [x] Swap UI strings ignored on first title pass
+- [x] Retry path reaches real item name below UI line
+- [x] No regression in unrelated title extraction
 
 ---
 
@@ -95,14 +60,14 @@ updated: 2026-04-24
 |------|-------|
 | Priority | high |
 | Size | M |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **Files:** `src/autoscrapper/progress/data_update.py`, `scripts/update_snapshot_and_defaults.py`
 
 **Done:**
-- [ ] MetaForge uses `includeComponents` instead of Supabase
-- [ ] All Supabase constants/helpers deleted
-- [ ] Updater runs without Supabase calls
+- [x] MetaForge uses `includeComponents` instead of Supabase
+- [x] All Supabase constants/helpers deleted
+- [x] Updater runs without Supabase calls
 
 **Risk:** Breaking data pipeline. Mitigation: Test with `--dry-run` first.
 
@@ -113,14 +78,14 @@ updated: 2026-04-24
 |------|-------|
 | Priority | medium |
 | Size | S |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **File:** `src/autoscrapper/scanner/`
 
 **Done:**
-- [ ] JSONL decision records when logging enabled
-- [ ] Log: timestamp, raw_text, decision, location, score, source
-- [ ] Opt-in, no scan slowdown
+- [x] JSONL decision records when logging enabled
+- [x] Log: timestamp, raw_text, decision, location, score, source
+- [x] Opt-in, no scan slowdown
 
 ---
 
@@ -129,14 +94,16 @@ updated: 2026-04-24
 |------|-------|
 | Priority | medium |
 | Size | M |
-| Status | ready |
+| Status | 🔄 IN PROGRESS |
 
 **File:** `src/autoscrapper/progress/`
 
-**Done:**
+**Todo:**
 - [ ] Recycle decisions cross-checked against quest requirements
 - [ ] Conflicts override to KEEP with quest reason
 - [ ] Graceful degradation when progress data absent
+
+**Note:** `decision_engine.py` has partial implementation (quest requirement checking in `get_decision()`). Needs review for graceful degradation.
 
 ---
 
@@ -146,15 +113,15 @@ updated: 2026-04-24
 |------|-------|
 | Priority | high |
 | Size | M |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **Files:** `src/autoscrapper/ocr/tesseract.py`, `src/autoscrapper/items/rules_store.py`
 
 **Done:**
-- [ ] `initialize_ocr` writes tokens to temp file, loads via `user_words_suffix`
-- [ ] `load_system_dawg` set to 0
-- [ ] Re-init on rules_store changes
-- [ ] Corpus replay shows no regressions
+- [x] `initialize_ocr` writes tokens to temp file, loads via `user_words_suffix`
+- [x] `load_system_dawg` set to 0
+- [x] Re-init on rules_store changes
+- [x] Corpus replay shows no regressions
 
 **Risk:** Tesseract re-init is expensive. Mitigation: Pre-load at startup only.
 
@@ -165,14 +132,14 @@ updated: 2026-04-24
 |------|-------|
 | Priority | medium |
 | Size | S |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **File:** `src/autoscrapper/ocr/inventory_vision.py`
 
 **Done:**
-- [ ] Top/bottom/right get symmetric _TITLE_PAD pixels of median background
-- [ ] Retry path keeps existing expansion
-- [ ] Corpus replay shows no regressions
+- [x] Top/bottom/right get symmetric _TITLE_PAD pixels of median background
+- [x] Retry path keeps existing expansion
+- [x] Corpus replay shows no regressions
 
 ---
 
@@ -181,14 +148,14 @@ updated: 2026-04-24
 |------|-------|
 | Priority | medium |
 | Size | S |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **File:** `src/autoscrapper/ocr/inventory_vision.py`
 
 **Done:**
-- [ ] Primary read uses `image_to_data`, computes mean per-character confidence
-- [ ] Retries fire when mean_conf < 60 even if fuzzy match exists
-- [ ] Highest-confidence result wins
+- [x] Primary read uses `image_to_data`, computes mean per-character confidence
+- [x] Retries fire when mean_conf < 60 even if fuzzy match exists
+- [x] Highest-confidence result wins
 
 ---
 
@@ -197,13 +164,13 @@ updated: 2026-04-24
 |------|-------|
 | Priority | low |
 | Size | XS |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **File:** `src/autoscrapper/ocr/tesseract.py`
 
 **Done:**
-- [ ] `initialize_ocr` sets `user_defined_dpi` to 300
-- [ ] No corpus regression
+- [x] `initialize_ocr` sets `user_defined_dpi` to 300
+- [x] No corpus regression
 
 ---
 
@@ -212,19 +179,21 @@ updated: 2026-04-24
 |------|-------|
 | Priority | high |
 | Size | L |
-| Status | ready |
+| Status | ❌ TODO |
 
 **Files:** New `scripts/vendor/arc-lens/`, `scripts/update_snapshot_and_defaults.py`
 
 **Refs:** https://github.com/eetusa/arc-lens/
 
-**Done:**
+**Todo:**
 - [ ] Vendor arc-lens scrapers under `scripts/vendor/arc-lens/`
 - [ ] Port JS to Python using `requests` + `BeautifulSoup`
 - [ ] Wire into `update_snapshot_and_defaults.py`
 - [ ] Add `--source arc-lens` flag
 - [ ] Document scraper contributions
 - [ ] Graceful failure if Arc-Lens unavailable
+
+**Note:** Only empty `__init__.py` exists in vendor/arc_lens/. No scraper implementation.
 
 ---
 
@@ -233,7 +202,7 @@ updated: 2026-04-24
 |------|-------|
 | Priority | high |
 | Size | S |
-| Status | **COMPLETE** |
+| Status | ✅ COMPLETE |
 
 **Files:** `src/autoscrapper/progress/progress_config.py`, `quest_inference.py`, `update_report.py`
 
@@ -250,11 +219,11 @@ updated: 2026-04-24
 |------|-------|
 | Priority | medium |
 | Size | L |
-| Status | ready |
+| Status | ❌ TODO |
 
-**Files:** `src/autoscrapper/ocr/inventory_vision.py` (1781L), `progress/decision_engine.py` (434L)
+**Files:** `src/autoscrapper/ocr/inventory_vision.py` (1832L), `progress/decision_engine.py` (434L)
 
-**Done:**
+**Todo:**
 - [ ] `inventory_vision.py` → preprocessing.py, detection.py, matching.py
 - [ ] `decision_engine.py` → quest_logic.py, hideout_logic.py, crafting_logic.py
 - [ ] All imports updated, tests pass
@@ -269,15 +238,16 @@ updated: 2026-04-24
 |------|-------|
 | Priority | medium |
 | Size | M |
-| Status | ready |
+| Status | ❌ TODO |
 
-**Files:** `src/autoscrapper/api/client.py`, `progress/data_update.py`
+**Files:** `src/autoscrapper/api/client.py`, `progress/data_update.py`, `ocr/inventory_vision.py`, `ocr/tesseract.py`, `interaction/ui_windows.py`, `scanner/scan_loop.py`
 
-**Done:**
+**Todo:**
 - [ ] API client raises specific exceptions (RateLimitError, AuthError, NotFoundError)
 - [ ] Data update catches specific exceptions per operation
 - [ ] Contextual error messages
 - [ ] Tests verify handling
+- [ ] Replace `except Exception:` with specific exception types across codebase
 
 ---
 
@@ -287,11 +257,11 @@ updated: 2026-04-24
 |------|-------|
 | Priority | medium |
 | Size | L |
-| Status | ready |
+| Status | ❌ TODO |
 
 **Files:** `scanner/scan_loop.py`, `api/client.py`, `interaction/`
 
-**Done:**
+**Todo:**
 - [ ] API client uses `aiohttp` or `httpx`
 - [ ] Scanner supports concurrent cell processing
 - [ ] Async-aware rate limiting
@@ -306,16 +276,16 @@ updated: 2026-04-24
 |------|-------|
 | Priority | high |
 | Size | M |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **File:** New `tests/progress/test_decision_engine.py`
 
 **Done:**
-- [ ] Unit tests for KEEP/SELL/RECYCLE paths
-- [ ] Quest requirement conflict tests
-- [ ] Hideout upgrade priority tests
-- [ ] Crafting value evaluation tests
-- [ ] >80% coverage
+- [x] Unit tests for KEEP/SELL/RECYCLE paths
+- [x] Quest requirement conflict tests
+- [x] Hideout upgrade priority tests
+- [x] Crafting value evaluation tests
+- [x] >80% coverage
 
 ---
 
@@ -324,15 +294,15 @@ updated: 2026-04-24
 |------|-------|
 | Priority | high |
 | Size | M |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **File:** New `tests/interaction/test_inventory_grid.py`
 
 **Done:**
-- [ ] Cell coordinate calculation tests
-- [ ] Grid detection edge case tests
-- [ ] Row/column boundary tests
-- [ ] Multi-resolution tests
+- [x] Cell coordinate calculation tests
+- [x] Grid detection edge case tests
+- [x] Row/column boundary tests
+- [x] Multi-resolution tests
 
 ---
 
@@ -341,15 +311,15 @@ updated: 2026-04-24
 |------|-------|
 | Priority | medium |
 | Size | L |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **File:** New `tests/ocr/test_ocr_pipeline_integration.py`
 
 **Done:**
-- [ ] Fixtures with sample inventory images
-- [ ] Full flow: image → OCR → fuzzy match → decision
-- [ ] Polarity detection, retry logic, confidence gating tests
-- [ ] Mock Tesseract for determinism
+- [x] Fixtures with sample inventory images
+- [x] Full flow: image → OCR → fuzzy match → decision
+- [x] Polarity detection, retry logic, confidence gating tests
+- [x] Mock Tesseract for determinism
 
 ---
 
@@ -358,15 +328,15 @@ updated: 2026-04-24
 |------|-------|
 | Priority | medium |
 | Size | S |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **Files:** `core/item_actions.py`, `items/rules_store.py`
 
 **Done:**
-- [ ] In-memory rule cache with TTL
-- [ ] Cache invalidation on file modification
-- [ ] Cache stats (hit rate, size)
-- [ ] Benchmark shows improvement
+- [x] In-memory rule cache with TTL
+- [x] Cache invalidation on file modification
+- [x] Cache stats (hit rate, size)
+- [x] Benchmark shows improvement
 
 ---
 
@@ -375,15 +345,15 @@ updated: 2026-04-24
 |------|-------|
 | Priority | high |
 | Size | M |
-| Status | ready |
+| Status | ✅ COMPLETE |
 
 **File:** `src/autoscrapper/ocr/inventory_vision.py`
 
 **Done:**
-- [ ] Cache preprocessed images between passes
-- [ ] Remove duplicate connectedComponentsWithStats
-- [ ] Lazy upscaling when needed
-- [ ] Benchmark shows <20% latency reduction
+- [x] Cache preprocessed images between passes
+- [x] Remove duplicate connectedComponentsWithStats
+- [x] Lazy upscaling when needed
+- [x] Benchmark shows <20% latency reduction
 
 ---
 
@@ -405,9 +375,20 @@ uv run pytest
 | `threshold-corpus-replay` | Threshold changes |
 | `add-fixture` | New OCR regression test |
 | `dead-code-sweep` | Cleanup |
+| `scan-report` | Analyze scan failures |
+| `failure-to-fix` | End-to-end failure pipeline |
+| `config-bump` | Persisted config changes |
 
 ### Critical Files (Extra Caution)
-- `src/autoscrapper/ocr/inventory_vision.py`
-- `src/autoscrapper/scanner/`
-- `src/autoscrapper/core/item_actions.py`
+- `src/autoscrapper/ocr/inventory_vision.py` (1832 lines - candidate for T036 refactor)
+- `src/autoscrapper/scanner/scan_loop.py` (async candidate - T038)
+- `src/autoscrapper/progress/decision_engine.py` (434 lines - candidate for T036 refactor)
 - `src/autoscrapper/config.py`
+- `src/autoscrapper/api/client.py` (T037 exception handling)
+
+### Completed Tasks (Auto-generated from status)
+✅ T012, T013, T014, T019, T027, T028, T030, T032, T035, T039, T040, T041, T042, T043
+
+### Incomplete Tasks (Require Work)
+❌ T034 (Arc-Lens scraper), T036 (module refactor), T037 (exception handling), T038 (async)
+🔄 T020 (quest recycle protection - partial)
