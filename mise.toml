@@ -18,6 +18,7 @@ python = "3.13.13"
 uv = "latest"
 ruff = "latest"
 prek = "latest"
+"github:BurntSushi/ripgrep" = "latest"
 
 [env]
 UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
