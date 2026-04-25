@@ -197,7 +197,7 @@ def _fetch_arclens_items() -> list[dict]:
     """Fetch all items from arc-lens wiki scraper."""
     try:
         from scripts.vendor.arc_lens.scrapers import WikiItemScraper
-    except Exception as exc:
+    except ImportError as exc:
         _log.warning("Arc-Lens not available: %s", exc)
         raise DownloadError("Arc-Lens scrapers not available") from exc
 
