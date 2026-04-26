@@ -32,9 +32,6 @@
   "constraints": {
     "python": "<3.14"
   },
-  "lockFileMaintenance": {
-    "enabled": true
-  },
   "pep621": {
     "enabled": true
   },
