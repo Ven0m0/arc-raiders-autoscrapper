@@ -73,7 +73,7 @@
     "gh_grep": {
       "type": "remote",
       "url": "https://mcp.grep.app",
-      "enabled": false
+      "enabled": true
     },
     "exa": {
       "type": "remote",
@@ -98,7 +98,7 @@
         "ide",
         "--project-from-cwd"
       ],
-      "enabled": false
+      "enabled": true
     },
     "octocode": {
       "type": "local",
@@ -108,7 +108,7 @@
     "playwright": {
       "type": "local",
       "command": ["npx", "-y", "@playwright/mcp@latest", "--headless"],
-      "enabled": false
+      "enabled": true
     },
     "gitnexus": {
       "type": "local",
