@@ -194,11 +194,15 @@ def _map_arctracker_quest(arctracker_quest: dict) -> dict | None:
 
 
 def _fetch_arclens_items() -> list[dict]:
-    """Fetch all items from arc-lens wiki scraper."""
+    """Fetch all items from arc-lens wiki scraper.
+
+    Arc-Lens is an optional supplemental source that must be explicitly
+    enabled via the ``use_arclens`` parameter to ``update_data_snapshot``.
+    When not enabled this function is never called.
+    """
     try:
         from scripts.vendor.arc_lens.scrapers import WikiItemScraper
     except ImportError as exc:
-        _log.warning("Arc-Lens not available: %s", exc)
         raise DownloadError("Arc-Lens scrapers not available") from exc
 
     scraper = WikiItemScraper()
@@ -213,11 +217,15 @@ def _fetch_arclens_items() -> list[dict]:
 
 
 def _fetch_arclens_quests() -> list[dict]:
-    """Fetch all quests from arc-lens wiki scraper."""
+    """Fetch all quests from arc-lens wiki scraper.
+
+    Arc-Lens is an optional supplemental source that must be explicitly
+    enabled via the ``use_arclens`` parameter to ``update_data_snapshot``.
+    When not enabled this function is never called.
+    """
     try:
         from scripts.vendor.arc_lens.scrapers import WikiQuestScraper
     except ImportError as exc:
-        _log.warning("Arc-Lens not available: %s", exc)
         raise DownloadError("Arc-Lens scrapers not available") from exc
 
     scraper = WikiQuestScraper()
@@ -232,11 +240,15 @@ def _fetch_arclens_quests() -> list[dict]:
 
 
 def _fetch_arclens_projects() -> list[dict]:
-    """Fetch all projects from arc-lens wiki scraper."""
+    """Fetch all projects from arc-lens wiki scraper.
+
+    Arc-Lens is an optional supplemental source that must be explicitly
+    enabled via the ``use_arclens`` parameter to ``update_data_snapshot``.
+    When not enabled this function is never called.
+    """
     try:
         from scripts.vendor.arc_lens.scrapers import WikiProjectScraper
     except ImportError as exc:
-        _log.warning("Arc-Lens not available: %s", exc)
         raise DownloadError("Arc-Lens scrapers not available") from exc
 
     scraper = WikiProjectScraper()
@@ -943,7 +955,7 @@ def _enrich_items_with_wiki(items: list[dict], uses_map: dict[str, str]) -> tupl
     return result, enriched_count
 
 
-def update_data_snapshot(data_dir: Path | None = None) -> dict:
+def update_data_snapshot(data_dir: Path | None = None, *, use_arclens: bool = False) -> dict:
     data_dir = data_dir or DATA_DIR
     (data_dir / "static").mkdir(parents=True, exist_ok=True)
 
@@ -1054,34 +1066,33 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
         arctracker_projects_error = str(exc)
         _log.warning("ArcTracker projects unavailable: %s", exc)
 
-    # Fetch arc-lens data for additional enrichment
+    # Fetch arc-lens data only when explicitly enabled (slow wiki scraper)
     arclens_items: list[dict] | None = None
     arclens_quests: list[dict] | None = None
     arclens_projects: list[dict] | None = None
     arclens_items_error: str | None = None
     arclens_quests_error: str | None = None
-    arclens_projects_error: str | None = None
 
-    try:
-        arclens_items = _fetch_arclens_items()
-        _log.info("Fetched %d items from arc-lens", len(arclens_items))
-    except DownloadError as exc:
-        arclens_items_error = str(exc)
-        _log.warning("Arc-Lens items unavailable: %s", exc)
+    if use_arclens:
+        try:
+            arclens_items = _fetch_arclens_items()
+            _log.info("Fetched %d items from arc-lens", len(arclens_items))
+        except DownloadError as exc:
+            arclens_items_error = str(exc)
+            _log.warning("Arc-Lens items unavailable: %s", exc)
 
-    try:
-        arclens_quests = _fetch_arclens_quests()
-        _log.info("Fetched %d quests from arc-lens", len(arclens_quests))
-    except DownloadError as exc:
-        arclens_quests_error = str(exc)
-        _log.warning("Arc-Lens quests unavailable: %s", exc)
+        try:
+            arclens_quests = _fetch_arclens_quests()
+            _log.info("Fetched %d quests from arc-lens", len(arclens_quests))
+        except DownloadError as exc:
+            arclens_quests_error = str(exc)
+            _log.warning("Arc-Lens quests unavailable: %s", exc)
 
-    try:
-        arclens_projects = _fetch_arclens_projects()
-        _log.info("Fetched %d projects from arc-lens", len(arclens_projects))
-    except DownloadError as exc:
-        arclens_projects_error = str(exc)
-        _log.warning("Arc-Lens projects unavailable: %s", exc)
+        try:
+            arclens_projects = _fetch_arclens_projects()
+            _log.info("Fetched %d projects from arc-lens", len(arclens_projects))
+        except DownloadError as exc:
+            _log.warning("Arc-Lens projects unavailable: %s", exc)
 
     # Map arctracker data
     mapped_arctracker_items = (
@@ -1095,17 +1106,15 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
         else []
     )
 
-    # Map arc-lens data
-    mapped_arclens_items = (
-        [mapped for item in arclens_items if (mapped := _map_arclens_item(item)) is not None]
-        if arclens_items is not None
-        else []
-    )
-    mapped_arclens_quests = (
-        [mapped for quest in arclens_quests if (mapped := _map_arclens_quest(quest)) is not None]
-        if arclens_quests is not None
-        else []
-    )
+    # Map arc-lens data only when enabled (skip expensive wiki scraping otherwise)
+    mapped_arclens_items: list[dict] = []
+    mapped_arclens_quests: list[dict] = []
+    if use_arclens and arclens_items is not None:
+        mapped_arclens_items = [mapped for item in arclens_items if (mapped := _map_arclens_item(item)) is not None]
+    if use_arclens and arclens_quests is not None:
+        mapped_arclens_quests = [
+            mapped for quest in arclens_quests if (mapped := _map_arclens_quest(quest)) is not None
+        ]
 
     # Merge arctracker data as supplemental (like RaidTheory fallback)
     mapped_items, arctracker_supplemental_items = _merge_missing_entries(
@@ -1117,24 +1126,24 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
         mapped_arctracker_quests,
     )
 
-    # Merge arc-lens data as supplemental entries
-    mapped_items, arclens_supplemental_items = _merge_missing_entries(
-        mapped_items,
-        mapped_arclens_items,
-    )
-    mapped_quests, arclens_supplemental_quests = _merge_missing_entries(
-        mapped_quests,
-        mapped_arclens_quests,
-    )
+    # Merge arc-lens data only when explicitly enabled
+    arclens_supplemental_items = 0
+    arclens_supplemental_quests = 0
+    if use_arclens:
+        mapped_items, arclens_supplemental_items = _merge_missing_entries(
+            mapped_items,
+            mapped_arclens_items,
+        )
+        mapped_quests, arclens_supplemental_quests = _merge_missing_entries(
+            mapped_quests,
+            mapped_arclens_quests,
+        )
 
     # Field-level merge: fill in missing fields from all supplemental sources
-    # Combine fallback, arctracker, and arc-lens data for field-level enrichment
-    combined_item_supplemental = (
-        list(mapped_fallback_items) + list(mapped_arctracker_items) + list(mapped_arclens_items)
-    )
-    combined_quest_supplemental = (
-        list(mapped_fallback_quests) + list(mapped_arctracker_quests) + list(mapped_arclens_quests)
-    )
+    # Combine fallback and arctracker data for field-level enrichment
+    # arc-lens is excluded from field-level merge when not enabled (too slow)
+    combined_item_supplemental = list(mapped_fallback_items) + list(mapped_arctracker_items)
+    combined_quest_supplemental = list(mapped_fallback_quests) + list(mapped_arctracker_quests)
 
     # Track field-level merge stats
     item_field_merge_count = 0
@@ -1185,14 +1194,14 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
     elif supplemental_quest_count:
         quest_source = "metaforge+raidtheory"
 
-    # Update source names if arctracker or arc-lens contributed data
+    # Update source names if arctracker contributed data
     if arctracker_supplemental_items > 0:
         item_source = f"{item_source}+arctracker"
     if arctracker_supplemental_quests > 0:
         quest_source = f"{quest_source}+arctracker"
-    if arclens_supplemental_items > 0:
+    if use_arclens and arclens_supplemental_items > 0:
         item_source = f"{item_source}+arclens"
-    if arclens_supplemental_quests > 0:
+    if use_arclens and arclens_supplemental_quests > 0:
         quest_source = f"{quest_source}+arclens"
 
     metadata = {
@@ -1221,14 +1230,10 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
                     "supplementalCount": arctracker_supplemental_items,
                     "error": arctracker_items_error,
                 },
-                "arclensEnrichment": {
-                    "supplementalCount": arclens_supplemental_items,
-                    "error": arclens_items_error,
-                },
                 "fieldLevelMerge": {
                     "enabled": True,
                     "entriesEnriched": item_field_merge_count,
-                    "sources": ["raidtheory-fallback", "arctracker", "arclens"],
+                    "sources": ["raidtheory-fallback", "arctracker"],
                     "fields": [
                         "type",
                         "rarity",
@@ -1240,6 +1245,11 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
                         "recyclesInto",
                         "wikiUses",
                     ],
+                },
+                "arclensEnrichment": {
+                    "enabled": use_arclens,
+                    "supplementalCount": arclens_supplemental_items if use_arclens else 0,
+                    "error": arclens_items_error if use_arclens else None,
                 },
                 "wikiEnrichment": {
                     "url": WIKI_LOOT_URL,
@@ -1269,13 +1279,14 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
                     "error": arctracker_quests_error,
                 },
                 "arclensEnrichment": {
-                    "supplementalCount": arclens_supplemental_quests,
-                    "error": arclens_quests_error,
+                    "enabled": use_arclens,
+                    "supplementalCount": arclens_supplemental_quests if use_arclens else 0,
+                    "error": arclens_quests_error if use_arclens else None,
                 },
                 "fieldLevelMerge": {
                     "enabled": True,
                     "entriesEnriched": quest_field_merge_count,
-                    "sources": ["raidtheory-fallback", "arctracker", "arclens"],
+                    "sources": ["raidtheory-fallback", "arctracker"],
                     "fields": ["objectives", "requirements", "trader", "xp", "sortOrder", "rewardItemIds", "rewards"],
                 },
             },
@@ -1295,10 +1306,6 @@ def update_data_snapshot(data_dir: Path | None = None) -> dict:
                     "count": len(arctracker_projects) if arctracker_projects else 0,
                     "error": arctracker_projects_error,
                     "file": "static/arctracker_projects.json",
-                },
-                "arclens": {
-                    "count": len(arclens_projects) if arclens_projects else 0,
-                    "error": arclens_projects_error,
                 },
             },
         },
