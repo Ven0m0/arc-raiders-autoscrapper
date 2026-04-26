@@ -32,6 +32,9 @@
   "constraints": {
     "python": "<3.14"
   },
+  "pre-commit": {
+    "enabled": true
+  },
   "pep621": {
     "enabled": true
   },
