@@ -140,7 +140,8 @@ def main() -> int:
         print("No samples found; capture live SKIP_UNLISTED data before calibrating the threshold.")
     elif not authoritative_samples:
         print(
-            "No authoritative labels found; mark samples with label_status=match|no_match before calibrating the threshold."
+            "No authoritative labels found; mark samples with "
+            "label_status=match|no_match before calibrating the threshold."
         )
     return 0
 
