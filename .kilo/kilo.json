@@ -2,7 +2,7 @@
   "$schema": "https://app.kilo.ai/config.json",
   "instructions": [".kilo/rules/*.md", ".kilo/CROSS_REFERENCE.md", "AGENTS.md", ".github/instructions/*.md"],
   "skills": {
-    "paths": [".kilo/skills"]
+    "paths": [".kilo/skills", ".kilo/skill", ".opencode/skills", ".claude/skills"]
   },
   "permission": {
     "*": "allow",
