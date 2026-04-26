@@ -1,7 +1,6 @@
 # Arc Raiders Inventory Auto Scrapper
 
-[![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
-[![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff) [![Maintainability](https://qlty.sh/gh/Ven0m0/projects/arc-raiders-autoscrapper/maintainability.svg)](https://qlty.sh/gh/Ven0m0/projects/arc-raiders-autoscrapper)
+[![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Ven0m0/arc-raiders-autoscrapper/main.svg)](https://results.pre-commit.ci/latest/github/Ven0m0/arc-raiders-autoscrapper/main)[![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/c1de27b2-4dd9-4d04-855a-b4faa4e9dd1a" alt="autoscrapper_logo4">

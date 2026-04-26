@@ -86,7 +86,7 @@ async function dirListing(dir: string, indent = ""): Promise<string> {
 
 // ── hashline_read ───────────────────────────────────────────────────────────
 
-export const read = tool({
+const read = tool({
   description:
     "Read a file with LINE#HASH|content annotations for use with hl_edit. " +
     "Each line is tagged so you can reference it precisely in edits. " +
@@ -267,7 +267,7 @@ async function fsFallback(pattern: string, searchPath: string, include?: string,
   return all;
 }
 
-export const grep = tool({
+const grep = tool({
   description:
     "Search files and return results with LINE#HASH|content annotations. " +
     "Results can be used directly as anchors for hl_edit — no separate read needed. " +
@@ -305,3 +305,5 @@ export const grep = tool({
     return formatGrepResults(matches, base);
   },
 });
+
+export { read, grep };

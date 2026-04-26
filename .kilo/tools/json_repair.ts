@@ -6,7 +6,7 @@ import { extractJson, extractAllJson, stripLlmWrapper } from "repair-json-stream
 
 const CHUNK = 65536; // 64 KB push chunks for streaming repair
 
-export default tool({
+const json_repair = tool({
   description: "Repair malformed/incomplete JSON. Modes: repair|extract|extract_all|strip. Accepts string or file path.",
 
   args: {
@@ -146,3 +146,5 @@ export default tool({
     return pretty ? JSON.stringify(results, null, 2) : JSON.stringify(results);
   },
 });
+
+export { json_repair as default, json_repair };

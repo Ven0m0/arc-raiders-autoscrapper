@@ -33,7 +33,6 @@
     "github:spoons-and-mirrors/subtask2",
     "./plugins/context-shield",
     "./plugins/gitingest",
-    "./plugins/codemogger",
     "./plugins/trim-tool-name",
     "./plugins/custom-tools",
     "./plugins/json-healer",

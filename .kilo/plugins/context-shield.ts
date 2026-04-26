@@ -54,8 +54,6 @@ const SKIP_COMPACTION_FOR = new Set([
   "json_repair",
   "sg",
   "sgr",
-  "codemogger_index",
-  "codemogger_search",
   "cshield_toggle",
 ]);
 
@@ -78,8 +76,6 @@ const SLIM_DESCRIPTIONS: Record<string, string> = {
   hl_grep: "Search files, return hash-annotated matches.",
   sg: "AST structural code search (25 langs). Meta-vars: $VAR (node), $$$ (many). Prefer over grep for function/class/call patterns.",
   sgr: "AST structural code replace (dry-run by default). Use $VAR/$$$ to rewrite matched patterns in-place.",
-  codemogger_index: "Index directory for semantic code search.",
-  codemogger_search: "Semantic/keyword/hybrid search over indexed code.",
 };
 
 // Regex for expanding line-range oldString in native edit (e.g. "55" or "55-64")

@@ -6,31 +6,10 @@ import { tool } from "@opencode-ai/plugin";
 import { spawn } from "bun";
 
 const CLI_LANGUAGES = [
-  "bash",
-  "c",
-  "cpp",
-  "csharp",
-  "css",
-  "elixir",
-  "go",
-  "haskell",
-  "html",
-  "java",
-  "javascript",
-  "json",
-  "kotlin",
-  "lua",
-  "nix",
-  "php",
-  "python",
-  "ruby",
-  "rust",
-  "scala",
-  "solidity",
-  "swift",
-  "typescript",
-  "tsx",
-  "yaml",
+  "bash", "c", "cpp", "csharp", "css", "elixir", "go", "haskell",
+  "html", "java", "javascript", "json", "kotlin", "lua", "nix", "php",
+  "python", "ruby", "rust", "scala", "solidity", "swift", "typescript",
+  "tsx", "yaml",
 ] as const;
 
 type Lang = (typeof CLI_LANGUAGES)[number];
@@ -111,9 +90,7 @@ async function runSg(opts: {
 
   const timeout = new Promise<never>((_, reject) => {
     const id = setTimeout(() => {
-      try {
-        proc.kill();
-      } catch {}
+      try { proc.kill(); } catch {}
       reject(new Error(`Search timeout after ${DEFAULT_TIMEOUT_MS}ms`));
     }, DEFAULT_TIMEOUT_MS);
     proc.exited.then(() => clearTimeout(id)).catch(() => clearTimeout(id));
@@ -142,7 +119,6 @@ async function runSg(opts: {
   try {
     all = JSON.parse(raw);
   } catch {
-    // try partial parse on truncated output
     const lastBrace = raw.lastIndexOf("}");
     const lastComma = raw.lastIndexOf("},", lastBrace);
     try {
@@ -161,7 +137,6 @@ async function runSg(opts: {
   };
 }
 
-// If rewrite+updateAll needed, run a second pass with --update-all
 async function runSgReplace(opts: {
   pattern: string;
   lang: Lang;
@@ -187,7 +162,7 @@ async function runSgReplace(opts: {
   return result;
 }
 
-function formatSearchResult(r: ReturnType<typeof runSg> extends Promise<infer T> ? T : never): string {
+function formatSearchResult(r: Awaited<ReturnType<typeof runSg>>): string {
   if (r.error) return `Error: ${r.error}`;
   if (r.matches.length === 0) return "No matches found";
   const lines: string[] = [];
@@ -201,71 +176,46 @@ function formatSearchResult(r: ReturnType<typeof runSg> extends Promise<infer T>
   return lines.join("\n");
 }
 
-export const search = tool({
-  description:
-    "AST-aware code search across the codebase. Supports 25 languages. " +
-    "Use meta-variables: $VAR (single node), $$$ (multiple nodes). " +
-    "Patterns must be complete AST nodes. " +
-    "Examples: 'console.log($MSG)', 'def $FUNC($$$):', 'async function $NAME($$$) { $$$ }'",
+const search = tool({
+  description: "AST structural code search via ast-grep CLI. Use meta-vars: $VAR (single node), $$$ (multiple). Preferred over grep for code patterns.",
   args: {
-    pattern: tool.schema.string().describe("AST pattern with meta-variables. Must be valid code."),
-    lang: tool.schema.enum(CLI_LANGUAGES).describe("Target language"),
-    paths: tool.schema.array(tool.schema.string()).optional().describe("Paths to search (default: cwd)"),
-    globs: tool.schema.array(tool.schema.string()).optional().describe("Glob filters (prefix ! to exclude)"),
-    context: tool.schema.number().optional().describe("Context lines around match"),
+    lang: tool.schema.string().optional().describe("Language (e.g. python, typescript, rust)."),
+    paths: tool.schema.array(tool.schema.string()).optional().describe("File paths to search."),
+    pattern: tool.schema.string().describe("AST pattern to match."),
+    rewrite: tool.schema.string().optional().describe("Rewrite pattern for sgr."),
+    globs: tool.schema.array(tool.schema.string()).optional().describe("Glob patterns."),
+    context: tool.schema.number().optional().describe("Lines of context."),
+    dryRun: tool.schema.boolean().optional().describe("Dry run for sgr."),
+    include: tool.schema.string().optional().describe("Include glob."),
   },
-  async execute(args, ctx) {
-    const result = await runSg({
-      pattern: args.pattern,
-      lang: args.lang as Lang,
-      paths: args.paths ?? [ctx.directory],
-      globs: args.globs,
-      context: args.context,
-    });
-    return formatSearchResult(result);
+  async execute(args) {
+    const sgPath = findSg();
+    if (!sgPath) return "ast-grep not found. Install: npm install -g @ast-grep/cli";
+    const workdir = process.cwd();
+    const subcommand = args.rewrite ? "replace" : "search";
+    const sgArgs = buildArgs(subcommand, args, workdir);
+    return runSg(sgPath, sgArgs, subcommand);
   },
 });
 
-export const replace = tool({
-  description:
-    "AST-aware code replacement. Dry-run by default (dryRun=true). " +
-    "Use meta-variables in rewrite to preserve matched content. " +
-    "Example: pattern='console.log($MSG)' rewrite='logger.info($MSG)'",
+const replace = tool({
+  description: "AST structural code replace via ast-grep CLI. Dry-run by default.",
   args: {
-    pattern: tool.schema.string().describe("AST pattern to match"),
-    rewrite: tool.schema.string().describe("Replacement pattern (can use $VAR from pattern)"),
-    lang: tool.schema.enum(CLI_LANGUAGES).describe("Target language"),
-    paths: tool.schema.array(tool.schema.string()).optional().describe("Paths to search"),
-    globs: tool.schema.array(tool.schema.string()).optional().describe("Glob filters"),
-    dryRun: tool.schema.boolean().optional().describe("Preview without applying (default: true)"),
+    lang: tool.schema.string().optional().describe("Language (e.g. python, typescript, rust)."),
+    paths: tool.schema.array(tool.schema.string()).optional().describe("File paths."),
+    pattern: tool.schema.string().describe("AST pattern to match."),
+    rewrite: tool.schema.string().describe("Rewrite pattern."),
+    globs: tool.schema.array(tool.schema.string()).optional().describe("Glob patterns."),
+    dryRun: tool.schema.boolean().optional().default(true).describe("Dry run (default: true)."),
+    include: tool.schema.string().optional().describe("Include glob."),
   },
-  async execute(args, ctx) {
-    const paths = args.paths ?? [ctx.directory];
-    const lang = args.lang as Lang;
-
-    if (args.dryRun !== false) {
-      const result = await runSg({ pattern: args.pattern, lang, paths, globs: args.globs });
-      if (result.error) return `Error: ${result.error}`;
-      if (result.matches.length === 0) return "No matches found";
-      const lines = [`[DRY RUN] ${result.matches.length} replacement(s):\n`];
-      for (const m of result.matches) {
-        lines.push(`${m.file}:${m.range.start.line + 1}:${m.range.start.column + 1}`);
-        lines.push(`  ${m.text}`);
-        lines.push("");
-      }
-      lines.push("Use dryRun=false to apply changes");
-      return lines.join("\n");
-    }
-
-    const result = await runSgReplace({
-      pattern: args.pattern,
-      rewrite: args.rewrite,
-      lang,
-      paths,
-      globs: args.globs,
-    });
-    if (result.error) return `Error: ${result.error}`;
-    if (result.matches.length === 0) return "No matches found";
-    return `Applied ${result.matches.length} replacement(s)`;
+  async execute(args) {
+    const sgPath = findSg();
+    if (!sgPath) return "ast-grep not found. Install: npm install -g @ast-grep/cli";
+    const workdir = process.cwd();
+    const sgArgs = buildArgs("replace", { ...args, dryRun: args.dryRun ?? true }, workdir);
+    return runSg(sgPath, sgArgs, "replace");
   },
 });
+
+export { search, replace };

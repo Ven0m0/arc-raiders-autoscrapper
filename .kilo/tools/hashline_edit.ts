@@ -340,7 +340,7 @@ EXAMPLE (file content after read):
 
 // ── Tool export ─────────────────────────────────────────────────────────────
 
-export default tool({
+const hl_edit = tool({
   description: DESCRIPTION,
   args: {
     filePath: tool.schema.string().describe("Absolute path to the file"),
@@ -438,3 +438,5 @@ export default tool({
     }
   },
 });
+
+export { hl_edit as default, hl_edit };
