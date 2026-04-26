@@ -40,6 +40,9 @@ jobs:
           cache-dependency-glob: |
             uv.lock
             pyproject.toml
+      - uses: jdx/mise-action@v3
+        with:
+          experimental: true
       - name: Install dependencies
         run: uv sync --extra linux-input --frozen --no-dev
       - name: Update snapshot + default rules
