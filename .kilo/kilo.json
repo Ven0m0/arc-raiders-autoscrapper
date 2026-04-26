@@ -27,7 +27,6 @@
   "disabled_providers": ["openai", "google"],
   "plugin": [
     "opencode-ignore@1.1.0",
-    "opencode-agent-skills@0.6.5",
     "@gotgenes/opencode-agent-identity@3.0.1",
     "github:kdcokenny/opencode-background-agents",
     "github:spoons-and-mirrors/subtask2",
@@ -35,10 +34,7 @@
     "./plugins/gitingest",
     "./plugins/trim-tool-name",
     "./plugins/custom-tools",
-    "./plugins/json-healer",
-    "opencode-betterglob",
-    "opencode-bettergrep",
-    "opencode-betterread"
+    "./plugins/json-healer"
   ],
   "formatter": {
     "biome": {
@@ -96,7 +92,7 @@
         "ide",
         "--project-from-cwd"
       ],
-      "enabled": false
+      "enabled": true
     },
     "octocode": {
       "type": "local",
@@ -107,20 +103,15 @@
       "type": "local",
       "command": ["npx", "-y", "@playwright/mcp@latest", "--headless"],
       "enabled": false
-    },
-    "gitnexus": {
-      "type": "local",
-      "command": ["npx", "-y", "gitnexus@latest", "mcp"],
-      "enabled": true
     }
   },
   "lsp": {
     "basedpyright": {
-      "command": ["basedpyright-langserver", "--stdio"],
+      "command": ["uv", "run", "basedpyright-langserver", "--stdio"],
       "extensions": [".py", ".pyw", ".pyi"]
     },
     "ty": {
-      "command": ["ty", "check"],
+      "command": ["uv", "run", "ty", "check"],
       "extensions": [".py", ".pyw", ".pyi"]
     },
     "bash": {
@@ -140,7 +131,7 @@
       "extensions": [".json", ".jsonc"]
     },
     "tombi": {
-      "command": ["tombi", "lsp"],
+      "command": ["uv", "run", "tombi", "lsp"],
       "extensions": [".toml"]
     }
   },
