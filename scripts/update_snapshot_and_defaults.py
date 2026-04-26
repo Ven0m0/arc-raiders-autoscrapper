@@ -18,8 +18,13 @@ import orjson
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SRC_DIR = REPO_ROOT / "src"
+SCRIPTS_DIR = REPO_ROOT / "scripts"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
 
 from autoscrapper.progress.data_update import update_data_snapshot  # noqa: E402
 from autoscrapper.progress.rules_generator import (  # noqa: E402

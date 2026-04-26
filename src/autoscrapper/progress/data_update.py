@@ -196,7 +196,7 @@ def _map_arctracker_quest(arctracker_quest: dict) -> dict | None:
 def _fetch_arclens_items() -> list[dict]:
     """Fetch all items from arc-lens wiki scraper."""
     try:
-        from scripts.vendor.arc_lens.scrapers import WikiItemScraper
+        from vendor.arc_lens.scrapers import WikiItemScraper
     except ImportError as exc:
         _log.warning("Arc-Lens not available: %s", exc)
         raise DownloadError("Arc-Lens scrapers not available") from exc
@@ -215,7 +215,7 @@ def _fetch_arclens_items() -> list[dict]:
 def _fetch_arclens_quests() -> list[dict]:
     """Fetch all quests from arc-lens wiki scraper."""
     try:
-        from scripts.vendor.arc_lens.scrapers import WikiQuestScraper
+        from vendor.arc_lens.scrapers import WikiQuestScraper
     except ImportError as exc:
         _log.warning("Arc-Lens not available: %s", exc)
         raise DownloadError("Arc-Lens scrapers not available") from exc
@@ -234,7 +234,7 @@ def _fetch_arclens_quests() -> list[dict]:
 def _fetch_arclens_projects() -> list[dict]:
     """Fetch all projects from arc-lens wiki scraper."""
     try:
-        from scripts.vendor.arc_lens.scrapers import WikiProjectScraper
+        from vendor.arc_lens.scrapers import WikiProjectScraper
     except ImportError as exc:
         _log.warning("Arc-Lens not available: %s", exc)
         raise DownloadError("Arc-Lens scrapers not available") from exc
