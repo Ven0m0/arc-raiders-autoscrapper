@@ -1,14 +1,14 @@
 ---
 title: Implementation Plan
 status: active
-updated: 2026-04-25
+updated: 2026-04-26
 updated_by: kilo
 ---
 
 <!-- AGENT GUIDE: Read AGENTS.md first. Never hand-edit data/ or items_rules.default.json -->
 
-<!-- Last updated: 2026-04-25T04:56:00+00:00 -->
-<!-- Plan review: Only remaining tasks shown. Completed tasks (T012, T013, T014, T019, T027, T028, T030, T032, T035, T039, T040, T041, T042, T043) removed to reduce context -->
+<!-- Last updated: 2026-04-26T07:59:00+00:00 -->
+<!-- Plan review: T034 and T020 verified complete. Remaining: T003 (blocked), T036, T037, T038 -->
 
 ## Active Tasks
 
@@ -18,7 +18,7 @@ updated_by: kilo
 |------|-------|
 | Priority | medium |
 | Size | M |
-| Status | blocked (Supabase removal complete) |
+| Status | blocked |
 
 **Files:** `src/autoscrapper/progress/data_update.py`
 
@@ -26,46 +26,6 @@ updated_by: kilo
 - [ ] Wiki enrichment for workshop/expedition/project data
 - [ ] Dry-run reports coverage
 - [ ] Metadata records field origins
-
----
-
-### T020 - Safe recycle protection against quest requirements
-| Attr | Value |
-|------|-------|
-| Priority | medium |
-| Size | M |
-| Status | 🔄 IN PROGRESS |
-
-**File:** `src/autoscrapper/progress/`
-
-**Todo:**
-- [ ] Graceful degradation when progress data absent
-- [ ] Review conflict resolution (recycle vs quest requirement)
-
-**Note:** `decision_engine.py` has `is_used_in_active_quests()` returning KEEP for quest-needed items. Needs graceful degradation review.
-
----
-
-### T034 - Integrate Arc-Lens data scraping pipeline
-<critical-path/>
-| Attr | Value |
-|------|-------|
-| Priority | high |
-| Size | L |
-| Status | ❌ TODO |
-
-**Files:** `scripts/vendor/arc-lens/`, `scripts/update_snapshot_and_defaults.py`
-
-**Refs:** https://github.com/eetusa/arc-lens/
-
-**Todo:**
-- [ ] Port JS scrapers to Python (`requests` + `BeautifulSoup`)
-- [ ] Implement `WikiItemScraper`, `WikiQuestScraper`, `WikiProjectScraper`, `MetaforgeScraper`
-- [ ] Wire into `update_snapshot_and_defaults.py`
-- [ ] Add `--source arc-lens` CLI flag
-- [ ] Graceful failure handling
-
-**Note:** Only empty `__init__.py` in vendor/arc_lens/. No implementation.
 
 ---
 
@@ -108,11 +68,9 @@ updated_by: kilo
 
 **Todo:**
 - [ ] Define specific exceptions (RateLimitError, AuthError, NotFoundError, etc.)
-- [ ] Replace `except Exception:` with specific types
+- [ ] Replace `except Exception:` with specific types (currently 15 instances)
 - [ ] Add contextual error messages
 - [ ] Tests verify specific exception handling
-
-**Current:** 15 instances of `except Exception:`
 
 ---
 
@@ -170,14 +128,19 @@ uv run pytest
 - `src/autoscrapper/config.py`
 - `src/autoscrapper/api/client.py` (T037 exception handling)
 
-## Recently Completed (reference)
+## Completed Tasks
 
-✅ T012 (roman numerals), T013 (swap filter), T014 (Supabase), T019 (JSONL), T027 (user_words), T028 (padding), T030 (confidence), T032 (DPI), T035 (normalization), T039-043 (tests), T042 (caching), T043 (optimization)
+| Task | Status | Notes |
+|------|--------|-------|
+| T012-T014, T019 | ✅ | Core infrastructure |
+| T020 | ✅ Verified | `is_used_in_active_quests()` handles empty progress gracefully |
+| T027-T028, T030, T032 | ✅ | UI/OCR improvements |
+| T034 | ✅ Verified | Full Arc-Lens implementation (516 lines in scrapers.py) |
+| T035, T039-T043 | ✅ | Normalization, tests, caching, optimization |
 
 ## Priority Order
 
-1. **T034** - Arc-Lens scraper (blocks data pipeline)
-2. **T036** - Module refactoring (maintainability)
-3. **T037** - Exception handling (reliability)
-4. **T020** - Quest recycle protection
-5. **T038** - Async patterns (performance)
+1. **T036** - Module refactoring (maintainability)
+2. **T037** - Exception handling (reliability)
+3. **T038** - Async patterns (performance)
+4. **T003** - Wiki enrichment (blocked on T014)
