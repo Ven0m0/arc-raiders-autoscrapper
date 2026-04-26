@@ -1,5 +1,3 @@
-min_version = "2024.9.5"
-
 [settings]
 experimental = true
 color = true
