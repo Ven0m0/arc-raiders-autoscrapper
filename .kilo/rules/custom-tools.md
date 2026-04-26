@@ -14,8 +14,6 @@ All tools are registered in `.kilo/kilo.json` and loaded via `.kilo/plugins/cust
 | `sgr` | `tools/ast_grep.ts` | AST-aware in-place code rewrite; dry-run by default |
 | `cshield_toggle` | `plugins/context-shield.ts` | Toggle output compaction on/off |
 | `gitingest` | `plugins/gitingest.ts` | Fetch full GitHub repo via gitingest.com |
-| `codemogger_index` | `plugins/codemogger.ts` | Build/update local semantic code index |
-| `codemogger_search` | `plugins/codemogger.ts` | Semantic/keyword/hybrid search over indexed code |
 
 ## Tool Routing (follow these rules)
 
@@ -33,8 +31,6 @@ All tools are registered in `.kilo/kilo.json` and loaded via `.kilo/plugins/cust
 
 **sg / sgr** — patterns use meta-variables: `$VAR` (single node), `$$$` (multiple nodes). Example: `console.log($MSG)`. Use `sgr` with `dryRun=false` to apply rewrites.
 
-**codemogger** — project root is auto-indexed on every session start (only changed files re-processed). Call `codemogger_index` to force a full refresh. Use `codemogger_search` for semantic or keyword lookup before reaching for `grep`.
-
 **json_repair** — no subprocess, no temp files; repair runs inline via `IncrementalJsonRepair`. Safe to call on large inputs. Also used by the `json-healer` plugin for automatic response healing.
 
 ## Plugin Architecture
@@ -43,12 +39,11 @@ All tools are registered in `.kilo/kilo.json` and loaded via `.kilo/plugins/cust
 |--------|---------|
 | `context-shield` | Compacts large tool outputs; applies slim descriptions to all built-in and custom tools; expands line-range `oldString` for native `edit`; suppresses verbose edit/read confirmation messages. **Also absorbs all openslimedit functionality** — there is no separate openslimedit plugin. |
 | `json-healer` | Transparent response healing: auto-repairs malformed JSON in string-valued tool arguments and string tool outputs before/after each tool call. Falls through silently if repair fails or result isn't valid JSON. |
-| `codemogger` | Semantic code search; indexes worktree in background on session start. Re-indexes on `file.edited` events. |
 | `custom-tools` | Registers `json_repair`, `hl_edit`, `hl_read`, `hl_grep`, `sg`, `sgr`. |
 
 ### SKIP_COMPACTION_FOR (context-shield)
 
-Context-shield never compacts output from: `write`, `apply_patch`, `multiedit`, `lsp`, `hl_read`, `hl_grep`, `hl_edit`, `json_repair`, `sg`, `sgr`, `codemogger_index`, `codemogger_search`, `cshield_toggle`.
+Context-shield never compacts output from: `write`, `apply_patch`, `multiedit`, `lsp`, `hl_read`, `hl_grep`, `hl_edit`, `json_repair`, `sg`, `sgr`, `cshield_toggle`.
 
 ## Naming
 

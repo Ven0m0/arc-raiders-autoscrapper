@@ -1,142 +1,236 @@
-## Repository Guide - Arc Raiders AutoScrapper
+# Arc Raiders AutoScrapper — Agent Guide
 
-This is the canonical repository guide for contributors and coding agents working in Arc Raiders AutoScrapper. Keep `CLAUDE.md` as a symlink to this file. Keep `.github/copilot-instructions.md` short and startup-focused; put path-specific rules in `.github/instructions/*.instructions.md`.
+> **Quick Links**: [Cross-Reference](./.kilo/CROSS_REFERENCE.md) • [Skills](./.kilo/skills/) • [Agents](./.kilo/agents/)
 
-### Quick Start
+This is the canonical guide for AI agents and contributors working on Arc Raiders AutoScrapper. For IDE-specific guidance, see [`.github/copilot-instructions.md`](./.github/copilot-instructions.md).
 
-- **Python**: 3.13
-- **Package manager**: `uv` (prefer `uv ...` in automation — uv may not be on PATH)
-- **UI**: Textual (TUI)
-- **Runtime**: Desktop automation for Arc Raiders inventory management (no game process hooking)
+---
 
-### Project Overview
+## Executive Summary
 
-Arc Raiders AutoScrapper automates inventory management via:
-- **Textual** TUI screens
-- **OCR** (tesserocr + tessdata.fast-eng) for item detection
-- **Vision** (OpenCV, Pillow, mss) for screen capture and grid detection
-- **Fuzzy matching** (rapidfuzz) for item name normalization
-- **Rule lookup** (`KEEP | SELL | RECYCLE`) with progress-based overrides
-- **Optional desktop input** (pydirectinput-rgx on Windows, pynput on Linux)
+**Arc Raiders AutoScrapper** is a desktop automation tool for Arc Raiders inventory management using:
+- **Textual** (Python TUI framework) for the interface
+- **Tesseract OCR** (via tesserocr) for item name recognition
+- **OpenCV/Pillow** for screen capture and image preprocessing
+- **RapidFuzz** for fuzzy item name matching
+- **pydirectinput/pynput** for optional desktop input automation
 
-**Dependencies**
-- OCR: tesserocr, tessdata.fast-eng
-- Vision: opencv-python-headless, Pillow, mss
-- Matching: rapidfuzz
-- Input: pydirectinput-rgx (Windows), pynput via linux-input (Linux)
+**Tech Stack**: Python 3.13, `uv` package manager, Ruff (lint/format), basedpyright (type-check), pytest
 
-### Repository Map
+---
 
-| Path | Purpose |
-|------|---------|
-| `src/autoscrapper/tui/` | Textual screens; `scan.py` starts scan flow |
-| `src/autoscrapper/scanner/` | Scan engine, page loop, reporting, action execution |
-| `src/autoscrapper/interaction/` | Screen capture, grid detection, platform input |
-| `src/autoscrapper/ocr/` | Tesseract init, preprocessing, infobox/item extraction |
-| `src/autoscrapper/core/item_actions.py` | Rule lookup and fuzzy decision logic |
-| `src/autoscrapper/items/rules_store.py` | Load/save custom rules; overrides bundled defaults |
-| `src/autoscrapper/progress/` | Quest, hideout, crafting data and default-rule generation |
-| `scripts/update_snapshot_and_defaults.py` | Regenerates bundled progress data and default rules |
-| `src/autoscrapper/config.py` | Persisted config dataclasses and versioning |
-| `tests/` | Pytest suite |
+## System Architecture
 
-### Daily Commands
+```
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│   Textual TUI   │────▶│   Scanner Loop   │────▶│   OCR Engine    │
+│  (tui/*.py)     │     │ (scanner/*.py)   │     │ (ocr/*.py)      │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
+                               │                           │
+                               ▼                           ▼
+                        ┌──────────────┐          ┌──────────────┐
+                        │ Interaction  │          │  Tesseract   │
+                        │(interaction/)│          │   OCR API    │
+                        └──────────────┘          └──────────────┘
+                               │
+                               ▼
+                        ┌──────────────┐
+                        │ Item Actions │
+                        │(rules, sell, │
+                        │  recycle)    │
+                        └──────────────┘
+```
+
+---
+
+## Repository Layout
+
+```
+src/autoscrapper/
+├── tui/                    # Textual UI screens
+│   ├── app.py             # Main app entry
+│   ├── scan.py            # Scan orchestration screen
+│   └── *.tcss             # Stylesheets
+├── scanner/               # Core scan engine
+│   ├── scan_loop.py       # Page iteration logic
+│   └── actions.py         # Action dispatch
+├── ocr/                   # OCR pipeline
+│   ├── inventory_vision.py # Image preprocessing, OCR
+│   └── tesseract_init.py  # Tesseract API setup
+├── interaction/           # Screen capture & input
+│   ├── screen_capture.py  # mss-based capture
+│   ├── grid_detection.py  # Inventory grid detection
+│   └── input_driver.py    # Platform input (Windows/Linux)
+├── core/                  # Business logic
+│   └── item_actions.py    # Rule lookup, fuzzy matching
+├── items/                 # Item rules
+│   ├── rules_store.py     # Custom/default rule loading
+│   └── items_rules.default.json  # Generated default rules
+├── progress/              # Game data & quest tracking
+│   ├── data/              # Generated JSON snapshots
+│   └── data_update.py     # MetaForge API integration
+└── config.py              # Persisted configuration
+```
+
+---
+
+## Essential Commands
 
 | Task | Command |
 |------|---------|
-| Install dependencies | `uv sync` |
-| Install Linux input extra | `uv sync --extra linux-input` |
-| Run TUI | `uv run autoscrapper` |
-| Run scan | `uv run autoscrapper scan` |
-| Run dry-run scan | `uv run autoscrapper scan --dry-run` |
-| Lint Python | `uv run ruff check src/ tests/ scripts/` |
-| Format Python | `uv run ruff format src/ tests/ scripts/` |
-| Type-check Python | `uv run basedpyright src/` |
-| Run tests | `uv run pytest` |
-| Validate workflow | `uv run prek run --files .github/workflows/<name>.yml` |
-| Run repo checks | `uv run prek run --all-files` |
-| Refresh generated data | `uv run python scripts/update_snapshot_and_defaults.py` |
-| Dry-run data refresh | `uv run python scripts/update_snapshot_and_defaults.py --dry-run` |
+| **Setup** | `uv sync` |
+| **Run TUI** | `uv run autoscrapper` |
+| **Dry-run scan** | `uv run autoscrapper scan --dry-run` |
+| **Validate** | `uv run ruff check src/ tests/ scripts/ && uv run basedpyright src/ && uv run pytest` |
+| **Format** | `uv run ruff format src/ tests/ scripts/` |
+| **Update data** | `uv run python scripts/update_snapshot_and_defaults.py --dry-run` |
 
-If `uv run <cmd>` fails with `No module named uv`, use `uv run <cmd>` directly.
+---
 
-### Validation Expectations
+## Using Agents & Skills
 
-| Change Type | Minimum Validation |
-|-------------|-------------------|
-| Python source | `ruff check` + `basedpyright` + `pytest` |
-| Workflow files | `prek run --files .github/workflows/<name>.yml` |
-| Generated data/rules | Use updater script (with `--dry-run` first) |
-| Docs/agent guidance | Verify paths, commands, links, hierarchy |
-| OCR/scanner/interaction/input | Standard validation + `autoscrapper scan --dry-run` |
+### Quick Reference
 
-- **Do not claim end-to-end OCR/scanner validation without a live Arc Raiders window.**
-- **Prefer `--dry-run` before anything that could click in-game.**
+| I need to... | Use |
+|--------------|-----|
+| Validate my changes | `/verify` or skill `verify` |
+| Fix OCR misreads | `/ocr-corpus-replay` → `ocr-reviewer` agent |
+| Add item rule | `/add-rule` skill |
+| Update game data | `/patch-update` skill |
+| Fix scan failures | `/diagnose-scan` → dispatch to specialist agent |
+| Generate tests | `test-generator` agent |
+| Review code | `{domain}-reviewer` agent (e.g., `ocr-reviewer`, `tui-reviewer`) |
 
-### Generated Files & Persisted Config
+### Agent Dispatch Pattern
 
-- **Never hand-edit** `src/autoscrapper/progress/data/`.
-- **Never hand-edit** `src/autoscrapper/items/items_rules.default.json`.
-- Regenerate both via `scripts/update_snapshot_and_defaults.py`.
-- On config field changes: bump `CONFIG_VERSION` in `src/autoscrapper/config.py` and add a migration.
-- Preserve custom-over-default rule precedence.
+When code changes are ready for review, invoke the appropriate specialist agent:
 
-### OCR & Interaction Invariants (High-Risk)
+```
+# OCR/vision changes
+Agent: ocr-reviewer
 
-Changes in these areas require extra caution, live validation, or corpus replay:
+# Scanner/interaction changes  
+Agent: scan-validator
 
-1. `initialize_ocr()` must run on the **main thread** before scan threads start.
-2. Keep the four Tesseract API locks separate: `_api_lock`, `_api_line_lock`, `_api_single_word_lock`, `_api_sparse_lock`.
-3. Keep capture-space image coordinates separate from screen-space input coordinates. Screen translation belongs in `src/autoscrapper/interaction/ui_windows.py`.
-4. `inventory_vision.py` upscales OCR images by 2×. Convert OCR boxes back to original-space coordinates before reuse.
-5. The dark context menu opens to the left of the clicked cell. The `_CONTEXT_MENU_` constants in `inventory_vision.py` are normalized to 1920×1080.
-6. Prefer `ocr_infobox_with_context(window_bgr, rect)` when the full window is available.
-7. `find_context_menu_crop` rejects crops with `dark_fraction < 0.20` on the left half. Treat that threshold as calibration-sensitive.
-8. Keep the fuzzy-match threshold shared between OCR item matching and rule lookup. Changing threshold or `score_cutoff` values requires corpus replay before shipping.
+# TUI changes
+Agent: tui-reviewer
 
-### Hotspots
+# Rule logic changes
+Agent: rules-reviewer
 
-Focus extra review time on these critical files:
-- `src/autoscrapper/ocr/inventory_vision.py`
-- `src/autoscrapper/scanner/`
-- `src/autoscrapper/core/item_actions.py`
-- `src/autoscrapper/items/rules_store.py`
-- `src/autoscrapper/config.py`
+# Config changes
+Agent: config-reviewer
 
-### Available Skills
-
-Use these built-in skills for common workflows:
-
-- `verify` — Full validation (lint + types + tests)
-- `dead-code-sweep` — Find/remove dead code
-- `add-rule` — Add/edit custom item rules
-- `threshold-change` — Safe threshold/sensitivity changes (requires corpus replay)
-- `ocr-corpus-replay` — Validate OCR changes against failure corpus
-- `config-bump` — Safely add/rename/remove persisted config fields
-- `calibrate-vision` — Recalibrate context-menu crop constants
-- `data-snapshot-updater` — Update Metaforge snapshots and bundled default rules
-- `patch-update` — Full new-game-patch pipeline
-- `scan-failed` — Diagnose scan failures (wrong decisions despite correct OCR)
-- `ocr-unavailable` — Triaging "UNAVAILABLE" misreads
-- `benchmark` — Tesseract model variant benchmarking
-
-### Git & Remote Rules
-
-- **Only permitted remote:** `https://github.com/Ven0m0/arc-raiders-autoscrapper` (personal fork).
-- **Never push** to upstream `https://github.com/zappybiby/ArcRaiders-AutoScrapper`.
-- If `gh pr create` would default to upstream, pass `--repo Ven0m0/arc-raiders-autoscrapper` or push without opening a PR.
-
-### Code Quality
-
-Run before committing:
-```bash
-uv run ruff check src/ tests/ scripts/
-uv run ruff format src/ tests/ scripts/
-uv run basedpyright src/
-uv run pytest
+# Data pipeline changes
+Agent: data-pipeline-reviewer
 ```
 
-### Documentation Updates
+See [`.kilo/CROSS_REFERENCE.md`](./.kilo/CROSS_REFERENCE.md) for the complete command/skill/agent matrix.
 
-- Keep the hierarchy clear: stable repo-wide rules here, startup guidance in `.github/copilot-instructions.md`, path-specific rules in `.github/instructions/*.instructions.md`.
-- Avoid duplicating large rule blocks across multiple files.
+---
+
+## Critical Invariants (DO NOT BREAK)
+
+### OCR & Threading
+1. **`initialize_ocr()` must run on main thread** before any scan threads start
+2. **Four separate Tesseract API locks**: `_api_lock`, `_api_line_lock`, `_api_single_word_lock`, `_api_sparse_lock`
+3. **2× upscaling in `inventory_vision.py`**: OCR boxes must be halved before reuse in original-space
+4. **Capture-space ≠ Screen-space**: Image coordinates vs input coordinates — translation happens in `interaction/ui_windows.py`
+
+### Data Integrity
+5. **Never hand-edit** `src/autoscrapper/progress/data/*` — use `scripts/update_snapshot_and_defaults.py`
+6. **Never hand-edit** `src/autoscrapper/items/items_rules.default.json` — same script
+7. **Custom rules take precedence** over default rules
+8. **Bump `CONFIG_VERSION`** and add migration when config fields change
+
+### Validation Requirements
+9. **OCR/scanner changes**: Require `autoscrapper scan --dry-run` against live game window
+10. **Threshold changes**: Require corpus replay (`ocr-corpus-replay`) before shipping
+
+---
+
+## Validation Checklist by Change Type
+
+| Change Type | Required Validation |
+|-------------|---------------------|
+| Python source | `ruff check` + `basedpyright` + `pytest` |
+| Workflow files | `pre-commit run --files .github/workflows/*.yml` |
+| OCR/scanner/input | Standard + `autoscrapper scan --dry-run` (live window) |
+| Config fields | Version bump + migration + round-trip test |
+| Generated data | Use updater script with `--dry-run` first |
+
+---
+
+## Hotspots (Extra Review Required)
+
+Files that require careful review for any changes:
+
+- `src/autoscrapper/ocr/inventory_vision.py` — Coordinate spaces, preprocessing, Tesseract config
+- `src/autoscrapper/scanner/scan_loop.py` — Timing, page detection, action dispatch
+- `src/autoscrapper/core/item_actions.py` — Rule lookup, fuzzy thresholds
+- `src/autoscrapper/items/rules_store.py` — Rule precedence, loading logic
+- `src/autoscrapper/config.py` — Versioning, migrations
+
+---
+
+## Common Workflows
+
+### 1. Fix OCR Misreads
+```
+/diagnose-scan → analyze output → /ocr-corpus-replay → /add-fixture → /verify
+```
+
+### 2. New Game Patch
+```
+/patch-update → check for unlisted items → /add-rule (gaps) → /verify → /ci-promote
+```
+
+### 3. Before Committing
+```
+/verify → /precommit-fix (if needed) → /upstream-sync → /merge-to-main
+```
+
+### 4. Clean Debug Artifacts
+```
+/clean-debug → /dead-code-sweep → /verify
+```
+
+---
+
+## Git & Remote Rules
+
+- **Fork only**: `https://github.com/Ven0m0/arc-raiders-autoscrapper`
+- **Never push to upstream**: `zappybiby/ArcRaiders-AutoScrapper`
+- **Always sync first**: Run `upstream-sync` skill before pushing
+- **PR target**: Use `--repo Ven0m0/arc-raiders-autoscrapper` with `gh pr create`
+
+---
+
+## Documentation Hierarchy
+
+| File | Purpose |
+|------|---------|
+| `AGENTS.md` (this file) | Canonical repo-wide rules |
+| `.github/copilot-instructions.md` | Quick startup for IDE |
+| `.github/instructions/*.md` | Path-specific rules |
+| `.kilo/CROSS_REFERENCE.md` | Command/skill/agent lookup |
+| `.kilo/rules/*.md` | Tool usage and coding standards |
+| `.kilo/agents/*.md` | Specialist agent definitions |
+| `.kilo/skills/*/SKILL.md` | Workflow procedures |
+
+---
+
+## Troubleshooting
+
+| Symptom | Solution |
+|---------|----------|
+| `uv run` fails with module error | Use `uv run <cmd>` (uv handles its own PATH) |
+| Pre-commit hook fails | See `/precommit-fix` skill |
+| OCR returns "UNAVAILABLE" | See `/ocr-unavailable` skill (context menu misread) |
+| Scan wrong decisions | See `/scan-failed` skill (rule precedence issue) |
+| Workflow YAML invalid | `pre-commit run --files .github/workflows/<name>.yml` |
+
+---
+
+*Last updated: 2026-04-26*
+*See [`.kilo/CROSS_REFERENCE.md`](./.kilo/CROSS_REFERENCE.md) for the complete skill/agent index.*

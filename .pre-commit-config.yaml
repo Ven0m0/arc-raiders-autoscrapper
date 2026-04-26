@@ -15,10 +15,10 @@ repos:
     rev: 1.39.3
     hooks:
       - id: basedpyright
--   repo: https://github.com/asottile/pyupgrade
+  - repo: https://github.com/asottile/pyupgrade
     rev: v3.21.2
     hooks:
-    -   id: pyupgrade
+      - id: pyupgrade
   - repo: https://github.com/astral-sh/uv-pre-commit
     rev: 0.11.7
     hooks:

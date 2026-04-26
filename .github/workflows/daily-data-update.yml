@@ -31,7 +31,7 @@ jobs:
         with:
           python-version-file: "pyproject.toml"
       - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
           activate-environment: true
@@ -40,11 +40,8 @@ jobs:
           cache-dependency-glob: |
             uv.lock
             pyproject.toml
-      - uses: jdx/mise-action@v4
-        with:
-          experimental: true
       - name: Install dependencies
-        run: uv sync --extra linux-input --frozen --no-dev
+        run: uv sync --frozen --no-dev
       - name: Update snapshot + default rules
         run: |
           uv run python scripts/update_snapshot_and_defaults.py \
