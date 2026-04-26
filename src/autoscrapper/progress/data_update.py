@@ -215,7 +215,7 @@ def _fetch_arclens_items() -> list[dict]:
 def _fetch_arclens_quests() -> list[dict]:
     """Fetch all quests from arc-lens wiki scraper."""
     try:
-        from vendor.arc_lens.scrapers import WikiQuestScraper
+        from scripts.vendor.arc_lens.scrapers import WikiQuestScraper
     except ImportError as exc:
         _log.warning("Arc-Lens not available: %s", exc)
         raise DownloadError("Arc-Lens scrapers not available") from exc
