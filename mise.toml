@@ -36,4 +36,4 @@ run = "pytest tests/"
 
 [tasks.lint]
 description = "Lint the code"
-run = "ruff ."
+run = "uv run ruff check src/ scripts/"
