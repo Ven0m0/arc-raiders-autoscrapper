@@ -230,3 +230,5 @@ artifacts/
 .kilocode/package-lock.json
 memory/
 .codemogger/
+.serena/
+!.serenal/project.yml
