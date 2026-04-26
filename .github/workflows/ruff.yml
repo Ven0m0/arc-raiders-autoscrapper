@@ -19,24 +19,28 @@ jobs:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
+      - name: Install mise
+        run: |
+          curl https://mise.run | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Setup tools
+        run: |
+          mise install python@3.13
+          mise install uv@latest
       - name: "Set up Python"
-        uses: actions/setup-python@v6
-        with:
-          python-version-file: "pyproject.toml"
+        run: mise run python -- python --version
       - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-        with:
-          enable-cache: true
-          activate-environment: true
-          ignore-nothing-to-cache: true
-          ignore-empty-workdir: true
-          cache-dependency-glob: |
-            uv.lock
-            pyproject.toml
+        run: mise run uv -- --version || mise install uv@latest
       - name: Install dependencies
-        run: uv sync --frozen
+        run: mise run python -- uv sync --frozen --all-extras
       - name: Run Ruff
-        run: uv run ruff check src/ tests/ scripts/
+        run: mise run python -- uv run ruff check src/ tests/ scripts/
+      - name: Run basedpyright
+        run: mise run python -- uv run basedpyright src/
+      - name: Run ty
+        run: mise run python -- uv run ty check src/
+      - name: Run pytest
+        run: mise run python -- uv run pytest
       - name: Run basedpyright
         run: uv run basedpyright src/
       - name: Run ty

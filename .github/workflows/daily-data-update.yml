@@ -19,22 +19,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version-file: "pyproject.toml"
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-        with:
-          enable-cache: true
-          activate-environment: true
-          ignore-nothing-to-cache: true
-          ignore-empty-workdir: true
-          cache-dependency-glob: |
-            uv.lock
-            pyproject.toml
+      - name: Install mise
+        run: |
+          curl https://mise.run | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Setup tools
+        run: mise install python@3.13 && mise install uv@latest
       - name: Install dependencies
-        run: uv sync --frozen --no-dev
+        run: mise run python -- uv sync --frozen --no-dev
       - name: Update snapshot + default rules
         run: |
           uv run python scripts/update_snapshot_and_defaults.py \
