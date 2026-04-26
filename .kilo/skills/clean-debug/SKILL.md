@@ -15,7 +15,7 @@ Delete OCR debug images older than the specified age.
 python3 -c "
 import os, time, pathlib, sys
 
-hours = float(sys.argv[1]) if len(sys.argv) > 1 else 24
+hours = float(sys.argv[1]) if len(sys.argv) > 1 and sys.argv[1] else 24
 cutoff = time.time() - hours * 3600
 debug_dir = pathlib.Path('ocr_debug')
 
