@@ -107,11 +107,7 @@
   },
   "lsp": {
     "basedpyright": {
-      "command": ["uv", "run", "basedpyright-langserver", "--stdio"],
-      "extensions": [".py", ".pyw", ".pyi"]
-    },
-    "ty": {
-      "command": ["uv", "run", "ty", "check"],
+      "command": ["uvx", "basedpyright-langserver", "--stdio"],
       "extensions": [".py", ".pyw", ".pyi"]
     },
     "bash": {
@@ -131,7 +127,7 @@
       "extensions": [".json", ".jsonc"]
     },
     "tombi": {
-      "command": ["uv", "run", "tombi", "lsp"],
+      "command": ["uvx", "tombi", "lsp"],
       "extensions": [".toml"]
     }
   },
