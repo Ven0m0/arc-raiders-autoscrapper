@@ -16,6 +16,7 @@ All tools are registered in `.kilo/kilo.json` and loaded via `.kilo/plugins/cust
 | `gitingest` | `plugins/gitingest.ts` | Fetch full GitHub repo via gitingest.com |
 | `codemogger_index` | `plugins/codemogger.ts` | Build/update local semantic code index |
 | `codemogger_search` | `plugins/codemogger.ts` | Semantic/keyword/hybrid search over indexed code |
+| `gitingest` | `plugins/gitingest.ts` | Fetch full GitHub repo via gitingest.com |
 
 ## Tool Routing (follow these rules)
 

@@ -18,6 +18,7 @@ This file maps related commands, skills, and agents so you can find the right to
 | Skill | `clean-debug` | Debug image cleanup |
 | Skill | `benchmark` | Tesseract model benchmark |
 | Skill | `threshold-change` | Threshold change safety protocol |
+| Skill | `threshold-corpus-replay` | Replay corpus against candidate threshold value |
 | Skill | `ocr-debug` | Internal: coordinate spaces, preprocessing, caches |
 | Skill | `ocr-unavailable` | Internal: "UNAVAILABLE" misread triage |
 | Agent | `ocr-reviewer` | Review OCR/scanner changes for bugs |
@@ -84,9 +85,11 @@ This file maps related commands, skills, and agents so you can find the right to
 | Skill | `ci-promote` | PR creation checklist |
 | Skill | `todo-scan` | TODO triage workflow |
 | Skill | `upstream-sync` | Sync fork from upstream |
+| Skill | `merge-to-main` | Commit, sync upstream, merge, push to fork |
 | Agent | `security-reviewer` | Security review |
 | Agent | `performance-reviewer` | Performance review |
 | Agent | `api-reviewer` | API change review |
+| Agent | `test-generator` | Generate pytest test cases for new/modified code |
 
 ## TUI
 
@@ -120,4 +123,9 @@ This file maps related commands, skills, and agents so you can find the right to
 ### Cleanup Before Commit
 ```
 /clean-debug → /dead-code-sweep → /verify
+```
+
+### Sync Fork with Upstream
+```
+/upstream-sync → /merge-to-main
 ```
