@@ -67,10 +67,6 @@ scraper = [
     "httpx>=0.28.0",
     "beautifulsoup4>=4.14.3",
 ]
-rapidocr = [
-    "rapidocr>=3.8.1",
-    "onnxruntime>=1.25.0",
-]
 
 [project.scripts]
 autoscrapper = "autoscrapper.__main__:main"
