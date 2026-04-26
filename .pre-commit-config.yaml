@@ -8,7 +8,6 @@ repos:
         args: [--fix, --exit-non-zero-on-fix]
         types_or: [python, pyi]
         stages: [pre-commit]
-      # Format code
       - id: ruff-format
         types_or: [python, pyi]
         stages: [pre-commit]
@@ -16,7 +15,10 @@ repos:
     rev: 1.39.3
     hooks:
       - id: basedpyright
-
+-   repo: https://github.com/asottile/pyupgrade
+    rev: v3.21.2
+    hooks:
+    -   id: pyupgrade
   - repo: https://github.com/astral-sh/uv-pre-commit
     rev: 0.11.7
     hooks:
@@ -39,7 +41,6 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
-      # General checks
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
@@ -49,9 +50,7 @@ repos:
       - id: check-xml
       - id: fix-byte-order-marker
       - id: mixed-line-ending
-      # Security checks
       - id: detect-private-key
-      # File checks
       - id: check-added-large-files
         args: [--maxkb=1000]
       - id: check-case-conflict
@@ -59,18 +58,20 @@ repos:
       - id: check-shebang-scripts-are-executable
       - id: forbid-submodules
 
-  # Renovate config validator
   - repo: https://github.com/renovatebot/pre-commit-hooks
     rev: 43.141.2
     hooks:
       - id: renovate-config-validator
-  # Shellcheck - Shell script linting
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
       - id: shellcheck
         args: [-x, --severity=warning]
         files: \.(sh|bash)$
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.4.13
+    hooks:
+      - id: biome-ci
   - repo: https://github.com/python-jsonschema/check-jsonschema
     rev: 0.37.1
     hooks:
