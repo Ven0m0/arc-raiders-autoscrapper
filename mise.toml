@@ -14,11 +14,10 @@ uv_venv_create_args = ["--seed", "--system-site-packages"]
 uvx = true
 
 [tools]
-python = "3.14.4"
+python = "3.13"
 uv = "latest"
 ruff = "latest"
 prek = "latest"
-"github:BurntSushi/ripgrep" = "latest"
 
 [env]
 UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
