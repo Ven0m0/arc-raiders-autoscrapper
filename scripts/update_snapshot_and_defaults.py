@@ -20,6 +20,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 SRC_DIR = REPO_ROOT / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from autoscrapper.progress.data_update import update_data_snapshot  # noqa: E402
 from autoscrapper.progress.rules_generator import (  # noqa: E402
