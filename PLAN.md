@@ -37,7 +37,7 @@ updated_by: kilo
 | Size | L |
 | Status | ❌ TODO |
 
-**Files:** 
+**Files:**
 - `src/autoscrapper/ocr/inventory_vision.py` (1832 lines)
 - `src/autoscrapper/progress/decision_engine.py` (434 lines)
 
@@ -58,7 +58,7 @@ updated_by: kilo
 | Size | M |
 | Status | ❌ TODO |
 
-**Files:** 
+**Files:**
 - `src/autoscrapper/api/client.py`
 - `src/autoscrapper/progress/data_update.py`
 - `src/autoscrapper/ocr/inventory_vision.py`
@@ -82,7 +82,7 @@ updated_by: kilo
 | Size | L |
 | Status | ❌ TODO |
 
-**Files:** 
+**Files:**
 - `scanner/scan_loop.py`
 - `api/client.py`
 - `interaction/`

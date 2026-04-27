@@ -27,7 +27,8 @@ HEAVY_MODULES = {
 
 def _make_cv2_stub() -> ModuleType:
     """Create a cv2 stub that returns valid-enough values for testing."""
-    stub = ModuleType("cv2")
+    stub = ModuleType("cv2")  # type: ignore[assignment]
+    stub.__dict__ = {}  # Allow dynamic attributes
 
     def _threshold(img, thresh, maxval, typ):
         import numpy as np
