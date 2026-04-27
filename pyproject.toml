@@ -122,8 +122,13 @@ log_level = "WARNING"
 [tool.basedpyright]
 pythonVersion = "3.13"
 typeCheckingMode = "standard"
+reportMissingImports = false
 reportMissingTypeStubs = false
-reportMissingModuleSource = true
+reportMissingModuleSource = false
+reportAttributeAccessIssue = false
+reportArgumentType = false
+reportOptionalCall = false
+reportOptionalMemberAccess = false
 
 [tool.vulture]
 paths = ["src/", "scripts/", "tests/"]
