@@ -1,9 +1,0 @@
-# mise (https://mise.jdx.dev) configuration
-# Auto-installed tools: python, uv, ruff, pytest, basedpyright
-
-[tools]
-python = "3.13"
-uv = "latest"
-ruff = "latest"
-pytest = "latest"
-basedpyright = "latest"
