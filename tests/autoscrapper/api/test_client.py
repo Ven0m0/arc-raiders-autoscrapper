@@ -32,6 +32,22 @@ class TestArcTrackerClient:
         assert api_client.rate_limit.remaining == 499
         assert api_client.rate_limit.reset_timestamp > 0
 
+    def test_rate_limit_parsing_handles_invalid_values(self, api_client, caplog):
+        import logging
+
+        headers = {
+            "X-RateLimit-Limit": "not-an-int",
+            "X-RateLimit-Remaining": "also-not-an-int",
+            "X-RateLimit-Reset": "definitely-not-an-int",
+        }
+        with caplog.at_level(logging.DEBUG):
+            api_client._update_rate_limit(headers)
+
+        assert "Failed to parse rate limit headers" in caplog.text
+        # Values should remain at their defaults
+        assert api_client.rate_limit.limit == 500
+        assert api_client.rate_limit.remaining == 500
+
 
 class TestAPIOrchestrator:
     def test_get_item_decisions_maps_correctly(self, api_client, mock_actions):
