@@ -30,13 +30,12 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Setup tools
         run: |
-          mise install python@3.13
-          mise install uv@latest
+          mise use --global python@3.13 uv@latest
       - name: "Set up Python"
-        run: mise run python -- python --version
+        run: mise exec -- python --version
       - name: Install uv
-        run: mise run uv -- --version || mise install uv@latest
+        run: mise exec -- uv --version || mise install uv@latest
       - name: Install dependencies
-        run: mise run python -- uv sync --frozen --all-extras
+        run: mise exec -- uv sync --frozen --all-extras
       - name: Run pytest
-        run: mise run python -- uv run pytest --tb=short -q
+        run: mise exec -- uv run pytest --tb=short -q
