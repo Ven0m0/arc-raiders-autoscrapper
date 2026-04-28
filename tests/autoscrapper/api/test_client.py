@@ -17,10 +17,15 @@ def api_client():
 
 
 class TestArcTrackerClient:
-    def test_headers_include_keys(self, api_client):
-        headers = api_client._get_headers(require_auth=True)
-        assert headers["X-App-Key"] == "test_app"
-        assert headers["Authorization"] == "Bearer test_user"
+    def test_auth_flow_injects_keys(self):
+        from autoscrapper.api.client import ArcTrackerAuth
+        import httpx
+
+        auth = ArcTrackerAuth(app_key="test_app", user_key="test_user")
+        request = httpx.Request("GET", "https://example.com")
+        modified_request = next(auth.auth_flow(request))
+        assert modified_request.headers["X-App-Key"] == "test_app"
+        assert modified_request.headers["Authorization"] == "Bearer test_user"
 
     def test_rate_limit_tracking(self, api_client):
         headers = {
