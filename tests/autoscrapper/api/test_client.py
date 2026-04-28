@@ -72,3 +72,18 @@ class TestAPIOrchestrator:
         with patch.object(api_client, "get_all_stash_items", return_value=mock_stash):
             decisions = orchestrator.get_item_decisions(prefer_api=True)
             assert decisions == {}
+
+
+def test_get_cached_item_mappings_handles_error(caplog):
+    import logging
+    from autoscrapper.api.client import _get_cached_item_mappings
+
+    _get_cached_item_mappings.cache_clear()
+
+    with caplog.at_level(logging.WARNING):
+        with patch("pathlib.Path.read_bytes", side_effect=Exception("Test file read error")):
+            id_to_name, name_to_id = _get_cached_item_mappings()
+
+    assert len(id_to_name) == 0
+    assert len(name_to_id) == 0
+    assert "api: Failed to load item mapping: Test file read error" in caplog.text
