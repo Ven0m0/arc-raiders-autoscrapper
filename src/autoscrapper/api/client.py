@@ -35,8 +35,6 @@ _log = logging.getLogger(__name__)
 
 ARCTRACKER_BASE_URL = "https://arctracker.io"
 DEFAULT_TIMEOUT = 30
-MAX_RETRIES = 3
-RETRY_DELAY_SECONDS = 1.0
 
 # Rate limit: 500 req/hour = 1 req per 7.2 seconds max sustained
 # We use a more conservative 8 seconds to stay well under the limit

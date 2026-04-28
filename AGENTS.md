@@ -109,7 +109,7 @@ When code changes are ready for review, invoke the appropriate specialist agent:
 # OCR/vision changes
 Agent: ocr-reviewer
 
-# Scanner/interaction changes  
+# Scanner/interaction changes
 Agent: scan-validator
 
 # TUI changes

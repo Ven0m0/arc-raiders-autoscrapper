@@ -23,9 +23,9 @@ print("sys.path[0:5]:", sys.path[0:5])
 
 # Now try the exact import that's failing
 try:
-    from scripts.vendor.arc_lens.scrapers import WikiItemScraper
-    print('SUCCESS: Import worked')
+    print("SUCCESS: Import worked")
 except Exception as e:
-    print('FAILED: Import failed with error:', e)
+    print("FAILED: Import failed with error:", e)
     import traceback
+
     traceback.print_exc()

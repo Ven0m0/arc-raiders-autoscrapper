@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-04-25T07:08:17.240932Z",
+  "lastUpdated": "2026-04-27T15:03:12.698163Z",
   "source": "https://metaforge.app/arc-raiders/api",
   "version": "autoscrapper-data-1",
-  "itemCount": 573,
+  "itemCount": 638,
   "questCount": 94,
   "dataSources": {
     "items": {
-      "provider": "metaforge+raidtheory",
+      "provider": "metaforge+raidtheory+arclens",
       "primary": {
         "documentation": "https://metaforge.app/arc-raiders/api",
         "apiBase": "https://metaforge.app/api/arc-raiders",
@@ -25,12 +25,12 @@
         "error": null
       },
       "arclensEnrichment": {
-        "supplementalCount": 0,
-        "error": "Arc-Lens scrapers not available"
+        "supplementalCount": 65,
+        "error": null
       },
       "fieldLevelMerge": {
         "enabled": true,
-        "entriesEnriched": 362,
+        "entriesEnriched": 81,
         "sources": [
           "raidtheory-fallback",
           "arctracker",
@@ -79,7 +79,7 @@
       },
       "arclensEnrichment": {
         "supplementalCount": 0,
-        "error": "Arc-Lens scrapers not available"
+        "error": null
       },
       "fieldLevelMerge": {
         "enabled": true,
@@ -118,8 +118,8 @@
         "file": "static/arctracker_projects.json"
       },
       "arclens": {
-        "count": 0,
-        "error": "Arc-Lens scrapers not available"
+        "count": 5,
+        "error": null
       }
     }
   },
