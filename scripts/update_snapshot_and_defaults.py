@@ -365,6 +365,12 @@ def main() -> int:
     args = parser.parse_args()
 
     use_arclens = getattr(args, "source", None) == "arc-lens"
+    if use_arclens:
+        try:
+            import scripts.vendor.arc_lens.scrapers  # noqa: F401
+        except ImportError:
+            print("Error: arc-lens scrapers not available.", file=sys.stderr)
+            return 1
 
     data_dir = args.data_dir.resolve()
     rules_path = args.rules_path.resolve()
