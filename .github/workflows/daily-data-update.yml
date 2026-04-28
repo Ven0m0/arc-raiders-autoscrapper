@@ -24,7 +24,7 @@ jobs:
           curl https://mise.run | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Setup tools
-        run: mise install python@3.13 && mise install uv@latest
+        run: mise install python@3.13.13 && mise install uv@latest
       - name: Install dependencies
         run: mise run python -- uv sync --frozen --no-dev
       - name: Update snapshot + default rules

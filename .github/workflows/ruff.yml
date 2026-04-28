@@ -25,7 +25,7 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Setup tools
         run: |
-          mise install python@3.13
+          mise install python@3.13.13
           mise install uv@latest
       - name: "Set up Python"
         run: mise run python -- python --version
