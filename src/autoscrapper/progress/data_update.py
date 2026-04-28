@@ -1286,7 +1286,7 @@ def update_data_snapshot(data_dir: Path | None = None, *, use_arclens: bool = Fa
                 "fieldLevelMerge": {
                     "enabled": True,
                     "entriesEnriched": quest_field_merge_count,
-                    "sources": ["raidtheory-fallback", "arctracker"],
+                    "sources": ["raidtheory-fallback", "arctracker"] + (["arclens"] if use_arclens else []),
                     "fields": ["objectives", "requirements", "trader", "xp", "sortOrder", "rewardItemIds", "rewards"],
                 },
             },
