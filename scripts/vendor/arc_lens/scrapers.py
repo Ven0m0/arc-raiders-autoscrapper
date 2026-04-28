@@ -144,7 +144,8 @@ class BaseScraper(ABC):
     def _get(self, url: str, **kwargs: Any) -> httpx.Response:
         """Make a GET request with rate limiting and error handling."""
         self._rate_limit()
-        response = self._client.get(url, timeout=30, **kwargs)
+        kwargs.setdefault("timeout", 30.0)
+        response = self._client.get(url, **kwargs)
         response.raise_for_status()
         return response
 
