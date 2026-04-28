@@ -1142,8 +1142,8 @@ def update_data_snapshot(data_dir: Path | None = None, *, use_arclens: bool = Fa
     # Field-level merge: fill in missing fields from all supplemental sources
     # Combine fallback and arctracker data for field-level enrichment
     # arc-lens is excluded from field-level merge when not enabled (too slow)
-    combined_item_supplemental = list(mapped_fallback_items) + list(mapped_arctracker_items)
-    combined_quest_supplemental = list(mapped_fallback_quests) + list(mapped_arctracker_quests)
+    combined_item_supplemental = list(mapped_fallback_items) + list(mapped_arctracker_items) + list(mapped_arclens_items)
+    combined_quest_supplemental = list(mapped_fallback_quests) + list(mapped_arctracker_quests) + list(mapped_arclens_quests)
 
     # Track field-level merge stats
     item_field_merge_count = 0
