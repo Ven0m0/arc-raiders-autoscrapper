@@ -17,6 +17,8 @@ python = "3.13"
 uv = "latest"
 ruff = "latest"
 prek = "latest"
+pytest = "latest"
+basedpyright = "latest"
 
 [env]
 UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
