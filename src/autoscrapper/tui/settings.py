@@ -2,17 +2,14 @@ from __future__ import annotations
 
 from abc import abstractmethod
 from dataclasses import replace
-from functools import cached_property
 
 from textual import events
 from textual.app import ComposeResult
-from textual.binding import Binding
 from textual.containers import Horizontal, HorizontalGroup, Vertical
 from textual.screen import ModalScreen
-from textual.widget import Widget
 from textual.widgets import Button, Checkbox, Footer, Input, Static
 
-from .common import AppScreen, MessageScreen
+from .common import AppScreen, FormScreen, MessageScreen
 from ..config import (
     ScanSettings,
     load_scan_settings,
@@ -90,27 +87,7 @@ class CaptureStopKeyScreen(ModalScreen[str | None]):
             self.dismiss(self._pending_key)
 
 
-class ScanSettingsScreen(AppScreen):
-    BINDINGS = [
-        *AppScreen.BINDINGS,
-        Binding("tab", "focus_next_field", "Next field", show=False, priority=True),
-        Binding(
-            "shift+tab",
-            "focus_previous_field",
-            "Previous field",
-            show=False,
-            priority=True,
-        ),
-        Binding(
-            "up",
-            "focus_previous_field",
-            "Previous field",
-            show=False,
-            priority=True,
-        ),
-        Binding("down", "focus_next_field", "Next field", show=False, priority=True),
-    ]
-
+class ScanSettingsScreen(FormScreen):
     DEFAULT_CSS = """
     ScanSettingsScreen {
         padding: 0 1;
@@ -206,34 +183,6 @@ class ScanSettingsScreen(AppScreen):
     def on_mount(self) -> None:
         self._load_into_fields()
         self.action_focus_next_field()
-
-    @cached_property
-    def _cached_focus_widgets(self) -> tuple[Widget, ...]:
-        return tuple(self.query_one(f"#{widget_id}") for widget_id in self._FOCUS_ORDER)
-
-    def _focus_candidates(self) -> list[Widget]:
-        return [w for w in self._cached_focus_widgets if w.is_mounted and not w.disabled]
-
-    def _cycle_focus(self, delta: int) -> None:
-        candidates = self._focus_candidates()
-        if not candidates:
-            return
-
-        current = self.focused
-        if current in candidates:
-            index = (candidates.index(current) + delta) % len(candidates)
-        else:
-            index = 0 if delta > 0 else len(candidates) - 1
-
-        target = candidates[index]
-        target.focus()
-        target.scroll_visible(immediate=True)
-
-    def action_focus_next_field(self) -> None:
-        self._cycle_focus(1)
-
-    def action_focus_previous_field(self) -> None:
-        self._cycle_focus(-1)
 
     def _parse_int_field(self, field_id: str, *, label: str, min_value: int) -> int | None:
         raw = self.query_one(field_id, Input).value.strip()

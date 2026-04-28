@@ -5,37 +5,15 @@ from __future__ import annotations
 from dataclasses import replace
 
 from textual.app import ComposeResult
-from textual.binding import Binding
 from textual.containers import Horizontal, HorizontalGroup, Vertical
-from textual.widget import Widget
 from textual.widgets import Button, Checkbox, Footer, Input, Static
 
-from .common import AppScreen, MessageScreen
+from .common import AppScreen, FormScreen, MessageScreen
 from ..config import load_api_settings, reset_api_settings, save_api_settings
 
 
-class ApiSettingsScreen(AppScreen):
+class ApiSettingsScreen(FormScreen):
     """Screen for configuring ArcTracker API integration."""
-
-    BINDINGS = [
-        *AppScreen.BINDINGS,
-        Binding("tab", "focus_next_field", "Next field", show=False, priority=True),
-        Binding(
-            "shift+tab",
-            "action_focus_previous_field",
-            "Previous field",
-            show=False,
-            priority=True,
-        ),
-        Binding(
-            "up",
-            "action_focus_previous_field",
-            "Previous field",
-            show=False,
-            priority=True,
-        ),
-        Binding("down", "focus_next_field", "Next field", show=False, priority=True),
-    ]
 
     TITLE = "API Settings (ArcTracker)"
     _FOCUS_ORDER = (
@@ -145,36 +123,6 @@ class ApiSettingsScreen(AppScreen):
     def on_mount(self) -> None:
         self._load_into_fields()
         self.action_focus_next_field()
-
-    def _focus_candidates(self) -> list[Widget]:
-        candidates: list[Widget] = []
-        for widget_id in self._FOCUS_ORDER:
-            widget = self.query_one(f"#{widget_id}")
-            if getattr(widget, "disabled", False):
-                continue
-            candidates.append(widget)
-        return candidates
-
-    def _cycle_focus(self, delta: int) -> None:
-        candidates = self._focus_candidates()
-        if not candidates:
-            return
-
-        current = self.focused
-        if current in candidates:
-            index = (candidates.index(current) + delta) % len(candidates)
-        else:
-            index = 0 if delta > 0 else len(candidates) - 1
-
-        target = candidates[index]
-        target.focus()
-        target.scroll_visible(immediate=True)
-
-    def action_focus_next_field(self) -> None:
-        self._cycle_focus(1)
-
-    def action_focus_previous_field(self) -> None:
-        self._cycle_focus(-1)
 
     def _compose_form(self) -> ComposeResult:
         yield Static(
