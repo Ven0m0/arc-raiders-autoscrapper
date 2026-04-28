@@ -16,9 +16,10 @@ uvx = true
 python = "3.13"
 uv = "latest"
 ruff = "latest"
+ty = "latest"
 prek = "latest"
-pytest = "latest"
-basedpyright = "latest"
+"pipx:pytest" = "latest"
+"pipx:basedpyright" = "latest"
 
 [env]
 UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
