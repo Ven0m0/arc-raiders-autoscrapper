@@ -28,19 +28,19 @@ jobs:
           mise install python@3.13.13
           mise install uv@latest
       - name: "Set up Python"
-        run: mise run python -- python --version
+        run: python --version
       - name: Install uv
         run: mise run uv -- --version || mise install uv@latest
       - name: Install dependencies
-        run: mise run python -- uv sync --frozen --all-extras
+        run: uv sync --frozen --all-extras
       - name: Run Ruff
-        run: mise run python -- uv run ruff check src/ tests/ scripts/
+        run: uv run ruff check src/ tests/ scripts/
       - name: Run basedpyright
-        run: mise run python -- uv run basedpyright src/
+        run: uv run basedpyright src/
       - name: Run ty
-        run: mise run python -- uv run ty check src/
+        run: uv run ty check src/
       - name: Run pytest
-        run: mise run python -- uv run pytest
+        run: uv run pytest
       - name: Run basedpyright
         run: uv run basedpyright src/
       - name: Run ty

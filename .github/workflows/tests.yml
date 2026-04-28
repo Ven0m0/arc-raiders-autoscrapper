@@ -33,10 +33,10 @@ jobs:
           mise install python@3.13.13
           mise install uv@latest
       - name: "Set up Python"
-        run: mise run python -- python --version
+        run: python --version
       - name: Install uv
         run: mise run uv -- --version || mise install uv@latest
       - name: Install dependencies
-        run: mise run python -- uv sync --frozen --all-extras
+        run: uv sync --frozen --all-extras
       - name: Run pytest
-        run: mise run python -- uv run pytest --tb=short -q
+        run: uv run pytest --tb=short -q
