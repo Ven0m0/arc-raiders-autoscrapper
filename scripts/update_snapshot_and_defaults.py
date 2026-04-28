@@ -183,8 +183,8 @@ def _fetch_default_user_context(data_dir: Path) -> tuple[dict[str, int], list[st
     return hideout_levels, completed_projects
 
 
-def _update_in_place(data_dir: Path, rules_path: Path) -> dict:
-    snapshot_metadata = update_data_snapshot(data_dir)
+def _update_in_place(data_dir: Path, rules_path: Path, *, use_arclens: bool = False) -> dict:
+    snapshot_metadata = update_data_snapshot(data_dir, use_arclens=use_arclens)
     hideout_levels, completed_projects = _fetch_default_user_context(data_dir)
 
     rules_payload = generate_rules_from_active(
@@ -203,7 +203,7 @@ def _update_in_place(data_dir: Path, rules_path: Path) -> dict:
     }
 
 
-def _update_dry_run(source_data_dir: Path) -> dict:
+def _update_dry_run(source_data_dir: Path, *, use_arclens: bool = False) -> dict:
     with TemporaryDirectory() as temp_dir_raw:
         temp_dir = Path(temp_dir_raw)
         temp_data_dir = temp_dir / "data"
@@ -212,7 +212,7 @@ def _update_dry_run(source_data_dir: Path) -> dict:
         temp_data_dir.mkdir(parents=True, exist_ok=True)
         _copy_support_files_for_temp_run(source_data_dir, temp_data_dir)
 
-        snapshot_metadata = update_data_snapshot(temp_data_dir)
+        snapshot_metadata = update_data_snapshot(temp_data_dir, use_arclens=use_arclens)
         hideout_levels, completed_projects = _fetch_default_user_context(temp_data_dir)
 
         rules_payload = generate_rules_from_active(
@@ -364,17 +364,13 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    # Check if arc-lens source is requested but not available
-    try:
-        import vendor.arc_lens.scrapers  # noqa: F401
-
-        ARC_LENS_AVAILABLE = True
-    except ImportError:
-        ARC_LENS_AVAILABLE = False
-
-    if getattr(args, "source", "metaforge") == "arc-lens" and not ARC_LENS_AVAILABLE:
-        print("Error: arc-lens scrapers not available.", file=sys.stderr)
-        return 1
+    use_arclens = getattr(args, "source", None) == "arc-lens"
+    if use_arclens:
+        try:
+            import scripts.vendor.arc_lens.scrapers  # noqa: F401
+        except ImportError:
+            print("Error: arc-lens scrapers not available.", file=sys.stderr)
+            return 1
 
     data_dir = args.data_dir.resolve()
     rules_path = args.rules_path.resolve()
@@ -384,7 +380,7 @@ def main() -> int:
     before_state = _load_state(data_dir, rules_path)
 
     if args.dry_run:
-        result = _update_dry_run(data_dir)
+        result = _update_dry_run(data_dir, use_arclens=use_arclens)
         after_state = result["after_state"]
         changed_files = result["changed_files"]
         hideout_levels = result["hideout_levels"]
@@ -392,7 +388,7 @@ def main() -> int:
         target_paths = [REPO_ROOT / relative for relative in TARGET_RELATIVE_FILES]
         before_bytes = _capture_file_bytes(target_paths)
 
-        result = _update_in_place(data_dir, rules_path)
+        result = _update_in_place(data_dir, rules_path, use_arclens=use_arclens)
         after_state = _load_state(data_dir, rules_path)
         after_bytes = _capture_file_bytes(target_paths)
         changed_files = _diff_changed_files(
