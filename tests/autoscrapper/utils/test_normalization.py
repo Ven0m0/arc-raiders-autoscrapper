@@ -15,6 +15,8 @@ from autoscrapper.utils.normalization import normalize_quest_name
         ("  The Elder's @#$% Quest-Line!  ", "the elders quest line"),
         ("", ""),
         (None, ""),
+        (0, "0"),
+        (False, "false"),
         (123, "123"),
         (45.6, "45 6"),
         ("A+B=C", "a b c"),
