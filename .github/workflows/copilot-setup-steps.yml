@@ -27,9 +27,9 @@ jobs:
         with:
           fetch-depth: 1
       - name: Configure fast apt mirror
-        uses: vegardit/fast-apt-mirror.sh@v1.0.0
+        uses: vegardit/fast-apt-mirror.sh@v1
       - name: Install Linux system dependencies
-        uses: gerlero/apt-install@v1.0.0
+        uses: gerlero/apt-install@v1
         with:
           packages: build-essential python3-evdev libevdev-dev libleptonica-dev libtesseract-dev pkg-config tesseract-ocr
           install-recommends: false
