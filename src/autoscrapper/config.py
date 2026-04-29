@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 import orjson
+import keyring
 
 from .interaction.keybinds import DEFAULT_STOP_KEY, normalize_stop_key
 
@@ -429,6 +430,39 @@ def save_ui_settings(settings: UiSettings) -> None:
     _save_config_dict(payload)
 
 
+KEYRING_SERVICE = "autoscrapper"
+
+
+def _get_keyring_password(username: str) -> str:
+    try:
+        return keyring.get_password(KEYRING_SERVICE, username) or ""
+    except Exception as e:
+        _log.warning("Failed to get %s from keyring: %s", username, e)
+        return ""
+
+
+def _set_keyring_password(username: str, password: str) -> None:
+    try:
+        if password:
+            keyring.set_password(KEYRING_SERVICE, username, password)
+        else:
+            try:
+                keyring.delete_password(KEYRING_SERVICE, username)
+            except keyring.errors.PasswordDeleteError:
+                pass
+    except Exception as e:
+        _log.warning("Failed to set %s in keyring: %s", username, e)
+
+
+def _delete_keyring_password(username: str) -> None:
+    try:
+        keyring.delete_password(KEYRING_SERVICE, username)
+    except keyring.errors.PasswordDeleteError:
+        pass
+    except Exception as e:
+        _log.warning("Failed to delete %s from keyring: %s", username, e)
+
+
 def _from_raw_api_settings(raw: Any) -> ApiSettings:
     if not isinstance(raw, dict):
         return ApiSettings()
@@ -442,15 +476,67 @@ def _from_raw_api_settings(raw: Any) -> ApiSettings:
 
 
 def load_api_settings() -> ApiSettings:
-    return _from_raw_api_settings(_load_config_dict().get("api"))
+    raw_config = _load_config_dict()
+    raw_api = raw_config.get("api")
+    if not isinstance(raw_api, dict):
+        raw_api = {}
+
+    settings = _from_raw_api_settings(raw_api)
+
+    needs_save = False
+
+    # Load from keyring
+    keyring_app_key = _get_keyring_password("app_key")
+    keyring_user_key = _get_keyring_password("user_key")
+
+    # Migrate from config file to keyring
+    if settings.app_key and not keyring_app_key:
+        _set_keyring_password("app_key", settings.app_key)
+        keyring_app_key = settings.app_key
+        needs_save = True
+
+    if settings.user_key and not keyring_user_key:
+        _set_keyring_password("user_key", settings.user_key)
+        keyring_user_key = settings.user_key
+        needs_save = True
+
+    # If it was migrated, clean up the config dict and save
+    if needs_save:
+        if "app_key" in raw_api:
+            del raw_api["app_key"]
+        if "user_key" in raw_api:
+            del raw_api["user_key"]
+        raw_config["api"] = raw_api
+        _save_config_dict(raw_config)
+
+    # Re-create with keyring values overriding config values
+    return ApiSettings(
+        app_key=keyring_app_key,
+        user_key=keyring_user_key,
+        enabled=settings.enabled,
+        prefer_api=settings.prefer_api,
+        base_url=settings.base_url,
+    )
 
 
 def save_api_settings(settings: ApiSettings) -> None:
+    # Save to keyring
+    _set_keyring_password("app_key", settings.app_key)
+    _set_keyring_password("user_key", settings.user_key)
+
     payload = _load_config_dict()
     payload["version"] = CONFIG_VERSION
-    payload["api"] = asdict(settings)
+
+    settings_dict = asdict(settings)
+    # Remove sensitive keys before saving to disk
+    settings_dict.pop("app_key", None)
+    settings_dict.pop("user_key", None)
+
+    payload["api"] = settings_dict
     _save_config_dict(payload)
 
 
 def reset_api_settings() -> None:
+    _delete_keyring_password("app_key")
+    _delete_keyring_password("user_key")
     save_api_settings(ApiSettings())
