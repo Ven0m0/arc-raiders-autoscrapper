@@ -30,7 +30,7 @@ jobs:
       - name: "Set up Python"
         run: mise exec -- python --version
       - name: Install uv
-        run: mise run uv -- --version || mise install uv@latest
+        run: mise exec -- uv --version || mise install uv@latest
       - name: Install dependencies
         run: mise exec -- uv sync --frozen --all-extras
       - name: Run Ruff
@@ -41,9 +41,3 @@ jobs:
         run: mise exec -- uv run ty check src/
       - name: Run pytest
         run: mise exec -- uv run pytest
-      - name: Run basedpyright
-        run: uv run basedpyright src/
-      - name: Run ty
-        run: uv run ty check src/
-      - name: Run pytest
-        run: uv run pytest

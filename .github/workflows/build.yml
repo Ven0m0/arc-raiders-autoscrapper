@@ -59,7 +59,7 @@ jobs:
 
       - name: Install uv
         run: |
-          mise run uv -- --version || mise install uv@latest
+          mise exec -- uv --version || mise install uv@latest
 
       - name: Install dependencies
         run: mise exec -- uv sync --frozen
