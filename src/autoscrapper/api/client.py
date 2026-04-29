@@ -8,6 +8,7 @@ from pathlib import Path
 from types import MappingProxyType
 import time
 from typing import TYPE_CHECKING, Any
+from pydantic import ValidationError
 
 import httpx
 import orjson
@@ -342,7 +343,12 @@ class ArcTrackerClient:
         profile_data = data.get("data", data)
         if not isinstance(profile_data, dict):
             return None
-        return UserProfile.from_api(profile_data)
+
+        try:
+            return UserProfile.model_validate(profile_data)
+        except ValidationError as exc:
+            _log.warning("api: Invalid profile data format: %s", exc)
+            return None
 
     def get_user_quests(
         self,

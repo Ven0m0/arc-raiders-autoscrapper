@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass, field
+from pydantic import BaseModel, Field
 from typing import Any, Literal
 
 
@@ -164,21 +165,12 @@ class APIInventoryResult:
     api_error: str | None = None
 
 
-@dataclass(frozen=True, slots=True)
-class UserProfile:
+class UserProfile(BaseModel):
     """User profile information."""
 
-    username: str
-    level: int
-    member_since: str
-
-    @classmethod
-    def from_api(cls, data: dict[str, Any]) -> UserProfile:
-        return cls(
-            username=str(data.get("username", "")),
-            level=int(data.get("level", 0)),
-            member_since=str(data.get("memberSince", "")),
-        )
+    username: str = Field(default="")
+    level: int = Field(default=0)
+    member_since: str = Field(default="", alias="memberSince")
 
 
 @dataclass(frozen=True, slots=True)

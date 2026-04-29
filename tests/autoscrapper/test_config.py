@@ -6,7 +6,6 @@ from unittest.mock import MagicMock, patch
 from autoscrapper.config import (
     load_api_settings,
     save_api_settings,
-
     ApiSettings,
     CONFIG_VERSION,
     ProgressSettings,

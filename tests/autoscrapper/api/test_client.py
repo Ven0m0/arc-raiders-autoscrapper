@@ -88,3 +88,27 @@ class TestAPIOrchestrator:
         with patch.object(api_client, "get_all_stash_items", return_value=mock_stash):
             decisions = orchestrator.get_item_decisions(prefer_api=True)
             assert decisions == {}
+
+    def test_get_user_profile_validation(self, api_client, caplog):
+        import logging
+
+        # Invalid payload where level is not an integer but a dictionary
+        invalid_data = {"data": {"username": "test_user", "level": {"invalid": "type"}, "memberSince": "2023-01-01"}}
+
+        with patch.object(api_client, "_make_request", return_value=invalid_data):
+            with caplog.at_level(logging.WARNING):
+                profile = api_client.get_user_profile()
+
+        assert profile is None
+        assert "api: Invalid profile data format" in caplog.text
+
+    def test_get_user_profile_success(self, api_client):
+        valid_data = {"data": {"username": "test_user", "level": 42, "memberSince": "2023-01-01"}}
+
+        with patch.object(api_client, "_make_request", return_value=valid_data):
+            profile = api_client.get_user_profile()
+
+        assert profile is not None
+        assert profile.username == "test_user"
+        assert profile.level == 42
+        assert profile.member_since == "2023-01-01"
