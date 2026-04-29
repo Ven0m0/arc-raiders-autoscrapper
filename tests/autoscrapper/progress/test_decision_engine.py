@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from autoscrapper.progress.decision_engine import DecisionEngine, DecisionReason
 
-
 SAMPLE_ITEMS = [
     {
         "id": "test-rifle",
