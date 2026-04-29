@@ -39,4 +39,4 @@ jobs:
             uv.lock
             pyproject.toml
       - name: Install project dependencies
-        run: mise exec -- uv sync --frozen
+        run: uv sync --frozen
