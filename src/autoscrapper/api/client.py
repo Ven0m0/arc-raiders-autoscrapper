@@ -1,6 +1,8 @@
 """ArcTracker API client with rate limiting and OCR fallback support."""
 
 from __future__ import annotations
+import concurrent.futures
+import math
 
 import logging
 import functools
@@ -10,6 +12,7 @@ import time
 from typing import TYPE_CHECKING, Any
 
 import httpx
+from pydantic import ValidationError
 import orjson
 
 from .models import (
@@ -62,6 +65,21 @@ def _get_cached_item_mappings() -> tuple[MappingProxyType[str, str], MappingProx
     return MappingProxyType(id_to_name), MappingProxyType(name_to_id)
 
 
+class ArcTrackerAuth(httpx.Auth):
+    """Custom auth to securely inject keys without exposing them in default headers."""
+
+    def __init__(self, app_key: str | None, user_key: str | None) -> None:
+        self.app_key = app_key
+        self.user_key = user_key
+
+    def auth_flow(self, request: httpx.Request):
+        if self.app_key:
+            request.headers["X-App-Key"] = self.app_key
+        if self.user_key:
+            request.headers["Authorization"] = f"Bearer {self.user_key}"
+        yield request
+
+
 class ArcTrackerClient:
     """Client for arctracker.io API with rate limiting and fallback support."""
 
@@ -111,15 +129,9 @@ class ArcTrackerClient:
 
         self.rate_limit.last_request_timestamp = time.time()
 
-    def _get_headers(self, *, require_auth: bool = False) -> dict[str, str]:
-        """Build request headers with optional authentication."""
-        headers: dict[str, str] = {}
-        if require_auth:
-            if self.app_key:
-                headers["X-App-Key"] = self.app_key
-            if self.user_key:
-                headers["Authorization"] = f"Bearer {self.user_key}"
-        return headers
+    def _get_headers(self) -> dict[str, str]:
+        """Build request headers."""
+        return {}
 
     def _make_request(
         self,
@@ -137,15 +149,18 @@ class ArcTrackerClient:
         self._wait_for_rate_limit()
 
         url = f"{self.base_url}{endpoint}"
-        headers = self._get_headers(require_auth=require_auth)
+        headers = self._get_headers()
         if "headers" in kwargs:
             headers.update(kwargs.pop("headers"))
+
+        auth = ArcTrackerAuth(self.app_key, self.user_key) if require_auth else None
 
         try:
             response = self._session.request(
                 method,
                 url,
                 headers=headers,
+                auth=auth,
                 timeout=DEFAULT_TIMEOUT,
                 **kwargs,
             )
@@ -220,40 +235,74 @@ class ArcTrackerClient:
         return self._parse_stash_response(data)
 
     def get_all_stash_items(self, locale: str = "en") -> StashData:
-        """Fetch all stash items across all pages."""
+        """Fetch all stash items across all pages concurrently."""
         all_items: list[StashItem] = []
-        total_slots = 0
-        used_slots = 0
-        page = 1
         per_page = 500
-        api_error: str | None = None
 
-        while True:
-            page_data = self.get_user_stash(locale=locale, page=page, per_page=per_page)
+        # Fetch first page sequentially to get total used slots
+        first_page = self.get_user_stash(locale=locale, page=1, per_page=per_page)
 
-            if page_data.api_error:
-                api_error = page_data.api_error
-                break
+        if first_page.api_error:
+            return StashData(
+                items=[],
+                total_slots=0,
+                used_slots=0,
+                api_error=first_page.api_error,
+            )
 
-            all_items.extend(page_data.items)
-            total_slots = page_data.total_slots
-            used_slots = page_data.used_slots
+        all_items.extend(first_page.items)
+        total_slots = first_page.total_slots
+        used_slots = first_page.used_slots
 
-            if len(page_data.items) < per_page:
-                break
-            if not page_data.items:
-                break
+        # If first page has fewer items than per_page, we're done
+        if len(first_page.items) < per_page or not first_page.items:
+            return StashData(
+                items=all_items,
+                total_slots=total_slots,
+                used_slots=used_slots,
+                api_error=None,
+            )
 
-            page += 1
-            if page > 100:
-                _log.warning("api: Stash pagination exceeded 100 pages, stopping")
-                break
+        # Calculate remaining pages based on used_slots
+        # used_slots tells us the total number of items to fetch
+        # total pages is ceil(used_slots / per_page)
+        total_pages = math.ceil(used_slots / per_page)
+
+        # Limit to 100 pages to prevent runaway requests
+        if total_pages > 100:
+            _log.warning("api: Stash pagination calculated >100 pages, limiting to 100")
+            total_pages = 100
+
+        if total_pages > 1:
+
+            def fetch_page(p: int) -> StashData:
+                return self.get_user_stash(locale=locale, page=p, per_page=per_page)
+
+            with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+                pages_to_fetch = range(2, total_pages + 1)
+                # Map preserves order
+                results = executor.map(fetch_page, pages_to_fetch)
+
+                for page_data in results:
+                    if page_data.api_error:
+                        return StashData(
+                            items=all_items,
+                            total_slots=total_slots,
+                            used_slots=used_slots,
+                            api_error=page_data.api_error,
+                        )
+
+                    all_items.extend(page_data.items)
+
+                    # If a page returns empty, stop processing further pages
+                    if not page_data.items:
+                        break
 
         return StashData(
             items=all_items,
             total_slots=total_slots,
             used_slots=used_slots,
-            api_error=api_error,
+            api_error=None,
         )
 
     def _parse_stash_response(self, data: dict[str, Any]) -> StashData:
@@ -342,7 +391,11 @@ class ArcTrackerClient:
         profile_data = data.get("data", data)
         if not isinstance(profile_data, dict):
             return None
-        return UserProfile.from_api(profile_data)
+        try:
+            return UserProfile.from_api(profile_data)
+        except ValidationError as e:
+            _log.warning(f"api: Failed to validate user profile response: {e}")
+            return None
 
     def get_user_quests(
         self,

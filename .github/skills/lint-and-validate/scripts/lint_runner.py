@@ -137,12 +137,14 @@ def run_linters_parallel(
             except Exception as exc:
                 print(f"\nFinished: {linter['name']}")
                 print(f"  [FAIL] {linter['name']} generated an exception: {exc}")
-                results.append({
-                    "name": linter["name"],
-                    "passed": False,
-                    "output": "",
-                    "error": str(exc),
-                })
+                results.append(
+                    {
+                        "name": linter["name"],
+                        "passed": False,
+                        "output": "",
+                        "error": str(exc),
+                    }
+                )
                 all_passed = False
 
     return results, all_passed

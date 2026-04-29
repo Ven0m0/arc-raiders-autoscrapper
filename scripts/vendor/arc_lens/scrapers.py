@@ -144,7 +144,8 @@ class BaseScraper(ABC):
     def _get(self, url: str, **kwargs: Any) -> httpx.Response:
         """Make a GET request with rate limiting and error handling."""
         self._rate_limit()
-        response = self._client.get(url, timeout=30, **kwargs)
+        kwargs.setdefault("timeout", 30.0)
+        response = self._client.get(url, **kwargs)
         response.raise_for_status()
         return response
 
@@ -430,10 +431,12 @@ class WikiProjectScraper(BaseScraper):
                         item_text = li.get_text(strip=True)
                         match = re.match(r"(.+?)\s*x?\s*(\d+)", item_text)
                         if match:
-                            phase_data["requirements"].append({
-                                "item": match.group(1).strip(),
-                                "amount": int(match.group(2)),
-                            })
+                            phase_data["requirements"].append(
+                                {
+                                    "item": match.group(1).strip(),
+                                    "amount": int(match.group(2)),
+                                }
+                            )
                 phases.append(phase_data)
         return phases
 

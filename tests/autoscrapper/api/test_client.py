@@ -17,10 +17,15 @@ def api_client():
 
 
 class TestArcTrackerClient:
-    def test_headers_include_keys(self, api_client):
-        headers = api_client._get_headers(require_auth=True)
-        assert headers["X-App-Key"] == "test_app"
-        assert headers["Authorization"] == "Bearer test_user"
+    def test_auth_flow_injects_keys(self):
+        from autoscrapper.api.client import ArcTrackerAuth
+        import httpx
+
+        auth = ArcTrackerAuth(app_key="test_app", user_key="test_user")
+        request = httpx.Request("GET", "https://example.com")
+        modified_request = next(auth.auth_flow(request))
+        assert modified_request.headers["X-App-Key"] == "test_app"
+        assert modified_request.headers["Authorization"] == "Bearer test_user"
 
     def test_rate_limit_tracking(self, api_client):
         headers = {
@@ -88,3 +93,18 @@ class TestAPIOrchestrator:
         with patch.object(api_client, "get_all_stash_items", return_value=mock_stash):
             decisions = orchestrator.get_item_decisions(prefer_api=True)
             assert decisions == {}
+
+
+def test_get_cached_item_mappings_handles_error(caplog):
+    import logging
+    from autoscrapper.api.client import _get_cached_item_mappings
+
+    _get_cached_item_mappings.cache_clear()
+
+    with caplog.at_level(logging.WARNING):
+        with patch("pathlib.Path.read_bytes", side_effect=Exception("Test file read error")):
+            id_to_name, name_to_id = _get_cached_item_mappings()
+
+    assert len(id_to_name) == 0
+    assert len(name_to_id) == 0
+    assert "api: Failed to load item mapping: Test file read error" in caplog.text
