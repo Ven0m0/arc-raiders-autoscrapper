@@ -135,6 +135,7 @@ paths = ["src/", "scripts/", "tests/"]
 min_confidence = 80
 
 [tool.black]
+line-length = 120
 extend-exclude = '''
 ^scripts/(setup-linux\.sh|setup-windows\.ps1)$
 '''
