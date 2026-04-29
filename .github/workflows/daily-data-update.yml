@@ -13,30 +13,27 @@ concurrency:
 jobs:
   update-data:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     environment: daily-data-update
     env:
       METAFORGE_SUPABASE_ANON_KEY: ${{ secrets.METAFORGE_SUPABASE_ANON_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
       - name: Install mise
         run: |
           curl https://mise.run | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Setup tools
-        run: mise install python@3.13.13 && mise install uv@latest
+        run: mise use --global python@3.13 uv@latest
+      - name: Set up Python
+        run: mise exec -- python --version
+      - name: Install uv
+        run: mise exec -- uv --version || mise install uv@latest
       - name: Install dependencies
         run: mise exec -- uv sync --frozen --no-dev
-=======
-        run: mise exec python -- uv sync --frozen --no-dev
-=======
-        run: mise exec -- python uv sync --frozen --no-dev
-=======
-        run: mise exec python@3.13 uv@latest -- uv sync --frozen --no-dev
-=======
-        run: mise exec python@3.13 -- uv sync --frozen --no-dev
-=======
-        run: uv sync --frozen --no-dev
       - name: Update snapshot + default rules
         run: |
           mise exec -- uv run python scripts/update_snapshot_and_defaults.py \

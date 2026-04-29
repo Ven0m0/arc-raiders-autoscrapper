@@ -4,20 +4,28 @@ on:
   push:
     branches:
       - main
+    paths:
+      - src/**
+      - .github/workflows/biome.yml
   pull_request:
     branches:
       - main
+    paths:
+      - src/**
+      - .github/workflows/biome.yml
 concurrency:
   group: biome-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   biome:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: read
     steps:
       - uses: actions/checkout@v6
         with:
+          fetch-depth: 1
           persist-credentials: false
       - name: Setup Biome
         uses: biomejs/setup-biome@v2

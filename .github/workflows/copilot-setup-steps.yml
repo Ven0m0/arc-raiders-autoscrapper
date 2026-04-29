@@ -4,9 +4,15 @@ on:
   push:
     paths:
       - .github/workflows/copilot-setup-steps.yml
+      - pyproject.toml
+      - uv.lock
+      - .python-version
   pull_request:
     paths:
       - .github/workflows/copilot-setup-steps.yml
+      - pyproject.toml
+      - uv.lock
+      - .python-version
 permissions:
   contents: read
 concurrency:
@@ -15,8 +21,11 @@ concurrency:
 jobs:
   copilot-setup-steps:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
       - name: Configure fast apt mirror
         uses: vegardit/fast-apt-mirror.sh@v1
       - name: Install Linux system dependencies
@@ -24,12 +33,12 @@ jobs:
         with:
           packages: build-essential python3-evdev libevdev-dev libleptonica-dev libtesseract-dev pkg-config tesseract-ocr
           install-recommends: false
-      - name: "Set up Python"
+      - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version-file: "pyproject.toml"
       - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
           activate-environment: true
