@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-29T08:45:10.162439Z",
+    "generatedAt": "2026-04-29T14:50:04.475857Z",
     "data": {
-      "lastUpdated": "2026-04-29T08:45:10.151693Z",
+      "lastUpdated": "2026-04-29T14:50:04.465525Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
-      "itemCount": 593,
+      "itemCount": 594,
       "questCount": 100,
       "dataSources": {
         "items": {
@@ -124,7 +124,7 @@
       },
       "hasPriceOverrides": false
     },
-    "itemCount": 593,
+    "itemCount": 594,
     "allQuestsCompleted": true
   },
   "items": [
@@ -4500,6 +4500,17 @@
     {
       "id": "riven-tides-hotel-keycard-no-208",
       "name": "Riven Tides Hotel Keycard No. 208",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "riven-tides-hotel-keycard-no-311",
+      "name": "Riven Tides Hotel Keycard No. 311",
       "value": 100,
       "action": "keep",
       "analysis": [

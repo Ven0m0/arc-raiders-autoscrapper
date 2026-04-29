@@ -6145,7 +6145,20 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-04-28T19:25:20.650029+00:00",
+    "updatedAt": "2026-04-29T09:01:46.572173+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "riven-tides-hotel-keycard-no-311",
+    "name": "Riven Tides Hotel Keycard No. 311",
+    "type": "Key",
+    "rarity": "common",
+    "value": 100,
+    "weightKg": 0.5,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-04-29T09:00:20.430939+00:00",
     "recipe": null,
     "recyclesInto": null
   },
