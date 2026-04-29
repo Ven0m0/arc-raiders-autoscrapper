@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-04-27T15:03:12.698163Z",
+  "lastUpdated": "2026-04-29T04:01:35.623174Z",
   "source": "https://metaforge.app/arc-raiders/api",
   "version": "autoscrapper-data-1",
-  "itemCount": 638,
-  "questCount": 94,
+  "itemCount": 593,
+  "questCount": 100,
   "dataSources": {
     "items": {
-      "provider": "metaforge+raidtheory+arclens",
+      "provider": "metaforge+raidtheory",
       "primary": {
         "documentation": "https://metaforge.app/arc-raiders/api",
         "apiBase": "https://metaforge.app/api/arc-raiders",
@@ -15,7 +15,7 @@
       "fallback": {
         "repository": "https://github.com/RaidTheory/arcraiders-data",
         "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
-        "supplementalCount": 26,
+        "supplementalCount": 28,
         "error": null
       },
       "arctrackerEnrichment": {
@@ -24,17 +24,12 @@
         "supplementalCount": 0,
         "error": null
       },
-      "arclensEnrichment": {
-        "supplementalCount": 65,
-        "error": null
-      },
       "fieldLevelMerge": {
         "enabled": true,
-        "entriesEnriched": 81,
+        "entriesEnriched": 366,
         "sources": [
           "raidtheory-fallback",
-          "arctracker",
-          "arclens"
+          "arctracker"
         ],
         "fields": [
           "type",
@@ -48,10 +43,15 @@
           "wikiUses"
         ]
       },
+      "arclensEnrichment": {
+        "enabled": false,
+        "supplementalCount": 0,
+        "error": null
+      },
       "wikiEnrichment": {
         "url": "https://arcraiders.wiki/wiki/Loot",
         "available": true,
-        "enrichedCount": 90,
+        "enrichedCount": 98,
         "error": null,
         "fields": [
           "wikiUses"
@@ -78,6 +78,7 @@
         "error": null
       },
       "arclensEnrichment": {
+        "enabled": false,
         "supplementalCount": 0,
         "error": null
       },
@@ -86,8 +87,7 @@
         "entriesEnriched": 0,
         "sources": [
           "raidtheory-fallback",
-          "arctracker",
-          "arclens"
+          "arctracker"
         ],
         "fields": [
           "objectives",
@@ -116,10 +116,6 @@
         "count": 0,
         "error": null,
         "file": "static/arctracker_projects.json"
-      },
-      "arclens": {
-        "count": 5,
-        "error": null
       }
     }
   },

@@ -1,8 +1,18 @@
 {
-  "generatedAt": "2026-04-27T15:03:12.697972Z",
+  "generatedAt": "2026-04-29T04:01:35.623000Z",
   "source": "quests.json",
   "traders": {
     "Celeste": [
+      {
+        "id": "a-wrench-in-the-works",
+        "name": "A Wrench in the Works",
+        "sortOrder": 0
+      },
+      {
+        "id": "line-in-the-sand",
+        "name": "Line in the Sand",
+        "sortOrder": 0
+      },
       {
         "id": "a-bad-feeling",
         "name": "A Bad Feeling",
@@ -120,6 +130,16 @@
       }
     ],
     "TianWen": [
+      {
+        "id": "collision-course",
+        "name": "Collision Course",
+        "sortOrder": 0
+      },
+      {
+        "id": "safe-harbor",
+        "name": "Safe Harbor",
+        "sortOrder": 0
+      },
       {
         "id": "the-right-tool",
         "name": "The Right Tool",
@@ -369,6 +389,16 @@
       }
     ],
     "Apollo": [
+      {
+        "id": "battening-down",
+        "name": "Battening Down",
+        "sortOrder": 0
+      },
+      {
+        "id": "shoring-up-defenses",
+        "name": "Shoring up Defenses",
+        "sortOrder": 0
+      },
       {
         "id": "safe-passage",
         "name": "Safe Passage",
