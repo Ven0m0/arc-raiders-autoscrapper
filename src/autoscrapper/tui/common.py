@@ -105,7 +105,7 @@ class FormScreen(AppScreen):
         return tuple(self.query_one(f"#{widget_id}") for widget_id in self._FOCUS_ORDER)
 
     def _focus_candidates(self) -> list[Widget]:
-        return [w for w in self._cached_focus_widgets if w.is_mounted and not getattr(w, "disabled", False)]
+        return [w for w in self._focus_widgets if w.is_mounted and w.can_focus and not w.disabled]
 
     def _cycle_focus(self, delta: int) -> None:
         candidates = self._focus_candidates()
