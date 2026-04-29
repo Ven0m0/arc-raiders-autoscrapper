@@ -26,10 +26,10 @@ jobs:
       - name: Setup tools
         run: mise install python@3.13 && mise install uv@latest
       - name: Install dependencies
-        run: mise run python -- uv sync --frozen --no-dev
+        run: mise exec -- uv sync --frozen --no-dev
       - name: Update snapshot + default rules
         run: |
-          uv run python scripts/update_snapshot_and_defaults.py \
+          mise exec -- uv run python scripts/update_snapshot_and_defaults.py \
             --report-json artifacts/update-report.json \
             --report-md artifacts/update-report.md
       - name: Upload update report artifact
@@ -42,7 +42,7 @@ jobs:
       - name: Check for tracked changes
         id: changes
         run: |
-          uv run python - <<'PY'
+          mise exec -- uv run python - <<'PY'
           import json
           import os
           import sys
@@ -102,7 +102,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          uv run python - <<'PY'
+          mise exec -- uv run python - <<'PY'
           import json
           import os
           import urllib.parse
