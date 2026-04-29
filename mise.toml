@@ -20,6 +20,8 @@ ty = "latest"
 prek = "latest"
 "pipx:pytest" = "latest"
 "pipx:basedpyright" = "latest"
+ripgrep = "latest"
+ast-grep = "latest"
 
 [env]
 UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
