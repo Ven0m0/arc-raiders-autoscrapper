@@ -30,6 +30,7 @@
     "@gotgenes/opencode-agent-identity@3.0.1",
     "github:kdcokenny/opencode-background-agents",
     "github:spoons-and-mirrors/subtask2",
+    "opencode-agent-skills@0.6.5",
     "./plugins/context-shield",
     "./plugins/gitingest",
     "./plugins/trim-tool-name",
@@ -42,7 +43,7 @@
       "extensions": [".json", ".js"]
     },
     "ruff": {
-      "command": ["uv", "run", "ruff", "format", "$FILE"],
+      "command": ["uvx", "ruff", "format", "$FILE"],
       "extensions": [".py", ".pyi"]
     }
   },
@@ -57,7 +58,7 @@
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
       "headers": { "Authorization": "Bearer {env:CONTEXT7_API_KEY}" },
-      "enabled": false
+      "enabled": true
     },
     "github": {
       "type": "remote",
@@ -74,11 +75,6 @@
       "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,get_code_context_exa,crawling_exa",
       "enabled": true,
       "headers": { "x-api-key": "{env:EXA_API_KEY}" }
-    },
-    "fast-filesystem": {
-      "type": "local",
-      "command": ["npx", "-y", "fast-filesystem@latest"],
-      "enabled": false
     },
     "serena": {
       "type": "local",
