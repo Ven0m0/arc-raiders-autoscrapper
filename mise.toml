@@ -24,10 +24,14 @@ ripgrep = "latest"
 ast-grep = "latest"
 
 [env]
+PROJECT_ROOT = "{{config_root}}"
 UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
 UV_LINK_MODE = "symlink"
 _.python.venv = { path = ".venv", create = true, uv_create_args = ["--seed", "--system-site-packages"] }
 _.file = { path = ".env", tools = true }
+
+[hooks]
+enter = "mise i -yq"
 
 [tasks.install]
 description = 'Mise ci install'
