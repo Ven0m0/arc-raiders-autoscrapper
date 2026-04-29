@@ -20,7 +20,6 @@ ty = "latest"
 prek = "latest"
 "pipx:pytest" = "latest"
 "pipx:basedpyright" = "latest"
-ripgrep = "latest"
 
 [env]
 PROJECT_ROOT = "{{config_root}}"
