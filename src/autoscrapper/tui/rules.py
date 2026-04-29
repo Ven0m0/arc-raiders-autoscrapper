@@ -83,16 +83,25 @@ def _should_hide_reason(reason: str) -> bool:
     return reason.strip().lower().startswith("override:")
 
 
-def _filter_indices(items: list[dict], query: str) -> list[int]:
+def _filter_indices(
+    items: list[dict],
+    query: str,
+    search_data: list[tuple[str, str]] | None = None,
+) -> list[int]:
     if not query:
         return list(range(len(items)))
     q = query.lower().strip()
     matches: list[int] = []
-    for idx, item in enumerate(items):
-        name = str(item.get("name", "")).lower()
-        item_id = str(item.get("id", "")).lower()
-        if q in name or (item_id and q in item_id):
-            matches.append(idx)
+    if search_data is not None:
+        for idx, (name, item_id) in enumerate(search_data):
+            if q in name or (item_id and q in item_id):
+                matches.append(idx)
+    else:
+        for idx, item in enumerate(items):
+            name = str(item.get("name", "")).lower()
+            item_id = str(item.get("id", "")).lower()
+            if q in name or (item_id and q in item_id):
+                matches.append(idx)
     return matches
 
 
@@ -435,6 +444,8 @@ class RulesScreen(AppScreen):
         super().__init__()
         self.payload = load_rules()
         self.items = list(self.payload.get("items", []))
+        self.search_data: list[tuple[str, str]] = []
+        self._refresh_search_data()
         defaults = load_rules(DEFAULT_RULES_PATH)
         (
             self.default_actions_by_id,
@@ -600,6 +611,9 @@ class RulesScreen(AppScreen):
     def _refresh_modified_map(self) -> None:
         self.modified_map = {idx: self._is_modified(item) for idx, item in enumerate(self.items)}
 
+    def _refresh_search_data(self) -> None:
+        self.search_data = [(str(item.get("name", "")).lower(), str(item.get("id", "")).lower()) for item in self.items]
+
     def _sort_indices(self, indices: list[int]) -> list[int]:
         if self.sort_mode == "action":
             return sorted(
@@ -642,7 +656,7 @@ class RulesScreen(AppScreen):
         previous_scroll_y = menu.scroll_y if preserve_scroll else None
         name_limit = self._list_name_limit(menu)
         self._refresh_modified_map()
-        filtered_indices = _filter_indices(self.items, self.search_query)
+        filtered_indices = _filter_indices(self.items, self.search_query, self.search_data)
         self.filtered = self._sort_indices(filtered_indices)
         options = []
         for list_index, item_index in enumerate(self.filtered):
@@ -816,6 +830,7 @@ class RulesScreen(AppScreen):
             return
         action = normalize_action(self.current_action) or "keep"
         self.items.append({"name": name, "action": action})
+        self._refresh_search_data()
         self.selected_index = len(self.items) - 1
         self.mode = "edit"
         self.search_query = name
@@ -837,6 +852,7 @@ class RulesScreen(AppScreen):
             self.app.push_screen(MessageScreen("No rule selected."))
             return
         item = self.items.pop(self.selected_index)
+        self._refresh_search_data()
         self._persist_rules()
         self._refresh_list()
         self._refresh_details()
@@ -847,6 +863,7 @@ class RulesScreen(AppScreen):
             CUSTOM_RULES_PATH.unlink(missing_ok=True)
         self.payload = load_rules(DEFAULT_RULES_PATH)
         self.items = list(self.payload.get("items", []))
+        self._refresh_search_data()
         self.mode = "edit"
         self.current_action = "keep"
         self._set_saved_with_timestamp()
@@ -1068,6 +1085,7 @@ class RulesChangesScreen(AppScreen):
         self.selected_index: int | None = None
         self.item_count = item_count
         self.default_count = default_count
+        self.search_data = [(change.name.lower(), change.item_id.lower()) for change in self.changes]
 
     def compose(self) -> ComposeResult:
         yield Static("Rule Changes", classes="menu-title")
@@ -1107,9 +1125,7 @@ class RulesChangesScreen(AppScreen):
         if not q:
             return list(range(len(self.changes)))
         matches: list[int] = []
-        for idx, change in enumerate(self.changes):
-            name = change.name.lower()
-            item_id = change.item_id.lower()
+        for idx, (name, item_id) in enumerate(self.search_data):
             if q in name or (item_id and q in item_id):
                 matches.append(idx)
         return matches
