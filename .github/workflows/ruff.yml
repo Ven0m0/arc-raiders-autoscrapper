@@ -42,8 +42,8 @@ jobs:
       - name: Run pytest
         run: mise exec -- uv run pytest
       - name: Run basedpyright
-        run: uv run basedpyright src/
+        run: mise exec -- uv run basedpyright src/
       - name: Run ty
-        run: uv run ty check src/
+        run: mise exec -- uv run ty check src/
       - name: Run pytest
-        run: uv run pytest
+        run: mise exec -- uv run pytest
