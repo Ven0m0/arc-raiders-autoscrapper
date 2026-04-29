@@ -56,6 +56,12 @@ jobs:
       - name: Install Python
         run: |
           mise exec -- python --version
+=======
+          mise exec python -- python --version
+=======
+          mise exec -- python python --version
+=======
+          python --version
 
       - name: Install uv
         run: |
@@ -68,6 +74,55 @@ jobs:
         run: |
           mise exec -- uv pip install pyinstaller
           mise exec -- pyinstaller \
+=======
+        run: mise exec python -- uv sync --frozen
+
+      - name: Build PyInstaller binary
+        run: |
+          mise exec python -- uv pip install pyinstaller
+          mise exec python -- pyinstaller \
+=======
+        run: mise exec -- python uv sync --frozen
+
+      - name: Build PyInstaller binary
+        run: |
+          mise exec -- python uv pip install pyinstaller
+          mise exec -- python pyinstaller \
+=======
+          mise exec python@3.13 uv@latest -- python --version
+
+      - name: Install uv
+        run: |
+          mise exec python@3.13 uv@latest -- uv --version
+
+      - name: Install dependencies
+        run: mise exec python@3.13 uv@latest -- uv sync --frozen
+
+      - name: Build PyInstaller binary
+        run: |
+          mise exec python@3.13 uv@latest -- uv pip install pyinstaller
+          mise exec python@3.13 uv@latest -- pyinstaller \
+=======
+          mise exec python@3.13 -- python --version
+
+      - name: Install uv
+        run: |
+          mise exec uv@latest -- --version || mise install uv@latest
+
+      - name: Install dependencies
+        run: mise exec python@3.13 -- uv sync --frozen
+
+      - name: Build PyInstaller binary
+        run: |
+          mise exec python@3.13 -- uv pip install pyinstaller
+          mise exec python@3.13 -- pyinstaller \
+=======
+        run: uv sync --frozen
+
+      - name: Build PyInstaller binary
+        run: |
+          uv pip install pyinstaller
+          pyinstaller \
             --name autoscrapper \
             --add-data "src/autoscrapper/items/items_rules.default.json:autoscrapper/items" \
             --add-data "src/autoscrapper/progress/data:autoscrapper/progress/data" \

@@ -17,7 +17,6 @@ from bs4 import BeautifulSoup as _BeautifulSoup
 from .data_loader import DATA_DIR
 from .quest_overrides import apply_quest_overrides
 
-
 _log = logging.getLogger(__name__)
 
 _SCRAPER_AVAILABLE = True
@@ -846,11 +845,13 @@ def _build_quests_by_trader(quests: list[dict]) -> dict[str, list[dict]]:
     by_trader: dict[str, list[dict]] = {}
     for quest in quests:
         trader = quest.get("trader") or "Unknown"
-        by_trader.setdefault(trader, []).append({
-            "id": quest.get("id"),
-            "name": quest.get("name"),
-            "sortOrder": quest.get("sortOrder", 0),
-        })
+        by_trader.setdefault(trader, []).append(
+            {
+                "id": quest.get("id"),
+                "name": quest.get("name"),
+                "sortOrder": quest.get("sortOrder", 0),
+            }
+        )
 
     for trader, quests_list in by_trader.items():
         quests_list.sort(key=lambda q: q.get("sortOrder") or 0)

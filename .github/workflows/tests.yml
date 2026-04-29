@@ -30,13 +30,64 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Setup tools
         run: |
-          mise install python@3.13
-          mise install uv@latest
+          mise use --global python@3.13 uv@latest
       - name: "Set up Python"
         run: mise exec -- python --version
+=======
+        run: mise exec python -- python --version
+=======
       - name: Install uv
-        run: mise exec uv -- uv --version || mise install uv@latest
+        run: mise exec -- uv --version || mise install uv@latest
       - name: Install dependencies
         run: mise exec -- uv sync --frozen --all-extras
       - name: Run pytest
         run: mise exec -- uv run pytest --tb=short -q
+=======
+        run: mise exec python -- uv sync --frozen --all-extras
+      - name: Run pytest
+        run: mise exec python -- uv run pytest --tb=short -q
+=======
+=======
+          mise install python@3.13.13
+          mise install uv@latest
+      - name: "Set up Python"
+        run: mise exec python@3.13.13 -- python --version
+=======
+          mise install python@3.13.13
+          mise install uv@latest
+      - name: "Set up Python"
+        run: python --version
+      - name: Install uv
+        run: mise exec uv@latest -- uv --version || mise install uv@latest
+      - name: Install dependencies
+        run: mise exec python@3.13.13 -- uv sync --frozen --all-extras
+      - name: Run pytest
+        run: mise exec python@3.13.13 -- uv run pytest --tb=short -q
+=======
+        run: mise exec -- python python --version
+      - name: Install uv
+        run: mise exec -- uv --version || mise install uv@latest
+      - name: Install dependencies
+        run: mise exec -- python uv sync --frozen --all-extras
+      - name: Run pytest
+        run: mise exec -- python uv run pytest --tb=short -q
+=======
+        run: mise exec python@3.13 uv@latest -- python --version
+      - name: Install uv
+        run: mise exec python@3.13 uv@latest -- uv --version
+      - name: Install dependencies
+        run: mise exec python@3.13 uv@latest -- uv sync --frozen --all-extras
+      - name: Run pytest
+        run: mise exec python@3.13 uv@latest -- uv run pytest --tb=short -q
+=======
+        run: mise exec python@3.13 -- python --version
+      - name: Install uv
+        run: mise exec uv@latest -- --version || mise install uv@latest
+      - name: Install dependencies
+        run: mise exec python@3.13 -- uv sync --frozen --all-extras
+      - name: Run pytest
+        run: mise exec python@3.13 -- uv run pytest --tb=short -q
+=======
+        run: uv sync --frozen --all-extras
+      - name: Run pytest
+        run: uv run pytest --tb=short -q

@@ -11,7 +11,6 @@ from .progress_config import (
     resolve_active_quests,
 )
 
-
 _log = logging.getLogger(__name__)
 
 

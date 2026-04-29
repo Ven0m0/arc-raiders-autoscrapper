@@ -33,7 +33,6 @@ from ..scanner.types import ScanStats
 from ..warmup import start_background_warmup, warmup_status
 from .common import AppScreen, MessageScreen
 
-
 CELLS_PER_PAGE = 20
 EVENT_LIMIT = 8
 

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-
 QUEST_TRADER_OVERRIDES = {
     "combat-recon": "Shani",
     "bombing-run": "Shani",
