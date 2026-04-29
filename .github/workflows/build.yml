@@ -55,19 +55,19 @@ jobs:
 
       - name: Install Python
         run: |
-          mise run python -- python --version
+          mise exec -- python python --version
 
       - name: Install uv
         run: |
-          mise run uv -- --version || mise install uv@latest
+          mise exec -- uv --version || mise install uv@latest
 
       - name: Install dependencies
-        run: mise run python -- uv sync --frozen
+        run: mise exec -- python uv sync --frozen
 
       - name: Build PyInstaller binary
         run: |
-          mise run python -- uv pip install pyinstaller
-          mise run python -- pyinstaller \
+          mise exec -- python uv pip install pyinstaller
+          mise exec -- python pyinstaller \
             --name autoscrapper \
             --add-data "src/autoscrapper/items/items_rules.default.json:autoscrapper/items" \
             --add-data "src/autoscrapper/progress/data:autoscrapper/progress/data" \
