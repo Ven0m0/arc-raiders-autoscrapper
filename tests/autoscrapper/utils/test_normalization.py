@@ -9,6 +9,7 @@ from autoscrapper.utils.normalization import normalize_quest_name
         ("  Quest Name  ", "quest name"),
         ("COLLECTOR'S ITEM", "collectors item"),
         ("Hunter\u2019s Mark", "hunters mark"),
+        ('The "Great" Quest', "the great quest"),
         ("Quest: Part 1!", "quest part 1"),
         ("Quest    Name", "quest name"),
         ("  The Elder's @#$% Quest-Line!  ", "the elders quest line"),
