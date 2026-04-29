@@ -858,6 +858,60 @@
     "sortOrder": 4259.252140564836
   },
   {
+    "id": "a-wrench-in-the-works",
+    "name": "A Wrench in the Works",
+    "objectives": [
+      "Search the buses near the western gate"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "mechanical-components",
+      "mod-components",
+      "yellow-radio-renegade-color"
+    ],
+    "rewards": [
+      {
+        "id": "6b658923-da8e-4329-94f2-bbb5c2583538",
+        "item": {
+          "id": "mechanical-components",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/mechanical-components.webp",
+          "name": "Mechanical Components",
+          "rarity": "Uncommon",
+          "item_type": "Refined Material"
+        },
+        "item_id": "mechanical-components",
+        "quantity": "5"
+      },
+      {
+        "id": "f47a832b-377b-465f-b242-b601dc428920",
+        "item": {
+          "id": "mod-components",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/mod-components.webp",
+          "name": "Mod Components",
+          "rarity": "Rare",
+          "item_type": "Refined Material"
+        },
+        "item_id": "mod-components",
+        "quantity": "3"
+      },
+      {
+        "id": "265c7eb6-e6ac-44d4-9abf-87cfcc79ea09",
+        "item": {
+          "id": "yellow-radio-renegade-color",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/yellow-radio-renegade-color.webp",
+          "name": "Yellow (Radio Renegade Color)",
+          "rarity": "Common",
+          "item_type": "Misc"
+        },
+        "item_id": "yellow-radio-renegade-color",
+        "quantity": "1"
+      }
+    ],
+    "trader": "Celeste",
+    "xp": 0,
+    "sortOrder": 0
+  },
+  {
     "id": "back-on-top",
     "name": "Back on Top",
     "objectives": [
@@ -913,6 +967,49 @@
     "trader": "TianWen",
     "xp": 0,
     "sortOrder": 4173.137708038272
+  },
+  {
+    "id": "battening-down",
+    "name": "Battening Down",
+    "objectives": [
+      "Photograph the cracks forming in the seawall",
+      "Sample the shoreline near the hotel beach",
+      "Fix the leaking oil pipe in the northeast"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "laser-trap-smoke-recipe",
+      "riven-tides-hotel-keycard-no-107"
+    ],
+    "rewards": [
+      {
+        "id": "aa1eb179-a537-4f7a-9bd9-0b221f171ed9",
+        "item": {
+          "id": "laser-trap-smoke-recipe",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/laser-trap-smoke-recipe.webp",
+          "name": "Smoke Grenade Trap",
+          "rarity": "Rare",
+          "item_type": "Quick Use"
+        },
+        "item_id": "laser-trap-smoke-recipe",
+        "quantity": "1"
+      },
+      {
+        "id": "694dd98e-2812-42b4-9f36-e10ce5a9c94f",
+        "item": {
+          "id": "riven-tides-hotel-keycard-no-107",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/riven-tides-hotel-keycard-no-107.webp",
+          "name": "Riven Tides Hotel Keycard No. 107",
+          "rarity": "Common",
+          "item_type": "Key"
+        },
+        "item_id": "riven-tides-hotel-keycard-no-107",
+        "quantity": "1"
+      }
+    ],
+    "trader": "Apollo",
+    "xp": 0,
+    "sortOrder": 0
   },
   {
     "id": "bees",
@@ -1364,6 +1461,61 @@
     "trader": "Shani",
     "xp": 0,
     "sortOrder": 1279.5769392581892
+  },
+  {
+    "id": "collision-course",
+    "name": "Collision Course",
+    "objectives": [
+      "Destroy a Comet",
+      "Deliver a Comet Igniter to Tian Wen"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "muzzle-brake-ii",
+      "canto",
+      "extended-medium-mag-iii"
+    ],
+    "rewards": [
+      {
+        "id": "55a3e53b-c812-49c8-bc93-92f5a34810e5",
+        "item": {
+          "id": "muzzle-brake-ii",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/muzzle-brake-ii.webp",
+          "name": "Muzzle Brake II",
+          "rarity": "Uncommon",
+          "item_type": "Modification"
+        },
+        "item_id": "muzzle-brake-ii",
+        "quantity": "1"
+      },
+      {
+        "id": "8018d547-efa5-4816-ba95-502a0f17f13a",
+        "item": {
+          "id": "canto",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/canto.webp",
+          "name": "Canto I",
+          "rarity": "Rare",
+          "item_type": "Weapon"
+        },
+        "item_id": "canto",
+        "quantity": "1"
+      },
+      {
+        "id": "950e7132-30ea-4068-ab5f-85e0a8eff17f",
+        "item": {
+          "id": "extended-medium-mag-iii",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/extended-medium-mag-iii.webp",
+          "name": "Extended Medium Mag III",
+          "rarity": "Rare",
+          "item_type": "Modification"
+        },
+        "item_id": "extended-medium-mag-iii",
+        "quantity": "1"
+      }
+    ],
+    "trader": "TianWen",
+    "xp": 0,
+    "sortOrder": 0
   },
   {
     "id": "combat-recon",
@@ -2684,6 +2836,63 @@
     "sortOrder": 5699.252140564836
   },
   {
+    "id": "line-in-the-sand",
+    "name": "Line in the Sand",
+    "objectives": [
+      "Find out why the train never reached Marano Station",
+      "Find out who orchestrated the robbery",
+      "Find out where the thruster valves were stashed",
+      "Search the basement of the merchant's nearby apartment"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "exodus-modules",
+      "magnetic-accelerator",
+      "magnetron"
+    ],
+    "rewards": [
+      {
+        "id": "7054ca76-6c34-496b-bd22-313e522b0091",
+        "item": {
+          "id": "exodus-modules",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/exodus-modules.webp",
+          "name": "Exodus Modules",
+          "rarity": "Epic",
+          "item_type": "Topside Material"
+        },
+        "item_id": "exodus-modules",
+        "quantity": "2"
+      },
+      {
+        "id": "0d9fbdfc-6886-495f-ab3f-64031ff8e4f7",
+        "item": {
+          "id": "magnetic-accelerator",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/magnetic-accelerator.webp",
+          "name": "Magnetic Accelerator",
+          "rarity": "Epic",
+          "item_type": "Refined Material"
+        },
+        "item_id": "magnetic-accelerator",
+        "quantity": "2"
+      },
+      {
+        "id": "a111e09c-452f-40b7-80e6-08a48cf5a013",
+        "item": {
+          "id": "magnetron",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/magnetron.webp",
+          "name": "Magnetron",
+          "rarity": "Epic",
+          "item_type": "Recyclable"
+        },
+        "item_id": "magnetron",
+        "quantity": "2"
+      }
+    ],
+    "trader": "Celeste",
+    "xp": 0,
+    "sortOrder": 0
+  },
+  {
     "id": "lost-in-transmission",
     "name": "Lost in Transmission",
     "objectives": [
@@ -3585,6 +3794,64 @@
     "sortOrder": 6377.914214694764
   },
   {
+    "id": "safe-harbor",
+    "name": "Safe Harbor",
+    "objectives": [
+      "In One Round:",
+      "Find the clue left by the restaurant kitchen staff",
+      "Find the area portrayed in the sketch",
+      "Dig up the buried part",
+      "Deliver the Precision Gimbal to Tian Wen"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "surge-coil",
+      "heavy-gun-parts",
+      "horizontal-grip"
+    ],
+    "rewards": [
+      {
+        "id": "8caf84ec-d251-4e38-857d-6e78ee249228",
+        "item": {
+          "id": "surge-coil",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/surge-coil.webp",
+          "name": "Surge Coil",
+          "rarity": "Rare",
+          "item_type": "Deployable"
+        },
+        "item_id": "surge-coil",
+        "quantity": "1"
+      },
+      {
+        "id": "dc3eb192-8511-4288-a0d9-dfcaecbc2b04",
+        "item": {
+          "id": "heavy-gun-parts",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/heavy-gun-parts.webp",
+          "name": "Heavy Gun Parts",
+          "rarity": "Rare",
+          "item_type": "Topside Material"
+        },
+        "item_id": "heavy-gun-parts",
+        "quantity": "1"
+      },
+      {
+        "id": "f6adc178-c7d7-43fd-85a4-824a3017bbd5",
+        "item": {
+          "id": "horizontal-grip",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/horizontal-grip.webp",
+          "name": "Horizontal Grip",
+          "rarity": "Epic",
+          "item_type": "Modification"
+        },
+        "item_id": "horizontal-grip",
+        "quantity": "1"
+      }
+    ],
+    "trader": "TianWen",
+    "xp": 0,
+    "sortOrder": 0
+  },
+  {
     "id": "safe-passage",
     "name": "Safe Passage",
     "objectives": [
@@ -3666,6 +3933,63 @@
     "trader": "TianWen",
     "xp": 0,
     "sortOrder": 7431.071956110197
+  },
+  {
+    "id": "shoring-up-defenses",
+    "name": "Shoring up Defenses",
+    "objectives": [
+      "Destroy 5 Wasps",
+      "Destroy 3 Fireflies",
+      "Use 1 ARC Alloy to reinforce the Raider structure on top of any Stacking Yard crane",
+      "Board up shuttered windows in the hotel"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "barricade-kit",
+      "lure-grenade-trap",
+      "seeker-grenade"
+    ],
+    "rewards": [
+      {
+        "id": "aad4da31-b844-4872-a247-dff0fc77512f",
+        "item": {
+          "id": "barricade-kit",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/barricade-kit.webp",
+          "name": "Barricade Kit",
+          "rarity": "Uncommon",
+          "item_type": "Quick Use"
+        },
+        "item_id": "barricade-kit",
+        "quantity": "3"
+      },
+      {
+        "id": "bf159ec5-7953-4bb9-9797-ba64cc58d09d",
+        "item": {
+          "id": "lure-grenade-trap",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/lure-grenade-trap.webp",
+          "name": "Lure Grenade Trap",
+          "rarity": "Uncommon",
+          "item_type": "Quick Use"
+        },
+        "item_id": "lure-grenade-trap",
+        "quantity": "3"
+      },
+      {
+        "id": "780b6b52-3ff3-484d-b6c0-8767ceae311a",
+        "item": {
+          "id": "seeker-grenade",
+          "icon": "https://cdn.metaforge.app/arc-raiders/icons/seeker-grenade.webp",
+          "name": "Seeker Grenade",
+          "rarity": "Uncommon",
+          "item_type": "Quick Use"
+        },
+        "item_id": "seeker-grenade",
+        "quantity": "6"
+      }
+    ],
+    "trader": "Apollo",
+    "xp": 0,
+    "sortOrder": 0
   },
   {
     "id": "snap-and-salvage",
