@@ -17,7 +17,6 @@ sys.modules.setdefault("pynput.mouse", MagicMock())
 
 from autoscrapper.scanner.scan_loop import _detect_consecutive_empty_stop_idx  # noqa: E402
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
