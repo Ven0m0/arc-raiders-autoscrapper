@@ -79,7 +79,8 @@ class ArcTrackerClient:
             headers={
                 "Accept": "application/json",
                 "User-Agent": "ArcRaiders-AutoScrapper/0.2.0",
-            }
+            },
+            verify=True,
         )
         self._item_id_to_name, self._item_name_to_id = _get_cached_item_mappings()
 

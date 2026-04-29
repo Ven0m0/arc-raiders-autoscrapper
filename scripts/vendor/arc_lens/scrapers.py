@@ -130,7 +130,7 @@ class BaseScraper(ABC):
     """Base class for all scrapers."""
 
     def __init__(self, client: httpx.Client | None = None, delay_ms: int = RATE_LIMIT_MS) -> None:
-        self._client = client if client else httpx.Client()
+        self._client = client if client else httpx.Client(verify=True)
         self.delay_ms = delay_ms
         self._last_request_time: float = 0.0
 
