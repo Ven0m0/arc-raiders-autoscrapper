@@ -21,7 +21,6 @@ prek = "latest"
 "pipx:pytest" = "latest"
 "pipx:basedpyright" = "latest"
 ripgrep = "latest"
-ast-grep = "latest"
 
 [env]
 PROJECT_ROOT = "{{config_root}}"
