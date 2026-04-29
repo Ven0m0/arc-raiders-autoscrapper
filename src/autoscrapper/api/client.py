@@ -10,6 +10,7 @@ import time
 from typing import TYPE_CHECKING, Any
 
 import httpx
+from pydantic import ValidationError
 import orjson
 
 from .models import (
@@ -342,7 +343,11 @@ class ArcTrackerClient:
         profile_data = data.get("data", data)
         if not isinstance(profile_data, dict):
             return None
-        return UserProfile.from_api(profile_data)
+        try:
+            return UserProfile.from_api(profile_data)
+        except ValidationError as e:
+            _log.warning(f"api: Failed to validate user profile response: {e}")
+            return None
 
     def get_user_quests(
         self,

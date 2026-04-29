@@ -5,6 +5,7 @@ from __future__ import annotations
 import time
 from dataclasses import dataclass, field
 from typing import Any, Literal
+from pydantic import BaseModel, ConfigDict
 
 
 type ItemDecision = Literal["KEEP", "SELL", "RECYCLE"]
@@ -164,9 +165,10 @@ class APIInventoryResult:
     api_error: str | None = None
 
 
-@dataclass(frozen=True, slots=True)
-class UserProfile:
+class UserProfile(BaseModel):
     """User profile information."""
+
+    model_config = ConfigDict(frozen=True, extra="ignore", strict=False)
 
     username: str
     level: int
@@ -174,11 +176,12 @@ class UserProfile:
 
     @classmethod
     def from_api(cls, data: dict[str, Any]) -> UserProfile:
-        return cls(
-            username=str(data.get("username", "")),
-            level=int(data.get("level", 0)),
-            member_since=str(data.get("memberSince", "")),
-        )
+        data_to_validate = {
+            "username": data.get("username"),
+            "level": data.get("level"),
+            "member_since": data.get("memberSince"),
+        }
+        return cls.model_validate(data_to_validate)
 
 
 @dataclass(frozen=True, slots=True)
