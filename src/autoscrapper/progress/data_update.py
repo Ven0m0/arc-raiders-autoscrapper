@@ -877,6 +877,7 @@ def _scrape_wiki_uses() -> dict[str, str]:
             WIKI_LOOT_URL,
             timeout=30.0,
             headers={"User-Agent": WIKI_USER_AGENT},
+            verify=True,
         )
         resp.raise_for_status()
     except Exception as exc:
