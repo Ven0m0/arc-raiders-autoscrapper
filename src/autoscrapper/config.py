@@ -286,7 +286,7 @@ def _from_raw_scan_settings(raw: Any) -> ScanSettings:
 
     infobox_retries = _coerce_positive_int(infobox_retries_raw)
     if infobox_retries is None:
-        infobox_retries = ScanSettings.infobox_retries
+        infobox_retries = ScanSettings().infobox_retries
     infobox_retries = _clamp_retry_count(infobox_retries, "infobox_retries")
 
     infobox_retry_interval_ms = _coerce_non_negative_int(infobox_retry_interval_ms_raw)
