@@ -35,7 +35,7 @@ jobs:
       - name: "Set up Python"
         run: mise exec -- python --version
       - name: Install uv
-        run: mise exec -- uv --version || mise install uv@latest
+        run: mise exec uv -- uv --version || mise install uv@latest
       - name: Install dependencies
         run: mise exec -- uv sync --frozen --all-extras
       - name: Run pytest
