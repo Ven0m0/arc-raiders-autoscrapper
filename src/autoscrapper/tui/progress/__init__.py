@@ -163,7 +163,7 @@ class ActiveQuestsScreen(ProgressScreen):
         *ProgressScreen.BINDINGS,
         Binding("up", "cursor_up", "up", priority=True),
         Binding("down", "cursor_down", "down", priority=True),
-        Binding("enter", "toggle", "Toggle quest"),
+        Binding("enter", "toggle_quest", "Toggle quest"),
         Binding("ctrl+f", "cycle_sort", "Sort", priority=True),
         Binding("ctrl+n", "next", "Continue"),
     ]
@@ -334,7 +334,7 @@ class ActiveQuestsScreen(ProgressScreen):
             return
         self.app.push_screen(WorkshopLevelsScreen(self.state, wizard_mode=True))
 
-    def action_toggle(self) -> None:
+    def action_toggle_quest(self) -> None:
         self._toggle_selected()
 
     def action_cycle_sort(self) -> None:
