@@ -4,33 +4,45 @@ on:
   push:
     branches:
       - main
+    paths:
+      - src/**
+      - tests/**
+      - scripts/**
+      - pyproject.toml
+      - uv.lock
+      - .python-version
   pull_request:
     branches:
       - main
+    paths:
+      - src/**
+      - tests/**
+      - scripts/**
+      - pyproject.toml
+      - uv.lock
+      - .python-version
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: read
     steps:
       - uses: actions/checkout@v6
         with:
+          fetch-depth: 1
           persist-credentials: false
       - name: Install mise
         run: |
           curl https://mise.run | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Setup tools
-        run: |
-          mise use --global python@3.13 uv@latest
-      - name: "Set up Python"
+        run: mise use --global python@3.13 uv@latest
+      - name: Set up Python
         run: mise exec -- python --version
-=======
-        run: mise exec python -- python --version
-=======
       - name: Install uv
         run: mise exec -- uv --version || mise install uv@latest
       - name: Install dependencies
@@ -43,94 +55,3 @@ jobs:
         run: mise exec -- uv run ty check src/
       - name: Run pytest
         run: mise exec -- uv run pytest
-=======
-        run: mise exec python -- uv sync --frozen --all-extras
-      - name: Run Ruff
-        run: mise exec python -- uv run ruff check src/ tests/ scripts/
-      - name: Run basedpyright
-        run: mise exec python -- uv run basedpyright src/
-      - name: Run ty
-        run: mise exec python -- uv run ty check src/
-      - name: Run pytest
-        run: mise exec python -- uv run pytest
-=======
-=======
-          mise install python@3.13.13
-          mise install uv@latest
-      - name: "Set up Python"
-        run: mise exec python@3.13.13 -- python --version
-=======
-          mise install python@3.13.13
-          mise install uv@latest
-      - name: "Set up Python"
-        run: python --version
-      - name: Install uv
-        run: mise exec uv@latest -- uv --version || mise install uv@latest
-      - name: Install dependencies
-        run: mise exec python@3.13.13 -- uv sync --frozen --all-extras
-      - name: Run Ruff
-        run: mise exec python@3.13.13 -- uv run ruff check src/ tests/ scripts/
-      - name: Run basedpyright
-        run: mise exec python@3.13.13 -- uv run basedpyright src/
-      - name: Run ty
-        run: mise exec python@3.13.13 -- uv run ty check src/
-      - name: Run pytest
-        run: mise exec python@3.13.13 -- uv run pytest
-=======
-        run: mise exec -- python python --version
-      - name: Install uv
-        run: mise exec -- uv --version || mise install uv@latest
-      - name: Install dependencies
-        run: mise exec -- python uv sync --frozen --all-extras
-      - name: Run Ruff
-        run: mise exec -- python uv run ruff check src/ tests/ scripts/
-=======
-        run: uv sync --frozen --all-extras
-      - name: Run Ruff
-        run: uv run ruff check src/ tests/ scripts/
-      - name: Run basedpyright
-        run: uv run basedpyright src/
-      - name: Run ty
-        run: uv run ty check src/
-      - name: Run pytest
-        run: uv run pytest
-      - name: Run basedpyright
-        run: mise exec -- python uv run basedpyright src/
-      - name: Run ty
-        run: mise exec -- python uv run ty check src/
-      - name: Run pytest
-        run: mise exec -- python uv run pytest
-      - name: Run basedpyright
-        run: mise exec python@3.13.13 -- uv run basedpyright src/
-      - name: Run ty
-        run: mise exec python@3.13.13 -- uv run ty check src/
-      - name: Run pytest
-        run: mise exec python@3.13.13 -- uv run pytest
-=======
-        run: mise exec python@3.13 uv@latest -- python --version
-      - name: Install uv
-        run: mise exec python@3.13 uv@latest -- uv --version
-      - name: Install dependencies
-        run: mise exec python@3.13 uv@latest -- uv sync --frozen --all-extras
-      - name: Run Ruff
-        run: mise exec python@3.13 uv@latest -- uv run ruff check src/ tests/ scripts/
-      - name: Run basedpyright
-        run: mise exec python@3.13 uv@latest -- uv run basedpyright src/
-      - name: Run ty
-        run: mise exec python@3.13 uv@latest -- uv run ty check src/
-      - name: Run pytest
-        run: mise exec python@3.13 uv@latest -- uv run pytest
-=======
-        run: mise exec python@3.13 -- python --version
-      - name: Install uv
-        run: mise exec uv@latest -- --version || mise install uv@latest
-      - name: Install dependencies
-        run: mise exec python@3.13 -- uv sync --frozen --all-extras
-      - name: Run Ruff
-        run: mise exec python@3.13 -- uv run ruff check src/ tests/ scripts/
-      - name: Run basedpyright
-        run: mise exec python@3.13 -- uv run basedpyright src/
-      - name: Run ty
-        run: mise exec python@3.13 -- uv run ty check src/
-      - name: Run pytest
-        run: mise exec python@3.13 -- uv run pytest
