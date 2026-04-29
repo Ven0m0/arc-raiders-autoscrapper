@@ -4,6 +4,9 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 from autoscrapper.config import (
+    load_api_settings,
+    save_api_settings,
+
     ApiSettings,
     CONFIG_VERSION,
     ProgressSettings,
@@ -307,5 +310,91 @@ def test_reset_progress_settings():
     _assert_reset_settings(reset_progress_settings, "progress", ProgressSettings())
 
 
-def test_reset_api_settings():
-    _assert_reset_settings(reset_api_settings, "api", ApiSettings())
+@patch("autoscrapper.config._get_keyring_password")
+@patch("autoscrapper.config._load_config_dict")
+def test_load_api_settings_keyring(mock_load, mock_get_keyring):
+    mock_load.return_value = {
+        "version": 6,
+        "api": {"enabled": True, "prefer_api": True, "base_url": "https://arctracker.io"},
+    }
+
+    def side_effect(username):
+        if username == "app_key":
+            return "keyring_app"
+        if username == "user_key":
+            return "keyring_user"
+        return ""
+
+    mock_get_keyring.side_effect = side_effect
+
+    settings = load_api_settings()
+    assert settings.app_key == "keyring_app"
+    assert settings.user_key == "keyring_user"
+    assert settings.enabled is True
+
+
+@patch("autoscrapper.config._set_keyring_password")
+@patch("autoscrapper.config._get_keyring_password")
+@patch("autoscrapper.config._save_config_dict")
+@patch("autoscrapper.config._load_config_dict")
+def test_load_api_settings_migration(mock_load, mock_save, mock_get_keyring, mock_set_keyring):
+    mock_load.return_value = {
+        "version": 6,
+        "api": {
+            "app_key": "config_app",
+            "user_key": "config_user",
+            "enabled": True,
+        },
+    }
+    mock_get_keyring.return_value = ""
+
+    settings = load_api_settings()
+
+    # Should be loaded from config
+    assert settings.app_key == "config_app"
+    assert settings.user_key == "config_user"
+    assert settings.enabled is True
+
+    # Should have migrated to keyring
+    mock_set_keyring.assert_any_call("app_key", "config_app")
+    mock_set_keyring.assert_any_call("user_key", "config_user")
+
+    # Should have saved config without keys
+    saved_config = mock_save.call_args[0][0]
+    assert "app_key" not in saved_config["api"]
+    assert "user_key" not in saved_config["api"]
+
+
+@patch("autoscrapper.config._set_keyring_password")
+@patch("autoscrapper.config._save_config_dict")
+@patch("autoscrapper.config._load_config_dict")
+def test_save_api_settings_keyring(mock_load, mock_save, mock_set_keyring):
+    mock_load.return_value = {"version": 6}
+
+    settings = ApiSettings(
+        app_key="new_app",
+        user_key="new_user",
+        enabled=True,
+    )
+
+    save_api_settings(settings)
+
+    # Keys should be saved to keyring
+    mock_set_keyring.assert_any_call("app_key", "new_app")
+    mock_set_keyring.assert_any_call("user_key", "new_user")
+
+    # Keys should NOT be in config dict
+    saved_config = mock_save.call_args[0][0]
+    assert "app_key" not in saved_config["api"]
+    assert "user_key" not in saved_config["api"]
+    assert saved_config["api"]["enabled"] is True
+
+
+@patch("autoscrapper.config._delete_keyring_password")
+@patch("autoscrapper.config.save_api_settings")
+def test_reset_api_settings_keyring(mock_save, mock_delete_keyring):
+    reset_api_settings()
+    mock_delete_keyring.assert_any_call("app_key")
+    mock_delete_keyring.assert_any_call("user_key")
+    mock_save.assert_called_once()
+    assert mock_save.call_args[0][0] == ApiSettings()
