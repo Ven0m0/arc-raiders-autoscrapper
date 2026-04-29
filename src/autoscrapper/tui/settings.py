@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from abc import abstractmethod
 from dataclasses import replace
+from typing import ClassVar
 
 from textual import events
 from textual.app import ComposeResult
@@ -163,7 +164,7 @@ class ScanSettingsScreen(FormScreen):
     }
     """
 
-    _FOCUS_ORDER: tuple[str, ...] = ()
+    _FOCUS_ORDER: ClassVar[tuple[str, ...]] = ()
     TITLE = "Scan Settings"
 
     def __init__(self) -> None:
