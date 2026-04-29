@@ -3,7 +3,7 @@ experimental = true
 color = true
 yes = true
 auto_install = true
-lockfile = true
+#lockfile = true
 
 [settings.python]
 uv_venv_auto = "create|source"
@@ -29,6 +29,7 @@ UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
 UV_LINK_MODE = "symlink"
 _.python.venv = { path = ".venv", create = true, uv_create_args = ["--seed", "--system-site-packages"] }
 _.file = { path = ".env", tools = true }
+MISE_PYTHON_GITHUB_ATTESTATIONS = "false"
 
 [hooks]
 enter = "mise i -yq"
