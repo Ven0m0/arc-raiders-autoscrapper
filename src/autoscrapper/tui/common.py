@@ -100,8 +100,8 @@ class FormScreen(AppScreen):
 
     _FOCUS_ORDER: ClassVar[tuple[str, ...]] = ()
 
-    @cached_property
-    def _cached_focus_widgets(self) -> tuple[Widget, ...]:
+    @property
+    def _focus_widgets(self) -> tuple[Widget, ...]:
         return tuple(self.query_one(f"#{widget_id}") for widget_id in self._FOCUS_ORDER)
 
     def _focus_candidates(self) -> list[Widget]:
