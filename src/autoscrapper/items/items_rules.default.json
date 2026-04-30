@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-29T14:50:04.475857Z",
+    "generatedAt": "2026-04-30T00:41:48.108560Z",
     "data": {
-      "lastUpdated": "2026-04-29T14:50:04.465525Z",
+      "lastUpdated": "2026-04-30T00:41:48.097574Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
-      "itemCount": 594,
+      "itemCount": 593,
       "questCount": 100,
       "dataSources": {
         "items": {
@@ -18,7 +18,7 @@
           "fallback": {
             "repository": "https://github.com/RaidTheory/arcraiders-data",
             "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
-            "supplementalCount": 28,
+            "supplementalCount": 27,
             "error": null
           },
           "arctrackerEnrichment": {
@@ -124,7 +124,7 @@
       },
       "hasPriceOverrides": false
     },
-    "itemCount": 594,
+    "itemCount": 593,
     "allQuestsCompleted": true
   },
   "items": [
@@ -5576,17 +5576,6 @@
       ]
     },
     {
-      "id": "tactical-mk3-smoke-blueprint",
-      "name": "Tactical Mk. 3 (Smoke) Blueprint",
-      "value": 5000,
-      "action": "keep",
-      "analysis": [
-        "Blueprint - valuable for unlocking crafting recipes",
-        "Review carefully before selling or recycling",
-        "Override: treat 'Your Call' as Keep"
-      ]
-    },
-    {
       "id": "tagging-grenade",
       "name": "Tagging Grenade",
       "value": 1000,
@@ -5939,7 +5928,7 @@
     },
     {
       "id": "utility-augment-t3-smoke-blueprint",
-      "name": "Utility Augment T3 Smoke Blueprint",
+      "name": "Tactical MK.3 (Smoke) Blueprint",
       "value": 5000,
       "action": "keep",
       "analysis": [
