@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-04-29T14:50:04.465525Z",
+  "lastUpdated": "2026-04-30T00:41:48.097574Z",
   "source": "https://metaforge.app/arc-raiders/api",
   "version": "autoscrapper-data-1",
-  "itemCount": 594,
+  "itemCount": 593,
   "questCount": 100,
   "dataSources": {
     "items": {
@@ -15,7 +15,7 @@
       "fallback": {
         "repository": "https://github.com/RaidTheory/arcraiders-data",
         "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
-        "supplementalCount": 28,
+        "supplementalCount": 27,
         "error": null
       },
       "arctrackerEnrichment": {

@@ -7743,7 +7743,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "equipment_bench",
-    "updatedAt": "2026-04-28T11:52:36.734081+00:00",
+    "updatedAt": "2026-04-29T17:42:02.282625+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
       "processor": 3
@@ -7752,6 +7752,19 @@
       "advanced-electrical-components": 1,
       "processor": 1
     }
+  },
+  {
+    "id": "utility-augment-t3-smoke-blueprint",
+    "name": "Tactical MK.3 (Smoke) Blueprint",
+    "type": "Blueprint",
+    "rarity": "legendary",
+    "value": 5000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-04-29T17:40:54.891336+00:00",
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "tagging-grenade",
@@ -8227,19 +8240,6 @@
       "metal-parts": 4,
       "simple-gun-parts": 5
     }
-  },
-  {
-    "id": "utility-augment-t3-smoke-blueprint",
-    "name": "Utility Augment T3 Smoke Blueprint",
-    "type": "Blueprint",
-    "rarity": "legendary",
-    "value": 5000,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "2026-04-28T09:10:51.019506+00:00",
-    "recipe": null,
-    "recyclesInto": null
   },
   {
     "id": "vaporizer-regulator",
@@ -9198,19 +9198,6 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "tactical-mk3-smoke-blueprint",
-    "name": "Tactical Mk. 3 (Smoke) Blueprint",
-    "type": "Blueprint",
-    "rarity": "common",
-    "value": 5000,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/28/2026",
     "recipe": null,
     "recyclesInto": null
   },
