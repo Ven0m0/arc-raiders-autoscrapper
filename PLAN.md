@@ -95,6 +95,11 @@ updated_by: kilo
 
 **Constraint:** OCR and input remain synchronous
 
+
+### T039 Replace httpx with "httpx[http2]
+
+use http2 for httpx via "httpx[http2]
+
 ---
 
 ## Validation
