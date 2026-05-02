@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          fetch-depth: 1
+          fetch-depth: 2
       - name: Configure fast apt mirror
         uses: vegardit/fast-apt-mirror.sh@v1
       - name: Install Linux system dependencies
