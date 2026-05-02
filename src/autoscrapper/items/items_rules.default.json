@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-30T00:41:48.108560Z",
+    "generatedAt": "2026-04-30T14:39:55.322183Z",
     "data": {
-      "lastUpdated": "2026-04-30T00:41:48.097574Z",
+      "lastUpdated": "2026-04-30T14:39:55.311444Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
-      "itemCount": 593,
+      "itemCount": 600,
       "questCount": 100,
       "dataSources": {
         "items": {
@@ -124,7 +124,7 @@
       },
       "hasPriceOverrides": false
     },
-    "itemCount": 593,
+    "itemCount": 600,
     "allQuestsCompleted": true
   },
   "items": [
@@ -4487,8 +4487,63 @@
       ]
     },
     {
+      "id": "riven-tides-classifed-records-keycard",
+      "name": "Riven Tides Classifed Records Keycard",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "riven-tides-crane-house-keycard",
+      "name": "Riven Tides Crane House Keycard",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "riven-tides-hotel-keycard-no-102",
+      "name": "Riven Tides Hotel Keycard No. 102",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "riven-tides-hotel-keycard-no-107",
       "name": "Riven Tides Hotel Keycard No. 107",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "riven-tides-hotel-keycard-no-113",
+      "name": "Riven Tides Hotel Keycard No. 113",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "riven-tides-hotel-keycard-no-205",
+      "name": "Riven Tides Hotel Keycard No. 205",
       "value": 100,
       "action": "keep",
       "analysis": [
@@ -4511,6 +4566,28 @@
     {
       "id": "riven-tides-hotel-keycard-no-311",
       "name": "Riven Tides Hotel Keycard No. 311",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "riven-tides-hotel-keycard-no-404",
+      "name": "Riven Tides Hotel Keycard No. 404",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "riven-tides-secure-storage-keycard",
+      "name": "Riven Tides Secure Storage Keycard",
       "value": 100,
       "action": "keep",
       "analysis": [
@@ -5888,7 +5965,7 @@
     {
       "id": "turbine-compressor",
       "name": "Turbine Compressor",
-      "value": 0,
+      "value": 5000,
       "action": "keep",
       "analysis": [
         "Epic rarity",
@@ -6254,10 +6331,11 @@
       "id": "white-flag",
       "name": "White Flag",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
