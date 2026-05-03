@@ -95,10 +95,11 @@ updated_by: kilo
 
 **Constraint:** OCR and input remain synchronous
 
-
 ### T039 Replace httpx with "httpx[http2]
-
 use http2 for httpx via "httpx[http2]
+
+### T040 rule update
+use: "Workshop profile: level-3-workshops" by default instead of "Workshop profile: level-2-workshops"
 
 ---
 
