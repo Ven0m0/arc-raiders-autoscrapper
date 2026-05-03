@@ -24,13 +24,13 @@
       "options": { "apiKey": "{env:ANTHROPIC_API_KEY}" }
     }
   },
-  "disabled_providers": ["openai", "google"],
+  "disabled_providers": ["openai", "google", "anthropic"],
   "plugin": [
     "opencode-ignore@1.1.0",
+    "@bastiangx/opencode-unmoji",
     "@gotgenes/opencode-agent-identity@3.0.1",
-    "github:kdcokenny/opencode-background-agents",
-    "github:spoons-and-mirrors/subtask2",
-    "opencode-agent-skills@0.6.5",
+    "@openspoon/subtask2@0.3.9",
+		"@tarquinen/opencode-dcp@3.1.9",
     "./plugins/context-shield",
     "./plugins/gitingest",
     "./plugins/trim-tool-name",
@@ -43,7 +43,7 @@
       "extensions": [".json", ".js"]
     },
     "ruff": {
-      "command": ["uvx", "ruff", "format", "$FILE"],
+      "command": ["ruff", "format", "$FILE"],
       "extensions": [".py", ".pyi"]
     }
   },
@@ -58,18 +58,13 @@
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
       "headers": { "Authorization": "Bearer {env:CONTEXT7_API_KEY}" },
-      "enabled": true
+      "enabled": false
     },
     "github": {
       "type": "remote",
       "url": "https://api.githubcopilot.com/mcp/",
       "enabled": true
-    },
-    "gh_grep": {
-      "type": "remote",
-      "url": "https://mcp.grep.app",
-      "enabled": false
-    },
+    }
     "exa": {
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,get_code_context_exa,crawling_exa",
@@ -94,25 +89,25 @@
       "type": "local",
       "command": ["npx", "-y", "octocode-mcp@latest"],
       "enabled": true
-    },
-    "playwright": {
-      "type": "local",
-      "command": ["npx", "-y", "@playwright/mcp@latest", "--headless"],
-      "enabled": false
     }
   },
   "lsp": {
     "basedpyright": {
-      "command": ["uvx", "basedpyright-langserver", "--stdio"],
+      "command": ["basedpyright-langserver", "--stdio"],
       "extensions": [".py", ".pyw", ".pyi"]
     },
     "bash": {
       "command": ["bash-language-server", "start"],
       "extensions": [".sh", ".bash", ".zsh"]
     },
-    "vtsls": {
+		"vtsls": {
       "command": ["vtsls", "--stdio"],
-      "extensions": [".ts", ".tsx", ".js", ".jsx", ".mjs", ".mts"]
+      "extensions": [".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs", ".mts", ".cts"],
+      "initialization": { "preferences": { "importModuleSpecifierPreference": "relative" } }
+		},
+    "rust": {
+      "command": ["rust-analyzer"],
+      "extensions": [".rs"]
     },
     "yaml-ls": {
       "command": ["yaml-language-server", "--stdio"],
@@ -123,8 +118,27 @@
       "extensions": [".json", ".jsonc"]
     },
     "tombi": {
-      "command": ["uvx", "tombi", "lsp"],
+      "command": ["tombi", "lsp"],
       "extensions": [".toml"]
+    },
+    "dockerfile-ls": {
+      "command": ["docker-langserver", "--stdio"],
+      "extensions": [".dockerfile"]
+    },
+    "html-ls": {
+      "command": ["vscode-html-language-server", "--stdio"],
+      "extensions": [".html", ".htm"]
+    },
+    "css-ls": {
+      "command": ["vscode-css-language-server", "--stdio"],
+      "extensions": [".css", ".scss", ".less"]
+    },
+		"powershell": {
+			"command": [
+				"pwsh", "-NoLogo", "-NoProfile", "-Command",
+				"$module = Get-Module -ListAvailable PowerShellEditorServices | Sort-Object Version -Descending | Select-Object -First 1; if (-not $module) { throw 'PowerShellEditorServices is not installed. Run: Install-Module -Name PowerShellEditorServices -Scope CurrentUser' }; Import-Module $module.Path; Start-EditorServices -HostName 'Claude Code' -HostProfileId 'ClaudeCode' -HostVersion '1.0.0' -Stdio -BundledModulesPath (Split-Path $module.Path) -LogPath '/dev/null' -LogLevel 'None' -EnableConsoleRepl"
+			],
+			"extensions": [".ps1", ".psm1", ".psd1"]
     }
   },
   "compaction": { "auto": true, "prune": true },
