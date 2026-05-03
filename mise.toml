@@ -26,6 +26,7 @@ fd = "latest"
 "actionlint" = "latest"
 "shellcheck" = "latest"
 "shfmt" = "latest"
+bun = "latest"
 
 [env]
 PROJECT_ROOT = "{{config_root}}"
