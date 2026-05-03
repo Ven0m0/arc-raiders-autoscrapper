@@ -53,7 +53,7 @@ run = "pytest tests/"
 
 [tasks.lint]
 description = "Lint the code"
-run = "ruff ."
+run = "ruff src/"
 
 [tasks.build]
 description = "Build Python package from pyproject.toml"
