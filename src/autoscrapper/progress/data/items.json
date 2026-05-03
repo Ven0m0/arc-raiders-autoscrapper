@@ -4441,7 +4441,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-04-28T12:56:14.973201+00:00",
+    "updatedAt": "2026-05-02T15:16:39.123489+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Projects Avian Alarm (1x)"
@@ -5036,7 +5036,7 @@
     "weightKg": 0.3,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-01-31T06:29:13.011643+00:00",
+    "updatedAt": "2026-05-02T09:03:57.247506+00:00",
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 3
@@ -5602,7 +5602,8 @@
     "craftBench": "utility_bench",
     "updatedAt": "2026-04-28T18:47:56.891256+00:00",
     "recipe": {
-      "power-rod": 1
+      "power-rod": 1,
+      "turbine-compressor": 1
     },
     "recyclesInto": {
       "advanced-electrical-components": 1,
@@ -8283,7 +8284,10 @@
     "craftBench": null,
     "updatedAt": "2026-04-30T07:21:58.079812+00:00",
     "recipe": null,
-    "recyclesInto": null,
+    "recyclesInto": {
+      "arc-circuitry": 1,
+      "arc-motion-core": 1
+    },
     "wikiUses": "Projects Avian Alarm (2x)"
   },
   {
@@ -8753,8 +8757,7 @@
     "updatedAt": "2026-02-24T17:41:00.192005+00:00",
     "recipe": null,
     "recyclesInto": {
-      "arc-alloy": 1,
-      "electrical-components": 1
+      "arc-alloy": 2
     },
     "wikiUses": "Workshop Gunsmith 1 (8x) Quests The Trifecta (2x) Projects Trophy Display (20x)"
   },
