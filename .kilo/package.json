@@ -8,8 +8,7 @@
     "memelord": "*",
     "opencode-rtk-rewrite": "github:itertea/opencode-rtk-rewrite",
     "repair-json-stream": "*",
-    "@morphllm/opencode-morph-plugin": "*",
-    "context-mode": "*"
+    "@morphllm/opencode-morph-plugin": "*"
   },
   "devDependencies": {
     "@opencode-ai/sdk": "^1.14.33",
