@@ -23,6 +23,9 @@ prek = "latest"
 "pipx:basedpyright" = "latest"
 ripgrep = "latest"
 fd = "latest"
+"actionlint" = "latest"
+"shellcheck" = "latest"
+"shfmt" = "latest"
 
 [env]
 PROJECT_ROOT = "{{config_root}}"
