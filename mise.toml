@@ -37,8 +37,8 @@ _.python.venv = { path = ".venv", create = true, uv_create_args = ["--seed", "--
 _.file = { path = ".env", tools = true }
 MISE_PYTHON_GITHUB_ATTESTATIONS = "false"
 
-#[hooks]
-#enter = "mise i -yq"
+[hooks]
+enter = "mise i -yq"
 
 [tasks.install]
 description = 'Mise ci install'
