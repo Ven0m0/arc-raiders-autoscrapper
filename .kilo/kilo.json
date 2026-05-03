@@ -2,7 +2,7 @@
   "$schema": "https://app.kilo.ai/config.json",
   "instructions": [".kilo/rules/*.md", ".kilo/CROSS_REFERENCE.md", "AGENTS.md", ".github/instructions/*.md"],
   "skills": {
-    "paths": [".kilo/skills", ".kilo/skill", ".opencode/skills", ".claude/skills"]
+    "paths": [".kilo/skills", ".opencode/skills", ".claude/skills"]
   },
   "permission": {
     "*": "allow",
@@ -15,6 +15,9 @@
     "rm -rf ~/*": "deny",
     ":(){:|:&};:": "deny",
     "doom_loop": "deny"
+  },
+  "agent": {
+    "compaction": { "model": "kilo-auto/free" },
   },
   "provider": {
     "openai": {
@@ -73,22 +76,24 @@
     },
     "serena": {
       "type": "local",
-      "command": [
-        "uvx",
-        "--from",
-        "git+https://github.com/oraios/serena",
-        "serena",
-        "start-mcp-server",
-        "--context",
-        "ide",
-        "--project-from-cwd"
-      ],
+			"command": [
+				"uvx", "--from",
+				"git+https://github.com/oraios/serena",
+				"serena", "start-mcp-server",
+				"--context", "ide", "--project-from-cwd"
+			],
       "enabled": true
     },
     "octocode": {
       "type": "local",
       "command": ["npx", "-y", "octocode-mcp@latest"],
       "enabled": true
+    },
+    "morph-mcp": {
+      "type": "local",
+      "command": ["npx", "-y", "@morphllm/morphmcp"],
+      "environment": { "MORPH_API_KEY": "{env:MORPH_API_KEY}" },
+      "enabled": false
     }
   },
   "lsp": {
@@ -145,6 +150,7 @@
   "experimental": {
     "continue_loop_on_deny": false,
     "codebase_search": true,
+    "semantic_indexing": true,
     "mcp_timeout": 30000,
     "openTelemetry": false,
     "batch_tool": true
