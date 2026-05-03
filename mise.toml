@@ -13,6 +13,9 @@ github_attestations = false
 [settings.pipx]
 uvx = true
 
+[settings.npm]
+package_manager = "bun"
+
 [tools]
 python = "3.13.13"
 uv = "latest"
