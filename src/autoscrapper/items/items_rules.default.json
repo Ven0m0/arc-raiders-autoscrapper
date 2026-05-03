@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-30T14:39:55.322183Z",
+    "generatedAt": "2026-05-03T14:17:38.284244Z",
     "data": {
-      "lastUpdated": "2026-04-30T14:39:55.311444Z",
+      "lastUpdated": "2026-05-03T14:17:38.274879Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
       "itemCount": 600,
@@ -29,7 +29,7 @@
           },
           "fieldLevelMerge": {
             "enabled": true,
-            "entriesEnriched": 366,
+            "entriesEnriched": 367,
             "sources": [
               "raidtheory-fallback",
               "arctracker"
@@ -5968,8 +5968,8 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
     },
