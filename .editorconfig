@@ -42,7 +42,7 @@ end_of_line = crlf
 [**/*.{py,pyw,pyi}]
 indent_size = 4
 indent_style = space
-max_line_length = 88
+max_line_length = 120
 quote_type = double
 
 # XML / HTML
@@ -72,3 +72,13 @@ insert_final_newline = true
 
 [*.svg]
 insert_final_newline = false
+
+[.kilo/kilo.json]
+indent_size = 2
+tab_width = 2
+indent_style = space
+
+[.kilo/kilo.jsonc]
+indent_size = 2
+tab_width = 2
+indent_style = space
