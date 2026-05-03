@@ -30,9 +30,9 @@
     "opencode-ignore@1.1.0",
     "@bastiangx/opencode-unmoji@0.3.12",
     "@gotgenes/opencode-agent-identity@3.0.1",
+    "opencode-agent-skills@0.6.5",
     "@openspoon/subtask2@0.3.9",
 		"@tarquinen/opencode-dcp@3.1.9",
-    "context-mode@1.0.104",
     "@morphllm/opencode-morph-plugin@2.0.9",
     "opencode-agent-memory@0.2.0",
     "superpowers@git+https://github.com/obra/superpowers.git",
@@ -89,17 +89,6 @@
     "octocode": {
       "type": "local",
       "command": ["npx", "-y", "octocode-mcp@latest"],
-      "enabled": true
-    },
-    "morph-mcp": {
-      "type": "local",
-      "command": ["npx", "-y", "@morphllm/morphmcp"],
-      "environment": { "MORPH_API_KEY": "{env:MORPH_API_KEY}" },
-      "enabled": false
-    },
-    "context-mode": {
-      "type": "local",
-      "command": ["context-mode"],
       "enabled": true
     } 
   },
