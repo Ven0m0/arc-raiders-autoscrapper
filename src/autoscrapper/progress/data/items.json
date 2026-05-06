@@ -2034,7 +2034,7 @@
     "weightKg": 0.3,
     "stackSize": 5,
     "craftBench": "Utility Station II",
-    "updatedAt": "2026-04-28T18:41:47.375266+00:00",
+    "updatedAt": "2026-05-05T12:56:01.174817+00:00",
     "recipe": {
       "durable-cloth": 1,
       "electrical-components": 1
@@ -2053,7 +2053,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-04-28T18:42:11.863948+00:00",
+    "updatedAt": "2026-05-05T12:55:41.066338+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4233,7 +4233,7 @@
     "weightKg": 9,
     "stackSize": 1,
     "craftBench": "Weapon Bench 3",
-    "updatedAt": "2026-01-31T06:29:13.011643+00:00",
+    "updatedAt": "2026-05-05T09:31:47.445506+00:00",
     "recipe": {
       "complex-gun-parts": 3,
       "magnetic-accelerator": 3,
@@ -5600,7 +5600,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "utility_bench",
-    "updatedAt": "2026-04-28T18:47:56.891256+00:00",
+    "updatedAt": "2026-05-05T12:56:35.094503+00:00",
     "recipe": {
       "power-rod": 1,
       "turbine-compressor": 1
@@ -5619,7 +5619,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-04-28T22:27:29.641275+00:00",
+    "updatedAt": "2026-05-05T12:18:34.332002+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6525,7 +6525,7 @@
     "weightKg": 3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-01-31T06:29:13.011643+00:00",
+    "updatedAt": "2026-05-06T12:37:44.280528+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 2,
@@ -8803,7 +8803,7 @@
     "weightKg": 0.2,
     "stackSize": 5,
     "craftBench": "Medical Lab I",
-    "updatedAt": "2026-04-30T07:50:55.598095+00:00",
+    "updatedAt": "2026-05-05T12:54:22.738451+00:00",
     "recipe": {
       "fabric": 10,
       "plastic-parts": 3
@@ -8822,7 +8822,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-04-30T07:49:58.200498+00:00",
+    "updatedAt": "2026-05-05T12:15:27.138544+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9088,6 +9088,19 @@
     "recyclesInto": null
   },
   {
+    "id": "expired-security-code",
+    "name": "Expired Security Code",
+    "type": "Key",
+    "rarity": "common",
+    "value": 10,
+    "weightKg": 0.25,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "05/04/2026",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "first-wave-compass",
     "name": "First Wave Compass",
     "type": "Trinket",
@@ -9127,6 +9140,19 @@
     "recyclesInto": null
   },
   {
+    "id": "hidden-bunker-key",
+    "name": "Hidden Bunker Key",
+    "type": "Key",
+    "rarity": "common",
+    "value": 100,
+    "weightKg": 0.25,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "05/04/2026",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "library-book",
     "name": "Book",
     "type": "Trinket",
@@ -9162,6 +9188,19 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "04/14/2026",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "marano-market-business-card",
+    "name": "Marano Market Business Card",
+    "type": "Trinket",
+    "rarity": "common",
+    "value": 100,
+    "weightKg": 0.5,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "05/04/2026",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9270,6 +9309,32 @@
     "recyclesInto": null
   },
   {
+    "id": "raider-flag",
+    "name": "Raider Flag",
+    "type": "Trinket",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0.5,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "05/04/2026",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "riven-tides-classified-records-keycard",
+    "name": "Riven Tides Classified Records Keycard",
+    "type": "Key",
+    "rarity": "uncommon",
+    "value": 100,
+    "weightKg": 0.25,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "05/02/2026",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "scout-patrol-note",
     "name": "Scout Patrol Note",
     "type": "Trinket",
@@ -9292,6 +9357,19 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "04/14/2026",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "seed-vault-box-key",
+    "name": "Seed Vault Box Key",
+    "type": "Key",
+    "rarity": "common",
+    "value": 100,
+    "weightKg": 0.25,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "05/04/2026",
     "recipe": null,
     "recyclesInto": null
   },

@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "generatedAt": "2026-05-03T14:17:38.284244Z",
+    "generatedAt": "2026-05-06T14:51:55.944868Z",
     "data": {
-      "lastUpdated": "2026-05-03T14:17:38.274879Z",
+      "lastUpdated": "2026-05-06T14:51:55.934286Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
-      "itemCount": 600,
+      "itemCount": 606,
       "questCount": 100,
       "dataSources": {
         "items": {
@@ -18,7 +18,7 @@
           "fallback": {
             "repository": "https://github.com/RaidTheory/arcraiders-data",
             "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
-            "supplementalCount": 27,
+            "supplementalCount": 33,
             "error": null
           },
           "arctrackerEnrichment": {
@@ -124,7 +124,7 @@
       },
       "hasPriceOverrides": false
     },
-    "itemCount": 600,
+    "itemCount": 606,
     "allQuestsCompleted": true
   },
   "items": [
@@ -2060,6 +2060,17 @@
       ]
     },
     {
+      "id": "expired-security-code",
+      "name": "Expired Security Code",
+      "value": 10,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "explosive-compound",
       "name": "Explosive Compound",
       "value": 1000,
@@ -2857,6 +2868,17 @@
       ]
     },
     {
+      "id": "hidden-bunker-key",
+      "name": "Hidden Bunker Key",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "horizontal-grip",
       "name": "Horizontal Grip",
       "value": 7000,
@@ -3521,6 +3543,16 @@
     {
       "id": "major-aivas-patch",
       "name": "Major Aiva's Patch",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "marano-market-business-card",
+      "name": "Marano Market Business Card",
       "value": 100,
       "action": "sell",
       "analysis": [
@@ -4244,6 +4276,16 @@
       ]
     },
     {
+      "id": "raider-flag",
+      "name": "Raider Flag",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "raider-hatch-key",
       "name": "Raider Hatch Key",
       "value": 2000,
@@ -4489,6 +4531,17 @@
     {
       "id": "riven-tides-classifed-records-keycard",
       "name": "Riven Tides Classifed Records Keycard",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "riven-tides-classified-records-keycard",
+      "name": "Riven Tides Classified Records Keycard",
       "value": 100,
       "action": "keep",
       "analysis": [
@@ -4832,6 +4885,17 @@
       "analysis": [
         "No immediate use found",
         "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "seed-vault-box-key",
+      "name": "Seed Vault Box Key",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
