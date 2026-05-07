@@ -15,7 +15,7 @@
     "doom_loop": "deny"
   },
   "agent": {
-    "compaction": { "model": "kilo-auto/free" },
+    "compaction": { "model": "kilo-auto/free" }
   },
   "provider": {
     "openai": {
@@ -32,7 +32,7 @@
     "@gotgenes/opencode-agent-identity@3.0.1",
     "opencode-agent-skills@0.6.5",
     "@openspoon/subtask2@0.3.9",
-		"@tarquinen/opencode-dcp@3.1.9",
+    "@tarquinen/opencode-dcp@3.1.9",
     "@morphllm/opencode-morph-plugin@2.0.9",
     "opencode-agent-memory@0.2.0",
     "superpowers@git+https://github.com/obra/superpowers.git",
@@ -69,7 +69,7 @@
       "type": "remote",
       "url": "https://api.githubcopilot.com/mcp/",
       "enabled": true
-    }
+    },
     "exa": {
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,get_code_context_exa,crawling_exa",
@@ -78,19 +78,23 @@
     },
     "serena": {
       "type": "local",
-			"command": [
-				"uvx", "--from",
-				"git+https://github.com/oraios/serena",
-				"serena", "start-mcp-server",
-				"--context", "ide", "--project-from-cwd"
-			],
+      "command": [
+        "uvx",
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+        "--context",
+        "ide",
+        "--project-from-cwd"
+      ],
       "enabled": true
     },
     "octocode": {
       "type": "local",
       "command": ["npx", "-y", "octocode-mcp@latest"],
       "enabled": true
-    } 
+    }
   },
   "lsp": {
     "basedpyright": {
@@ -101,11 +105,11 @@
       "command": ["bash-language-server", "start"],
       "extensions": [".sh", ".bash", ".zsh"]
     },
-		"vtsls": {
+    "vtsls": {
       "command": ["vtsls", "--stdio"],
       "extensions": [".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs", ".mts", ".cts"],
       "initialization": { "preferences": { "importModuleSpecifierPreference": "relative" } }
-		},
+    },
     "rust": {
       "command": ["rust-analyzer"],
       "extensions": [".rs"]
@@ -134,12 +138,15 @@
       "command": ["vscode-css-language-server", "--stdio"],
       "extensions": [".css", ".scss", ".less"]
     },
-		"powershell": {
-			"command": [
-				"pwsh", "-NoLogo", "-NoProfile", "-Command",
-				"$module = Get-Module -ListAvailable PowerShellEditorServices | Sort-Object Version -Descending | Select-Object -First 1; if (-not $module) { throw 'PowerShellEditorServices is not installed. Run: Install-Module -Name PowerShellEditorServices -Scope CurrentUser' }; Import-Module $module.Path; Start-EditorServices -HostName 'Claude Code' -HostProfileId 'ClaudeCode' -HostVersion '1.0.0' -Stdio -BundledModulesPath (Split-Path $module.Path) -LogPath '/dev/null' -LogLevel 'None' -EnableConsoleRepl"
-			],
-			"extensions": [".ps1", ".psm1", ".psd1"]
+    "powershell": {
+      "command": [
+        "pwsh",
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "$module = Get-Module -ListAvailable PowerShellEditorServices | Sort-Object Version -Descending | Select-Object -First 1; if (-not $module) { throw 'PowerShellEditorServices is not installed. Run: Install-Module -Name PowerShellEditorServices -Scope CurrentUser' }; Import-Module $module.Path; Start-EditorServices -HostName 'Claude Code' -HostProfileId 'ClaudeCode' -HostVersion '1.0.0' -Stdio -BundledModulesPath (Split-Path $module.Path) -LogPath '/dev/null' -LogLevel 'None' -EnableConsoleRepl"
+      ],
+      "extensions": [".ps1", ".psm1", ".psd1"]
     }
   },
   "compaction": { "auto": true, "prune": true },
