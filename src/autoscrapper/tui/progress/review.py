@@ -16,54 +16,7 @@ from .state import QuestEntry, normalize_quest_value, persist_progress_settings
 
 
 class ReviewQuestsScreen(ProgressScreen):
-    DEFAULT_CSS = """
-    ReviewQuestsScreen {
-        padding: 1 2;
-    }
-
-    #review-title {
-        width: auto;
-        text-style: bold;
-        color: #7dd3fc;
-    }
-
-    #review-filterbar {
-        height: auto;
-        align: left middle;
-        margin-bottom: 1;
-    }
-
-    #review-search {
-        width: 1fr;
-        margin-right: 1;
-    }
-
-    #review-sort {
-        width: 20;
-        text-style: bold;
-    }
-
-    #review-list-summary {
-        margin-bottom: 1;
-    }
-
-    #review-list {
-        height: 1fr;
-    }
-
-    #review-list > .option-list--option {
-        padding: 0 0 1 0;
-    }
-
-    #review-list > .option-list--option-highlighted {
-        text-style: bold;
-    }
-
-    #review-actions {
-        margin-top: 1;
-        height: auto;
-    }
-    """
+    CSS_PATH = "quests.tcss"
 
     SORT_LABELS: dict[str, str] = {
         "name_asc": "Name A-Z",
