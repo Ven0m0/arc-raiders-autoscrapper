@@ -51,7 +51,5 @@ jobs:
         run: mise exec -- uv run ruff check src/ tests/ scripts/
       - name: Run basedpyright
         run: mise exec -- uv run basedpyright src/
-      - name: Run ty
-        run: mise exec -- uv run ty check src/
       - name: Run pytest
         run: mise exec -- uv run pytest
