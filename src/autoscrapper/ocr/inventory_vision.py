@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 import re
 import time
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
@@ -46,7 +46,7 @@ _last_roi_hash: bytes | None = None
 _last_ocr_result: tuple[str, str] | None = None
 
 # Preprocessing cache: (roi_hash, params_hash) -> processed_image
-_preprocess_cache: dict[tuple[bytes, bytes], np.ndarray] = {}
+_preprocess_cache: OrderedDict[tuple[bytes, bytes], np.ndarray] = OrderedDict()
 _PREPROCESS_CACHE_MAX_SIZE = 50
 DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75
 # Hand-picked initial value; no live corpus exists yet.
@@ -981,14 +981,8 @@ def preprocess_for_ocr(
     # Check cache
     cached = _preprocess_cache.get(cache_key)
     if cached is not None:
+        _preprocess_cache.move_to_end(cache_key)
         return cached.copy()  # Return a copy to prevent mutation
-
-    # Limit cache size to prevent unbounded growth
-    if len(_preprocess_cache) >= _PREPROCESS_CACHE_MAX_SIZE:
-        # Clear oldest half of cache (simple LRU approximation)
-        keys_to_remove = list(_preprocess_cache.keys())[: _PREPROCESS_CACHE_MAX_SIZE // 2]
-        for key in keys_to_remove:
-            del _preprocess_cache[key]
 
     gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
     if apply_clahe:
@@ -1053,6 +1047,11 @@ def preprocess_for_ocr(
 
     # Store in cache (store a copy to prevent external mutation)
     _preprocess_cache[cache_key] = binary.copy()
+
+    # Evict oldest item if over size limit
+    if len(_preprocess_cache) > _PREPROCESS_CACHE_MAX_SIZE:
+        _preprocess_cache.popitem(last=False)
+
     return binary
 
 
