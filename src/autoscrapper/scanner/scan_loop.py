@@ -189,12 +189,15 @@ def _scroll_clicks_sequence(click_pattern: Iterable[int | str]) -> Iterator[int]
     """
     Yield repeating calibrated scroll counts.
     """
-    pattern = tuple(int(clicks) for clicks in click_pattern)
-    if not pattern:
+    pattern_list = []
+    for clicks in click_pattern:
+        val = int(clicks)
+        if val <= 0:
+            raise ValueError("scroll click pattern values must be > 0")
+        pattern_list.append(val)
+    if not pattern_list:
         raise ValueError("scroll click pattern must not be empty")
-    if any(clicks <= 0 for clicks in pattern):
-        raise ValueError("scroll click pattern values must be > 0")
-    return cycle(pattern)
+    return cycle(pattern_list)
 
 
 def detect_grid(
@@ -350,14 +353,12 @@ class _ScanRunner:
 
     def _capture_window(self) -> tuple[Any, float]:
         capture_start = time.perf_counter()
-        window_bgr = capture_region(
-            (
-                self.context.win_left,
-                self.context.win_top,
-                self.context.win_width,
-                self.context.win_height,
-            )
-        )
+        window_bgr = capture_region((
+            self.context.win_left,
+            self.context.win_top,
+            self.context.win_width,
+            self.context.win_height,
+        ))
         return window_bgr, time.perf_counter() - capture_start
 
     def _try_context_menu_crop(self, window_bgr: Any) -> tuple[int, int, int, int] | None:
