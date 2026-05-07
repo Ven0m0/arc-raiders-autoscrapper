@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING, Literal
 
@@ -14,6 +14,7 @@ from .client import ArcTrackerClient
 
 if TYPE_CHECKING:
     from ..scanner.types import ScanStats
+    from .models import StashData
 
 _log = logging.getLogger(__name__)
 
@@ -28,10 +29,13 @@ class APIDataSource:
     client: ArcTrackerClient
     actions: ActionMap
     dry_run: bool = False
+    _cached_stash: "StashData | None" = field(default=None, init=False)
 
     def fetch_stash(self) -> list[ItemActionResult]:
         """Fetch stash from API and convert to scan results."""
-        stash_data = self.client.get_all_stash_items()
+        if self._cached_stash is None:
+            self._cached_stash = self.client.get_all_stash_items()
+        stash_data = self._cached_stash
 
         if stash_data.api_error:
             _log.warning("api: Failed to fetch stash: %s", stash_data.api_error)
@@ -94,7 +98,9 @@ class APIDataSource:
         """Get scan stats for API fetch."""
         from ..scanner.types import ScanStats
 
-        stash_data = self.client.get_all_stash_items()
+        if self._cached_stash is None:
+            self._cached_stash = self.client.get_all_stash_items()
+        stash_data = self._cached_stash
 
         return ScanStats(
             items_in_stash=stash_data.used_slots if not stash_data.api_error else None,
