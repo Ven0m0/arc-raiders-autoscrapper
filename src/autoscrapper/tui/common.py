@@ -77,6 +77,67 @@ def update_inline_filter(event: events.Key, text: str) -> tuple[str, bool]:
 
 
 class FormScreen(AppScreen):
+    DEFAULT_CSS = """
+    .setting-row {
+        width: 1fr;
+        height: auto;
+        align: left middle;
+    }
+
+    .setting-label-col {
+        color: $text-muted;
+        margin-right: 1;
+    }
+
+    .setting-control-row {
+        height: auto;
+        align: left middle;
+        margin-top: 0;
+    }
+
+    .setting-value {
+        min-height: 3;
+        content-align: left middle;
+        text-style: bold;
+        border: round #334155;
+        background: #111827;
+        padding: 0 1;
+        margin-right: 1;
+    }
+
+    .field-input {
+        min-height: 3;
+        padding: 0 1;
+    }
+
+    #form-shell {
+        width: 100%;
+        height: 1fr;
+        layout: vertical;
+        border: round #334155;
+        background: #0b1220;
+        padding: 0 1;
+        overflow: hidden hidden;
+    }
+
+    #form-container {
+        width: 100%;
+        height: 1fr;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #form-actions {
+        margin-top: 0;
+        height: auto;
+        align: left middle;
+    }
+
+    #form-actions Button {
+        min-width: 12;
+    }
+    """
+
     BINDINGS: ClassVar[list[Binding | tuple[str, str] | tuple[str, str, str]]] = [
         *AppScreen.BINDINGS,
         Binding("tab", "focus_next_field", "Next field", show=False, priority=True),
