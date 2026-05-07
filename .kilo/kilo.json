@@ -69,8 +69,8 @@
       "type": "remote",
       "url": "https://api.githubcopilot.com/mcp/",
       "enabled": true
-    }
-    "exa": {
+    },
+    \"exa\": {
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,get_code_context_exa,crawling_exa",
       "enabled": true,
