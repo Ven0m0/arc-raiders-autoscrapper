@@ -54,12 +54,10 @@ def _get_cached_item_mappings() -> tuple[MappingProxyType[str, str], MappingProx
         raw = orjson.loads(items_path.read_bytes())
         if isinstance(raw, list):
             for item in raw:
-                if isinstance(item, dict):
-                    item_id = item.get("id")
-                    item_name = item.get("name")
-                    if isinstance(item_id, str) and isinstance(item_name, str):
-                        id_to_name[item_id] = item_name
-                        name_to_id[item_name.lower()] = item_id
+                item_id = item["id"]
+                item_name = item["name"]
+                id_to_name[item_id] = item_name
+                name_to_id[item_name.lower()] = item_id
     except Exception as exc:
         _log.warning("api: Failed to load item mapping: %s", exc)
     return MappingProxyType(id_to_name), MappingProxyType(name_to_id)

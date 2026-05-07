@@ -294,13 +294,11 @@ def _assert_reset_settings(reset_func, section_name: str, expected_settings: obj
         reset_func()
 
     mock_load.assert_called_once()
-    mock_save.assert_called_once_with(
-        {
-            "version": CONFIG_VERSION,
-            "some_other_key": "value",
-            section_name: asdict(expected_settings),
-        }
-    )
+    mock_save.assert_called_once_with({
+        "version": CONFIG_VERSION,
+        "some_other_key": "value",
+        section_name: asdict(expected_settings),
+    })
 
 
 def test_reset_scan_settings():
