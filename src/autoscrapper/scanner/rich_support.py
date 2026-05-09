@@ -30,11 +30,11 @@ from rich.progress import (
     Progress as Progress,
     ProgressColumn as ProgressColumn,
     SpinnerColumn as SpinnerColumn,
-    Table as Table,
     Task as Task,
     TaskProgressColumn as TaskProgressColumn,
     TextColumn as TextColumn,
     TimeElapsedColumn as TimeElapsedColumn,
     TimeRemainingColumn as TimeRemainingColumn,
 )
+from rich.table import Table as Table  # noqa: F401
 from rich.text import Text as Text
