@@ -23,9 +23,9 @@ jobs:
         with:
           fetch-depth: 1
       - name: Install mise
-        run: |
-          curl https://mise.run | sh
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+        uses: jdx/mise-action@v3
+        with:
+          version: latest
       - name: Setup tools
         run: mise use --global python@3.13 uv@latest
       - name: Set up Python
