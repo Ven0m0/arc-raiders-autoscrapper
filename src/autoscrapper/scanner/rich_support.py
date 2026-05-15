@@ -36,5 +36,5 @@ from rich.progress import (
     TimeElapsedColumn as TimeElapsedColumn,
     TimeRemainingColumn as TimeRemainingColumn,
 )
-from rich.table import Table as Table
+from rich.table import Table as Table  # noqa: F401
 from rich.text import Text as Text
