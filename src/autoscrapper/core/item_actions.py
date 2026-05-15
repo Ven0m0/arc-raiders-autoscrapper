@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal, cast
@@ -51,14 +50,17 @@ def normalize_item_name(name: str) -> str:
     return name.strip().lower()
 
 
-_CLEAN_OCR_PATTERN = re.compile(r"[^-A-Za-z0-9 '(),.!?:&+]+")
+_ALLOWED_CHARS = "-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 '(),.!?:&+"
+_DELETE_BYTES = bytes([i for i in range(256) if chr(i) not in _ALLOWED_CHARS])
 
 
 def clean_ocr_text(raw: str) -> str:
-    text = " ".join(raw.split())
+    # Encode to ascii (ignoring non-ascii characters), split/join on bytes to normalize spaces
+    b = raw.encode("ascii", "ignore")
+    b = b" ".join(b.split())
     # Keep letters, numbers, common punctuation - be permissive
-    text = _CLEAN_OCR_PATTERN.sub("", text)
-    return text.strip()
+    b = b.translate(None, _DELETE_BYTES)
+    return b.strip().decode("ascii")
 
 
 def _normalize_action(value: object) -> Decision | None:
