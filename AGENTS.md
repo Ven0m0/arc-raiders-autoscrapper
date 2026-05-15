@@ -211,6 +211,7 @@ Files that require careful review for any changes:
 | File | Purpose |
 |------|---------|
 | `AGENTS.md` (this file) | Canonical repo-wide rules |
+| `CLAUDE.md` | Symlink to AGENTS.md (for Claude Code compatibility) |
 | `.github/copilot-instructions.md` | Quick startup for IDE |
 | `.github/instructions/*.md` | Path-specific rules |
 | `.kilo/CROSS_REFERENCE.md` | Command/skill/agent lookup |
@@ -232,5 +233,26 @@ Files that require careful review for any changes:
 
 ---
 
-*Last updated: 2026-04-26*
+## Context-Mode Optimized Workflows
+
+### Fast Context-Mode Usage
+- Use `ctx search` with `source: "label"` for session continuity
+- Use inline code execution via `ctx execute --language javascript` for analysis
+- Batch I/O with `ctx batch_execute` (concurrency: 4-8 for network)
+
+### File Discovery Best Practices
+- Use `rg` (ripgrep) for exact keyword searches
+- Use `glob` with patterns like `**/*.py` for discovery
+- Prefer `warpgrep_codebase_search` for semantic/natural language searches
+
+### Tool Selection Policy
+- **Small exact edits**: Use native `edit`
+- **Large/scattered edits**: Use `morph_edit`
+- **New files**: Use `write`
+- **Codebase search**: Use `warpgrep_codebase_search` for semantic, `rg` for exact
+- **JSON repair**: Use `json_repair` before manual edits
+
+---
+
+*Last updated: 2026-05-15*
 *See [`.kilo/CROSS_REFERENCE.md`](./.kilo/CROSS_REFERENCE.md) for the complete skill/agent index.*
