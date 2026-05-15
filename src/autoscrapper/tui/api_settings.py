@@ -34,75 +34,25 @@ class ApiSettingsScreen(FormScreen):
         margin: 0;
     }
 
-    #api-settings-shell {
-        width: 100%;
-        height: 1fr;
-        layout: vertical;
-        border: round #334155;
-        background: #0b1220;
-        padding: 0 1;
-        overflow: hidden hidden;
-    }
-
-    #api-settings-form {
-        width: 100%;
-        height: 1fr;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    .setting-row {
-        width: 1fr;
-        height: auto;
-        align: left middle;
-    }
-
     .setting-label-col {
         width: 20;
-        color: $text-muted;
-        margin-right: 1;
-    }
-
-    .setting-control-row {
-        height: auto;
-        align: left middle;
-        margin-top: 0;
     }
 
     .setting-value {
         width: 40;
         min-width: 40;
-        min-height: 3;
-        content-align: left middle;
-        text-style: bold;
-        border: round #334155;
-        background: #111827;
-        padding: 0 1;
-        margin-right: 1;
     }
 
     .field-input {
         width: 40;
         min-width: 40;
         max-width: 40;
-        min-height: 3;
-        padding: 0 1;
     }
 
     .api-info {
         color: $text-muted;
         margin-top: 1;
         margin-bottom: 1;
-    }
-
-    #screen-actions {
-        margin-top: 0;
-        height: auto;
-        align: left middle;
-    }
-
-    #screen-actions Button {
-        min-width: 12;
     }
     """
 
@@ -112,10 +62,10 @@ class ApiSettingsScreen(FormScreen):
 
     def compose(self) -> ComposeResult:
         yield Static(self.TITLE or "", classes="menu-title")
-        with Vertical(id="api-settings-shell"):
-            with Vertical(id="api-settings-form"):
+        with Vertical(id="form-shell"):
+            with Vertical(id="form-container"):
                 yield from self._compose_form()
-            with Horizontal(id="screen-actions"):
+            with Horizontal(id="form-actions"):
                 yield Button("Save", id="save", variant="primary")
                 yield Button("Back", id="back")
         yield Footer()

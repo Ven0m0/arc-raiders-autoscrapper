@@ -98,69 +98,19 @@ class ScanSettingsScreen(FormScreen):
         margin: 0;
     }
 
-    #settings-shell {
-        width: 100%;
-        height: 1fr;
-        layout: vertical;
-        border: round #334155;
-        background: #0b1220;
-        padding: 0 1;
-        overflow: hidden hidden;
-    }
-
-    #settings-form {
-        width: 100%;
-        height: 1fr;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    .setting-row {
-        width: 1fr;
-        height: auto;
-        align: left middle;
-    }
-
     .setting-label-col {
         width: 30;
-        color: $text-muted;
-        margin-right: 1;
-    }
-
-    .setting-control-row {
-        height: auto;
-        align: left middle;
-        margin-top: 0;
     }
 
     .setting-value {
         width: 10;
         min-width: 10;
-        min-height: 3;
-        content-align: left middle;
-        text-style: bold;
-        border: round #334155;
-        background: #111827;
-        padding: 0 1;
-        margin-right: 1;
     }
 
     .field-input {
         width: 10;
         min-width: 10;
         max-width: 10;
-        min-height: 3;
-        padding: 0 1;
-    }
-
-    #screen-actions {
-        margin-top: 0;
-        height: auto;
-        align: left middle;
-    }
-
-    #screen-actions Button {
-        min-width: 12;
     }
     """
 
@@ -173,10 +123,10 @@ class ScanSettingsScreen(FormScreen):
 
     def compose(self) -> ComposeResult:
         yield Static(self.TITLE or "", classes="menu-title")
-        with Vertical(id="settings-shell"):
-            with Vertical(id="settings-form"):
+        with Vertical(id="form-shell"):
+            with Vertical(id="form-container"):
                 yield from self._compose_form()
-            with Horizontal(id="screen-actions"):
+            with Horizontal(id="form-actions"):
                 yield Button("Save", id="save", variant="primary")
                 yield Button("Back", id="back")
         yield Footer()
