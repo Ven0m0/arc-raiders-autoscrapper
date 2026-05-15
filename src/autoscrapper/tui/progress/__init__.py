@@ -104,54 +104,7 @@ class ProgressIntroScreen(ProgressScreen):
 
 
 class ActiveQuestsScreen(ProgressScreen):
-    DEFAULT_CSS = """
-    ActiveQuestsScreen {
-        padding: 1 2;
-    }
-
-    #quest-title {
-        width: auto;
-        text-style: bold;
-        color: #7dd3fc;
-    }
-
-    #quest-filterbar {
-        height: auto;
-        align: left middle;
-        margin-bottom: 1;
-    }
-
-    #quest-search {
-        width: 1fr;
-        margin-right: 1;
-    }
-
-    #quest-sort {
-        width: 20;
-        text-style: bold;
-    }
-
-    #quest-list-summary {
-        margin-bottom: 1;
-    }
-
-    #quest-list {
-        height: 1fr;
-    }
-
-    #quest-list > .option-list--option {
-        padding: 0 0 1 0;
-    }
-
-    #quest-list > .option-list--option-highlighted {
-        text-style: bold;
-    }
-
-    #quest-actions {
-        margin-top: 1;
-        height: auto;
-    }
-    """
+    CSS_PATH = "quests.tcss"
 
     SORT_LABELS: dict[str, str] = {
         "name_asc": "Name A-Z",
