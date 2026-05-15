@@ -5,7 +5,7 @@ from __future__ import annotations
 import time
 from dataclasses import dataclass, field
 from typing import Any, Literal
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 type ItemDecision = Literal["KEEP", "SELL", "RECYCLE"]
 
@@ -45,30 +45,23 @@ class RateLimitState:
         return cooldown
 
 
-@dataclass(frozen=True, slots=True)
-class StashItem:
+class StashItem(BaseModel):
     """An item in the user's stash."""
 
-    item_id: str
+    model_config = ConfigDict(frozen=True, extra="ignore", strict=False, populate_by_name=True)
+
+    item_id: str = Field(alias="id")
     name: str
     quantity: int
-    slot: int | None
-    item_type: str
+    slot: int | None = None
+    item_type: str = Field(alias="type")
     rarity: str
     value: int
 
     @classmethod
-    def from_api(cls, data: dict[str, Any]) -> StashItem:
+    def from_api(cls, data: dict[str, Any]) -> "StashItem":
         """Create a StashItem from API response data."""
-        return cls(
-            item_id=str(data.get("id", "")),
-            name=str(data.get("name", "")),
-            quantity=int(data.get("quantity", 1)),
-            slot=data.get("slot"),
-            item_type=str(data.get("type", "")),
-            rarity=str(data.get("rarity", "")),
-            value=int(data.get("value", 0)),
-        )
+        return cls.model_validate(data)
 
 
 @dataclass(slots=True)
@@ -81,69 +74,53 @@ class StashData:
     api_error: str | None = None
 
 
-@dataclass(frozen=True, slots=True)
-class HideoutModule:
+class HideoutModule(BaseModel):
     """A hideout module with its upgrade progress."""
 
-    module_id: str
+    model_config = ConfigDict(frozen=True, extra="ignore", strict=False, populate_by_name=True)
+
+    module_id: str = Field(alias="id")
     name: str
-    current_level: int
-    max_level: int
+    current_level: int = Field(alias="currentLevel")
+    max_level: int = Field(alias="maxLevel")
 
     @classmethod
-    def from_api(cls, data: dict[str, Any]) -> HideoutModule:
+    def from_api(cls, data: dict[str, Any]) -> "HideoutModule":
         """Create a HideoutModule from API response data."""
-        return cls(
-            module_id=str(data.get("id", "")),
-            name=str(data.get("name", "")),
-            current_level=int(data.get("currentLevel", 0)),
-            max_level=int(data.get("maxLevel", 0)),
-        )
+        return cls.model_validate(data)
 
 
-@dataclass(frozen=True, slots=True)
-class ProjectPhase:
+class ProjectPhase(BaseModel):
     """A single phase of a project."""
 
-    phase_number: int
+    model_config = ConfigDict(frozen=True, extra="ignore", strict=False, populate_by_name=True)
+
+    phase_number: int = Field(alias="phase")
     name: str
     completed: bool
 
     @classmethod
-    def from_api(cls, data: dict[str, Any]) -> ProjectPhase:
+    def from_api(cls, data: dict[str, Any]) -> "ProjectPhase":
         """Create a ProjectPhase from API response data."""
-        return cls(
-            phase_number=int(data.get("phase", 0)),
-            name=str(data.get("name", "")),
-            completed=bool(data.get("completed", False)),
-        )
+        return cls.model_validate(data)
 
 
-@dataclass(frozen=True, slots=True)
-class ProjectProgress:
+class ProjectProgress(BaseModel):
     """A project with its completion progress."""
 
-    project_id: str
+    model_config = ConfigDict(frozen=True, extra="ignore", strict=False, populate_by_name=True)
+
+    project_id: str = Field(alias="id")
     name: str
-    current_phase: int
-    max_phases: int
+    current_phase: int = Field(alias="currentPhase")
+    max_phases: int = Field(alias="maxPhases")
     completed: bool
     phases: list[ProjectPhase]
 
     @classmethod
-    def from_api(cls, data: dict[str, Any]) -> ProjectProgress:
+    def from_api(cls, data: dict[str, Any]) -> "ProjectProgress":
         """Create a ProjectProgress from API response data."""
-        phases_data = data.get("phases", [])
-        phases = [ProjectPhase.from_api(p) for p in phases_data if isinstance(p, dict)]
-
-        return cls(
-            project_id=str(data.get("id", "")),
-            name=str(data.get("name", "")),
-            current_phase=int(data.get("currentPhase", 0)),
-            max_phases=int(data.get("maxPhases", 0)),
-            completed=bool(data.get("completed", False)),
-            phases=phases,
-        )
+        return cls.model_validate(data)
 
 
 @dataclass(slots=True)
@@ -167,80 +144,61 @@ class APIInventoryResult:
 class UserProfile(BaseModel):
     """User profile information."""
 
-    model_config = ConfigDict(frozen=True, extra="ignore", strict=False)
+    model_config = ConfigDict(frozen=True, extra="ignore", strict=False, populate_by_name=True)
 
     username: str
     level: int
-    member_since: str
+    member_since: str = Field(alias="memberSince")
 
     @classmethod
-    def from_api(cls, data: dict[str, Any]) -> UserProfile:
-        data_to_validate = {
-            "username": data.get("username"),
-            "level": data.get("level"),
-            "member_since": data.get("memberSince"),
-        }
-        return cls.model_validate(data_to_validate)
+    def from_api(cls, data: dict[str, Any]) -> "UserProfile":
+        """Create a UserProfile from API response data."""
+        return cls.model_validate(data)
 
 
-@dataclass(frozen=True, slots=True)
-class UserQuest:
+class UserQuest(BaseModel):
     """A quest with user completion status."""
 
-    quest_id: str
+    model_config = ConfigDict(frozen=True, extra="ignore", strict=False, populate_by_name=True)
+
+    quest_id: str = Field(alias="id")
     name: str
     completed: bool
     objectives: list[Any]
 
     @classmethod
-    def from_api(cls, data: dict[str, Any]) -> UserQuest:
-        return cls(
-            quest_id=str(data.get("id", "")),
-            name=str(data.get("name", "")),
-            completed=bool(data.get("completed", False)),
-            objectives=data.get("objectives", []),
-        )
+    def from_api(cls, data: dict[str, Any]) -> "UserQuest":
+        return cls.model_validate(data)
 
 
-@dataclass(frozen=True, slots=True)
-class RoundEntry:
+class RoundEntry(BaseModel):
     """A single round from the user's round history."""
 
-    round_id: str
+    model_config = ConfigDict(frozen=True, extra="ignore", strict=False, populate_by_name=True)
+
+    round_id: str = Field(alias="id")
     outcome: str
-    map_slug: str
+    map_slug: str = Field(alias="map")
     kills: int
     damage: float
-    season: int | None
-    looted_items: list[Any]
+    season: int | None = None
+    looted_items: list[Any] = Field(alias="lootedItems")
 
     @classmethod
-    def from_api(cls, data: dict[str, Any]) -> RoundEntry:
-        return cls(
-            round_id=str(data.get("id", "")),
-            outcome=str(data.get("outcome", "unknown")),
-            map_slug=str(data.get("map", "")),
-            kills=int(data.get("kills", 0)),
-            damage=float(data.get("damage", 0.0)),
-            season=data.get("season"),
-            looted_items=data.get("lootedItems", []),
-        )
+    def from_api(cls, data: dict[str, Any]) -> "RoundEntry":
+        return cls.model_validate(data)
 
 
-@dataclass(frozen=True, slots=True)
-class Blueprint:
+class Blueprint(BaseModel):
     """A blueprint with learned status."""
 
-    blueprint_id: str
+    model_config = ConfigDict(frozen=True, extra="ignore", strict=False, populate_by_name=True)
+
+    blueprint_id: str = Field(alias="id")
     name: str
     category: str
     learned: bool
 
     @classmethod
-    def from_api(cls, data: dict[str, Any]) -> Blueprint:
-        return cls(
-            blueprint_id=str(data.get("id", "")),
-            name=str(data.get("name", "")),
-            category=str(data.get("category", "")),
-            learned=bool(data.get("learned", False)),
-        )
+    def from_api(cls, data: dict[str, Any]) -> "Blueprint":
+        return cls.model_validate(data)

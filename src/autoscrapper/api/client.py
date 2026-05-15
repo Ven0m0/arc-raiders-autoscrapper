@@ -323,7 +323,10 @@ class ArcTrackerClient:
 
         for item_data in items_data:
             if isinstance(item_data, dict):
-                result.items.append(StashItem.from_api(item_data))
+                try:
+                    result.items.append(StashItem.from_api(item_data))
+                except ValidationError as e:
+                    _log.warning(f"api: Failed to validate stash item: {e}")
 
         return result
 
@@ -348,7 +351,14 @@ class ArcTrackerClient:
             _log.warning("api: Unexpected hideout response format")
             return []
 
-        return [HideoutModule.from_api(m) for m in modules_data if isinstance(m, dict)]
+        modules = []
+        for m in modules_data:
+            if isinstance(m, dict):
+                try:
+                    modules.append(HideoutModule.from_api(m))
+                except ValidationError as e:
+                    _log.warning(f"api: Failed to validate hideout module: {e}")
+        return modules
 
     def get_user_projects(
         self,
@@ -379,7 +389,14 @@ class ArcTrackerClient:
             _log.warning("api: Unexpected projects response format")
             return []
 
-        return [ProjectProgress.from_api(p) for p in projects_data if isinstance(p, dict)]
+        projects = []
+        for p in projects_data:
+            if isinstance(p, dict):
+                try:
+                    projects.append(ProjectProgress.from_api(p))
+                except ValidationError as e:
+                    _log.warning(f"api: Failed to validate project progress: {e}")
+        return projects
 
     def get_user_profile(self) -> UserProfile | None:
         """Fetch user profile from /api/v2/user/profile (auth required)."""
@@ -415,7 +432,14 @@ class ArcTrackerClient:
         if not isinstance(quests_data, list):
             _log.warning("api: Unexpected quests response format")
             return []
-        return [UserQuest.from_api(q) for q in quests_data if isinstance(q, dict)]
+        quests = []
+        for q in quests_data:
+            if isinstance(q, dict):
+                try:
+                    quests.append(UserQuest.from_api(q))
+                except ValidationError as e:
+                    _log.warning(f"api: Failed to validate user quest: {e}")
+        return quests
 
     def get_user_rounds(
         self,
@@ -447,7 +471,14 @@ class ArcTrackerClient:
         if not isinstance(rounds_data, list):
             _log.warning("api: Unexpected rounds response format")
             return []
-        return [RoundEntry.from_api(r) for r in rounds_data if isinstance(r, dict)]
+        rounds = []
+        for r in rounds_data:
+            if isinstance(r, dict):
+                try:
+                    rounds.append(RoundEntry.from_api(r))
+                except ValidationError as e:
+                    _log.warning(f"api: Failed to validate round entry: {e}")
+        return rounds
 
     def get_user_loadout(self, locale: str = "en") -> dict[str, Any] | None:
         """Fetch user loadout from /api/v2/user/loadout (auth required)."""
@@ -476,7 +507,14 @@ class ArcTrackerClient:
         if not isinstance(blueprints_data, list):
             _log.warning("api: Unexpected blueprints response format")
             return []
-        return [Blueprint.from_api(b) for b in blueprints_data if isinstance(b, dict)]
+        blueprints = []
+        for b in blueprints_data:
+            if isinstance(b, dict):
+                try:
+                    blueprints.append(Blueprint.from_api(b))
+                except ValidationError as e:
+                    _log.warning(f"api: Failed to validate blueprint: {e}")
+        return blueprints
 
     def test_connection(self) -> dict[str, Any] | None:
         """Test API connection and authentication."""
