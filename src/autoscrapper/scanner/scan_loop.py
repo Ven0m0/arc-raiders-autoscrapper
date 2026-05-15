@@ -125,9 +125,8 @@ def _init_decision_log() -> str | None:
     global _decision_log_file, _decision_log_handle
     if _decision_log_file is not None:
         return _decision_log_file
-    log_dir = Path(tempfile.gettempdir()) / "autoscrapper_decisions"
     try:
-        log_dir.mkdir(parents=True, exist_ok=True)
+        log_dir = Path(tempfile.mkdtemp(prefix="autoscrapper_decisions_"))
         timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
         _decision_log_file = str(log_dir / f"decisions_{timestamp}.jsonl")
         _decision_log_handle = open(_decision_log_file, "a")
@@ -350,14 +349,12 @@ class _ScanRunner:
 
     def _capture_window(self) -> tuple[Any, float]:
         capture_start = time.perf_counter()
-        window_bgr = capture_region(
-            (
-                self.context.win_left,
-                self.context.win_top,
-                self.context.win_width,
-                self.context.win_height,
-            )
-        )
+        window_bgr = capture_region((
+            self.context.win_left,
+            self.context.win_top,
+            self.context.win_width,
+            self.context.win_height,
+        ))
         return window_bgr, time.perf_counter() - capture_start
 
     def _try_context_menu_crop(self, window_bgr: Any) -> tuple[int, int, int, int] | None:
