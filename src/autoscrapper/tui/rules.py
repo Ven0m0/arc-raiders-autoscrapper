@@ -98,10 +98,25 @@ def _filter_indices(
                 matches.append(idx)
     else:
         for idx, item in enumerate(items):
-            name = str(item.get("name", "")).lower()
-            item_id = str(item.get("id", "")).lower()
-            if q in name or (item_id and q in item_id):
-                matches.append(idx)
+            try:
+                if q in item["name"].lower():
+                    matches.append(idx)
+                    continue
+            except AttributeError:
+                if q in str(item.get("name", "")).lower():
+                    matches.append(idx)
+                    continue
+            except KeyError:
+                pass
+
+            try:
+                if q in item["id"].lower():
+                    matches.append(idx)
+            except AttributeError:
+                if q in str(item.get("id", "")).lower():
+                    matches.append(idx)
+            except KeyError:
+                pass
     return matches
 
 
