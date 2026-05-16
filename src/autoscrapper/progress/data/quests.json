@@ -2664,7 +2664,7 @@
           "icon": "https://cdn.metaforge.app/arc-raiders/icons/flame-spray.webp",
           "name": "Flame Spray",
           "rarity": "Uncommon",
-          "item_type": "Quick use"
+          "item_type": "Quick Use"
         },
         "item_id": "flame-spray",
         "quantity": "1"

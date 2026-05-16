@@ -3301,13 +3301,13 @@
   {
     "id": "flame-spray",
     "name": "Flame Spray",
-    "type": "Quick use",
+    "type": "Quick Use",
     "rarity": "uncommon",
     "value": 640,
     "weightKg": 1,
     "stackSize": 1,
     "craftBench": "in_raid",
-    "updatedAt": "2026-01-31T06:29:13.011643+00:00",
+    "updatedAt": "2026-05-07T17:35:33.710226+00:00",
     "recipe": {
       "air-freshener": 1,
       "fireball-burner": 1
@@ -6813,13 +6813,13 @@
   {
     "id": "shotgun-silencer",
     "name": "Shotgun Silencer",
-    "type": "Mods",
+    "type": "Modification",
     "rarity": "epic",
     "value": 5000,
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-01-31T06:29:13.011643+00:00",
+    "updatedAt": "2026-05-07T17:35:15.002617+00:00",
     "recipe": {
       "mod-components": 2,
       "wires": 8
