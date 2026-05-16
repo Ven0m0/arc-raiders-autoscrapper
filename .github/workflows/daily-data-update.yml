@@ -19,19 +19,13 @@ jobs:
       METAFORGE_SUPABASE_ANON_KEY: ${{ secrets.METAFORGE_SUPABASE_ANON_KEY }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
       - name: Install mise
-        uses: jdx/mise-action@v3
+        uses: jdx/mise-action@v2
         with:
           version: latest
-      - name: Setup tools
-        run: mise use --global python@3.13 uv@latest
-      - name: Set up Python
-        run: mise exec -- python --version
-      - name: Install uv
-        run: mise exec -- uv --version || mise install uv@latest
       - name: Install dependencies
         run: mise exec -- uv sync --frozen --no-dev
       - name: Update snapshot + default rules
@@ -40,7 +34,7 @@ jobs:
             --report-json artifacts/update-report.json \
             --report-md artifacts/update-report.md
       - name: Upload update report artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: daily-data-update-report
           path: |
