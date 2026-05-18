@@ -350,14 +350,12 @@ class _ScanRunner:
 
     def _capture_window(self) -> tuple[Any, float]:
         capture_start = time.perf_counter()
-        window_bgr = capture_region(
-            (
-                self.context.win_left,
-                self.context.win_top,
-                self.context.win_width,
-                self.context.win_height,
-            )
-        )
+        window_bgr = capture_region((
+            self.context.win_left,
+            self.context.win_top,
+            self.context.win_width,
+            self.context.win_height,
+        ))
         return window_bgr, time.perf_counter() - capture_start
 
     def _try_context_menu_crop(self, window_bgr: Any) -> tuple[int, int, int, int] | None:

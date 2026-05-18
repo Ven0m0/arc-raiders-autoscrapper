@@ -431,12 +431,10 @@ class WikiProjectScraper(BaseScraper):
                         item_text = li.get_text(strip=True)
                         match = re.match(r"(.+?)\s*x?\s*(\d+)", item_text)
                         if match:
-                            phase_data["requirements"].append(
-                                {
-                                    "item": match.group(1).strip(),
-                                    "amount": int(match.group(2)),
-                                }
-                            )
+                            phase_data["requirements"].append({
+                                "item": match.group(1).strip(),
+                                "amount": int(match.group(2)),
+                            })
                 phases.append(phase_data)
         return phases
 
