@@ -26,7 +26,6 @@ jobs:
         uses: jdx/mise-action@v4
         with:
           version: latest
-          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Install dependencies
         run: mise exec -- uv sync --frozen --no-dev
       - name: Update snapshot + default rules
