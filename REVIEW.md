@@ -8,15 +8,16 @@ This is the canonical guide for AI agents performing automated code review on pu
 
 ## Executive Summary
 
-Automated PR reviews in this repo are driven by **specialist reviewer agents**, each scoped to a domain (OCR, TUI, Scanner, Rules, Config, etc.). Every PR change triggers one or more reviewers based on which files were modified. Review findings are reported at three severity levels:
+Automated PR reviews in this repo are driven by **specialist reviewer agents**, each scoped to a domain (OCR, TUI, Scanner, Rules, Config, etc.). Every PR change triggers one or more reviewers based on which files were modified. Review findings are reported at four severity levels:
 
 | Severity | Meaning |
 |----------|---------|
-| **MUST FIX** | Blocks merge. Incorrect behavior guaranteed or data loss risk. |
-| **SHOULD FIX** | Strongly recommended. Likely incorrect under specific conditions. |
-| **CONSIDER** | Optional improvement or hygiene. Does not block merge. |
+| **MUST FIX** | Blocks merge. Incorrect behavior guaranteed or data loss risk. (Reported as CRITICAL severity.) |
+| **SHOULD FIX** | Strongly recommended. Likely incorrect under specific conditions. (Reported as MEDIUM severity.) |
+| **CONSIDER** | Optional improvement or hygiene including style issues and code smells. Does not block merge. (Reported as LOW severity.) |
+| **QUESTION** | Seeking clarification before rendering a verdict. Does not block. |
 
-Reviewers report only concrete issues with `file:line` references. Speculative concerns and style issues are excluded unless they constitute a **MUST FIX**.
+Reviewers report only concrete issues with `file:line` references. Speculative concerns are excluded unless they constitute a **MUST FIX**.
 
 ---
 
@@ -34,7 +35,7 @@ PRs are routed to reviewers by changed file path. A PR touching multiple areas d
 | `src/autoscrapper/progress/data_update.py` | `data-pipeline-reviewer` |
 | `src/autoscrapper/progress/` (excluding data_update.py) | `progress-reviewer` |
 | `src/autoscrapper/api/` | `api-reviewer` |
-| `inventory_vision.py`, `scan_loop.py`, OCR preprocessing paths | `performance-reviewer` |
+| `src/autoscrapper/ocr/inventory_vision.py`, `src/autoscrapper/scanner/scan_loop.py`, OCR preprocessing paths | `performance-reviewer` |
 | Input automation, window targeting, action dispatch | `security-reviewer` |
 | Any new Python source file | `test-generator` (after review passes) |
 
@@ -52,9 +53,14 @@ The following files have critical invariants that MUST be preserved. Any change 
 |-----------|-------------|
 | **2× upscaling** | OCR boxes from a 2×-upscaled image must be halved before reuse in original-space operations |
 | **Main-thread OCR init** | `initialize_ocr()` must run on the main thread before any scan threads start |
-| **Four Tesseract API locks** | `_api_lock`, `_api_line_lock`, `_api_single_word_lock`, `_api_sparse_lock` — each dedicated to one PSM mode |
 | **No direct BGR→Tesseract** | Raw BGR frames must pass through `preprocess_for_ocr()` (Otsu binarization + morphology) before OCR |
 | **Cache reset at scan start** | `reset_ocr_caches()` must be called at entry to `scan_pages()` |
+
+### `src/autoscrapper/ocr/tesseract.py`
+
+| Invariant | Description |
+|-----------|-------------|
+| **Four Tesseract API locks** | `_api_lock`, `_api_line_lock`, `_api_single_word_lock`, `_api_sparse_lock` — each dedicated to one PSM mode, never shared across modes |
 
 ### `src/autoscrapper/scanner/scan_loop.py`
 
@@ -103,7 +109,7 @@ A PR that claims a behavior is validated must provide the evidence below. Review
 | Change type | Required evidence |
 |-------------|------------------|
 | Python source (general) | `uv run ruff check src/ tests/ scripts/` · `uv run basedpyright src/` · `uv run pytest` — all passing |
-| Workflow files (`.github/workflows/*.yml`) | `pre-commit run --files .github/workflows/<name>.yml` — all hooks passing |
+| Workflow files (`.github/workflows/*.yml`) | `uv run prek run --files .github/workflows/<name>.yml` — all hooks passing |
 | OCR / scanner / input changes | Live dry-run scan: `uv run autoscrapper scan --dry-run` against a live game window. **CI cannot substitute for this.** |
 | Config field changes | CONFIG_VERSION bumped + migration written + round-trip test included |
 | Fuzzy threshold changes | `/ocr-corpus-replay` completed; regression report attached |
@@ -411,7 +417,7 @@ A PR is blocked if ANY of the following are true:
 4. A generated file was directly edited (not via the updater script)
 5. An OCR/scanner/input change claims live-window validation but no evidence is provided
 6. A fuzzy threshold change ships without corpus replay results
-7. A workflow file change fails `pre-commit run`
+7. A workflow file change fails `uv run prek run --files .github/workflows/<name>.yml`
 8. `ruff check`, `basedpyright`, or `pytest` do not pass
 
 ---
@@ -425,7 +431,7 @@ Verify these pre-merge gates:
 | Lint | `uv run ruff check src/ tests/ scripts/` |
 | Types | `uv run basedpyright src/` |
 | Tests | `uv run pytest` |
-| Pre-commit | `pre-commit run --all-files` |
+| Hooks | `uv run prek run --all-files` |
 | Fork sync | `/upstream-sync` (syncs fork from upstream before merge) |
 | Branch up-to-date | Rebase or merge `main` into branch |
 
