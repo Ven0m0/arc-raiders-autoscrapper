@@ -58,10 +58,14 @@ repos:
       - id: check-shebang-scripts-are-executable
       - id: forbid-submodules
 
-  - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 43.149.0
-    hooks:
-      - id: renovate-config-validator
+  # DISABLED — renovatebot/pre-commit-hooks package exceeds pre-commit.ci's
+  # 250MiB build limit (~616MiB). Affects ALL versions of this hook.
+  # Track: https://results.pre-commit.ci/run/github/1196279882/1779143368
+  # Re-enable by uncommenting when pre-commit.ci raises build limit.
+  # - repo: https://github.com/renovatebot/pre-commit-hooks
+  #   rev: 43.149.0
+  #   hooks:
+  #     - id: renovate-config-validator
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
