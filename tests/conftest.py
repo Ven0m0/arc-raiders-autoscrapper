@@ -6,6 +6,7 @@ only when the real cv2 cannot be loaded (e.g., no libGL in CI).
 
 from __future__ import annotations
 
+from typing import Generator
 import sys
 from types import ModuleType
 from unittest.mock import MagicMock
@@ -156,7 +157,7 @@ if not _has_cv2:
 
 
 @pytest.fixture(autouse=True)
-def _reset_cv2_stub_per_test() -> None:
+def _reset_cv2_stub_per_test() -> Generator[None]:
     """Reset cv2 stub state between tests to prevent cross-test contamination."""
     yield
     if "cv2" in sys.modules:

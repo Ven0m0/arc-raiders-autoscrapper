@@ -93,7 +93,7 @@ def mock_game_data() -> GameData:
 def test_generate_rules_with_active_quests(mock_load: MagicMock, mock_game_data: GameData) -> None:
     mock_load.return_value = mock_game_data
 
-    result = generate_rules_from_active(active_quests=["Quest 1"], hideout_levels={})
+    result: dict[str, Any] = generate_rules_from_active(active_quests=["Quest 1"], hideout_levels={})
 
     assert result["metadata"]["itemCount"] == 3
     assert "activeQuests" in result["metadata"]
@@ -135,7 +135,7 @@ def test_generate_rules_no_active_quests_no_override(mock_load: MagicMock, mock_
 def test_generate_rules_all_quests_completed(mock_load: MagicMock, mock_game_data: GameData) -> None:
     mock_load.return_value = mock_game_data
 
-    result = generate_rules_from_active(active_quests=[], hideout_levels={}, all_quests_completed=True)
+    result: dict[str, Any] = generate_rules_from_active(active_quests=[], hideout_levels={}, all_quests_completed=True)
 
     assert result["metadata"].get("allQuestsCompleted") is True
     assert "activeQuests" not in result["metadata"]
@@ -149,15 +149,15 @@ def test_generate_rules_all_quests_completed(mock_load: MagicMock, mock_game_dat
 def test_generate_rules_completed_quests_override(mock_load: MagicMock, mock_game_data: GameData) -> None:
     mock_load.return_value = mock_game_data
 
-    result = generate_rules_from_active(
+    result: dict[str, Any] = generate_rules_from_active(
         active_quests=[],
         hideout_levels={"module1": 1},  # module 1 upgraded
         completed_quests_override=["quest1", "quest2"],
     )
 
     # Both quests completed, module upgraded
-    item1_rule = next(item for item in result["items"] if item["id"] == "item1")
-    item2_rule = next(item for item in result["items"] if item["id"] == "item2")
+    item1_rule: dict[str, object] = next(item for item in result["items"] if item["id"] == "item1")
+    item2_rule: dict[str, object] = next(item for item in result["items"] if item["id"] == "item2")
 
     assert item1_rule["action"] == "sell"
     assert item2_rule["action"] == "sell"
