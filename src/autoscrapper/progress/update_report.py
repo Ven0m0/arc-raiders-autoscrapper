@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import orjson
 
-from ..utils.normalization import normalize_quest_name, normalize_text
+from ..utils.normalization import normalize_text
 
 
 def _safe_float(value: Any) -> float:
@@ -286,52 +286,6 @@ def diff_rules(before_payload: Mapping[str, object], after_payload: Mapping[str,
         "actionChanged": action_changed,
         "analysisChanged": analysis_changed,
         "nameChanged": name_changed,
-    }
-
-
-def graph_gap_report(quests: Sequence[object], quest_graph: Mapping[str, object]) -> dict:
-    nodes = quest_graph.get("nodes")
-    node_values = nodes.values() if isinstance(nodes, dict) else []
-    node_names_normalized = {
-        normalize_quest_name(node_name) for node_name in node_values if normalize_quest_name(node_name)
-    }
-
-    quest_entries: list[dict[str, Any]] = [cast(dict[str, Any], quest) for quest in quests if isinstance(quest, dict)]
-    quest_names_normalized = {
-        normalize_quest_name(quest.get("name")) for quest in quest_entries if normalize_quest_name(quest.get("name"))
-    }
-
-    missing_quests: list[dict] = []
-    for quest in quest_entries:
-        quest_name = normalize_quest_name(quest.get("name"))
-        if not quest_name or quest_name in node_names_normalized:
-            continue
-        missing_quests.append(
-            {
-                "id": quest.get("id"),
-                "name": quest.get("name"),
-                "trader": quest.get("trader"),
-                "sortOrder": quest.get("sortOrder"),
-            }
-        )
-
-    missing_quests.sort(
-        key=lambda quest: (
-            str(quest.get("trader") or ""),
-            _safe_float(quest.get("sortOrder")),
-            str(quest.get("name") or ""),
-        )
-    )
-
-    orphaned_nodes = sorted(node_names_normalized - quest_names_normalized)
-
-    return {
-        "graphNodeCount": len(node_names_normalized),
-        "questCount": len(quest_entries),
-        "questsMissingFromGraphCount": len(missing_quests),
-        "questsMissingFromGraph": missing_quests,
-        "graphNodesMissingFromQuestsCount": len(orphaned_nodes),
-        "graphNodesMissingFromQuests": orphaned_nodes,
     }
 
 
