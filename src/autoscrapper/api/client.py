@@ -195,13 +195,6 @@ class ArcTrackerClient:
         """Fetch public hideout data from /api/hideout (no auth required)."""
         return self._make_request("GET", "/api/hideout", require_auth=False, params={"locale": locale})
 
-    def get_public_projects(self, locale: str = "en", season: int | None = None) -> dict[str, Any] | None:
-        """Fetch public projects data from /api/projects (no auth required)."""
-        params: dict[str, Any] = {"locale": locale}
-        if season is not None:
-            params["season"] = season
-        return self._make_request("GET", "/api/projects", require_auth=False, params=params)
-
     def get_user_stash(
         self,
         locale: str = "en",
