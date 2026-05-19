@@ -449,15 +449,6 @@ class ArcTrackerClient:
             return []
         return [RoundEntry.from_api(r) for r in rounds_data if isinstance(r, dict)]
 
-    def get_user_loadout(self, locale: str = "en") -> dict[str, Any] | None:
-        """Fetch user loadout from /api/v2/user/loadout (auth required)."""
-        if not self.is_configured():
-            return None
-        data = self._make_request("GET", "/api/v2/user/loadout", require_auth=True, params={"locale": locale})
-        if data is None:
-            return None
-        return data.get("data", data)
-
     def get_user_blueprints(
         self,
         locale: str = "en",
