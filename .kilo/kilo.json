@@ -15,7 +15,7 @@
     "doom_loop": "deny"
   },
   "agent": {
-    "compaction": { "model": "kilo-auto/free" },
+    "compaction": { "model": "kilo-auto/free" }
   },
   "provider": {
     "openai": {
@@ -69,7 +69,7 @@
       "type": "remote",
       "url": "https://api.githubcopilot.com/mcp/",
       "enabled": true
-    }
+    },
     "exa": {
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,get_code_context_exa,crawling_exa",
