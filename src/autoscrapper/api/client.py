@@ -187,10 +187,6 @@ class ArcTrackerClient:
 
         return None
 
-    def get_public_items(self, locale: str = "en") -> dict[str, Any] | None:
-        """Fetch public item data from /api/items (no auth required)."""
-        return self._make_request("GET", "/api/items", require_auth=False, params={"locale": locale})
-
     def get_public_hideout(self, locale: str = "en") -> dict[str, Any] | None:
         """Fetch public hideout data from /api/hideout (no auth required)."""
         return self._make_request("GET", "/api/hideout", require_auth=False, params={"locale": locale})
