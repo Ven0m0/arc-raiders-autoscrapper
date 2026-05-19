@@ -1,7 +1,0 @@
-perf: Optimize API calls in datasource fetch/stats
-
-⚡ [Optimize API calls in datasource fetch/stats]
-
-💡 **What:** Cached the API response in the APIDataSource class instance during fetch_stash, and reused it in get_stats instead of making a second redundant API call.
-🎯 **Why:** To prevent a duplicate network request to the ArcTracker API, solving an inefficiency issue in how scan stats were generated.
-📊 **Measured Improvement:** The time taken for running the fetch_stash and get_stats sequence decreased from 1.01s to 0.50s in testing, effectively halving the latency and reducing API calls from 2 to 1.
