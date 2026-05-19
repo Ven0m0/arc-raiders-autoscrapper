@@ -57,11 +57,10 @@ def _get_cached_item_mappings() -> tuple[MappingProxyType[str, str], MappingProx
                 try:
                     item_id = item["id"]
                     item_name = item["name"]
-                    if isinstance(item_id, str) and isinstance(item_name, str):
-                        lower_name = item_name.lower()
-                        id_to_name[item_id] = item_name
-                        name_to_id[lower_name] = item_id
-                except (KeyError, TypeError):
+                    lower_name = item_name.lower()  # Atomic: fail before dictionary update
+                    id_to_name[item_id] = item_name
+                    name_to_id[lower_name] = item_id
+                except (KeyError, TypeError, AttributeError):
                     continue
     except Exception as exc:
         _log.warning("api: Failed to load item mapping: %s", exc)
