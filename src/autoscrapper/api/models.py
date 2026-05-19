@@ -225,22 +225,3 @@ class RoundEntry:
             season=data.get("season"),
             looted_items=data.get("lootedItems", []),
         )
-
-
-@dataclass(frozen=True, slots=True)
-class Blueprint:
-    """A blueprint with learned status."""
-
-    blueprint_id: str
-    name: str
-    category: str
-    learned: bool
-
-    @classmethod
-    def from_api(cls, data: dict[str, Any]) -> Blueprint:
-        return cls(
-            blueprint_id=str(data.get("id", "")),
-            name=str(data.get("name", "")),
-            category=str(data.get("category", "")),
-            learned=bool(data.get("learned", False)),
-        )

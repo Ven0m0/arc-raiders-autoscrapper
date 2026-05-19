@@ -16,7 +16,6 @@ from pydantic import ValidationError
 import orjson
 
 from .models import (
-    Blueprint,
     HideoutModule,
     ItemDecision,
     ProjectProgress,
@@ -457,26 +456,6 @@ class ArcTrackerClient:
         if data is None:
             return None
         return data.get("data", data)
-
-    def get_user_blueprints(
-        self,
-        locale: str = "en",
-        filter: str | None = None,
-    ) -> list[Blueprint]:
-        """Fetch user blueprints from /api/v2/user/blueprints (auth required)."""
-        if not self.is_configured():
-            return []
-        params: dict[str, Any] = {"locale": locale}
-        if filter is not None:
-            params["filter"] = filter
-        data = self._make_request("GET", "/api/v2/user/blueprints", require_auth=True, params=params)
-        if data is None:
-            return []
-        blueprints_data = data.get("data", [])
-        if not isinstance(blueprints_data, list):
-            _log.warning("api: Unexpected blueprints response format")
-            return []
-        return [Blueprint.from_api(b) for b in blueprints_data if isinstance(b, dict)]
 
     def test_connection(self) -> dict[str, Any] | None:
         """Test API connection and authentication."""
