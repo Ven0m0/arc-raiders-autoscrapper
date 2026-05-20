@@ -203,31 +203,6 @@ class UserQuest:
 
 
 @dataclass(frozen=True, slots=True)
-class RoundEntry:
-    """A single round from the user's round history."""
-
-    round_id: str
-    outcome: str
-    map_slug: str
-    kills: int
-    damage: float
-    season: int | None
-    looted_items: list[Any]
-
-    @classmethod
-    def from_api(cls, data: dict[str, Any]) -> RoundEntry:
-        return cls(
-            round_id=str(data.get("id", "")),
-            outcome=str(data.get("outcome", "unknown")),
-            map_slug=str(data.get("map", "")),
-            kills=int(data.get("kills", 0)),
-            damage=float(data.get("damage", 0.0)),
-            season=data.get("season"),
-            looted_items=data.get("lootedItems", []),
-        )
-
-
-@dataclass(frozen=True, slots=True)
 class Blueprint:
     """A blueprint with learned status."""
 

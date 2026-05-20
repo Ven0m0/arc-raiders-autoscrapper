@@ -21,7 +21,6 @@ from .models import (
     ItemDecision,
     ProjectProgress,
     RateLimitState,
-    RoundEntry,
     StashData,
     StashItem,
     UserProfile,
@@ -416,38 +415,6 @@ class ArcTrackerClient:
             _log.warning("api: Unexpected quests response format")
             return []
         return [UserQuest.from_api(q) for q in quests_data if isinstance(q, dict)]
-
-    def get_user_rounds(
-        self,
-        locale: str = "en",
-        limit: int = 50,
-        offset: int = 0,
-        outcome: str | None = None,
-        map_slug: str | None = None,
-        season: int | None = None,
-    ) -> list[RoundEntry]:
-        """Fetch user round history from /api/v2/user/rounds (auth required)."""
-        if not self.is_configured():
-            return []
-        params: dict[str, Any] = {
-            "locale": locale,
-            "limit": min(limit, 200),
-            "offset": offset,
-        }
-        if outcome is not None:
-            params["outcome"] = outcome
-        if map_slug is not None:
-            params["map"] = map_slug
-        if season is not None:
-            params["season"] = season
-        data = self._make_request("GET", "/api/v2/user/rounds", require_auth=True, params=params)
-        if data is None:
-            return []
-        rounds_data = data.get("data", [])
-        if not isinstance(rounds_data, list):
-            _log.warning("api: Unexpected rounds response format")
-            return []
-        return [RoundEntry.from_api(r) for r in rounds_data if isinstance(r, dict)]
 
     def get_user_loadout(self, locale: str = "en") -> dict[str, Any] | None:
         """Fetch user loadout from /api/v2/user/loadout (auth required)."""
