@@ -101,5 +101,3 @@ ARCTRACKER_USER_KEY=<bearer-token>  # grants /api/v2/user/* access
 
 `create_client_from_config()` reads from saved settings automatically.
 `client.is_configured()` returns `True` only when both keys are present.
-`client.is_public_available()` returns `True` when `requests` is importable (always,
-since `requests` is a default dependency).

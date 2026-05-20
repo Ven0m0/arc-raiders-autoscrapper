@@ -490,10 +490,6 @@ class ArcTrackerClient:
         """Check if API client has necessary configuration."""
         return bool(self.app_key and self.user_key)
 
-    def is_public_available(self) -> bool:
-        """Check if public API endpoints are reachable."""
-        return True
-
 
 class APIOrchestrator:
     """Orchestrates API and OCR data sources with automatic fallback."""
