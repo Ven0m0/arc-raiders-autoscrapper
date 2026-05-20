@@ -40,6 +40,8 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Setup tools
         run: mise use --global python@3.13 uv@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up Python
         run: mise exec -- python --version
       - name: Install uv
