@@ -35,10 +35,14 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
       - name: Install mise
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           curl https://mise.run | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Setup tools
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mise use --global python@3.13 uv@latest
       - name: Set up Python
         run: mise exec -- python --version
