@@ -37,13 +37,16 @@ def _display_action(item: dict) -> str:
 
 
 def _normalized_action(item: dict) -> str | None:
-    action = normalize_action(str(item.get("action", "")))
+    action = item.get("action")
     if action:
-        return action
+        parsed = normalize_action(action if type(action) is str else str(action))
+        if parsed:
+            return parsed
+
     decisions = item.get("decision")
-    if isinstance(decisions, list):
+    if type(decisions) is list:
         for decision in decisions:
-            if isinstance(decision, str):
+            if type(decision) is str:
                 parsed = normalize_action(decision)
                 if parsed:
                     return parsed
