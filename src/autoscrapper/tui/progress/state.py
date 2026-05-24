@@ -47,19 +47,40 @@ def normalize_quest_value(value: str) -> str:
 def build_quest_entries(quests: list[dict]) -> list[QuestEntry]:
     entries: list[QuestEntry] = []
     for quest in quests:
-        quest_id = quest.get("id")
-        quest_name = quest.get("name")
-        trader = quest.get("trader") or "Unknown"
-        sort_order = int(quest.get("sortOrder") or 0)
+        try:
+            quest_id = quest["id"]
+            quest_name = quest["name"]
+        except KeyError:
+            continue
+
         if not quest_id or not quest_name:
             continue
+
+        try:
+            trader = quest["trader"]
+        except KeyError:
+            trader = "Unknown"
+        else:
+            if not trader:
+                trader = "Unknown"
+
+        try:
+            sort_order = int(quest["sortOrder"] or 0)
+        except (KeyError, ValueError, TypeError):
+            sort_order = 0
+
+        try:
+            has_requirements = bool(quest["requirements"])
+        except KeyError:
+            has_requirements = False
+
         entries.append(
             QuestEntry(
                 id=str(quest_id),
                 name=str(quest_name),
                 trader=str(trader),
                 sort_order=sort_order,
-                has_requirements=bool(quest.get("requirements")),
+                has_requirements=has_requirements,
             )
         )
     entries.sort(key=lambda entry: (entry.trader, entry.sort_order, entry.name))
