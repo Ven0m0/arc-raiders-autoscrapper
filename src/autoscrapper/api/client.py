@@ -528,6 +528,7 @@ class APIOrchestrator:
             from ..core.item_actions import normalize_item_name
             from ..ocr.inventory_vision import match_item_name
 
+            matched_cache: dict[str, str] = {}
             for item in stash_data.items:
                 normalized_name = normalize_item_name(item.name)
                 decision_list = self.actions.get(normalized_name)
@@ -535,7 +536,10 @@ class APIOrchestrator:
                     decisions[item.name] = decision_list[0]
                 else:
                     # Fallback to fuzzy match if exact match fails
-                    matched_name = match_item_name(item.name)
+                    if item.name not in matched_cache:
+                        matched_cache[item.name] = match_item_name(item.name)
+
+                    matched_name = matched_cache[item.name]
                     if matched_name:
                         decision_list = self.actions.get(matched_name)
                         if decision_list:
