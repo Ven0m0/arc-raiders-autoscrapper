@@ -65,21 +65,6 @@ def _get_cached_item_mappings() -> tuple[MappingProxyType[str, str], MappingProx
     return MappingProxyType(id_to_name), MappingProxyType(name_to_id)
 
 
-class ArcTrackerAuth(httpx.Auth):
-    """Custom auth to securely inject keys without exposing them in default headers."""
-
-    def __init__(self, app_key: str | None, user_key: str | None) -> None:
-        self.app_key = app_key
-        self.user_key = user_key
-
-    def auth_flow(self, request: httpx.Request):
-        if self.app_key:
-            request.headers["X-App-Key"] = self.app_key
-        if self.user_key:
-            request.headers["Authorization"] = f"Bearer {self.user_key}"
-        yield request
-
-
 class ArcTrackerClient:
     """Client for arctracker.io API with rate limiting and fallback support."""
 
@@ -153,14 +138,17 @@ class ArcTrackerClient:
         if "headers" in kwargs:
             headers.update(kwargs.pop("headers"))
 
-        auth = ArcTrackerAuth(self.app_key, self.user_key) if require_auth else None
+        if require_auth:
+            if self.app_key:
+                headers["X-App-Key"] = self.app_key
+            if self.user_key:
+                headers["Authorization"] = f"Bearer {self.user_key}"
 
         try:
             response = self._session.request(
                 method,
                 url,
                 headers=headers,
-                auth=auth,
                 timeout=DEFAULT_TIMEOUT,
                 **kwargs,
             )

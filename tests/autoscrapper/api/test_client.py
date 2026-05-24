@@ -17,15 +17,21 @@ def api_client():
 
 
 class TestArcTrackerClient:
-    def test_auth_flow_injects_keys(self):
-        from autoscrapper.api.client import ArcTrackerAuth
-        import httpx
+    def test_make_request_injects_keys(self, api_client):
+        from unittest.mock import patch, MagicMock
+        with patch.object(api_client._session, 'request') as mock_req:
+            mock_response = MagicMock()
+            mock_response.status_code = 200
+            mock_response.headers = {}
+            mock_response.json.return_value = {}
+            mock_req.return_value = mock_response
 
-        auth = ArcTrackerAuth(app_key="test_app", user_key="test_user")
-        request = httpx.Request("GET", "https://example.com")
-        modified_request = next(auth.auth_flow(request))
-        assert modified_request.headers["X-App-Key"] == "test_app"
-        assert modified_request.headers["Authorization"] == "Bearer test_user"
+            api_client._make_request("GET", "/test", require_auth=True)
+
+            mock_req.assert_called_once()
+            headers = mock_req.call_args[1].get("headers", {})
+            assert headers.get("X-App-Key") == "test_app"
+            assert headers.get("Authorization") == "Bearer test_user"
 
     def test_rate_limit_tracking(self, api_client):
         headers = {
