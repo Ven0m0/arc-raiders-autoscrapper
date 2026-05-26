@@ -3,13 +3,21 @@
     "fast-filesystem": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "fast-filesystem-mcp@latest"],
-      "env": { "MCP_SILENT_ERRORS": "true" }
+      "args": [
+        "-y",
+        "fast-filesystem-mcp@latest"
+      ],
+      "env": {
+        "MCP_SILENT_ERRORS": "true"
+      }
     },
     "octocode": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "octocode-mcp@latest"],
+      "args": [
+        "-y",
+        "octocode-mcp@latest"
+      ],
       "env": {
         "GITHUB_TOKEN": "$GITHUB_PERSONAL_ACCESS_TOKEN",
         "ENABLE_LOCAL": "true",
@@ -19,7 +27,9 @@
     "ast-grep": {
       "type": "stdio",
       "command": "bunx",
-      "args": ["@notprolands/ast-grep-mcp@latest"]
+      "args": [
+        "@notprolands/ast-grep-mcp@latest"
+      ]
     },
     "ref-tools": {
       "type": "http",
@@ -37,18 +47,20 @@
         "--project-from-cwd"
       ]
     },
-		"github": {
-			"type": "http",
-			"url": "https://api.githubcopilot.com/mcp/"
-		},
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
     "context7": {
       "type": "http",
       "url": "https://mcp.context7.com/mcp"
     },
-		"exa": {
-			"type": "http",
-			"url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,get_code_context_exa,crawling_exa",
-			"headers": { "x-api-key": "{env:EXA_API_KEY}" }
-		}
+    "exa": {
+      "type": "http",
+      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,get_code_context_exa,crawling_exa",
+      "headers": {
+        "x-api-key": "{env:EXA_API_KEY}"
+      }
+    }
   }
 }
