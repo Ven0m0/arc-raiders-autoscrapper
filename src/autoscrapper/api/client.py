@@ -39,9 +39,9 @@ _log = logging.getLogger(__name__)
 ARCTRACKER_BASE_URL = "https://arctracker.io"
 DEFAULT_TIMEOUT = 30
 
-# Rate limit: 500 req/hour = 1 req per 7.2 seconds max sustained
-# We use a more conservative 8 seconds to stay well under the limit
-MIN_REQUEST_INTERVAL_SECONDS = 8.0
+# Rate limit: 500 req/hour.
+# We rely on API X-RateLimit remaining headers instead of artificial client delay.
+MIN_REQUEST_INTERVAL_SECONDS = 0.0
 
 
 @functools.cache
@@ -103,11 +103,12 @@ class ArcTrackerClient:
         self._item_id_to_name, self._item_name_to_id = _get_cached_item_mappings()
 
     def _wait_for_rate_limit(self) -> None:
-        """Pre-emptively throttle requests to respect rate limits."""
-        wait_time = self.rate_limit.time_until_next_request(MIN_REQUEST_INTERVAL_SECONDS)
-        if wait_time > 0:
-            _log.debug("api: Rate limit cooldown: %.2fs", wait_time)
-            time.sleep(wait_time)
+        """Wait if we are currently rate limited by the API quota."""
+        if self.rate_limit.is_rate_limited:
+            wait_time = self.rate_limit.seconds_until_reset
+            if wait_time > 0:
+                _log.debug("api: Rate limit exhausted, waiting: %.2fs", wait_time)
+                time.sleep(wait_time)
 
     def _update_rate_limit(self, headers: dict[str, str]) -> None:
         """Update rate limit state from response headers."""
