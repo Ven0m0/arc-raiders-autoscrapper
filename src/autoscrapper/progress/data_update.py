@@ -13,11 +13,14 @@ from .data_loader import DATA_DIR
 from .quest_overrides import apply_quest_overrides
 
 METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
-SUPABASE_URL = "https://unhbvkszwhczbjxgetgk.supabase.co/rest/v1"
+SUPABASE_URL = os.environ.get(
+    "METAFORGE_SUPABASE_URL",
+    "https://sb.metaforge.app/rest/v1",
+).rstrip("/")
 
 SUPABASE_ANON_KEY = os.environ.get(
     "METAFORGE_SUPABASE_ANON_KEY",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVuaGJ2a3N6d2hjemJqeGdldGdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ5NjgwMjUsImV4cCI6MjA2MDU0NDAyNX0.gckCmxnlpwwJOGmc5ebLYDnaWaxr5PW31eCrSPR5aRQ",
+    "sb_publishable_C7SqVOoZBPFy4W0DxKcOGQ_emEIw-rj",
 )
 
 
