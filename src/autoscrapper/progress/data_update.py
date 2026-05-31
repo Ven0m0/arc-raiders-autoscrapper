@@ -845,13 +845,11 @@ def _build_quests_by_trader(quests: list[dict]) -> dict[str, list[dict]]:
     by_trader: dict[str, list[dict]] = {}
     for quest in quests:
         trader = quest.get("trader") or "Unknown"
-        by_trader.setdefault(trader, []).append(
-            {
-                "id": quest.get("id"),
-                "name": quest.get("name"),
-                "sortOrder": quest.get("sortOrder", 0),
-            }
-        )
+        by_trader.setdefault(trader, []).append({
+            "id": quest.get("id"),
+            "name": quest.get("name"),
+            "sortOrder": quest.get("sortOrder", 0),
+        })
 
     for trader, quests_list in by_trader.items():
         quests_list.sort(key=lambda q: q.get("sortOrder") or 0)
@@ -916,13 +914,14 @@ def _scrape_wiki_uses() -> dict[str, str]:
         return {}
 
     uses_map: dict[str, str] = {}
-    for row in loot_table.find_all("tr")[1:]:
-        cells = row.find_all("td")
+    rows = loot_table.select("tr")
+    for row in rows[1:]:
+        cells = row.select("td")
         if len(cells) <= max(item_col, uses_col):
             continue
 
         item_cell = cells[item_col]
-        name_link = item_cell.find("a")
+        name_link = item_cell.select_one("a")
         name = name_link.get_text(strip=True) if name_link else item_cell.get_text(strip=True)
         if not name:
             continue
