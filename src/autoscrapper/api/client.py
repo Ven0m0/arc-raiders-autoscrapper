@@ -528,19 +528,34 @@ class APIOrchestrator:
             from ..core.item_actions import normalize_item_name
             from ..ocr.inventory_vision import match_item_name
 
+            matched_cache = {}
             for item in stash_data.items:
-                normalized_name = normalize_item_name(item.name)
+                name = item.name
+                if name in matched_cache:
+                    decision = matched_cache[name]
+                    if decision:
+                        decisions[name] = decision
+                    continue
+
+                normalized_name = normalize_item_name(name)
                 decision_list = self.actions.get(normalized_name)
                 if decision_list:
-                    decisions[item.name] = decision_list[0]
+                    decision = decision_list[0]
+                    decisions[name] = decision
+                    matched_cache[name] = decision
                 else:
                     # Fallback to fuzzy match if exact match fails
-                    matched_name = match_item_name(item.name)
+                    matched_name = match_item_name(name)
                     if matched_name:
                         decision_list = self.actions.get(matched_name)
                         if decision_list:
-                            decisions[item.name] = decision_list[0]
-
+                            decision = decision_list[0]
+                            decisions[name] = decision
+                            matched_cache[name] = decision
+                        else:
+                            matched_cache[name] = None
+                    else:
+                        matched_cache[name] = None
             self._log.info(
                 "api: Retrieved %d decisions from API stash",
                 len(decisions),
