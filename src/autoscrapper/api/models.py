@@ -34,16 +34,6 @@ class RateLimitState:
         now = time.time()
         return max(0.0, self.reset_timestamp - now)
 
-    def time_until_next_request(self, min_interval: float = 8.0) -> float:
-        """Calculate time to wait before next request."""
-        now = time.time()
-        time_since_last = now - self.last_request_timestamp
-        cooldown = max(0.0, min_interval - time_since_last)
-
-        if self.is_rate_limited:
-            return max(cooldown, self.seconds_until_reset)
-        return cooldown
-
 
 @dataclass(frozen=True, slots=True)
 class StashItem:

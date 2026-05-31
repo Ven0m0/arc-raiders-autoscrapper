@@ -41,7 +41,6 @@ DEFAULT_TIMEOUT = 30
 
 # Rate limit: 500 req/hour = 1 req per 7.2 seconds max sustained
 # We use a more conservative 8 seconds to stay well under the limit
-MIN_REQUEST_INTERVAL_SECONDS = 8.0
 
 
 @functools.cache
@@ -104,10 +103,11 @@ class ArcTrackerClient:
 
     def _wait_for_rate_limit(self) -> None:
         """Pre-emptively throttle requests to respect rate limits."""
-        wait_time = self.rate_limit.time_until_next_request(MIN_REQUEST_INTERVAL_SECONDS)
-        if wait_time > 0:
-            _log.debug("api: Rate limit cooldown: %.2fs", wait_time)
-            time.sleep(wait_time)
+        if self.rate_limit.is_rate_limited:
+            wait_time = self.rate_limit.seconds_until_reset
+            if wait_time > 0:
+                _log.warning("api: Rate limit reached. Waiting %.2fs until reset", wait_time)
+                time.sleep(wait_time)
 
     def _update_rate_limit(self, headers: dict[str, str]) -> None:
         """Update rate limit state from response headers."""
