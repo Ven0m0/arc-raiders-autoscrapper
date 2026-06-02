@@ -83,26 +83,11 @@ def _should_hide_reason(reason: str) -> bool:
     return reason.strip().lower().startswith("override:")
 
 
-def _filter_indices(
-    items: list[dict],
-    query: str,
-    search_data: list[tuple[str, str]] | None = None,
-) -> list[int]:
-    if not query:
-        return list(range(len(items)))
+def _filter_indices(query: str, search_data: list[tuple[str, str]]) -> list[int]:
     q = query.lower().strip()
-    matches: list[int] = []
-    if search_data is not None:
-        for idx, (name, item_id) in enumerate(search_data):
-            if q in name or (item_id and q in item_id):
-                matches.append(idx)
-    else:
-        for idx, item in enumerate(items):
-            name = str(item.get("name", "")).lower()
-            item_id = str(item.get("id", "")).lower()
-            if q in name or (item_id and q in item_id):
-                matches.append(idx)
-    return matches
+    if not q:
+        return list(range(len(search_data)))
+    return [idx for idx, (name, item_id) in enumerate(search_data) if q in name or q in item_id]
 
 
 def _truncate_label(text: str, limit: int) -> str:
@@ -656,7 +641,7 @@ class RulesScreen(AppScreen):
         previous_scroll_y = menu.scroll_y if preserve_scroll else None
         name_limit = self._list_name_limit(menu)
         self._refresh_modified_map()
-        filtered_indices = _filter_indices(self.items, self.search_query, self.search_data)
+        filtered_indices = _filter_indices(self.search_query, self.search_data)
         self.filtered = self._sort_indices(filtered_indices)
         options = []
         for list_index, item_index in enumerate(self.filtered):

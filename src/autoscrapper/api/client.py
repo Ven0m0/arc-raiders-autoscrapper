@@ -3,9 +3,9 @@
 from __future__ import annotations
 import concurrent.futures
 import math
-
 import logging
 import functools
+import threading
 from pathlib import Path
 from types import MappingProxyType
 import time
@@ -16,12 +16,10 @@ from pydantic import ValidationError
 import orjson
 
 from .models import (
-    Blueprint,
     HideoutModule,
     ItemDecision,
     ProjectProgress,
     RateLimitState,
-    RoundEntry,
     StashData,
     StashItem,
     UserProfile,
@@ -38,10 +36,6 @@ _log = logging.getLogger(__name__)
 
 ARCTRACKER_BASE_URL = "https://arctracker.io"
 DEFAULT_TIMEOUT = 30
-
-# Rate limit: 500 req/hour = 1 req per 7.2 seconds max sustained
-# We use a more conservative 8 seconds to stay well under the limit
-MIN_REQUEST_INTERVAL_SECONDS = 8.0
 
 
 @functools.cache
@@ -65,21 +59,6 @@ def _get_cached_item_mappings() -> tuple[MappingProxyType[str, str], MappingProx
     return MappingProxyType(id_to_name), MappingProxyType(name_to_id)
 
 
-class ArcTrackerAuth(httpx.Auth):
-    """Custom auth to securely inject keys without exposing them in default headers."""
-
-    def __init__(self, app_key: str | None, user_key: str | None) -> None:
-        self.app_key = app_key
-        self.user_key = user_key
-
-    def auth_flow(self, request: httpx.Request):
-        if self.app_key:
-            request.headers["X-App-Key"] = self.app_key
-        if self.user_key:
-            request.headers["Authorization"] = f"Bearer {self.user_key}"
-        yield request
-
-
 class ArcTrackerClient:
     """Client for arctracker.io API with rate limiting and fallback support."""
 
@@ -93,6 +72,7 @@ class ArcTrackerClient:
         self.user_key = user_key
         self.base_url = base_url.rstrip("/")
         self.rate_limit = RateLimitState()
+        self._rate_limit_lock = threading.Lock()
         self._session = httpx.Client(
             headers={
                 "Accept": "application/json",
@@ -103,10 +83,12 @@ class ArcTrackerClient:
         self._item_id_to_name, self._item_name_to_id = _get_cached_item_mappings()
 
     def _wait_for_rate_limit(self) -> None:
-        """Pre-emptively throttle requests to respect rate limits."""
-        wait_time = self.rate_limit.time_until_next_request(MIN_REQUEST_INTERVAL_SECONDS)
+        """Wait if we are currently rate limited by the API quota."""
+        with self._rate_limit_lock:
+            is_limited = self.rate_limit.is_rate_limited
+            wait_time = self.rate_limit.seconds_until_reset if is_limited else 0.0
         if wait_time > 0:
-            _log.debug("api: Rate limit cooldown: %.2fs", wait_time)
+            _log.debug("api: Rate limit exhausted, waiting: %.2fs", wait_time)
             time.sleep(wait_time)
 
     def _update_rate_limit(self, headers: dict[str, str]) -> None:
@@ -117,9 +99,7 @@ class ArcTrackerClient:
             if "X-RateLimit-Remaining" in headers:
                 self.rate_limit.remaining = int(headers["X-RateLimit-Remaining"])
             if "X-RateLimit-Reset" in headers:
-                # Reset is usually a Unix timestamp
                 reset_val = int(headers["X-RateLimit-Reset"])
-                # Handle both absolute timestamp and relative seconds
                 if reset_val > 1_000_000_000:  # Unix timestamp
                     self.rate_limit.reset_timestamp = float(reset_val)
                 else:  # Relative seconds
@@ -128,10 +108,6 @@ class ArcTrackerClient:
             _log.debug("api: Failed to parse rate limit headers: %s", exc)
 
         self.rate_limit.last_request_timestamp = time.time()
-
-    def _get_headers(self) -> dict[str, str]:
-        """Build request headers."""
-        return {}
 
     def _make_request(
         self,
@@ -149,18 +125,18 @@ class ArcTrackerClient:
         self._wait_for_rate_limit()
 
         url = f"{self.base_url}{endpoint}"
-        headers = self._get_headers()
+        headers: dict[str, str] = {}
         if "headers" in kwargs:
             headers.update(kwargs.pop("headers"))
-
-        auth = ArcTrackerAuth(self.app_key, self.user_key) if require_auth else None
+        if require_auth:
+            headers["X-App-Key"] = self.app_key  # type: ignore[assignment]
+            headers["Authorization"] = f"Bearer {self.user_key}"
 
         try:
             response = self._session.request(
                 method,
                 url,
                 headers=headers,
-                auth=auth,
                 timeout=DEFAULT_TIMEOUT,
                 **kwargs,
             )
@@ -186,21 +162,6 @@ class ArcTrackerClient:
             _log.warning("api: Unexpected error: %s", exc)
 
         return None
-
-    def get_public_items(self, locale: str = "en") -> dict[str, Any] | None:
-        """Fetch public item data from /api/items (no auth required)."""
-        return self._make_request("GET", "/api/items", require_auth=False, params={"locale": locale})
-
-    def get_public_hideout(self, locale: str = "en") -> dict[str, Any] | None:
-        """Fetch public hideout data from /api/hideout (no auth required)."""
-        return self._make_request("GET", "/api/hideout", require_auth=False, params={"locale": locale})
-
-    def get_public_projects(self, locale: str = "en", season: int | None = None) -> dict[str, Any] | None:
-        """Fetch public projects data from /api/projects (no auth required)."""
-        params: dict[str, Any] = {"locale": locale}
-        if season is not None:
-            params["season"] = season
-        return self._make_request("GET", "/api/projects", require_auth=False, params=params)
 
     def get_user_stash(
         self,
@@ -239,7 +200,6 @@ class ArcTrackerClient:
         all_items: list[StashItem] = []
         per_page = 500
 
-        # Fetch first page sequentially to get total used slots
         first_page = self.get_user_stash(locale=locale, page=1, per_page=per_page)
 
         if first_page.api_error:
@@ -254,7 +214,6 @@ class ArcTrackerClient:
         total_slots = first_page.total_slots
         used_slots = first_page.used_slots
 
-        # If first page has fewer items than per_page, we're done
         if len(first_page.items) < per_page or not first_page.items:
             return StashData(
                 items=all_items,
@@ -263,12 +222,8 @@ class ArcTrackerClient:
                 api_error=None,
             )
 
-        # Calculate remaining pages based on used_slots
-        # used_slots tells us the total number of items to fetch
-        # total pages is ceil(used_slots / per_page)
         total_pages = math.ceil(used_slots / per_page)
 
-        # Limit to 100 pages to prevent runaway requests
         if total_pages > 100:
             _log.warning("api: Stash pagination calculated >100 pages, limiting to 100")
             total_pages = 100
@@ -280,7 +235,6 @@ class ArcTrackerClient:
 
             with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
                 pages_to_fetch = range(2, total_pages + 1)
-                # Map preserves order
                 results = executor.map(fetch_page, pages_to_fetch)
 
                 for page_data in results:
@@ -294,7 +248,6 @@ class ArcTrackerClient:
 
                     all_items.extend(page_data.items)
 
-                    # If a page returns empty, stop processing further pages
                     if not page_data.items:
                         break
 
@@ -394,7 +347,7 @@ class ArcTrackerClient:
         try:
             return UserProfile.from_api(profile_data)
         except ValidationError as e:
-            _log.warning(f"api: Failed to validate user profile response: {e}")
+            _log.warning("api: Failed to validate user profile response: %s", e)
             return None
 
     def get_user_quests(
@@ -417,67 +370,6 @@ class ArcTrackerClient:
             return []
         return [UserQuest.from_api(q) for q in quests_data if isinstance(q, dict)]
 
-    def get_user_rounds(
-        self,
-        locale: str = "en",
-        limit: int = 50,
-        offset: int = 0,
-        outcome: str | None = None,
-        map_slug: str | None = None,
-        season: int | None = None,
-    ) -> list[RoundEntry]:
-        """Fetch user round history from /api/v2/user/rounds (auth required)."""
-        if not self.is_configured():
-            return []
-        params: dict[str, Any] = {
-            "locale": locale,
-            "limit": min(limit, 200),
-            "offset": offset,
-        }
-        if outcome is not None:
-            params["outcome"] = outcome
-        if map_slug is not None:
-            params["map"] = map_slug
-        if season is not None:
-            params["season"] = season
-        data = self._make_request("GET", "/api/v2/user/rounds", require_auth=True, params=params)
-        if data is None:
-            return []
-        rounds_data = data.get("data", [])
-        if not isinstance(rounds_data, list):
-            _log.warning("api: Unexpected rounds response format")
-            return []
-        return [RoundEntry.from_api(r) for r in rounds_data if isinstance(r, dict)]
-
-    def get_user_loadout(self, locale: str = "en") -> dict[str, Any] | None:
-        """Fetch user loadout from /api/v2/user/loadout (auth required)."""
-        if not self.is_configured():
-            return None
-        data = self._make_request("GET", "/api/v2/user/loadout", require_auth=True, params={"locale": locale})
-        if data is None:
-            return None
-        return data.get("data", data)
-
-    def get_user_blueprints(
-        self,
-        locale: str = "en",
-        filter: str | None = None,
-    ) -> list[Blueprint]:
-        """Fetch user blueprints from /api/v2/user/blueprints (auth required)."""
-        if not self.is_configured():
-            return []
-        params: dict[str, Any] = {"locale": locale}
-        if filter is not None:
-            params["filter"] = filter
-        data = self._make_request("GET", "/api/v2/user/blueprints", require_auth=True, params=params)
-        if data is None:
-            return []
-        blueprints_data = data.get("data", [])
-        if not isinstance(blueprints_data, list):
-            _log.warning("api: Unexpected blueprints response format")
-            return []
-        return [Blueprint.from_api(b) for b in blueprints_data if isinstance(b, dict)]
-
     def test_connection(self) -> dict[str, Any] | None:
         """Test API connection and authentication."""
         if not self.is_configured():
@@ -489,10 +381,6 @@ class ArcTrackerClient:
     def is_configured(self) -> bool:
         """Check if API client has necessary configuration."""
         return bool(self.app_key and self.user_key)
-
-    def is_public_available(self) -> bool:
-        """Check if public API endpoints are reachable."""
-        return True
 
 
 class APIOrchestrator:
@@ -528,18 +416,26 @@ class APIOrchestrator:
             from ..core.item_actions import normalize_item_name
             from ..ocr.inventory_vision import match_item_name
 
+            matched_cache: dict[str, ItemDecision | None] = {}
+
             for item in stash_data.items:
-                normalized_name = normalize_item_name(item.name)
+                name = item.name
+                if name in matched_cache:
+                    continue
+                normalized_name = normalize_item_name(name)
                 decision_list = self.actions.get(normalized_name)
                 if decision_list:
-                    decisions[item.name] = decision_list[0]
+                    matched_cache[name] = decision_list[0]
+                    decisions[name] = decision_list[0]
                 else:
-                    # Fallback to fuzzy match if exact match fails
-                    matched_name = match_item_name(item.name)
+                    matched_name = match_item_name(name)
                     if matched_name:
-                        decision_list = self.actions.get(matched_name)
+                        decision_list = self.actions.get(normalize_item_name(matched_name))
                         if decision_list:
-                            decisions[item.name] = decision_list[0]
+                            matched_cache[name] = decision_list[0]
+                            decisions[name] = decision_list[0]
+                            continue
+                    matched_cache[name] = None
 
             self._log.info(
                 "api: Retrieved %d decisions from API stash",

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING, Literal
 
@@ -11,6 +11,7 @@ from ..config import ApiSettings, ProgressSettings, load_api_settings, load_prog
 from ..core.item_actions import ActionMap, ItemActionResult, normalize_item_name
 from ..interaction.inventory_grid import Cell
 from .client import ArcTrackerClient
+from .models import StashData
 
 if TYPE_CHECKING:
     from ..scanner.types import ScanStats
@@ -28,10 +29,12 @@ class APIDataSource:
     client: ArcTrackerClient
     actions: ActionMap
     dry_run: bool = False
+    _stash_data_cache: StashData | None = field(default=None)
 
     def fetch_stash(self) -> list[ItemActionResult]:
         """Fetch stash from API and convert to scan results."""
         stash_data = self.client.get_all_stash_items()
+        self._stash_data_cache = stash_data
 
         if stash_data.api_error:
             _log.warning("api: Failed to fetch stash: %s", stash_data.api_error)
@@ -39,14 +42,11 @@ class APIDataSource:
 
         results: list[ItemActionResult] = []
         for idx, item in enumerate(stash_data.items):
-            # Normalize the item name for decision lookup
             normalized_name = normalize_item_name(item.name)
 
-            # Look up decision in actions map
             decision_list = self.actions.get(normalized_name)
             decision = decision_list[0] if decision_list else None
 
-            # Create a synthetic cell for the result
             slot_idx = item.slot if item.slot is not None else idx
             page = slot_idx // 20  # 20 items per page (4x5 grid)
             cell_index = slot_idx % 20
@@ -63,7 +63,6 @@ class APIDataSource:
                 safe_bounds=(0, 0, 0, 0),
             )
 
-            # Determine action taken
             if self.dry_run:
                 action_taken = "dry-run"
             elif decision == "KEEP":
@@ -94,7 +93,7 @@ class APIDataSource:
         """Get scan stats for API fetch."""
         from ..scanner.types import ScanStats
 
-        stash_data = self.client.get_all_stash_items()
+        stash_data = self._stash_data_cache if self._stash_data_cache is not None else self.client.get_all_stash_items()
 
         return ScanStats(
             items_in_stash=stash_data.used_slots if not stash_data.api_error else None,
@@ -110,16 +109,7 @@ def fetch_stash_as_scan_results(
     api_settings: ApiSettings | None = None,
     dry_run: bool = False,
 ) -> tuple[list[ItemActionResult], ScanStats]:
-    """Fetch stash from API and convert to scan results format.
-
-    Args:
-        actions: Action map for item decisions.
-        api_settings: Optional API settings. If None, loads from config.
-        dry_run: Whether this is a dry run.
-
-    Returns:
-        Tuple of (results, stats).
-    """
+    """Fetch stash from API and convert to scan results format."""
     if api_settings is None:
         api_settings = load_api_settings()
 
