@@ -23,16 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 2
       - name: Configure fast apt mirror
         uses: vegardit/fast-apt-mirror.sh@v1
-      - name: Install Linux system dependencies
-        uses: gerlero/apt-install@v1
-        with:
-          packages: build-essential python3-evdev libevdev-dev libleptonica-dev libtesseract-dev pkg-config tesseract-ocr
-          install-recommends: false
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
