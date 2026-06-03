@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_NEW_INIT": "true",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
+    "CLAUDE_CODE_ENABLE_TASKS": "true",
+    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1",
+    "USE_BUILTIN_RIPGREP": "1",
+    "ENABLE_LSP_TOOL": "1",
+    "ENABLE_TOOL_SEARCH": "true",
+    "GIT_SSH_COMMAND": "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no",
+    "PAGER": "bat -pp",
+    "GIT_PAGER": "bat -pp",
+    "GIT_MERGE_AUTOEDIT": "no",
+    "DEBCONF_NOWARNINGS": "yes",
+    "DEBIAN_FRONTEND": "noninteractive",
+    "TERM": "screen-256color",
+    "COLORTERM": "truecolor"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(qlty check:*)",
+      "Bash(qlty metrics:*)",
+      "Bash(qlty smells:*)",
+      "Bash(uv run pytest:*)",
+      "Bash(uv run ruff check:*)",
+      "Bash(uv run ruff format:*)",
+      "Bash(uv run basedpyright:*)",
+      "Bash(uv run autoscrapper scan --dry-run:*)",
+      "Bash(uv sync:*)",
+      "Bash(uv run pytest:*)",
+      "Bash(uv run ruff check:*)",
+      "Bash(uv run basedpyright:*)",
+      "Bash(uv run ty:*)",
+      "Bash(uv run ty:*)",
+      "Bash(rtk:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh issue:*)",
+      "Bash(gh run:*)",
+      "mcp__plugin_oh-my-claudecode_t__lsp_document_symbols",
+      "mcp__plugin_context-mode_context-mode__ctx_execute",
+      "mcp__claude_ai_gitmcp__fetch_generic_documentation",
+      "mcp__claude_ai_gitmcp__search_generic_code",
+      "mcp__plugin_context-mode_context-mode__ctx_fetch_and_index",
+      "mcp__plugin_context-mode_context-mode__ctx_search",
+      "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
+      "mcp__plugin_oh-my-claudecode_t__state_clear",
+      "Skill(afc:triage)",
+      "Skill(commit-commands:commit-push-pr)",
+      "mcp__cachebro__read_files",
+      "mcp__cachebro__read_file",
+      "mcp__token-pilot__read_for_edit",
+      "mcp__token-pilot__find_usages",
+      "mcp__token-pilot__smart_read",
+      "mcp__plugin_oh-my-claudecode_t__state_list_active"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": ["fast-filesystem", "octocode", "ast-grep", "ref-tools", "github"],
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=$(jq -r '.tool_input.file_path // .tool_response.filePath' 2>/dev/null); if [ -n \"$f\" ] && [ \"${f##*.}\" = 'py' ]; then uv run ruff format \"$f\" 2>/dev/null || true; fi",
+            "statusMessage": "Formatting Python code with Ruff...",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "f=$(jq -r '.tool_input.file_path // .tool_response.filePath' 2>/dev/null); if [ -n \"$f\" ] && [ \"${f##*.}\" = 'py' ]; then uv run ruff check \"$f\" 2>/dev/null || true; fi",
+            "statusMessage": "Linting Python code with Ruff...",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "f=$(jq -r '.tool_input.file_path // .tool_response.filePath' 2>/dev/null); if [ -n \"$f\" ] && [ \"${f##*.}\" = 'py' ]; then uv run basedpyright \"$f\" 2>/dev/null || true; fi",
+            "statusMessage": "Type-checking with basedpyright...",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "f=$(jq -r '.tool_input.file_path // .tool_response.filePath' 2>/dev/null); if [ -n \"$f\" ] && [ \"${f##*.}\" = 'py' ]; then uv run ty check \"$f\" 2>/dev/null || true; fi",
+            "statusMessage": "Type-checking with ty...",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "f=$(jq -r '.tool_input.file_path // .tool_response.filePath' 2>/dev/null); if [ -n \"$f\" ] && [ \"${f##*.}\" = 'py' ] && [[ \"$f\" == */src/autoscrapper/* ]] && ! [[ \"$f\" == *data* ]]; then base=$(basename \"${f%.py}\"); for tfile in \"tests/test_${base}.py\" \"tests/${base}_test.py\" \"${f%/*}/test_${base}.py\"; do if [ -f \"$tfile\" ]; then uv run pytest -xvs \"$tfile\" 2>&1 | head -100 || true; break; fi; done; fi",
+            "statusMessage": "Running related pytest suite...",
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-post-bash"
+          }
+        ]
+      },
+      {
+        "matcher": "Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-post-task"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | grep -E '(progress/data/|items_rules\\.default\\.json|uv\\.lock|pyproject\\.toml)' && echo '{\"continue\":false,\"stopReason\":\"This file is auto-generated or locked. Use scripts/update_snapshot_and_defaults.py for data files, or uv commands for uv.lock.\"}' || echo '{\"continue\":true}'",
+            "statusMessage": "Checking file protection rules..."
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-read"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-edit"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-pre-bash"
+          }
+        ]
+      },
+      {
+        "matcher": "Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-pre-grep"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "statusMessage": "Checking push target remote...",
+            "command": "cmd=$(jq -r '.tool_input.command // empty' 2>/dev/null); if echo \"$cmd\" | grep -qE '(^|\\s)(rtk )?git push'; then remote=$(echo \"$cmd\" | grep -oP '(?<=(git push )|(push ))[^\\s-]\\S*' | grep -v '^-' | head -1); remote=${remote:-origin}; url=$(git remote get-url \"$remote\" 2>/dev/null); if ! echo \"$url\" | grep -qi 'Ven0m0/arc-raiders-autoscrapper'; then echo \"{\\\"continue\\\":false,\\\"stopReason\\\":\\\"Blocked: '$remote' points to '$url', not Ven0m0/arc-raiders-autoscrapper. Check git remote -v.\\\"}\" ; else echo '{\"continue\":true}'; fi; else echo '{\"continue\":true}'; fi"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd=$(jq -r '.tool_input.command // empty' 2>/dev/null); if echo \"$cmd\" | grep -qE '^git commit'; then branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); if echo \"$branch\" | grep -qE '^(main|master)$'; then echo '{\"systemMessage\":\"\u26a0\ufe0f Warning: You are committing to main/master. Ensure this is intended.\"}'; else echo '{\"continue\":true}'; fi; else echo '{\"continue\":true}'; fi",
+            "statusMessage": "Checking git branch..."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-session-start"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "root=$(git rev-parse --show-toplevel 2>/dev/null); [ -z \"$root\" ] && exit 0; st=$(git -C \"$root\" status --short 2>/dev/null); [ -n \"$st\" ] && echo \"{\\\"systemMessage\\\":\\\"\u26a0\ufe0f Uncommitted changes in repo:\\n$st\\\"}\" || true"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "github@claude-plugins-official": true
+  },
+  "prefersReducedMotion": true,
+  "sshConfigs": [
+    {
+      "id": "github",
+      "name": "GitHub",
+      "sshHost": "git@github.com",
+      "sshIdentityFile": "~/.ssh/id_ed25519",
+      "startDirectory": "~"
+    }
+  ]
+}

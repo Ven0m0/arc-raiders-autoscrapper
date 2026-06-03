@@ -1,39 +1,49 @@
 from __future__ import annotations
 
-from typing import Optional
+from abc import ABC, abstractmethod
 
 from .live_ui import _ScanLiveUI
 from .rich_support import Console
 
 
-class ScanProgress:
+class ScanProgress(ABC):
+    @abstractmethod
     def start(self) -> None:
         raise NotImplementedError
 
+    @abstractmethod
     def stop(self) -> None:
         raise NotImplementedError
 
-    def set_total(self, total: Optional[int]) -> None:
+    @abstractmethod
+    def set_total(self, total: int | None) -> None:
         raise NotImplementedError
 
+    @abstractmethod
     def set_phase(self, phase: str) -> None:
         raise NotImplementedError
 
+    @abstractmethod
     def set_mode(self, mode_label: str) -> None:
         raise NotImplementedError
 
+    @abstractmethod
     def set_stash_label(self, stash_label: str) -> None:
         raise NotImplementedError
 
+    @abstractmethod
     def set_pages_label(self, pages_label: str) -> None:
         raise NotImplementedError
 
+    @abstractmethod
     def start_timer(self) -> None:
         raise NotImplementedError
 
+    @abstractmethod
     def add_event(self, message: str, *, style: str = "dim") -> None:
         raise NotImplementedError
 
+    @abstractmethod
     def update_item(self, current_label: str, item_label: str, outcome: str) -> None:
         raise NotImplementedError
 
@@ -45,7 +55,7 @@ class NullScanProgress(ScanProgress):
     def stop(self) -> None:
         return None
 
-    def set_total(self, total: Optional[int]) -> None:
+    def set_total(self, total: int | None) -> None:
         return None
 
     def set_phase(self, phase: str) -> None:
@@ -82,7 +92,7 @@ class RichScanProgress(ScanProgress):
     def stop(self) -> None:
         self._ui.stop()
 
-    def set_total(self, total: Optional[int]) -> None:
+    def set_total(self, total: int | None) -> None:
         self._ui.set_total(total)
 
     def set_phase(self, phase: str) -> None:

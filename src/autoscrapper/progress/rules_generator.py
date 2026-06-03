@@ -1,9 +1,11 @@
 from __future__ import annotations
 
-import json
+from typing import Any, cast
+
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List, Optional
+
+import orjson
 
 from .data_loader import load_game_data
 from .decision_engine import DecisionEngine, DecisionReason
@@ -31,39 +33,33 @@ def _iso_now() -> str:
 
 
 def generate_rules_from_active(
-    active_quests: List[str],
-    hideout_levels: Dict[str, int],
+    active_quests: list[str],
+    hideout_levels: dict[str, int],
     *,
-    completed_projects: Optional[List[str]] = None,
-    completed_quests_override: Optional[List[str]] = None,
+    completed_projects: list[str] | None = None,
+    completed_quests_override: list[str] | None = None,
     all_quests_completed: bool = False,
-    data_dir: Optional[Path] = None,
-) -> Dict[str, object]:
+    data_dir: Path | None = None,
+) -> dict[str, object]:
     game_data = load_game_data(data_dir)
-    normalized_levels = normalize_hideout_levels(
-        hideout_levels, game_data.hideout_modules
-    )
+    normalized_levels = normalize_hideout_levels(hideout_levels, game_data.hideout_modules)
 
     quests_by_trader = group_quests_by_trader(game_data.quests)
     quest_index = build_quest_index(quests_by_trader)
-    active_resolved: List[dict] = []
+    active_resolved: list[dict[str, Any]] = []
     if active_quests:
         active_resolved, missing = resolve_active_quests(active_quests, quest_index)
         if missing:
             raise ValueError(f"Active quests not found: {', '.join(missing)}")
 
     if all_quests_completed:
-        completed_quests = [
-            quest.get("id") for quest in game_data.quests if quest.get("id")
-        ]
+        completed_quests = [cast(str, q_id) for quest in game_data.quests if (q_id := quest.get("id")) is not None]
     elif completed_quests_override is not None:
         completed_quests = completed_quests_override
     else:
         if not active_resolved:
             raise ValueError("No active quests provided.")
-        completed_quests = infer_completed_from_active(
-            game_data.quests, game_data.quest_graph, active_quests
-        )
+        completed_quests = infer_completed_from_active(game_data.quests, game_data.quest_graph, active_quests)
 
     user_progress = {
         "hideoutLevels": normalized_levels,
@@ -72,9 +68,7 @@ def generate_rules_from_active(
         "lastUpdated": int(datetime.now(timezone.utc).timestamp() * 1000),
     }
 
-    engine = DecisionEngine(
-        game_data.items, game_data.hideout_modules, game_data.quests, game_data.projects
-    )
+    engine = DecisionEngine(game_data.items, game_data.hideout_modules, game_data.quests, game_data.projects)
     items_with_decisions = engine.get_items_with_decisions(user_progress)
 
     out_items = [
@@ -89,7 +83,7 @@ def generate_rules_from_active(
     ]
     out_items.sort(key=lambda entry: str(entry.get("id", "")))
 
-    metadata = {
+    metadata: dict[str, Any] = {
         "generatedAt": _iso_now(),
         "data": game_data.metadata,
         "itemCount": len(out_items),
@@ -109,6 +103,6 @@ def generate_rules_from_active(
     return {"metadata": metadata, "items": out_items}
 
 
-def write_rules(output: Dict[str, object], path: Path) -> None:
+def write_rules(output: dict[str, object], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(output, indent=2), encoding="utf-8")
+    path.write_bytes(orjson.dumps(output, option=orjson.OPT_INDENT_2))

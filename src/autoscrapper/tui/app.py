@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 import time
-from typing import Callable, Iterable, Optional
+from typing import cast
 
 from rich.text import Text
 from textual import events
@@ -23,6 +24,7 @@ from .progress import (
 )
 from .rules import RulesScreen
 from .scan import ScanScreen
+from .api_settings import ApiSettingsScreen
 from .settings import (
     ResetScanSettingsScreen,
     ScanControlsScreen,
@@ -33,7 +35,7 @@ from .settings import (
 from .status import build_status_panel, has_progress
 from ..warmup import start_background_warmup, warmup_status
 
-MenuAction = Callable[["MenuScreen"], None]
+MenuAction = Callable[["MenuScreen"], object]
 _SPLASH_MAX_SECONDS = 8.0
 _SPLASH_TICK_SECONDS = 0.08
 _SPLASH_BAR_WIDTH = 36
@@ -49,7 +51,7 @@ _SPLASH_TITLE = (
 )
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class MenuItem:
     key: str
     label: str
@@ -109,9 +111,7 @@ class StartupSplash(ModalScreen[None]):
                     line_chars.append(" ")
                     continue
                 if idx == glitch_col and self._tick % 2 == 0:
-                    line_chars.append(
-                        _SPLASH_GLITCH[(self._tick + idx) % len(_SPLASH_GLITCH)]
-                    )
+                    line_chars.append(_SPLASH_GLITCH[(self._tick + idx) % len(_SPLASH_GLITCH)])
                 else:
                     line_chars.append(ch)
                 reveal_budget -= 1
@@ -150,13 +150,9 @@ class StartupSplash(ModalScreen[None]):
         elif self._timed_out:
             phase = "Warmup taking longer than expected, continuing..."
 
-        self.query_one("#startup-title", Static).update(
-            self._animated_title(ready=ready)
-        )
+        self.query_one("#startup-title", Static).update(self._animated_title(ready=ready))
         self.query_one("#startup-status", Static).update(f"{spinner} {phase}")
-        self.query_one("#startup-bar", Static).update(
-            f"{self._progress_bar(percent)} {percent:3d}%"
-        )
+        self.query_one("#startup-bar", Static).update(f"{self._progress_bar(percent)} {percent:3d}%")
 
         self._tick += 1
         if ready:
@@ -183,7 +179,7 @@ class MenuScreen(AppScreen):
         items: Iterable[MenuItem],
         *,
         default_key: str,
-        recommended_key: Optional[str] = None,
+        recommended_key: str | None = None,
         show_status: bool = False,
     ) -> None:
         super().__init__()
@@ -199,7 +195,7 @@ class MenuScreen(AppScreen):
         with Vertical(id="menu-root"):
             if self.show_status:
                 yield StatusPanel(id="status")
-            yield Static(self.title, classes="menu-title")
+            yield Static(self.title or "", classes="menu-title")
             yield OptionList(id="menu")
         yield Footer()
 
@@ -237,9 +233,7 @@ class MenuScreen(AppScreen):
     def _highlight_default(self) -> None:
         menu = self.query_one(OptionList)
         highlighted_key = self.default_key
-        default_item = next(
-            (item for item in self.items if item.key == self.default_key), None
-        )
+        default_item = next((item for item in self.items if item.key == self.default_key), None)
         if default_item and default_item.disabled:
             fallback = next((item for item in self.items if not item.disabled), None)
             if fallback:
@@ -292,12 +286,16 @@ class HomeScreen(MenuScreen):
             MenuItem(
                 "1",
                 "Scan",
-                lambda screen: screen.app.push_screen(screen.app._scan_menu()),
+                lambda screen: cast("AutoScrapperApp", screen.app).push_screen(
+                    cast("AutoScrapperApp", screen.app)._scan_menu()
+                ),
             ),
             MenuItem(
                 "2",
                 "Generate Personalized Rule List (Quests / Workshop Level)",
-                lambda screen: screen.app.push_screen(screen.app._progress_menu()),
+                lambda screen: cast("AutoScrapperApp", screen.app).push_screen(
+                    cast("AutoScrapperApp", screen.app)._progress_menu()
+                ),
             ),
             MenuItem(
                 "3",
@@ -307,12 +305,16 @@ class HomeScreen(MenuScreen):
             MenuItem(
                 "4",
                 "Settings",
-                lambda screen: screen.app.push_screen(screen.app._settings_menu()),
+                lambda screen: cast("AutoScrapperApp", screen.app).push_screen(
+                    cast("AutoScrapperApp", screen.app)._settings_menu()
+                ),
             ),
             MenuItem(
                 "5",
                 "Maintenance",
-                lambda screen: screen.app.push_screen(screen.app._maintenance_menu()),
+                lambda screen: cast("AutoScrapperApp", screen.app).push_screen(
+                    cast("AutoScrapperApp", screen.app)._maintenance_menu()
+                ),
             ),
             MenuItem("q", "Quit", lambda screen: screen.app.exit()),
         ]
@@ -321,9 +323,9 @@ class HomeScreen(MenuScreen):
         self._refresh_items()
         super().on_mount()
 
-    def on_screen_resume(self, event: events.ScreenResume) -> None:
+    def on_screen_resume(self, _event: events.ScreenResume) -> None:
         self._refresh_items()
-        super().on_screen_resume(event)
+        super().on_screen_resume(_event)
 
     def action_back(self) -> None:
         # Home is the root screen; Back should be a no-op here.
@@ -335,6 +337,15 @@ class MaintenanceMenuScreen(MenuScreen):
         items = [
             MenuItem(
                 "1",
+<<<<<<< HEAD
+=======
+                "Update game data snapshot",
+                lambda screen: cast("AutoScrapperApp", screen.app)._open_snapshot_update(),
+                disabled=update_used,
+            ),
+            MenuItem(
+                "2",
+>>>>>>> origin/main
                 "Reset saved progress",
                 lambda screen: screen.app.push_screen(ResetProgressScreen()),
             ),
@@ -345,7 +356,18 @@ class MaintenanceMenuScreen(MenuScreen):
             ),
             MenuItem("0", "Back", lambda screen: screen.app.pop_screen()),
         ]
+<<<<<<< HEAD
         super().__init__("Maintenance", items, default_key="1")
+=======
+
+    def on_mount(self) -> None:
+        self._refresh_items()
+        super().on_mount()
+
+    def on_screen_resume(self, _event: events.ScreenResume) -> None:
+        self._refresh_items()
+        super().on_screen_resume(_event)
+>>>>>>> origin/main
 
 
 class AutoScrapperApp(App[None]):
@@ -375,7 +397,7 @@ class AutoScrapperApp(App[None]):
         while not isinstance(self.screen, HomeScreen):
             self.pop_screen()
 
-    def action_back(self) -> None:
+    async def action_back(self) -> None:
         if isinstance(self.screen, ScanScreen):
             return
         if isinstance(self.screen, HomeScreen):
@@ -383,22 +405,45 @@ class AutoScrapperApp(App[None]):
         self.pop_screen()
 
     def _scan_menu(self) -> MenuScreen:
+        from ..api import create_client_from_config
+
+        # Check if API is configured
+        client = create_client_from_config()
+        api_configured = client.is_configured()
+
         items = [
             MenuItem(
                 "1",
-                "Scan now",
+                "Scan now (OCR)",
                 lambda screen: screen.app.push_screen(ScanScreen(dry_run=False)),
             ),
             MenuItem(
                 "2",
-                "Dry run (no clicks)",
+                "Dry run (OCR, no clicks)",
                 lambda screen: screen.app.push_screen(ScanScreen(dry_run=True)),
+            ),
+            MenuItem(
+                "3",
+                "Scan via API (ArcTracker.io)",
+                lambda screen: screen.app.push_screen(ScanScreen(dry_run=False, use_api=True)),
+                disabled=not api_configured,
+            ),
+            MenuItem(
+                "4",
+                "Dry run via API",
+                lambda screen: screen.app.push_screen(ScanScreen(dry_run=True, use_api=True)),
+                disabled=not api_configured,
             ),
             MenuItem("0", "Back", lambda screen: screen.app.pop_screen()),
         ]
         return MenuScreen("Scan", items, default_key="1")
 
     def _progress_menu(self) -> MenuScreen:
+        from ..api import create_client_from_config
+
+        client = create_client_from_config()
+        api_configured = client.is_configured()
+
         items = [
             MenuItem(
                 "1",
@@ -420,9 +465,43 @@ class AutoScrapperApp(App[None]):
                 "Update rules from saved progress",
                 lambda screen: launch_generate_rules(screen.app),
             ),
+            MenuItem(
+                "5",
+                "Sync hideout from arctracker.io",
+                lambda screen: self._sync_hideout_from_api(screen),
+                disabled=not api_configured,
+            ),
+            MenuItem(
+                "6",
+                "Sync projects from arctracker.io",
+                lambda screen: self._sync_projects_from_api(screen),
+                disabled=not api_configured,
+            ),
             MenuItem("0", "Back", lambda screen: screen.app.pop_screen()),
         ]
         return MenuScreen("Progress", items, default_key="1")
+
+    def _sync_hideout_from_api(self, screen: MenuScreen) -> None:
+        """Sync hideout progress from arctracker.io API."""
+        from ..api.datasource import sync_hideout_to_progress
+        from .common import MessageScreen
+
+        try:
+            sync_hideout_to_progress()
+            screen.app.push_screen(MessageScreen("Hideout progress synced from arctracker.io"))
+        except Exception as exc:
+            screen.app.push_screen(MessageScreen(f"Failed to sync hideout: {exc}"))
+
+    def _sync_projects_from_api(self, screen: MenuScreen) -> None:
+        """Sync project progress from arctracker.io API."""
+        from ..api.datasource import sync_projects_to_progress
+        from .common import MessageScreen
+
+        try:
+            sync_projects_to_progress()
+            screen.app.push_screen(MessageScreen("Project progress synced from arctracker.io"))
+        except Exception as exc:
+            screen.app.push_screen(MessageScreen(f"Failed to sync projects: {exc}"))
 
     def _settings_menu(self) -> MenuScreen:
         items = [
@@ -448,6 +527,11 @@ class AutoScrapperApp(App[None]):
             ),
             MenuItem(
                 "5",
+                "API Settings (ArcTracker)",
+                lambda screen: screen.app.push_screen(ApiSettingsScreen()),
+            ),
+            MenuItem(
+                "6",
                 "Reset scan settings to defaults",
                 lambda screen: screen.app.push_screen(ResetScanSettingsScreen()),
             ),
@@ -462,6 +546,9 @@ class AutoScrapperApp(App[None]):
 def run_tui(*, start_screen: str = "home", dry_run: bool = False) -> int:
     if start_screen not in {"home", "scan"}:
         raise ValueError("start_screen must be 'home' or 'scan'")
+    from ..app_warnings import maybe_warn_default_rules
+
+    maybe_warn_default_rules()
     app = AutoScrapperApp(start_screen=start_screen, scan_dry_run=dry_run)
     app.run(mouse=True)
     return 0

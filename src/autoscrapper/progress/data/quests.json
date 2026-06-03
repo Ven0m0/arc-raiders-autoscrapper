@@ -909,7 +909,11 @@
     ],
     "trader": "Celeste",
     "xp": 0,
+<<<<<<< HEAD
     "sortOrder": 7482.376892077519
+=======
+    "sortOrder": 0
+>>>>>>> origin/main
   },
   {
     "id": "back-on-top",
@@ -1009,7 +1013,11 @@
     ],
     "trader": "Apollo",
     "xp": 0,
+<<<<<<< HEAD
     "sortOrder": 703.6805381957103
+=======
+    "sortOrder": 0
+>>>>>>> origin/main
   },
   {
     "id": "bees",
@@ -1515,7 +1523,11 @@
     ],
     "trader": "TianWen",
     "xp": 0,
+<<<<<<< HEAD
     "sortOrder": 1040.3079231388663
+=======
+    "sortOrder": 0
+>>>>>>> origin/main
   },
   {
     "id": "combat-recon",
@@ -2890,7 +2902,11 @@
     ],
     "trader": "Celeste",
     "xp": 0,
+<<<<<<< HEAD
     "sortOrder": 7009.632620481293
+=======
+    "sortOrder": 0
+>>>>>>> origin/main
   },
   {
     "id": "lost-in-transmission",
@@ -3849,7 +3865,11 @@
     ],
     "trader": "TianWen",
     "xp": 0,
+<<<<<<< HEAD
     "sortOrder": 7246.24880814753
+=======
+    "sortOrder": 0
+>>>>>>> origin/main
   },
   {
     "id": "safe-passage",
@@ -3989,7 +4009,11 @@
     ],
     "trader": "Apollo",
     "xp": 0,
+<<<<<<< HEAD
     "sortOrder": 422.07582107905125
+=======
+    "sortOrder": 0
+>>>>>>> origin/main
   },
   {
     "id": "snap-and-salvage",

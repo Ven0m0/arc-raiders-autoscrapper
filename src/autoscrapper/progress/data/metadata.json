@@ -1,8 +1,131 @@
 {
+<<<<<<< HEAD
   "lastUpdated": "2026-06-01T19:14:32.340613Z",
   "source": "https://metaforge.app/arc-raiders",
   "version": "autoscrapper-data-1",
   "itemCount": 581,
   "questCount": 100,
+=======
+  "lastUpdated": "2026-05-08T14:33:29.557671Z",
+  "source": "https://metaforge.app/arc-raiders/api",
+  "version": "autoscrapper-data-1",
+  "itemCount": 606,
+  "questCount": 100,
+  "dataSources": {
+    "items": {
+      "provider": "metaforge+raidtheory",
+      "primary": {
+        "documentation": "https://metaforge.app/arc-raiders/api",
+        "apiBase": "https://metaforge.app/api/arc-raiders",
+        "error": null
+      },
+      "fallback": {
+        "repository": "https://github.com/RaidTheory/arcraiders-data",
+        "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
+        "supplementalCount": 33,
+        "error": null
+      },
+      "arctrackerEnrichment": {
+        "documentation": "https://arctracker.io/developers/docs",
+        "apiBase": "https://arctracker.io",
+        "supplementalCount": 0,
+        "error": null
+      },
+      "fieldLevelMerge": {
+        "enabled": true,
+        "entriesEnriched": 367,
+        "sources": [
+          "raidtheory-fallback",
+          "arctracker"
+        ],
+        "fields": [
+          "type",
+          "rarity",
+          "value",
+          "weightKg",
+          "stackSize",
+          "craftBench",
+          "recipe",
+          "recyclesInto",
+          "wikiUses"
+        ]
+      },
+      "arclensEnrichment": {
+        "enabled": false,
+        "supplementalCount": 0,
+        "error": null
+      },
+      "wikiEnrichment": {
+        "url": "https://arcraiders.wiki/wiki/Loot",
+        "available": true,
+        "enrichedCount": 98,
+        "error": null,
+        "fields": [
+          "wikiUses"
+        ]
+      }
+    },
+    "quests": {
+      "provider": "metaforge",
+      "primary": {
+        "documentation": "https://metaforge.app/arc-raiders/api",
+        "apiBase": "https://metaforge.app/api/arc-raiders",
+        "error": null
+      },
+      "fallback": {
+        "repository": "https://github.com/RaidTheory/arcraiders-data",
+        "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
+        "supplementalCount": 0,
+        "error": null
+      },
+      "arctrackerEnrichment": {
+        "documentation": "https://arctracker.io/developers/docs",
+        "apiBase": "https://arctracker.io",
+        "supplementalCount": 0,
+        "error": null
+      },
+      "arclensEnrichment": {
+        "enabled": false,
+        "supplementalCount": 0,
+        "error": null
+      },
+      "fieldLevelMerge": {
+        "enabled": true,
+        "entriesEnriched": 0,
+        "sources": [
+          "raidtheory-fallback",
+          "arctracker"
+        ],
+        "fields": [
+          "objectives",
+          "requirements",
+          "trader",
+          "xp",
+          "sortOrder",
+          "rewardItemIds",
+          "rewards"
+        ]
+      }
+    },
+    "hideout": {
+      "arctracker": {
+        "documentation": "https://arctracker.io/developers/docs",
+        "apiBase": "https://arctracker.io",
+        "count": 0,
+        "error": null,
+        "file": "static/arctracker_hideout.json"
+      }
+    },
+    "projects": {
+      "arctracker": {
+        "documentation": "https://arctracker.io/developers/docs",
+        "apiBase": "https://arctracker.io",
+        "count": 0,
+        "error": null,
+        "file": "static/arctracker_projects.json"
+      }
+    }
+  },
+>>>>>>> origin/main
   "hasPriceOverrides": false
 }

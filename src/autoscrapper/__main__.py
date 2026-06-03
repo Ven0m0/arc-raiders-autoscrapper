@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import asyncio
 import sys
+
+import uvloop
 
 
 def _run_tui() -> int:
-    from .tui import run_tui
+    from .tui.app import run_tui
 
     return run_tui()
 
@@ -18,6 +21,9 @@ def _print_usage() -> None:
 
 
 def main(argv=None) -> int:
+    # Set uvloop policy before any asyncio operations (Textual uses asyncio)
+    asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+
     args = list(sys.argv[1:] if argv is None else argv)
     if not args:
         return _run_tui()

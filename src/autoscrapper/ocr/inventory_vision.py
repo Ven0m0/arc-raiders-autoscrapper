@@ -1,21 +1,26 @@
 from __future__ import annotations
 
+import hashlib
 import re
 import time
+from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Literal, Optional, Tuple
+from typing import Literal
 
 import cv2
 import numpy as np
+from rapidfuzz import fuzz, process
 
 from ..core.item_actions import clean_ocr_text
+from ..items import rules_store
 from .tesseract import image_to_data, image_to_string
 
 # Infobox visual characteristics
 INFOBOX_COLOR_BGR = np.array([236, 246, 253], dtype=np.uint8)  # #fdf6ec in BGR
 INFOBOX_TOLERANCE_MIN = 5
 INFOBOX_TOLERANCE_MAX = 30
+INFOBOX_TOLERANCE_MAX_WIDE = 50
 INFOBOX_TOLERANCE_PADDING = 2.0
 INFOBOX_CLOSE_KERNEL_MIN = 7
 INFOBOX_CLOSE_KERNEL_MAX = 15
@@ -23,8 +28,10 @@ INFOBOX_CLOSE_DIVISOR = 150.0
 INFOBOX_EDGE_FRACTION = 0.55
 INFOBOX_MIN_AREA = 1000
 
-# Item title placement inside the infobox (relative to infobox size)
-TITLE_HEIGHT_REL = 0.18
+# Item title placement inside the infobox (relative to infobox size).
+# OCR only needs the top band; 22% matches the title area selected by the
+# existing top-of-infobox line filter in _extract_title_from_data.
+TITLE_HEIGHT_REL = 0.22
 
 # Confirmation buttons (window-normalized rectangles)
 SELL_CONFIRM_RECT_NORM = (0.5047, 0.6941, 0.1791, 0.0531)
@@ -32,40 +39,121 @@ RECYCLE_CONFIRM_RECT_NORM = (0.5058, 0.6274, 0.1777, 0.0544)
 
 # Inventory count ROI (window-normalized rectangle)
 # Matches the always-visible "items in stash" label near the top-left.
-INVENTORY_COUNT_RECT_NORM = (0.0734, 0.1583, 0.0380, 0.0231)
+INVENTORY_COUNT_RECT_NORM = (0.0734, 0.1583, 0.0760, 0.0231)
 
-_OCR_DEBUG_DIR: Optional[Path] = None
+_OCR_DEBUG_DIR: Path | None = None
+_last_roi_hash: bytes | None = None
+_last_ocr_result: tuple[str, str] | None = None
+
+# Preprocessing cache: (roi_hash, params_hash) -> processed_image
+_preprocess_cache: dict[tuple[bytes, bytes], np.ndarray] = {}
+_PREPROCESS_CACHE_MAX_SIZE = 50
+DEFAULT_ITEM_NAME_MATCH_THRESHOLD = 75
+# Hand-picked initial value; no live corpus exists yet.
+# To calibrate: capture SKIP_UNLISTED samples from a live run, label them with
+# label_status=match|no_match in artifacts/ocr/skip_unlisted/samples.jsonl, then run:
+#   uv run python scripts/replay_ocr_failure_corpus.py
+# Update this constant only when the replay confirms every labelled sample
+# stays unmatched or resolves to the correct item name at the new threshold.
+# Record the corpus commit hash here when you change the value, e.g.:
+#   Calibrated at corpus commit <hash>: threshold <N> passes all <M> samples.
+# Guarded fallback only uses these broad stat labels; extend this list if new
+# infobox stat headings start outranking item titles in OCR output.
+_STAT_LINE_KEYWORDS = (
+    "accuracy",
+    "ammo type",
+    "arc armor",
+    "armor penetration",
+    "damage",
+    "durability",
+    "fire rate",
+    "firing mode",
+    "magazine size",
+    "range",
+    "rarity",
+    "reload",
+    "stack size",
+    "value",
+    "weight",
+)
+_STAT_LINE_PATTERN = re.compile(
+    r"\b(?:" + "|".join(re.escape(keyword) for keyword in _STAT_LINE_KEYWORDS) + r")\b",
+    re.IGNORECASE,
+)
+
+# Roman numeral OCR misread corrections (adapted from ArcCompanion-public).
+# Tesseract confuses lowercase-l with uppercase-I, producing "Il" for "II",
+# "Ill" for "III", and "lV" for "IV".  Also digit-1 variants like "1V" and "111".
+# Apply longest-match first.
+_ROMAN_NUMERAL_FIXES: tuple[tuple[re.Pattern[str], str], ...] = (
+    (re.compile(r"\bIll\b"), "III"),
+    (re.compile(r"\b111\b"), "III"),
+    (re.compile(r"\bIl\b"), "II"),
+    (re.compile(r"\b1V\b"), "IV"),
+    (re.compile(r"\blV\b"), "IV"),
+)
 
 
-@dataclass
+def reset_ocr_caches() -> None:
+    """Reset module-level OCR caches. Call at the start of each scan session.
+
+    Resets memoization caches (_last_roi_hash, _last_ocr_result, rules_store._ITEM_NAMES,
+    and _preprocess_cache).
+    Does NOT reset _OCR_DEBUG_DIR — that is session-scoped configuration set by
+    enable_ocr_debug(), not a cache, and must persist across scans within a
+    process lifetime so debug output is not silently dropped mid-session.
+    """
+    global _last_roi_hash, _last_ocr_result, _preprocess_cache
+    _last_roi_hash = None
+    _last_ocr_result = None
+    _preprocess_cache.clear()
+    rules_store.reset_item_names_cache()
+
+
+@dataclass(slots=True)
 class InfoboxOcrResult:
     item_name: str
     raw_item_text: str
-    sell_bbox: Optional[Tuple[int, int, int, int]]
-    recycle_bbox: Optional[Tuple[int, int, int, int]]
     processed: np.ndarray
     preprocess_time: float
     ocr_time: float
+    source: Literal["infobox", "context_menu"] = "infobox"
     ocr_failed: bool = False
 
 
-@dataclass
+@dataclass(frozen=True, slots=True)
+class ItemNameMatchResult:
+    """
+    Match metadata for OCR item-name resolution.
+
+    `cleaned_text` is the OCR output after normalization. `chosen_name` is the
+    caller-facing value (configured match or cleaned OCR fallback), while
+    `matched_name` is only set when a configured item-name match cleared the
+    fuzzy threshold.
+    """
+
+    cleaned_text: str
+    chosen_name: str
+    matched_name: str | None
+    threshold: int
+    score: int = 0
+
+
+@dataclass(slots=True)
 class InfoboxDetectionResult:
-    rect: Optional[Tuple[int, int, int, int]]
+    rect: tuple[int, int, int, int] | None
     tolerance: int
     min_dist: float
     close_kernel: int
     contour_count: int
     candidate_count: int
-    selected_area: Optional[int]
-    selected_score: Optional[float]
-    bbox_method: Optional[Literal["dominant_edge", "percentile_fallback"]]
-    failure_reason: Optional[str]
+    selected_area: int | None
+    selected_score: float | None
+    bbox_method: Literal["dominant_edge", "percentile_fallback"] | None
+    failure_reason: str | None
 
 
-def is_empty_cell(
-    bright_fraction: float, gray_var: float, edge_fraction: float
-) -> bool:
+def is_empty_cell(bright_fraction: float, gray_var: float, edge_fraction: float) -> bool:
     """
     Decide if a slot is empty based on precomputed metrics.
 
@@ -89,7 +177,7 @@ def slot_metrics(
     v_thresh: int = 120,
     canny1: int = 50,
     canny2: int = 150,
-) -> Tuple[float, float, float]:
+) -> tuple[float, float, float]:
     """
     Compute simple statistics for an inventory slot.
 
@@ -124,9 +212,7 @@ def is_slot_empty(
     """
     Decide if an inventory slot is visually empty using slot metrics.
     """
-    bright_fraction, gray_var, edge_fraction = slot_metrics(
-        slot_bgr, v_thresh, canny1, canny2
-    )
+    bright_fraction, gray_var, edge_fraction = slot_metrics(slot_bgr, v_thresh, canny1, canny2)
     return is_empty_cell(bright_fraction, gray_var, edge_fraction)
 
 
@@ -135,20 +221,20 @@ def _odd(value: int) -> int:
 
 
 def _compute_auto_tolerance(
-    bgr_image: np.ndarray, target_bgr: np.ndarray
-) -> Tuple[int, float]:
+    bgr_image: np.ndarray,
+    target_bgr: np.ndarray,
+    tolerance_max: int = INFOBOX_TOLERANCE_MAX,
+) -> tuple[int, float]:
     image_f = bgr_image.astype(np.float32)
     target_f = target_bgr.astype(np.float32)
     dist = np.linalg.norm(image_f - target_f, axis=2)
     min_dist = float(dist.min()) if dist.size else float("inf")
     tol = int(np.ceil(min_dist + INFOBOX_TOLERANCE_PADDING))
-    tol = int(np.clip(tol, INFOBOX_TOLERANCE_MIN, INFOBOX_TOLERANCE_MAX))
+    tol = int(np.clip(tol, INFOBOX_TOLERANCE_MIN, tolerance_max))
     return tol, min_dist
 
 
-def _dominant_edge_bbox(
-    contour: np.ndarray, image_width: int, image_height: int
-) -> Optional[Tuple[int, int, int, int]]:
+def _dominant_edge_bbox(contour: np.ndarray, image_width: int, image_height: int) -> tuple[int, int, int, int] | None:
     points = contour.reshape(-1, 2)
     if points.size == 0:
         return None
@@ -181,7 +267,7 @@ def _dominant_edge_bbox(
 
 def _percentile_bbox_from_filled_contour(
     contour: np.ndarray, image_width: int, image_height: int
-) -> Optional[Tuple[int, int, int, int]]:
+) -> tuple[int, int, int, int] | None:
     filled = np.zeros((image_height, image_width), dtype=np.uint8)
     cv2.drawContours(filled, [contour], contourIdx=-1, color=255, thickness=-1)
     ys, xs = np.where(filled > 0)
@@ -200,12 +286,12 @@ def _save_infobox_detection_debug_images(
     bgr_image: np.ndarray,
     mask: np.ndarray,
     mask_proc: np.ndarray,
-    contour: Optional[np.ndarray],
-    rect: Optional[Tuple[int, int, int, int]],
+    contour: np.ndarray | None,
+    rect: tuple[int, int, int, int] | None,
     tolerance: int,
     min_dist: float,
-    bbox_method: Optional[str],
-    failure_reason: Optional[str],
+    bbox_method: str | None,
+    failure_reason: str | None,
 ) -> None:
     if _OCR_DEBUG_DIR is None:
         return
@@ -292,7 +378,10 @@ def _save_infobox_detection_debug_images(
     _save_debug_image("infobox_detect_overlay", overlay)
 
 
-def find_infobox_with_debug(bgr_image: np.ndarray) -> InfoboxDetectionResult:
+def find_infobox_with_debug(
+    bgr_image: np.ndarray,
+    tolerance_max: int = INFOBOX_TOLERANCE_MAX,
+) -> InfoboxDetectionResult:
     """
     Detect the infobox/context-menu panel using adaptive color tolerance and
     contour refinement. Returns the detected rect plus diagnostics.
@@ -322,12 +411,12 @@ def find_infobox_with_debug(bgr_image: np.ndarray) -> InfoboxDetectionResult:
         )
     )
 
-    tolerance, min_dist = _compute_auto_tolerance(bgr_image, INFOBOX_COLOR_BGR)
+    tolerance, min_dist = _compute_auto_tolerance(bgr_image, INFOBOX_COLOR_BGR, tolerance_max)
     color = INFOBOX_COLOR_BGR.astype(np.int16)
     lower = np.clip(color - tolerance, 0, 255).astype(np.uint8)
     upper = np.clip(color + tolerance, 0, 255).astype(np.uint8)
 
-    mask = cv2.inRange(bgr_image, lower, upper)
+    mask = cv2.inRange(bgr_image, lower, upper)  # type: ignore[arg-type]
     close_kernel = np.ones((close_k, close_k), dtype=np.uint8)
     open_kernel = np.ones((3, 3), dtype=np.uint8)
 
@@ -361,9 +450,9 @@ def find_infobox_with_debug(bgr_image: np.ndarray) -> InfoboxDetectionResult:
             failure_reason="no_contours",
         )
 
-    candidates: List[Tuple[float, np.ndarray, int]] = []
+    candidates: list[tuple[float, np.ndarray, int]] = []
     for contour in contours:
-        x, y, bw, bh = cv2.boundingRect(contour)
+        _, _, bw, bh = cv2.boundingRect(contour)
         area = int(bw * bh)
         if area < INFOBOX_MIN_AREA:
             continue
@@ -396,22 +485,18 @@ def find_infobox_with_debug(bgr_image: np.ndarray) -> InfoboxDetectionResult:
             failure_reason="no_scored_contours",
         )
 
-    selected_score, best_contour, selected_area = max(
-        candidates, key=lambda item: item[0]
-    )
+    selected_score, best_contour, selected_area = max(candidates, key=lambda item: item[0])
 
     dominant_bbox = _dominant_edge_bbox(best_contour, img_w, img_h)
-    bbox_method: Optional[Literal["dominant_edge", "percentile_fallback"]]
-    failure_reason: Optional[str]
+    bbox_method: Literal["dominant_edge", "percentile_fallback"] | None
+    failure_reason: str | None
 
     if dominant_bbox is not None:
         rect = dominant_bbox
         bbox_method = "dominant_edge"
         failure_reason = None
     else:
-        percentile_bbox = _percentile_bbox_from_filled_contour(
-            best_contour, img_w, img_h
-        )
+        percentile_bbox = _percentile_bbox_from_filled_contour(best_contour, img_w, img_h)
         if percentile_bbox is None:
             _save_infobox_detection_debug_images(
                 bgr_image,
@@ -466,15 +551,231 @@ def find_infobox_with_debug(bgr_image: np.ndarray) -> InfoboxDetectionResult:
     )
 
 
-def find_infobox(bgr_image: np.ndarray) -> Optional[Tuple[int, int, int, int]]:
+def find_infobox(bgr_image: np.ndarray) -> tuple[int, int, int, int] | None:
     """
     Backward-compatible wrapper returning only the detected infobox rectangle.
     Returns (x, y, w, h) relative to the provided image, or None if not found.
+    Retries once with a wider color tolerance to handle non-standard monitor
+    gamma or HDR before returning None.
     """
-    return find_infobox_with_debug(bgr_image).rect
+    result = find_infobox_with_debug(bgr_image)
+    if result.rect is not None:
+        return result.rect
+    wide_result = find_infobox_with_debug(bgr_image, tolerance_max=INFOBOX_TOLERANCE_MAX_WIDE)
+    return wide_result.rect
 
 
-def title_roi(infobox_rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
+# Positional fallback crop for the context-menu UI.
+# Formula: right_edge = cell_center_x + x_off
+#          left_edge  = cell_center_x + x_off - crop_w
+# The item title (e.g. "MATRIARCH REACTOR", "BASTION CROSSBOW") extends
+# ~200-250 px to the RIGHT of the clicked cell centre, so the right edge of
+# the crop must reach at least +250 px past cell_center_x.
+# The item name header occupies the topmost row of the menu.  It sits roughly
+# 10 px above cell centre (one ~40 px row above the first action button, which
+# appears at crop-y≈10 when Y-offset=30).  Using -20 gives a 10 px safety
+# margin above the item name row.
+# Normalized context-menu crop offsets (calibrated at 1920x1080).
+# X_OFFSET is the distance from cell_center_x to the RIGHT edge of the crop.
+# WIDTH is total crop width; left edge = cell_center_x + X_OFFSET - WIDTH.
+_CONTEXT_MENU_X_OFFSET_NORM = 250 / 1920  # was 35/1920 — right edge 250 px past centre
+_CONTEXT_MENU_Y_OFFSET_NORM = -20 / 1080  # negative = crop starts above cell centre
+_CONTEXT_MENU_WIDTH_NORM = 450 / 1920  # narrowed from 635/1920 — removes background grid on right
+_CONTEXT_MENU_HEIGHT_NORM = 450 / 1080
+# Gray threshold used by isolate_menu_panel() to detect the white/cream context
+# menu background.  The panel body is ~220-250; background is 20-40.  190 gives
+# a comfortable margin for anti-aliased edges and variable monitor brightness.
+_MENU_PANEL_GRAY_THRESH = 190
+
+_DARK_PANEL_GRAY_THRESH = 80  # max gray level considered "dark" for title band detection
+# Fraction of the context-menu crop occupied by the title band.
+# At 1080p the crop is ~450px tall; the dark title band is ~40px raw
+# plus padding above.  0.15 * 450 = 67px gives safe margin without
+# capturing the first menu option text.  SINGLE_LINE PSM in
+# ocr_title_strip mitigates any partial line contamination.
+_CTX_MENU_TITLE_HEIGHT_REL = 0.15
+
+
+def find_context_menu_crop(
+    bgr_image: np.ndarray,
+    cell_center_x: int,
+    cell_center_y: int,
+) -> tuple[int, int, int, int] | None:
+    """
+    Return a positional crop rect near the right-click context menu.
+
+    Used as a fallback when color-based ``find_infobox`` fails because the
+    game changed its item panel from a light-cream background to a dark
+    context menu.  The caller must pass the window-relative cell center so
+    the crop is anchored to the correct screen location.
+
+    Returns ``None`` if the computed crop region does not contain the
+    characteristic bright (cream/white) background of the context menu
+    panel — for example when the context menu has not opened yet, has
+    already closed, or the positional offset lands on a different UI
+    element such as the dark LOADOUT equipment panel.
+    """
+    img_h, img_w = bgr_image.shape[:2]
+    x_off = int(round(_CONTEXT_MENU_X_OFFSET_NORM * img_w))
+    y_off = int(round(_CONTEXT_MENU_Y_OFFSET_NORM * img_h))
+    crop_w = int(round(_CONTEXT_MENU_WIDTH_NORM * img_w))
+    crop_h = int(round(_CONTEXT_MENU_HEIGHT_NORM * img_h))
+    # Anchor the crop so its right edge sits x_off pixels past cell centre,
+    # with the bulk of the crop extending to the left of the cell centre.
+    # right_edge = cell_center_x + x_off; left_edge = right_edge - crop_w
+    x = max(0, cell_center_x - crop_w + x_off)
+    y = max(0, cell_center_y + y_off)
+    # Shift left/up if the crop would overflow the right or bottom edge so the full
+    # width and height are preserved (sell/recycle labels are in the lower portion of
+    # the context menu and would be silently truncated without the bottom guard).
+    if x + crop_w > img_w:
+        x = max(0, img_w - crop_w)
+    if y + crop_h > img_h:
+        y = max(0, img_h - crop_h)
+    x2 = min(img_w, x + crop_w)
+    y2 = min(img_h, y + crop_h)
+    w, h = x2 - x, y2 - y
+    min_dim = int(round(100 * min(img_w, img_h) / img_h))
+    if w < min_dim or h < min_dim:
+        return None
+    # Brightness guard: verify the left half of the crop contains UI
+    # content rather than empty stash background.  The context menu panel
+    # has a white/cream background (~gray 220-250) with dark text; combined
+    # with the dark sidebar icons on the left the left-half mean sits well
+    # above the empty stash background (~gray < 30).
+    crop_left_half = bgr_image[y:y2, x : x + max(1, w // 2)]
+    if crop_left_half.size > 0:
+        gray_half = cv2.cvtColor(crop_left_half, cv2.COLOR_BGR2GRAY)
+        mean_brightness = float(np.mean(gray_half))
+        if mean_brightness < 40.0:
+            return None
+        # Reject crops that landed entirely on the inventory grid rather than
+        # the context-menu area.  The left half of a valid context-menu crop
+        # always includes the dark sidebar icon column (gray < 40); inventory
+        # grid cells are filled with mid-tone artwork and produce far fewer
+        # true-black pixels.  Note: the dark fraction comes from the SIDEBAR,
+        # not from the menu panel itself (which is bright white/cream).
+        dark_fraction = float(np.sum(gray_half < 40) / gray_half.size)
+        if dark_fraction < 0.20:
+            return None
+    return x, y, w, h
+
+
+def isolate_menu_panel(crop_bgr: np.ndarray) -> tuple[int, int, int, int] | None:
+    """
+    Detect and return the bounding rect of the white/cream context-menu panel
+    within a wider crop that may also contain sidebar icons and inventory grid.
+
+    The context menu panel has a white/cream background (~gray 220-250) with
+    dark text.  The surrounding sidebar icons and inventory grid are dark
+    (~gray 20-60).  We find the largest bright rectangle that spans most of
+    the crop height.
+
+    Returns ``(x, y, w, h)`` relative to ``crop_bgr``, or ``None`` if no
+    qualifying panel is found (caller falls back to unmasked processing).
+    """
+    if crop_bgr.size == 0:
+        return None
+    gray = cv2.cvtColor(crop_bgr, cv2.COLOR_BGR2GRAY)
+    # Threshold: pixels brighter than _MENU_PANEL_GRAY_THRESH belong to the
+    # panel background (white/cream).  THRESH_BINARY keeps bright pixels as
+    # 255 so the panel body becomes a solid white blob in the mask.
+    _, bright_mask = cv2.threshold(gray, _MENU_PANEL_GRAY_THRESH, 255, cv2.THRESH_BINARY)
+    # Morphological close bridges the dark text rows inside the panel so the
+    # whole panel merges into one contour.  25x25 easily spans text-row gaps
+    # (~2 px) without reaching across the dark sidebar gap to neighbouring
+    # bright regions.
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (25, 25))
+    closed = cv2.morphologyEx(bright_mask, cv2.MORPH_CLOSE, kernel)
+    contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    if not contours:
+        return None
+    crop_h, crop_w = crop_bgr.shape[:2]
+    crop_area = max(1, crop_h * crop_w)
+    best: tuple[int, int, int, int] | None = None
+    best_area = 0
+    for cnt in contours:
+        bx, by, bw, bh = cv2.boundingRect(cnt)
+        area = bw * bh
+        # Must cover at least 15% of the crop area (rejects small bright spots).
+        if area < 0.15 * crop_area:
+            continue
+        # Must not be a thin horizontal/vertical strip (reject bright UI strips).
+        aspect = bw / max(1, bh)
+        if not (0.3 <= aspect <= 3.0):
+            continue
+        # Must span at least 50% of the crop height (panel is tall).
+        if bh < 0.50 * crop_h:
+            continue
+        if area > best_area:
+            best_area = area
+            best = (bx, by, bw, bh)
+    return best
+
+
+def isolate_dark_title_panel(
+    crop_bgr: np.ndarray,
+    *,
+    x_offset: int | None = None,
+) -> tuple[int, int, int, int] | None:
+    """
+    Detect and return the bounding rect of the dark context-menu title band
+    within a wider context-menu crop.
+
+    The title band has a very dark background (~gray 0-80) with light text,
+    unlike the cream panel body detected by ``isolate_menu_panel``.  We search
+    only the top ~15 % of the crop so the cream body and left sidebar do not
+    interfere.
+
+    ``x_offset`` skips the left N pixels (e.g. the dark sidebar).  When
+    ``None`` it defaults to ``crop_w // 4`` so the sidebar icon column is
+    excluded from the search.
+
+    Returns ``(x, y, w, h)`` relative to ``crop_bgr``, or ``None`` if no
+    qualifying dark region is found (caller falls back to the raw slice).
+    """
+    if crop_bgr.size == 0:
+        return None
+    crop_h, crop_w = crop_bgr.shape[:2]
+    search_h = max(1, int(crop_h * 0.15))
+    x_off = x_offset if x_offset is not None else crop_w // 4
+    x_off = min(x_off, crop_w - 1)
+    # search is a view of crop_bgr starting at y=0, so contour coords are
+    # already in crop_bgr space — no offset adjustment is needed.
+    search = crop_bgr[:search_h, x_off:]
+    if search.size == 0:
+        return None
+    gray = cv2.cvtColor(search, cv2.COLOR_BGR2GRAY)
+    _, dark_mask = cv2.threshold(gray, _DARK_PANEL_GRAY_THRESH, 255, cv2.THRESH_BINARY_INV)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (15, 15))
+    closed = cv2.morphologyEx(dark_mask, cv2.MORPH_CLOSE, kernel)
+    contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    if not contours:
+        return None
+    search_w = crop_w - x_off
+    search_area = max(1, search_h * search_w)
+    best: tuple[int, int, int, int] | None = None
+    best_area = 0
+    for cnt in contours:
+        bx, by, bw, bh = cv2.boundingRect(cnt)
+        area = bw * bh
+        if area < 0.02 * search_area:
+            continue
+        aspect = bw / max(1, bh)
+        if aspect < 2.0:
+            continue
+        if bw < 0.20 * search_w:
+            continue
+        if by > 0.05 * search_h:
+            continue
+        # Translate x back to crop_bgr coordinates
+        if area > best_area:
+            best_area = area
+            best = (bx + x_off, by, bw, bh)
+    return best
+
+
+def title_roi(infobox_rect: tuple[int, int, int, int]) -> tuple[int, int, int, int]:
     """
     Compute the ROI for the title text within the infobox.
     """
@@ -483,7 +784,84 @@ def title_roi(infobox_rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, i
     return x, y, w, max(1, title_h)
 
 
-def rect_center(rect: Tuple[int, int, int, int]) -> Tuple[int, int]:
+_TITLE_PAD = 4  # px — keeps text away from edges to improve OCR accuracy.
+
+# Whitelist for item names: alpha, digits, space, hyphen, apostrophe, period (T026)
+ITEM_NAME_WHITELIST = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 '-."
+
+
+def _crop_title_strip(infobox_bgr: np.ndarray) -> np.ndarray:
+    if infobox_bgr.size == 0:
+        return infobox_bgr
+    title_h = max(1, int(round(infobox_bgr.shape[0] * TITLE_HEIGHT_REL)))
+    strip = infobox_bgr[:title_h, :]
+
+    # Pad all sides with median background color to prevent edge clipping (T028)
+    if strip.size > 0:
+        median_val = np.median(strip, axis=(0, 1))
+        return cv2.copyMakeBorder(
+            strip,
+            _TITLE_PAD,
+            _TITLE_PAD,
+            _TITLE_PAD,
+            _TITLE_PAD,
+            cv2.BORDER_CONSTANT,
+            value=median_val.tolist(),
+        )
+    return strip
+
+
+def match_item_name_result(raw: str, threshold: int | None = None) -> ItemNameMatchResult:
+    cleaned = clean_ocr_text(raw)
+    for _pattern, _replacement in _ROMAN_NUMERAL_FIXES:
+        cleaned = _pattern.sub(_replacement, cleaned)
+    resolved_threshold = DEFAULT_ITEM_NAME_MATCH_THRESHOLD if threshold is None else threshold
+    if not 0 <= resolved_threshold <= 100:
+        raise ValueError("threshold must be between 0 and 100")
+    if not cleaned:
+        return ItemNameMatchResult(
+            cleaned_text="",
+            chosen_name="",
+            matched_name=None,
+            threshold=resolved_threshold,
+        )
+
+    match = process.extractOne(
+        cleaned,
+        rules_store.get_item_names(),
+        scorer=fuzz.WRatio,
+        processor=str.lower,
+        score_cutoff=resolved_threshold,
+    )
+    if match is None:
+        return ItemNameMatchResult(
+            cleaned_text=cleaned,
+            chosen_name=cleaned,
+            matched_name=None,
+            threshold=resolved_threshold,
+            score=0,
+        )
+
+    matched_name, score, _ = match
+    return ItemNameMatchResult(
+        cleaned_text=cleaned,
+        chosen_name=str(matched_name),
+        matched_name=str(matched_name),
+        threshold=resolved_threshold,
+        score=int(score),
+    )
+
+
+def match_item_name(raw: str, threshold: int | None = None) -> str:
+    return match_item_name_result(raw, threshold).chosen_name
+
+
+def _hash_roi(image: np.ndarray) -> bytes:
+    contiguous = np.ascontiguousarray(image)
+    return hashlib.blake2b(contiguous.tobytes(), digest_size=16).digest()
+
+
+def rect_center(rect: tuple[int, int, int, int]) -> tuple[int, int]:
     """
     Center (cx, cy) of a rectangle.
     """
@@ -492,10 +870,10 @@ def rect_center(rect: Tuple[int, int, int, int]) -> Tuple[int, int]:
 
 
 def normalized_rect_to_window(
-    norm_rect: Tuple[float, float, float, float],
+    norm_rect: tuple[float, float, float, float],
     window_width: int,
     window_height: int,
-) -> Tuple[int, int, int, int]:
+) -> tuple[int, int, int, int]:
     """
     Scale a normalized rectangle (x,y,w,h in [0,1]) to window-relative pixels.
     """
@@ -508,10 +886,10 @@ def normalized_rect_to_window(
 
 
 def window_relative_to_screen(
-    rect: Tuple[int, int, int, int],
+    rect: tuple[int, int, int, int],
     window_left: int,
     window_top: int,
-) -> Tuple[int, int, int, int]:
+) -> tuple[int, int, int, int]:
     """
     Convert a window-relative rectangle to absolute screen coordinates.
     """
@@ -519,15 +897,11 @@ def window_relative_to_screen(
     return window_left + x, window_top + y, w, h
 
 
-def inventory_count_rect(
-    window_width: int, window_height: int
-) -> Tuple[int, int, int, int]:
+def inventory_count_rect(window_width: int, window_height: int) -> tuple[int, int, int, int]:
     """
     Window-relative rectangle for the always-visible inventory count label.
     """
-    return normalized_rect_to_window(
-        INVENTORY_COUNT_RECT_NORM, window_width, window_height
-    )
+    return normalized_rect_to_window(INVENTORY_COUNT_RECT_NORM, window_width, window_height)
 
 
 def sell_confirm_button_rect(
@@ -535,13 +909,11 @@ def sell_confirm_button_rect(
     window_top: int,
     window_width: int,
     window_height: int,
-) -> Tuple[int, int, int, int]:
+) -> tuple[int, int, int, int]:
     """
     Absolute screen rectangle for the Sell confirmation button.
     """
-    rel_rect = normalized_rect_to_window(
-        SELL_CONFIRM_RECT_NORM, window_width, window_height
-    )
+    rel_rect = normalized_rect_to_window(SELL_CONFIRM_RECT_NORM, window_width, window_height)
     return window_relative_to_screen(rel_rect, window_left, window_top)
 
 
@@ -550,13 +922,11 @@ def recycle_confirm_button_rect(
     window_top: int,
     window_width: int,
     window_height: int,
-) -> Tuple[int, int, int, int]:
+) -> tuple[int, int, int, int]:
     """
     Absolute screen rectangle for the Recycle confirmation button.
     """
-    rel_rect = normalized_rect_to_window(
-        RECYCLE_CONFIRM_RECT_NORM, window_width, window_height
-    )
+    rel_rect = normalized_rect_to_window(RECYCLE_CONFIRM_RECT_NORM, window_width, window_height)
     return window_relative_to_screen(rel_rect, window_left, window_top)
 
 
@@ -565,13 +935,11 @@ def sell_confirm_button_center(
     window_top: int,
     window_width: int,
     window_height: int,
-) -> Tuple[int, int]:
+) -> tuple[int, int]:
     """
     Center of the Sell confirmation button (absolute screen coords).
     """
-    return rect_center(
-        sell_confirm_button_rect(window_left, window_top, window_width, window_height)
-    )
+    return rect_center(sell_confirm_button_rect(window_left, window_top, window_width, window_height))
 
 
 def recycle_confirm_button_center(
@@ -579,20 +947,112 @@ def recycle_confirm_button_center(
     window_top: int,
     window_width: int,
     window_height: int,
-) -> Tuple[int, int]:
+) -> tuple[int, int]:
     """
     Center of the Recycle confirmation button (absolute screen coords).
     """
-    return rect_center(
-        recycle_confirm_button_rect(
-            window_left, window_top, window_width, window_height
-        )
-    )
+    return rect_center(recycle_confirm_button_rect(window_left, window_top, window_width, window_height))
 
 
-def preprocess_for_ocr(roi_bgr: np.ndarray) -> np.ndarray:
+def preprocess_for_ocr(
+    roi_bgr: np.ndarray,
+    *,
+    restrict_otsu_to_left: bool = False,
+    upscale: bool = True,
+    apply_clahe: bool = True,
+    robust_polarity: bool = True,
+    close_gaps: bool = True,
+) -> np.ndarray:
+    """Preprocess image for OCR with optional result caching.
+
+    Caches results based on ROI content hash and preprocessing parameters
+    to avoid redundant processing during retry paths.
+    """
+    global _preprocess_cache
+
+    if roi_bgr.size == 0:
+        raise ValueError(f"preprocess_for_ocr: empty input array (shape={roi_bgr.shape})")
+
+    # Compute cache key from ROI hash and parameters
+    roi_hash = _hash_roi(roi_bgr)
+    params_bytes = f"{restrict_otsu_to_left}:{upscale}:{apply_clahe}:{robust_polarity}:{close_gaps}".encode()
+    cache_key = (roi_hash, params_bytes)
+
+    # Check cache
+    cached = _preprocess_cache.get(cache_key)
+    if cached is not None:
+        return cached.copy()  # Return a copy to prevent mutation
+
+    # Limit cache size to prevent unbounded growth
+    if len(_preprocess_cache) >= _PREPROCESS_CACHE_MAX_SIZE:
+        # Clear oldest half of cache (simple LRU approximation)
+        keys_to_remove = list(_preprocess_cache.keys())[: _PREPROCESS_CACHE_MAX_SIZE // 2]
+        for key in keys_to_remove:
+            del _preprocess_cache[key]
+
     gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
-    _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    if apply_clahe:
+        # Normalize local luminance so Otsu stays stable on rarity-colored
+        # backgrounds (yellow, magenta, purple glow).
+        h_g, w_g = gray.shape[:2]
+        tile_cols = max(2, min(8, w_g // 16))  # tiles at least 16 px wide
+        tile_rows = max(2, min(8, h_g // 16))  # tiles at least 16 px tall
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(tile_cols, tile_rows))
+        gray = clahe.apply(gray)
+    if upscale:
+        gray = cv2.resize(gray, (0, 0), fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
+    if restrict_otsu_to_left:
+        # Compute the Otsu threshold from the left half only (context-menu panel
+        # side) so that bright inventory-grid icons on the right do not bias the
+        # global threshold used for the menu text.
+        w_g = gray.shape[1]
+        if w_g // 2 > 0:
+            thresh, _ = cv2.threshold(gray[:, : w_g // 2], 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        else:
+            thresh, _ = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        _, binary = cv2.threshold(gray, thresh, 255, cv2.THRESH_BINARY)
+    else:
+        _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    # Tesseract expects dark text on light background.
+    if robust_polarity:
+        # Count glyph-sized connected components in both polarities and keep
+        # whichever orientation produces more — more reliable than the mean
+        # heuristic when the dark panel dominates the left-half sample.
+        h, w = binary.shape[:2]
+        sample = binary if min(h, w) < 8 else binary[h // 6 : 5 * h // 6, :]
+
+        def _glyph_cc_count(img: np.ndarray) -> int:
+            _, _, stats, _ = cv2.connectedComponentsWithStats(img, connectivity=8)
+            return int(
+                np.sum(
+                    (stats[1:, cv2.CC_STAT_HEIGHT] >= 4)
+                    & (stats[1:, cv2.CC_STAT_HEIGHT] <= max(8, h))
+                    & (stats[1:, cv2.CC_STAT_AREA] >= 8)
+                )
+            )
+
+        if _glyph_cc_count(cv2.bitwise_not(sample)) > _glyph_cc_count(sample):
+            binary = cv2.bitwise_not(binary)
+    else:
+        # Legacy mean-based polarity check — sample only the left half so that
+        # bright inventory-grid icons on the right do not flip the decision.
+        h, w = binary.shape[:2]
+        centre = binary[h // 4 : 3 * h // 4, 0 : w // 2]
+        if centre.size == 0:
+            centre = binary[:, 0 : w // 2]
+        if centre.size == 0:
+            centre = binary
+        if float(np.mean(centre)) < 128.0:
+            binary = cv2.bitwise_not(binary)
+    if close_gaps and upscale:
+        # Reconnect thin-stroke fragments from over-thresholding (1-2 px strokes
+        # on rarity-gradient backgrounds). Kernel acts on the 2x-upscaled image
+        # so 1x2 px ≈ 0.5 px in source coords.
+        kernel = np.ones((1, 2), np.uint8)
+        binary = cv2.morphologyEx(binary, cv2.MORPH_CLOSE, kernel)
+
+    # Store in cache (store a copy to prevent external mutation)
+    _preprocess_cache[cache_key] = binary.copy()
     return binary
 
 
@@ -605,7 +1065,7 @@ def enable_ocr_debug(debug_dir: Path) -> None:
         debug_dir.mkdir(parents=True, exist_ok=True)
         _OCR_DEBUG_DIR = debug_dir
         print(f"[vision_ocr] OCR debug output enabled at {_OCR_DEBUG_DIR}", flush=True)
-    except Exception as exc:  # pragma: no cover - filesystem dependent
+    except Exception as exc:
         print(f"[vision_ocr] failed to enable OCR debug dir: {exc}", flush=True)
         _OCR_DEBUG_DIR = None
 
@@ -613,23 +1073,43 @@ def enable_ocr_debug(debug_dir: Path) -> None:
 def _save_debug_image(name: str, image: np.ndarray) -> None:
     """
     Write a debug image if a debug directory has been configured.
+
+    Images are written in BGR channel order (OpenCV native) via cv2.imwrite.
+    All input arrays must be BGR — do not convert to RGB before passing here.
     """
     if _OCR_DEBUG_DIR is None:
         return
     timestamp = time.strftime("%Y%m%d_%H%M%S")
-    filename = f"{timestamp}_{time.time_ns() % 1_000_000_000:09d}_{name}.png"
+    filename = f"{timestamp}_{time.time_ns() % 1_000_000_000:09d}_{name}.webp"
     path = _OCR_DEBUG_DIR / filename
     try:
-        cv2.imwrite(str(path), image)
+        cv2.imwrite(str(path), image, [cv2.IMWRITE_WEBP_QUALITY, 101])
     except Exception as exc:  # pragma: no cover - filesystem dependent
         print(f"[vision_ocr] failed to save debug image {path}: {exc}", flush=True)
 
 
+def _save_debug_json(name: str, data: object) -> None:
+    """
+    Write a debug JSON file if a debug directory has been configured.
+    """
+    if _OCR_DEBUG_DIR is None:
+        return
+    import json  # local import — only needed when debug is active
+
+    timestamp = time.strftime("%Y%m%d_%H%M%S")
+    filename = f"{timestamp}_{time.time_ns() % 1_000_000_000:09d}_{name}.json"
+    path = _OCR_DEBUG_DIR / filename
+    try:
+        path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    except Exception as exc:  # pragma: no cover - filesystem dependent
+        print(f"[vision_ocr] failed to save debug json {path}: {exc}", flush=True)
+
+
 def _extract_title_from_data(
-    ocr_data: Dict[str, List],
+    ocr_data: dict[str, list],
     image_height: int,
     top_fraction: float = 0.22,
-) -> Tuple[str, str]:
+) -> tuple[str, str]:
     """
     Choose the best-confidence line near the top of the infobox as the title.
     """
@@ -638,7 +1118,7 @@ def _extract_title_from_data(
         return "", ""
 
     cutoff = max(1.0, float(image_height) * top_fraction)
-    groups: Dict[Tuple[int, int, int, int], List[int]] = {}
+    groups: dict[tuple[int, int, int, int], list[int]] = defaultdict(list)
     n = len(texts)
     for i in range(n):
         raw_text = texts[i] or ""
@@ -658,12 +1138,12 @@ def _extract_title_from_data(
             int(ocr_data["par_num"][i]),
             int(ocr_data["line_num"][i]),
         )
-        groups.setdefault(key, []).append(i)
+        groups[key].append(i)
 
     if not groups:
         return "", ""
 
-    def _group_score(indices: List[int]) -> float:
+    def _group_score(indices: list[int]) -> float:
         confs = []
         for idx in indices:
             try:
@@ -672,45 +1152,108 @@ def _extract_title_from_data(
                 continue
         return sum(confs) / len(confs) if confs else -1.0
 
-    best_key = max(groups.keys(), key=lambda k: _group_score(groups[k]))
-    ordered_indices = sorted(groups[best_key])
-    cleaned_parts = [
-        clean_ocr_text(texts[i] or "") for i in ordered_indices if texts[i]
-    ]
-    raw_parts = [(texts[i] or "").strip() for i in ordered_indices if texts[i]]
-    cleaned = " ".join(p for p in cleaned_parts if p).strip()
-    raw = " ".join(p for p in raw_parts if p).strip()
-    return cleaned, raw
+    scored = {k: _group_score(groups[k]) for k in groups}
+    best_score = max(scored.values())
+    if best_score < 0:
+        return "", ""
+
+    def _group_top(key: tuple[int, int, int, int]) -> float:
+        return min(float(ocr_data["top"][i]) for i in groups[key])
+
+    def _group_text(
+        key: tuple[int, int, int, int],
+    ) -> tuple[str, str]:
+        ordered_indices = sorted(groups[key])
+        cleaned_parts = []
+        raw_parts = []
+        for i in ordered_indices:
+            if not texts[i]:
+                continue
+            raw_text = (texts[i] or "").strip()
+            raw_parts.append(raw_text)
+            cleaned = clean_ocr_text(raw_text)
+            if cleaned:
+                cleaned_parts.append(cleaned)
+        return (
+            " ".join(p for p in cleaned_parts if p).strip(),
+            " ".join(p for p in raw_parts if p).strip(),
+        )
+
+    def _looks_like_stat_line(cleaned_text: str) -> bool:
+        lowered = cleaned_text.casefold()
+        return bool(lowered) and _STAT_LINE_PATTERN.search(lowered) is not None
+
+    ranked_keys = sorted(groups, key=lambda k: (-scored[k], _group_top(k)))
+    if not ranked_keys:
+        return "", ""
+
+    CONFIDENCE_THRESHOLD = 60.0
+    for key in ranked_keys:
+        text, raw = _group_text(key)
+        if not text:
+            continue
+        if _looks_like_stat_line(text):
+            continue
+        result = match_item_name_result(text)
+        if result.matched_name is not None and scored[key] >= CONFIDENCE_THRESHOLD:
+            return result.chosen_name, raw
+
+    primary_text, primary_raw = _group_text(ranked_keys[0])
+    primary_result = match_item_name_result(primary_text)
+    if primary_result.matched_name is not None or not _looks_like_stat_line(primary_text):
+        return primary_result.chosen_name, primary_raw
+
+    for candidate_key in ranked_keys[1:]:
+        candidate_text, candidate_raw = _group_text(candidate_key)
+        if not candidate_text or _looks_like_stat_line(candidate_text):
+            continue
+        candidate_result = match_item_name_result(candidate_text)
+        if candidate_result.matched_name is not None:
+            return candidate_result.chosen_name, candidate_raw
+
+    return primary_result.chosen_name, primary_raw
+
+
+def _extract_cropped_title_from_data(ocr_data: dict[str, list], image_height: int) -> tuple[str, str]:
+    """
+    Extract a title from OCR data that was already cropped to the title strip.
+    """
+    return _extract_title_from_data(ocr_data, image_height, top_fraction=1.0)
 
 
 def _extract_action_line_bbox(
-    ocr_data: Dict[str, List],
+    ocr_data: dict[str, list],
     target: Literal["sell", "recycle"],
-) -> Optional[Tuple[int, int, int, int]]:
+) -> tuple[int, int, int, int] | None:
     """
     Given OCR data, return a bbox (left, top, w, h) for
     the line containing the target action (infobox-relative coords).
     """
-    groups: Dict[Tuple[int, int, int, int], List[int]] = {}
+    groups: defaultdict[tuple[int, int, int, int], list[int]] = defaultdict(list)
     texts = ocr_data.get("text", [])
     n = len(texts)
+    page_nums = [int(v) for v in ocr_data.get("page_num", [])]
+    block_nums = [int(v) for v in ocr_data.get("block_num", [])]
+    par_nums = [int(v) for v in ocr_data.get("par_num", [])]
+    line_nums = [int(v) for v in ocr_data.get("line_num", [])]
+
     for i in range(n):
         raw_text = texts[i] or ""
         cleaned = re.sub(r"[^a-z]", "", raw_text.lower())
         if not cleaned or target not in cleaned:
             continue
         key = (
-            int(ocr_data["page_num"][i]),
-            int(ocr_data["block_num"][i]),
-            int(ocr_data["par_num"][i]),
-            int(ocr_data["line_num"][i]),
+            page_nums[i],
+            block_nums[i],
+            par_nums[i],
+            line_nums[i],
         )
-        groups.setdefault(key, []).append(i)
+        groups[key].append(i)
 
     if not groups:
         return None
 
-    def _group_score(indices: List[int]) -> float:
+    def _group_score(indices: list[int]) -> float:
         confs = []
         for idx in indices:
             conf_str = ocr_data["conf"][idx]
@@ -721,7 +1264,20 @@ def _extract_action_line_bbox(
         return sum(confs) / len(confs) if confs else -1.0
 
     best_key = max(groups.keys(), key=lambda k: _group_score(groups[k]))
-    indices = groups[best_key]
+    # Expand to all words on the winning line, not just the ones containing the
+    # target token.  This ensures the price token "(+11,000)" next to "Sell" is
+    # included in the bbox even though it doesn't contain the target string.
+    widths = [int(v) for v in ocr_data.get("width", [0] * n)]
+    bp, bb, bpa, bl = best_key
+    indices = [
+        i
+        for i in range(n)
+        if page_nums[i] == bp and block_nums[i] == bb and par_nums[i] == bpa and line_nums[i] == bl and widths[i] > 0
+    ]
+    # If every word on the line has width==0 (degenerate tesserocr output), fall
+    # back to the original group indices so min/max never operate on empty lists.
+    if not indices:
+        indices = list(groups[best_key])
     lefts = [int(ocr_data["left"][i]) for i in indices]
     tops = [int(ocr_data["top"][i]) for i in indices]
     rights = [int(ocr_data["left"][i]) + int(ocr_data["width"][i]) for i in indices]
@@ -735,70 +1291,452 @@ def _extract_action_line_bbox(
 def find_action_bbox_by_ocr(
     infobox_bgr: np.ndarray,
     target: Literal["sell", "recycle"],
-) -> Tuple[Optional[Tuple[int, int, int, int]], np.ndarray]:
+) -> tuple[tuple[int, int, int, int] | None, np.ndarray]:
     """
     Run OCR over the full infobox to locate the line containing the target
     action. Returns (bbox, processed_image) where bbox is infobox-relative.
     """
-    processed = preprocess_for_ocr(infobox_bgr)
-    _save_debug_image(f"infobox_action_{target}_processed", processed)
+    processed = preprocess_for_ocr(infobox_bgr, restrict_otsu_to_left=True)
     try:
         data = image_to_data(processed)
-    except Exception as exc:
+    except Exception as exc:  # pragma: no cover - OCR-backend dependent
         print(
-            f"[vision_ocr] ocr_backend image_to_data failed for target={target}; falling back to no bbox. "
-            f"error={exc}",
+            f"[vision_ocr] ocr_backend image_to_data failed for target={target}; falling back to no bbox. error={exc}",
             flush=True,
         )
+        _save_debug_image(f"infobox_action_{target}_processed", processed)
         return None, processed
 
     bbox = _extract_action_line_bbox(data, target)
+    # OCR coordinates are in the 2x-upscaled image space; scale back to
+    # the original infobox coordinate system.
+    if bbox is not None:
+        bx, by, bw, bh = bbox
+        # Save a tightly-cropped debug image of just the target-action line
+        # region (in 2x space) so the debug PNG shows exactly what Tesseract
+        # read rather than the entire context-menu crop.
+        _save_debug_image(f"infobox_action_{target}_processed", processed[by : by + bh, bx : bx + bw])
+        # Use floor division for position fields (pixel origins round down) and
+        # ceiling division for size fields so odd-pixel 2x extents round up
+        # rather than truncating, preserving the full original-space extent.
+        bbox = (
+            bx // 2,
+            by // 2,
+            max(1, (bw + 1) // 2),
+            max(1, (bh + 1) // 2),
+        )
+    else:
+        _save_debug_image(f"infobox_action_{target}_processed", processed)
     return bbox, processed
 
 
-def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
+def ocr_title_strip(
+    title_strip_bgr: np.ndarray,
+    *,
+    use_fallback_psm: bool = False,
+    restrict_otsu_to_left: bool = False,
+) -> InfoboxOcrResult:
     """
-    OCR the full infobox once to derive the title and action line positions.
+    OCR a pre-cropped infobox title strip to derive the item title.
+
+    Pass ``use_fallback_psm=True`` on retry attempts to switch from
+    PSM.SINGLE_LINE to PSM.SINGLE_WORD, which handles titles that
+    Tesseract struggles to segment under SINGLE_LINE.
     """
+    if title_strip_bgr.size == 0:
+        return InfoboxOcrResult(
+            item_name="",
+            raw_item_text="",
+            processed=np.zeros((1, 1), dtype=np.uint8),
+            preprocess_time=0.0,
+            ocr_time=0.0,
+            source="infobox",
+            ocr_failed=True,
+        )
+    global _last_ocr_result, _last_roi_hash
+    # Hash the raw BGR input so that two different raw strips that happen to produce
+    # the same binarized image are not incorrectly served each other's result.
+    # Encode PSM mode into the hash so a fallback-PSM retry never serves a cached
+    # result from a normal-PSM call (or vice versa).
+    roi_hash = (
+        _hash_roi(title_strip_bgr)
+        + (b"\x01" if use_fallback_psm else b"\x00")
+        + (b"\x01" if restrict_otsu_to_left else b"\x00")
+    )
     preprocess_start = time.perf_counter()
-    _save_debug_image("infobox_raw", infobox_bgr)
-    processed = preprocess_for_ocr(infobox_bgr)
+    processed = preprocess_for_ocr(title_strip_bgr, restrict_otsu_to_left=restrict_otsu_to_left)
     _save_debug_image("infobox_processed", processed)
     preprocess_time = time.perf_counter() - preprocess_start
+    if _last_roi_hash == roi_hash and _last_ocr_result is not None:
+        item_name, raw_item_text = _last_ocr_result
+        return InfoboxOcrResult(
+            item_name=item_name,
+            raw_item_text=raw_item_text,
+            processed=processed,
+            preprocess_time=preprocess_time,
+            ocr_time=0.0,
+            source="infobox",
+        )
 
     ocr_time = 0.0
     try:
         ocr_start = time.perf_counter()
-        data = image_to_data(processed)
+        raw_text = image_to_string(
+            processed,
+            single_line=not use_fallback_psm,
+            use_single_word=use_fallback_psm,
+            whitelist=ITEM_NAME_WHITELIST,
+        )
         ocr_time = time.perf_counter() - ocr_start
-    except Exception as exc:
+    except Exception as exc:  # pragma: no cover - OCR backend dependent
+        _last_roi_hash = None  # invalidate cache so next call does not re-serve stale result
         print(
-            f"[vision_ocr] ocr_backend image_to_data failed for full infobox; "
+            f"[vision_ocr] ocr_backend image_to_string failed for infobox title strip; "
             f"falling back to empty OCR result. error={exc}",
             flush=True,
         )
         return InfoboxOcrResult(
             item_name="",
             raw_item_text="",
-            sell_bbox=None,
-            recycle_bbox=None,
             processed=processed,
             preprocess_time=preprocess_time,
             ocr_time=ocr_time,
+            source="infobox",
             ocr_failed=True,
         )
 
-    item_name, raw_item_text = _extract_title_from_data(data, processed.shape[0])
-    sell_bbox = _extract_action_line_bbox(data, "sell")
-    recycle_bbox = _extract_action_line_bbox(data, "recycle")
+    match_result = match_item_name_result(raw_text)
+    raw_item_text = match_result.cleaned_text
+    item_name = match_result.matched_name or ""
+    if not match_result.matched_name:
+        # Fallback: retry without 2x upscale AND try dual polarity (T024)
+        processed_no_up = preprocess_for_ocr(
+            title_strip_bgr, upscale=False, restrict_otsu_to_left=restrict_otsu_to_left
+        )
+
+        # Try original polarity without upscale
+        try:
+            raw_no_up = image_to_string(
+                processed_no_up,
+                single_line=not use_fallback_psm,
+                use_single_word=use_fallback_psm,
+                whitelist=ITEM_NAME_WHITELIST,
+            )
+        except Exception:
+            raw_no_up = ""
+
+        # Try inverted polarity (dual-pass arbitration T024)
+        processed_inverted = cv2.bitwise_not(processed)
+        try:
+            raw_inverted = image_to_string(
+                processed_inverted,
+                single_line=not use_fallback_psm,
+                use_single_word=use_fallback_psm,
+                whitelist=ITEM_NAME_WHITELIST,
+            )
+        except Exception:
+            raw_inverted = ""
+
+        res_no_up = match_item_name_result(raw_no_up)
+        res_inverted = match_item_name_result(raw_inverted)
+
+        # Arbitrate: pick the best score
+        best_fallback = match_result
+        if (res_no_up.score or 0) > (best_fallback.score or 0):
+            best_fallback = res_no_up
+            processed = processed_no_up
+
+        if (res_inverted.score or 0) > (best_fallback.score or 0):
+            best_fallback = res_inverted
+            processed = processed_inverted
+
+        if best_fallback.matched_name:
+            raw_item_text = best_fallback.cleaned_text
+            item_name = best_fallback.matched_name
+            # If we picked inverted, update processed for debug dump
+            if best_fallback == res_inverted:
+                processed = processed_inverted
+            elif best_fallback == res_no_up:
+                processed = processed_no_up
+    if item_name:
+        _last_roi_hash = roi_hash
+        _last_ocr_result = (item_name, raw_item_text)
+    else:
+        # Emit debug artifacts so failures can be promoted to fixtures.
+        _save_debug_image("title_strip_fail_raw", title_strip_bgr)
+        _save_debug_image("title_strip_fail_processed", processed)
+        # T025: Dump alternate polarity on failure for debugging
+        _save_debug_image("title_strip_fail_inverted", cv2.bitwise_not(processed))
     return InfoboxOcrResult(
         item_name=item_name,
         raw_item_text=raw_item_text,
-        sell_bbox=sell_bbox,
-        recycle_bbox=recycle_bbox,
         processed=processed,
         preprocess_time=preprocess_time,
         ocr_time=ocr_time,
+        source="infobox",
+    )
+
+
+def ocr_infobox(infobox_bgr: np.ndarray) -> InfoboxOcrResult:
+    """
+    OCR the infobox title strip once to derive the item title.
+    """
+    _save_debug_image("infobox_raw", infobox_bgr)
+    title_strip_bgr = _crop_title_strip(infobox_bgr)
+    _save_debug_image("infobox_title_raw", title_strip_bgr)
+    return ocr_title_strip(title_strip_bgr)
+
+
+def ocr_infobox_with_context(
+    window_bgr: np.ndarray,
+    infobox_rect: tuple[int, int, int, int],
+    *,
+    use_fallback_psm: bool = False,
+) -> InfoboxOcrResult:
+    """
+    OCR the item title using window context to extend the crop upward.
+
+    ``find_infobox`` detects only the cream-coloured details region, missing
+    the darker title band above it.  This variant extends the slice upward by
+    up to 35 % of the detected height so the title band is included before the
+    strip is passed to Tesseract.
+
+    Unlike ``ocr_infobox``, this function requires the full ``window_bgr`` and
+    the original ``infobox_rect`` from ``find_infobox`` so the extension can be
+    anchored correctly.
+    """
+    x, y, w, h = infobox_rect
+    # Extend upward to capture the title band that sits above the detected area.
+    extension = int(round(0.35 * h))
+    y_ext = max(0, y - extension)
+    actual_ext = y - y_ext  # may be less than extension when near the window top
+    crop_bgr = window_bgr[y_ext : y + h, x : x + w]
+    _save_debug_image("infobox_raw", crop_bgr)
+    # Title strip = extended portion + a small buffer into the original top so
+    # the full item-name header is covered even when the extension undershoots.
+    title_h = max(1, actual_ext + int(round(0.10 * h)))
+    title_strip_bgr = crop_bgr[:title_h, :]
+    _save_debug_image("infobox_title_raw", title_strip_bgr)
+    return ocr_title_strip(title_strip_bgr, use_fallback_psm=use_fallback_psm)
+
+
+def build_skip_unlisted_corpus_image(infobox_bgr: np.ndarray, *, from_context_menu: bool) -> np.ndarray:
+    if from_context_menu:
+        return np.ascontiguousarray(infobox_bgr)
+    return np.ascontiguousarray(_crop_title_strip(infobox_bgr))
+
+
+def ocr_context_menu(
+    context_crop_bgr: np.ndarray,
+    *,
+    use_fallback_psm: bool = False,
+) -> InfoboxOcrResult:
+    """
+    OCR a dark context-menu crop to extract the item name.
+
+    Unlike ``ocr_infobox``, this does not strip to the title row.  Instead it
+    searches every text line top-to-bottom for one that fuzzy-matches a known
+    item name via ``match_item_name``.  This handles menus that mix action
+    labels ("Move to Backpack", "Sell", "Recycle") with the item title.
+
+    Pass ``use_fallback_psm=True`` on retry attempts to switch from
+    PSM.SINGLE_BLOCK to PSM.SPARSE_TEXT, which handles crops where the menu
+    layout is non-standard and block segmentation produces no usable text.
+    """
+    if context_crop_bgr.size == 0:
+        return InfoboxOcrResult(
+            item_name="",
+            raw_item_text="",
+            processed=np.zeros((1, 1), dtype=np.uint8),
+            preprocess_time=0.0,
+            ocr_time=0.0,
+            source="context_menu",
+            ocr_failed=True,
+        )
+    global _last_roi_hash, _last_ocr_result
+    preprocess_start = time.perf_counter()
+    _save_debug_image("ctx_menu_raw", context_crop_bgr)
+    # --- Title-band OCR pass ---
+    # The title band (top ~18%) has DARK background with LIGHT text —
+    # opposite polarity to the cream menu body.  isolate_menu_panel
+    # excludes it (gray < 190), so we OCR it separately first.
+    # ocr_title_strip auto-inverts dark backgrounds via preprocess_for_ocr.
+    ctx_h, ctx_w = context_crop_bgr.shape[:2]
+    title_band_h = max(1, int(round(ctx_h * _CTX_MENU_TITLE_HEIGHT_REL)))
+    dark_rect = isolate_dark_title_panel(context_crop_bgr)
+    if dark_rect is not None:
+        dx, dy, dw, dh = dark_rect
+        effective_h = min(title_band_h, dh)
+        # Skip a small margin on the left to clear any anti-aliased icon edge
+        # that protrudes into the detected rect.  The sidebar was already
+        # excluded by isolate_dark_title_panel's x_offset, so we only need a
+        # modest padding (~8 px at 1080p, scaled by crop width).
+        icon_skip = min(effective_h, max(4, ctx_w // 50))
+        title_band_bgr = context_crop_bgr[dy : dy + effective_h, dx + icon_skip : dx + dw]
+    else:
+        # Fallback: the dark title band was not detected (e.g. the menu is
+        # very short or the title background is not uniformly dark).  Crop
+        # the top portion and skip the left sidebar icon column.
+        sidebar_skip = ctx_w // 4
+        title_band_bgr = context_crop_bgr[:title_band_h, sidebar_skip:]
+    if title_band_bgr.size > 0:
+        # Preserve the global OCR cache so the infobox path is unaffected.
+        _saved_hash, _saved_result = _last_roi_hash, _last_ocr_result
+        try:
+            title_result = ocr_title_strip(
+                title_band_bgr, use_fallback_psm=use_fallback_psm, restrict_otsu_to_left=True
+            )
+        finally:
+            # Restore cache — context-menu title strips must not evict infobox
+            # cache entries even if ocr_title_strip raises.
+            _last_roi_hash, _last_ocr_result = _saved_hash, _saved_result
+        if title_result.item_name:
+            _save_debug_image("ctx_menu_title_band_processed", title_result.processed)
+            preprocess_time = time.perf_counter() - preprocess_start
+            return InfoboxOcrResult(
+                item_name=title_result.item_name,
+                raw_item_text=title_result.raw_item_text,
+                processed=title_result.processed,
+                preprocess_time=preprocess_time,
+                ocr_time=title_result.ocr_time,
+                source="context_menu",  # NOT "infobox" — correct provenance
+            )
+    panel_rect = isolate_menu_panel(context_crop_bgr)
+    if panel_rect is not None:
+        px, py, pw, ph = panel_rect
+        context_crop_bgr = context_crop_bgr[py : py + ph, px : px + pw]
+        _save_debug_image("ctx_menu_panel_isolated", context_crop_bgr)
+    processed = preprocess_for_ocr(context_crop_bgr, restrict_otsu_to_left=(panel_rect is None))
+    _save_debug_image("ctx_menu_processed", processed)
+
+    preprocess_time = time.perf_counter() - preprocess_start
+
+    ocr_time = 0.0
+    try:
+        ocr_start = time.perf_counter()
+        data = image_to_data(processed, use_sparse=use_fallback_psm)
+        ocr_time = time.perf_counter() - ocr_start
+    except Exception as exc:  # pragma: no cover - OCR backend failure path
+        print(
+            f"[vision_ocr] ocr_backend image_to_data failed for context menu; "
+            f"falling back to empty OCR result. error={exc}",
+            flush=True,
+        )
+        return InfoboxOcrResult(
+            item_name="",
+            raw_item_text="",
+            processed=processed,
+            preprocess_time=preprocess_time,
+            ocr_time=ocr_time,
+            source="context_menu",
+            ocr_failed=True,
+        )
+
+    # Group words into lines keyed by (page, block, par, line).
+    texts = data.get("text", [])
+    groups: defaultdict[tuple[int, int, int, int], list[int]] = defaultdict(list)
+    for i, raw_text in enumerate(texts):
+        cleaned = clean_ocr_text(raw_text or "")
+        if not cleaned:
+            continue
+        key = (
+            int(data["page_num"][i]),
+            int(data["block_num"][i]),
+            int(data["par_num"][i]),
+            int(data["line_num"][i]),
+        )
+        groups[key].append(i)
+
+    def _line_top(indices: list[int]) -> float:
+        return min(float(data["top"][i]) for i in indices)
+
+    # Known action-button labels that are never item names.  Lines whose
+    # lowercased text starts with one of these are skipped before fuzzy
+    # matching so that left-clipped fragments (e.g. "it Stack" from "Split
+    # Stack") cannot accidentally match a real item name.
+    _ACTION_PREFIXES = (
+        "split stack",
+        "move to backpack",
+        "move to safe pocket",
+        "inspect",
+        "sell",
+        "recycle",
+        "drop",
+        "equip",
+        "unequip",
+        "unavailable",
+        "detach mods",
+        "repair",
+        "upgrade",
+        "weapon swap",
+        "swap weapon",
+    )
+
+    item_name = ""
+    raw_item_text = ""
+    for key in sorted(groups.keys(), key=lambda k: _line_top(groups[k])):
+        indices = sorted(groups[key])
+        raw_parts = [(data["text"][i] or "").strip() for i in indices if data["text"][i]]
+        cleaned_parts = [clean_ocr_text(p) for p in raw_parts]
+        line_text = " ".join(p for p in cleaned_parts if p).strip()
+        line_lower = line_text.lower()
+        # Strip leading non-alpha chars (e.g. OCR'd game icons) before
+        # checking action prefixes.  Also slide up to 5 positions to catch
+        # short alpha garble from icon glyphs (e.g. "ame Split Stack").
+        stripped_lower = re.sub(r"^[^a-z]+", "", line_lower)
+        _is_action = any(line_lower.startswith(p) or stripped_lower.startswith(p) for p in _ACTION_PREFIXES)
+        if not _is_action:
+            for _trim in range(1, 6):
+                remainder = line_lower[_trim:]
+                if len(remainder) >= 4 and any(remainder.startswith(p) for p in _ACTION_PREFIXES):
+                    _is_action = True
+                    break
+        if _is_action:
+            continue
+        # Skip very short fragments (stash quantity labels like "1", "3") —
+        # they false-match item names via partial_ratio in WRatio.  Threshold
+        # is 3 so that any 3-char item name can still pass; the coverage guard
+        # below catches short noise that slips through (e.g. "arc" at 3 chars
+        # matches "Arc Alloy" at 33% coverage, well below the 60% floor).
+        if len(line_text) < 3:
+            continue
+        result = match_item_name_result(line_text)
+        if result.matched_name is not None:
+            # Guard against WRatio partial_ratio false positives: a fragment
+            # like "ARC A" (5 chars) matches "Arc Alloy" (9 chars) at 100%
+            # via partial substring matching.  Require the OCR text to cover
+            # at least 60% of the matched name length so short noise strings
+            # are rejected even when they exceed the minimum-length guard.
+            # Use line_text (single-cleaned) rather than result.cleaned_text
+            # (doubly-cleaned) so punctuation stripping doesn't shrink the
+            # measured length and over-reject valid short names.
+            coverage = len(line_text) / max(1, len(result.matched_name))
+            if coverage < 0.6:
+                continue
+            if result.chosen_name.lower().startswith("unavailable"):
+                continue
+            item_name = result.chosen_name
+            raw_item_text = " ".join(p for p in raw_parts if p).strip()
+            break
+
+    if not item_name:
+        # Dump every OCR'd line so misread crops can be triaged and promoted
+        # to regression fixtures via /add-fixture.
+        line_data = [
+            {
+                "text": " ".join((data["text"][i] or "").strip() for i in sorted(groups[k]) if data["text"][i]),
+                "top": min(int(data["top"][i]) for i in groups[k]),
+            }
+            for k in sorted(groups.keys(), key=lambda k: _line_top(groups[k]))
+        ]
+        _save_debug_json("ctx_menu_lines_fail", line_data)
+    return InfoboxOcrResult(
+        item_name=item_name,
+        raw_item_text=raw_item_text,
+        processed=processed,
+        preprocess_time=preprocess_time,
+        ocr_time=ocr_time,
+        source="context_menu",
     )
 
 
@@ -809,12 +1747,31 @@ def ocr_item_name(roi_bgr: np.ndarray) -> str:
     if roi_bgr.size == 0:
         return ""
 
+    global _last_ocr_result, _last_roi_hash
+    roi_hash = _hash_roi(roi_bgr)
+    if _last_roi_hash == roi_hash and _last_ocr_result is not None:
+        return _last_ocr_result[0]
+
     processed = preprocess_for_ocr(roi_bgr)
-    raw = image_to_string(processed)
-    return clean_ocr_text(raw)
+    try:
+        raw = image_to_string(processed, single_line=True)
+    except Exception as exc:  # pragma: no cover - OCR backend dependent
+        _last_roi_hash = None  # invalidate cache so next call does not re-serve stale result
+        print(
+            f"[vision_ocr] ocr_backend image_to_string failed for item name; falling back to empty result. error={exc}",
+            flush=True,
+        )
+        return ""
+
+    item_name = match_item_name(raw)
+    if item_name:
+        _last_roi_hash = roi_hash
+        _last_ocr_result = (item_name, raw)
+
+    return item_name
 
 
-def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:
+def ocr_inventory_count(roi_bgr: np.ndarray) -> tuple[int | None, str]:
     """
     OCR the "items in stash" label and return (count, raw_text).
     """
@@ -826,8 +1783,8 @@ def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:
     _save_debug_image("inventory_count_processed", processed)
 
     try:
-        raw = image_to_string(processed)
-    except Exception as exc:
+        raw = image_to_string(processed, single_line=True)
+    except Exception as exc:  # pragma: no cover - OCR backend dependent
         print(
             f"[vision_ocr] ocr_backend image_to_string failed for inventory count: {exc}",
             flush=True,
@@ -835,13 +1792,40 @@ def ocr_inventory_count(roi_bgr: np.ndarray) -> Tuple[Optional[int], str]:
         return None, ""
 
     cleaned = (raw or "").replace("\n", " ").strip()
+    # The label reads "N/M" (current/capacity). Extract N from that pattern first so
+    # that a stash-icon glyph OCR'd before the digits (e.g. "8 197/232") does not
+    # cause digits[0] to return the icon's value instead of the item count.
+    m = re.search(r"(\d+)/(\d+)", cleaned)
+    if m:
+        current, capacity = int(m.group(1)), int(m.group(2))
+        if current <= capacity:
+            return current, cleaned
+        # OCR artifact: a single spurious leading digit (e.g. "2251/280" → "251/280").
+        # Only attempt recovery when raw_current has exactly one surplus digit relative
+        # to capacity, so we never silently discard real leading digits from a valid count.
+        raw_current = m.group(1)
+        if len(raw_current) == len(str(capacity)) + 1:
+            trimmed = int(raw_current[1:])
+            if trimmed <= capacity:
+                return trimmed, cleaned
+        # Cannot recover cleanly — return None so the engine uses its safe fallback
+        # (1 page or CLI-supplied page count) rather than an unreliable guess.
+        print(
+            f"[vision_ocr] ocr_inventory_count: unrecoverable count in {cleaned!r}; "
+            f"parsed {current} > capacity {capacity}",
+            flush=True,
+        )
+        return None, cleaned
+
     digits = re.findall(r"\d+", cleaned)
     if not digits:
         return None, cleaned
 
-    try:
-        count = max(int(d) for d in digits)
-    except Exception:
-        count = None
+    # Skip a likely stash-icon noise digit: a single-digit prefix followed by a
+    # multi-digit number (e.g. "8 197" → use 197, not 8).
+    if len(digits) >= 2 and len(digits[0]) == 1 and len(digits[1]) > 1:
+        count = int(digits[1])
+    else:
+        count = int(digits[0])
 
     return count, cleaned

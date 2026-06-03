@@ -1,0 +1,45 @@
+{
+  "title": "OCR Pipeline Fixes: Lossless Debug Images + Context Menu Title Band OCR",
+  "stories": [
+    {
+      "id": "US-001",
+      "title": "Lossless WebP debug images in inventory_vision.py",
+      "passes": true,
+      "acceptanceCriteria": [
+        "Line 926 of inventory_vision.py uses [cv2.IMWRITE_WEBP_QUALITY, 101] instead of 80",
+        "ruff check src/ tests/ reports no errors in inventory_vision.py"
+      ]
+    },
+    {
+      "id": "US-002",
+      "title": "Lossless WebP corpus images in failure_corpus.py",
+      "passes": true,
+      "acceptanceCriteria": [
+        "Line 216 of failure_corpus.py uses [cv2.IMWRITE_WEBP_QUALITY, 101] instead of 80",
+        "ruff check src/ tests/ reports no errors in failure_corpus.py"
+      ]
+    },
+    {
+      "id": "US-003",
+      "title": "Add _CTX_MENU_TITLE_HEIGHT_REL constant",
+      "passes": true,
+      "acceptanceCriteria": [
+        "_CTX_MENU_TITLE_HEIGHT_REL = 0.18 is defined in inventory_vision.py near _MENU_PANEL_GRAY_THRESH",
+        "ruff and basedpyright report no new errors"
+      ]
+    },
+    {
+      "id": "US-004",
+      "title": "Title-band OCR pass in ocr_context_menu",
+      "passes": true,
+      "acceptanceCriteria": [
+        "ocr_context_menu calls ocr_title_strip on the top _CTX_MENU_TITLE_HEIGHT_REL fraction before isolate_menu_panel",
+        "global _last_roi_hash, _last_ocr_result declared at top of ocr_context_menu for cache save/restore",
+        "On title_result.item_name match, returns InfoboxOcrResult with source='context_menu'",
+        "If title-band OCR yields no match, existing menu-text path runs unchanged as fallback",
+        "ruff check and basedpyright report no new errors",
+        "pytest passes"
+      ]
+    }
+  ]
+}

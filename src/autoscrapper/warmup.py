@@ -3,48 +3,61 @@ from __future__ import annotations
 import importlib
 import threading
 from dataclasses import dataclass
-from typing import Optional
 
 _WARMUP_LOCK = threading.Lock()
 _WARMUP_DONE = threading.Event()
 _WARMUP_STARTED = False
-_WARMUP_ERROR: Optional[str] = None
+_WARMUP_ERROR: str | None = None
 
 _HEAVY_MODULES = (
+    # Only modules that do NOT transitively import tesserocr are safe to
+    # pre-import in a background thread.  tesserocr pulls in cysignals, which
+    # installs OS signal handlers and requires the main thread.
+    # Modules excluded for that reason:
+    #   autoscrapper.ocr.inventory_vision  (→ tesseract → tesserocr)
+    #   autoscrapper.scanner.scan_loop     (→ inventory_vision → tesserocr)
+    #   autoscrapper.scanner.engine        (→ scan_loop → tesserocr)
     "autoscrapper.core.item_actions",
     "autoscrapper.interaction.ui_windows",
-    "autoscrapper.ocr.inventory_vision",
-    "autoscrapper.scanner.scan_loop",
-    "autoscrapper.scanner.engine",
 )
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class WarmupStatus:
     started: bool
     completed: bool
     failed: bool
-    error: Optional[str]
+    error: str | None
 
 
-def _set_warmup_error(error: Optional[str]) -> None:
+def _set_warmup_error(error: str | None) -> None:
     global _WARMUP_ERROR
     with _WARMUP_LOCK:
         _WARMUP_ERROR = error
 
 
-def _get_warmup_error() -> Optional[str]:
+def _get_warmup_error() -> str | None:
     with _WARMUP_LOCK:
         return _WARMUP_ERROR
 
 
 def _run_background_warmup() -> None:
     try:
+        from .items import rules_store
+
+        rules_store.get_item_names()
+    except Exception as e:
+        error = f"Failed to pre-populate item names cache in warmup: {type(e).__name__}: {e}"
+        _set_warmup_error(error)
+        print(f"[warn] {error}")
+
+    try:
         for module_name in _HEAVY_MODULES:
             importlib.import_module(module_name)
-        from .ocr.tesseract import initialize_ocr
-
-        initialize_ocr()
+        # initialize_ocr() is intentionally NOT called here: tesserocr imports
+        # cysignals which installs signal handlers, and signal handlers can only
+        # be installed from the main thread.  OCR is lazily initialised on first
+        # use (on the main thread) via the _get_api() lock in tesseract.py.
     except Exception as exc:  # pragma: no cover - defensive warmup fallback
         _set_warmup_error(f"{type(exc).__name__}: {exc}")
     finally:

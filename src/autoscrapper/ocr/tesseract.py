@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 import os
+import sys
 import threading
 from dataclasses import dataclass
 from pathlib import Path
-import sys
-from typing import Dict, List
 
 import numpy as np
 from PIL import Image
@@ -13,13 +12,23 @@ import tessdata
 from tesserocr import PSM, PyTessBaseAPI, RIL, iterate_level
 
 _api_lock = threading.Lock()
+_api_line_lock = threading.Lock()
+_api_single_word_lock = threading.Lock()
+_api_sparse_lock = threading.Lock()
 _api_init_lock = threading.Lock()
 _api: PyTessBaseAPI | None = None
+_api_line: PyTessBaseAPI | None = None
+_api_single_word: PyTessBaseAPI | None = None
+_api_sparse: PyTessBaseAPI | None = None
 _tessdata_dir: str | None = None
-_backend_info: "OcrBackendInfo | None" = None
+_backend_info: OcrBackendInfo | None = None
+_user_words_path: Path | None = None
+_pending_user_words: list[str] | None = None
+_user_words_file: Path | None = None
+_USER_WORDS_SUFFIX = "user-words"
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class OcrBackendInfo:
     tesseract_version: str
     tessdata_dir: str | None
@@ -66,11 +75,38 @@ def _candidate_tessdata_paths() -> list[Path]:
     return unique
 
 
-def _create_api() -> PyTessBaseAPI:
+def _ensure_user_words_file() -> Path | None:
+    global _user_words_file, _pending_user_words, _tessdata_dir
+    if _user_words_file is not None and _user_words_file.exists():
+        return _user_words_file
+
+    if not _pending_user_words or not _tessdata_dir:
+        return None
+
+    try:
+        tessdata_path = Path(_tessdata_dir)
+        user_words_path = tessdata_path / f"eng.{_USER_WORDS_SUFFIX}.txt"
+        with open(user_words_path, "w") as f:
+            for word in _pending_user_words:
+                if word:
+                    f.write(word + "\n")
+        _user_words_file = user_words_path
+        return _user_words_file
+    except Exception:
+        return None
+
+
+def _create_api(*, psm: PSM = PSM.SINGLE_BLOCK, user_words: list[str] | None = None) -> PyTessBaseAPI:
     """
-    Build a shared PyTessBaseAPI instance configured for English, single block.
+    Build a shared PyTessBaseAPI instance configured for English.
     """
-    global _tessdata_dir
+    global _tessdata_dir, _user_words_path, _pending_user_words
+
+    if user_words is not None:
+        _pending_user_words = user_words
+
+    user_words_path = _ensure_user_words_file()
+
     errors: list[tuple[Path, Exception]] = []
     candidates = _candidate_tessdata_paths()
 
@@ -79,7 +115,16 @@ def _create_api() -> PyTessBaseAPI:
             continue
         try:
             os.environ["TESSDATA_PREFIX"] = str(candidate)
-            api = PyTessBaseAPI(path=str(candidate), lang="eng", psm=PSM.SINGLE_BLOCK)
+            lang = "eng"
+            if user_words_path is not None:
+                lang = f"eng:{_USER_WORDS_SUFFIX}"
+            api = PyTessBaseAPI(path=str(candidate), lang=lang, psm=psm)
+            api.SetVariable(
+                "tessedit_char_whitelist",
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 '-/(),.!?:&+",
+            )
+            api.SetVariable("user_defined_dpi", "300")
+            api.SetVariable("load_system_dawg", "0")
             _tessdata_dir = str(candidate)
             return api
         except Exception as exc:
@@ -125,11 +170,69 @@ def _get_api() -> PyTessBaseAPI:
     return _api
 
 
+def _get_api_line() -> PyTessBaseAPI:
+    """
+    Lazily initialize and return the shared single-line Tesseract API instance (PSM.SINGLE_LINE).
+    """
+    global _api_line
+    if _api_line is not None:
+        return _api_line
+
+    with _api_init_lock:
+        if _api_line is None:
+            _api_line = _create_api(psm=PSM.SINGLE_LINE)
+            _record_backend_info(_api_line)
+    return _api_line
+
+
+def _get_api_single_word() -> PyTessBaseAPI:
+    """
+    Lazily initialize and return the shared single-word Tesseract API instance (PSM.SINGLE_WORD).
+
+    Used as a PSM fallback on OCR retry attempts for the title strip when
+    SINGLE_LINE produces no match.
+    """
+    global _api_single_word
+    if _api_single_word is not None:
+        return _api_single_word
+
+    with _api_init_lock:
+        if _api_single_word is None:
+            _api_single_word = _create_api(psm=PSM.SINGLE_WORD)
+            _record_backend_info(_api_single_word)
+    return _api_single_word
+
+
+def _get_api_sparse() -> PyTessBaseAPI:
+    """
+    Lazily initialize and return the shared sparse-text Tesseract API instance (PSM.SPARSE_TEXT).
+
+    Used as a PSM fallback on OCR retry attempts for context-menu crops when
+    SINGLE_BLOCK produces no match.
+    """
+    global _api_sparse
+    if _api_sparse is not None:
+        return _api_sparse
+
+    with _api_init_lock:
+        if _api_sparse is None:
+            _api_sparse = _create_api(psm=PSM.SPARSE_TEXT)
+            _record_backend_info(_api_sparse)
+    return _api_sparse
+
+
 def initialize_ocr() -> OcrBackendInfo:
     """
     Force initialization so the OCR backend is ready before the first OCR call.
     """
+    global _pending_user_words
+    from ..items.rules_store import get_item_names
+
+    _pending_user_words = list(get_item_names())
     api = _get_api()
+    _get_api_line()
+    _get_api_single_word()
+    _get_api_sparse()
     _record_backend_info(api)
     if _backend_info is None:  # pragma: no cover - defensive
         raise RuntimeError("OCR backend initialized but metadata is missing.")
@@ -154,7 +257,7 @@ def _as_pil_image(image: np.ndarray) -> Image.Image:
     raise ValueError(f"Unsupported image shape for OCR: {image.shape}")
 
 
-def _empty_data_dict() -> Dict[str, List]:
+def _empty_data_dict() -> dict[str, list]:
     return {
         "level": [],
         "page_num": [],
@@ -171,7 +274,7 @@ def _empty_data_dict() -> Dict[str, List]:
     }
 
 
-def _build_data_dict(iterator) -> Dict[str, List]:
+def _build_data_dict(iterator) -> dict[str, list]:
     data = _empty_data_dict()
     block_num = 0
     par_num = 0
@@ -183,6 +286,7 @@ def _build_data_dict(iterator) -> Dict[str, List]:
             block_num += 1
             par_num = 0
             line_num = 0
+            word_num = 0
         if word.IsAtBeginningOf(RIL.PARA):
             par_num += 1
             line_num = 0
@@ -218,31 +322,81 @@ def _build_data_dict(iterator) -> Dict[str, List]:
     return data
 
 
-def image_to_string(image: np.ndarray) -> str:
+DEFAULT_WHITELIST = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 '-/(),.!?:&+"
+
+
+def image_to_string(
+    image: np.ndarray,
+    *,
+    single_line: bool = False,
+    use_single_word: bool = False,
+    whitelist: str | None = None,
+) -> str:
     """
     OCR the provided image and return raw UTF-8 text.
+
+    - ``use_single_word=True`` → PSM.SINGLE_WORD (fallback on retry for title strips).
+    - ``single_line=True``     → PSM.SINGLE_LINE (default title-strip mode).
+    - Neither set              → PSM.SINGLE_BLOCK.
+    - ``whitelist``            → Restrict OCR to these characters (T026).
     """
-    api = _get_api()
+    if use_single_word:
+        api = _get_api_single_word()
+        lock = _api_single_word_lock
+    elif single_line:
+        api = _get_api_line()
+        lock = _api_line_lock
+    else:
+        api = _get_api()
+        lock = _api_lock
     pil_img = _as_pil_image(np.ascontiguousarray(image))
 
-    with _api_lock:
+    with lock:
+        if whitelist:
+            api.SetVariable("tessedit_char_whitelist", whitelist)
         api.SetImage(pil_img)
         text = api.GetUTF8Text() or ""
+        if whitelist:
+            api.SetVariable("tessedit_char_whitelist", DEFAULT_WHITELIST)
 
     return text
 
 
-def image_to_data(image: np.ndarray) -> Dict[str, List]:
+def image_to_data(
+    image: np.ndarray,
+    *,
+    single_line: bool = False,
+    use_sparse: bool = False,
+    whitelist: str | None = None,
+) -> dict[str, list]:
     """
     OCR the provided image and return a dict shaped like pytesseract Output.DICT.
+
+    - ``use_sparse=True``  → PSM.SPARSE_TEXT (fallback on retry for context-menu crops).
+    - ``single_line=True`` → PSM.SINGLE_LINE.
+    - Neither set          → PSM.SINGLE_BLOCK.
+    - ``whitelist``        → Restrict OCR to these characters (T026).
     """
-    api = _get_api()
+    if use_sparse:
+        api = _get_api_sparse()
+        lock = _api_sparse_lock
+    elif single_line:
+        api = _get_api_line()
+        lock = _api_line_lock
+    else:
+        api = _get_api()
+        lock = _api_lock
     pil_img = _as_pil_image(np.ascontiguousarray(image))
 
-    with _api_lock:
+    with lock:
+        if whitelist:
+            api.SetVariable("tessedit_char_whitelist", whitelist)
         api.SetImage(pil_img)
         api.Recognize()
         iterator = api.GetIterator()
+        if whitelist:
+            api.SetVariable("tessedit_char_whitelist", DEFAULT_WHITELIST)
+
         if iterator is None:
             return _empty_data_dict()
         return _build_data_dict(iterator)

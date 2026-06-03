@@ -1,0 +1,155 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - v*
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version tag (e.g., v0.2.0)
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  PYTHON_VERSION: "3.13"
+
+jobs:
+  build-binary:
+    name: Build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: autoscrapper-linux-x86_64
+            executable_name: autoscrapper
+          - os: windows-latest
+            artifact_name: autoscrapper-windows-x86_64.exe
+            executable_name: autoscrapper.exe
+          - os: macos-latest
+            artifact_name: autoscrapper-macos-x86_64
+            executable_name: autoscrapper
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Install mise
+        run: |
+          curl https://mise.run | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Setup toolchain
+        run: |
+          mise install python@${{ env.PYTHON_VERSION }}
+          mise install uv@latest
+
+      - name: Set up Python
+        run: mise exec -- python --version
+
+      - name: Install uv
+        run: mise exec -- uv --version || mise install uv@latest
+
+      - name: Install dependencies
+        run: mise exec -- uv sync --frozen
+
+      - name: Build PyInstaller binary
+        run: |
+          mise exec -- uv pip install pyinstaller
+          mise exec -- pyinstaller \
+            --name autoscrapper \
+            --add-data "src/autoscrapper/items/items_rules.default.json:autoscrapper/items" \
+            --add-data "src/autoscrapper/progress/data:autoscrapper/progress/data" \
+            --hidden-import=tesserocr \
+            --hidden-import=textual \
+            --hidden-import=cv2 \
+            --hidden-import=mss \
+            --hidden-import=rapidfuzz \
+            --recursive-hook-search \
+            --onefile \
+            --console \
+            src/autoscrapper/__main__.py
+
+      - name: Rename artifact
+        shell: bash
+        run: |
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            mv dist/autoscrapper.exe "${{ matrix.artifact_name }}"
+          else
+            mv dist/autoscrapper "${{ matrix.artifact_name }}"
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: ${{ matrix.artifact_name }}
+          retention-days: 30
+
+  release:
+    name: Create Release
+    needs: build-binary
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v8
+        with:
+          path: artifacts
+
+      - name: Display structure
+        run: ls -laR artifacts/
+
+      - name: Prepare release assets
+        run: |
+          cd artifacts
+          for dir in */; do
+            arch="${dir%/}"
+            if [ -f "$arch/autoscrapper" ]; then
+              chmod +x "$arch/autoscrapper"
+              tar -czf "${arch}.tar.gz" "$arch/"
+              rm -rf "$arch"
+            elif [ -f "$arch/autoscrapper.exe" ]; then
+              tar -czf "${arch}.zip" "$arch/"
+              rm -rf "$arch"
+            fi
+          done
+          ls -la
+
+      - name: Get version
+        id: version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Arc Raiders AutoScrapper ${{ steps.version.outputs.version }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          files: |
+            artifacts/*.tar.gz
+            artifacts/*.zip
