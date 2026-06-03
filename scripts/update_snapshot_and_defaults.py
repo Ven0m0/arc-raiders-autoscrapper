@@ -44,6 +44,7 @@ TARGET_RELATIVE_FILES = (
     "src/autoscrapper/progress/data/quests.json",
     "src/autoscrapper/progress/data/quests_by_trader.json",
     "src/autoscrapper/progress/data/metadata.json",
+    "src/autoscrapper/progress/data/metaforge_sources.json",
     "src/autoscrapper/items/items_rules.default.json",
 )
 EXCLUDED_LEVEL2_IDS = {"stash", "workbench"}
@@ -144,6 +145,10 @@ def _copy_support_files_for_temp_run(source_data_dir: Path, temp_data_dir: Path)
     else:
         temp_static.mkdir(parents=True, exist_ok=True)
 
+    source_sources_path = source_data_dir / "metaforge_sources.json"
+    if source_sources_path.exists():
+        shutil.copy2(source_sources_path, temp_data_dir / "metaforge_sources.json")
+
 
 def _fetch_default_user_context(data_dir: Path) -> tuple[dict[str, int], list[str]]:
     """Load default hideout levels and completed projects from snapshot static files."""
@@ -234,6 +239,7 @@ def _update_dry_run(source_data_dir: Path, *, use_arclens: bool = False) -> dict
                 temp_data_dir / "quests.json",
                 temp_data_dir / "quests_by_trader.json",
                 temp_data_dir / "metadata.json",
+                temp_data_dir / "metaforge_sources.json",
                 temp_rules_path,
             ]
         )
@@ -242,7 +248,8 @@ def _update_dry_run(source_data_dir: Path, *, use_arclens: bool = False) -> dict
             target_paths[1]: after_bytes[temp_data_dir / "quests.json"],
             target_paths[2]: after_bytes[temp_data_dir / "quests_by_trader.json"],
             target_paths[3]: after_bytes[temp_data_dir / "metadata.json"],
-            target_paths[4]: after_bytes[temp_rules_path],
+            target_paths[4]: after_bytes[temp_data_dir / "metaforge_sources.json"],
+            target_paths[5]: after_bytes[temp_rules_path],
         }
         changed_files = _diff_changed_files(
             before_bytes,
