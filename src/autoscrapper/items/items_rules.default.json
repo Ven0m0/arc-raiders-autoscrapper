@@ -2169,7 +2169,7 @@
     },
     {
       "id": "extended-barrel-i",
-      "name": "Extended Barrel I ",
+      "name": "Extended Barrel I",
       "value": 1000,
       "action": "keep",
       "analysis": [
