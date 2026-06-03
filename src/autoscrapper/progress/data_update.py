@@ -387,7 +387,7 @@ def _fetch_supabase_all(table: str, sources_path: Path) -> List[dict]:
         if not _is_supabase_auth_error(exc):
             raise
 
-        discovered = _discover_supabase_config()
+        discovered = _discover_supabase_config(force=True)
         if discovered == supabase_config:
             raise DownloadError(
                 "Supabase auth failed and Metaforge page discovery returned "
