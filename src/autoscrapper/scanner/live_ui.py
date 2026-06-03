@@ -3,7 +3,8 @@ from __future__ import annotations
 import time
 from collections import Counter, deque
 from datetime import datetime, timedelta
-from typing import Optional
+from typing import cast
+
 
 from .outcomes import _outcome_style
 from .rich_support import (
@@ -39,11 +40,10 @@ AUTOSCRAPPER_ASCII = r"""
 """.strip("\n")
 
 
-def _format_duration(seconds: Optional[float]) -> str:
+def _format_duration(seconds: float | None) -> str:
     if seconds is None:
         return "--:--"
-    if seconds < 0:
-        seconds = 0
+    seconds = max(seconds, 0)
     minutes, secs = divmod(int(seconds), 60)
     hours, minutes = divmod(minutes, 60)
     if hours:
@@ -51,42 +51,16 @@ def _format_duration(seconds: Optional[float]) -> str:
     return f"{minutes:02d}:{secs:02d}"
 
 
-if (
-    ProgressColumn is not None and Task is not None and Text is not None
-):  # pragma: no cover
-
-    class _ItemsPerSecondColumn(ProgressColumn):
-        def render(self, task: Task) -> Text:
-            speed = getattr(task, "finished_speed", None) or task.speed
-            if speed is None:
-                return Text("-- it/s", style="dim")
-            return Text(f"{speed:0.2f} it/s", style="dim")
-
-else:  # pragma: no cover - rich missing
-    _ItemsPerSecondColumn = None  # type: ignore[assignment]
+class _ItemsPerSecondColumn(ProgressColumn):
+    def render(self, task: Task) -> Text:
+        speed = getattr(task, "finished_speed", None) or task.speed
+        if speed is None:
+            return Text("-- it/s", style="dim")
+        return Text(f"{speed:0.2f} it/s", style="dim")
 
 
 class _ScanLiveUI:
     def __init__(self) -> None:
-        if (
-            Console is None
-            or Group is None
-            or Live is None
-            or Panel is None
-            or Progress is None
-            or BarColumn is None
-            or SpinnerColumn is None
-            or TextColumn is None
-            or TaskProgressColumn is None
-            or TimeElapsedColumn is None
-            or TimeRemainingColumn is None
-            or Align is None
-            or Table is None
-            or Text is None
-            or box is None
-        ):
-            raise RuntimeError("Rich is required for the live scan UI.")
-
         self.console: Console = Console()
         self._events: deque[tuple[Text, Text]] = deque(maxlen=6)
         self._counts: Counter = Counter()
@@ -99,14 +73,14 @@ class _ScanLiveUI:
         self.last_item_label = ""
         self.last_outcome_label = ""
 
-        self._scan_started_at: Optional[float] = None
+        self._scan_started_at: float | None = None
 
         self.progress: Progress = Progress(
             SpinnerColumn(style="cyan"),
             BarColumn(bar_width=None),
             TextColumn("{task.completed}/{task.total}", style="cyan"),
             TaskProgressColumn(),
-            _ItemsPerSecondColumn() if _ItemsPerSecondColumn is not None else Text(""),
+            _ItemsPerSecondColumn() if _ItemsPerSecondColumn is not None else cast("ProgressColumn", Text("")),
             TextColumn("[dim]elapsed[/]"),
             TimeElapsedColumn(),
             TextColumn("[dim]left[/]"),
@@ -132,7 +106,7 @@ class _ScanLiveUI:
         if self._scan_started_at is None:
             self._scan_started_at = time.perf_counter()
 
-    def set_total(self, total: Optional[int]) -> None:
+    def set_total(self, total: int | None) -> None:
         self.progress.update(self._task_id, total=total)
         self.refresh()
 
@@ -158,7 +132,7 @@ class _ScanLiveUI:
     def refresh(self) -> None:
         self._live.update(self._render(), refresh=True)
 
-    def _render_counts(self) -> "Table":
+    def _render_counts(self) -> Table:
         table = Table(
             box=box.SIMPLE,
             show_header=False,
@@ -204,7 +178,7 @@ class _ScanLiveUI:
         eta = datetime.now() + timedelta(seconds=seconds)
         return eta.strftime("%H:%M:%S")
 
-    def _render_events(self) -> "Table":
+    def _render_events(self) -> Table:
         table = Table.grid(expand=True)
         table.add_column(justify="right", width=8, no_wrap=True, style="dim")
         table.add_column(ratio=1, overflow="fold")
@@ -218,7 +192,7 @@ class _ScanLiveUI:
 
         return table
 
-    def _render(self) -> "Group":
+    def _render(self) -> Group:
         banner = Text(AUTOSCRAPPER_ASCII, style="bold cyan")
 
         subtitle = Text()

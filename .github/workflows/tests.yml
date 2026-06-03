@@ -1,0 +1,50 @@
+name: Tests
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/**
+      - tests/**
+      - pyproject.toml
+      - uv.lock
+      - .python-version
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/**
+      - tests/**
+      - pyproject.toml
+      - uv.lock
+      - .python-version
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    name: pytest
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Install mise
+        run: |
+          curl https://mise.run | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Setup tools
+        run: mise use --global python@3.13 uv@latest
+      - name: Set up Python
+        run: mise exec -- python --version
+      - name: Install uv
+        run: mise exec -- uv --version || mise install uv@latest
+      - name: Install dependencies
+        run: mise exec -- uv sync --frozen --all-extras
+      - name: Run pytest
+        run: mise exec -- uv run pytest --tb=short -q

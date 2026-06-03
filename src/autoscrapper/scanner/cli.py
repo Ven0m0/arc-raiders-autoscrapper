@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import argparse
-from typing import Iterable, Optional
+from collections.abc import Iterable
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -17,9 +17,9 @@ def _build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: Optional[Iterable[str]] = None) -> int:
+def main(argv: Iterable[str] | None = None) -> int:
     parser = _build_parser()
     args = parser.parse_args(list(argv) if argv is not None else None)
-    from ..tui import run_tui
+    from ..tui.app import run_tui
 
     return run_tui(start_screen="scan", dry_run=args.dry_run)

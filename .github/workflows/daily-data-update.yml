@@ -1,59 +1,49 @@
 name: Daily Data Update
-
 on:
   schedule:
     - cron: "0 14 * * *"
   workflow_dispatch:
-
 permissions:
   actions: read
   contents: write
   pull-requests: write
-
 concurrency:
   group: daily-data-update
   cancel-in-progress: false
-
 jobs:
   update-data:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: daily-data-update
+    env:
+      METAFORGE_SUPABASE_ANON_KEY: ${{ secrets.METAFORGE_SUPABASE_ANON_KEY }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
-          fetch-depth: 0
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
+          fetch-depth: 1
+      - name: Install mise
+        uses: jdx/mise-action@v4
         with:
-          python-version: "3.13"
-
-      - name: Setup uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: false
-
+          version: latest
       - name: Install dependencies
-        run: uv sync
-
+        run: mise exec -- uv sync --frozen --no-dev
       - name: Update snapshot + default rules
         run: |
-          uv run python scripts/update_snapshot_and_defaults.py \
+          mise exec -- uv run python scripts/update_snapshot_and_defaults.py \
             --report-json artifacts/update-report.json \
             --report-md artifacts/update-report.md
-
       - name: Upload update report artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: daily-data-update-report
           path: |
             artifacts/update-report.json
             artifacts/update-report.md
-
       - name: Check for tracked changes
         id: changes
         run: |
-          python - <<'PY'
+          mise exec -- uv run python - <<'PY'
           import json
           import os
           import sys
@@ -77,19 +67,22 @@ jobs:
               for file_path in changed_files:
                   print(f" - {file_path}")
           else:
-              print("No substantive tracked changes (timestamp-only updates ignored).")
+              print(
+              "No substantive tracked changes (timestamp-only updates ignored)."
+          )
 
           with Path(os.environ["GITHUB_OUTPUT"]).open("a", encoding="utf-8") as output:
               output.write(f"has_changes={'true' if has_changes else 'false'}\n")
           PY
-
       - name: Commit and push update branch
         if: steps.changes.outputs.has_changes == 'true'
         id: commit_push
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
+          gh auth setup-git
           git switch -C bot/daily-data-update
           git add \
             src/autoscrapper/progress/data/items.json \
@@ -98,23 +91,20 @@ jobs:
             src/autoscrapper/progress/data/metadata.json \
             src/autoscrapper/progress/data/metaforge_sources.json \
             src/autoscrapper/items/items_rules.default.json
-
           if git diff --cached --quiet; then
             echo "has_commit=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-
           git commit -m "chore(data): daily Metaforge snapshot + default rules"
           git push --force-with-lease origin HEAD:bot/daily-data-update
           echo "has_commit=true" >> "$GITHUB_OUTPUT"
-
       - name: Create or update pull request
         if: steps.commit_push.outputs.has_commit == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          python - <<'PY'
+          mise exec -- uv run python - <<'PY'
           import json
           import os
           import urllib.parse

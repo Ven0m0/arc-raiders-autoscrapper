@@ -1,27 +1,28 @@
 from __future__ import annotations
 
-import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Literal, Optional, Tuple, cast
+from typing import Literal, cast
+
+import orjson
 
 from ..interaction.inventory_grid import Cell
 
-Decision = Literal["KEEP", "RECYCLE", "SELL"]
-DecisionList = List[Decision]
-ActionMap = Dict[str, DecisionList]
+type Decision = Literal["KEEP", "RECYCLE", "SELL"]
+type DecisionList = list[Decision]
+type ActionMap = dict[str, DecisionList]
 
 
-@dataclass
+@dataclass(slots=True)
 class ItemActionResult:
     page: int
     cell: Cell
     item_name: str
-    decision: Optional[Decision]
+    decision: Decision | None
     action_taken: str
-    raw_item_text: Optional[str] = None
-    note: Optional[str] = None
+    raw_item_text: str | None = None
+    note: str | None = None
 
 
 VALID_DECISIONS = {"KEEP", "RECYCLE", "SELL"}
@@ -35,22 +36,14 @@ ACTION_ALIASES = {
     "sell or recycle": "SELL",
     "crafting material": "KEEP",
 }
-ITEM_RULES_DEFAULT_PATH = (
-    Path(__file__).resolve().parent.parent / "items" / "items_rules.default.json"
-)
-ITEM_RULES_CUSTOM_PATH = (
-    Path(__file__).resolve().parent.parent / "items" / "items_rules.custom.json"
-)
+ITEM_RULES_DEFAULT_PATH = Path(__file__).resolve().parent.parent / "items" / "items_rules.default.json"
+ITEM_RULES_CUSTOM_PATH = Path(__file__).resolve().parent.parent / "items" / "items_rules.custom.json"
 ITEM_RULES_PATH = ITEM_RULES_DEFAULT_PATH
 
 
-def resolve_item_actions_path(path: Optional[Path] = None) -> Path:
+def resolve_item_actions_path(path: Path | None = None) -> Path:
     if path is None or path == ITEM_RULES_DEFAULT_PATH or path == ITEM_RULES_PATH:
-        return (
-            ITEM_RULES_CUSTOM_PATH
-            if ITEM_RULES_CUSTOM_PATH.exists()
-            else ITEM_RULES_DEFAULT_PATH
-        )
+        return ITEM_RULES_CUSTOM_PATH if ITEM_RULES_CUSTOM_PATH.exists() else ITEM_RULES_DEFAULT_PATH
     return path
 
 
@@ -58,13 +51,17 @@ def normalize_item_name(name: str) -> str:
     return name.strip().lower()
 
 
+_CLEAN_OCR_PATTERN = re.compile(r"[^-A-Za-z0-9 '(),.!?:&+]+")
+
+
 def clean_ocr_text(raw: str) -> str:
     text = " ".join(raw.split())
-    text = re.sub(r"[^-A-Za-z0-9 '()\\]+", "", text)
+    # Keep letters, numbers, common punctuation - be permissive
+    text = _CLEAN_OCR_PATTERN.sub("", text)
     return text.strip()
 
 
-def _normalize_action(value: object) -> Optional[Decision]:
+def _normalize_action(value: object) -> Decision | None:
     if not isinstance(value, str):
         return None
     key = value.strip().lower()
@@ -77,19 +74,15 @@ def _normalize_action(value: object) -> Optional[Decision]:
     return None
 
 
-def load_item_actions(path: Optional[Path] = None) -> ActionMap:
+def load_item_actions(path: Path | None = None) -> ActionMap:
     path = resolve_item_actions_path(path)
     try:
-        raw = json.loads(path.read_text(encoding="utf-8"))
+        raw = orjson.loads(path.read_bytes())
     except FileNotFoundError:
-        print(
-            f"[warn] Item rules file not found at {path}; defaulting to skip actions."
-        )
+        print(f"[warn] Item rules file not found at {path}; defaulting to skip actions.")
         return {}
-    except json.JSONDecodeError as exc:
-        print(
-            f"[warn] Could not parse item rules file {path}: {exc}; defaulting to skip actions."
-        )
+    except orjson.JSONDecodeError as exc:
+        print(f"[warn] Could not parse item rules file {path}: {exc}; defaulting to skip actions.")
         return {}
 
     if isinstance(raw, dict):
@@ -98,9 +91,7 @@ def load_item_actions(path: Optional[Path] = None) -> ActionMap:
         raw_items = raw
 
     if not isinstance(raw_items, list):
-        print(
-            f"[warn] Item rules file {path} must contain an items list; defaulting to skip actions."
-        )
+        print(f"[warn] Item rules file {path} must contain an items list; defaulting to skip actions.")
         return {}
 
     actions: ActionMap = {}
@@ -108,8 +99,10 @@ def load_item_actions(path: Optional[Path] = None) -> ActionMap:
         if not isinstance(entry, dict):
             continue
         name = entry.get("name")
+        if not isinstance(name, str):
+            continue
         normalized_name = normalize_item_name(name)
-        if not isinstance(name, str) or not normalized_name:
+        if not normalized_name:
             continue
 
         action_value = entry.get("action")
@@ -134,9 +127,7 @@ def load_item_actions(path: Optional[Path] = None) -> ActionMap:
     return actions
 
 
-def choose_decision(
-    item_name: str, actions: ActionMap
-) -> Tuple[Optional[Decision], Optional[str]]:
+def choose_decision(item_name: str, actions: ActionMap) -> tuple[Decision | None, str | None]:
     normalized = normalize_item_name(item_name)
     if not normalized:
         return None, None

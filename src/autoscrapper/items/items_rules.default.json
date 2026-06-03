@@ -1,5 +1,9 @@
 {
   "metadata": {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
     "generatedAt": "2026-06-01T19:14:32.356646Z",
     "data": {
       "lastUpdated": "2026-06-01T19:14:32.340613Z",
@@ -7,6 +11,136 @@
       "version": "autoscrapper-data-1"
     },
     "itemCount": 581,
+<<<<<<< HEAD
+=======
+=======
+    "generatedAt": "2026-05-08T14:33:29.567880Z",
+    "data": {
+      "lastUpdated": "2026-05-08T14:33:29.557671Z",
+      "source": "https://metaforge.app/arc-raiders/api",
+      "version": "autoscrapper-data-1",
+      "itemCount": 606,
+      "questCount": 100,
+      "dataSources": {
+        "items": {
+          "provider": "metaforge+raidtheory",
+          "primary": {
+            "documentation": "https://metaforge.app/arc-raiders/api",
+            "apiBase": "https://metaforge.app/api/arc-raiders",
+            "error": null
+          },
+          "fallback": {
+            "repository": "https://github.com/RaidTheory/arcraiders-data",
+            "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
+            "supplementalCount": 33,
+            "error": null
+          },
+          "arctrackerEnrichment": {
+            "documentation": "https://arctracker.io/developers/docs",
+            "apiBase": "https://arctracker.io",
+            "supplementalCount": 0,
+            "error": null
+          },
+          "fieldLevelMerge": {
+            "enabled": true,
+            "entriesEnriched": 367,
+            "sources": [
+              "raidtheory-fallback",
+              "arctracker"
+            ],
+            "fields": [
+              "type",
+              "rarity",
+              "value",
+              "weightKg",
+              "stackSize",
+              "craftBench",
+              "recipe",
+              "recyclesInto",
+              "wikiUses"
+            ]
+          },
+          "arclensEnrichment": {
+            "enabled": false,
+            "supplementalCount": 0,
+            "error": null
+          },
+          "wikiEnrichment": {
+            "url": "https://arcraiders.wiki/wiki/Loot",
+            "available": true,
+            "enrichedCount": 98,
+            "error": null,
+            "fields": [
+              "wikiUses"
+            ]
+          }
+        },
+        "quests": {
+          "provider": "metaforge",
+          "primary": {
+            "documentation": "https://metaforge.app/arc-raiders/api",
+            "apiBase": "https://metaforge.app/api/arc-raiders",
+            "error": null
+          },
+          "fallback": {
+            "repository": "https://github.com/RaidTheory/arcraiders-data",
+            "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
+            "supplementalCount": 0,
+            "error": null
+          },
+          "arctrackerEnrichment": {
+            "documentation": "https://arctracker.io/developers/docs",
+            "apiBase": "https://arctracker.io",
+            "supplementalCount": 0,
+            "error": null
+          },
+          "arclensEnrichment": {
+            "enabled": false,
+            "supplementalCount": 0,
+            "error": null
+          },
+          "fieldLevelMerge": {
+            "enabled": true,
+            "entriesEnriched": 0,
+            "sources": [
+              "raidtheory-fallback",
+              "arctracker"
+            ],
+            "fields": [
+              "objectives",
+              "requirements",
+              "trader",
+              "xp",
+              "sortOrder",
+              "rewardItemIds",
+              "rewards"
+            ]
+          }
+        },
+        "hideout": {
+          "arctracker": {
+            "documentation": "https://arctracker.io/developers/docs",
+            "apiBase": "https://arctracker.io",
+            "count": 0,
+            "error": null,
+            "file": "static/arctracker_hideout.json"
+          }
+        },
+        "projects": {
+          "arctracker": {
+            "documentation": "https://arctracker.io/developers/docs",
+            "apiBase": "https://arctracker.io",
+            "count": 0,
+            "error": null,
+            "file": "static/arctracker_projects.json"
+          }
+        }
+      },
+      "hasPriceOverrides": false
+    },
+    "itemCount": 606,
+>>>>>>> origin/main
+>>>>>>> origin/main
     "allQuestsCompleted": true
   },
   "items": [
@@ -113,7 +247,7 @@
     {
       "id": "ancient-fort-security-code",
       "name": "Ancient Fort Security Code",
-      "value": 0,
+      "value": 100,
       "action": "keep",
       "analysis": [
         "Key - opens locked areas and containers",
@@ -127,8 +261,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Angled Grip",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -138,8 +273,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Angled Grip",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -159,8 +295,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Angled Grip",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -189,8 +326,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Anvil",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -200,8 +338,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Anvil",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -211,8 +350,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Anvil",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -222,8 +362,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Anvil",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -245,6 +386,27 @@
       "analysis": [
         "Legendary rarity - extremely valuable",
         "Keep all legendaries"
+      ]
+    },
+    {
+      "id": "aphelion",
+      "name": "Aphelion",
+      "value": 27500,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
+      ]
+    },
+    {
+      "id": "aphelion-blueprint",
+      "name": "Aphelion Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -308,10 +470,11 @@
       "id": "arc-flex-rubber",
       "name": "ARC Flex Rubber",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 16x Rubber Parts",
-        "Recycle value: Components (800 coins) worth less than Item (1000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -320,9 +483,7 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Used in 3 crafting recipes",
-        "Rare crafting material",
-        "Override: treat 'Your Call' as Keep"
+        "Required for hideout upgrade: Refiner (Level 2)"
       ]
     },
     {
@@ -339,10 +500,9 @@
       "id": "arc-powercell",
       "name": "ARC Powercell",
       "value": 270,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Required for hideout upgrade: Refiner (Level 1)"
       ]
     },
     {
@@ -371,8 +531,9 @@
       "value": 5500,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Arpeggio",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -382,8 +543,9 @@
       "value": 8000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Arpeggio",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -393,8 +555,9 @@
       "value": 11500,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Arpeggio",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -404,8 +567,9 @@
       "value": 15000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Arpeggio",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -415,7 +579,7 @@
       "value": 5000,
       "action": "sell",
       "analysis": [
-        "Recycles into: 1x Advanced Mechanical Components, 3x Advanced ARC Powercell",
+        "Recycles into: 3x Advanced ARC Powercell, 1x Advanced Mechanical Components",
         "Recycle value: Components (3670 coins) worth less than Item (5000 coins)"
       ]
     },
@@ -525,8 +689,9 @@
       "value": 8000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bettina",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -536,8 +701,9 @@
       "value": 11000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bettina",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -547,8 +713,9 @@
       "value": 14000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bettina",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -558,8 +725,9 @@
       "value": 18000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bettina",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -579,18 +747,19 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "Recycles into: 4x Plastic Parts, 2x Rubber Parts",
-        "Recycle value: Components (340 coins) worth less than Item (640 coins)"
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
       "id": "bison-driver",
       "name": "Bison Driver",
       "value": 2500,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 2x ARC Motion Core, 2x ARC Alloy",
-        "Recycle value: Components (2400 coins) worth less than Item (2500 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -627,10 +796,11 @@
       "id": "blaze-grenade",
       "name": "Blaze Grenade",
       "value": 1600,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 4x Metal Parts, 2x Oil",
-        "Recycle value: Components (900 coins) worth less than Item (1600 coins)"
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -755,8 +925,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bobcat",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -776,8 +947,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bobcat",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -787,8 +959,9 @@
       "value": 22000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bobcat",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -798,8 +971,9 @@
       "value": 27000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Bobcat",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -876,20 +1050,22 @@
       "id": "broken-handheld-radio",
       "name": "Broken Handheld Radio",
       "value": 2000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 3x Sensors, 2x Wires",
-        "Recycle value: Components (1900 coins) worth less than Item (2000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
       "id": "broken-taser",
       "name": "Broken Taser",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 2x Battery, 2x Wires",
-        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -952,8 +1128,9 @@
       "value": 2900,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Burletta",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -963,8 +1140,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Burletta",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -985,8 +1163,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Burletta",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1099,8 +1278,19 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
+<<<<<<< HEAD
         "Weapon - review based on your current loadout",
         "Consider tier and your play style",
+=======
+<<<<<<< HEAD
+        "Weapon - review based on your current loadout",
+        "Consider tier and your play style",
+=======
+        "Tier 2 variant - review based on your current loadout",
+        "Consider tier and your play style",
+        "Base weapon: Canto",
+>>>>>>> origin/main
+>>>>>>> origin/main
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1110,8 +1300,19 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
+<<<<<<< HEAD
         "Weapon - review based on your current loadout",
         "Consider tier and your play style",
+=======
+<<<<<<< HEAD
+        "Weapon - review based on your current loadout",
+        "Consider tier and your play style",
+=======
+        "Tier 3 variant - review based on your current loadout",
+        "Consider tier and your play style",
+        "Base weapon: Canto",
+>>>>>>> origin/main
+>>>>>>> origin/main
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1121,8 +1322,19 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
+<<<<<<< HEAD
         "Weapon - review based on your current loadout",
         "Consider tier and your play style",
+=======
+<<<<<<< HEAD
+        "Weapon - review based on your current loadout",
+        "Consider tier and your play style",
+=======
+        "Tier 4 variant - review based on your current loadout",
+        "Consider tier and your play style",
+        "Base weapon: Canto",
+>>>>>>> origin/main
+>>>>>>> origin/main
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1133,6 +1345,16 @@
       "action": "keep",
       "analysis": [
         "Required for hideout upgrade: Scrappy (Level 4)"
+      ]
+    },
+    {
+      "id": "celeste-journal",
+      "name": "Celeste's Journal",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -1151,9 +1373,8 @@
       "value": 50,
       "action": "keep",
       "analysis": [
-        "Used in 11 crafting recipes",
-        "Common crafting ingredient",
-        "Override: treat 'Your Call' as Keep"
+        "Override: keep progression material",
+        "Manual default keep override"
       ]
     },
     {
@@ -1182,8 +1403,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "Recycles into: 3x Plastic Parts, 3x Rubber Parts",
-        "Recycle value: Components (330 coins) worth less than Item (640 coins)"
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -1256,8 +1477,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Compensator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1267,8 +1489,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Compensator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1288,8 +1511,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Compensator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1338,10 +1562,11 @@
       "id": "cooling-coil",
       "name": "Cooling Coil",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 6x Chemicals, 2x Steel Spring",
-        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -1357,10 +1582,51 @@
       "id": "cracked-bioscanner",
       "name": "Cracked Bioscanner",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 3x Battery, 3x Rubber Parts",
-        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
+        "Required for hideout upgrade: Medical Lab (Level 2)"
+      ]
+    },
+    {
+      "id": "crash-mat",
+      "name": "Crash Mat",
+      "value": 1200,
+      "action": "keep",
+      "analysis": [
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "crash-mat-blueprint",
+      "name": "Crash Mat Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
+      ]
+    },
+    {
+      "id": "crash-mat",
+      "name": "Crash Mat",
+      "value": 1200,
+      "action": "keep",
+      "analysis": [
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "crash-mat-blueprint",
+      "name": "Crash Mat Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
       ]
     },
     {
@@ -1400,9 +1666,8 @@
       "value": 270,
       "action": "keep",
       "analysis": [
-        "Used in 6 crafting recipes",
-        "Common crafting ingredient",
-        "Override: treat 'Your Call' as Keep"
+        "Override: keep progression material",
+        "Manual default keep override"
       ]
     },
     {
@@ -1418,6 +1683,20 @@
     {
       "id": "dam-control-center-tower-key",
       "name": "Dam Control Tower Key",
+<<<<<<< HEAD
+=======
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "dam-control-tower-key",
+      "name": "Dam Control Tower Key",
+>>>>>>> origin/main
       "value": 100,
       "action": "keep",
       "analysis": [
@@ -1514,16 +1793,25 @@
       "id": "damaged-heat-sink",
       "name": "Damaged Heat Sink",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 6x Metal Parts, 2x Wires",
-        "Recycle value: Components (850 coins) worth less than Item (1000 coins)"
+        "Required for hideout upgrade: Utility Station (Level 2)"
       ]
     },
     {
       "id": "damaged-rocketeer-part",
       "name": "Damaged Rocketeer Driver",
       "value": 2000,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "damaged-snitch-scanner",
+      "name": "Damaged Snitch Scanner",
+      "value": 659,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -1556,8 +1844,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Recycles into: 2x ARC Alloy",
+        "Recycle value: Components (400 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -1618,8 +1906,8 @@
       "value": 1000,
       "action": "sell",
       "analysis": [
-        "Recycles into: 9x Fabric, 9x Rubber Parts",
-        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -1628,18 +1916,49 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "Recycles into: 11x Rubber Parts",
-        "Recycle value: Components (550 coins) worth less than Item (640 coins)"
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
       "id": "diving-googles",
       "name": "Diving Goggles",
       "value": 640,
+      "action": "keep",
+      "analysis": [
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "dockmasters-detector",
+      "name": "Dockmaster’s Detector",
+      "value": 1000,
       "action": "sell",
       "analysis": [
-        "Recycles into: 12x Rubber Parts",
-        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "dodgers-note",
+      "name": "Dodger's Note",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "dockmasters-detector",
+      "name": "Dockmaster\u2019s Detector",
+      "value": 1000,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -1656,10 +1975,9 @@
       "id": "dog-collar",
       "name": "Dog Collar",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 8x Fabric, 1x Metal Parts",
-        "Recycle value: Components (475 coins) worth less than Item (640 coins)"
+        "Required for hideout upgrade: Scrappy (Level 2)"
       ]
     },
     {
@@ -1717,11 +2035,10 @@
       "id": "duct-tape-recipe",
       "name": "Duct Tape",
       "value": 300,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Used in 11 crafting recipes",
-        "Common crafting ingredient",
-        "Override: treat 'Your Call' as Keep"
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -1731,6 +2048,16 @@
       "action": "keep",
       "analysis": [
         "Needed for project: Expedition Project"
+      ]
+    },
+    {
+      "id": "dusty-film-reel",
+      "name": "Dusty Film Reel",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -1784,9 +2111,19 @@
       ]
     },
     {
+      "id": "espresso-machine-parts",
+      "name": "Espresso Machine Parts",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "esr-analyzer",
       "name": "ESR Analyzer",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -1803,6 +2140,16 @@
       ]
     },
     {
+      "id": "experimental-seed-sample",
+      "name": "Experimental Seed Sample",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "expired-pasta",
       "name": "Expired Pasta",
       "value": 1000,
@@ -1816,10 +2163,22 @@
       "id": "expired-respirator",
       "name": "Expired Respirator",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 4x Fabric, 8x Rubber Parts",
-        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "expired-security-code",
+      "name": "Expired Security Code",
+      "value": 10,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -1865,7 +2224,11 @@
     },
     {
       "id": "extended-barrel-i",
+<<<<<<< HEAD
       "name": "Extended Barrel I ",
+=======
+      "name": "Extended Barrel I",
+>>>>>>> origin/main
       "value": 1000,
       "action": "keep",
       "analysis": [
@@ -1911,8 +2274,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Light Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1922,8 +2286,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Light Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1943,8 +2308,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Light Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1964,8 +2330,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Medium Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1975,8 +2342,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Medium Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1996,8 +2364,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Medium Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2017,8 +2386,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Shotgun Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2028,8 +2398,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Shotgun Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2049,8 +2420,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Extended Shotgun Mag",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2070,9 +2442,19 @@
       "value": 50,
       "action": "keep",
       "analysis": [
+<<<<<<< HEAD
         "Used in 3 crafting recipes",
         "Common crafting ingredient",
         "Override: treat 'Your Call' as Keep"
+=======
+<<<<<<< HEAD
+        "Used in 3 crafting recipes",
+        "Common crafting ingredient",
+        "Override: treat 'Your Call' as Keep"
+=======
+        "Required for hideout upgrade: Gear Bench (Level 1), Medical Lab (Level 1)"
+>>>>>>> origin/main
+>>>>>>> origin/main
       ]
     },
     {
@@ -2111,8 +2493,9 @@
       "value": 475,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Ferro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2122,8 +2505,9 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Ferro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2133,8 +2517,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Ferro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2144,8 +2529,9 @@
       "value": 2900,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Ferro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2193,10 +2579,9 @@
       "id": "fireball-burner",
       "name": "Fireball Burner",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 1x ARC Alloy, 1x Crude Explosives",
-        "Recycle value: Components (470 coins) worth less than Item (640 coins)"
+        "Required for hideout upgrade: Refiner (Level 2)"
       ]
     },
     {
@@ -2243,6 +2628,36 @@
       ]
     },
     {
+      "id": "first-wave-compass",
+      "name": "First Wave Compass",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "first-wave-rations",
+      "name": "First Wave Rations",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "first-wave-tape",
+      "name": "First Wave Tape",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "flame-spray",
       "name": "Flame Spray",
       "value": 640,
@@ -2269,14 +2684,14 @@
       "value": 3000,
       "action": "sell",
       "analysis": [
-        "Recycles into: 1x Advanced Mechanical Components, 1x Sensors",
-        "Recycle value: Components (2250 coins) worth less than Item (3000 coins)"
+        "Recycles into: 1x Advanced Mechanical Components",
+        "Recycle value: Components (1750 coins) worth less than Item (3000 coins)"
       ]
     },
     {
       "id": "flushing-terminal-key",
       "name": "Flushing Terminal Key",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -2299,8 +2714,18 @@
       "value": 100,
       "action": "recycle",
       "analysis": [
+<<<<<<< HEAD
         "Recycles into: 6x Plastic Parts, 6x Rubber Parts",
         "Recycle value: Components (660 coins) worth MORE than Item (100 coins)"
+=======
+<<<<<<< HEAD
+        "Recycles into: 6x Plastic Parts, 6x Rubber Parts",
+        "Recycle value: Components (660 coins) worth MORE than Item (100 coins)"
+=======
+        "Recycles into: 6x Plastic Parts",
+        "Recycle value: Components (360 coins) worth MORE than Item (100 coins)"
+>>>>>>> origin/main
+>>>>>>> origin/main
       ]
     },
     {
@@ -2473,8 +2898,9 @@
       "value": 450,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hairpin",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2484,8 +2910,9 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hairpin",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2495,8 +2922,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hairpin",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2506,8 +2934,9 @@
       "value": 2900,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hairpin",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2525,10 +2954,11 @@
       "id": "headphones",
       "name": "Headphones",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 7x Rubber Parts, 1x Speaker Component",
-        "Recycle value: Components (850 coins) worth less than Item (1000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -2559,7 +2989,15 @@
       "value": 700,
       "action": "keep",
       "analysis": [
+<<<<<<< HEAD
         "Used in 21 crafting recipes",
+=======
+<<<<<<< HEAD
+        "Used in 21 crafting recipes",
+=======
+        "Used in 4 crafting recipes",
+>>>>>>> origin/main
+>>>>>>> origin/main
         "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
@@ -2607,6 +3045,17 @@
       ]
     },
     {
+      "id": "hidden-bunker-key",
+      "name": "Hidden Bunker Key",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
       "id": "horizontal-grip",
       "name": "Horizontal Grip",
       "value": 7000,
@@ -2623,9 +3072,16 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
         "Used in 2 crafting recipes",
         "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
+=======
+        "Required for hideout upgrade: Gear Bench (Level 2)"
+>>>>>>> origin/main
       ]
     },
     {
@@ -2654,8 +3110,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hullcracker",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2665,8 +3122,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hullcracker",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2676,8 +3134,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hullcracker",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2687,8 +3146,9 @@
       "value": 22000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Hullcracker IV",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2717,8 +3177,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Il Toro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2728,8 +3189,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Il Toro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2750,8 +3212,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Il Toro",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2871,8 +3334,9 @@
       "value": 840,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Kettle",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2882,8 +3346,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Kettle",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2893,8 +3358,9 @@
       "value": 3000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Kettle",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -2904,8 +3370,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Kettle",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3000,9 +3467,25 @@
       ]
     },
     {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+      "id": "library-book",
+      "name": "Book",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+>>>>>>> origin/main
+>>>>>>> origin/main
       "id": "lidar-scanner",
       "name": "Lidar Scanner",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -3035,7 +3518,7 @@
       "value": 700,
       "action": "keep",
       "analysis": [
-        "Used in 6 crafting recipes",
+        "Used in 2 crafting recipes",
         "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
@@ -3109,8 +3592,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "Recycles into: 3x Plastic Parts, 3x Rubber Parts",
-        "Recycle value: Components (330 coins) worth less than Item (640 coins)"
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -3235,8 +3718,38 @@
       "value": 6000,
       "action": "sell",
       "analysis": [
-        "Recycles into: 1x Magnetic Accelerator, 1x Steel Spring",
-        "Recycle value: Components (5800 coins) worth less than Item (6000 coins)"
+        "Recycles into: 1x Magnetic Accelerator",
+        "Recycle value: Components (5500 coins) worth less than Item (6000 coins)"
+      ]
+    },
+    {
+      "id": "major-aivas-mementos",
+      "name": "Major Aiva's Mementos",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "major-aivas-patch",
+      "name": "Major Aiva's Patch",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "marano-market-business-card",
+      "name": "Marano Market Business Card",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -3265,9 +3778,16 @@
       "value": 640,
       "action": "keep",
       "analysis": [
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
         "Used in 35 crafting recipes",
         "Common crafting ingredient",
         "Override: treat 'Your Call' as Keep"
+=======
+        "Required for hideout upgrade: Gunsmith (Level 2)"
+>>>>>>> origin/main
       ]
     },
     {
@@ -3287,7 +3807,15 @@
       "value": 700,
       "action": "keep",
       "analysis": [
+<<<<<<< HEAD
         "Used in 26 crafting recipes",
+=======
+<<<<<<< HEAD
+        "Used in 26 crafting recipes",
+=======
+        "Used in 7 crafting recipes",
+>>>>>>> origin/main
+>>>>>>> origin/main
         "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
@@ -3364,6 +3892,16 @@
       ]
     },
     {
+      "id": "moisture-meter",
+      "name": "Moisture Meter",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "moss",
       "name": "Moss",
       "value": 500,
@@ -3418,8 +3956,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Muzzle Brake",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3429,8 +3968,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Muzzle Brake",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3450,8 +3990,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Muzzle Brake",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3487,6 +4028,26 @@
       ]
     },
     {
+      "id": "nutrient-meter",
+      "name": "Nutrient Meter",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "official-shutdown-documentation",
+      "name": "Official Shutdown Documentation",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "oil",
       "name": "Oil",
       "value": 300,
@@ -3495,6 +4056,16 @@
         "Used in 3 crafting recipes",
         "Common crafting ingredient",
         "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "old-world-books",
+      "name": "Old World Books",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -3522,8 +4093,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Osprey",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3533,8 +4105,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Osprey",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3544,8 +4117,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Osprey",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3555,8 +4129,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Osprey",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3646,7 +4221,7 @@
     {
       "id": "pilgrims-peak-security-code",
       "name": "Pilgrim's Peak Security Code",
-      "value": 0,
+      "value": 100,
       "action": "keep",
       "analysis": [
         "Key - opens locked areas and containers",
@@ -3660,9 +4235,16 @@
       "value": 60,
       "action": "keep",
       "analysis": [
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
         "Used in 19 crafting recipes",
         "Common crafting ingredient",
         "Override: treat 'Your Call' as Keep"
+=======
+        "Required for hideout upgrade: Gear Bench (Level 1), Utility Station (Level 1)"
+>>>>>>> origin/main
       ]
     },
     {
@@ -3689,25 +4271,45 @@
       "id": "pop-trigger",
       "name": "Pop Trigger",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 1x Crude Explosives, 1x ARC Alloy",
-        "Recycle value: Components (470 coins) worth less than Item (640 coins)"
+        "Required for hideout upgrade: Explosives Station (Level 2)"
       ]
     },
     {
       "id": "portable-television",
       "name": "Portable TV",
       "value": 2000,
+      "action": "keep",
+      "analysis": [
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "possibly-toxic-plant",
+      "name": "Possibly Toxic Plant",
+      "value": 100,
       "action": "sell",
       "analysis": [
-        "Recycles into: 2x Battery, 6x Wires",
-        "Recycle value: Components (1700 coins) worth less than Item (2000 coins)"
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
       "id": "poster-natural-wonder",
       "name": "Poster of Natural Wonder",
+      "value": 2000,
+      "action": "sell",
+      "analysis": [
+        "High value (2000 coins)",
+        "No crafting or upgrade use"
+      ]
+    },
+    {
+      "id": "poster-of-natural-wonders",
+      "name": "Poster of Natural Wonders",
       "value": 2000,
       "action": "sell",
       "analysis": [
@@ -3729,20 +4331,20 @@
       "id": "power-bank",
       "name": "Power Bank",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 2x Battery, 2x Wires",
-        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
       "id": "power-cable",
       "name": "Power Cable",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 4x Wires",
-        "Recycle value: Components (800 coins) worth less than Item (1000 coins)"
+        "Required for hideout upgrade: Gear Bench (Level 2)"
       ]
     },
     {
@@ -3751,7 +4353,7 @@
       "value": 5500,
       "action": "keep",
       "analysis": [
-        "Used in 2 crafting recipes",
+        "Used in 3 crafting recipes",
         "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
@@ -3778,6 +4380,22 @@
       ]
     },
     {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+      "id": "precision-gimbal",
+      "name": "Precision Gimbal",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+>>>>>>> origin/main
+>>>>>>> origin/main
       "id": "prickly-pear",
       "name": "Prickly Pear",
       "value": 640,
@@ -3798,13 +4416,24 @@
       ]
     },
     {
+      "id": "project-heartwood-blueprints",
+      "name": "Project Heartwood Blueprints",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "projector",
       "name": "Projector",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 1x Processor, 2x Wires",
-        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -3842,25 +4471,37 @@
       "id": "radio",
       "name": "Radio",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 1x Sensors, 1x Speaker Component",
-        "Recycle value: Components (1000 coins) worth less than Item (1000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
       "id": "radio-relay",
       "name": "Radio Relay",
       "value": 3000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 2x Sensors, 2x Speaker Component",
-        "Recycle value: Components (2000 coins) worth less than Item (3000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
       "id": "radio-renegade-outfit",
       "name": "Radio Renegade (Outfit)",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "raider-flag",
+      "name": "Raider Flag",
       "value": 0,
       "action": "sell",
       "analysis": [
@@ -3892,7 +4533,7 @@
     {
       "id": "raiders-refuge-security-code",
       "name": "Raider's Refuge Security Code",
-      "value": 0,
+      "value": 100,
       "action": "keep",
       "analysis": [
         "Key - opens locked areas and containers",
@@ -3960,8 +4601,9 @@
       "value": 1750,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Rattler",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3971,8 +4613,9 @@
       "value": 3000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Rattler",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3982,8 +4625,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Rattler",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3993,8 +4637,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Rattler",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4053,7 +4698,7 @@
     {
       "id": "reinforced-reception-security-code",
       "name": "Reinforced Reception Security Code",
-      "value": 0,
+      "value": 100,
       "action": "keep",
       "analysis": [
         "Key - opens locked areas and containers",
@@ -4065,10 +4710,11 @@
       "id": "remote-control",
       "name": "Remote Control",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 7x Plastic Parts, 1x Sensors",
-        "Recycle value: Components (920 coins) worth less than Item (1000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -4098,8 +4744,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Renegade",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4109,8 +4756,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Renegade",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4120,8 +4768,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Renegade",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4131,8 +4780,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Renegade",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4158,7 +4808,11 @@
     },
     {
       "id": "riven-tides-classifed-records-keycard",
+<<<<<<< HEAD
       "name": "Riven Tides Classifed Records Keycard",
+=======
+      "name": "Riven Tides Classified Records Keycard",
+>>>>>>> origin/main
       "value": 100,
       "action": "keep",
       "analysis": [
@@ -4168,6 +4822,23 @@
       ]
     },
     {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+      "id": "riven-tides-classified-records-keycard",
+      "name": "Riven Tides Classified Records Keycard",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+>>>>>>> origin/main
+>>>>>>> origin/main
       "id": "riven-tides-crane-house-keycard",
       "name": "Riven Tides Crane House Keycard",
       "value": 100,
@@ -4272,7 +4943,7 @@
       "value": 2000,
       "action": "sell",
       "analysis": [
-        "Recycles into: 2x Synthesized Fuel, 6x Metal Parts",
+        "Recycles into: 6x Metal Parts, 2x Synthesized Fuel",
         "Recycle value: Components (1850 coins) worth less than Item (2000 coins)"
       ]
     },
@@ -4340,10 +5011,11 @@
       "id": "rubber-pad",
       "name": "Rubber Pad",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 18x Rubber Parts",
-        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -4359,10 +5031,11 @@
       "id": "ruined-accordion",
       "name": "Ruined Accordion",
       "value": 2000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 18x Rubber Parts, 3x Steel Spring",
-        "Recycle value: Components (1800 coins) worth less than Item (2000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -4381,8 +5054,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "Recycles into: 6x Metal Parts, 3x Rubber Parts",
-        "Recycle value: Components (600 coins) worth less than Item (640 coins)"
+        "Recycles into: 6x Metal Parts",
+        "Recycle value: Components (450 coins) worth less than Item (640 coins)"
       ]
     },
     {
@@ -4411,8 +5084,8 @@
       "value": 1000,
       "action": "sell",
       "analysis": [
-        "Recycles into: 10x Plastic Parts, 6x Rubber Parts",
-        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
+        "Recycles into: 10x Plastic Parts",
+        "Recycle value: Components (600 coins) worth less than Item (1000 coins)"
       ]
     },
     {
@@ -4457,10 +5130,9 @@
       "id": "rusted-tools",
       "name": "Rusted Tools",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 8x Metal Parts, 1x Steel Spring",
-        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
+        "Required for hideout upgrade: Gunsmith (Level 2)"
       ]
     },
     {
@@ -4481,6 +5153,37 @@
       "analysis": [
         "Recycles into: 14x Assorted Seeds, 2x Electrical Components",
         "Recycle value: Components (2680 coins) worth less than Item (3000 coins)"
+      ]
+    },
+    {
+      "id": "scout-patrol-note",
+      "name": "Scout Patrol Note",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "secret-meeting-info",
+      "name": "Secret Meeting Info",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
+      "id": "seed-vault-box-key",
+      "name": "Seed Vault Box Key",
+      "value": 100,
+      "action": "keep",
+      "analysis": [
+        "Key - opens locked areas and containers",
+        "Review based on areas you want to access",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -4561,8 +5264,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Shotgun Choke",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4572,8 +5276,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Shotgun Choke",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4593,8 +5298,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Shotgun Choke",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4646,7 +5352,7 @@
       "value": 2100,
       "action": "sell",
       "analysis": [
-        "Recycles into: 2x Battery, 1x Electrical Components",
+        "Recycles into: 1x Electrical Components, 1x Voltage Converter",
         "Recycle value: Components (1140 coins) worth less than Item (2100 coins)"
       ]
     },
@@ -4697,8 +5403,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Silencer",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4718,8 +5425,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Silencer",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4739,8 +5447,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Silencer",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4760,7 +5469,7 @@
       "value": 330,
       "action": "keep",
       "analysis": [
-        "Used in 24 crafting recipes",
+        "Used in 7 crafting recipes",
         "Common crafting ingredient",
         "Override: treat 'Your Call' as Keep"
       ]
@@ -4831,10 +5540,9 @@
       "id": "snitch-scanner",
       "name": "Snitch Scanner",
       "value": 2000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 1x ARC Alloy, 2x Electrical Components",
-        "Recycle value: Components (1480 coins) worth less than Item (2000 coins)"
+        "Required for hideout upgrade: Utility Station (Level 2)"
       ]
     },
     {
@@ -4897,7 +5605,7 @@
       "value": 500,
       "action": "keep",
       "analysis": [
-        "Used in 2 crafting recipes",
+        "Used in 3 crafting recipes",
         "Rare crafting material",
         "Override: treat 'Your Call' as Keep"
       ]
@@ -4908,8 +5616,8 @@
       "value": 3000,
       "action": "sell",
       "analysis": [
-        "Recycles into: 1x Advanced Electrical Components, 1x Sensors",
-        "Recycle value: Components (2250 coins) worth less than Item (3000 coins)"
+        "Recycles into: 1x Advanced Electrical Components",
+        "Recycle value: Components (1750 coins) worth less than Item (3000 coins)"
       ]
     },
     {
@@ -4918,18 +5626,18 @@
       "value": 3500,
       "action": "sell",
       "analysis": [
-        "Recycles into: 1x Exodus Modules, 1x Sensors",
-        "Recycle value: Components (3250 coins) worth less than Item (3500 coins)"
+        "Recycles into: 1x Exodus Modules",
+        "Recycle value: Components (2750 coins) worth less than Item (3500 coins)"
       ]
     },
     {
       "id": "spotter-relay",
       "name": "Spotter Relay",
       "value": 1000,
-      "action": "recycle",
+      "action": "sell",
       "analysis": [
-        "Recycles into: 1x ARC Alloy, 2x Electrical Components",
-        "Recycle value: Components (1480 coins) worth MORE than Item (1000 coins)"
+        "Recycles into: 1x ARC Alloy, 1x Electrical Components",
+        "Recycle value: Components (840 coins) worth less than Item (1000 coins)"
       ]
     },
     {
@@ -4947,8 +5655,8 @@
       "value": 2000,
       "action": "sell",
       "analysis": [
-        "Recycles into: 2x Durable Cloth, 2x Steel Spring",
-        "Recycle value: Components (1880 coins) worth less than Item (2000 coins)"
+        "Recycles into: 2x Durable Cloth",
+        "Recycle value: Components (1280 coins) worth less than Item (2000 coins)"
       ]
     },
     {
@@ -4957,8 +5665,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stable Stock",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4968,8 +5677,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stable Stock",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4989,8 +5699,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stable Stock",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5007,7 +5718,7 @@
     {
       "id": "stack-of-movie-tapes",
       "name": "Stack of Movie Tapes",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -5085,8 +5796,9 @@
       "value": 800,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stitcher",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5096,8 +5808,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stitcher",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5107,8 +5820,9 @@
       "value": 3000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stitcher",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5118,8 +5832,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Stitcher",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5136,7 +5851,15 @@
     {
       "id": "surge-coil",
       "name": "Surge Coil",
+<<<<<<< HEAD
       "value": 0,
+=======
+<<<<<<< HEAD
+      "value": 0,
+=======
+      "value": 2100,
+>>>>>>> origin/main
+>>>>>>> origin/main
       "action": "keep",
       "analysis": [
         "Rare rarity",
@@ -5180,9 +5903,7 @@
       "value": 700,
       "action": "keep",
       "analysis": [
-        "Used in 1 crafting recipes",
-        "Rare crafting material",
-        "Override: treat 'Your Call' as Keep"
+        "Required for hideout upgrade: Explosives Station (Level 2)"
       ]
     },
     {
@@ -5212,8 +5933,8 @@
       "value": 640,
       "action": "sell",
       "analysis": [
-        "Recycles into: 3x Plastic Parts, 3x Rubber Parts",
-        "Recycle value: Components (330 coins) worth less than Item (640 coins)"
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -5358,8 +6079,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Tempest",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5379,8 +6101,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Tempest",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5390,8 +6113,9 @@
       "value": 22000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Tempest",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5401,8 +6125,9 @@
       "value": 27000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Tempest",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5410,30 +6135,29 @@
       "id": "thermostat",
       "name": "Thermostat",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 7x Rubber Parts, 1x Sensors",
-        "Recycle value: Components (850 coins) worth less than Item (1000 coins)"
+        "Rare rarity",
+        "May have future use - review carefully",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
       "id": "tick-pod",
       "name": "Tick Pod",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 2x ARC Alloy, 2x Chemicals",
-        "Recycle value: Components (500 coins) worth less than Item (640 coins)"
+        "Required for hideout upgrade: Medical Lab (Level 2)"
       ]
     },
     {
       "id": "toaster",
       "name": "Toaster",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 5x Plastic Parts, 3x Wires",
-        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
+        "Required for hideout upgrade: Refiner (Level 2)"
       ]
     },
     {
@@ -5482,8 +6206,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Torrente",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5493,8 +6218,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Torrente",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5504,8 +6230,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Torrente",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5515,8 +6242,31 @@
       "value": 15000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Torrente",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "trailblazer",
+      "name": "Trailblazer",
+      "value": 2200,
+      "action": "keep",
+      "analysis": [
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "trailblazer-blueprint",
+      "name": "Trailblazer Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Blueprint - valuable for unlocking crafting recipes",
+        "Review carefully before selling or recycling",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5578,8 +6328,18 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
+<<<<<<< HEAD
         "Epic rarity",
         "May have future use - review carefully",
+=======
+<<<<<<< HEAD
+        "Epic rarity",
+        "May have future use - review carefully",
+=======
+        "Used in 1 crafting recipes",
+        "Rare crafting material",
+>>>>>>> origin/main
+>>>>>>> origin/main
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5660,8 +6420,9 @@
       "value": 7000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Venator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5671,8 +6432,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Venator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5682,8 +6444,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Venator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5693,8 +6456,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Venator",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5714,8 +6478,9 @@
       "value": 640,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vertical Grip",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5725,8 +6490,9 @@
       "value": 2000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vertical Grip",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5746,8 +6512,9 @@
       "value": 5000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vertical Grip",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5849,8 +6616,9 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vulcano",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5860,8 +6628,9 @@
       "value": 13000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 2 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vulcano",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5871,8 +6640,9 @@
       "value": 17000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 3 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vulcano",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5882,8 +6652,9 @@
       "value": 22000,
       "action": "keep",
       "analysis": [
-        "Weapon - review based on your current loadout",
+        "Tier 4 variant - review based on your current loadout",
         "Consider tier and your play style",
+        "Base weapon: Vulcano",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5901,10 +6672,9 @@
       "id": "wasp-driver",
       "name": "Wasp Driver",
       "value": 640,
-      "action": "recycle",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 1x ARC Alloy, 1x Electrical Components",
-        "Recycle value: Components (840 coins) worth MORE than Item (640 coins)"
+        "Required for hideout upgrade: Gunsmith (Level 2)"
       ]
     },
     {
@@ -5913,8 +6683,8 @@
       "value": 1000,
       "action": "sell",
       "analysis": [
-        "Recycles into: 3x Canister, 2x Rubber Parts",
-        "Recycle value: Components (1000 coins) worth less than Item (1000 coins)"
+        "Recycles into: 3x Canister",
+        "Recycle value: Components (900 coins) worth less than Item (1000 coins)"
       ]
     },
     {

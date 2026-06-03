@@ -1,25 +1,16 @@
 from __future__ import annotations
 
-import json
-import re
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Mapping, Sequence
+from collections.abc import Mapping, Sequence
+from typing import Any, cast
+
+import orjson
+
+from ..utils.normalization import normalize_quest_name, normalize_text
 
 
-def _normalize_quest_name(value: object) -> str:
-    normalized = str(value or "").lower().replace("'", "").replace("’", "")
-    normalized = re.sub(r"[^a-z0-9]+", " ", normalized)
-    return re.sub(r"\s+", " ", normalized).strip()
-
-
-def _normalize_text(value: object) -> str:
-    if not isinstance(value, str):
-        return ""
-    return value.strip()
-
-
-def _safe_float(value: object) -> float:
+def _safe_float(value: Any) -> float:
     try:
         return float(value)
     except (TypeError, ValueError):
@@ -27,10 +18,10 @@ def _safe_float(value: object) -> float:
 
 
 def _item_key(item: Mapping[str, object]) -> str:
-    item_id = _normalize_text(item.get("id"))
+    item_id = normalize_text(item.get("id"))
     if item_id:
         return f"id:{item_id}"
-    name = _normalize_text(item.get("name"))
+    name = normalize_text(item.get("name"))
     if name:
         return f"name:{name.lower()}"
     return ""
@@ -44,30 +35,30 @@ def load_json(path: Path, default: Any) -> Any:
     if not path.exists():
         return default
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
+        return orjson.loads(path.read_bytes())
+    except orjson.JSONDecodeError:
         return default
 
 
-def diff_quests(
-    before_quests: Sequence[object], after_quests: Sequence[object]
-) -> dict:
-    before_by_id: Dict[str, Mapping[str, object]] = {}
-    after_by_id: Dict[str, Mapping[str, object]] = {}
+def diff_quests(before_quests: Sequence[object], after_quests: Sequence[object]) -> dict:
+    before_by_id: dict[str, Any] = {}
+    after_by_id: dict[str, Any] = {}
 
     for quest in before_quests:
         if not isinstance(quest, dict):
             continue
-        quest_id = _normalize_text(quest.get("id"))
+        quest_d = cast(dict[str, Any], quest)
+        quest_id = normalize_text(quest_d.get("id"))
         if quest_id:
-            before_by_id[quest_id] = quest
+            before_by_id[quest_id] = quest_d
 
     for quest in after_quests:
         if not isinstance(quest, dict):
             continue
-        quest_id = _normalize_text(quest.get("id"))
+        quest_d = cast(dict[str, Any], quest)
+        quest_id = normalize_text(quest_d.get("id"))
         if quest_id:
-            after_by_id[quest_id] = quest
+            after_by_id[quest_id] = quest_d
 
     before_ids = set(before_by_id.keys())
     after_ids = set(after_by_id.keys())
@@ -98,7 +89,7 @@ def diff_quests(
         for quest_id in removed_ids
     ]
 
-    changed: List[dict] = []
+    changed: list[dict] = []
     changed_fields = (
         "name",
         "trader",
@@ -110,22 +101,22 @@ def diff_quests(
     for quest_id in common_ids:
         before = before_by_id[quest_id]
         after = after_by_id[quest_id]
-        changes: Dict[str, dict] = {}
+        changes: dict[str, dict] = {}
         for field in changed_fields:
-            if before.get(field) != after.get(field):
+            before_val = before.get(field)
+            after_val = after.get(field)
+            if before_val != after_val:
                 changes[field] = {
-                    "before": before.get(field),
-                    "after": after.get(field),
+                    "before": before_val,
+                    "after": after_val,
                 }
         if not changes:
             continue
-        changed.append(
-            {
-                "id": quest_id,
-                "name": after.get("name") or before.get("name"),
-                "changes": changes,
-            }
-        )
+        changed.append({
+            "id": quest_id,
+            "name": after.get("name") or before.get("name"),
+            "changes": changes,
+        })
 
     changed.sort(key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id"))))
 
@@ -141,30 +132,30 @@ def diff_quests(
     }
 
 
-def diff_rules(
-    before_payload: Mapping[str, object], after_payload: Mapping[str, object]
-) -> dict:
+def diff_rules(before_payload: Mapping[str, object], after_payload: Mapping[str, object]) -> dict:
     before_items_raw = before_payload.get("items")
     after_items_raw = after_payload.get("items")
     before_items = before_items_raw if isinstance(before_items_raw, list) else []
     after_items = after_items_raw if isinstance(after_items_raw, list) else []
 
-    before_by_key: Dict[str, Mapping[str, object]] = {}
-    after_by_key: Dict[str, Mapping[str, object]] = {}
+    before_by_key: dict[str, Any] = {}
+    after_by_key: dict[str, Any] = {}
 
     for item in before_items:
         if not isinstance(item, dict):
             continue
-        key = _item_key(item)
+        item_d = cast(dict[str, Any], item)
+        key = _item_key(item_d)
         if key:
-            before_by_key[key] = item
+            before_by_key[key] = item_d
 
     for item in after_items:
         if not isinstance(item, dict):
             continue
-        key = _item_key(item)
+        item_d = cast(dict[str, Any], item)
+        key = _item_key(item_d)
         if key:
-            after_by_key[key] = item
+            after_by_key[key] = item_d
 
     before_keys = set(before_by_key.keys())
     after_keys = set(after_by_key.keys())
@@ -174,106 +165,97 @@ def diff_rules(
 
     added = [
         {
-            "id": after_by_key[key].get("id"),
-            "name": after_by_key[key].get("name"),
-            "value": after_by_key[key].get("value"),
-            "action": after_by_key[key].get("action"),
+            "id": item.get("id"),
+            "name": item.get("name"),
+            "value": item.get("value"),
+            "action": item.get("action"),
         }
         for key in added_keys
+        if (item := after_by_key[key]) or True
     ]
 
     removed = [
         {
-            "id": before_by_key[key].get("id"),
-            "name": before_by_key[key].get("name"),
-            "value": before_by_key[key].get("value"),
-            "action": before_by_key[key].get("action"),
+            "id": item.get("id"),
+            "name": item.get("name"),
+            "value": item.get("value"),
+            "action": item.get("action"),
         }
         for key in removed_keys
+        if (item := before_by_key[key]) or True
     ]
 
-    modified: List[dict] = []
-    value_changed: List[dict] = []
-    action_changed: List[dict] = []
-    analysis_changed: List[dict] = []
-    name_changed: List[dict] = []
+    modified: list[dict] = []
+    value_changed: list[dict] = []
+    action_changed: list[dict] = []
+    analysis_changed: list[dict] = []
+    name_changed: list[dict] = []
 
     for key in common_keys:
         before = before_by_key[key]
         after = after_by_key[key]
-        changes: Dict[str, dict] = {}
+        changes: dict[str, dict] = {}
 
-        if before.get("value") != after.get("value"):
-            change = {"before": before.get("value"), "after": after.get("value")}
+        before_value = before.get("value")
+        after_value = after.get("value")
+        before_action = before.get("action")
+        after_action = after.get("action")
+        before_analysis_raw = before.get("analysis")
+        after_analysis_raw = after.get("analysis")
+        before_name = before.get("name")
+        after_name = after.get("name")
+
+        # Cache IDs and Names for changes
+        after_id_or_before = after.get("id") or before.get("id")
+        after_name_or_before = after_name or before_name
+
+        if before_value != after_value:
+            change = {"before": before_value, "after": after_value}
             changes["value"] = change
-            value_changed.append(
-                {
-                    "id": after.get("id") or before.get("id"),
-                    "name": after.get("name") or before.get("name"),
-                    **change,
-                }
-            )
+            value_changed.append({
+                "id": after_id_or_before,
+                "name": after_name_or_before,
+                **change,
+            })
 
-        if before.get("action") != after.get("action"):
-            change = {"before": before.get("action"), "after": after.get("action")}
+        if before_action != after_action:
+            change = {"before": before_action, "after": after_action}
             changes["action"] = change
-            action_changed.append(
-                {
-                    "id": after.get("id") or before.get("id"),
-                    "name": after.get("name") or before.get("name"),
-                    **change,
-                }
-            )
+            action_changed.append({
+                "id": after_id_or_before,
+                "name": after_name_or_before,
+                **change,
+            })
 
-        before_analysis = (
-            before.get("analysis") if isinstance(before.get("analysis"), list) else []
-        )
-        after_analysis = (
-            after.get("analysis") if isinstance(after.get("analysis"), list) else []
-        )
+        before_analysis = before_analysis_raw if isinstance(before_analysis_raw, list) else []
+        after_analysis = after_analysis_raw if isinstance(after_analysis_raw, list) else []
         if before_analysis != after_analysis:
             changes["analysis"] = {"before": before_analysis, "after": after_analysis}
-            analysis_changed.append(
-                {
-                    "id": after.get("id") or before.get("id"),
-                    "name": after.get("name") or before.get("name"),
-                }
-            )
+            analysis_changed.append({
+                "id": after_id_or_before,
+                "name": after_name_or_before,
+            })
 
-        if before.get("name") != after.get("name"):
-            change = {"before": before.get("name"), "after": after.get("name")}
+        if before_name != after_name:
+            change = {"before": before_name, "after": after_name}
             changes["name"] = change
-            name_changed.append(
-                {
-                    "id": after.get("id") or before.get("id"),
-                    **change,
-                }
-            )
+            name_changed.append({
+                "id": after_id_or_before,
+                **change,
+            })
 
         if changes:
-            modified.append(
-                {
-                    "id": after.get("id") or before.get("id"),
-                    "name": after.get("name") or before.get("name"),
-                    "changes": changes,
-                }
-            )
+            modified.append({
+                "id": after_id_or_before,
+                "name": after_name_or_before,
+                "changes": changes,
+            })
 
-    modified.sort(
-        key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id")))
-    )
-    value_changed.sort(
-        key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id")))
-    )
-    action_changed.sort(
-        key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id")))
-    )
-    analysis_changed.sort(
-        key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id")))
-    )
-    name_changed.sort(
-        key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id")))
-    )
+    modified.sort(key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id"))))
+    value_changed.sort(key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id"))))
+    action_changed.sort(key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id"))))
+    analysis_changed.sort(key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id"))))
+    name_changed.sort(key=lambda entry: (str(entry.get("name") or ""), str(entry.get("id"))))
 
     return {
         "beforeCount": len(before_by_key),
@@ -295,37 +277,24 @@ def diff_rules(
     }
 
 
-def graph_gap_report(
-    quests: Sequence[object], quest_graph: Mapping[str, object]
-) -> dict:
+def graph_gap_report(quests: Sequence[object], quest_graph: Mapping[str, object]) -> dict:
     nodes = quest_graph.get("nodes")
     node_values = nodes.values() if isinstance(nodes, dict) else []
-    node_names_normalized = {
-        _normalize_quest_name(node_name)
-        for node_name in node_values
-        if _normalize_quest_name(node_name)
-    }
+    node_names_normalized = {n for node_name in node_values if (n := normalize_quest_name(node_name))}
 
-    quest_entries = [quest for quest in quests if isinstance(quest, dict)]
-    quest_names_normalized = {
-        _normalize_quest_name(quest.get("name"))
-        for quest in quest_entries
-        if _normalize_quest_name(quest.get("name"))
-    }
+    quest_entries: list[dict[str, Any]] = [cast(dict[str, Any], quest) for quest in quests if isinstance(quest, dict)]
+    quest_names_normalized = {n for quest in quest_entries if (n := normalize_quest_name(quest.get("name")))}
 
-    missing_quests: List[dict] = []
+    missing_quests: list[dict] = []
     for quest in quest_entries:
-        quest_name = _normalize_quest_name(quest.get("name"))
-        if not quest_name or quest_name in node_names_normalized:
+        if not (quest_name := normalize_quest_name(quest.get("name"))) or quest_name in node_names_normalized:
             continue
-        missing_quests.append(
-            {
-                "id": quest.get("id"),
-                "name": quest.get("name"),
-                "trader": quest.get("trader"),
-                "sortOrder": quest.get("sortOrder"),
-            }
-        )
+        missing_quests.append({
+            "id": quest.get("id"),
+            "name": quest.get("name"),
+            "trader": quest.get("trader"),
+            "sortOrder": quest.get("sortOrder"),
+        })
 
     missing_quests.sort(
         key=lambda quest: (
@@ -347,10 +316,8 @@ def graph_gap_report(
     }
 
 
-def _render_item_list(
-    items: Sequence[Mapping[str, object]], limit: int = 10
-) -> List[str]:
-    lines: List[str] = []
+def _render_item_list(items: Sequence[Mapping[str, object]], limit: int = 10) -> list[str]:
+    lines: list[str] = []
     for entry in list(items)[:limit]:
         item_id = entry.get("id") or "unknown-id"
         name = entry.get("name") or "Unknown"
@@ -358,29 +325,21 @@ def _render_item_list(
     return lines
 
 
-def build_markdown_summary(
-    report: Mapping[str, object], *, sample_limit: int = 10
-) -> str:
+def build_markdown_summary(report: Mapping[str, Any], *, sample_limit: int = 10) -> str:
     snapshot = report.get("snapshot") or {}
     quests = report.get("quests") or {}
     rules = report.get("rules") or {}
     graph = report.get("questGraph") or {}
     assumptions = report.get("assumptions") or {}
 
-    lines: List[str] = []
+    lines: list[str] = []
     lines.append("# Daily Metaforge Data Update Report")
     lines.append("")
     lines.append(f"Generated at: `{report.get('generatedAt', iso_now())}`")
     lines.append("")
     lines.append("## Snapshot")
-    lines.append(
-        "- Items: "
-        f"{snapshot.get('beforeItemCount', 0)} -> {snapshot.get('afterItemCount', 0)}"
-    )
-    lines.append(
-        "- Quests: "
-        f"{snapshot.get('beforeQuestCount', 0)} -> {snapshot.get('afterQuestCount', 0)}"
-    )
+    lines.append(f"- Items: {snapshot.get('beforeItemCount', 0)} -> {snapshot.get('afterItemCount', 0)}")
+    lines.append(f"- Quests: {snapshot.get('beforeQuestCount', 0)} -> {snapshot.get('afterQuestCount', 0)}")
     lines.append(
         "- Data lastUpdated: "
         f"`{snapshot.get('beforeLastUpdated', 'unknown')}` -> "
@@ -438,24 +397,18 @@ def build_markdown_summary(
     if isinstance(action_changed, list) and action_changed:
         lines.append("- Action changes (sample):")
         for entry in action_changed[:sample_limit]:
-            lines.append(
-                f"  - `{entry.get('id')}`: "
-                f"`{entry.get('before')}` -> `{entry.get('after')}`"
-            )
+            lines.append(f"  - `{entry.get('id')}`: `{entry.get('before')}` -> `{entry.get('after')}`")
 
     value_changed = rules.get("valueChanged")
     if isinstance(value_changed, list) and value_changed:
         lines.append("- Value changes (sample):")
         for entry in value_changed[:sample_limit]:
-            lines.append(
-                f"  - `{entry.get('id')}`: "
-                f"`{entry.get('before')}` -> `{entry.get('after')}`"
-            )
+            lines.append(f"  - `{entry.get('id')}`: `{entry.get('before')}` -> `{entry.get('after')}`")
 
     lines.append("")
     lines.append("## Quest Graph Coverage")
     missing_count = graph.get("questsMissingFromGraphCount", 0)
-    lines.append("- Missing quests in `quests_graph.json`: " f"`{missing_count}`")
+    lines.append(f"- Missing quests in `quests_graph.json`: `{missing_count}`")
     if isinstance(missing_count, int) and missing_count > 0:
         lines.append(":warning: Graph drift detected. Solver fallback may be used.")
         missing_quests = graph.get("questsMissingFromGraph")
@@ -465,21 +418,12 @@ def build_markdown_summary(
 
     lines.append("")
     lines.append("## Generation Baseline")
-    lines.append(
-        "- `allQuestsCompleted`: " f"`{assumptions.get('allQuestsCompleted', False)}`"
-    )
-    lines.append(
-        "- Workshop profile: " f"`{assumptions.get('workshopProfile', 'unknown')}`"
-    )
-    lines.append(
-        "- Workshop IDs at level 2: "
-        f"`{', '.join(assumptions.get('workshopIds', []))}`"
-    )
+    lines.append(f"- `allQuestsCompleted`: `{assumptions.get('allQuestsCompleted', False)}`")
+    lines.append(f"- Workshop profile: `{assumptions.get('workshopProfile', 'unknown')}`")
+    lines.append(f"- Workshop IDs at level 2: `{', '.join(assumptions.get('workshopIds', []))}`")
     lines.append("- Report artifact: `artifacts/update-report.json`")
 
     lines.append("")
-    lines.append(
-        "This PR was generated automatically by the scheduled data update workflow."
-    )
+    lines.append("This PR was generated automatically by the scheduled data update workflow.")
 
     return "\n".join(lines) + "\n"

@@ -1,8 +1,43 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
-from typing import Optional
+from typing import Any, cast
+
+import orjson
+from ..core.item_actions import clean_ocr_text
+
+_ITEM_NAMES: tuple[str, ...] | None = None
+
+
+def get_item_names() -> tuple[str, ...]:
+    global _ITEM_NAMES
+    if _ITEM_NAMES is not None:
+        return _ITEM_NAMES
+
+    payload = load_rules()
+    names: list[str] = []
+    seen: set[str] = set()
+    for entry in payload.get("items", []):
+        if not isinstance(entry, dict):
+            continue
+        name = entry.get("name")
+        if not isinstance(name, str):
+            continue
+        cleaned = clean_ocr_text(name)
+        key = cleaned.casefold()
+        if not cleaned or key in seen:
+            continue
+        seen.add(key)
+        names.append(cleaned)
+
+    _ITEM_NAMES = tuple(names)
+    return _ITEM_NAMES
+
+
+def reset_item_names_cache() -> None:
+    global _ITEM_NAMES
+    _ITEM_NAMES = None
+
 
 DEFAULT_RULES_PATH = Path(__file__).with_name("items_rules.default.json")
 CUSTOM_RULES_PATH = Path(__file__).with_name("items_rules.custom.json")
@@ -18,10 +53,11 @@ def using_custom_rules() -> bool:
 
 def _coerce_payload(raw: object) -> dict:
     if isinstance(raw, dict):
-        items = raw.get("items")
+        raw_d = cast(dict[str, Any], raw)
+        items = raw_d.get("items")
         if not isinstance(items, list):
             items = []
-        metadata = raw.get("metadata") if isinstance(raw.get("metadata"), dict) else {}
+        metadata = raw_d.get("metadata") if isinstance(raw_d.get("metadata"), dict) else {}
         return {"metadata": metadata, "items": items}
 
     if isinstance(raw, list):
@@ -30,12 +66,11 @@ def _coerce_payload(raw: object) -> dict:
     return {"metadata": {}, "items": []}
 
 
-def load_rules(path: Optional[Path] = None) -> dict:
+def load_rules(path: Path | None = None) -> dict:
     rules_path = path or active_rules_path()
     if not rules_path.exists():
         return {"metadata": {}, "items": []}
-    with rules_path.open("r", encoding="utf-8") as fp:
-        raw = json.load(fp)
+    raw = orjson.loads(rules_path.read_bytes())
     return _coerce_payload(raw)
 
 
@@ -43,21 +78,19 @@ def save_rules(payload: dict, path: Path) -> None:
     items = payload.get("items")
     if not isinstance(items, list):
         items = []
-    metadata = (
-        payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
-    )
+    meta_raw = payload.get("metadata")
+    metadata: dict[str, Any] = meta_raw if isinstance(meta_raw, dict) else {}
     metadata["itemCount"] = len(items)
     payload = {"metadata": metadata, "items": items}
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as fp:
-        json.dump(payload, fp, indent=2)
+    path.write_bytes(orjson.dumps(payload, option=orjson.OPT_INDENT_2))
 
 
 def save_custom_rules(payload: dict) -> None:
     save_rules(payload, CUSTOM_RULES_PATH)
 
 
-def normalize_action(value: str) -> Optional[str]:
+def normalize_action(value: str) -> str | None:
     raw = value.strip().lower()
     if raw in {"k", "keep"}:
         return "keep"

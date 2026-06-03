@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List
+from typing import Any, cast
 
 from rich.text import Text
 from textual import events
@@ -173,7 +173,7 @@ class ActiveQuestsScreen(ProgressScreen):
         self.state = state
         self.search_query = ""
         self.sort_mode: str = "name_asc"
-        self.filtered: List[QuestEntry] = []
+        self.filtered: list[QuestEntry] = []
 
     def compose(self) -> ComposeResult:
         yield Static("Select Active Quests", id="quest-title")
@@ -182,9 +182,7 @@ class ActiveQuestsScreen(ProgressScreen):
             classes="hint",
         )
         with Horizontal(id="quest-filterbar"):
-            yield Input(
-                placeholder="Search quests... (name, id, trader)", id="quest-search"
-            )
+            yield Input(placeholder="Search quests... (name, id, trader)", id="quest-search")
             yield Button("Sort: Name A-Z", id="quest-sort", variant="primary")
         yield Static(id="quest-list-summary", classes="hint")
         yield OptionList(id="quest-list")
@@ -205,7 +203,7 @@ class ActiveQuestsScreen(ProgressScreen):
     def _focus_list(self) -> None:
         self.query_one("#quest-list", OptionList).focus()
 
-    def _sorted_entries(self) -> List[QuestEntry]:
+    def _sorted_entries(self) -> list[QuestEntry]:
         entries = list(self.state.quest_entries)
         if self.sort_mode == "trader":
             entries.sort(
@@ -225,22 +223,18 @@ class ActiveQuestsScreen(ProgressScreen):
         )
         return entries
 
-    def _filtered_entries(self) -> List[QuestEntry]:
+    def _filtered_entries(self) -> list[QuestEntry]:
         entries = self._sorted_entries()
         if not self.search_query:
             return entries
         normalized = normalize_quest_value(self.search_query)
         if not normalized:
             return entries
-        results: List[QuestEntry] = []
+        results: list[QuestEntry] = []
         for entry in entries:
             name_norm = normalize_quest_value(entry.name)
             trader_norm = normalize_quest_value(entry.trader)
-            if (
-                normalized in name_norm
-                or normalized in trader_norm
-                or normalized == entry.id
-            ):
+            if normalized in name_norm or normalized in trader_norm or normalized == entry.id:
                 results.append(entry)
         return results
 
@@ -340,7 +334,7 @@ class ActiveQuestsScreen(ProgressScreen):
             return
         self.app.push_screen(WorkshopLevelsScreen(self.state, wizard_mode=True))
 
-    def action_toggle(self) -> None:
+    def action_toggle_selected(self) -> None:
         self._toggle_selected()
 
     def action_cycle_sort(self) -> None:
@@ -453,9 +447,7 @@ class WorkshopLevelsScreen(ProgressScreen):
     def _refresh_options(self) -> None:
         menu = self.query_one("#workshop-list", OptionList)
         prev_highlight = menu.highlighted
-        options = [
-            Option(self._option_label(entry), id=entry.id) for entry in self.entries
-        ]
+        options = [Option(self._option_label(entry), id=entry.id) for entry in self.entries]
         menu.set_options(options)
         if options:
             if prev_highlight is None:
@@ -561,9 +553,7 @@ class ProgressSummaryScreen(ProgressScreen):
     def _render_summary(self) -> None:
         active_count = len(self.state.active_ids)
         workshop_count = len(self.state.hideout_levels)
-        requirement_entries = [
-            entry for entry in self.state.quest_entries if entry.has_requirements
-        ]
+        requirement_entries = [entry for entry in self.state.quest_entries if entry.has_requirements]
         lines = [
             f"Active quests selected: {active_count}",
             f"Workshops configured: {workshop_count}",
@@ -572,13 +562,9 @@ class ProgressSummaryScreen(ProgressScreen):
         ]
         try:
             if self.state.all_quests_completed:
-                self.inferred_completed_ids = [
-                    entry.id for entry in self.state.quest_entries
-                ]
+                self.inferred_completed_ids = [entry.id for entry in self.state.quest_entries]
             else:
-                self.inferred_completed_ids = compute_completed_quests(
-                    list(self.state.active_ids)
-                )
+                self.inferred_completed_ids = compute_completed_quests(list(self.state.active_ids))
         except ValueError as exc:
             self.inferred_completed_ids = []
             lines.extend(["", f"Could not infer completed quests: {exc}"])
@@ -586,12 +572,8 @@ class ProgressSummaryScreen(ProgressScreen):
             return
 
         completed_set = set(self.inferred_completed_ids)
-        inferred_requirement_completed = [
-            entry.name for entry in requirement_entries if entry.id in completed_set
-        ]
-        inferred_requirement_remaining = [
-            entry.name for entry in requirement_entries if entry.id not in completed_set
-        ]
+        inferred_requirement_completed = [entry.name for entry in requirement_entries if entry.id in completed_set]
+        inferred_requirement_remaining = [entry.name for entry in requirement_entries if entry.id not in completed_set]
         lines.extend(
             [
                 "",
@@ -608,9 +590,7 @@ class ProgressSummaryScreen(ProgressScreen):
 
     def _save(self) -> None:
         try:
-            completed_ids = list(
-                self.inferred_completed_ids
-            ) or compute_completed_quests(list(self.state.active_ids))
+            completed_ids = list(self.inferred_completed_ids) or compute_completed_quests(list(self.state.active_ids))
         except ValueError as exc:
             self.app.push_screen(MessageScreen(str(exc)))
             return
@@ -634,7 +614,8 @@ class ProgressSummaryScreen(ProgressScreen):
             return
 
         write_rules(output, ITEM_RULES_CUSTOM_PATH)
-        item_count = output.get("metadata", {}).get("itemCount", 0)
+        output_d = cast("dict[str, Any]", output)
+        item_count = cast("dict[str, Any]", output_d.get("metadata", {})).get("itemCount", 0)
         default_payload = load_rules(DEFAULT_RULES_PATH)
         changes = collect_rule_changes(default_payload, output)
         default_items = default_payload.get("items")
@@ -716,7 +697,8 @@ def launch_generate_rules(app) -> None:
         return
 
     write_rules(output, ITEM_RULES_CUSTOM_PATH)
-    item_count = output.get("metadata", {}).get("itemCount", 0)
+    metadata = cast("dict[str, Any]", cast("dict[str, Any]", output).get("metadata") or {})
+    item_count = metadata.get("itemCount", 0)
     app.push_screen(MessageScreen(f"Rules regenerated. Items: {item_count}."))
 
 

@@ -1,0 +1,97 @@
+[settings]
+experimental = true
+color = true
+yes = true
+auto_install = true
+lockfile = true
+
+[settings.python]
+uv_venv_auto = "create|source"
+uv_venv_create_args = ["--seed", "--system-site-packages"]
+github_attestations = false
+
+[settings.pipx]
+uvx = true
+
+[settings.npm]
+package_manager = "bun"
+
+[tools]
+python = "3.13.13"
+uv = "latest"
+ruff = "latest"
+ty = "latest"
+prek = "latest"
+"pipx:pytest" = "latest"
+"pipx:basedpyright" = "latest"
+ripgrep = "latest"
+fd = "latest"
+"actionlint" = "latest"
+action-validator = "latest"
+"shellcheck" = "latest"
+"shfmt" = "latest"
+bun = "latest"
+
+[env]
+PROJECT_ROOT = "{{config_root}}"
+UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
+UV_LINK_MODE = "symlink"
+_.python.venv = { path = ".venv", create = true, uv_create_args = ["--seed", "--system-site-packages"] }
+_.file = { path = ".env", tools = true }
+MISE_PYTHON_GITHUB_ATTESTATIONS = "false"
+
+[hooks]
+enter = "mise i -yq"
+
+[tasks.install]
+description = 'Mise ci install'
+file = '.mise/tasks/install'
+
+[tasks.test]
+description = "Run tests"
+run = "pytest tests/"
+
+[tasks.lint]
+description = "Lint the code"
+run = "ruff src/"
+
+[tasks.build]
+description = "Build Python package from pyproject.toml"
+run = "uv build --outdir dist --python 3.13"
+
+[tasks.build-sdist]
+description = "Build source distribution"
+run = "uv build --outdir dist --python 3.13 --sdist"
+
+[tasks.build-wheel]
+description = "Build wheel distribution"
+run = "uv build --outdir dist --python 3.13 --wheel"
+
+[tasks.clean]
+description = "Clean build artifacts, caches, and venvs"
+run = '''
+rm -rf dist/ build/ *.egg-info/ src/*.egg-info/ .venv/ .build/
+find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+find . -type f -name "*.pyc" -delete 2>/dev/null || true
+find . -type d -name ".ruff_cache" -exec rm -rf {} + 2>/dev/null || true
+'''
+
+[tasks.sync]
+description = "Sync dependencies with uv"
+run = "uv sync --python 3.13"
+
+[tasks.sync-dev]
+description = "Sync dev dependencies"
+run = "uv sync --dev --python 3.13"
+
+[tasks.lock]
+description = "Regenerate uv.lock"
+run = "uv lock --python 3.13"
+
+[tasks.check]
+description = "Run all checks (lint, typecheck, test)"
+run = '''
+echo "=== Running ruff ===" && ruff check src/ tests/ scripts/
+echo "=== Running basedpyright ===" && basedpyright src/
+echo "=== Running pytest ===" && pytest tests/ -q
+'''

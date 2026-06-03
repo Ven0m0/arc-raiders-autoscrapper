@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import numpy as np
+
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Optional, Tuple
+from typing import Any, Literal
 
 from ..config import ScanSettings
 from ..interaction.ui_windows import (
-    MOVE_DURATION,
+    SELL_RECYCLE_MOVE_DURATION,
     SELL_RECYCLE_SPEED_MULT,
     click_absolute,
     click_window_relative,
@@ -14,8 +17,12 @@ from ..interaction.ui_windows import (
     sleep_with_abort,
 )
 from ..interaction.keybinds import DEFAULT_STOP_KEY
+from ..ocr.failure_corpus import capture_skip_unlisted_sample
 from ..ocr.inventory_vision import (
     InfoboxOcrResult,
+    build_skip_unlisted_corpus_image,
+    find_action_bbox_by_ocr,
+    match_item_name_result,
     recycle_confirm_button_center,
     rect_center,
     sell_confirm_button_center,
@@ -29,7 +36,7 @@ ITEM_INFOBOX_SETTLE_DELAY = _DEFAULT_SCAN_SETTINGS.item_infobox_settle_delay_ms 
 POST_SELL_RECYCLE_DELAY = _DEFAULT_SCAN_SETTINGS.post_sell_recycle_delay_ms / 1000.0
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class ActionExecutionContext:
     apply_actions: bool
     win_left: int
@@ -42,27 +49,28 @@ class ActionExecutionContext:
     post_action_delay: float
 
 
-def _perform_sell(
-    infobox_rect: Tuple[int, int, int, int],
-    action_bbox_rel: Tuple[int, int, int, int],
+def _perform_destructive_action(
+    infobox_rect: tuple[int, int, int, int],
+    action_bbox_rel: tuple[int, int, int, int],
     window_left: int,
     window_top: int,
     window_width: int,
     window_height: int,
     *,
+    confirm_center_func: Callable[[int, int, int, int], tuple[int, int]],
     stop_key: str = DEFAULT_STOP_KEY,
     action_delay: float = INPUT_ACTION_DELAY,
     item_infobox_settle_delay: float = ITEM_INFOBOX_SETTLE_DELAY,
     post_action_delay: float = POST_SELL_RECYCLE_DELAY,
 ) -> None:
-    move_duration = MOVE_DURATION * SELL_RECYCLE_SPEED_MULT
+    move_duration = SELL_RECYCLE_MOVE_DURATION
     action_pause = action_delay * SELL_RECYCLE_SPEED_MULT
     bx, by, bw, bh = action_bbox_rel
-    sell_bbox_win = (infobox_rect[0] + bx, infobox_rect[1] + by, bw, bh)
-    sx, sy = rect_center(sell_bbox_win)
+    action_bbox_win = (infobox_rect[0] + bx, infobox_rect[1] + by, bw, bh)
+    ax, ay = rect_center(action_bbox_win)
     move_window_relative(
-        sx,
-        sy,
+        ax,
+        ay,
         window_left,
         window_top,
         duration=move_duration,
@@ -70,8 +78,8 @@ def _perform_sell(
         stop_key=stop_key,
     )
     click_window_relative(
-        sx,
-        sy,
+        ax,
+        ay,
         window_left,
         window_top,
         pause=action_pause,
@@ -79,9 +87,7 @@ def _perform_sell(
     )
     sleep_with_abort(item_infobox_settle_delay, stop_key=stop_key)
 
-    cx, cy = sell_confirm_button_center(
-        window_left, window_top, window_width, window_height
-    )
+    cx, cy = confirm_center_func(window_left, window_top, window_width, window_height)
     move_absolute(
         cx,
         cy,
@@ -96,26 +102,31 @@ def _perform_sell(
 def _apply_destructive_decision(
     *,
     decision: Decision,
-    infobox_rect: Optional[Tuple[int, int, int, int]],
-    infobox_ocr: Optional[InfoboxOcrResult],
-    action_bbox_rel: Optional[Tuple[int, int, int, int]],
+    infobox_rect: tuple[int, int, int, int] | None,
+    infobox_bgr: Any | None,
+    infobox_ocr: InfoboxOcrResult | None,
     context: ActionExecutionContext,
 ) -> str:
     if infobox_rect is None or infobox_ocr is None:
         return "SKIP_NO_INFOBOX"
+    action_bbox_rel: tuple[int, int, int, int] | None = None
+    if infobox_bgr is not None:
+        target: Literal["sell", "recycle"] = "sell" if decision == "SELL" else "recycle"
+        action_bbox_rel, _processed = find_action_bbox_by_ocr(infobox_bgr, target)
     if action_bbox_rel is None:
         return "SKIP_NO_ACTION_BBOX"
     if not context.apply_actions:
         return f"DRY_RUN_{decision}"
 
     if decision == "SELL":
-        _perform_sell(
+        _perform_destructive_action(
             infobox_rect,
             action_bbox_rel,
             context.win_left,
             context.win_top,
             context.win_width,
             context.win_height,
+            confirm_center_func=sell_confirm_button_center,
             stop_key=context.stop_key,
             action_delay=context.action_delay,
             item_infobox_settle_delay=context.item_infobox_settle_delay,
@@ -123,13 +134,14 @@ def _apply_destructive_decision(
         )
         return "SELL"
 
-    _perform_recycle(
+    _perform_destructive_action(
         infobox_rect,
         action_bbox_rel,
         context.win_left,
         context.win_top,
         context.win_width,
         context.win_height,
+        confirm_center_func=recycle_confirm_button_center,
         stop_key=context.stop_key,
         action_delay=context.action_delay,
         item_infobox_settle_delay=context.item_infobox_settle_delay,
@@ -140,13 +152,12 @@ def _apply_destructive_decision(
 
 def resolve_action_taken(
     *,
-    decision: Optional[Decision],
+    decision: Decision | None,
     item_name: str,
     actions: ActionMap,
-    infobox_rect: Optional[Tuple[int, int, int, int]],
-    infobox_ocr: Optional[InfoboxOcrResult],
-    sell_bbox_rel: Optional[Tuple[int, int, int, int]],
-    recycle_bbox_rel: Optional[Tuple[int, int, int, int]],
+    infobox_rect: tuple[int, int, int, int] | None,
+    infobox_bgr: Any | None,
+    infobox_ocr: InfoboxOcrResult | None,
     context: ActionExecutionContext,
 ) -> str:
     if decision is None:
@@ -160,6 +171,29 @@ def resolve_action_taken(
             return "UNREADABLE_TITLE"
         if not actions:
             return "SKIP_NO_ACTION_MAP"
+        raw_text = infobox_ocr.raw_item_text if infobox_ocr is not None else item_name
+        match_result = match_item_name_result(raw_text)
+        source_image: np.ndarray | None = None
+        from_context_menu = infobox_ocr.source == "context_menu" if infobox_ocr is not None else False
+        if infobox_bgr is not None and infobox_ocr is not None:
+            source_image = build_skip_unlisted_corpus_image(
+                infobox_bgr,
+                from_context_menu=from_context_menu,
+            )
+        try:
+            capture_skip_unlisted_sample(
+                raw_text=raw_text,
+                chosen_name=match_result.chosen_name,
+                matched_name=match_result.matched_name,
+                source_image=source_image,
+                from_context_menu=from_context_menu,
+                threshold=match_result.threshold,
+            )
+        except (OSError, ValueError) as exc:  # pragma: no cover - runtime dependent
+            print(
+                f"[ocr_corpus] failed to capture SKIP_UNLISTED sample: {exc}",
+                flush=True,
+            )
         return "SKIP_UNLISTED"
 
     if decision == "KEEP":
@@ -168,67 +202,16 @@ def resolve_action_taken(
         return _apply_destructive_decision(
             decision=decision,
             infobox_rect=infobox_rect,
+            infobox_bgr=infobox_bgr,
             infobox_ocr=infobox_ocr,
-            action_bbox_rel=sell_bbox_rel,
             context=context,
         )
     if decision == "RECYCLE":
         return _apply_destructive_decision(
             decision=decision,
             infobox_rect=infobox_rect,
+            infobox_bgr=infobox_bgr,
             infobox_ocr=infobox_ocr,
-            action_bbox_rel=recycle_bbox_rel,
             context=context,
         )
     return "SCAN_ONLY"
-
-
-def _perform_recycle(
-    infobox_rect: Tuple[int, int, int, int],
-    action_bbox_rel: Tuple[int, int, int, int],
-    window_left: int,
-    window_top: int,
-    window_width: int,
-    window_height: int,
-    *,
-    stop_key: str = DEFAULT_STOP_KEY,
-    action_delay: float = INPUT_ACTION_DELAY,
-    item_infobox_settle_delay: float = ITEM_INFOBOX_SETTLE_DELAY,
-    post_action_delay: float = POST_SELL_RECYCLE_DELAY,
-) -> None:
-    move_duration = MOVE_DURATION * SELL_RECYCLE_SPEED_MULT
-    action_pause = action_delay * SELL_RECYCLE_SPEED_MULT
-    bx, by, bw, bh = action_bbox_rel
-    recycle_bbox_win = (infobox_rect[0] + bx, infobox_rect[1] + by, bw, bh)
-    rx, ry = rect_center(recycle_bbox_win)
-    move_window_relative(
-        rx,
-        ry,
-        window_left,
-        window_top,
-        duration=move_duration,
-        pause=action_pause,
-        stop_key=stop_key,
-    )
-    click_window_relative(
-        rx,
-        ry,
-        window_left,
-        window_top,
-        pause=action_pause,
-        stop_key=stop_key,
-    )
-    sleep_with_abort(item_infobox_settle_delay, stop_key=stop_key)
-
-    cx, cy = recycle_confirm_button_center(
-        window_left, window_top, window_width, window_height
-    )
-    move_absolute(
-        cx,
-        cy,
-        duration=move_duration,
-        pause=action_pause,
-        stop_key=stop_key,
-    )
-    click_absolute(cx, cy, pause=action_pause, stop_key=stop_key)
-    sleep_with_abort(post_action_delay, stop_key=stop_key)

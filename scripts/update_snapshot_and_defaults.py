@@ -1,25 +1,34 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13,<3.14"
+# dependencies = ["orjson"]
+# ///
+
 from __future__ import annotations
 
 import argparse
-import json
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Dict, Iterable
+from collections.abc import Iterable
+
+import orjson
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SRC_DIR = REPO_ROOT / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
-from autoscrapper.progress.data_update import update_data_snapshot
-from autoscrapper.progress.rules_generator import (
+from autoscrapper.progress.data_update import update_data_snapshot  # noqa: E402
+from autoscrapper.progress.rules_generator import (  # noqa: E402
     generate_rules_from_active,
     write_rules,
 )
-from autoscrapper.progress.update_report import (
+from autoscrapper.progress.update_report import (  # noqa: E402
     build_markdown_summary,
     diff_quests,
     diff_rules,
@@ -29,9 +38,7 @@ from autoscrapper.progress.update_report import (
 )
 
 DATA_DIR = REPO_ROOT / "src" / "autoscrapper" / "progress" / "data"
-DEFAULT_RULES_PATH = (
-    REPO_ROOT / "src" / "autoscrapper" / "items" / "items_rules.default.json"
-)
+DEFAULT_RULES_PATH = REPO_ROOT / "src" / "autoscrapper" / "items" / "items_rules.default.json"
 TARGET_RELATIVE_FILES = (
     "src/autoscrapper/progress/data/items.json",
     "src/autoscrapper/progress/data/quests.json",
@@ -42,32 +49,6 @@ TARGET_RELATIVE_FILES = (
 )
 EXCLUDED_LEVEL2_IDS = {"stash", "workbench"}
 VOLATILE_TIMESTAMP_KEYS = {"generatedAt", "lastUpdated", "lastupdated"}
-
-
-def _load_workshop_level2_map(hideout_modules_path: Path) -> Dict[str, int]:
-    modules = load_json(hideout_modules_path, [])
-    out: Dict[str, int] = {}
-    if not isinstance(modules, list):
-        return out
-
-    for module in modules:
-        if not isinstance(module, dict):
-            continue
-        module_id = module.get("id")
-        if not isinstance(module_id, str) or not module_id:
-            continue
-        if module_id in EXCLUDED_LEVEL2_IDS:
-            continue
-        max_level = module.get("maxLevel", 0)
-        try:
-            max_level_int = int(max_level)
-        except (TypeError, ValueError):
-            continue
-        if max_level_int <= 0:
-            continue
-        out[module_id] = min(2, max_level_int)
-
-    return out
 
 
 def _load_state(data_dir: Path, rules_path: Path) -> dict:
@@ -96,8 +77,8 @@ def _load_state(data_dir: Path, rules_path: Path) -> dict:
     }
 
 
-def _capture_file_bytes(paths: Iterable[Path]) -> Dict[Path, bytes]:
-    captured: Dict[Path, bytes] = {}
+def _capture_file_bytes(paths: Iterable[Path]) -> dict[Path, bytes]:
+    captured: dict[Path, bytes] = {}
     for path in paths:
         if path.exists():
             captured[path] = path.read_bytes()
@@ -110,7 +91,7 @@ def _normalize_for_semantic_diff(value: object) -> object:
     if isinstance(value, dict):
         normalized: dict[str, object] = {}
         for key, nested_value in value.items():
-            if key in VOLATILE_TIMESTAMP_KEYS:
+            if not isinstance(key, str) or key in VOLATILE_TIMESTAMP_KEYS:
                 continue
             normalized[key] = _normalize_for_semantic_diff(nested_value)
         return normalized
@@ -124,19 +105,17 @@ def _is_ignorable_timestamp_only_json_diff(before: bytes, after: bytes) -> bool:
         return False
 
     try:
-        before_json = json.loads(before.decode("utf-8"))
-        after_json = json.loads(after.decode("utf-8"))
-    except (UnicodeDecodeError, json.JSONDecodeError):
+        before_json = orjson.loads(before)
+        after_json = orjson.loads(after)
+    except (orjson.JSONDecodeError, UnicodeDecodeError):
         return False
 
-    return _normalize_for_semantic_diff(before_json) == _normalize_for_semantic_diff(
-        after_json
-    )
+    return _normalize_for_semantic_diff(before_json) == _normalize_for_semantic_diff(after_json)
 
 
 def _diff_changed_files(
-    before_bytes: Dict[Path, bytes],
-    after_bytes: Dict[Path, bytes],
+    before_bytes: dict[Path, bytes],
+    after_bytes: dict[Path, bytes],
     *,
     ignore_timestamp_only_diffs: bool = False,
 ) -> list[str]:
@@ -147,18 +126,14 @@ def _diff_changed_files(
         if before_value == after_value:
             continue
 
-        if ignore_timestamp_only_diffs and _is_ignorable_timestamp_only_json_diff(
-            before_value, after_value
-        ):
+        if ignore_timestamp_only_diffs and _is_ignorable_timestamp_only_json_diff(before_value, after_value):
             continue
 
         changed.append(path.relative_to(REPO_ROOT).as_posix())
     return changed
 
 
-def _copy_support_files_for_temp_run(
-    source_data_dir: Path, temp_data_dir: Path
-) -> None:
+def _copy_support_files_for_temp_run(source_data_dir: Path, temp_data_dir: Path) -> None:
     quest_graph_path = source_data_dir / "quests_graph.json"
     if quest_graph_path.exists():
         shutil.copy2(quest_graph_path, temp_data_dir / "quests_graph.json")
@@ -175,14 +150,52 @@ def _copy_support_files_for_temp_run(
         shutil.copy2(source_sources_path, temp_data_dir / "metaforge_sources.json")
 
 
-def _update_in_place(data_dir: Path, rules_path: Path) -> dict:
-    snapshot_metadata = update_data_snapshot(data_dir)
-    hideout_levels = _load_workshop_level2_map(
-        data_dir / "static" / "hideout_modules.json"
-    )
+def _fetch_default_user_context(data_dir: Path) -> tuple[dict[str, int], list[str]]:
+    """Load default hideout levels and completed projects from snapshot static files."""
+    hideout_levels: dict[str, int] = {}
+    completed_projects: list[str] = []
+
+    hideout_path = data_dir / "static" / "arctracker_hideout.json"
+    if hideout_path.exists():
+        try:
+            raw = orjson.loads(hideout_path.read_bytes())
+            if isinstance(raw, list):
+                for module in raw:
+                    if not isinstance(module, dict):
+                        continue
+                    module_id = module.get("id")
+                    if not module_id or module_id in EXCLUDED_LEVEL2_IDS:
+                        continue
+                    max_level = module.get("maxLevel") or 0
+                    hideout_levels[str(module_id)] = min(2, int(max_level))
+        except Exception:
+            pass
+
+    projects_path = data_dir / "static" / "arctracker_projects.json"
+    if projects_path.exists():
+        try:
+            raw = orjson.loads(projects_path.read_bytes())
+            if isinstance(raw, list):
+                for project in raw:
+                    if not isinstance(project, dict):
+                        continue
+                    project_id = project.get("id")
+                    if project_id:
+                        completed_projects.append(str(project_id))
+        except Exception:
+            pass
+
+    return hideout_levels, completed_projects
+
+
+def _update_in_place(data_dir: Path, rules_path: Path, *, use_arclens: bool = False) -> dict:
+    snapshot_metadata = update_data_snapshot(data_dir, use_arclens=use_arclens)
+    hideout_levels, completed_projects = _fetch_default_user_context(data_dir)
+
     rules_payload = generate_rules_from_active(
         active_quests=[],
         hideout_levels=hideout_levels,
+        completed_projects=completed_projects,
         all_quests_completed=True,
         data_dir=data_dir,
     )
@@ -195,7 +208,7 @@ def _update_in_place(data_dir: Path, rules_path: Path) -> dict:
     }
 
 
-def _update_dry_run(source_data_dir: Path) -> dict:
+def _update_dry_run(source_data_dir: Path, *, use_arclens: bool = False) -> dict:
     with TemporaryDirectory() as temp_dir_raw:
         temp_dir = Path(temp_dir_raw)
         temp_data_dir = temp_dir / "data"
@@ -204,13 +217,13 @@ def _update_dry_run(source_data_dir: Path) -> dict:
         temp_data_dir.mkdir(parents=True, exist_ok=True)
         _copy_support_files_for_temp_run(source_data_dir, temp_data_dir)
 
-        snapshot_metadata = update_data_snapshot(temp_data_dir)
-        hideout_levels = _load_workshop_level2_map(
-            temp_data_dir / "static" / "hideout_modules.json"
-        )
+        snapshot_metadata = update_data_snapshot(temp_data_dir, use_arclens=use_arclens)
+        hideout_levels, completed_projects = _fetch_default_user_context(temp_data_dir)
+
         rules_payload = generate_rules_from_active(
             active_quests=[],
             hideout_levels=hideout_levels,
+            completed_projects=completed_projects,
             all_quests_completed=True,
             data_dir=temp_data_dir,
         )
@@ -272,27 +285,17 @@ def build_report(
     before_state: dict,
     after_state: dict,
     changed_files: list[str],
-    hideout_levels: Dict[str, int],
+    hideout_levels: dict[str, int],
     dry_run: bool,
 ) -> dict:
     quests = diff_quests(before_state.get("quests", []), after_state.get("quests", []))
     rules = diff_rules(before_state.get("rules", {}), after_state.get("rules", {}))
-    quest_graph = graph_gap_report(
-        after_state.get("quests", []), after_state.get("quest_graph", {})
-    )
+    quest_graph = graph_gap_report(after_state.get("quests", []), after_state.get("quest_graph", {}))
 
     before_metadata = before_state.get("metadata", {})
     after_metadata = after_state.get("metadata", {})
-    before_last_updated = (
-        before_metadata.get("lastUpdated")
-        if isinstance(before_metadata, dict)
-        else "unknown"
-    )
-    after_last_updated = (
-        after_metadata.get("lastUpdated")
-        if isinstance(after_metadata, dict)
-        else "unknown"
-    )
+    before_last_updated = before_metadata.get("lastUpdated") if isinstance(before_metadata, dict) else "unknown"
+    after_last_updated = after_metadata.get("lastUpdated") if isinstance(after_metadata, dict) else "unknown"
 
     workshop_ids = sorted(hideout_levels.keys())
 
@@ -324,8 +327,7 @@ def build_report(
 def main() -> int:
     parser = argparse.ArgumentParser(
         description=(
-            "Update progress snapshot and regenerate default rules using "
-            "all quests completed + level-2 workshops."
+            "Update progress snapshot and regenerate default rules using all quests completed + level-2 workshops."
         )
     )
     parser.add_argument(
@@ -363,7 +365,21 @@ def main() -> int:
         action="store_true",
         help="Generate report against a temporary snapshot without writing tracked files.",
     )
+    parser.add_argument(
+        "--source",
+        choices=["metaforge", "arc-lens"],
+        default="metaforge",
+        help="Data source to use for update (default: metaforge).",
+    )
     args = parser.parse_args()
+
+    use_arclens = getattr(args, "source", None) == "arc-lens"
+    if use_arclens:
+        try:
+            import scripts.vendor.arc_lens.scrapers  # noqa: F401
+        except ImportError:
+            print("Error: arc-lens scrapers not available.", file=sys.stderr)
+            return 1
 
     data_dir = args.data_dir.resolve()
     rules_path = args.rules_path.resolve()
@@ -373,7 +389,7 @@ def main() -> int:
     before_state = _load_state(data_dir, rules_path)
 
     if args.dry_run:
-        result = _update_dry_run(data_dir)
+        result = _update_dry_run(data_dir, use_arclens=use_arclens)
         after_state = result["after_state"]
         changed_files = result["changed_files"]
         hideout_levels = result["hideout_levels"]
@@ -381,7 +397,7 @@ def main() -> int:
         target_paths = [REPO_ROOT / relative for relative in TARGET_RELATIVE_FILES]
         before_bytes = _capture_file_bytes(target_paths)
 
-        result = _update_in_place(data_dir, rules_path)
+        result = _update_in_place(data_dir, rules_path, use_arclens=use_arclens)
         after_state = _load_state(data_dir, rules_path)
         after_bytes = _capture_file_bytes(target_paths)
         changed_files = _diff_changed_files(
@@ -400,7 +416,7 @@ def main() -> int:
     )
 
     report_json_path.parent.mkdir(parents=True, exist_ok=True)
-    report_json_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    report_json_path.write_bytes(orjson.dumps(report, option=orjson.OPT_INDENT_2))
 
     markdown = build_markdown_summary(report, sample_limit=max(1, args.sample_limit))
     report_md_path.parent.mkdir(parents=True, exist_ok=True)
@@ -417,10 +433,7 @@ def main() -> int:
 
     graph_missing = report.get("questGraph", {}).get("questsMissingFromGraphCount", 0)
     if isinstance(graph_missing, int) and graph_missing > 0:
-        print(
-            f"Warning: {graph_missing} quests are missing from quests_graph.json; "
-            "workflow continues by design."
-        )
+        print(f"Warning: {graph_missing} quests are missing from quests_graph.json; workflow continues by design.")
 
     return 0
 

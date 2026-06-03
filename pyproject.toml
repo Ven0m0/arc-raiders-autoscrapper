@@ -1,42 +1,80 @@
 [build-system]
-requires = ["setuptools>=61", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build>=0.11.16", "setuptools>=82.0.1"]
+build-backend = "uv_build"
 
 [project]
 name = "autoscrapper"
-version = "0.1.0"
+version = "0.2.0"
 description = "Arc Raiders inventory autoscrapper"
 readme = "README.md"
-requires-python = ">=3.10,<3.14"
+keywords = ["ocr", "arc-raiders", "tesseract", "text-recognition"]
+requires-python = ">=3.13,<3.14"
 dependencies = [
-    "mss",
-    "numpy",
-    "opencv-python",
-    "Pillow",
-    "pydirectinput-rgx; sys_platform == 'win32'",
-    "pynput; sys_platform == 'linux'",
-    "pywinctl",
-    "rich",
-    "textual",
-    "tessdata.fast-eng",
-    "tesserocr==2.9.1; sys_platform == 'linux'",
-    "tesserocr @ https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.9.1-tesseract-5.5.1/tesserocr-2.9.1-cp310-cp310-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.10' and platform_machine == 'AMD64'",
-    "tesserocr @ https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.9.1-tesseract-5.5.1/tesserocr-2.9.1-cp311-cp311-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.11' and platform_machine == 'AMD64'",
-    "tesserocr @ https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.9.1-tesseract-5.5.1/tesserocr-2.9.1-cp312-cp312-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.12' and platform_machine == 'AMD64'",
-    "tesserocr @ https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.9.1-tesseract-5.5.1/tesserocr-2.9.1-cp313-cp313-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.13' and platform_machine == 'AMD64'",
+  "mss>=10.2.0",
+  "numpy>=2.4.4",
+  "opencv-python-headless>=4.13.0.92",
+  "orjson>=3.11.8",
+  "Pillow>=12.2.0",
+  "pydirectinput-rgx>=2.1.3; sys_platform == 'win32'",
+  "pywinctl>=0.4.1",
+  "rapidfuzz>=3.14.5",
+  "rich>=15.0.0",
+  "textual>=8.2.5",
+  "tessdata.fast-eng>=1.0.0",
+  "tesserocr==2.10.0; sys_platform == 'linux'",
+  "tesserocr @ https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp313-cp313-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.13' and platform_machine == 'AMD64'",
+  "pynput>=1.8.1; sys_platform == 'linux'",
+  "httpx>=0.28.1",
+  "uvloop>=0.22.1",
+  "beautifulsoup4>=4.14.3",
+  "keyring>=25.7.0",
+  "pydantic>=2.13.3",
+]
+
+[dependency-groups]
+dev = [
+    "basedpyright>=1.39.3",
+    "deadcode>=2.4.1",
+    "mypy>=1.20.2",
+    "opencv-stubs>=0.1.3",
+    "prek>=0.3.10",
+    "pytest>=9.0.3",
+    "ruff>=0.15.11",
+    "tombi>=0.9.22",
+    "ty>=0.0.32",
+    "types-pynput>=1.8.1.20260408",
+    "vulture>=2.16",
 ]
 
 [project.optional-dependencies]
+# Keep [project.optional-dependencies].dev aligned with [dependency-groups].dev
+# so pip and uv users install the same local tooling.
 dev = [
-    "black==26.1.0",
-    "pre-commit",
+    "basedpyright>=1.39.3",
+    "deadcode>=2.4.1",
+    "mypy>=1.20.2",
+    "opencv-stubs>=0.1.3",
+    "prek>=0.3.10",
+    "pytest>=9.0.3",
+    "ruff>=0.15.11",
+    "tombi>=0.9.22",
+    "ty>=0.0.32",
+    "types-pynput>=1.8.1.20260408",
+    "vulture>=2.16",
+]
+linux-input = [
+    "pynput; sys_platform == 'linux'",
+]
+scraper = [
+    "httpx>=0.28.1",
+    "beautifulsoup4>=4.14.3",
 ]
 
 [project.scripts]
 autoscrapper = "autoscrapper.__main__:main"
 
 [project.urls]
-Homepage = "https://github.com/zappybiby/ArcRaiders-AutoScrapper"
+Homepage = "https://github.com/Ven0m0/arc-raiders-autoscrapper"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
@@ -53,7 +91,62 @@ autoscrapper = [
     "tui/*.tcss",
 ]
 
+[tool.ruff]
+extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
+line-length = 120
+target-version = "py313"
+fix = true
+show-fixes = true
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F"]
+ignore = [
+  "E501", # line too long (handled by formatter)
+]
+preview = true
+
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["F401"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+preview = true
+line-ending = "auto"
+docstring-code-format = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+log_level = "WARNING"
+
+[tool.basedpyright]
+pythonVersion = "3.13"
+typeCheckingMode = "standard"
+reportMissingImports = false
+reportMissingTypeStubs = false
+reportMissingModuleSource = false
+reportAttributeAccessIssue = false
+reportArgumentType = false
+reportOptionalCall = false
+reportOptionalMemberAccess = false
+
+[tool.vulture]
+paths = ["src/", "scripts/", "tests/"]
+min_confidence = 80
+
 [tool.black]
+line-length = 120
 extend-exclude = '''
 ^scripts/(setup-linux\.sh|setup-windows\.ps1)$
 '''
+
+[tool.uv]
+link-mode = "symlink"
+compile-bytecode = true
+preview = true
+
+[tool.uv.pip]
+link-mode = "symlink"
+compile-bytecode = true

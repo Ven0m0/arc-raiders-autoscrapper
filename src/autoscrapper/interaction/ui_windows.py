@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+import logging
 import os
 import sys
 import threading
 import time
 from dataclasses import dataclass
-from typing import Optional, Tuple
+from typing import Any, Protocol
 
 import mss
 import numpy as np
@@ -14,6 +15,14 @@ import pywinctl as pwc
 from .inventory_grid import Cell
 from . import input_driver as pdi
 from .keybinds import DEFAULT_STOP_KEY
+
+_log = logging.getLogger(__name__)
+
+
+class LiveWindow(Protocol):
+    """Minimal protocol for a window handle that exposes liveness state."""
+
+    isAlive: bool
 
 
 # Target window
@@ -31,12 +40,8 @@ WINDOW_POLL_INTERVAL = 0.05
 ACTION_DELAY = 0.05
 MOVE_DURATION = 0.05
 CELL_INFOBOX_LEFT_RIGHT_CLICK_GAP = 0.25
-SELL_RECYCLE_SPEED_MULT = (
-    1.5  # extra slack vs default pacing (MOVE_DURATION/ACTION_DELAY)
-)
+SELL_RECYCLE_SPEED_MULT = 1.5  # extra slack vs default pacing (MOVE_DURATION/ACTION_DELAY)
 SELL_RECYCLE_MOVE_DURATION = MOVE_DURATION * SELL_RECYCLE_SPEED_MULT
-SELL_RECYCLE_ACTION_DELAY = ACTION_DELAY * SELL_RECYCLE_SPEED_MULT
-SELL_RECYCLE_POST_DELAY = 0.1  # seconds to allow item collapse after confirm
 
 # Scrolling
 # Pattern derivation (calibrator data):
@@ -76,20 +81,20 @@ SCROLL_SETTLE_DELAY = 0.05
 _MSS_LOCAL = threading.local()
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class WindowSnapshot:
     win_left: int
     win_top: int
     win_width: int
     win_height: int
-    work_area: Tuple[int, int, int, int]
+    work_area: tuple[int, int, int, int]
     mon_left: int
     mon_top: int
     mon_right: int
     mon_bottom: int
 
 
-def get_active_target_window(target_app: str = TARGET_APP) -> Optional[pwc.Window]:
+def get_active_target_window(target_app: str = TARGET_APP) -> pwc.Window | None:
     """
     Return the active window if it matches the target app; otherwise None.
     """
@@ -103,7 +108,7 @@ def get_active_target_window(target_app: str = TARGET_APP) -> Optional[pwc.Windo
         title = getattr(win, "title") or ""
     if not title and hasattr(win, "getTitle"):
         try:
-            title = win.getTitle() or ""
+            title = getattr(win, "getTitle")() or ""
         except Exception:
             title = ""
     title_lower = title.lower()
@@ -168,7 +173,7 @@ def wait_for_target_window(
     raise TimeoutError(f"Timed out waiting for active window {target_app!r}")
 
 
-def window_rect(win: pwc.Window) -> Tuple[int, int, int, int]:
+def window_rect(win: pwc.Window) -> tuple[int, int, int, int]:
     """
     (left, top, width, height) in screen coordinates for the window.
     """
@@ -177,7 +182,7 @@ def window_rect(win: pwc.Window) -> Tuple[int, int, int, int]:
 
 def window_display_info(
     win: pwc.Window,
-) -> Tuple[str, Tuple[int, int], Tuple[int, int, int, int]]:
+) -> tuple[str, tuple[int, int], tuple[int, int, int, int]]:
     """
     Return (display name, display size, work area) and enforce that the window is on a single monitor.
     """
@@ -186,17 +191,21 @@ def window_display_info(
         raise RuntimeError("Unable to determine which monitor the target window is on.")
     if len(display_names) > 1:
         joined = ", ".join(display_names)
-        raise RuntimeError(
-            f"Target window spans multiple monitors ({joined}); move it fully onto one display."
-        )
+        raise RuntimeError(f"Target window spans multiple monitors ({joined}); move it fully onto one display.")
 
     display_name = display_names[0]
     size = pwc.getScreenSize(display_name)
     work_area = pwc.getWorkArea(display_name)
-    return display_name, size, work_area
+    if size is None or work_area is None:
+        raise RuntimeError(f"Unable to get display metrics for {display_name!r}")
+    return (
+        display_name,
+        (int(size[0]), int(size[1])),
+        (int(work_area[0]), int(work_area[1]), int(work_area[2]), int(work_area[3])),
+    )
 
 
-def window_monitor_rect(win: pwc.Window) -> Tuple[int, int, int, int]:
+def window_monitor_rect(win: pwc.Window) -> tuple[int, int, int, int]:
     """
     Return (left, top, right, bottom) bounds for the physical monitor containing
     the window center.
@@ -225,7 +234,7 @@ def window_monitor_rect(win: pwc.Window) -> Tuple[int, int, int, int]:
     raise RuntimeError("Unable to map target window to a monitor via mss.")
 
 
-def _get_mss() -> "MSSBase":
+def _get_mss() -> Any:
     """
     Lazily create a thread-local MSS instance for screen capture.
 
@@ -234,9 +243,7 @@ def _get_mss() -> "MSSBase":
     missing `srcdc`, so each thread keeps its own instance.
     """
     if sys.platform not in ("win32", "linux"):
-        raise RuntimeError(
-            "Screen capture requires Windows or Linux; this build targets X11/XWayland."
-        )
+        raise RuntimeError("Screen capture requires Windows or Linux; this build targets X11/XWayland.")
 
     sct = getattr(_MSS_LOCAL, "instance", None)
     if sct is None:
@@ -258,7 +265,7 @@ def _reset_mss() -> None:
         try:
             close()
         except Exception:
-            pass
+            _log.warning("Failed to close MSS instance", exc_info=True)
     _MSS_LOCAL.instance = None
 
 
@@ -270,7 +277,7 @@ def _is_mss_thread_handle_error(exc: Exception) -> bool:
     return "srcdc" in text or "thread._local" in text
 
 
-def capture_region(region: Tuple[int, int, int, int]) -> np.ndarray:
+def capture_region(region: tuple[int, int, int, int]) -> np.ndarray:
     """
     Capture a BGR screenshot of the given region (left, top, width, height).
     """
@@ -294,13 +301,9 @@ def capture_region(region: Tuple[int, int, int, int]) -> np.ndarray:
             try:
                 shot = _get_mss().grab(bbox)
             except Exception as retry_exc:
-                raise RuntimeError(
-                    f"mss failed to capture the requested region {bbox}: {retry_exc}"
-                ) from retry_exc
+                raise RuntimeError(f"mss failed to capture the requested region {bbox}: {retry_exc}") from retry_exc
         else:
-            raise RuntimeError(
-                f"mss failed to capture the requested region {bbox}: {exc}"
-            ) from exc
+            raise RuntimeError(f"mss failed to capture the requested region {bbox}: {exc}") from exc
 
     frame = np.asarray(shot)
     if frame.shape[2] == 4:
@@ -316,9 +319,7 @@ def sleep_with_abort(duration: float, *, stop_key: str = DEFAULT_STOP_KEY) -> No
     abort_if_escape_pressed(stop_key)
 
 
-def pause_action(
-    duration: float = ACTION_DELAY, *, stop_key: str = DEFAULT_STOP_KEY
-) -> None:
+def pause_action(duration: float = ACTION_DELAY, *, stop_key: str = DEFAULT_STOP_KEY) -> None:
     """
     Standard pause to keep a safe delay between input/processing steps.
     """
@@ -353,9 +354,7 @@ def click_window_relative(
     *,
     stop_key: str = DEFAULT_STOP_KEY,
 ) -> None:
-    click_absolute(
-        int(window_left + x), int(window_top + y), pause=pause, stop_key=stop_key
-    )
+    click_absolute(int(window_left + x), int(window_top + y), pause=pause, stop_key=stop_key)
 
 
 def move_absolute(
@@ -414,8 +413,8 @@ def open_cell_item_infobox(
 
 def scroll_to_next_grid_at(
     clicks: int,
-    grid_center_abs: Tuple[int, int],
-    safe_point_abs: Optional[Tuple[int, int]] = None,
+    grid_center_abs: tuple[int, int],
+    safe_point_abs: tuple[int, int] | None = None,
     *,
     stop_key: str = DEFAULT_STOP_KEY,
     pause: float = ACTION_DELAY,
@@ -442,9 +441,7 @@ def scroll_to_next_grid_at(
         f"[scroll] vscroll clicks={scroll_clicks} interval={scroll_interval} at=({gx},{gy})",
         flush=True,
     )
-    timed_action(
-        pdi.vscroll, clicks=scroll_clicks, interval=scroll_interval, stop_key=stop_key
-    )
+    timed_action(pdi.vscroll, clicks=scroll_clicks, interval=scroll_interval, stop_key=stop_key)
     sleep_with_abort(settle_delay, stop_key=stop_key)
 
     if safe_point_abs is not None:
@@ -452,8 +449,6 @@ def scroll_to_next_grid_at(
         move_absolute(sx, sy, pause=pause, stop_key=stop_key)
 
 
-def _cell_screen_center(
-    cell: Cell, window_left: int, window_top: int
-) -> Tuple[int, int]:
+def _cell_screen_center(cell: Cell, window_left: int, window_top: int) -> tuple[int, int]:
     cx, cy = cell.safe_center
     return int(window_left + cx), int(window_top + cy)

@@ -1,17 +1,16 @@
 from __future__ import annotations
 
+from abc import abstractmethod
 from dataclasses import replace
-from typing import Optional
+from typing import ClassVar
 
 from textual import events
 from textual.app import ComposeResult
-from textual.binding import Binding
 from textual.containers import Horizontal, HorizontalGroup, Vertical
 from textual.screen import ModalScreen
-from textual.widget import Widget
 from textual.widgets import Button, Checkbox, Footer, Input, Static
 
-from .common import AppScreen, MessageScreen
+from .common import AppScreen, FormScreen, MessageScreen
 from ..config import (
     ScanSettings,
     load_scan_settings,
@@ -21,7 +20,7 @@ from ..config import (
 from ..interaction.keybinds import stop_key_label, textual_key_to_stop_key
 
 
-class CaptureStopKeyScreen(ModalScreen[Optional[str]]):
+class CaptureStopKeyScreen(ModalScreen[str | None]):
     DEFAULT_CSS = """
     CaptureStopKeyScreen {
         align: center middle;
@@ -57,7 +56,7 @@ class CaptureStopKeyScreen(ModalScreen[Optional[str]]):
 
     def __init__(self) -> None:
         super().__init__()
-        self._pending_key: Optional[str] = None
+        self._pending_key: str | None = None
 
     def compose(self) -> ComposeResult:
         with Vertical(id="capture-box"):
@@ -78,9 +77,7 @@ class CaptureStopKeyScreen(ModalScreen[Optional[str]]):
             return
 
         self._pending_key = key_name
-        self.query_one("#capture-selected", Static).update(
-            f"Selected: {stop_key_label(key_name)}"
-        )
+        self.query_one("#capture-selected", Static).update(f"Selected: {stop_key_label(key_name)}")
         self.query_one("#confirm", Button).disabled = False
         event.stop()
 
@@ -91,27 +88,7 @@ class CaptureStopKeyScreen(ModalScreen[Optional[str]]):
             self.dismiss(self._pending_key)
 
 
-class ScanSettingsScreen(AppScreen):
-    BINDINGS = [
-        *AppScreen.BINDINGS,
-        Binding("tab", "focus_next_field", "Next field", show=False, priority=True),
-        Binding(
-            "shift+tab",
-            "focus_previous_field",
-            "Previous field",
-            show=False,
-            priority=True,
-        ),
-        Binding(
-            "up",
-            "focus_previous_field",
-            "Previous field",
-            show=False,
-            priority=True,
-        ),
-        Binding("down", "focus_next_field", "Next field", show=False, priority=True),
-    ]
-
+class ScanSettingsScreen(FormScreen):
     DEFAULT_CSS = """
     ScanSettingsScreen {
         padding: 0 1;
@@ -187,7 +164,7 @@ class ScanSettingsScreen(AppScreen):
     }
     """
 
-    _FOCUS_ORDER: tuple[str, ...] = ()
+    _FOCUS_ORDER: ClassVar[tuple[str, ...]] = ()
     TITLE = "Scan Settings"
 
     def __init__(self) -> None:
@@ -195,7 +172,7 @@ class ScanSettingsScreen(AppScreen):
         self.settings = load_scan_settings()
 
     def compose(self) -> ComposeResult:
-        yield Static(self.TITLE, classes="menu-title")
+        yield Static(self.TITLE or "", classes="menu-title")
         with Vertical(id="settings-shell"):
             with Vertical(id="settings-form"):
                 yield from self._compose_form()
@@ -208,50 +185,14 @@ class ScanSettingsScreen(AppScreen):
         self._load_into_fields()
         self.action_focus_next_field()
 
-    def _focus_candidates(self) -> list[Widget]:
-        candidates: list[Widget] = []
-        for widget_id in self._FOCUS_ORDER:
-            widget = self.query_one(f"#{widget_id}")
-            if getattr(widget, "disabled", False):
-                continue
-            candidates.append(widget)
-        return candidates
-
-    def _move_focus(self, delta: int) -> None:
-        candidates = self._focus_candidates()
-        if not candidates:
-            return
-
-        current = self.focused
-        if current in candidates:
-            index = (candidates.index(current) + delta) % len(candidates)
-        else:
-            index = 0 if delta > 0 else len(candidates) - 1
-
-        target = candidates[index]
-        target.focus()
-        target.scroll_visible(immediate=True)
-
-    def action_focus_next_field(self) -> None:
-        self._move_focus(1)
-
-    def action_focus_previous_field(self) -> None:
-        self._move_focus(-1)
-
-    def _parse_int_field(
-        self, field_id: str, *, label: str, min_value: int
-    ) -> Optional[int]:
+    def _parse_int_field(self, field_id: str, *, label: str, min_value: int) -> int | None:
         raw = self.query_one(field_id, Input).value.strip()
         if not raw.isdigit():
-            self.app.push_screen(
-                MessageScreen(f"Enter a valid {label} (>= {min_value}).")
-            )
+            self.app.push_screen(MessageScreen(f"Enter a valid {label} (>= {min_value})."))
             return None
         value = int(raw)
         if value < min_value:
-            self.app.push_screen(
-                MessageScreen(f"Enter a valid {label} (>= {min_value}).")
-            )
+            self.app.push_screen(MessageScreen(f"Enter a valid {label} (>= {min_value})."))
             return None
         return value
 
@@ -260,9 +201,11 @@ class ScanSettingsScreen(AppScreen):
         save_scan_settings(settings)
         self.app.push_screen(MessageScreen("Scan settings saved."))
 
+    @abstractmethod
     def _compose_form(self) -> ComposeResult:
         raise NotImplementedError
 
+    @abstractmethod
     def _load_into_fields(self) -> None:
         raise NotImplementedError
 
@@ -297,7 +240,7 @@ class ScanControlsScreen(ScanSettingsScreen):
     def _set_stop_key(self) -> None:
         self.app.push_screen(CaptureStopKeyScreen(), self._on_stop_key_selected)
 
-    def _on_stop_key_selected(self, key_name: Optional[str]) -> None:
+    def _on_stop_key_selected(self, key_name: str | None) -> None:
         if key_name is None:
             return
         self._stop_key = key_name
@@ -348,18 +291,10 @@ class ScanDetectionScreen(ScanSettingsScreen):
 
     def _load_into_fields(self) -> None:
         self.settings = load_scan_settings()
-        self.query_one("#infobox-retries", Input).value = str(
-            self.settings.infobox_retries
-        )
-        self.query_one("#infobox-delay", Input).value = str(
-            self.settings.infobox_retry_interval_ms
-        )
-        self.query_one("#ocr-retries", Input).value = str(
-            self.settings.ocr_unreadable_retries
-        )
-        self.query_one("#ocr-delay", Input).value = str(
-            self.settings.ocr_retry_interval_ms
-        )
+        self.query_one("#infobox-retries", Input).value = str(self.settings.infobox_retries)
+        self.query_one("#infobox-delay", Input).value = str(self.settings.infobox_retry_interval_ms)
+        self.query_one("#ocr-retries", Input).value = str(self.settings.ocr_unreadable_retries)
+        self.query_one("#ocr-delay", Input).value = str(self.settings.ocr_retry_interval_ms)
 
     def _save(self) -> None:
         infobox_retries = self._parse_int_field(
@@ -437,18 +372,10 @@ class ScanTimingScreen(ScanSettingsScreen):
 
     def _load_into_fields(self) -> None:
         self.settings = load_scan_settings()
-        self.query_one("#action-delay", Input).value = str(
-            self.settings.input_action_delay_ms
-        )
-        self.query_one("#click-gap", Input).value = str(
-            self.settings.cell_infobox_left_right_click_gap_ms
-        )
-        self.query_one("#item-infobox-delay", Input).value = str(
-            self.settings.item_infobox_settle_delay_ms
-        )
-        self.query_one("#post-delay", Input).value = str(
-            self.settings.post_sell_recycle_delay_ms
-        )
+        self.query_one("#action-delay", Input).value = str(self.settings.input_action_delay_ms)
+        self.query_one("#click-gap", Input).value = str(self.settings.cell_infobox_left_right_click_gap_ms)
+        self.query_one("#item-infobox-delay", Input).value = str(self.settings.item_infobox_settle_delay_ms)
+        self.query_one("#post-delay", Input).value = str(self.settings.post_sell_recycle_delay_ms)
 
     def _save(self) -> None:
         action_delay = self._parse_int_field(
