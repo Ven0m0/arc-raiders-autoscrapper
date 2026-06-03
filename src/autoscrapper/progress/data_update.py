@@ -315,7 +315,10 @@ def _extract_public_env_value(source: str, key: str) -> str:
     )
     if not match:
         raise DownloadError(f"Could not find {key} in {METAFORGE_APP_URL}")
-    value = json.loads(match.group(1))
+    try:
+        value = json.loads(match.group(1))
+    except json.JSONDecodeError as exc:
+        raise DownloadError(f"Failed to parse public env value for {key}: {exc}") from exc
     if not isinstance(value, str) or not value.strip():
         raise DownloadError(f"Invalid {key} in {METAFORGE_APP_URL}")
     return value
