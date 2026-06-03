@@ -321,10 +321,10 @@ def _extract_public_env_value(source: str, key: str) -> str:
     return value
 
 
-def _discover_supabase_config() -> SupabaseConfig:
+def _discover_supabase_config(*, force: bool = False) -> SupabaseConfig:
     global _discovered_supabase_config
 
-    if _discovered_supabase_config is not None:
+    if not force and _discovered_supabase_config is not None:
         return _discovered_supabase_config
 
     page = _fetch_text(METAFORGE_APP_URL, accept="text/html,application/xhtml+xml")
