@@ -334,37 +334,29 @@ class HomeScreen(MenuScreen):
 
 class MaintenanceMenuScreen(MenuScreen):
     def __init__(self) -> None:
-        items = [
+        super().__init__("Maintenance", [], default_key="1")
+
+    def _refresh_items(self) -> None:
+        update_used = bool(getattr(self.app, "_snapshot_update_used", False))
+        self.items = [
             MenuItem(
                 "1",
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
                 "Update game data snapshot",
                 lambda screen: cast("AutoScrapperApp", screen.app)._open_snapshot_update(),
                 disabled=update_used,
             ),
             MenuItem(
                 "2",
->>>>>>> origin/main
->>>>>>> origin/main
                 "Reset saved progress",
                 lambda screen: screen.app.push_screen(ResetProgressScreen()),
             ),
             MenuItem(
-                "2",
+                "3",
                 "Reset rules to default",
                 lambda screen: screen.app.push_screen(ResetRulesScreen()),
             ),
             MenuItem("0", "Back", lambda screen: screen.app.pop_screen()),
         ]
-<<<<<<< HEAD
-        super().__init__("Maintenance", items, default_key="1")
-=======
-<<<<<<< HEAD
-        super().__init__("Maintenance", items, default_key="1")
-=======
 
     def on_mount(self) -> None:
         self._refresh_items()
@@ -373,8 +365,6 @@ class MaintenanceMenuScreen(MenuScreen):
     def on_screen_resume(self, _event: events.ScreenResume) -> None:
         self._refresh_items()
         super().on_screen_resume(_event)
->>>>>>> origin/main
->>>>>>> origin/main
 
 
 class AutoScrapperApp(App[None]):

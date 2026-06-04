@@ -10,5 +10,5 @@ def build_reverse_recipe_index(items: list[dict]) -> dict[str, list[str]]:
             continue
         for ingredient_id in recipe.keys():
             used_by = reverse_index.setdefault(ingredient_id, [])
-            used_by.append(item.get("id", ""))
+            used_by.append(item.get("id") or "")
     return reverse_index
