@@ -17,14 +17,12 @@ jobs:
     environment: daily-data-update
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@v6
         with:
           fetch-depth: 1
           persist-credentials: false
       - name: Install mise
-        uses: jdx/mise-action@dba19683ed58901619b14f395a24841710cb4925 # v4.1.0
-        with:
-          version: latest
+        uses: jdx/mise-action@v4
       - name: Install dependencies
         run: mise exec -- uv sync --frozen --no-dev
       - name: Update snapshot + default rules
@@ -35,7 +33,7 @@ jobs:
             --report-json artifacts/update-report.json \
             --report-md artifacts/update-report.md
       - name: Upload update report artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@v7
         with:
           name: daily-data-update-report
           path: |

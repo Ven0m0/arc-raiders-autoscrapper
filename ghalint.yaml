@@ -1,0 +1,9 @@
+# ghalint configuration
+# Project convention: pin GitHub Actions to readable version tags (e.g. @v6),
+# not full-length commit SHAs. Renovate/Dependabot keep tags current, and tags
+# stay legible in diffs. Disable policy 008 (action_ref_should_be_full_length_commit_sha)
+# repo-wide so `ghalint run` reflects this intent.
+# https://github.com/suzuki-shunsuke/ghalint/blob/main/docs/policies/008.md
+excludes:
+  - policy_name: action_ref_should_be_full_length_commit_sha
+    action_name: "*/*"
