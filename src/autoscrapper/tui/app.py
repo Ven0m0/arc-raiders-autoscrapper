@@ -339,12 +339,15 @@ class MaintenanceMenuScreen(MenuScreen):
                 "1",
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
                 "Update game data snapshot",
                 lambda screen: cast("AutoScrapperApp", screen.app)._open_snapshot_update(),
                 disabled=update_used,
             ),
             MenuItem(
                 "2",
+>>>>>>> origin/main
 >>>>>>> origin/main
                 "Reset saved progress",
                 lambda screen: screen.app.push_screen(ResetProgressScreen()),
@@ -359,6 +362,9 @@ class MaintenanceMenuScreen(MenuScreen):
 <<<<<<< HEAD
         super().__init__("Maintenance", items, default_key="1")
 =======
+<<<<<<< HEAD
+        super().__init__("Maintenance", items, default_key="1")
+=======
 
     def on_mount(self) -> None:
         self._refresh_items()
@@ -367,6 +373,7 @@ class MaintenanceMenuScreen(MenuScreen):
     def on_screen_resume(self, _event: events.ScreenResume) -> None:
         self._refresh_items()
         super().on_screen_resume(_event)
+>>>>>>> origin/main
 >>>>>>> origin/main
 
 

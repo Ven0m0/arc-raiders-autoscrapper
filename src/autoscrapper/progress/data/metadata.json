@@ -1,10 +1,15 @@
 {
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
   "lastUpdated": "2026-06-01T19:14:32.340613Z",
   "source": "https://metaforge.app/arc-raiders",
   "version": "autoscrapper-data-1",
   "itemCount": 581,
   "questCount": 100,
+<<<<<<< HEAD
+=======
 =======
   "lastUpdated": "2026-05-08T14:33:29.557671Z",
   "source": "https://metaforge.app/arc-raiders/api",
@@ -126,6 +131,7 @@
       }
     }
   },
+>>>>>>> origin/main
 >>>>>>> origin/main
   "hasPriceOverrides": false
 }

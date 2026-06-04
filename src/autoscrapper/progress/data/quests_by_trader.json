@@ -2,7 +2,11 @@
 <<<<<<< HEAD
   "generatedAt": "2026-06-01T19:14:32.340231Z",
 =======
+<<<<<<< HEAD
+  "generatedAt": "2026-06-01T19:14:32.340231Z",
+=======
   "generatedAt": "2026-05-08T14:33:29.557470Z",
+>>>>>>> origin/main
 >>>>>>> origin/main
   "source": "quests.json",
   "traders": {
@@ -127,12 +131,18 @@
         "name": "Turnabout",
         "sortOrder": 6307.955576058115
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
       },
       {
         "id": "line-in-the-sand",
         "name": "Line in the Sand",
         "sortOrder": 7009.632620481293
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/main
 >>>>>>> origin/main
       },
       {
@@ -140,12 +150,18 @@
         "name": "Keeping An Eye Out",
         "sortOrder": 7116.778716162711
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
       },
       {
         "id": "a-wrench-in-the-works",
         "name": "A Wrench in the Works",
         "sortOrder": 7482.376892077519
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/main
 >>>>>>> origin/main
       }
     ],
@@ -156,12 +172,16 @@
 <<<<<<< HEAD
         "sortOrder": 1040.3079231388663
 =======
+<<<<<<< HEAD
+        "sortOrder": 1040.3079231388663
+=======
         "sortOrder": 0
       },
       {
         "id": "safe-harbor",
         "name": "Safe Harbor",
         "sortOrder": 0
+>>>>>>> origin/main
 >>>>>>> origin/main
       },
       {
@@ -241,12 +261,18 @@
       },
       {
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
         "id": "safe-harbor",
         "name": "Safe Harbor",
         "sortOrder": 7246.24880814753
       },
       {
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/main
 >>>>>>> origin/main
         "id": "settled-in-full",
         "name": "Settled in Full",
@@ -423,6 +449,9 @@
     "Apollo": [
       {
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
         "id": "shoring-up-defenses",
         "name": "Shoring up Defenses",
         "sortOrder": 422.07582107905125
@@ -431,6 +460,8 @@
         "id": "battening-down",
         "name": "Battening Down",
         "sortOrder": 703.6805381957103
+<<<<<<< HEAD
+=======
 =======
         "id": "battening-down",
         "name": "Battening Down",
@@ -440,6 +471,7 @@
         "id": "shoring-up-defenses",
         "name": "Shoring up Defenses",
         "sortOrder": 0
+>>>>>>> origin/main
 >>>>>>> origin/main
       },
       {

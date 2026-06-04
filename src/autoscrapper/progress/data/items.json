@@ -753,6 +753,9 @@
     "recipe": null,
     "recyclesInto": {
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
       "arc-alloy": 3,
       "advanced-mechanical-components": 1
     }
@@ -1594,7 +1597,11 @@
 <<<<<<< HEAD
     "updatedAt": "2026-05-24T21:05:14.834373+00:00",
 =======
+<<<<<<< HEAD
+    "updatedAt": "2026-05-24T21:05:14.834373+00:00",
+=======
     "updatedAt": "2026-04-06T09:47:44.400185+00:00",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
@@ -1630,12 +1637,18 @@
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-04-03T23:45:42.68568+00:00",
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
     "recipe": {
       "advanced-mechanical-components": 1,
       "medium-gun-parts": 2
     },
+<<<<<<< HEAD
+=======
 =======
     "recipe": null,
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -1653,12 +1666,18 @@
     "craftBench": null,
     "updatedAt": "2026-04-03T23:48:53.265546+00:00",
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
     "recipe": {
       "advanced-mechanical-components": 1,
       "medium-gun-parts": 2
     },
+<<<<<<< HEAD
+=======
 =======
     "recipe": null,
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -1676,12 +1695,18 @@
     "craftBench": null,
     "updatedAt": "2026-04-03T23:51:27.380366+00:00",
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
     "recipe": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 2
     },
+<<<<<<< HEAD
+=======
 =======
     "recipe": null,
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recyclesInto": {
       "advanced-mechanical-components": 3,
@@ -2077,6 +2102,9 @@
   },
   {
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
     "id": "crash-mat",
     "name": "Crash Mat",
     "type": "Quick Use",
@@ -2096,7 +2124,10 @@
     }
   },
   {
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/main
 >>>>>>> origin/main
     "id": "crash-mat-blueprint",
     "name": "Crash Mat Blueprint",
@@ -2109,7 +2140,11 @@
 <<<<<<< HEAD
     "updatedAt": "2026-05-25T09:44:11.57557+00:00",
 =======
+<<<<<<< HEAD
+    "updatedAt": "2026-05-25T09:44:11.57557+00:00",
+=======
     "updatedAt": "2026-05-05T12:55:41.066338+00:00",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
@@ -2490,7 +2525,11 @@
 <<<<<<< HEAD
     "name": "Dockmaster\u2019s Detector",
 =======
+<<<<<<< HEAD
+    "name": "Dockmaster\u2019s Detector",
+=======
     "name": "Dockmaster’s Detector",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "type": "Gadget",
     "rarity": "uncommon",
@@ -2550,7 +2589,11 @@
 <<<<<<< HEAD
     "updatedAt": "2026-05-24T21:02:38.780319+00:00",
 =======
+<<<<<<< HEAD
+    "updatedAt": "2026-05-24T21:02:38.780319+00:00",
+=======
     "updatedAt": "2026-04-06T09:43:59.559957+00:00",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
@@ -2829,11 +2872,16 @@
   },
   {
     "id": "extended-barrel-i",
+<<<<<<< HEAD
+    "name": "Extended Barrel I ",
+=======
     "name": "Extended Barrel I",
+>>>>>>> origin/main
     "type": "Modification",
     "rarity": "uncommon",
     "value": 1000,
     "weightKg": 0.25,
+<<<<<<< HEAD
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-05-24T09:17:44.091994+00:00",
@@ -2848,7 +2896,6 @@
     "value": 3000,
     "weightKg": 0.5,
     "stackSize": 1,
-<<<<<<< HEAD
     "craftBench": null,
     "updatedAt": "2026-05-20T10:36:55.499969+00:00",
     "recipe": {
@@ -2861,6 +2908,71 @@
     }
   },
   {
+    "id": "extended-barrel-ii-blueprint",
+    "name": "Extended Barrel II Blueprint",
+    "type": "Blueprint",
+    "rarity": "legendary",
+    "value": 5000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-05-24T09:07:00.230069+00:00",
+=======
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-05-24T09:17:44.091994+00:00",
+>>>>>>> origin/main
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+<<<<<<< HEAD
+    "id": "extended-barrel-recipe",
+    "name": "Extended Barrel III Blueprint",
+    "type": "Blueprint",
+    "rarity": "legendary",
+    "value": 5000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-05-19T17:49:58.291628+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "extended-barrel",
+    "name": "Extended Barrel IIII",
+    "type": "Modification",
+    "rarity": "epic",
+    "value": 5000,
+    "weightKg": 0.75,
+    "stackSize": 1,
+    "craftBench": "Gunsmith I",
+    "updatedAt": "2026-05-19T17:56:50.224648+00:00",
+=======
+    "id": "extended-barrel-ii",
+    "name": "Extended Barrel II",
+    "type": "Modification",
+    "rarity": "rare",
+    "value": 3000,
+    "weightKg": 0.5,
+    "stackSize": 1,
+<<<<<<< HEAD
+    "craftBench": null,
+    "updatedAt": "2026-05-20T10:36:55.499969+00:00",
+>>>>>>> origin/main
+    "recipe": {
+      "mechanical-components": 3,
+      "wires-recipe": 6
+    },
+    "recyclesInto": {
+      "mechanical-components": 1,
+      "wires-recipe": 1
+    }
+  },
+  {
+<<<<<<< HEAD
+=======
     "id": "extended-barrel-ii-blueprint",
     "name": "Extended Barrel II Blueprint",
     "type": "Blueprint",
@@ -2910,6 +3022,7 @@
     }
   },
   {
+>>>>>>> origin/main
     "id": "extended-light-mag-i",
     "name": "Extended Light Mag I",
     "type": "Modification",
@@ -3423,8 +3536,11 @@
     "stackSize": 1,
 <<<<<<< HEAD
     "craftBench": null,
+<<<<<<< HEAD
+=======
 =======
     "craftBench": "in_raid",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "updatedAt": "2026-05-07T17:35:33.710226+00:00",
     "recipe": {
@@ -3510,7 +3626,11 @@
 <<<<<<< HEAD
       "rubber-parts-recipe": 6
 =======
+<<<<<<< HEAD
+      "rubber-parts-recipe": 6
+=======
       "rubber-parts": 6
+>>>>>>> origin/main
 >>>>>>> origin/main
     }
   },
@@ -4583,6 +4703,19 @@
     "recyclesInto": null
   },
   {
+    "id": "leviathans-crown-ship-model",
+    "name": "\"Leviathan's Crown\" Ship Model",
+    "type": "Trinket",
+    "rarity": "legendary",
+    "value": 10000,
+    "weightKg": 0.5,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-05-02T15:16:39.123489+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "lidar-scanner",
     "name": "Lidar Scanner",
     "type": "Trinket",
@@ -5175,7 +5308,11 @@
 <<<<<<< HEAD
     "updatedAt": "2026-05-24T21:08:36.221228+00:00",
 =======
+<<<<<<< HEAD
+    "updatedAt": "2026-05-24T21:08:36.221228+00:00",
+=======
     "updatedAt": "2026-05-02T09:03:57.247506+00:00",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recipe": null,
     "recyclesInto": {
@@ -5752,6 +5889,9 @@
   },
   {
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
     "id": "powered-descender",
     "name": "Powered Descender",
     "type": "Gadget",
@@ -5768,7 +5908,10 @@
     }
   },
   {
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/main
 >>>>>>> origin/main
     "id": "powered-descender-blueprint",
     "name": "Powered Descender Blueprint",
@@ -5781,7 +5924,11 @@
 <<<<<<< HEAD
     "updatedAt": "2026-05-20T10:46:23.877509+00:00",
 =======
+<<<<<<< HEAD
+    "updatedAt": "2026-05-20T10:46:23.877509+00:00",
+=======
     "updatedAt": "2026-05-05T12:18:34.332002+00:00",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
@@ -5818,7 +5965,11 @@
 <<<<<<< HEAD
     "updatedAt": "2026-05-25T11:58:38.439991+00:00",
 =======
+<<<<<<< HEAD
+    "updatedAt": "2026-05-25T11:58:38.439991+00:00",
+=======
     "updatedAt": "2026-04-15T14:50:47.786663+00:00",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recipe": null,
     "recyclesInto": {
@@ -6031,7 +6182,11 @@
   },
   {
     "id": "rascal-ii",
+<<<<<<< HEAD
+    "name": "Rascal II ",
+=======
     "name": "Rascal II",
+>>>>>>> origin/main
     "type": "Weapon",
     "rarity": "rare",
     "value": 0,
@@ -6383,7 +6538,11 @@
   },
   {
     "id": "riven-tides-classifed-records-keycard",
+<<<<<<< HEAD
+    "name": "Riven Tides Classifed Records Keycard",
+=======
     "name": "Riven Tides Classified Records Keycard",
+>>>>>>> origin/main
     "type": "Key",
     "rarity": "uncommon",
     "value": 100,
@@ -6432,7 +6591,11 @@
 <<<<<<< HEAD
     "updatedAt": "2026-05-20T10:39:04.615594+00:00",
 =======
+<<<<<<< HEAD
+    "updatedAt": "2026-05-20T10:39:04.615594+00:00",
+=======
     "updatedAt": "2026-04-30T08:43:30.097008+00:00",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
@@ -6789,7 +6952,11 @@
 <<<<<<< HEAD
     "updatedAt": "2026-05-21T18:57:15.222867+00:00",
 =======
+<<<<<<< HEAD
+    "updatedAt": "2026-05-21T18:57:15.222867+00:00",
+=======
     "updatedAt": "2026-05-06T12:37:44.280528+00:00",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recipe": null,
     "recyclesInto": {
@@ -7085,8 +7252,11 @@
     "stackSize": 1,
 <<<<<<< HEAD
     "craftBench": null,
+<<<<<<< HEAD
+=======
 =======
     "craftBench": "weapon_bench",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "updatedAt": "2026-05-07T17:35:15.002617+00:00",
     "recipe": {
@@ -7318,8 +7488,12 @@
 <<<<<<< HEAD
     "recyclesInto": null
 =======
+<<<<<<< HEAD
+    "recyclesInto": null
+=======
     "recyclesInto": null,
     "wikiUses": "Projects Avian Alarm (5x)"
+>>>>>>> origin/main
 >>>>>>> origin/main
   },
   {
@@ -7871,7 +8045,11 @@
 <<<<<<< HEAD
     "value": 0,
 =======
+<<<<<<< HEAD
+    "value": 0,
+=======
     "value": 2100,
+>>>>>>> origin/main
 >>>>>>> origin/main
     "weightKg": 0,
     "stackSize": 1,
@@ -7880,10 +8058,15 @@
     "recipe": {
       "electrical-components": 1,
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
       "sensors-recipe": 1,
       "hornet-driver": 1
     },
     "recyclesInto": null
+<<<<<<< HEAD
+=======
 =======
       "hornet-driver": 1,
       "sensors": 1
@@ -7892,6 +8075,7 @@
       "electrical-components": 1,
       "sensors": 1
     }
+>>>>>>> origin/main
 >>>>>>> origin/main
   },
   {
@@ -7906,7 +8090,11 @@
 <<<<<<< HEAD
     "updatedAt": "2026-05-24T21:06:14.829654+00:00",
 =======
+<<<<<<< HEAD
+    "updatedAt": "2026-05-24T21:06:14.829654+00:00",
+=======
     "updatedAt": "2026-04-06T09:45:52.854826+00:00",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
@@ -8125,7 +8313,11 @@
 <<<<<<< HEAD
     "craftBench": null,
 =======
+<<<<<<< HEAD
+    "craftBench": null,
+=======
     "craftBench": "equipment_bench",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "updatedAt": "2026-04-30T06:51:54.741036+00:00",
     "recipe": {
@@ -8149,7 +8341,11 @@
 <<<<<<< HEAD
     "updatedAt": "2026-05-20T10:46:41.187256+00:00",
 =======
+<<<<<<< HEAD
+    "updatedAt": "2026-05-20T10:46:41.187256+00:00",
+=======
     "updatedAt": "2026-04-30T06:50:49.008893+00:00",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
@@ -8586,8 +8782,12 @@
 <<<<<<< HEAD
     }
 =======
+<<<<<<< HEAD
+    }
+=======
     },
     "wikiUses": "Projects Avian Alarm (2x)"
+>>>>>>> origin/main
 >>>>>>> origin/main
   },
   {
@@ -8620,8 +8820,12 @@
 <<<<<<< HEAD
     "recyclesInto": null
 =======
+<<<<<<< HEAD
+    "recyclesInto": null
+=======
     "recyclesInto": null,
     "wikiUses": "Projects Avian Alarm (5x)"
+>>>>>>> origin/main
 >>>>>>> origin/main
   },
   {
@@ -8684,8 +8888,12 @@
 <<<<<<< HEAD
     "recyclesInto": null
 =======
+<<<<<<< HEAD
+    "recyclesInto": null
+=======
     "recyclesInto": null,
     "wikiUses": "Projects Avian Alarm (5x)"
+>>>>>>> origin/main
 >>>>>>> origin/main
   },
   {
@@ -9133,7 +9341,11 @@
 <<<<<<< HEAD
     "updatedAt": "2026-05-20T10:46:56.354189+00:00",
 =======
+<<<<<<< HEAD
+    "updatedAt": "2026-05-20T10:46:56.354189+00:00",
+=======
     "updatedAt": "2026-05-05T12:15:27.138544+00:00",
+>>>>>>> origin/main
 >>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null

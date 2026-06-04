@@ -579,7 +579,11 @@
         "item": {
           "id": "extended-barrel",
           "icon": "https://cdn.metaforge.app/arc-raiders/icons/extended-barrel.webp",
+<<<<<<< HEAD
+          "name": "Extended Barrel IIII",
+=======
           "name": "Extended Barrel III",
+>>>>>>> origin/main
           "rarity": "Epic",
           "item_type": "Modification"
         },
@@ -912,7 +916,11 @@
 <<<<<<< HEAD
     "sortOrder": 7482.376892077519
 =======
+<<<<<<< HEAD
+    "sortOrder": 7482.376892077519
+=======
     "sortOrder": 0
+>>>>>>> origin/main
 >>>>>>> origin/main
   },
   {
@@ -1016,7 +1024,11 @@
 <<<<<<< HEAD
     "sortOrder": 703.6805381957103
 =======
+<<<<<<< HEAD
+    "sortOrder": 703.6805381957103
+=======
     "sortOrder": 0
+>>>>>>> origin/main
 >>>>>>> origin/main
   },
   {
@@ -1526,7 +1538,11 @@
 <<<<<<< HEAD
     "sortOrder": 1040.3079231388663
 =======
+<<<<<<< HEAD
+    "sortOrder": 1040.3079231388663
+=======
     "sortOrder": 0
+>>>>>>> origin/main
 >>>>>>> origin/main
   },
   {
@@ -2905,7 +2921,11 @@
 <<<<<<< HEAD
     "sortOrder": 7009.632620481293
 =======
+<<<<<<< HEAD
+    "sortOrder": 7009.632620481293
+=======
     "sortOrder": 0
+>>>>>>> origin/main
 >>>>>>> origin/main
   },
   {
@@ -3868,7 +3888,11 @@
 <<<<<<< HEAD
     "sortOrder": 7246.24880814753
 =======
+<<<<<<< HEAD
+    "sortOrder": 7246.24880814753
+=======
     "sortOrder": 0
+>>>>>>> origin/main
 >>>>>>> origin/main
   },
   {
@@ -4012,7 +4036,11 @@
 <<<<<<< HEAD
     "sortOrder": 422.07582107905125
 =======
+<<<<<<< HEAD
+    "sortOrder": 422.07582107905125
+=======
     "sortOrder": 0
+>>>>>>> origin/main
 >>>>>>> origin/main
   },
   {

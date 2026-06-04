@@ -1,20 +1,16 @@
 from __future__ import annotations
-from typing import Any, cast
+from typing import Any, cast, Optional, Dict, List
 
-<<<<<<< HEAD
 import html
 import json
 import os
 import re
 import time
 from dataclasses import dataclass
-=======
 import concurrent.futures
 import io
 import logging
-import re
 import zipfile
->>>>>>> origin/main
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -26,9 +22,13 @@ from bs4 import BeautifulSoup as _BeautifulSoup
 from .data_loader import DATA_DIR
 from .quest_overrides import apply_quest_overrides
 
-<<<<<<< HEAD
+_log = logging.getLogger(__name__)
+
+_SCRAPER_AVAILABLE = True
+
 METAFORGE_APP_URL = "https://metaforge.app/arc-raiders"
 METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
+METAFORGE_API_DOCS_URL = "https://metaforge.app/arc-raiders/api"
 METAFORGE_SOURCES_FILENAME = "metaforge_sources.json"
 DEFAULT_SUPABASE_URL = "https://sb.metaforge.app/rest/v1"
 DEFAULT_SUPABASE_ANON_KEY = "sb_publishable_C7SqVOoZBPFy4W0DxKcOGQ_emEIw-rj"
@@ -41,19 +41,12 @@ SUPABASE_ANON_KEY = os.environ.get(
     "METAFORGE_SUPABASE_ANON_KEY",
     DEFAULT_SUPABASE_ANON_KEY,
 )
-=======
-_log = logging.getLogger(__name__)
 
-_SCRAPER_AVAILABLE = True
-
-METAFORGE_API_DOCS_URL = "https://metaforge.app/arc-raiders/api"
-METAFORGE_API_BASE = "https://metaforge.app/api/arc-raiders"
 RAIDTHEORY_REPO_URL = "https://github.com/RaidTheory/arcraiders-data"
 RAIDTHEORY_ARCHIVE_URL = "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip"
 WIKI_LOOT_URL = "https://arcraiders.wiki/wiki/Loot"
 WIKI_USER_AGENT = "arc-raiders-autoscrapper/1.0 (https://github.com/Ven0m0/arc-raiders-autoscrapper)"
 
-ARCTRACKER_BASE_URL = "https://arctracker.io"
 ARCTRACKER_BASE_URL = "https://arctracker.io"
 ARCTRACKER_API_DOCS_URL = "https://arctracker.io/developers/docs"
 
@@ -61,7 +54,6 @@ ARCTRACKER_API_DOCS_URL = "https://arctracker.io/developers/docs"
 ARC_LENS_WIKI_URL = "https://arcraiders.wiki"
 ARC_LENS_META_URL = "https://metaforge.app/api"
 ARC_LENS_MAPS = ["dam", "spaceport", "buried-city", "blue-gate", "stella-montis"]
->>>>>>> origin/main
 
 SUPABASE_AUTH_ERROR_MARKERS = (
     "unauthorized",
@@ -85,7 +77,6 @@ class DownloadError(RuntimeError):
     pass
 
 
-<<<<<<< HEAD
 class HttpDownloadError(DownloadError):
     def __init__(self, url: str, status_code: int, body: str) -> None:
         self.url = url
@@ -98,34 +89,28 @@ class HttpDownloadError(DownloadError):
         super().__init__(message)
 
 
-def _fetch_text(
+def _fetch_bytes(
     url: str,
-    headers: Optional[Dict[str, str]] = None,
+    headers: dict[str, str] | None = None,
     *,
-    accept: str = "application/json",
-) -> str:
-=======
-def _fetch_bytes(url: str, headers: dict[str, str] | None = None) -> bytes:
->>>>>>> origin/main
+    accept: str | None = None,
+) -> bytes:
     request_headers = {
-        "Accept": accept,
         "User-Agent": (
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
             "AppleWebKit/537.36 (KHTML, like Gecko) "
             "Chrome/147.0.0.0 Safari/537.36"
         ),
     }
+    if accept:
+        request_headers["Accept"] = accept
     if headers:
         request_headers.update(headers)
 
     req = Request(url, headers=request_headers)
     try:
         with urlopen(req, timeout=30) as resp:
-<<<<<<< HEAD
-            return resp.read().decode("utf-8")
-=======
             return resp.read()
->>>>>>> origin/main
     except HTTPError as exc:
         body = exc.read().decode("utf-8", "replace")
         raise HttpDownloadError(url, exc.code, body) from exc
@@ -133,43 +118,20 @@ def _fetch_bytes(url: str, headers: dict[str, str] | None = None) -> bytes:
         raise DownloadError(f"Failed to reach {url}: {exc}") from exc
 
 
-<<<<<<< HEAD
-def _fetch_json(url: str, headers: Optional[Dict[str, str]] = None) -> object:
-    payload = _fetch_text(url, headers)
-    try:
-        return json.loads(payload)
-    except json.JSONDecodeError as exc:
-        raise DownloadError(f"Invalid JSON response for {url}") from exc
+def _fetch_text(
+    url: str,
+    headers: Optional[Dict[str, str]] = None,
+    *,
+    accept: str = "application/json",
+) -> str:
+    return _fetch_bytes(url, headers, accept=accept).decode("utf-8")
 
 
-def _fetch_all_items() -> List[dict]:
-    items: List[dict] = []
-    current_page = 1
-    has_next = True
-    limit = 100
-
-    while has_next:
-        url = f"{METAFORGE_API_BASE}/items?page={current_page}&limit={limit}"
-        response = _fetch_json(url)
-        if not isinstance(response, dict):
-            raise DownloadError("Unexpected response for items")
-        data = response.get("data") or []
-        if isinstance(data, list):
-            items.extend(data)
-        pagination = response.get("pagination") or {}
-        has_next = bool(pagination.get("hasNextPage"))
-        current_page += 1
-        if has_next:
-            time.sleep(0.1)
-
-    return items
-=======
 def _fetch_json(url: str, headers: dict[str, str] | None = None) -> Any:
     try:
         return orjson.loads(_fetch_bytes(url, headers=headers))
     except orjson.JSONDecodeError as exc:
         raise DownloadError(f"Invalid JSON returned from {url}") from exc
->>>>>>> origin/main
 
 
 def _fetch_arctracker_items() -> list[dict]:
@@ -184,7 +146,6 @@ def _fetch_arctracker_items() -> list[dict]:
     return [entry for entry in data if isinstance(entry, dict)]
 
 
-<<<<<<< HEAD
 def _normalize_supabase_rest_url(supabase_url: str) -> str:
     normalized = supabase_url.strip().rstrip("/")
     if normalized.endswith("/rest/v1"):
@@ -1305,10 +1266,15 @@ def update_data_snapshot(data_dir: Path | None = None, *, use_arclens: bool = Fa
         _log.warning("MetaForge quests unavailable: %s", exc)
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
     components = _fetch_supabase_all("arc_item_components", sources_path)
     recycle_components = _fetch_supabase_all(
         "arc_item_recycle_components", sources_path
     )
+<<<<<<< HEAD
+=======
 =======
     fallback_items: list[dict] = []
     fallback_quests: list[dict] = []
@@ -1318,6 +1284,7 @@ def update_data_snapshot(data_dir: Path | None = None, *, use_arclens: bool = Fa
     except DownloadError as exc:
         fallback_error = str(exc)
         _log.warning("RaidTheory fallback unavailable: %s", exc)
+>>>>>>> origin/main
 >>>>>>> origin/main
 
     # Map fallback items/quests for field-level merging (preserve for later use)
