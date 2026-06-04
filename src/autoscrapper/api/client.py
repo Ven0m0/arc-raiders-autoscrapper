@@ -129,7 +129,7 @@ class ArcTrackerClient:
         if "headers" in kwargs:
             headers.update(kwargs.pop("headers"))
         if require_auth:
-            headers["X-App-Key"] = self.app_key  # type: ignore[assignment]
+            headers["X-App-Key"] = self.app_key or ""
             headers["Authorization"] = f"Bearer {self.user_key}"
 
         try:

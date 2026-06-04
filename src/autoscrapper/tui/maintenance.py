@@ -7,10 +7,6 @@ from textual.widgets import Button, Footer, Static
 from .common import AppScreen, MessageScreen
 from ..config import reset_progress_settings
 from ..core.item_actions import ITEM_RULES_CUSTOM_PATH
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 from ..progress.data_update import DownloadError, update_data_snapshot
 
 
@@ -57,8 +53,6 @@ class UpdateSnapshotScreen(AppScreen):
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "back":
             self.app.pop_screen()
->>>>>>> origin/main
->>>>>>> origin/main
 
 
 class ResetProgressScreen(AppScreen):

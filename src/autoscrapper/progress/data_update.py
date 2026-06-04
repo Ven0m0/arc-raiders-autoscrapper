@@ -260,9 +260,7 @@ def _write_sources_config(path: Path, config: SupabaseConfig) -> None:
         "sourcePage": METAFORGE_APP_URL,
         "supabaseUrl": config.url,
         "supabaseAnonKey": config.anon_key,
-        "lastDiscoveredAt": datetime.now(timezone.utc)
-        .isoformat()
-        .replace("+00:00", "Z"),
+        "lastDiscoveredAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
     }
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
@@ -292,9 +290,7 @@ def _discover_supabase_config(*, force: bool = False) -> SupabaseConfig:
         return _discovered_supabase_config
 
     page = _fetch_text(METAFORGE_APP_URL, accept="text/html,application/xhtml+xml")
-    supabase_url = _normalize_supabase_rest_url(
-        _extract_public_env_value(page, "PUBLIC_SUPABASE_URL")
-    )
+    supabase_url = _normalize_supabase_rest_url(_extract_public_env_value(page, "PUBLIC_SUPABASE_URL"))
     anon_key = _extract_public_env_value(page, "PUBLIC_SUPABASE_ANON_KEY")
     _discovered_supabase_config = SupabaseConfig(
         url=supabase_url,
@@ -354,22 +350,13 @@ def _fetch_supabase_all(table: str, sources_path: Path) -> List[dict]:
         discovered = _discover_supabase_config(force=True)
         if discovered == supabase_config:
             raise DownloadError(
-                "Supabase auth failed and Metaforge page discovery returned "
-                "the same public Supabase config."
+                "Supabase auth failed and Metaforge page discovery returned the same public Supabase config."
             ) from exc
         if configured.persist_discovery:
             _write_sources_config(sources_path, discovered)
         return _fetch_supabase_all_with_config(table, discovered)
 
 
-def _build_component_map(components: List[dict]) -> Dict[str, Dict[str, int]]:
-    component_map: Dict[str, Dict[str, int]] = {}
-    for component in components:
-        item_id = component.get("item_id")
-        component_id = component.get("component_id")
-        quantity = component.get("quantity")
-        if not item_id or not component_id or quantity is None:
-=======
 def _fetch_arctracker_quests() -> list[dict]:
     """Fetch all quests from arctracker.io public API."""
     url = f"{ARCTRACKER_BASE_URL}/api/quests"
@@ -754,7 +741,6 @@ def _normalize_component_values(value: object) -> dict[str, int] | None:
     for raw_item_id, raw_quantity in value_d.items():
         item_id = _normalize_external_id(raw_item_id)
         if item_id is None:
->>>>>>> origin/main
             continue
         try:
             quantity = int(raw_quantity)
@@ -1133,13 +1119,11 @@ def _build_quests_by_trader(quests: list[dict]) -> dict[str, list[dict]]:
     by_trader: dict[str, list[dict]] = {}
     for quest in quests:
         trader = quest.get("trader") or "Unknown"
-        by_trader.setdefault(trader, []).append(
-            {
-                "id": quest.get("id"),
-                "name": quest.get("name"),
-                "sortOrder": quest.get("sortOrder", 0),
-            }
-        )
+        by_trader.setdefault(trader, []).append({
+            "id": quest.get("id"),
+            "name": quest.get("name"),
+            "sortOrder": quest.get("sortOrder", 0),
+        })
 
     for trader, quests_list in by_trader.items():
         quests_list.sort(key=lambda q: q.get("sortOrder") or 0)
@@ -1248,7 +1232,6 @@ def _enrich_items_with_wiki(items: list[dict], uses_map: dict[str, str]) -> tupl
 def update_data_snapshot(data_dir: Path | None = None, *, use_arclens: bool = False) -> dict:
     data_dir = data_dir or DATA_DIR
     (data_dir / "static").mkdir(parents=True, exist_ok=True)
-    sources_path = _sources_path(data_dir)
 
     metaforge_items: list[dict] | None = None
     metaforge_quests: list[dict] | None = None
@@ -1265,17 +1248,6 @@ def update_data_snapshot(data_dir: Path | None = None, *, use_arclens: bool = Fa
         metaforge_quests_error = str(exc)
         _log.warning("MetaForge quests unavailable: %s", exc)
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/main
-    components = _fetch_supabase_all("arc_item_components", sources_path)
-    recycle_components = _fetch_supabase_all(
-        "arc_item_recycle_components", sources_path
-    )
-<<<<<<< HEAD
-=======
-=======
     fallback_items: list[dict] = []
     fallback_quests: list[dict] = []
     fallback_error: str | None = None
@@ -1284,8 +1256,6 @@ def update_data_snapshot(data_dir: Path | None = None, *, use_arclens: bool = Fa
     except DownloadError as exc:
         fallback_error = str(exc)
         _log.warning("RaidTheory fallback unavailable: %s", exc)
->>>>>>> origin/main
->>>>>>> origin/main
 
     # Map fallback items/quests for field-level merging (preserve for later use)
     mapped_fallback_items = (

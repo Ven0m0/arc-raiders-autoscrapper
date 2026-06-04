@@ -67,7 +67,7 @@
       "electrical-components": 1,
       "wires": 1
     },
-    "wikiUses": "Workshop Gear Bench 3 (5x) Utility Station 3 (5x) Projects Expedition 1 (5x) Expedition 2 (5x) Expedition 3 (5x)"
+    "wikiUses": "Workshop Gear Bench 3 (5x) Utility Station 3 (5x) Projects Expedition 1 (5x) Expedition 2 (5x) Expedition 3 (5x) Expedition 4 (5x)"
   },
   {
     "id": "advanced-mechanical-components",
@@ -102,8 +102,7 @@
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 3
-    },
-    "wikiUses": "Projects Avian Alarm (8x)"
+    }
   },
   {
     "id": "agave-juice",
@@ -429,7 +428,7 @@
     "recyclesInto": {
       "metal-parts": 2
     },
-    "wikiUses": "Workshop Explosives Station 1 (6x) Medical Lab 1 (6x) Utility Station 1 (6x) Quests Clearer Skies (3x) Shoring Up Defenses (1x) Projects Expedition 1 (80x) Expedition 2 (80x) Expedition 3 (80x)"
+    "wikiUses": "Workshop Explosives Station 1 (6x) Medical Lab 1 (6x) Utility Station 1 (6x) Quests Clearer Skies (3x) Shoring Up Defenses (1x) Projects Expedition 1 (80x) Expedition 2 (80x) Expedition 3 (80x) Expedition 4 (80x)"
   },
   {
     "id": "arc-circuitry",
@@ -495,7 +494,7 @@
     "recyclesInto": {
       "arc-alloy": 2
     },
-    "wikiUses": "Workshop Refiner 2 (5x)"
+    "wikiUses": "Workshop Refiner 2 (5x) Projects Expedition 4 (20x)"
   },
   {
     "id": "arc-performance-steel",
@@ -752,19 +751,10 @@
     "updatedAt": "2026-04-07T20:56:46.075515+00:00",
     "recipe": null,
     "recyclesInto": {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/main
-      "arc-alloy": 3,
-      "advanced-mechanical-components": 1
-    }
-=======
       "advanced-mechanical-components": 1,
       "arc-alloy": 3
     },
     "wikiUses": "Workshop Gear Bench 3 (6x) Quests Settled in Full (1x) Projects Trophy Display (5x)"
->>>>>>> origin/main
   },
   {
     "id": "battery",
@@ -1570,7 +1560,7 @@
     "recyclesInto": {
       "plastic-parts": 3
     },
-    "wikiUses": "Projects Avian Alarm (20x)"
+    "wikiUses": "Projects Expedition 4 (15x)"
   },
   {
     "id": "cans-backpack-attachment",
@@ -1594,15 +1584,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-<<<<<<< HEAD
     "updatedAt": "2026-05-24T21:05:14.834373+00:00",
-=======
-<<<<<<< HEAD
-    "updatedAt": "2026-05-24T21:05:14.834373+00:00",
-=======
-    "updatedAt": "2026-04-06T09:47:44.400185+00:00",
->>>>>>> origin/main
->>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
   },
@@ -1636,20 +1618,7 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-04-03T23:45:42.68568+00:00",
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/main
-    "recipe": {
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    },
-<<<<<<< HEAD
-=======
-=======
     "recipe": null,
->>>>>>> origin/main
->>>>>>> origin/main
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 2
@@ -1665,20 +1634,7 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-04-03T23:48:53.265546+00:00",
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/main
-    "recipe": {
-      "advanced-mechanical-components": 1,
-      "medium-gun-parts": 2
-    },
-<<<<<<< HEAD
-=======
-=======
     "recipe": null,
->>>>>>> origin/main
->>>>>>> origin/main
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 3
@@ -1694,20 +1650,7 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-04-03T23:51:27.380366+00:00",
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/main
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 2
-    },
-<<<<<<< HEAD
-=======
-=======
     "recipe": null,
->>>>>>> origin/main
->>>>>>> origin/main
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "medium-gun-parts": 3
@@ -1752,7 +1695,7 @@
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
     "recyclesInto": null,
-    "wikiUses": "Workshop Explosives Station 1 (50x) Projects Expedition 3 (100x)"
+    "wikiUses": "Workshop Explosives Station 1 (50x) Projects Expedition 3 (100x) Expedition 4 (100x)"
   },
   {
     "id": "coffee-pot",
@@ -1898,7 +1841,7 @@
       "arc-alloy": 2,
       "crude-explosives": 2
     },
-    "wikiUses": "Quests Collision Course (1x) Projects Avian Alarm (3x)"
+    "wikiUses": "Quests Collision Course (1x)"
   },
   {
     "id": "compensator-i",
@@ -2101,34 +2044,6 @@
     }
   },
   {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/main
-    "id": "crash-mat",
-    "name": "Crash Mat",
-    "type": "Quick Use",
-    "rarity": "uncommon",
-    "value": 1200,
-    "weightKg": 0.3,
-    "stackSize": 5,
-    "craftBench": "Utility Station II",
-    "updatedAt": "2026-05-05T12:56:01.174817+00:00",
-    "recipe": {
-      "electrical-components": 1,
-      "durable-cloth": 1
-    },
-    "recyclesInto": {
-      "fabric": 6,
-      "plastic-parts": 3
-    }
-  },
-  {
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/main
->>>>>>> origin/main
     "id": "crash-mat-blueprint",
     "name": "Crash Mat Blueprint",
     "type": "Blueprint",
@@ -2137,15 +2052,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-<<<<<<< HEAD
     "updatedAt": "2026-05-25T09:44:11.57557+00:00",
-=======
-<<<<<<< HEAD
-    "updatedAt": "2026-05-25T09:44:11.57557+00:00",
-=======
-    "updatedAt": "2026-05-05T12:55:41.066338+00:00",
->>>>>>> origin/main
->>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
   },
@@ -2522,15 +2429,7 @@
   },
   {
     "id": "dockmasters-detector",
-<<<<<<< HEAD
-    "name": "Dockmaster\u2019s Detector",
-=======
-<<<<<<< HEAD
-    "name": "Dockmaster\u2019s Detector",
-=======
     "name": "Dockmaster’s Detector",
->>>>>>> origin/main
->>>>>>> origin/main
     "type": "Gadget",
     "rarity": "uncommon",
     "value": 1000,
@@ -2586,15 +2485,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-<<<<<<< HEAD
     "updatedAt": "2026-05-24T21:02:38.780319+00:00",
-=======
-<<<<<<< HEAD
-    "updatedAt": "2026-05-24T21:02:38.780319+00:00",
-=======
-    "updatedAt": "2026-04-06T09:43:59.559957+00:00",
->>>>>>> origin/main
->>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
   },
@@ -2675,7 +2566,7 @@
     "recyclesInto": {
       "fabric": 6
     },
-    "wikiUses": "Workshop Medical Lab 2 (5x) Quests Doctor's Orders (1x) Projects Expedition 1 (35x) Expedition 2 (35x) Expedition 3 (30x)"
+    "wikiUses": "Workshop Medical Lab 2 (5x) Quests Doctor's Orders (1x) Projects Expedition 1 (35x) Expedition 2 (35x) Expedition 3 (30x) Expedition 4 (30x)"
   },
   {
     "id": "electrical-components",
@@ -2695,7 +2586,7 @@
       "plastic-parts": 3,
       "rubber-parts": 3
     },
-    "wikiUses": "Workshop Gear Bench 2 (5x) Utility Station 2 (5x) Quests Fragmented Logs (1x) Projects Expedition 1 (30x) Expedition 2 (20x) Expedition 3 (20x)"
+    "wikiUses": "Workshop Gear Bench 2 (5x) Utility Station 2 (5x) Quests Fragmented Logs (1x) Projects Expedition 1 (30x) Expedition 2 (20x) Expedition 3 (20x) Expedition 4 (20x)"
   },
   {
     "id": "empty-wine-bottle",
@@ -2787,7 +2678,7 @@
       "magnet": 2,
       "processor": 2
     },
-    "wikiUses": "Projects Expedition 1 (1x) Expedition 2 (1x) Expedition 3 (1x) Trophy Display (5x)"
+    "wikiUses": "Projects Expedition 1 (1x) Expedition 2 (1x) Expedition 3 (1x) Expedition 4 (2x) Trophy Display (5x)"
   },
   {
     "id": "expired-pasta",
@@ -2872,21 +2763,21 @@
   },
   {
     "id": "extended-barrel-i",
-<<<<<<< HEAD
     "name": "Extended Barrel I ",
-=======
-    "name": "Extended Barrel I",
->>>>>>> origin/main
     "type": "Modification",
     "rarity": "uncommon",
     "value": 1000,
     "weightKg": 0.25,
-<<<<<<< HEAD
     "stackSize": 1,
-    "craftBench": null,
+    "craftBench": "weapon_bench",
     "updatedAt": "2026-05-24T09:17:44.091994+00:00",
-    "recipe": null,
-    "recyclesInto": null
+    "recipe": {
+      "metal-parts": 6,
+      "wires": 3
+    },
+    "recyclesInto": {
+      "metal-parts": 5
+    }
   },
   {
     "id": "extended-barrel-ii",
@@ -2896,15 +2787,15 @@
     "value": 3000,
     "weightKg": 0.5,
     "stackSize": 1,
-    "craftBench": null,
+    "craftBench": "weapon_bench",
     "updatedAt": "2026-05-20T10:36:55.499969+00:00",
     "recipe": {
       "mechanical-components": 3,
-      "wires-recipe": 6
+      "wires": 6
     },
     "recyclesInto": {
       "mechanical-components": 1,
-      "wires-recipe": 1
+      "wires": 1
     }
   },
   {
@@ -2917,16 +2808,10 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-05-24T09:07:00.230069+00:00",
-=======
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "2026-05-24T09:17:44.091994+00:00",
->>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
   },
   {
-<<<<<<< HEAD
     "id": "extended-barrel-recipe",
     "name": "Extended Barrel III Blueprint",
     "type": "Blueprint",
@@ -2949,80 +2834,10 @@
     "stackSize": 1,
     "craftBench": "Gunsmith I",
     "updatedAt": "2026-05-19T17:56:50.224648+00:00",
-=======
-    "id": "extended-barrel-ii",
-    "name": "Extended Barrel II",
-    "type": "Modification",
-    "rarity": "rare",
-    "value": 3000,
-    "weightKg": 0.5,
-    "stackSize": 1,
-<<<<<<< HEAD
-    "craftBench": null,
-    "updatedAt": "2026-05-20T10:36:55.499969+00:00",
->>>>>>> origin/main
-    "recipe": {
-      "mechanical-components": 3,
-      "wires-recipe": 6
-    },
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "wires-recipe": 1
-    }
-  },
-  {
-<<<<<<< HEAD
-=======
-    "id": "extended-barrel-ii-blueprint",
-    "name": "Extended Barrel II Blueprint",
-    "type": "Blueprint",
-    "rarity": "legendary",
-    "value": 5000,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "2026-05-24T09:07:00.230069+00:00",
     "recipe": null,
     "recyclesInto": null
   },
   {
-    "id": "extended-barrel-recipe",
-    "name": "Extended Barrel III Blueprint",
-    "type": "Blueprint",
-    "rarity": "legendary",
-    "value": 5000,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "2026-05-19T17:49:58.291628+00:00",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "extended-barrel",
-    "name": "Extended Barrel III",
-    "type": "Modification",
-    "rarity": "epic",
-    "value": 5000,
-    "weightKg": 0.75,
-    "stackSize": 1,
-    "craftBench": "Gunsmith I",
-    "updatedAt": "2026-05-19T17:56:50.224648+00:00",
-=======
-    "craftBench": "weapon_bench",
-    "updatedAt": "2026-01-31T06:29:13.011643+00:00",
->>>>>>> origin/main
-    "recipe": {
-      "mod-components": 2,
-      "wires": 8
-    },
-    "recyclesInto": {
-      "mod-components": 1,
-      "wires": 1
-    }
-  },
-  {
->>>>>>> origin/main
     "id": "extended-light-mag-i",
     "name": "Extended Light Mag I",
     "type": "Modification",
@@ -3401,8 +3216,7 @@
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 2
-    },
-    "wikiUses": "Projects Avian Alarm (10x)"
+    }
   },
   {
     "id": "film-reel",
@@ -3534,14 +3348,7 @@
     "value": 640,
     "weightKg": 1,
     "stackSize": 1,
-<<<<<<< HEAD
-    "craftBench": null,
-<<<<<<< HEAD
-=======
-=======
     "craftBench": "in_raid",
->>>>>>> origin/main
->>>>>>> origin/main
     "updatedAt": "2026-05-07T17:35:33.710226+00:00",
     "recipe": {
       "air-freshener": 1,
@@ -3623,15 +3430,7 @@
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 6,
-<<<<<<< HEAD
-      "rubber-parts-recipe": 6
-=======
-<<<<<<< HEAD
-      "rubber-parts-recipe": 6
-=======
       "rubber-parts": 6
->>>>>>> origin/main
->>>>>>> origin/main
     }
   },
   {
@@ -4387,7 +4186,7 @@
       "metal-parts": 5,
       "voltage-converter": 1
     },
-    "wikiUses": "Projects Expedition 3 (3x)"
+    "wikiUses": "Projects Expedition 3 (3x) Expedition 4 (3x)"
   },
   {
     "id": "industrial-magnet",
@@ -4674,33 +4473,6 @@
       "assorted-seeds": 3
     },
     "wikiUses": "Workshop Scrappy 3 (3x)"
-  },
-  {
-    "id": "leviathans-crown-ship-model",
-    "name": "\"Leviathan's Crown\" Ship Model",
-    "type": "Trinket",
-    "rarity": "legendary",
-    "value": 10000,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "2026-05-02T15:16:39.123489+00:00",
-    "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Avian Alarm (1x)"
-  },
-  {
-    "id": "leviathans-crown-ship-model",
-    "name": "\"Leviathan's Crown\" Ship Model",
-    "type": "Trinket",
-    "rarity": "legendary",
-    "value": 10000,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "2026-05-02T15:16:39.123489+00:00",
-    "recipe": null,
-    "recyclesInto": null
   },
   {
     "id": "leviathans-crown-ship-model",
@@ -5243,7 +5015,7 @@
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
     "recyclesInto": null,
-    "wikiUses": "Workshop Gunsmith 1 (20x) Refiner 1 (60x) Projects Expedition 1 (150x) Expedition 2 (150x) Expedition 3 (150x)"
+    "wikiUses": "Workshop Gunsmith 1 (20x) Refiner 1 (60x) Projects Expedition 1 (150x) Expedition 2 (150x) Expedition 3 (150x) Expedition 4 (150x)"
   },
   {
     "id": "microscope",
@@ -5305,20 +5077,11 @@
     "weightKg": 0.3,
     "stackSize": 10,
     "craftBench": null,
-<<<<<<< HEAD
     "updatedAt": "2026-05-24T21:08:36.221228+00:00",
-=======
-<<<<<<< HEAD
-    "updatedAt": "2026-05-24T21:08:36.221228+00:00",
-=======
-    "updatedAt": "2026-05-02T09:03:57.247506+00:00",
->>>>>>> origin/main
->>>>>>> origin/main
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 3
-    },
-    "wikiUses": "Projects Avian Alarm (12x)"
+    }
   },
   {
     "id": "motor",
@@ -5505,7 +5268,8 @@
     "recipe": null,
     "recyclesInto": {
       "chemicals": 3
-    }
+    },
+    "wikiUses": "Projects Expedition 4 (25x)"
   },
   {
     "id": "olives",
@@ -5808,7 +5572,7 @@
       "battery": 2,
       "wires": 6
     },
-    "wikiUses": "Quests Movie Night (1x)"
+    "wikiUses": "Quests Movie Night (1x) Projects Expedition 4 (1x)"
   },
   {
     "id": "poster-natural-wonder",
@@ -5888,31 +5652,6 @@
     }
   },
   {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/main
-    "id": "powered-descender",
-    "name": "Powered Descender",
-    "type": "Gadget",
-    "rarity": "epic",
-    "value": 10000,
-    "weightKg": 5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "2026-05-05T12:56:35.094503+00:00",
-    "recipe": null,
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "arc-circuitry": 2
-    }
-  },
-  {
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/main
->>>>>>> origin/main
     "id": "powered-descender-blueprint",
     "name": "Powered Descender Blueprint",
     "type": "Blueprint",
@@ -5921,15 +5660,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-<<<<<<< HEAD
     "updatedAt": "2026-05-20T10:46:23.877509+00:00",
-=======
-<<<<<<< HEAD
-    "updatedAt": "2026-05-20T10:46:23.877509+00:00",
-=======
-    "updatedAt": "2026-05-05T12:18:34.332002+00:00",
->>>>>>> origin/main
->>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
   },
@@ -5962,15 +5693,7 @@
     "weightKg": 0.2,
     "stackSize": 10,
     "craftBench": null,
-<<<<<<< HEAD
     "updatedAt": "2026-05-25T11:58:38.439991+00:00",
-=======
-<<<<<<< HEAD
-    "updatedAt": "2026-05-25T11:58:38.439991+00:00",
-=======
-    "updatedAt": "2026-04-15T14:50:47.786663+00:00",
->>>>>>> origin/main
->>>>>>> origin/main
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 3
@@ -6157,15 +5880,8 @@
     "stackSize": 1,
     "craftBench": "Gunsmith II",
     "updatedAt": "2026-06-01T10:42:59.404609+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 3,
-      "canister": 5
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "heavy-gun-parts": 2
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "rascal-blueprint",
@@ -6182,22 +5898,15 @@
   },
   {
     "id": "rascal-ii",
-<<<<<<< HEAD
     "name": "Rascal II ",
-=======
-    "name": "Rascal II",
->>>>>>> origin/main
     "type": "Weapon",
     "rarity": "rare",
-    "value": 0,
+    "value": 10000,
     "weightKg": 4,
     "stackSize": 1,
-    "craftBench": null,
+    "craftBench": "weapon_bench",
     "updatedAt": "2026-05-24T21:50:44.350759+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 1,
-      "heavy-gun-parts": 1
-    },
+    "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "heavy-gun-parts": 2
@@ -6208,15 +5917,12 @@
     "name": "Rascal III",
     "type": "Weapon",
     "rarity": "rare",
-    "value": 0,
+    "value": 13000,
     "weightKg": 4,
     "stackSize": 1,
-    "craftBench": null,
+    "craftBench": "weapon_bench",
     "updatedAt": "2026-05-24T21:51:39.782937+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 1,
-      "heavy-gun-parts": 1
-    },
+    "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "heavy-gun-parts": 3
@@ -6227,15 +5933,12 @@
     "name": "Rascal IV",
     "type": "Weapon",
     "rarity": "rare",
-    "value": 0,
+    "value": 17000,
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "Gunsmith II",
     "updatedAt": "2026-05-24T21:52:11.362064+00:00",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "heavy-gun-parts": 1
-    },
+    "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "heavy-gun-parts": 3
@@ -6332,8 +6035,7 @@
     "craftBench": null,
     "updatedAt": "2026-01-31T06:29:13.011643+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Avian Alarm (3x)"
+    "recyclesInto": null
   },
   {
     "id": "red-light-stick",
@@ -6538,11 +6240,7 @@
   },
   {
     "id": "riven-tides-classifed-records-keycard",
-<<<<<<< HEAD
     "name": "Riven Tides Classifed Records Keycard",
-=======
-    "name": "Riven Tides Classified Records Keycard",
->>>>>>> origin/main
     "type": "Key",
     "rarity": "uncommon",
     "value": 100,
@@ -6588,15 +6286,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-<<<<<<< HEAD
     "updatedAt": "2026-05-20T10:39:04.615594+00:00",
-=======
-<<<<<<< HEAD
-    "updatedAt": "2026-05-20T10:39:04.615594+00:00",
-=======
-    "updatedAt": "2026-04-30T08:43:30.097008+00:00",
->>>>>>> origin/main
->>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
   },
@@ -6724,8 +6414,7 @@
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 1
-    },
-    "wikiUses": "Projects Avian Alarm (4x)"
+    }
   },
   {
     "id": "rope",
@@ -6949,15 +6638,7 @@
     "weightKg": 3,
     "stackSize": 3,
     "craftBench": null,
-<<<<<<< HEAD
     "updatedAt": "2026-05-21T18:57:15.222867+00:00",
-=======
-<<<<<<< HEAD
-    "updatedAt": "2026-05-21T18:57:15.222867+00:00",
-=======
-    "updatedAt": "2026-05-06T12:37:44.280528+00:00",
->>>>>>> origin/main
->>>>>>> origin/main
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 2,
@@ -6997,7 +6678,7 @@
       "metal-parts": 8,
       "steel-spring": 1
     },
-    "wikiUses": "Workshop Gunsmith 2 (3x) Projects Avian Alarm (8x)"
+    "wikiUses": "Workshop Gunsmith 2 (3x)"
   },
   {
     "id": "rusty-arc-steel",
@@ -7250,14 +6931,7 @@
     "value": 5000,
     "weightKg": 0.5,
     "stackSize": 1,
-<<<<<<< HEAD
-    "craftBench": null,
-<<<<<<< HEAD
-=======
-=======
     "craftBench": "weapon_bench",
->>>>>>> origin/main
->>>>>>> origin/main
     "updatedAt": "2026-05-07T17:35:15.002617+00:00",
     "recipe": {
       "mod-components": 2,
@@ -7485,16 +7159,8 @@
     "craftBench": null,
     "updatedAt": "2026-04-28T21:18:47.938347+00:00",
     "recipe": null,
-<<<<<<< HEAD
-    "recyclesInto": null
-=======
-<<<<<<< HEAD
-    "recyclesInto": null
-=======
     "recyclesInto": null,
-    "wikiUses": "Projects Avian Alarm (5x)"
->>>>>>> origin/main
->>>>>>> origin/main
+    "wikiUses": "Projects Expedition 4 (2x)"
   },
   {
     "id": "smoke-grenade",
@@ -7695,7 +7361,8 @@
     "recyclesInto": {
       "plastic-parts": 2,
       "rubber-parts": 3
-    }
+    },
+    "wikiUses": "Projects Expedition 4 (15x)"
   },
   {
     "id": "spectrometer",
@@ -8042,32 +7709,13 @@
     "name": "Surge Coil",
     "type": "Deployable",
     "rarity": "rare",
-<<<<<<< HEAD
-    "value": 0,
-=======
-<<<<<<< HEAD
-    "value": 0,
-=======
     "value": 2100,
->>>>>>> origin/main
->>>>>>> origin/main
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": "Explosives Bench III",
     "updatedAt": "2026-04-01T15:47:24.211411+00:00",
     "recipe": {
       "electrical-components": 1,
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/main
-      "sensors-recipe": 1,
-      "hornet-driver": 1
-    },
-    "recyclesInto": null
-<<<<<<< HEAD
-=======
-=======
       "hornet-driver": 1,
       "sensors": 1
     },
@@ -8075,8 +7723,6 @@
       "electrical-components": 1,
       "sensors": 1
     }
->>>>>>> origin/main
->>>>>>> origin/main
   },
   {
     "id": "surge-coil-blueprint",
@@ -8087,15 +7733,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-<<<<<<< HEAD
     "updatedAt": "2026-05-24T21:06:14.829654+00:00",
-=======
-<<<<<<< HEAD
-    "updatedAt": "2026-05-24T21:06:14.829654+00:00",
-=======
-    "updatedAt": "2026-04-06T09:45:52.854826+00:00",
->>>>>>> origin/main
->>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
   },
@@ -8310,15 +7948,7 @@
     "value": 5000,
     "weightKg": 4,
     "stackSize": 1,
-<<<<<<< HEAD
-    "craftBench": null,
-=======
-<<<<<<< HEAD
-    "craftBench": null,
-=======
     "craftBench": "equipment_bench",
->>>>>>> origin/main
->>>>>>> origin/main
     "updatedAt": "2026-04-30T06:51:54.741036+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
@@ -8338,15 +7968,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-<<<<<<< HEAD
     "updatedAt": "2026-05-20T10:46:41.187256+00:00",
-=======
-<<<<<<< HEAD
-    "updatedAt": "2026-05-20T10:46:41.187256+00:00",
-=======
-    "updatedAt": "2026-04-30T06:50:49.008893+00:00",
->>>>>>> origin/main
->>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
   },
@@ -8553,7 +8175,7 @@
       "arc-alloy": 2,
       "chemicals": 2
     },
-    "wikiUses": "Workshop Medical Lab 2 (8x) Projects Avian Alarm (7x) Trophy Display (15x)"
+    "wikiUses": "Workshop Medical Lab 2 (8x) Projects Trophy Display (15x)"
   },
   {
     "id": "toaster",
@@ -8779,16 +8401,8 @@
     "recyclesInto": {
       "arc-circuitry": 1,
       "arc-motion-core": 1
-<<<<<<< HEAD
-    }
-=======
-<<<<<<< HEAD
-    }
-=======
     },
-    "wikiUses": "Projects Avian Alarm (2x)"
->>>>>>> origin/main
->>>>>>> origin/main
+    "wikiUses": "Projects Expedition 4 (5x)"
   },
   {
     "id": "turbo-pump",
@@ -8817,16 +8431,7 @@
     "craftBench": null,
     "updatedAt": "2026-04-28T12:54:12.347282+00:00",
     "recipe": null,
-<<<<<<< HEAD
     "recyclesInto": null
-=======
-<<<<<<< HEAD
-    "recyclesInto": null
-=======
-    "recyclesInto": null,
-    "wikiUses": "Projects Avian Alarm (5x)"
->>>>>>> origin/main
->>>>>>> origin/main
   },
   {
     "id": "unusable-weapon",
@@ -8859,7 +8464,7 @@
       "advanced-electrical-components": 1,
       "arc-circuitry": 2
     },
-    "wikiUses": "Projects Avian Alarm (1x)"
+    "wikiUses": "Projects Expedition 4 (3x)"
   },
   {
     "id": "vase",
@@ -8885,16 +8490,7 @@
     "craftBench": null,
     "updatedAt": "2026-04-28T14:48:53.389154+00:00",
     "recipe": null,
-<<<<<<< HEAD
     "recyclesInto": null
-=======
-<<<<<<< HEAD
-    "recyclesInto": null
-=======
-    "recyclesInto": null,
-    "wikiUses": "Projects Avian Alarm (5x)"
->>>>>>> origin/main
->>>>>>> origin/main
   },
   {
     "id": "venator-recipe",
@@ -9275,7 +8871,7 @@
     "recyclesInto": {
       "arc-alloy": 2
     },
-    "wikiUses": "Workshop Gunsmith 1 (8x) Quests The Trifecta (2x) Projects Trophy Display (20x)"
+    "wikiUses": "Workshop Gunsmith 2 (8x) Quests The Trifecta (2x) Projects Trophy Display (20x)"
   },
   {
     "id": "water-filter",
@@ -9291,8 +8887,7 @@
     "recyclesInto": {
       "canister": 3,
       "rubber-parts": 2
-    },
-    "wikiUses": "Projects Avian Alarm (3x)"
+    }
   },
   {
     "id": "water-pump",
@@ -9338,15 +8933,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-<<<<<<< HEAD
     "updatedAt": "2026-05-20T10:46:56.354189+00:00",
-=======
-<<<<<<< HEAD
-    "updatedAt": "2026-05-20T10:46:56.354189+00:00",
-=======
-    "updatedAt": "2026-05-05T12:15:27.138544+00:00",
->>>>>>> origin/main
->>>>>>> origin/main
     "recipe": null,
     "recyclesInto": null
   },
@@ -9534,19 +9121,6 @@
     "recyclesInto": null
   },
   {
-    "id": "dam-control-tower-key",
-    "name": "Dam Control Tower Key",
-    "type": "Key",
-    "rarity": "epic",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "02/24/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
     "id": "damaged-snitch-scanner",
     "name": "Damaged Snitch Scanner",
     "type": "Recyclable",
@@ -9623,6 +9197,25 @@
     "updatedAt": "05/04/2026",
     "recipe": null,
     "recyclesInto": null
+  },
+  {
+    "id": "extended-barrel-iii",
+    "name": "Extended Barrel III",
+    "type": "Modification",
+    "rarity": "epic",
+    "value": 5000,
+    "weightKg": 0.5,
+    "stackSize": 1,
+    "craftBench": "weapon_bench",
+    "updatedAt": "01/13/2026",
+    "recipe": {
+      "mod-components": 2,
+      "wires": 8
+    },
+    "recyclesInto": {
+      "mod-components": 1,
+      "wires": 1
+    }
   },
   {
     "id": "first-wave-compass",
@@ -9844,6 +9437,26 @@
     "updatedAt": "05/04/2026",
     "recipe": null,
     "recyclesInto": null
+  },
+  {
+    "id": "rascal-i",
+    "name": "Rascal I",
+    "type": "Special",
+    "rarity": "rare",
+    "value": 7000,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": "weapon_bench",
+    "updatedAt": "05/19/2026",
+    "recipe": {
+      "advanced-mechanical-components": 2,
+      "canister": 5,
+      "heavy-gun-parts": 3
+    },
+    "recyclesInto": {
+      "advanced-mechanical-components": 1,
+      "heavy-gun-parts": 2
+    }
   },
   {
     "id": "riven-tides-classified-records-keycard",
