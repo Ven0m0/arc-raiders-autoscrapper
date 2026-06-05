@@ -23,8 +23,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: Configure fast apt mirror
-        uses: vegardit/fast-apt-mirror.sh@v1
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
