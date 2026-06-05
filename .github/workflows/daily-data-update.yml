@@ -66,9 +66,7 @@ jobs:
               for file_path in changed_files:
                   print(f" - {file_path}")
           else:
-              print(
-              "No substantive tracked changes (timestamp-only updates ignored)."
-          )
+              print("No substantive tracked changes (timestamp-only updates ignored).")
 
           with Path(os.environ["GITHUB_OUTPUT"]).open("a", encoding="utf-8") as output:
               output.write(f"has_changes={'true' if has_changes else 'false'}\n")
@@ -95,7 +93,12 @@ jobs:
             exit 0
           fi
           git commit -m "chore(data): daily Metaforge snapshot + default rules"
-          git push --force-with-lease origin HEAD:bot/daily-data-update
+          # The runner checks out main at depth 1, so it has no remote-tracking
+          # ref for bot/daily-data-update. --force-with-lease would expect the
+          # branch to be absent and get rejected on every run after the first,
+          # so use a plain force push. The concurrency group serializes runs and
+          # the branch is owned exclusively by this workflow.
+          git push --force origin HEAD:bot/daily-data-update
           echo "has_commit=true" >> "$GITHUB_OUTPUT"
       - name: Create or update pull request
         if: steps.commit_push.outputs.has_commit == 'true'
