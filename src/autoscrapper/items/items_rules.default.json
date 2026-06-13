@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "generatedAt": "2026-06-10T15:01:29.790917Z",
+    "generatedAt": "2026-06-13T14:41:45.259440Z",
     "data": {
-      "lastUpdated": "2026-06-10T15:01:29.778255Z",
+      "lastUpdated": "2026-06-13T14:41:45.248861Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
       "itemCount": 615,
@@ -4313,7 +4313,7 @@
     {
       "id": "raider-flag",
       "name": "Raider Flag",
-      "value": 0,
+      "value": 100,
       "action": "sell",
       "analysis": [
         "No immediate use found",
