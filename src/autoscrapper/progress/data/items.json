@@ -9430,11 +9430,11 @@
     "name": "Raider Flag",
     "type": "Trinket",
     "rarity": "common",
-    "value": 0,
+    "value": 100,
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "05/04/2026",
+    "updatedAt": "05/23/2026",
     "recipe": null,
     "recyclesInto": null
   },
