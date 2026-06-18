@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "generatedAt": "2026-06-16T15:36:24.379278Z",
+    "generatedAt": "2026-06-18T15:00:31.026468Z",
     "data": {
-      "lastUpdated": "2026-06-16T15:36:24.368503Z",
+      "lastUpdated": "2026-06-18T15:00:31.015656Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
-      "itemCount": 624,
+      "itemCount": 623,
       "questCount": 100,
       "dataSources": {
         "items": {
@@ -18,7 +18,7 @@
           "fallback": {
             "repository": "https://github.com/RaidTheory/arcraiders-data",
             "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
-            "supplementalCount": 34,
+            "supplementalCount": 33,
             "error": null
           },
           "arctrackerEnrichment": {
@@ -29,7 +29,7 @@
           },
           "fieldLevelMerge": {
             "enabled": true,
-            "entriesEnriched": 371,
+            "entriesEnriched": 372,
             "sources": [
               "raidtheory-fallback",
               "arctracker"
@@ -124,7 +124,7 @@
       },
       "hasPriceOverrides": false
     },
-    "itemCount": 624,
+    "itemCount": 623,
     "allQuestsCompleted": true
   },
   "items": [
@@ -2141,7 +2141,7 @@
     },
     {
       "id": "extended-barrel",
-      "name": "Extended Barrel IIII",
+      "name": "Extended Barrel III",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -2182,18 +2182,6 @@
       "analysis": [
         "Legendary rarity - extremely valuable",
         "Keep all legendaries"
-      ]
-    },
-    {
-      "id": "extended-barrel-iii",
-      "name": "Extended Barrel III",
-      "value": 5000,
-      "action": "keep",
-      "analysis": [
-        "Tier 3 variant - review based on your current loadout",
-        "Consider tier and your play style",
-        "Base weapon: Extended Barrel",
-        "Override: treat 'Your Call' as Keep"
       ]
     },
     {

@@ -43,7 +43,7 @@
     "weightKg": 0.5,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-17T14:20:54.488705+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-powercell": 2
@@ -1733,7 +1733,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-16T13:40:08.602499+00:00",
+    "updatedAt": "2026-06-16T19:36:15.848196+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1746,7 +1746,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-16T14:40:32.89141+00:00",
+    "updatedAt": "2026-06-16T19:36:38.324267+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1759,7 +1759,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-16T14:41:50.397354+00:00",
+    "updatedAt": "2026-06-16T19:36:55.874323+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2636,7 +2636,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-16T14:37:52.63142+00:00",
+    "updatedAt": "2026-06-16T19:34:27.65139+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2711,7 +2711,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-16T14:31:20.609621+00:00",
+    "updatedAt": "2026-06-16T19:33:00.710826+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2877,6 +2877,25 @@
     "recyclesInto": null
   },
   {
+    "id": "extended-barrel",
+    "name": "Extended Barrel III",
+    "type": "Modification",
+    "rarity": "epic",
+    "value": 5000,
+    "weightKg": 0.75,
+    "stackSize": 1,
+    "craftBench": "Gunsmith I",
+    "updatedAt": "2026-06-17T14:40:30.724601+00:00",
+    "recipe": {
+      "mod-components": 2,
+      "wires": 8
+    },
+    "recyclesInto": {
+      "mod-components": 1,
+      "wires": 1
+    }
+  },
+  {
     "id": "extended-barrel-recipe",
     "name": "Extended Barrel III Blueprint",
     "type": "Blueprint",
@@ -2885,19 +2904,6 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "extended-barrel",
-    "name": "Extended Barrel IIII",
-    "type": "Modification",
-    "rarity": "epic",
-    "value": 5000,
-    "weightKg": 0.75,
-    "stackSize": 1,
-    "craftBench": "Gunsmith I",
     "updatedAt": "2026-06-15T07:45:11.797307+00:00",
     "recipe": null,
     "recyclesInto": null
@@ -4653,7 +4659,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Equipment Bench 1",
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-17T14:25:37.086759+00:00",
     "recipe": {
       "arc-alloy": 2,
       "plastic-parts": 4
@@ -5044,7 +5050,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Equipment Bench",
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-17T14:09:49.837849+00:00",
     "recipe": {
       "arc-circuitry": 1,
       "battery": 4
@@ -6563,7 +6569,7 @@
     "weightKg": 0.1,
     "stackSize": 50,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-17T13:44:28.794007+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Workshop Gunsmith 1 (30x) Projects Expedition 1 (200x)"
@@ -6850,7 +6856,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-16T12:22:45.34046+00:00",
+    "updatedAt": "2026-06-16T19:32:10.557161+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6881,7 +6887,7 @@
     "weightKg": 0.15,
     "stackSize": 5,
     "craftBench": "Equipment Bench",
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-17T13:42:26.115797+00:00",
     "recipe": {
       "arc-powercell": 1,
       "rubber-parts": 5
@@ -7824,7 +7830,7 @@
     "weightKg": 0.2,
     "stackSize": 5,
     "craftBench": "Medical Lab II",
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-17T14:24:09.975913+00:00",
     "recipe": {
       "advanced-arc-powercell": 1,
       "electrical-components": 1
@@ -8150,7 +8156,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-16T14:34:00.171167+00:00",
+    "updatedAt": "2026-06-16T19:33:36.892233+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -8442,7 +8448,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-16T14:19:49.670935+00:00",
+    "updatedAt": "2026-06-16T19:30:31.288369+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -8782,7 +8788,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-16T14:24:29.833915+00:00",
+    "updatedAt": "2026-06-16T19:31:08.469893+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9314,25 +9320,6 @@
     "updatedAt": "05/04/2026",
     "recipe": null,
     "recyclesInto": null
-  },
-  {
-    "id": "extended-barrel-iii",
-    "name": "Extended Barrel III",
-    "type": "Modification",
-    "rarity": "epic",
-    "value": 5000,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": "weapon_bench",
-    "updatedAt": "01/13/2026",
-    "recipe": {
-      "mod-components": 2,
-      "wires": 8
-    },
-    "recyclesInto": {
-      "mod-components": 1,
-      "wires": 1
-    }
   },
   {
     "id": "first-wave-compass",
