@@ -342,9 +342,9 @@ class TestOcrTitleStripCache:
         # 2. no-upscale fallback
         # 3. inverted polarity fallback (T024)
         # 3 × 2 = 6.
-        assert (
-            mock_ocr.call_count == 6
-        ), "image_to_string called 6 times: 3 per invocation (upscale + no-upscale + inverted)"
+        assert mock_ocr.call_count == 6, (
+            "image_to_string called 6 times: 3 per invocation (upscale + no-upscale + inverted)"
+        )
 
     def test_non_empty_result_is_cached(self):
         """When item_name is non-empty, the second call must use the cache."""
@@ -554,16 +554,16 @@ class TestFindContextMenuCrop:
         img = self._solid()
         return find_context_menu_crop(img, cx, cy)
 
-    def test_right_edge_extends_at_least_200px_past_cell_centre(self):
-        """Right edge of crop must be ≥ 200 px past cell_center_x."""
+    def test_find_context_menu_crop_right_edge(self):
+        """Test context menu right edge scaling."""
         cx, cy = 800, 540
         result = self._crop(cx, cy)
         assert result is not None, "crop should succeed on a bright image"
         x, _, w, _ = result
         right_edge = x + w
-        assert (
-            right_edge >= cx + 200
-        ), f"right edge {right_edge} is only {right_edge - cx} px past centre {cx}; title text will be clipped"
+        assert right_edge >= cx + 200, (
+            f"right edge {right_edge} is only {right_edge - cx} px past centre {cx}; title text will be clipped"
+        )
 
     def test_right_edge_extends_at_least_200px_near_left_screen(self):
         """Same geometry holds when cell is near the left screen edge."""
@@ -573,9 +573,9 @@ class TestFindContextMenuCrop:
         x, _, w, _ = result
         right_edge = x + w
         # Crop is clamped to screen, but must still extend past centre
-        assert (
-            right_edge >= cx + 200 or right_edge == self._W
-        ), "right edge must reach 200 px past centre or be clamped to screen width"
+        assert right_edge >= cx + 200 or right_edge == self._W, (
+            "right edge must reach 200 px past centre or be clamped to screen width"
+        )
 
     def test_crop_stays_within_image_bounds(self):
         """Crop rectangle must not exceed image dimensions."""
