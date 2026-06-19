@@ -87,7 +87,7 @@ def _solid_bgr(h, w, color=(128, 128, 128)):
 
 
 class TestPreprocessForOcr:
-    def test_zero_size_raises_value_error(self):
+    def test_preprocess_for_ocr_zero_size_input(self):
         """Bug 1: zero-size input must raise ValueError before cv2 crashes."""
         with pytest.raises(ValueError, match="empty input"):
             preprocess_for_ocr(np.zeros((0, 10, 3), dtype=np.uint8))
