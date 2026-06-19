@@ -803,14 +803,29 @@ def _raidtheory_archive_prefix(names: list[str]) -> str:
 
 def _load_raidtheory_json_entries(archive: zipfile.ZipFile, prefix: str) -> list[dict]:
     entries: list[dict] = []
+    # Limit max read size to 10MB to prevent zip bomb out-of-memory issues
+    MAX_FILE_SIZE = 10 * 1024 * 1024
+
     for name in sorted(archive.namelist()):
         if not name.startswith(prefix) or not name.endswith(".json"):
             continue
+
+        info = archive.getinfo(name)
+        if info.file_size > MAX_FILE_SIZE:
+            _log.warning(f"Skipping {name}: file size {info.file_size} exceeds {MAX_FILE_SIZE} bytes")
+            continue
+
         with archive.open(name) as file_obj:
+            data = file_obj.read(MAX_FILE_SIZE + 1)
+            if len(data) > MAX_FILE_SIZE:
+                _log.warning(f"Skipping {name}: uncompressed size exceeds {MAX_FILE_SIZE} bytes")
+                continue
+
             try:
-                payload = orjson.loads(file_obj.read())
+                payload = orjson.loads(data)
             except orjson.JSONDecodeError as exc:
                 raise DownloadError(f"Invalid JSON in RaidTheory archive member {name}") from exc
+
         if isinstance(payload, dict):
             entries.append(payload)
     return entries
