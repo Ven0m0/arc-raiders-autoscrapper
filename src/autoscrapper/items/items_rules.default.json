@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "generatedAt": "2026-06-18T15:00:31.026468Z",
+    "generatedAt": "2026-06-23T14:58:52.824905Z",
     "data": {
-      "lastUpdated": "2026-06-18T15:00:31.015656Z",
+      "lastUpdated": "2026-06-23T14:58:52.814320Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
-      "itemCount": 623,
+      "itemCount": 626,
       "questCount": 100,
       "dataSources": {
         "items": {
@@ -18,7 +18,7 @@
           "fallback": {
             "repository": "https://github.com/RaidTheory/arcraiders-data",
             "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
-            "supplementalCount": 33,
+            "supplementalCount": 36,
             "error": null
           },
           "arctrackerEnrichment": {
@@ -29,7 +29,7 @@
           },
           "fieldLevelMerge": {
             "enabled": true,
-            "entriesEnriched": 372,
+            "entriesEnriched": 373,
             "sources": [
               "raidtheory-fallback",
               "arctracker"
@@ -54,7 +54,7 @@
           "wikiEnrichment": {
             "url": "https://arcraiders.wiki/wiki/Loot",
             "available": true,
-            "enrichedCount": 91,
+            "enrichedCount": 101,
             "error": null,
             "fields": [
               "wikiUses"
@@ -124,7 +124,7 @@
       },
       "hasPriceOverrides": false
     },
-    "itemCount": 623,
+    "itemCount": 626,
     "allQuestsCompleted": true
   },
   "items": [
@@ -1372,6 +1372,16 @@
       ]
     },
     {
+      "id": "colorful-shoes-green",
+      "name": "Colorful Shoes (Green)",
+      "value": 7000,
+      "action": "sell",
+      "analysis": [
+        "High value (7000 coins)",
+        "No crafting or upgrade use"
+      ]
+    },
+    {
       "id": "colorful-shoes-rare",
       "name": "Colorful Shoes",
       "value": 3000,
@@ -1379,6 +1389,26 @@
       "analysis": [
         "High value (3000 coins)",
         "No crafting or upgrade use"
+      ]
+    },
+    {
+      "id": "colorful-shoes-red",
+      "name": "Colorful Shoes (Red)",
+      "value": 3000,
+      "action": "sell",
+      "analysis": [
+        "High value (3000 coins)",
+        "No crafting or upgrade use"
+      ]
+    },
+    {
+      "id": "colorful-shoes-silver",
+      "name": "Colorful Shoes (Silver)",
+      "value": 10000,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
       ]
     },
     {
@@ -3646,7 +3676,7 @@
     {
       "id": "matriarch-reactor",
       "name": "Matriarch Reactor",
-      "value": 13000,
+      "value": 11000,
       "action": "keep",
       "analysis": [
         "Legendary rarity - extremely valuable",
@@ -4205,7 +4235,7 @@
     {
       "id": "power-rod",
       "name": "Power Rod",
-      "value": 5500,
+      "value": 4997,
       "action": "keep",
       "analysis": [
         "Used in 3 crafting recipes",
@@ -5932,12 +5962,11 @@
     {
       "id": "tellurion",
       "name": "Tellurion",
-      "value": 0,
-      "action": "keep",
+      "value": 7000,
+      "action": "sell",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
-        "Override: treat 'Your Call' as Keep"
+        "High value (7000 coins)",
+        "No crafting or upgrade use"
       ]
     },
     {
