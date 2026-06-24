@@ -502,6 +502,11 @@ class TestOcrInventoryCount:
         assert count is None
         capsys.readouterr()  # consume log
 
+    def test_ocr_inventory_count_stash_icon_noise(self):
+        """Stash icon can cause a false prefix digit. Ensure fix handles it."""
+        count, _ = self._call("8 197/232")
+        assert count == 197
+
     def test_no_slash_pattern_falls_through_to_digit_fallback(self):
         """No N/M pattern — falls through to digit extraction path."""
         count, _ = self._call("251")
