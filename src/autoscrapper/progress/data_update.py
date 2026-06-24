@@ -134,15 +134,15 @@ def _fetch_json(url: str, headers: dict[str, str] | None = None) -> Any:
         raise DownloadError(f"Invalid JSON returned from {url}") from exc
 
 
-def _fetch_arctracker_items() -> list[dict]:
-    """Fetch all items from arctracker.io public API."""
-    url = f"{ARCTRACKER_BASE_URL}/api/items"
+def _fetch_arctracker_resource(resource_name: str) -> list[dict]:
+    """Fetch all records for a specific resource from arctracker.io public API."""
+    url = f"{ARCTRACKER_BASE_URL}/api/{resource_name}"
     response = _fetch_json(url)
     if not isinstance(response, dict):
-        raise DownloadError("Unexpected response from arctracker items endpoint")
+        raise DownloadError(f"Unexpected response from arctracker {resource_name} endpoint")
     data = response.get("data") or []
     if not isinstance(data, list):
-        raise DownloadError("Unexpected arctracker items payload: data must be a list")
+        raise DownloadError(f"Unexpected arctracker {resource_name} payload: data must be a list")
     return [entry for entry in data if isinstance(entry, dict)]
 
 
@@ -355,42 +355,6 @@ def _fetch_supabase_all(table: str, sources_path: Path) -> List[dict]:
         if configured.persist_discovery:
             _write_sources_config(sources_path, discovered)
         return _fetch_supabase_all_with_config(table, discovered)
-
-
-def _fetch_arctracker_quests() -> list[dict]:
-    """Fetch all quests from arctracker.io public API."""
-    url = f"{ARCTRACKER_BASE_URL}/api/quests"
-    response = _fetch_json(url)
-    if not isinstance(response, dict):
-        raise DownloadError("Unexpected response from arctracker quests endpoint")
-    data = response.get("data") or []
-    if not isinstance(data, list):
-        raise DownloadError("Unexpected arctracker quests payload: data must be a list")
-    return [entry for entry in data if isinstance(entry, dict)]
-
-
-def _fetch_arctracker_hideout() -> list[dict]:
-    """Fetch all hideout modules from arctracker.io public API."""
-    url = f"{ARCTRACKER_BASE_URL}/api/hideout"
-    response = _fetch_json(url)
-    if not isinstance(response, dict):
-        raise DownloadError("Unexpected response from arctracker hideout endpoint")
-    data = response.get("data") or []
-    if not isinstance(data, list):
-        raise DownloadError("Unexpected arctracker hideout payload: data must be a list")
-    return [entry for entry in data if isinstance(entry, dict)]
-
-
-def _fetch_arctracker_projects() -> list[dict]:
-    """Fetch all projects from arctracker.io public API."""
-    url = f"{ARCTRACKER_BASE_URL}/api/projects"
-    response = _fetch_json(url)
-    if not isinstance(response, dict):
-        raise DownloadError("Unexpected response from arctracker projects endpoint")
-    data = response.get("data") or []
-    if not isinstance(data, list):
-        raise DownloadError("Unexpected arctracker projects payload: data must be a list")
-    return [entry for entry in data if isinstance(entry, dict)]
 
 
 def _map_arctracker_item(arctracker_item: dict) -> dict | None:
@@ -1313,28 +1277,28 @@ def update_data_snapshot(data_dir: Path | None = None, *, use_arclens: bool = Fa
     arctracker_projects_error: str | None = None
 
     try:
-        arctracker_items = _fetch_arctracker_items()
+        arctracker_items = _fetch_arctracker_resource("items")
         _log.info("Fetched %d items from arctracker.io", len(arctracker_items))
     except DownloadError as exc:
         arctracker_items_error = str(exc)
         _log.warning("ArcTracker items unavailable: %s", exc)
 
     try:
-        arctracker_quests = _fetch_arctracker_quests()
+        arctracker_quests = _fetch_arctracker_resource("quests")
         _log.info("Fetched %d quests from arctracker.io", len(arctracker_quests))
     except DownloadError as exc:
         arctracker_quests_error = str(exc)
         _log.warning("ArcTracker quests unavailable: %s", exc)
 
     try:
-        arctracker_hideout = _fetch_arctracker_hideout()
+        arctracker_hideout = _fetch_arctracker_resource("hideout")
         _log.info("Fetched %d hideout modules from arctracker.io", len(arctracker_hideout))
     except DownloadError as exc:
         arctracker_hideout_error = str(exc)
         _log.warning("ArcTracker hideout unavailable: %s", exc)
 
     try:
-        arctracker_projects = _fetch_arctracker_projects()
+        arctracker_projects = _fetch_arctracker_resource("projects")
         _log.info("Fetched %d projects from arctracker.io", len(arctracker_projects))
     except DownloadError as exc:
         arctracker_projects_error = str(exc)
