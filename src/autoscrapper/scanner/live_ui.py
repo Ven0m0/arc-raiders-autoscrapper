@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from typing import cast
 
 
+from ..utils.formatting import format_duration
 from .outcomes import _outcome_style
 from .rich_support import (
     Align,
@@ -38,17 +39,6 @@ AUTOSCRAPPER_ASCII = r"""
 /_/ |_|\_,_/\__/\___/___/\__/_/  \_,_/ .__/ .__/\__/_/
                                    /_/  /_/
 """.strip("\n")
-
-
-def _format_duration(seconds: float | None) -> str:
-    if seconds is None:
-        return "--:--"
-    seconds = max(seconds, 0)
-    minutes, secs = divmod(int(seconds), 60)
-    hours, minutes = divmod(minutes, 60)
-    if hours:
-        return f"{hours:d}:{minutes:02d}:{secs:02d}"
-    return f"{minutes:02d}:{secs:02d}"
 
 
 class _ItemsPerSecondColumn(ProgressColumn):
@@ -225,7 +215,7 @@ class _ScanLiveUI:
             left.add_row("Pages", self.pages_label)
         if self._scan_started_at is not None:
             elapsed = time.perf_counter() - self._scan_started_at
-            left.add_row("Elapsed", _format_duration(elapsed))
+            left.add_row("Elapsed", format_duration(elapsed))
             left.add_row("Completion ETA", self._completion_eta_label())
 
         right = Table.grid(padding=(0, 1))
