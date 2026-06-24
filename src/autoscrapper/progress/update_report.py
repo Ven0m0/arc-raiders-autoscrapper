@@ -41,24 +41,17 @@ def load_json(path: Path, default: Any) -> Any:
 
 
 def diff_quests(before_quests: Sequence[object], after_quests: Sequence[object]) -> dict:
-    before_by_id: dict[str, Any] = {}
-    after_by_id: dict[str, Any] = {}
+    before_by_id: dict[str, Any] = {
+        quest_id: cast(dict[str, Any], quest)
+        for quest in before_quests
+        if type(quest) is dict and (quest_id := normalize_text(quest.get("id")))
+    }
 
-    for quest in before_quests:
-        if not isinstance(quest, dict):
-            continue
-        quest_d = cast(dict[str, Any], quest)
-        quest_id = normalize_text(quest_d.get("id"))
-        if quest_id:
-            before_by_id[quest_id] = quest_d
-
-    for quest in after_quests:
-        if not isinstance(quest, dict):
-            continue
-        quest_d = cast(dict[str, Any], quest)
-        quest_id = normalize_text(quest_d.get("id"))
-        if quest_id:
-            after_by_id[quest_id] = quest_d
+    after_by_id: dict[str, Any] = {
+        quest_id: cast(dict[str, Any], quest)
+        for quest in after_quests
+        if type(quest) is dict and (quest_id := normalize_text(quest.get("id")))
+    }
 
     before_ids = set(before_by_id.keys())
     after_ids = set(after_by_id.keys())
