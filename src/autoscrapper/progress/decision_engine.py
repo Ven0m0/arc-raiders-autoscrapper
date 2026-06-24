@@ -99,15 +99,23 @@ class DecisionEngine:
 
             phases = project.get("phases") or []
             if isinstance(phases, list):
+                # Collect all unique item IDs needed across all phases first
+                phase_item_ids = set()
                 for phase in phases:
                     phase_reqs = phase.get("requirementItemIds") or []
                     if isinstance(phase_reqs, list):
                         for req in phase_reqs:
                             item_id = req.get("item_id")
                             if item_id:
-                                # Avoid adding the same project multiple times if it appears in multiple phases
-                                if project not in self._project_requirements[item_id]:
-                                    self._project_requirements[item_id].append(project)
+                                phase_item_ids.add(item_id)
+
+                # Add project to the requirement list for each unique item ID
+                for item_id in phase_item_ids:
+                    # The project might have already been added from 'requirements' list above
+                    # so we still need this check, but it happens O(unique_items) times instead
+                    # of O(all_items_across_phases) times
+                    if project not in self._project_requirements[item_id]:
+                        self._project_requirements[item_id].append(project)
 
         self._upgrade_requirements: dict[str, list[tuple[dict, int]]] = defaultdict(list)
         for module in hideout_modules:
