@@ -29,6 +29,7 @@ from ..interaction.ui_windows import (
 from ..ocr.tesseract import initialize_ocr
 from ..scanner.outcomes import _describe_action, _outcome_style
 from ..scanner.progress import ScanProgress
+from ..utils.formatting import format_duration
 from ..scanner.types import ScanStats
 from ..warmup import start_background_warmup, warmup_status
 from .common import AppScreen, MessageScreen
@@ -57,17 +58,6 @@ class ScanState:
     counts: Counter[str] = field(default_factory=Counter)
     events: deque[Text] = field(default_factory=lambda: deque(maxlen=EVENT_LIMIT))
     start_time: float | None = None
-
-
-def _format_duration(seconds: float | None) -> str:
-    if seconds is None:
-        return "--:--"
-    seconds = max(seconds, 0)
-    minutes, secs = divmod(int(seconds), 60)
-    hours, minutes = divmod(minutes, 60)
-    if hours:
-        return f"{hours:d}:{minutes:02d}:{secs:02d}"
-    return f"{minutes:02d}:{secs:02d}"
 
 
 def _item_label(result: Any) -> str:
@@ -474,7 +464,7 @@ class ScanScreen(Screen):
         if self._state.start_time is not None:
             elapsed = time.perf_counter() - self._state.start_time
             text.append("Elapsed: ", style="cyan")
-            text.append(_format_duration(elapsed))
+            text.append(format_duration(elapsed))
             text.append("\n")
             speed = self._speed(elapsed)
             if speed is not None:
