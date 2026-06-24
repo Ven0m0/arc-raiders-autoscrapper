@@ -343,7 +343,9 @@ class DecisionEngine:
 
     def is_used_in_active_quests(self, item: dict, user_progress: dict) -> _QuestUseResult:
         quest_names: list[str] = []
-        completed = set(user_progress.get("completedQuests", []))
+        completed = user_progress.get("_completed_quests_set")
+        if completed is None:
+            completed = set(user_progress.get("completedQuests", []))
         item_id = item.get("id")
 
         if item_id:
@@ -355,7 +357,9 @@ class DecisionEngine:
 
     def is_used_in_active_projects(self, item: dict, user_progress: dict) -> _ProjectUseResult:
         project_names: list[str] = []
-        completed = set(user_progress.get("completedProjects", []))
+        completed = user_progress.get("_completed_projects_set")
+        if completed is None:
+            completed = set(user_progress.get("completedProjects", []))
         item_id = item.get("id")
 
         if item_id:
@@ -427,7 +431,15 @@ class DecisionEngine:
 
     def get_items_with_decisions(self, user_progress: dict) -> list[dict]:
         items_with_decisions: list[dict] = []
+        # Cache completed sets once per run
+        user_progress["_completed_quests_set"] = set(user_progress.get("completedQuests", []))
+        user_progress["_completed_projects_set"] = set(user_progress.get("completedProjects", []))
+
         for item in self.items.values():
             decision = self.get_decision(item, user_progress)
             items_with_decisions.append({**item, "decision_data": decision})
+
+        # Clean up cache
+        user_progress.pop("_completed_quests_set", None)
+        user_progress.pop("_completed_projects_set", None)
         return items_with_decisions
