@@ -113,7 +113,7 @@
     "weightKg": 0.2,
     "stackSize": 1,
     "craftBench": "in_raid",
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-19T20:00:33.559289+00:00",
     "recipe": {
       "agave": 1,
       "empty-wine-bottle": 1
@@ -131,7 +131,8 @@
     "craftBench": null,
     "updatedAt": "2026-06-15T07:45:11.797307+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Projects Converging Paths (2x)"
   },
   {
     "id": "alarm-clock",
@@ -171,7 +172,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-19T19:55:52.453144+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -285,7 +286,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T15:57:43.634367+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -394,7 +395,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:25:32.364075+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -461,7 +462,8 @@
     "recipe": null,
     "recyclesInto": {
       "chemicals": 16
-    }
+    },
+    "wikiUses": "Projects Converging Paths (9x)"
   },
   {
     "id": "arc-flex-rubber",
@@ -487,7 +489,7 @@
     "weightKg": 0.3,
     "stackSize": 5,
     "craftBench": "Refiner II",
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-19T20:04:56.219265+00:00",
     "recipe": {
       "arc-alloy": 8
     },
@@ -510,7 +512,7 @@
     "recyclesInto": {
       "metal-parts": 12
     },
-    "wikiUses": "Projects Trophy Display (10x)"
+    "wikiUses": "Projects Converging Paths (7x) Trophy Display (10x)"
   },
   {
     "id": "arc-powercell",
@@ -540,7 +542,7 @@
     "recyclesInto": {
       "plastic-parts": 14
     },
-    "wikiUses": "Projects Trophy Display (10x)"
+    "wikiUses": "Projects Converging Paths (10x) Trophy Display (10x)"
   },
   {
     "id": "arc-thermo-lining",
@@ -551,11 +553,12 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:22:52.162035+00:00",
     "recipe": null,
     "recyclesInto": {
       "fabric": 16
-    }
+    },
+    "wikiUses": "Projects Converging Paths (6x)"
   },
   {
     "id": "arpeggio-i",
@@ -633,7 +636,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-19T20:07:59.284786+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-arc-powercell": 3,
@@ -735,7 +738,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:13:04.206044+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -748,7 +751,7 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:12:16.844734+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 1,
@@ -781,7 +784,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:17:26.717143+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1122,7 +1125,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T15:51:05.459555+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1203,7 +1206,7 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:19:54.130654+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 1,
@@ -1389,7 +1392,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:30:59.970365+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1402,7 +1405,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:21:42.727734+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1584,7 +1587,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-19T20:27:00.660416+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2638,7 +2641,8 @@
     "craftBench": null,
     "updatedAt": "2026-06-16T19:34:27.65139+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Projects Converging Paths (1x)"
   },
   {
     "id": "empty-wine-bottle",
@@ -2713,7 +2717,8 @@
     "craftBench": null,
     "updatedAt": "2026-06-16T19:33:00.710826+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Projects Converging Paths (3x)"
   },
   {
     "id": "esr-analyzer",
@@ -2872,7 +2877,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T15:49:49.719486+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2885,7 +2890,7 @@
     "weightKg": 0.75,
     "stackSize": 1,
     "craftBench": "Gunsmith I",
-    "updatedAt": "2026-06-17T14:40:30.724601+00:00",
+    "updatedAt": "2026-06-20T20:31:32.128901+00:00",
     "recipe": {
       "mod-components": 2,
       "wires": 8
@@ -2904,7 +2909,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-20T20:31:10.392263+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3068,7 +3073,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T15:55:34.350149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4366,7 +4371,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:07:48.733111+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4554,7 +4559,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:26:47.952623+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4599,7 +4604,7 @@
     "updatedAt": "2026-06-15T07:45:11.797307+00:00",
     "recipe": null,
     "recyclesInto": null,
-    "wikiUses": "Projects Expedition 1 (5x) Expedition 2 (4x)"
+    "wikiUses": "Projects Converging Paths (6x) Expedition 1 (5x) Expedition 2 (4x)"
   },
   {
     "id": "light-gun-parts",
@@ -4788,7 +4793,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "equipment_bench",
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:34:43.404238+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
       "processor": 3
@@ -4807,7 +4812,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-19T20:35:18.252841+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4820,7 +4825,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "equipment_bench",
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-19T20:33:13.533957+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
       "processor": 3
@@ -4963,11 +4968,11 @@
     "name": "Matriarch Reactor",
     "type": "Recyclable",
     "rarity": "legendary",
-    "value": 13000,
+    "value": 11000,
     "weightKg": 10,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-22T08:32:46.45804+00:00",
     "recipe": null,
     "recyclesInto": {
       "magnetic-accelerator": 1,
@@ -5072,7 +5077,8 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 8
-    }
+    },
+    "wikiUses": "Projects Converging Paths (5x)"
   },
   {
     "id": "metal-parts",
@@ -5163,7 +5169,7 @@
     "weightKg": 3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:35:41.562057+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 2,
@@ -5180,7 +5186,7 @@
     "weightKg": 0.2,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:32:17.467742+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Workshop Mushroom 5 (12x) Scrappy 5 (12x)"
@@ -5480,7 +5486,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:27:45.754605+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -5564,7 +5570,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-19T19:56:38.129148+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -5740,11 +5746,11 @@
     "name": "Power Rod",
     "type": "Advanced Material",
     "rarity": "epic",
-    "value": 5500,
+    "value": 4997,
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": "Refiner",
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-22T08:33:20.758422+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
       "arc-circuitry": 2
@@ -5843,7 +5849,7 @@
     "weightKg": 10,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T15:40:35.400364+00:00",
     "recipe": null,
     "recyclesInto": {
       "magnetic-accelerator": 1,
@@ -5924,7 +5930,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-19T19:57:35.03639+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6160,7 +6166,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-19T19:58:31.527102+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6435,7 +6441,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:18:35.051013+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6481,7 +6487,7 @@
     "weightKg": 0.2,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:16:18.344983+00:00",
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 1
@@ -6858,7 +6864,8 @@
     "craftBench": null,
     "updatedAt": "2026-06-16T19:32:10.557161+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Projects Converging Paths (4x)"
   },
   {
     "id": "shaker",
@@ -7274,7 +7281,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:28:34.890435+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7345,7 +7352,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-19T20:21:07.237486+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7630,7 +7637,7 @@
     "weightKg": 0.25,
     "stackSize": 15,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:14:14.851673+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 2
@@ -8152,13 +8159,14 @@
     "name": "Tellurion",
     "type": "Trinket",
     "rarity": "epic",
-    "value": 0,
+    "value": 7000,
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-06-16T19:33:36.892233+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Projects Converging Paths (3x)"
   },
   {
     "id": "tempest-i-recipe",
@@ -8450,7 +8458,8 @@
     "craftBench": null,
     "updatedAt": "2026-06-16T19:30:31.288369+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Projects Converging Paths (3x)"
   },
   {
     "id": "trigger-nade",
@@ -8790,7 +8799,8 @@
     "craftBench": null,
     "updatedAt": "2026-06-16T19:31:08.469893+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Projects Converging Paths (2x)"
   },
   {
     "id": "vita-shot",
@@ -8895,7 +8905,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-21T16:05:17.934538+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9131,7 +9141,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-15T07:45:11.797307+00:00",
+    "updatedAt": "2026-06-19T20:30:13.268879+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9240,6 +9250,45 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "06/03/2026",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "colorful-shoes-green",
+    "name": "Colorful Shoes (Green)",
+    "type": "Trinket",
+    "rarity": "epic",
+    "value": 7000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "06/17/2026",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "colorful-shoes-red",
+    "name": "Colorful Shoes (Red)",
+    "type": "Trinket",
+    "rarity": "rare",
+    "value": 3000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "06/17/2026",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "colorful-shoes-silver",
+    "name": "Colorful Shoes (Silver)",
+    "type": "Trinket",
+    "rarity": "legendary",
+    "value": 10000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "06/17/2026",
     "recipe": null,
     "recyclesInto": null
   },

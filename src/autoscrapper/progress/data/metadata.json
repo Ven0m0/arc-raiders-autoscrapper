@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-06-18T15:00:31.015656Z",
+  "lastUpdated": "2026-06-23T14:58:52.814320Z",
   "source": "https://metaforge.app/arc-raiders/api",
   "version": "autoscrapper-data-1",
-  "itemCount": 623,
+  "itemCount": 626,
   "questCount": 100,
   "dataSources": {
     "items": {
@@ -15,7 +15,7 @@
       "fallback": {
         "repository": "https://github.com/RaidTheory/arcraiders-data",
         "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
-        "supplementalCount": 33,
+        "supplementalCount": 36,
         "error": null
       },
       "arctrackerEnrichment": {
@@ -26,7 +26,7 @@
       },
       "fieldLevelMerge": {
         "enabled": true,
-        "entriesEnriched": 372,
+        "entriesEnriched": 373,
         "sources": [
           "raidtheory-fallback",
           "arctracker"
@@ -51,7 +51,7 @@
       "wikiEnrichment": {
         "url": "https://arcraiders.wiki/wiki/Loot",
         "available": true,
-        "enrichedCount": 91,
+        "enrichedCount": 101,
         "error": null,
         "fields": [
           "wikiUses"

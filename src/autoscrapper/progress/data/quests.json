@@ -578,7 +578,7 @@
         "id": "5da94583-1123-4ec1-9cc2-994602efee5d",
         "item": {
           "id": "extended-barrel",
-          "icon": "https://cdn.metaforge.app/arc-raiders/icons/extended-barrel.webp",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/extended-barrel.webp",
           "name": "Extended Barrel III",
           "rarity": "Epic",
           "item_type": "Modification"
