@@ -32,6 +32,9 @@ METAFORGE_API_DOCS_URL = "https://metaforge.app/arc-raiders/api"
 METAFORGE_SOURCES_FILENAME = "metaforge_sources.json"
 DEFAULT_SUPABASE_URL = "https://sb.metaforge.app/rest/v1"
 DEFAULT_SUPABASE_ANON_KEY = "sb_publishable_C7SqVOoZBPFy4W0DxKcOGQ_emEIw-rj"
+HTTP_TIMEOUT_SECONDS = 30
+HTTP_RETRY_DELAYS_SECONDS = (2.0, 5.0, 10.0, 20.0)
+HTTP_RETRYABLE_STATUS_CODES = {408, 429, 500, 502, 503, 504}
 SUPABASE_URL = os.environ.get(
     "METAFORGE_SUPABASE_URL",
     DEFAULT_SUPABASE_URL,
@@ -89,6 +92,29 @@ class HttpDownloadError(DownloadError):
         super().__init__(message)
 
 
+def _retry_after_seconds(headers: Any) -> Optional[float]:
+    retry_after = headers.get("Retry-After") if hasattr(headers, "get") else None
+    if retry_after is None:
+        return None
+
+    try:
+        return max(0.0, min(float(retry_after), 60.0))
+    except ValueError:
+        return None
+
+
+def _log_fetch_retry(url: str, reason: str, attempt: int, delay: float) -> None:
+    max_attempts = len(HTTP_RETRY_DELAYS_SECONDS) + 1
+    _log.warning(
+        "Transient fetch failure for %s: %s. Retrying in %gs (%d/%d).",
+        url,
+        reason,
+        delay,
+        attempt + 1,
+        max_attempts,
+    )
+
+
 def _fetch_bytes(
     url: str,
     headers: dict[str, str] | None = None,
@@ -107,15 +133,29 @@ def _fetch_bytes(
     if headers:
         request_headers.update(headers)
 
-    req = Request(url, headers=request_headers)
-    try:
-        with urlopen(req, timeout=30) as resp:
-            return resp.read()
-    except HTTPError as exc:
-        body = exc.read().decode("utf-8", "replace")
-        raise HttpDownloadError(url, exc.code, body) from exc
-    except URLError as exc:
-        raise DownloadError(f"Failed to reach {url}: {exc}") from exc
+    for attempt, delay in enumerate((*HTTP_RETRY_DELAYS_SECONDS, 0.0)):
+        req = Request(url, headers=request_headers)
+        try:
+            with urlopen(req, timeout=HTTP_TIMEOUT_SECONDS) as resp:
+                return resp.read()
+        except HTTPError as exc:
+            try:
+                body = exc.read().decode("utf-8", "replace")
+                error = HttpDownloadError(url, exc.code, body)
+                if exc.code not in HTTP_RETRYABLE_STATUS_CODES or delay == 0.0:
+                    raise error from exc
+                retry_delay = _retry_after_seconds(exc.headers) or delay
+                _log_fetch_retry(url, f"HTTP {exc.code}", attempt, retry_delay)
+                time.sleep(retry_delay)
+            finally:
+                exc.close()
+        except (TimeoutError, URLError) as exc:
+            if delay == 0.0:
+                raise DownloadError(f"Failed to reach {url}: {exc}") from exc
+            _log_fetch_retry(url, str(exc), attempt, delay)
+            time.sleep(delay)
+
+    raise DownloadError(f"Failed to reach {url}")
 
 
 def _fetch_text(
@@ -124,7 +164,7 @@ def _fetch_text(
     *,
     accept: str = "application/json",
 ) -> str:
-    return _fetch_bytes(url, headers, accept=accept).decode("utf-8")
+    return _fetch_bytes(url, headers, accept=accept).decode("utf-8", "replace")
 
 
 def _fetch_json(url: str, headers: dict[str, str] | None = None) -> Any:
@@ -134,15 +174,17 @@ def _fetch_json(url: str, headers: dict[str, str] | None = None) -> Any:
         raise DownloadError(f"Invalid JSON returned from {url}") from exc
 
 
-def _fetch_arctracker_items() -> list[dict]:
-    """Fetch all items from arctracker.io public API."""
-    url = f"{ARCTRACKER_BASE_URL}/api/items"
+def _fetch_arctracker_resource(resource_name: str) -> list[dict]:
+    """Fetch all records for a specific resource from arctracker.io public API."""
+    url = f"{ARCTRACKER_BASE_URL}/api/{resource_name}"
     response = _fetch_json(url)
     if not isinstance(response, dict):
-        raise DownloadError("Unexpected response from arctracker items endpoint")
-    data = response.get("data") or []
+        raise DownloadError(f"Unexpected response from arctracker {resource_name} endpoint")
+    if "data" not in response:
+        raise DownloadError(f"Unexpected response from arctracker {resource_name} endpoint: missing 'data' key")
+    data = response["data"]
     if not isinstance(data, list):
-        raise DownloadError("Unexpected arctracker items payload: data must be a list")
+        raise DownloadError(f"Unexpected arctracker {resource_name} payload: data must be a list")
     return [entry for entry in data if isinstance(entry, dict)]
 
 
@@ -348,49 +390,16 @@ def _fetch_supabase_all(table: str, sources_path: Path) -> List[dict]:
             raise
 
         discovered = _discover_supabase_config(force=True)
-        if discovered == supabase_config:
+        # Compare only the connection fields; metadata fields such as ``source`` and
+        # ``persist_discovery`` differ between configured and discovered instances and
+        # would otherwise mask a genuinely identical public Supabase config.
+        if discovered.url == supabase_config.url and discovered.anon_key == supabase_config.anon_key:
             raise DownloadError(
                 "Supabase auth failed and Metaforge page discovery returned the same public Supabase config."
             ) from exc
         if configured.persist_discovery:
             _write_sources_config(sources_path, discovered)
         return _fetch_supabase_all_with_config(table, discovered)
-
-
-def _fetch_arctracker_quests() -> list[dict]:
-    """Fetch all quests from arctracker.io public API."""
-    url = f"{ARCTRACKER_BASE_URL}/api/quests"
-    response = _fetch_json(url)
-    if not isinstance(response, dict):
-        raise DownloadError("Unexpected response from arctracker quests endpoint")
-    data = response.get("data") or []
-    if not isinstance(data, list):
-        raise DownloadError("Unexpected arctracker quests payload: data must be a list")
-    return [entry for entry in data if isinstance(entry, dict)]
-
-
-def _fetch_arctracker_hideout() -> list[dict]:
-    """Fetch all hideout modules from arctracker.io public API."""
-    url = f"{ARCTRACKER_BASE_URL}/api/hideout"
-    response = _fetch_json(url)
-    if not isinstance(response, dict):
-        raise DownloadError("Unexpected response from arctracker hideout endpoint")
-    data = response.get("data") or []
-    if not isinstance(data, list):
-        raise DownloadError("Unexpected arctracker hideout payload: data must be a list")
-    return [entry for entry in data if isinstance(entry, dict)]
-
-
-def _fetch_arctracker_projects() -> list[dict]:
-    """Fetch all projects from arctracker.io public API."""
-    url = f"{ARCTRACKER_BASE_URL}/api/projects"
-    response = _fetch_json(url)
-    if not isinstance(response, dict):
-        raise DownloadError("Unexpected response from arctracker projects endpoint")
-    data = response.get("data") or []
-    if not isinstance(data, list):
-        raise DownloadError("Unexpected arctracker projects payload: data must be a list")
-    return [entry for entry in data if isinstance(entry, dict)]
 
 
 def _map_arctracker_item(arctracker_item: dict) -> dict | None:
@@ -803,14 +812,41 @@ def _raidtheory_archive_prefix(names: list[str]) -> str:
 
 def _load_raidtheory_json_entries(archive: zipfile.ZipFile, prefix: str) -> list[dict]:
     entries: list[dict] = []
+    # Limit read sizes to prevent zip bomb out-of-memory issues. MAX_FILE_SIZE bounds any
+    # single member; MAX_TOTAL_SIZE bounds the cumulative uncompressed size across members
+    # (defending against archives made of many small files).
+    MAX_FILE_SIZE = 10 * 1024 * 1024
+    MAX_TOTAL_SIZE = 100 * 1024 * 1024  # 100MB cumulative limit
+    total_extracted_size = 0
+
     for name in sorted(archive.namelist()):
         if not name.startswith(prefix) or not name.endswith(".json"):
             continue
-        with archive.open(name) as file_obj:
-            try:
-                payload = orjson.loads(file_obj.read())
-            except orjson.JSONDecodeError as exc:
-                raise DownloadError(f"Invalid JSON in RaidTheory archive member {name}") from exc
+
+        info = archive.getinfo(name)
+        if info.file_size > MAX_FILE_SIZE:
+            _log.warning(f"Skipping {name}: file size {info.file_size} exceeds {MAX_FILE_SIZE} bytes")
+            continue
+
+        try:
+            with archive.open(name) as file_obj:
+                data = file_obj.read(MAX_FILE_SIZE + 1)
+        except Exception as exc:
+            raise DownloadError(f"Failed to read RaidTheory archive member {name}") from exc
+
+        if len(data) > MAX_FILE_SIZE:
+            _log.warning(f"Skipping {name}: uncompressed size exceeds {MAX_FILE_SIZE} bytes")
+            continue
+
+        total_extracted_size += len(data)
+        if total_extracted_size > MAX_TOTAL_SIZE:
+            raise DownloadError(f"RaidTheory archive total uncompressed size exceeds limit of {MAX_TOTAL_SIZE} bytes")
+
+        try:
+            payload = orjson.loads(data)
+        except orjson.JSONDecodeError as exc:
+            raise DownloadError(f"Invalid JSON in RaidTheory archive member {name}") from exc
+
         if isinstance(payload, dict):
             entries.append(payload)
     return entries
@@ -1312,33 +1348,19 @@ def update_data_snapshot(data_dir: Path | None = None, *, use_arclens: bool = Fa
     arctracker_hideout_error: str | None = None
     arctracker_projects_error: str | None = None
 
-    try:
-        arctracker_items = _fetch_arctracker_items()
-        _log.info("Fetched %d items from arctracker.io", len(arctracker_items))
-    except DownloadError as exc:
-        arctracker_items_error = str(exc)
-        _log.warning("ArcTracker items unavailable: %s", exc)
+    def _safe_fetch(resource: str, display_name: str) -> tuple[list[dict] | None, str | None]:
+        try:
+            data = _fetch_arctracker_resource(resource)
+            _log.info("Fetched %d %s from arctracker.io", len(data), display_name)
+            return data, None
+        except DownloadError as exc:
+            _log.warning("ArcTracker %s unavailable: %s", display_name, exc)
+            return None, str(exc)
 
-    try:
-        arctracker_quests = _fetch_arctracker_quests()
-        _log.info("Fetched %d quests from arctracker.io", len(arctracker_quests))
-    except DownloadError as exc:
-        arctracker_quests_error = str(exc)
-        _log.warning("ArcTracker quests unavailable: %s", exc)
-
-    try:
-        arctracker_hideout = _fetch_arctracker_hideout()
-        _log.info("Fetched %d hideout modules from arctracker.io", len(arctracker_hideout))
-    except DownloadError as exc:
-        arctracker_hideout_error = str(exc)
-        _log.warning("ArcTracker hideout unavailable: %s", exc)
-
-    try:
-        arctracker_projects = _fetch_arctracker_projects()
-        _log.info("Fetched %d projects from arctracker.io", len(arctracker_projects))
-    except DownloadError as exc:
-        arctracker_projects_error = str(exc)
-        _log.warning("ArcTracker projects unavailable: %s", exc)
+    arctracker_items, arctracker_items_error = _safe_fetch("items", "items")
+    arctracker_quests, arctracker_quests_error = _safe_fetch("quests", "quests")
+    arctracker_hideout, arctracker_hideout_error = _safe_fetch("hideout", "hideout modules")
+    arctracker_projects, arctracker_projects_error = _safe_fetch("projects", "projects")
 
     # Fetch arc-lens data only when explicitly enabled (slow wiki scraper)
     arclens_items: list[dict] | None = None

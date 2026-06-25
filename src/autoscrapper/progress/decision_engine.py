@@ -99,15 +99,25 @@ class DecisionEngine:
 
             phases = project.get("phases") or []
             if isinstance(phases, list):
+                # Collect all unique item IDs needed across all phases first
+                phase_item_ids = set()
                 for phase in phases:
-                    phase_reqs = phase.get("requirementItemIds") or []
-                    if isinstance(phase_reqs, list):
-                        for req in phase_reqs:
-                            item_id = req.get("item_id")
-                            if item_id:
-                                # Avoid adding the same project multiple times if it appears in multiple phases
-                                if project not in self._project_requirements[item_id]:
-                                    self._project_requirements[item_id].append(project)
+                    if isinstance(phase, dict):
+                        phase_reqs = phase.get("requirementItemIds")
+                        if isinstance(phase_reqs, list):
+                            for req in phase_reqs:
+                                if isinstance(req, dict):
+                                    item_id = req.get("item_id")
+                                    if item_id:
+                                        phase_item_ids.add(item_id)
+
+                # Add project to the requirement list for each unique item ID
+                for item_id in phase_item_ids:
+                    # The project might have already been added from 'requirements' list above
+                    # so we still need this check, but it happens O(unique_items) times instead
+                    # of O(all_items_across_phases) times
+                    if project not in self._project_requirements[item_id]:
+                        self._project_requirements[item_id].append(project)
 
         self._upgrade_requirements: dict[str, list[tuple[dict, int]]] = defaultdict(list)
         for module in hideout_modules:
@@ -343,7 +353,9 @@ class DecisionEngine:
 
     def is_used_in_active_quests(self, item: dict, user_progress: dict) -> _QuestUseResult:
         quest_names: list[str] = []
-        completed = set(user_progress.get("completedQuests", []))
+        completed = user_progress.get("_completed_quests_set")
+        if completed is None:
+            completed = set(user_progress.get("completedQuests", []))
         item_id = item.get("id")
 
         if item_id:
@@ -355,7 +367,9 @@ class DecisionEngine:
 
     def is_used_in_active_projects(self, item: dict, user_progress: dict) -> _ProjectUseResult:
         project_names: list[str] = []
-        completed = set(user_progress.get("completedProjects", []))
+        completed = user_progress.get("_completed_projects_set")
+        if completed is None:
+            completed = set(user_progress.get("completedProjects", []))
         item_id = item.get("id")
 
         if item_id:
@@ -427,7 +441,14 @@ class DecisionEngine:
 
     def get_items_with_decisions(self, user_progress: dict) -> list[dict]:
         items_with_decisions: list[dict] = []
+        # Work on a shallow copy so we never mutate the caller's dictionary. This keeps
+        # the method thread-safe and tolerant of read-only mappings, while still caching
+        # the completed-set conversions once per run.
+        local_progress = dict(user_progress)
+        local_progress["_completed_quests_set"] = set(local_progress.get("completedQuests", []))
+        local_progress["_completed_projects_set"] = set(local_progress.get("completedProjects", []))
+
         for item in self.items.values():
-            decision = self.get_decision(item, user_progress)
+            decision = self.get_decision(item, local_progress)
             items_with_decisions.append({**item, "decision_data": decision})
         return items_with_decisions

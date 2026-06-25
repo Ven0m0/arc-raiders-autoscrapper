@@ -185,7 +185,7 @@ def slot_metrics(
         (bright_fraction, gray_var, edge_fraction)
     """
     if slot_bgr.size == 0:
-        raise ValueError("slot_bgr is empty (ROI outside image bounds?)")
+        return 0.0, 0.0, 0.0
 
     # Brightness stats from HSV V channel
     hsv = cv2.cvtColor(slot_bgr, cv2.COLOR_BGR2HSV)
@@ -212,6 +212,9 @@ def is_slot_empty(
     """
     Decide if an inventory slot is visually empty using slot metrics.
     """
+    if slot_bgr.size == 0:
+        return False
+
     bright_fraction, gray_var, edge_fraction = slot_metrics(slot_bgr, v_thresh, canny1, canny2)
     return is_empty_cell(bright_fraction, gray_var, edge_fraction)
 

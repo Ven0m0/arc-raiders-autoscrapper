@@ -71,6 +71,13 @@ class TestZeroSizeCropResetsPrevEmpty:
     causes a false stop when the next valid cell is also empty.
     """
 
+    def test_is_slot_empty_handles_zero_size_crop(self):
+        # Bug-fix regression: zero-size crop must be handled safely (returns False)
+        from autoscrapper.ocr.inventory_vision import is_slot_empty as _detect_empty
+
+        empty_image = np.zeros((0, 0, 3), dtype=np.uint8)
+        assert not _detect_empty(empty_image)
+
     def test_no_false_stop_after_zero_size_gap(self):
         """empty → [zero-size gap] → empty  must NOT trigger a stop."""
         cells = [
