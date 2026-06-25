@@ -441,17 +441,14 @@ class DecisionEngine:
 
     def get_items_with_decisions(self, user_progress: dict) -> list[dict]:
         items_with_decisions: list[dict] = []
-        # Cache completed sets once per run
-        user_progress["_completed_quests_set"] = set(user_progress.get("completedQuests", []))
-        user_progress["_completed_projects_set"] = set(user_progress.get("completedProjects", []))
+        # Work on a shallow copy so we never mutate the caller's dictionary. This keeps
+        # the method thread-safe and tolerant of read-only mappings, while still caching
+        # the completed-set conversions once per run.
+        local_progress = dict(user_progress)
+        local_progress["_completed_quests_set"] = set(local_progress.get("completedQuests", []))
+        local_progress["_completed_projects_set"] = set(local_progress.get("completedProjects", []))
 
-        try:
-            for item in self.items.values():
-                decision = self.get_decision(item, user_progress)
-                items_with_decisions.append({**item, "decision_data": decision})
-        finally:
-            # Clean up cache even if processing raises, to avoid leaking the
-            # temporary cache keys back into the caller's dictionary.
-            user_progress.pop("_completed_quests_set", None)
-            user_progress.pop("_completed_projects_set", None)
+        for item in self.items.values():
+            decision = self.get_decision(item, local_progress)
+            items_with_decisions.append({**item, "decision_data": decision})
         return items_with_decisions

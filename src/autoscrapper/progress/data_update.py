@@ -92,11 +92,8 @@ class HttpDownloadError(DownloadError):
         super().__init__(message)
 
 
-def _retry_after_seconds(headers: object) -> Optional[float]:
-    # ``headers`` is typed as ``object`` because callers pass an ``HTTPMessage``
-    # (which implements the mapping interface) but ``object`` has no ``.get``.
-    get_fn = getattr(headers, "get", None)
-    retry_after = get_fn("Retry-After") if get_fn is not None else None
+def _retry_after_seconds(headers: Any) -> Optional[float]:
+    retry_after = headers.get("Retry-After") if hasattr(headers, "get") else None
     if retry_after is None:
         return None
 
@@ -142,13 +139,16 @@ def _fetch_bytes(
             with urlopen(req, timeout=HTTP_TIMEOUT_SECONDS) as resp:
                 return resp.read()
         except HTTPError as exc:
-            body = exc.read().decode("utf-8", "replace")
-            error = HttpDownloadError(url, exc.code, body)
-            if exc.code not in HTTP_RETRYABLE_STATUS_CODES or delay == 0.0:
-                raise error from exc
-            retry_delay = _retry_after_seconds(exc.headers) or delay
-            _log_fetch_retry(url, f"HTTP {exc.code}", attempt, retry_delay)
-            time.sleep(retry_delay)
+            try:
+                body = exc.read().decode("utf-8", "replace")
+                error = HttpDownloadError(url, exc.code, body)
+                if exc.code not in HTTP_RETRYABLE_STATUS_CODES or delay == 0.0:
+                    raise error from exc
+                retry_delay = _retry_after_seconds(exc.headers) or delay
+                _log_fetch_retry(url, f"HTTP {exc.code}", attempt, retry_delay)
+                time.sleep(retry_delay)
+            finally:
+                exc.close()
         except (TimeoutError, URLError) as exc:
             if delay == 0.0:
                 raise DownloadError(f"Failed to reach {url}: {exc}") from exc
