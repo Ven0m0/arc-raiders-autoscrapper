@@ -1,7 +1,10 @@
 from autoscrapper.utils.formatting import format_duration
 
+
 def test_format_duration():
     assert format_duration(None) == "--:--"
+    assert format_duration(float("nan")) == "--:--"
+    assert format_duration(float("inf")) == "--:--"
     assert format_duration(-10) == "00:00"
     assert format_duration(0) == "00:00"
     assert format_duration(45) == "00:45"

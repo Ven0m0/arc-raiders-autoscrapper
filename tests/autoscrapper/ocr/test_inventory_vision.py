@@ -504,8 +504,13 @@ class TestOcrInventoryCount:
 
     def test_ocr_inventory_count_stash_icon_noise(self):
         """Stash icon can cause a false prefix digit. Ensure fix handles it."""
+        # Test with slash pattern
         count, _ = self._call("8 197/232")
         assert count == 197
+
+        # Test with fallback digit extraction path (no slash)
+        count_no_slash, _ = self._call("8 197")
+        assert count_no_slash == 197
 
     def test_no_slash_pattern_falls_through_to_digit_fallback(self):
         """No N/M pattern — falls through to digit extraction path."""

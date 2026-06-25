@@ -29,7 +29,7 @@ from ..interaction.ui_windows import (
 from ..ocr.tesseract import initialize_ocr
 from ..scanner.outcomes import _describe_action, _outcome_style
 from ..scanner.progress import ScanProgress
-from ..utils.formatting import format_duration
+from ..utils import format_duration
 from ..scanner.types import ScanStats
 from ..warmup import start_background_warmup, warmup_status
 from .common import AppScreen, MessageScreen

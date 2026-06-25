@@ -102,12 +102,14 @@ class DecisionEngine:
                 # Collect all unique item IDs needed across all phases first
                 phase_item_ids = set()
                 for phase in phases:
-                    phase_reqs = phase.get("requirementItemIds") or []
-                    if isinstance(phase_reqs, list):
-                        for req in phase_reqs:
-                            item_id = req.get("item_id")
-                            if item_id:
-                                phase_item_ids.add(item_id)
+                    if isinstance(phase, dict):
+                        phase_reqs = phase.get("requirementItemIds")
+                        if isinstance(phase_reqs, list):
+                            for req in phase_reqs:
+                                if isinstance(req, dict):
+                                    item_id = req.get("item_id")
+                                    if item_id:
+                                        phase_item_ids.add(item_id)
 
                 # Add project to the requirement list for each unique item ID
                 for item_id in phase_item_ids:
@@ -443,11 +445,13 @@ class DecisionEngine:
         user_progress["_completed_quests_set"] = set(user_progress.get("completedQuests", []))
         user_progress["_completed_projects_set"] = set(user_progress.get("completedProjects", []))
 
-        for item in self.items.values():
-            decision = self.get_decision(item, user_progress)
-            items_with_decisions.append({**item, "decision_data": decision})
-
-        # Clean up cache
-        user_progress.pop("_completed_quests_set", None)
-        user_progress.pop("_completed_projects_set", None)
+        try:
+            for item in self.items.values():
+                decision = self.get_decision(item, user_progress)
+                items_with_decisions.append({**item, "decision_data": decision})
+        finally:
+            # Clean up cache even if processing raises, to avoid leaking the
+            # temporary cache keys back into the caller's dictionary.
+            user_progress.pop("_completed_quests_set", None)
+            user_progress.pop("_completed_projects_set", None)
         return items_with_decisions

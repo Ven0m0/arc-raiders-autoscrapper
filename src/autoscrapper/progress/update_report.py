@@ -44,13 +44,13 @@ def diff_quests(before_quests: Sequence[object], after_quests: Sequence[object])
     before_by_id: dict[str, Any] = {
         quest_id: cast(dict[str, Any], quest)
         for quest in before_quests
-        if type(quest) is dict and (quest_id := normalize_text(quest.get("id")))
+        if isinstance(quest, dict) and (quest_id := normalize_text(quest.get("id")))
     }
 
     after_by_id: dict[str, Any] = {
         quest_id: cast(dict[str, Any], quest)
         for quest in after_quests
-        if type(quest) is dict and (quest_id := normalize_text(quest.get("id")))
+        if isinstance(quest, dict) and (quest_id := normalize_text(quest.get("id")))
     }
 
     before_ids = set(before_by_id.keys())

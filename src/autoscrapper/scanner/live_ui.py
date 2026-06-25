@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from typing import cast
 
 
-from ..utils.formatting import format_duration
+from ..utils import format_duration
 from .outcomes import _outcome_style
 from .rich_support import (
     Align,
