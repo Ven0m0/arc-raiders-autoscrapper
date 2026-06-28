@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-23T14:58:52.814320Z",
+  "lastUpdated": "2026-06-28T14:31:52.409089Z",
   "source": "https://metaforge.app/arc-raiders/api",
   "version": "autoscrapper-data-1",
   "itemCount": 626,
@@ -22,7 +22,7 @@
         "documentation": "https://arctracker.io/developers/docs",
         "apiBase": "https://arctracker.io",
         "supplementalCount": 0,
-        "error": null
+        "error": "Unexpected response from arctracker items endpoint: missing 'data' key"
       },
       "fieldLevelMerge": {
         "enabled": true,
@@ -75,7 +75,7 @@
         "documentation": "https://arctracker.io/developers/docs",
         "apiBase": "https://arctracker.io",
         "supplementalCount": 0,
-        "error": null
+        "error": "Unexpected response from arctracker quests endpoint: missing 'data' key"
       },
       "arclensEnrichment": {
         "enabled": false,
@@ -105,7 +105,7 @@
         "documentation": "https://arctracker.io/developers/docs",
         "apiBase": "https://arctracker.io",
         "count": 0,
-        "error": null,
+        "error": "Unexpected response from arctracker hideout endpoint: missing 'data' key",
         "file": "static/arctracker_hideout.json"
       }
     },
@@ -114,7 +114,7 @@
         "documentation": "https://arctracker.io/developers/docs",
         "apiBase": "https://arctracker.io",
         "count": 0,
-        "error": null,
+        "error": "Unexpected response from arctracker projects endpoint: missing 'data' key",
         "file": "static/arctracker_projects.json"
       }
     }
