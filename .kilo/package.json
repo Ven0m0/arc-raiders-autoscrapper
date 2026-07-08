@@ -2,7 +2,7 @@
   "dependencies": {
     "@ai-sdk/openai-compatible": "*",
     "@ast-grep/cli": "^0.44.0",
-    "@kilocode/plugin": "7.3.63",
+    "@kilocode/plugin": "7.4.1",
     "@morphllm/opencode-morph-plugin": "^2.0.9",
     "@opencode-ai/plugin": "^1.14.33",
     "cachebro": "*",
