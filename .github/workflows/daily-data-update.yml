@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
       - name: Install mise
-        uses: jdx/mise-action@v4.2.0
+        uses: jdx/mise-action@v4.2.1
       - name: Install dependencies
         run: mise exec -- uv sync --frozen --no-dev
       - name: Update snapshot + default rules
