@@ -413,7 +413,7 @@
     "recyclesInto": {
       "assorted-seeds": 3
     },
-    "wikiUses": "Workshop Apricot 5 (12x) Cat Bed 4 (1x) Olives 4 (6x) Prickly Pear 4 (6x) Scrappy 3 (3x) Scrappy 5 (12x)"
+    "wikiUses": "Workshop Apricot 5 (12x) Cat Bed 4 (1x) Olives 4 (6x) Prickly Pear 4 (6x) Scrappy 3 (3x)"
   },
   {
     "id": "arc-alloy",
@@ -1670,8 +1670,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:43.222836+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Workshop Scrappy 4 (1x)"
+    "recyclesInto": null
   },
   {
     "id": "cheer-emote",
@@ -5202,7 +5201,7 @@
     "updatedAt": "2026-06-29T16:24:08.619024+00:00",
     "recipe": null,
     "recyclesInto": null,
-    "wikiUses": "Workshop Mushroom 5 (12x) Scrappy 5 (12x)"
+    "wikiUses": "Workshop Mushroom 5 (12x)"
   },
   {
     "id": "music-album",
@@ -5374,8 +5373,7 @@
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 2
-    },
-    "wikiUses": "Workshop Scrappy 4 (6x)"
+    }
   },
   {
     "id": "orange-camo-origin-outfit",
@@ -5787,8 +5785,7 @@
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 3
-    },
-    "wikiUses": "Workshop Scrappy 4 (6x)"
+    }
   },
   {
     "id": "processor",
@@ -8799,7 +8796,7 @@
     "updatedAt": "2026-06-29T16:24:36.500981+00:00",
     "recipe": null,
     "recyclesInto": null,
-    "wikiUses": "Workshop Scrappy 5 (3x) Very Comfortable Pillow 5 (12x)"
+    "wikiUses": "Workshop Very Comfortable Pillow 5 (12x)"
   },
   {
     "id": "vintage-steering-wheel",
