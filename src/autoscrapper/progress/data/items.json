@@ -87,7 +87,7 @@
       "mechanical-components": 1,
       "steel-spring": 1
     },
-    "wikiUses": "Workshop Gunsmith 3 (5x)"
+    "wikiUses": "Workshop Gunsmith 3 (5x) Projects Expedition 5 (5x)"
   },
   {
     "id": "agave",
@@ -429,7 +429,7 @@
     "recyclesInto": {
       "metal-parts": 2
     },
-    "wikiUses": "Workshop Explosives Station 1 (6x) Medical Lab 1 (6x) Utility Station 1 (6x) Quests Clearer Skies (3x) Shoring Up Defenses (1x) Projects Expedition 1 (80x) Expedition 2 (80x) Expedition 3 (80x) Expedition 4 (80x)"
+    "wikiUses": "Workshop Explosives Station 1 (6x) Medical Lab 1 (6x) Utility Station 1 (6x) Quests Clearer Skies (3x) Shoring Up Defenses (1x) Projects Expedition 1 (80x) Expedition 2 (80x) Expedition 3 (80x) Expedition 4 (80x) Expedition 5 (80x)"
   },
   {
     "id": "arc-circuitry",
@@ -447,7 +447,7 @@
     "recyclesInto": {
       "arc-alloy": 2
     },
-    "wikiUses": "Workshop Refiner 3 (10x)"
+    "wikiUses": "Workshop Refiner 3 (10x) Projects Expedition 5 (20x)"
   },
   {
     "id": "arc-coolant",
@@ -757,7 +757,7 @@
       "advanced-mechanical-components": 1,
       "arc-alloy": 3
     },
-    "wikiUses": "Workshop Gear Bench 3 (6x) Quests Settled in Full (1x) Projects Trophy Display (5x)"
+    "wikiUses": "Workshop Gear Bench 3 (6x) Quests Settled in Full (1x) Projects Expedition 5 (5x) Trophy Display (5x)"
   },
   {
     "id": "battery",
@@ -2589,7 +2589,8 @@
     "recipe": null,
     "recyclesInto": {
       "fabric": 3
-    }
+    },
+    "wikiUses": "Projects Expedition 5 (25x)"
   },
   {
     "id": "durable-cloth",
@@ -2607,7 +2608,7 @@
     "recyclesInto": {
       "fabric": 6
     },
-    "wikiUses": "Workshop Medical Lab 2 (5x) Quests Doctor's Orders (1x) Projects Expedition 1 (35x) Expedition 2 (35x) Expedition 3 (30x) Expedition 4 (30x)"
+    "wikiUses": "Workshop Medical Lab 2 (5x) Quests Doctor's Orders (1x) Projects Expedition 1 (35x) Expedition 2 (35x) Expedition 3 (30x) Expedition 4 (30x) Expedition 5 (30x)"
   },
   {
     "id": "electrical-components",
@@ -4485,7 +4486,8 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:03.462366+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Projects Expedition 5 (3x)"
   },
   {
     "id": "laser-trap-lure-recipe",
@@ -4910,7 +4912,8 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 2
-    }
+    },
+    "wikiUses": "Projects Expedition 5 (15x)"
   },
   {
     "id": "magnetic-accelerator",
@@ -4930,7 +4933,7 @@
       "advanced-mechanical-components": 1,
       "arc-motion-core": 1
     },
-    "wikiUses": "Projects Expedition 1 (3x) Trophy Display (10x)"
+    "wikiUses": "Projects Expedition 1 (3x) Expedition 5 (3x) Trophy Display (10x)"
   },
   {
     "id": "magnetron",
@@ -5010,7 +5013,7 @@
       "metal-parts": 3,
       "rubber-parts": 2
     },
-    "wikiUses": "Workshop Gunsmith 2 (5x)"
+    "wikiUses": "Workshop Gunsmith 2 (5x) Projects Expedition 5 (20x)"
   },
   {
     "id": "medium-ammo",
@@ -5104,7 +5107,7 @@
     "updatedAt": "2026-06-29T16:24:07.868988+00:00",
     "recipe": null,
     "recyclesInto": null,
-    "wikiUses": "Workshop Gunsmith 1 (20x) Refiner 1 (60x) Projects Expedition 1 (150x) Expedition 2 (150x) Expedition 3 (150x) Expedition 4 (150x)"
+    "wikiUses": "Workshop Gunsmith 1 (20x) Refiner 1 (60x) Projects Expedition 1 (150x) Expedition 2 (150x) Expedition 3 (150x) Expedition 4 (150x) Expedition 5 (150x)"
   },
   {
     "id": "microscope",
@@ -5597,7 +5600,7 @@
     "updatedAt": "2026-06-29T16:24:11.674514+00:00",
     "recipe": null,
     "recyclesInto": null,
-    "wikiUses": "Workshop Gear Bench 1 (25x) Utility Station 1 (50x) Projects Expedition 2 (200x)"
+    "wikiUses": "Workshop Gear Bench 1 (25x) Utility Station 1 (50x) Projects Expedition 2 (200x) Expedition 5 (100x)"
   },
   {
     "id": "playing-cards",
@@ -5881,7 +5884,8 @@
     "recyclesInto": {
       "sensors": 1,
       "speaker-component": 1
-    }
+    },
+    "wikiUses": "Projects Expedition 5 (2x)"
   },
   {
     "id": "radio-relay",
@@ -6470,7 +6474,7 @@
       "advanced-electrical-components": 1,
       "arc-alloy": 3
     },
-    "wikiUses": "Workshop Explosives Station 3 (3x) Quests Out of the Shadows (1x) Projects Trophy Display (8x)"
+    "wikiUses": "Workshop Explosives Station 3 (3x) Quests Out of the Shadows (1x) Projects Expedition 5 (3x) Trophy Display (8x)"
   },
   {
     "id": "rocket-thruster",
@@ -7463,7 +7467,7 @@
       "plastic-parts": 2,
       "rubber-parts": 3
     },
-    "wikiUses": "Projects Expedition 4 (15x)"
+    "wikiUses": "Projects Expedition 4 (15x) Expedition 5 (15x)"
   },
   {
     "id": "spectrometer",
@@ -8904,7 +8908,8 @@
     "recyclesInto": {
       "rubber-parts": 1,
       "wires": 1
-    }
+    },
+    "wikiUses": "Projects Expedition 5 (10x)"
   },
   {
     "id": "vulcano-blueprint",
