@@ -87,7 +87,7 @@
       "mechanical-components": 1,
       "steel-spring": 1
     },
-    "wikiUses": "Workshop Gunsmith 3 (5x)"
+    "wikiUses": "Workshop Gunsmith 3 (5x) Projects Expedition 5 (5x)"
   },
   {
     "id": "agave",
@@ -131,8 +131,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:30.242168+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Converging Paths (2x)"
+    "recyclesInto": null
   },
   {
     "id": "alarm-clock",
@@ -203,7 +202,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-06-29T16:23:30.90057+00:00",
+    "updatedAt": "2026-07-28T08:01:10.836661+00:00",
     "recipe": {
       "duct-tape": 3,
       "mechanical-components": 2
@@ -429,7 +428,7 @@
     "recyclesInto": {
       "metal-parts": 2
     },
-    "wikiUses": "Workshop Explosives Station 1 (6x) Medical Lab 1 (6x) Utility Station 1 (6x) Quests Clearer Skies (3x) Shoring Up Defenses (1x) Projects Expedition 1 (80x) Expedition 2 (80x) Expedition 3 (80x) Expedition 4 (80x)"
+    "wikiUses": "Workshop Explosives Station 1 (6x) Medical Lab 1 (6x) Utility Station 1 (6x) Quests Clearer Skies (3x) Shoring Up Defenses (1x) Projects Expedition 1 (80x) Expedition 2 (80x) Expedition 3 (80x) Expedition 4 (80x) Expedition 5 (80x)"
   },
   {
     "id": "arc-circuitry",
@@ -447,7 +446,7 @@
     "recyclesInto": {
       "arc-alloy": 2
     },
-    "wikiUses": "Workshop Refiner 3 (10x)"
+    "wikiUses": "Workshop Refiner 3 (10x) Projects Expedition 5 (20x)"
   },
   {
     "id": "arc-coolant",
@@ -462,8 +461,7 @@
     "recipe": null,
     "recyclesInto": {
       "chemicals": 16
-    },
-    "wikiUses": "Projects Converging Paths (9x)"
+    }
   },
   {
     "id": "arc-flex-rubber",
@@ -512,7 +510,7 @@
     "recyclesInto": {
       "metal-parts": 12
     },
-    "wikiUses": "Projects Converging Paths (7x) Trophy Display (10x)"
+    "wikiUses": "Projects Trophy Display (10x)"
   },
   {
     "id": "arc-powercell",
@@ -542,7 +540,7 @@
     "recyclesInto": {
       "plastic-parts": 14
     },
-    "wikiUses": "Projects Converging Paths (10x) Trophy Display (10x)"
+    "wikiUses": "Projects Trophy Display (10x)"
   },
   {
     "id": "arc-thermo-lining",
@@ -557,8 +555,7 @@
     "recipe": null,
     "recyclesInto": {
       "fabric": 16
-    },
-    "wikiUses": "Projects Converging Paths (6x)"
+    }
   },
   {
     "id": "arpeggio-i",
@@ -757,7 +754,7 @@
       "advanced-mechanical-components": 1,
       "arc-alloy": 3
     },
-    "wikiUses": "Workshop Gear Bench 3 (6x) Quests Settled in Full (1x) Projects Trophy Display (5x)"
+    "wikiUses": "Workshop Gear Bench 3 (6x) Quests Settled in Full (1x) Projects Expedition 5 (5x) Trophy Display (5x)"
   },
   {
     "id": "battery",
@@ -882,7 +879,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "Utility Bench",
-    "updatedAt": "2026-06-29T16:23:36.251381+00:00",
+    "updatedAt": "2026-07-28T07:54:37.438386+00:00",
     "recipe": {
       "plastic-parts": 8,
       "rubber-parts": 4
@@ -1069,7 +1066,7 @@
     "weightKg": 0.15,
     "stackSize": 5,
     "craftBench": "utility_bench",
-    "updatedAt": "2026-06-29T16:23:38.028864+00:00",
+    "updatedAt": "2026-07-28T07:55:59.221432+00:00",
     "recipe": {
       "chemicals": 3
     },
@@ -1793,7 +1790,7 @@
     "weightKg": 3,
     "stackSize": 1,
     "craftBench": "Equipment Bench",
-    "updatedAt": "2026-06-29T16:23:43.904727+00:00",
+    "updatedAt": "2026-07-28T08:05:31.461695+00:00",
     "recipe": {
       "electrical-components": 2,
       "magnet": 3
@@ -1911,7 +1908,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "Gunsmith II",
-    "updatedAt": "2026-06-29T16:23:44.742875+00:00",
+    "updatedAt": "2026-07-28T08:02:26.853115+00:00",
     "recipe": {
       "mechanical-components": 2,
       "wires": 4
@@ -2589,7 +2586,8 @@
     "recipe": null,
     "recyclesInto": {
       "fabric": 3
-    }
+    },
+    "wikiUses": "Projects Expedition 5 (25x)"
   },
   {
     "id": "durable-cloth",
@@ -2607,7 +2605,7 @@
     "recyclesInto": {
       "fabric": 6
     },
-    "wikiUses": "Workshop Medical Lab 2 (5x) Quests Doctor's Orders (1x) Projects Expedition 1 (35x) Expedition 2 (35x) Expedition 3 (30x) Expedition 4 (30x)"
+    "wikiUses": "Workshop Medical Lab 2 (5x) Quests Doctor's Orders (1x) Projects Expedition 1 (35x) Expedition 2 (35x) Expedition 3 (30x) Expedition 4 (30x) Expedition 5 (30x)"
   },
   {
     "id": "electrical-components",
@@ -2640,8 +2638,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-16T19:34:27.65139+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Converging Paths (1x)"
+    "recyclesInto": null
   },
   {
     "id": "empty-wine-bottle",
@@ -2716,8 +2713,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-16T19:33:00.710826+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Converging Paths (3x)"
+    "recyclesInto": null
   },
   {
     "id": "esr-analyzer",
@@ -2939,7 +2935,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "Weapon Bench II",
-    "updatedAt": "2026-06-29T16:23:51.921323+00:00",
+    "updatedAt": "2026-07-28T07:59:45.696147+00:00",
     "recipe": {
       "mechanical-components": 2,
       "steel-spring": 3
@@ -3021,7 +3017,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-06-29T16:23:52.5296+00:00",
+    "updatedAt": "2026-07-28T08:00:10.541401+00:00",
     "recipe": {
       "mechanical-components": 2,
       "steel-spring": 3
@@ -3358,7 +3354,7 @@
     "weightKg": 0.05,
     "stackSize": 5,
     "craftBench": "utility_bench",
-    "updatedAt": "2026-06-29T16:23:55.063542+00:00",
+    "updatedAt": "2026-07-28T07:55:24.1457+00:00",
     "recipe": {
       "chemicals": 2,
       "plastic-parts": 4
@@ -3393,7 +3389,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "explosives_bench",
-    "updatedAt": "2026-06-29T16:23:55.287271+00:00",
+    "updatedAt": "2026-07-28T08:06:33.69387+00:00",
     "recipe": {
       "explosive-compound": 1,
       "pop-trigger": 3
@@ -3740,7 +3736,7 @@
     "weightKg": 0.15,
     "stackSize": 5,
     "craftBench": "utility_bench",
-    "updatedAt": "2026-06-29T16:23:58.17285+00:00",
+    "updatedAt": "2026-07-28T07:56:41.680985+00:00",
     "recipe": {
       "chemicals": 3
     },
@@ -4485,7 +4481,8 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:03.462366+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Projects Expedition 5 (3x)"
   },
   {
     "id": "laser-trap-lure-recipe",
@@ -4603,7 +4600,7 @@
     "updatedAt": "2026-06-29T16:24:04.676111+00:00",
     "recipe": null,
     "recyclesInto": null,
-    "wikiUses": "Projects Converging Paths (6x) Expedition 1 (5x) Expedition 2 (4x)"
+    "wikiUses": "Projects Expedition 1 (5x) Expedition 2 (4x)"
   },
   {
     "id": "light-gun-parts",
@@ -4754,7 +4751,7 @@
     "weightKg": 2,
     "stackSize": 1,
     "craftBench": "Equipment Bench",
-    "updatedAt": "2026-06-29T16:24:05.622287+00:00",
+    "updatedAt": "2026-07-28T08:06:08.429806+00:00",
     "recipe": {
       "electrical-components": 2,
       "magnet": 3
@@ -4910,7 +4907,8 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 2
-    }
+    },
+    "wikiUses": "Projects Expedition 5 (15x)"
   },
   {
     "id": "magnetic-accelerator",
@@ -4930,7 +4928,7 @@
       "advanced-mechanical-components": 1,
       "arc-motion-core": 1
     },
-    "wikiUses": "Projects Expedition 1 (3x) Trophy Display (10x)"
+    "wikiUses": "Projects Expedition 1 (3x) Expedition 5 (3x) Trophy Display (10x)"
   },
   {
     "id": "magnetron",
@@ -5010,7 +5008,7 @@
       "metal-parts": 3,
       "rubber-parts": 2
     },
-    "wikiUses": "Workshop Gunsmith 2 (5x)"
+    "wikiUses": "Workshop Gunsmith 2 (5x) Projects Expedition 5 (20x)"
   },
   {
     "id": "medium-ammo",
@@ -5089,8 +5087,7 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 8
-    },
-    "wikiUses": "Projects Converging Paths (5x)"
+    }
   },
   {
     "id": "metal-parts",
@@ -5104,7 +5101,7 @@
     "updatedAt": "2026-06-29T16:24:07.868988+00:00",
     "recipe": null,
     "recyclesInto": null,
-    "wikiUses": "Workshop Gunsmith 1 (20x) Refiner 1 (60x) Projects Expedition 1 (150x) Expedition 2 (150x) Expedition 3 (150x) Expedition 4 (150x)"
+    "wikiUses": "Workshop Gunsmith 1 (20x) Refiner 1 (60x) Projects Expedition 1 (150x) Expedition 2 (150x) Expedition 3 (150x) Expedition 4 (150x) Expedition 5 (150x)"
   },
   {
     "id": "microscope",
@@ -5597,7 +5594,7 @@
     "updatedAt": "2026-06-29T16:24:11.674514+00:00",
     "recipe": null,
     "recyclesInto": null,
-    "wikiUses": "Workshop Gear Bench 1 (25x) Utility Station 1 (50x) Projects Expedition 2 (200x)"
+    "wikiUses": "Workshop Gear Bench 1 (25x) Utility Station 1 (50x) Projects Expedition 2 (200x) Expedition 5 (100x)"
   },
   {
     "id": "playing-cards",
@@ -5881,7 +5878,8 @@
     "recyclesInto": {
       "sensors": 1,
       "speaker-component": 1
-    }
+    },
+    "wikiUses": "Projects Expedition 5 (2x)"
   },
   {
     "id": "radio-relay",
@@ -5924,7 +5922,7 @@
       "in_raid",
       "utility_bench"
     ],
-    "updatedAt": "2026-06-29T16:24:14.209058+00:00",
+    "updatedAt": "2026-07-28T08:02:52.934198+00:00",
     "recipe": {
       "advanced-electrical-components": 1,
       "sensors": 3
@@ -6105,7 +6103,7 @@
     "weightKg": 0.2,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:15.734983+00:00",
+    "updatedAt": "2026-07-28T07:58:05.262381+00:00",
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 10
@@ -6131,9 +6129,9 @@
     "rarity": "common",
     "value": 150,
     "weightKg": 0.15,
-    "stackSize": 1,
+    "stackSize": 5,
     "craftBench": "utility_bench",
-    "updatedAt": "2026-06-29T16:24:15.967114+00:00",
+    "updatedAt": "2026-07-28T07:57:14.336194+00:00",
     "recipe": {
       "chemicals": 3
     },
@@ -6470,7 +6468,7 @@
       "advanced-electrical-components": 1,
       "arc-alloy": 3
     },
-    "wikiUses": "Workshop Explosives Station 3 (3x) Quests Out of the Shadows (1x) Projects Trophy Display (8x)"
+    "wikiUses": "Workshop Explosives Station 3 (3x) Quests Out of the Shadows (1x) Projects Expedition 5 (3x) Trophy Display (8x)"
   },
   {
     "id": "rocket-thruster",
@@ -6874,8 +6872,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-16T19:32:10.557161+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Converging Paths (4x)"
+    "recyclesInto": null
   },
   {
     "id": "shaker",
@@ -6886,7 +6883,7 @@
     "weightKg": 0.2,
     "stackSize": 1,
     "craftBench": "in_raid",
-    "updatedAt": "2026-06-29T16:24:21.653739+00:00",
+    "updatedAt": "2026-07-28T07:58:38.404863+00:00",
     "recipe": {
       "assorted-seeds": 7,
       "canister": 1
@@ -7150,7 +7147,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": "Gunsmith I",
-    "updatedAt": "2026-06-29T16:24:23.413344+00:00",
+    "updatedAt": "2026-07-28T07:59:17.329513+00:00",
     "recipe": {
       "mechanical-components": 2,
       "wires": 4
@@ -7463,7 +7460,7 @@
       "plastic-parts": 2,
       "rubber-parts": 3
     },
-    "wikiUses": "Projects Expedition 4 (15x)"
+    "wikiUses": "Projects Expedition 4 (15x) Expedition 5 (15x)"
   },
   {
     "id": "spectrometer",
@@ -7557,7 +7554,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-06-29T16:24:26.897897+00:00",
+    "updatedAt": "2026-07-28T08:00:40.450962+00:00",
     "recipe": {
       "duct-tape": 3,
       "mechanical-components": 2
@@ -7715,7 +7712,7 @@
     "weightKg": 0.2,
     "stackSize": 3,
     "craftBench": "Med Station 2",
-    "updatedAt": "2026-06-29T16:24:28.14672+00:00",
+    "updatedAt": "2026-07-28T08:04:39.384732+00:00",
     "recipe": {
       "antiseptic": 1,
       "durable-cloth": 2
@@ -7847,7 +7844,7 @@
     "weightKg": 0.2,
     "stackSize": 5,
     "craftBench": "Medical Lab II",
-    "updatedAt": "2026-06-17T14:24:09.975913+00:00",
+    "updatedAt": "2026-07-28T08:03:57.192374+00:00",
     "recipe": {
       "advanced-arc-powercell": 1,
       "electrical-components": 1
@@ -7935,7 +7932,7 @@
     "weightKg": 2,
     "stackSize": 1,
     "craftBench": "Equipment Bench",
-    "updatedAt": "2026-06-29T16:24:29.703336+00:00",
+    "updatedAt": "2026-07-28T08:05:07.819109+00:00",
     "recipe": {
       "electrical-components": 2,
       "magnet": 3
@@ -8175,8 +8172,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-16T19:33:36.892233+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Converging Paths (3x)"
+    "recyclesInto": null
   },
   {
     "id": "tempest-i-recipe",
@@ -8468,8 +8464,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-16T19:30:31.288369+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Converging Paths (3x)"
+    "recyclesInto": null
   },
   {
     "id": "trigger-nade",
@@ -8809,8 +8804,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-16T19:31:08.469893+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Converging Paths (2x)"
+    "recyclesInto": null
   },
   {
     "id": "vita-shot",
@@ -8904,7 +8898,8 @@
     "recyclesInto": {
       "rubber-parts": 1,
       "wires": 1
-    }
+    },
+    "wikiUses": "Projects Expedition 5 (10x)"
   },
   {
     "id": "vulcano-blueprint",
@@ -9164,7 +9159,7 @@
     "weightKg": 0.15,
     "stackSize": 5,
     "craftBench": "utility_bench",
-    "updatedAt": "2026-06-29T16:24:39.243633+00:00",
+    "updatedAt": "2026-07-28T07:57:37.777066+00:00",
     "recipe": {
       "chemicals": 3
     },
