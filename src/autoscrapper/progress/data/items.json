@@ -558,6 +558,19 @@
     }
   },
   {
+    "id": "arpeggio-blueprint",
+    "name": "Arpeggio Blueprint",
+    "type": "Blueprint",
+    "rarity": "legendary",
+    "value": 5000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-08-01T08:57:03.360883+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "arpeggio-i",
     "name": "Arpeggio I",
     "type": "Weapon",
@@ -2218,6 +2231,19 @@
     }
   },
   {
+    "id": "damaged-leaper-pulse-unit",
+    "name": "Damaged Leaper Pulse Unit",
+    "type": "Recyclable",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-08-01T09:03:25.606942+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "damaged-rocketeer-part",
     "name": "Damaged Rocketeer Driver",
     "type": "Recyclable",
@@ -2504,7 +2530,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-06-29T16:23:49.271647+00:00",
+    "updatedAt": "2026-08-01T09:09:31.995464+00:00",
     "recipe": {
       "magnetic-accelerator": 3,
       "shredder-gyro": 3,
@@ -2557,6 +2583,19 @@
     "recyclesInto": {
       "metal-parts": 2
     }
+  },
+  {
+    "id": "door-blocker-blueprint",
+    "name": "Door Blocker Blueprint",
+    "type": "Blueprint",
+    "rarity": "legendary",
+    "value": 5000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-08-01T08:59:41.545124+00:00",
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "dried-out-arc-resin",
@@ -2724,7 +2763,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:23:50.654407+00:00",
+    "updatedAt": "2026-08-01T09:09:56.807253+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2835,7 +2874,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-06-29T16:23:51.469086+00:00",
+    "updatedAt": "2026-08-01T09:15:24.959542+00:00",
     "recipe": {
       "metal-parts": 6,
       "wires": 3
@@ -4568,7 +4607,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:04.445829+00:00",
+    "updatedAt": "2026-08-01T09:10:16.231836+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4956,7 +4995,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-07-17T06:39:18.699321+00:00",
+    "updatedAt": "2026-08-01T09:18:10.064739+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -5990,7 +6029,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-06-29T16:24:14.911504+00:00",
+    "updatedAt": "2026-08-01T09:15:44.29521+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -6006,7 +6045,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-06-29T16:24:15.026973+00:00",
+    "updatedAt": "2026-08-01T09:16:27.798974+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -6022,12 +6061,25 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "Gunsmith II",
-    "updatedAt": "2026-06-29T16:24:15.142391+00:00",
+    "updatedAt": "2026-08-01T09:17:04.17509+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "heavy-gun-parts": 3
     }
+  },
+  {
+    "id": "rattler-blueprint",
+    "name": "Rattler Blueprint",
+    "type": "Blueprint",
+    "rarity": "legendary",
+    "value": 5000,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-08-01T09:01:19.718164+00:00",
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "rattler-i",
@@ -6332,7 +6384,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:17.48243+00:00",
+    "updatedAt": "2026-08-01T09:10:46.56865+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6345,7 +6397,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-07-16T17:20:05.945542+00:00",
+    "updatedAt": "2026-08-01T09:11:11.0033+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6358,7 +6410,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:17.725301+00:00",
+    "updatedAt": "2026-08-01T09:11:44.870365+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6384,7 +6436,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:17.967412+00:00",
+    "updatedAt": "2026-08-01T09:12:17.832609+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6397,7 +6449,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:18.099192+00:00",
+    "updatedAt": "2026-08-01T09:12:38.182057+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6410,7 +6462,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:18.218023+00:00",
+    "updatedAt": "2026-08-01T09:12:57.5655+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6423,7 +6475,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:18.339805+00:00",
+    "updatedAt": "2026-08-01T09:13:22.093049+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6436,7 +6488,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:18.458226+00:00",
+    "updatedAt": "2026-08-01T09:13:47.065562+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6449,7 +6501,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:18.574237+00:00",
+    "updatedAt": "2026-08-01T09:14:08.828767+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7017,7 +7069,7 @@
     "weightKg": 0.4,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:22.476905+00:00",
+    "updatedAt": "2026-08-01T09:18:36.768295+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7255,7 +7307,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:24.233081+00:00",
+    "updatedAt": "2026-08-01T09:09:12.4705+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Projects Expedition 4 (2x)"
@@ -8047,7 +8099,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "equipment_bench",
-    "updatedAt": "2026-06-29T16:24:30.605419+00:00",
+    "updatedAt": "2026-08-01T09:15:02.669937+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
       "processor": 3

@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "generatedAt": "2026-07-31T14:45:57.904723Z",
+    "generatedAt": "2026-08-05T14:45:47.387884Z",
     "data": {
-      "lastUpdated": "2026-07-31T14:45:57.895064Z",
+      "lastUpdated": "2026-08-05T14:45:47.378087Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
-      "itemCount": 626,
+      "itemCount": 630,
       "questCount": 100,
       "dataSources": {
         "items": {
@@ -124,7 +124,7 @@
       },
       "hasPriceOverrides": false
     },
-    "itemCount": 626,
+    "itemCount": 630,
     "allQuestsCompleted": true
   },
   "items": [
@@ -507,6 +507,16 @@
       "analysis": [
         "Recycles into: 16x Fabric",
         "Recycle value: Components (800 coins) worth less than Item (1000 coins)"
+      ]
+    },
+    {
+      "id": "arpeggio-blueprint",
+      "name": "Arpeggio Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
       ]
     },
     {
@@ -1757,6 +1767,16 @@
       ]
     },
     {
+      "id": "damaged-leaper-pulse-unit",
+      "name": "Damaged Leaper Pulse Unit",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "damaged-rocketeer-part",
       "name": "Damaged Rocketeer Driver",
       "value": 2000,
@@ -1957,6 +1977,16 @@
         "Consumable item - grenades, healing items, etc.",
         "Review based on your current inventory needs",
         "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "door-blocker-blueprint",
+      "name": "Door Blocker Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
       ]
     },
     {
@@ -4487,6 +4517,16 @@
         "Consider tier and your play style",
         "Base weapon: Rascal",
         "Override: treat 'Your Call' as Keep"
+      ]
+    },
+    {
+      "id": "rattler-blueprint",
+      "name": "Rattler Blueprint",
+      "value": 5000,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
       ]
     },
     {
