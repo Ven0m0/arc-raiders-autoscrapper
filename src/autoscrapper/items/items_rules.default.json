@@ -1,12 +1,12 @@
 {
   "metadata": {
-    "generatedAt": "2026-06-19T16:25:20.011611Z",
+    "generatedAt": "2026-08-11T14:47:15.499762Z",
     "data": {
-      "lastUpdated": "2026-06-19T16:25:19.994351Z",
+      "lastUpdated": "2026-08-11T14:47:15.481860Z",
       "source": "https://metaforge.app/arc-raiders",
       "version": "autoscrapper-data-1"
     },
-    "itemCount": 590,
+    "itemCount": 592,
     "allQuestsCompleted": true
   },
   "items": [
@@ -1548,6 +1548,16 @@
       "analysis": [
         "Recycles into: 6x Metal Parts, 2x Wires",
         "Recycle value: Components (850 coins) worth less than Item (1000 coins)"
+      ]
+    },
+    {
+      "id": "damaged-leaper-pulse-unit",
+      "name": "Damaged Leaper Pulse Unit",
+      "value": 0,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
       ]
     },
     {
@@ -3290,6 +3300,16 @@
       ]
     },
     {
+      "id": "marano-market-buisness-card",
+      "name": "Marano Market Business Card",
+      "value": 100,
+      "action": "sell",
+      "analysis": [
+        "No immediate use found",
+        "Safe to sell or recycle"
+      ]
+    },
+    {
       "id": "mastery-medal-backpack-charm",
       "name": "Mastery Medal (Backpack Charm)",
       "value": 0,
@@ -3302,7 +3322,7 @@
     {
       "id": "matriarch-reactor",
       "name": "Matriarch Reactor",
-      "value": 13000,
+      "value": 11000,
       "action": "keep",
       "analysis": [
         "Legendary rarity - extremely valuable",
@@ -3798,7 +3818,7 @@
     {
       "id": "power-rod",
       "name": "Power Rod",
-      "value": 5500,
+      "value": 4997,
       "action": "keep",
       "analysis": [
         "Used in 2 crafting recipes",
