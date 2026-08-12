@@ -54,9 +54,6 @@
       "Skill(commit-commands:commit-push-pr)",
       "mcp__cachebro__read_files",
       "mcp__cachebro__read_file",
-      "mcp__token-pilot__read_for_edit",
-      "mcp__token-pilot__find_usages",
-      "mcp__token-pilot__smart_read",
       "mcp__plugin_oh-my-claudecode_t__state_list_active"
     ]
   },
@@ -98,24 +95,6 @@
             "async": true
           }
         ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-post-bash"
-          }
-        ]
-      },
-      {
-        "matcher": "Task",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-post-task"
-          }
-        ]
       }
     ],
     "PreToolUse": [
@@ -126,42 +105,6 @@
             "type": "command",
             "command": "jq -r '.tool_input.file_path' | grep -E '(progress/data/|items_rules\\.default\\.json|uv\\.lock|pyproject\\.toml)' && echo '{\"continue\":false,\"stopReason\":\"This file is auto-generated or locked. Use scripts/update_snapshot_and_defaults.py for data files, or uv commands for uv.lock.\"}' || echo '{\"continue\":true}'",
             "statusMessage": "Checking file protection rules..."
-          }
-        ]
-      },
-      {
-        "matcher": "Read",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-read"
-          }
-        ]
-      },
-      {
-        "matcher": "Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-edit"
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-pre-bash"
-          }
-        ]
-      },
-      {
-        "matcher": "Grep",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-pre-grep"
           }
         ]
       },
@@ -184,16 +127,6 @@
             "type": "command",
             "command": "cmd=$(jq -r '.tool_input.command // empty' 2>/dev/null); if echo \"$cmd\" | grep -qE '^git commit'; then branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); if echo \"$branch\" | grep -qE '^(main|master)$'; then echo '{\"systemMessage\":\"\u26a0\ufe0f Warning: You are committing to main/master. Ensure this is intended.\"}'; else echo '{\"continue\":true}'; fi; else echo '{\"continue\":true}'; fi",
             "statusMessage": "Checking git branch..."
-          }
-        ]
-      }
-    ],
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/home/ven0m0/.local/share/fnm/node-versions/v24.14.1/installation/bin/node /home/ven0m0/.npm/_npx/3c6ec659f659d129/node_modules/token-pilot/dist/index.js hook-session-start"
           }
         ]
       }
