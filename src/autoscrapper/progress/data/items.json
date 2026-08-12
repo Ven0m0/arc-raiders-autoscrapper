@@ -10,10 +10,7 @@
     "craftBench": null,
     "updatedAt": "2026-07-10T09:37:56.307153+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "metal-parts": 4,
-      "wires": 6
-    }
+    "recyclesInto": null
   },
   {
     "id": "adrenaline-shot",
@@ -26,8 +23,8 @@
     "craftBench": "Med Stations 1",
     "updatedAt": "2026-06-29T16:23:29.650815+00:00",
     "recipe": {
-      "chemicals": 3,
-      "plastic-parts": 3
+      "plastic-parts": 3,
+      "chemicals": 3
     },
     "recyclesInto": {
       "chemicals": 1,
@@ -60,14 +57,13 @@
     "craftBench": "Refiner",
     "updatedAt": "2026-06-29T16:23:29.765617+00:00",
     "recipe": {
-      "electrical-components": 2,
-      "wires": 3
+      "wires-recipe": 3,
+      "electrical-components": 2
     },
     "recyclesInto": {
       "electrical-components": 1,
-      "wires": 1
-    },
-    "wikiUses": "Workshop Gear Bench 3 (5x) Utility Station 3 (5x) Projects Expedition 1 (5x) Expedition 2 (5x) Expedition 3 (5x) Expedition 4 (5x)"
+      "wires-recipe": 1
+    }
   },
   {
     "id": "advanced-mechanical-components",
@@ -80,14 +76,13 @@
     "craftBench": "Refiner",
     "updatedAt": "2026-06-29T16:23:29.881443+00:00",
     "recipe": {
-      "mechanical-components": 2,
-      "steel-spring": 2
+      "spring": 2,
+      "mechanical-components": 2
     },
     "recyclesInto": {
       "mechanical-components": 1,
-      "steel-spring": 1
-    },
-    "wikiUses": "Workshop Gunsmith 3 (5x) Projects Expedition 5 (5x)"
+      "spring": 1
+    }
   },
   {
     "id": "agave",
@@ -110,9 +105,9 @@
     "type": "Consumable",
     "rarity": "common",
     "value": 1800,
-    "weightKg": 0.2,
+    "weightKg": 0,
     "stackSize": 1,
-    "craftBench": "in_raid",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:30.12777+00:00",
     "recipe": {
       "agave": 1,
@@ -167,7 +162,7 @@
     "name": "Ancient Fort Security Code",
     "type": "Key",
     "rarity": "common",
-    "value": 100,
+    "value": 0,
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
@@ -186,8 +181,8 @@
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:23:30.75776+00:00",
     "recipe": {
-      "duct-tape": 1,
-      "plastic-parts": 6
+      "plastic-parts": 6,
+      "duct-tape-recipe": 1
     },
     "recyclesInto": {
       "plastic-parts": 6
@@ -201,14 +196,14 @@
     "value": 2000,
     "weightKg": 0.5,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-07-28T08:01:10.836661+00:00",
     "recipe": {
-      "duct-tape": 3,
-      "mechanical-components": 2
+      "mechanical-components": 2,
+      "duct-tape-recipe": 3
     },
     "recyclesInto": {
-      "duct-tape": 1,
+      "duct-tape-recipe": 1,
       "mechanical-components": 1
     }
   },
@@ -233,14 +228,14 @@
     "value": 5000,
     "weightKg": 0.5,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:31.043669+00:00",
     "recipe": {
-      "duct-tape": 5,
-      "mod-components": 2
+      "mod-components": 2,
+      "duct-tape-recipe": 5
     },
     "recyclesInto": {
-      "duct-tape": 2,
+      "duct-tape-recipe": 2,
       "mod-components": 1
     }
   },
@@ -269,12 +264,11 @@
     "updatedAt": "2026-06-29T16:23:31.490123+00:00",
     "recipe": {
       "chemicals": 10,
-      "great-mullein": 2
+      "great-muullein": 2
     },
     "recyclesInto": {
       "chemicals": 10
-    },
-    "wikiUses": "Workshop Medical Lab 3 (8x) Quests Doctor's Orders (2x)"
+    }
   },
   {
     "id": "anvil-recipe",
@@ -301,7 +295,8 @@
     "updatedAt": "2026-06-29T16:23:31.635113+00:00",
     "recipe": {
       "mechanical-components": 5,
-      "simple-gun-parts": 6
+      "simple-gun-parts": 6,
+      "anvil-recipe": 1
     },
     "recyclesInto": {
       "mechanical-components": 2,
@@ -318,7 +313,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench II",
     "updatedAt": "2026-06-29T16:23:31.747632+00:00",
-    "recipe": null,
+    "recipe": {
+      "anvil-i": 1,
+      "mechanical-components": 3,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 3,
       "simple-gun-parts": 3
@@ -334,7 +333,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:23:31.861974+00:00",
-    "recipe": null,
+    "recipe": {
+      "anvil-ii": 1,
+      "mechanical-components": 4,
+      "heavy-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 4,
       "simple-gun-parts": 4
@@ -348,9 +351,13 @@
     "value": 13000,
     "weightKg": 5,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:31.983504+00:00",
-    "recipe": null,
+    "recipe": {
+      "mechanical-components": 4,
+      "heavy-gun-parts": 1,
+      "anvil-iii": 1
+    },
     "recyclesInto": {
       "mechanical-components": 5,
       "simple-gun-parts": 5
@@ -382,8 +389,15 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:32.322868+00:00",
-    "recipe": null,
-    "recyclesInto": null
+    "recipe": {
+      "magnetic-accelerator": 3,
+      "complex-gun-parts": 3,
+      "matriarch-reactor": 1
+    },
+    "recyclesInto": {
+      "magnetic-accelerator": 2,
+      "complex-gun-parts": 1
+    }
   },
   {
     "id": "aphelion-rifle-blueprint",
@@ -411,8 +425,7 @@
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 3
-    },
-    "wikiUses": "Workshop Apricot 5 (12x) Cat Bed 4 (1x) Olives 4 (6x) Prickly Pear 4 (6x) Scrappy 3 (3x)"
+    }
   },
   {
     "id": "arc-alloy",
@@ -427,8 +440,7 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 2
-    },
-    "wikiUses": "Workshop Explosives Station 1 (6x) Medical Lab 1 (6x) Utility Station 1 (6x) Quests Clearer Skies (3x) Shoring Up Defenses (1x) Projects Expedition 1 (80x) Expedition 2 (80x) Expedition 3 (80x) Expedition 4 (80x) Expedition 5 (80x)"
+    }
   },
   {
     "id": "arc-circuitry",
@@ -445,8 +457,7 @@
     },
     "recyclesInto": {
       "arc-alloy": 2
-    },
-    "wikiUses": "Workshop Refiner 3 (10x) Projects Expedition 5 (20x)"
+    }
   },
   {
     "id": "arc-coolant",
@@ -475,7 +486,7 @@
     "updatedAt": "2026-06-29T16:23:33.044434+00:00",
     "recipe": null,
     "recyclesInto": {
-      "rubber-parts": 16
+      "rubber-parts-recipe": 16
     }
   },
   {
@@ -493,8 +504,7 @@
     },
     "recyclesInto": {
       "arc-alloy": 2
-    },
-    "wikiUses": "Workshop Refiner 2 (5x) Projects Expedition 4 (20x)"
+    }
   },
   {
     "id": "arc-performance-steel",
@@ -509,8 +519,7 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 12
-    },
-    "wikiUses": "Projects Trophy Display (10x)"
+    }
   },
   {
     "id": "arc-powercell",
@@ -523,8 +532,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:33.388992+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Workshop Refiner 1 (5x)"
+    "recyclesInto": null
   },
   {
     "id": "arc-synthetic-resin",
@@ -539,8 +547,7 @@
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 14
-    },
-    "wikiUses": "Projects Trophy Display (10x)"
+    }
   },
   {
     "id": "arc-thermo-lining",
@@ -558,19 +565,6 @@
     }
   },
   {
-    "id": "arpeggio-blueprint",
-    "name": "Arpeggio Blueprint",
-    "type": "Blueprint",
-    "rarity": "legendary",
-    "value": 5000,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "2026-08-01T08:57:03.360883+00:00",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
     "id": "arpeggio-i",
     "name": "Arpeggio I",
     "type": "Weapon",
@@ -584,10 +578,7 @@
       "mechanical-components": 6,
       "simple-gun-parts": 6
     },
-    "recyclesInto": {
-      "mechanical-components": 2,
-      "simple-gun-parts": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "arpeggio-ii",
@@ -599,11 +590,12 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:23:33.844399+00:00",
-    "recipe": null,
-    "recyclesInto": {
-      "mechanical-components": 3,
+    "recipe": {
+      "arpeggio-i": 1,
+      "metal-parts": 14,
       "simple-gun-parts": 3
-    }
+    },
+    "recyclesInto": null
   },
   {
     "id": "arpeggio-iii",
@@ -613,13 +605,14 @@
     "value": 11500,
     "weightKg": 6,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:33.962415+00:00",
-    "recipe": null,
-    "recyclesInto": {
-      "mechanical-components": 4,
+    "recipe": {
+      "arpeggio-ii": 1,
+      "metal-parts": 10,
       "simple-gun-parts": 4
-    }
+    },
+    "recyclesInto": null
   },
   {
     "id": "arpeggio-iv",
@@ -629,13 +622,14 @@
     "value": 15000,
     "weightKg": 6,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:34.079013+00:00",
-    "recipe": null,
-    "recyclesInto": {
-      "mechanical-components": 5,
-      "simple-gun-parts": 5
-    }
+    "recipe": {
+      "mechanical-components": 1,
+      "medium-gun-parts": 2,
+      "arpeggio-iii": 1
+    },
+    "recyclesInto": null
   },
   {
     "id": "assessor-matrix",
@@ -649,8 +643,8 @@
     "updatedAt": "2026-06-29T16:23:34.2067+00:00",
     "recipe": null,
     "recyclesInto": {
-      "advanced-arc-powercell": 3,
-      "advanced-mechanical-components": 1
+      "advanced-mechanical-components": 1,
+      "advanced-arc-powercell": 3
     }
   },
   {
@@ -764,10 +758,9 @@
     "updatedAt": "2026-06-29T16:23:35.143718+00:00",
     "recipe": null,
     "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "arc-alloy": 3
-    },
-    "wikiUses": "Workshop Gear Bench 3 (6x) Quests Settled in Full (1x) Projects Expedition 5 (5x) Trophy Display (5x)"
+      "arc-alloy": 3,
+      "advanced-mechanical-components": 1
+    }
   },
   {
     "id": "battery",
@@ -782,8 +775,7 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 2
-    },
-    "wikiUses": "Quests After Rain Comes (2x) Clamoring for Attention (1x) Trash Into Treasure (1x) Projects Expedition 1 (30x) Expedition 2 (30x) Expedition 3 (25x)"
+    }
   },
   {
     "id": "bettina-blueprint",
@@ -810,13 +802,10 @@
     "updatedAt": "2026-06-29T16:23:35.49966+00:00",
     "recipe": {
       "advanced-mechanical-components": 3,
-      "canister": 3,
-      "heavy-gun-parts": 3
+      "heavy-gun-parts": 3,
+      "canister": 3
     },
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "heavy-gun-parts": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "bettina-ii",
@@ -828,7 +817,10 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:23:35.649395+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 1,
+      "heavy-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "heavy-gun-parts": 2
@@ -844,7 +836,10 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:23:35.797431+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 1,
+      "heavy-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "heavy-gun-parts": 3
@@ -860,7 +855,10 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:23:35.94703+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 2,
+      "heavy-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "heavy-gun-parts": 3
@@ -880,8 +878,7 @@
     "recyclesInto": {
       "canister": 4,
       "metal-parts": 10
-    },
-    "wikiUses": "Quests The League (1x)"
+    }
   },
   {
     "id": "binoculars",
@@ -895,11 +892,11 @@
     "updatedAt": "2026-07-28T07:54:37.438386+00:00",
     "recipe": {
       "plastic-parts": 8,
-      "rubber-parts": 4
+      "rubber-parts-recipe": 4
     },
     "recyclesInto": {
       "plastic-parts": 4,
-      "rubber-parts": 2
+      "rubber-parts-recipe": 2
     }
   },
   {
@@ -913,7 +910,10 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:36.397903+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": {
+      "arc-motion-core": 2,
+      "arc-alloy": 2
+    }
   },
   {
     "id": "black-eye-face-style",
@@ -965,8 +965,8 @@
     "craftBench": "Explosive Bench 3",
     "updatedAt": "2026-06-29T16:23:36.990975+00:00",
     "recipe": {
-      "explosive-compound": 1,
-      "oil": 2
+      "oil": 2,
+      "explosive-compound": 1
     },
     "recyclesInto": {
       "metal-parts": 4,
@@ -994,15 +994,9 @@
     "value": 1000,
     "weightKg": 0.3,
     "stackSize": 3,
-    "craftBench": [
-      "in_raid",
-      "workbench"
-    ],
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:37.279993+00:00",
-    "recipe": {
-      "blaze-grenade": 1,
-      "wires": 1
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -1078,11 +1072,9 @@
     "value": 150,
     "weightKg": 0.15,
     "stackSize": 5,
-    "craftBench": "utility_bench",
+    "craftBench": null,
     "updatedAt": "2026-07-28T07:55:59.221432+00:00",
-    "recipe": {
-      "chemicals": 3
-    },
+    "recipe": null,
     "recyclesInto": {
       "chemicals": 1
     }
@@ -1150,14 +1142,12 @@
     "craftBench": "Weapon Bench 3",
     "updatedAt": "2026-06-29T16:23:38.545534+00:00",
     "recipe": {
-      "exodus-modules": 2,
+      "magnetic-accelerator": 1,
       "light-gun-parts": 3,
-      "magnetic-accelerator": 1
+      "bobcat-i-recipe": 1,
+      "exodus-modules": 2
     },
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "light-gun-parts": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "bobcat-ii",
@@ -1169,7 +1159,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:23:38.68269+00:00",
-    "recipe": null,
+    "recipe": {
+      "bobcat-i": 1,
+      "advanced-mechanical-components": 2,
+      "light-gun-parts": 1
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "light-gun-parts": 3
@@ -1183,9 +1177,13 @@
     "value": 22000,
     "weightKg": 7,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:38.817144+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 2,
+      "light-gun-parts": 3,
+      "bobcat-ii": 1
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 4,
       "light-gun-parts": 4
@@ -1199,9 +1197,13 @@
     "value": 27000,
     "weightKg": 7,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:39.087582+00:00",
-    "recipe": null,
+    "recipe": {
+      "bobcat-iii": 1,
+      "advanced-mechanical-components": 2,
+      "light-gun-parts": 3
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 5,
       "light-gun-parts": 4
@@ -1219,10 +1221,9 @@
     "updatedAt": "2026-06-29T16:23:39.217555+00:00",
     "recipe": null,
     "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "arc-alloy": 3
-    },
-    "wikiUses": "Workshop Refiner 3 (6x) Projects Expedition 3 (2x) Trophy Display (8x)"
+      "advanced-mechanical-components": 2,
+      "arc-alloy": 2
+    }
   },
   {
     "id": "bow-and-arrow-emote",
@@ -1248,8 +1249,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:39.453041+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Expedition 3 (3x)"
+    "recyclesInto": null
   },
   {
     "id": "briefcase-backpack-attachment",
@@ -1293,8 +1293,7 @@
     "recipe": null,
     "recyclesInto": {
       "processor": 4
-    },
-    "wikiUses": "Projects Expedition 3 (1x)"
+    }
   },
   {
     "id": "broken-handcuffs",
@@ -1321,8 +1320,8 @@
     "updatedAt": "2026-06-29T16:23:40.06677+00:00",
     "recipe": null,
     "recyclesInto": {
-      "sensors": 3,
-      "wires": 2
+      "sensors-recipe": 3,
+      "wires-recipe": 2
     }
   },
   {
@@ -1338,7 +1337,7 @@
     "recipe": null,
     "recyclesInto": {
       "battery": 2,
-      "wires": 2
+      "wires-recipe": 2
     }
   },
   {
@@ -1431,7 +1430,8 @@
     "updatedAt": "2026-06-29T16:23:41.177047+00:00",
     "recipe": {
       "mechanical-components": 3,
-      "simple-gun-parts": 3
+      "simple-gun-parts": 3,
+      "burltetta-recipe": 1
     },
     "recyclesInto": {
       "mechanical-components": 1,
@@ -1448,7 +1448,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:23:41.306566+00:00",
-    "recipe": null,
+    "recipe": {
+      "burletta-i": 1,
+      "mechanical-components": 3,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 2,
       "simple-gun-parts": 2
@@ -1464,7 +1468,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:23:41.441838+00:00",
-    "recipe": null,
+    "recipe": {
+      "burletta-ii": 1,
+      "mechanical-components": 3,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 3,
       "simple-gun-parts": 3
@@ -1480,7 +1488,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:23:41.57266+00:00",
-    "recipe": null,
+    "recipe": {
+      "burletta-iiii": 1,
+      "mechanical-components": 4,
+      "light-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 4,
       "simple-gun-parts": 4
@@ -1572,8 +1584,7 @@
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 3
-    },
-    "wikiUses": "Projects Expedition 4 (15x)"
+    }
   },
   {
     "id": "cans-backpack-attachment",
@@ -1631,7 +1642,10 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:23:42.883257+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 1,
+      "medium-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 2
@@ -1647,7 +1661,10 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:42.997373+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 1,
+      "medium-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 3
@@ -1663,7 +1680,10 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:43.110388+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 2,
+      "medium-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "medium-gun-parts": 3
@@ -1706,8 +1726,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:43.450921+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Workshop Explosives Station 1 (50x) Projects Expedition 3 (100x) Expedition 4 (100x)"
+    "recyclesInto": null
   },
   {
     "id": "coffee-pot",
@@ -1720,8 +1739,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:43.569129+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Expedition 3 (1x)"
+    "recyclesInto": null
   },
   {
     "id": "coins",
@@ -1787,11 +1805,11 @@
     "updatedAt": "2026-06-29T16:23:43.793161+00:00",
     "recipe": {
       "plastic-parts": 6,
-      "rubber-parts": 6
+      "rubber-parts-recipe": 6
     },
     "recyclesInto": {
       "plastic-parts": 3,
-      "rubber-parts": 3
+      "rubber-parts-recipe": 3
     }
   },
   {
@@ -1827,10 +1845,7 @@
       "advanced-electrical-components": 2,
       "processor": 3
     },
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "processor": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "combat-mk3-aggressive-blueprint",
@@ -1859,10 +1874,7 @@
       "advanced-electrical-components": 2,
       "processor": 3
     },
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "processor": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "combat-mk-3-flanking",
@@ -1891,8 +1903,7 @@
     "recyclesInto": {
       "arc-alloy": 2,
       "crude-explosives": 2
-    },
-    "wikiUses": "Quests Collision Course (1x)"
+    }
   },
   {
     "id": "compensator-i",
@@ -1906,7 +1917,7 @@
     "updatedAt": "2026-06-29T16:23:44.629416+00:00",
     "recipe": {
       "metal-parts": 6,
-      "wires": 1
+      "wires-recipe": 1
     },
     "recyclesInto": {
       "metal-parts": 5
@@ -1924,11 +1935,11 @@
     "updatedAt": "2026-07-28T08:02:26.853115+00:00",
     "recipe": {
       "mechanical-components": 2,
-      "wires": 4
+      "wires-recipe": 4
     },
     "recyclesInto": {
-      "mechanical-components": 1,
-      "wires": 1
+      "wires-recipe": 1,
+      "mechanical-components": 1
     }
   },
   {
@@ -1956,11 +1967,11 @@
     "updatedAt": "2026-06-29T16:23:44.861393+00:00",
     "recipe": {
       "mod-components": 2,
-      "wires": 8
+      "wires-recipe": 8
     },
     "recyclesInto": {
-      "mod-components": 1,
-      "wires": 2
+      "wires-recipe": 2,
+      "mod-components": 1
     }
   },
   {
@@ -1987,9 +1998,9 @@
     "craftBench": "Refiner",
     "updatedAt": "2026-06-29T16:23:45.258867+00:00",
     "recipe": {
-      "heavy-gun-parts": 2,
       "light-gun-parts": 2,
-      "medium-gun-parts": 2
+      "medium-gun-parts": 2,
+      "heavy-gun-parts": 2
     },
     "recyclesInto": {
       "simple-gun-parts": 3
@@ -2037,9 +2048,8 @@
     "recipe": null,
     "recyclesInto": {
       "chemicals": 6,
-      "steel-spring": 2
-    },
-    "wikiUses": "Projects Expedition 2 (4x)"
+      "spring": 2
+    }
   },
   {
     "id": "cooling-fan",
@@ -2054,9 +2064,8 @@
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 14,
-      "wires": 4
-    },
-    "wikiUses": "Projects Expedition 1 (5x)"
+      "wires-recipe": 4
+    }
   },
   {
     "id": "cracked-bioscanner",
@@ -2071,9 +2080,8 @@
     "recipe": null,
     "recyclesInto": {
       "battery": 3,
-      "rubber-parts": 3
-    },
-    "wikiUses": "Workshop Medical Lab 2 (2x)"
+      "rubber-parts-recipe": 3
+    }
   },
   {
     "id": "crash-mat",
@@ -2086,8 +2094,8 @@
     "craftBench": "Utility Station II",
     "updatedAt": "2026-06-29T16:23:45.943415+00:00",
     "recipe": {
-      "durable-cloth": 1,
-      "electrical-components": 1
+      "electrical-components": 1,
+      "durable-cloth": 1
     },
     "recyclesInto": {
       "fabric": 6,
@@ -2135,8 +2143,7 @@
     },
     "recyclesInto": {
       "chemicals": 3
-    },
-    "wikiUses": "Workshop Explosives Station 2 (5x)"
+    }
   },
   {
     "id": "crumpled-plastic-bottle",
@@ -2211,9 +2218,8 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 6,
-      "wires": 2
-    },
-    "wikiUses": "Workshop Utility Station 2 (2x)"
+      "wires-recipe": 2
+    }
   },
   {
     "id": "danaged-hornet-driver",
@@ -2226,9 +2232,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:48.011857+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "arc-alloy": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "damaged-leaper-pulse-unit",
@@ -2390,12 +2394,11 @@
     "craftBench": "Explosives Bench III",
     "updatedAt": "2026-06-29T16:23:48.242299+00:00",
     "recipe": {
+      "explosive-compound": 3,
       "arc-circuitry": 2,
-      "comet-igniter": 1,
-      "explosive-compound": 3
+      "comet-igniter": 1
     },
     "recyclesInto": {
-      "arc-circuitry": 1,
       "explosive-compound": 1
     }
   },
@@ -2423,8 +2426,8 @@
     "craftBench": "Med Station 3",
     "updatedAt": "2026-06-29T16:23:48.467688+00:00",
     "recipe": {
-      "moss": 1,
-      "plastic-parts": 9
+      "plastic-parts": 3,
+      "moss": 1
     },
     "recyclesInto": {
       "moss": 1,
@@ -2457,9 +2460,8 @@
     "recipe": null,
     "recyclesInto": {
       "fabric": 9,
-      "rubber-parts": 9
-    },
-    "wikiUses": "Quests The League (1x)"
+      "rubber-parts-recipe": 9
+    }
   },
   {
     "id": "degraded-arc-rubber",
@@ -2473,7 +2475,7 @@
     "updatedAt": "2026-06-29T16:23:48.809411+00:00",
     "recipe": null,
     "recyclesInto": {
-      "rubber-parts": 11
+      "rubber-parts-recipe": 11
     }
   },
   {
@@ -2488,12 +2490,12 @@
     "updatedAt": "2026-06-29T16:23:48.925059+00:00",
     "recipe": null,
     "recyclesInto": {
-      "rubber-parts": 12
+      "rubber-parts-recipe": 12
     }
   },
   {
     "id": "dockmasters-detector",
-    "name": "Dockmaster’s Detector",
+    "name": "Dockmaster\u2019s Detector",
     "type": "Gadget",
     "rarity": "uncommon",
     "value": 1000,
@@ -2518,8 +2520,7 @@
     "recyclesInto": {
       "fabric": 8,
       "metal-parts": 1
-    },
-    "wikiUses": "Workshop Scrappy 2 (1x)"
+    }
   },
   {
     "id": "dolabra",
@@ -2532,12 +2533,12 @@
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-08-01T09:09:31.995464+00:00",
     "recipe": {
-      "magnetic-accelerator": 3,
       "shredder-gyro": 3,
+      "magnetic-accelerator": 3,
       "vaporizer-regulator": 2
     },
     "recyclesInto": {
-      "magnetic-accelerator": 2
+      "magnetic-accelerator": 1
     }
   },
   {
@@ -2578,23 +2579,8 @@
     "updatedAt": "2026-06-29T16:23:49.62608+00:00",
     "recipe": {
       "metal-parts": 3,
-      "rubber-parts": 3
+      "rubber-parts-recipe": 3
     },
-    "recyclesInto": {
-      "metal-parts": 2
-    }
-  },
-  {
-    "id": "door-blocker-blueprint",
-    "name": "Door Blocker Blueprint",
-    "type": "Blueprint",
-    "rarity": "legendary",
-    "value": 5000,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "2026-08-01T08:59:41.545124+00:00",
-    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -2625,8 +2611,7 @@
     "recipe": null,
     "recyclesInto": {
       "fabric": 3
-    },
-    "wikiUses": "Projects Expedition 5 (25x)"
+    }
   },
   {
     "id": "durable-cloth",
@@ -2643,8 +2628,7 @@
     },
     "recyclesInto": {
       "fabric": 6
-    },
-    "wikiUses": "Workshop Medical Lab 2 (5x) Quests Doctor's Orders (1x) Projects Expedition 1 (35x) Expedition 2 (35x) Expedition 3 (30x) Expedition 4 (30x) Expedition 5 (30x)"
+    }
   },
   {
     "id": "electrical-components",
@@ -2658,13 +2642,12 @@
     "updatedAt": "2026-06-29T16:23:50.080236+00:00",
     "recipe": {
       "plastic-parts": 8,
-      "rubber-parts": 4
+      "rubber-parts-recipe": 4
     },
     "recyclesInto": {
       "plastic-parts": 3,
-      "rubber-parts": 3
-    },
-    "wikiUses": "Workshop Gear Bench 2 (5x) Utility Station 2 (5x) Quests Fragmented Logs (1x) Projects Expedition 1 (30x) Expedition 2 (20x) Expedition 3 (20x) Expedition 4 (20x)"
+      "rubber-parts-recipe": 3
+    }
   },
   {
     "id": "elephant-obelisk",
@@ -2700,7 +2683,7 @@
     "value": 200,
     "weightKg": 0.3,
     "stackSize": 5,
-    "craftBench": "workbench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:50.312841+00:00",
     "recipe": {
       "advanced-arc-powercell": 1,
@@ -2719,14 +2702,11 @@
     "craftBench": "Weapon Bench 3",
     "updatedAt": "2026-06-29T16:23:50.425345+00:00",
     "recipe": {
-      "complex-gun-parts": 3,
+      "queen-reactor": 1,
       "magnetic-accelerator": 3,
-      "queen-reactor": 1
+      "complex-gun-parts": 3
     },
-    "recyclesInto": {
-      "complex-gun-parts": 1,
-      "magnetic-accelerator": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "equalizer-recipe",
@@ -2759,7 +2739,7 @@
     "name": "ESR Analyzer",
     "type": "Quest Item",
     "rarity": "common",
-    "value": 100,
+    "value": 0,
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
@@ -2781,8 +2761,7 @@
     "recyclesInto": {
       "magnet": 2,
       "processor": 2
-    },
-    "wikiUses": "Projects Expedition 1 (1x) Expedition 2 (1x) Expedition 3 (1x) Expedition 4 (2x) Trophy Display (5x)"
+    }
   },
   {
     "id": "expired-pasta",
@@ -2810,9 +2789,8 @@
     "recipe": null,
     "recyclesInto": {
       "fabric": 4,
-      "rubber-parts": 8
-    },
-    "wikiUses": "Projects Trophy Display (3x)"
+      "rubber-parts-recipe": 8
+    }
   },
   {
     "id": "explosive-compound",
@@ -2829,9 +2807,8 @@
       "oil": 2
     },
     "recyclesInto": {
-      "crude-explosives": 2
-    },
-    "wikiUses": "Workshop Explosives Station 3 (5x)"
+      "crude-explosives": 1
+    }
   },
   {
     "id": "explosive-mine",
@@ -2844,13 +2821,10 @@
     "craftBench": "Explosives Bench 3",
     "updatedAt": "2026-06-29T16:23:51.230199+00:00",
     "recipe": {
-      "explosive-compound": 1,
-      "sensors": 1
+      "sensors-recipe": 1,
+      "explosive-compound": 1
     },
-    "recyclesInto": {
-      "oil": 1,
-      "sensors": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "explosive-mine-blueprint",
@@ -2873,15 +2847,10 @@
     "value": 1000,
     "weightKg": 0.25,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-08-01T09:15:24.959542+00:00",
-    "recipe": {
-      "metal-parts": 6,
-      "wires": 3
-    },
-    "recyclesInto": {
-      "metal-parts": 5
-    }
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "extended-barrel-ii",
@@ -2891,15 +2860,15 @@
     "value": 3000,
     "weightKg": 0.5,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:51.580954+00:00",
     "recipe": {
       "mechanical-components": 3,
-      "wires": 6
+      "wires-recipe": 6
     },
     "recyclesInto": {
       "mechanical-components": 1,
-      "wires": 1
+      "wires-recipe": 1
     }
   },
   {
@@ -2927,11 +2896,11 @@
     "updatedAt": "2026-06-20T20:31:32.128901+00:00",
     "recipe": {
       "mod-components": 2,
-      "wires": 8
+      "wires-recipe": 8
     },
     "recyclesInto": {
       "mod-components": 1,
-      "wires": 1
+      "wires-recipe": 1
     }
   },
   {
@@ -2959,7 +2928,7 @@
     "updatedAt": "2026-06-29T16:23:51.808382+00:00",
     "recipe": {
       "plastic-parts": 6,
-      "steel-spring": 1
+      "spring": 1
     },
     "recyclesInto": {
       "plastic-parts": 6
@@ -2977,11 +2946,11 @@
     "updatedAt": "2026-07-28T07:59:45.696147+00:00",
     "recipe": {
       "mechanical-components": 2,
-      "steel-spring": 3
+      "spring": 3
     },
     "recyclesInto": {
       "mechanical-components": 1,
-      "steel-spring": 1
+      "spring": 1
     }
   },
   {
@@ -3009,11 +2978,11 @@
     "updatedAt": "2026-06-29T16:23:52.033054+00:00",
     "recipe": {
       "mod-components": 2,
-      "steel-spring": 5
+      "spring": 5
     },
     "recyclesInto": {
       "mod-components": 1,
-      "steel-spring": 2
+      "spring": 2
     }
   },
   {
@@ -3041,7 +3010,7 @@
     "updatedAt": "2026-06-29T16:23:52.377842+00:00",
     "recipe": {
       "plastic-parts": 6,
-      "steel-spring": 1
+      "spring": 1
     },
     "recyclesInto": {
       "plastic-parts": 6
@@ -3055,15 +3024,15 @@
     "value": 2000,
     "weightKg": 0.5,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-07-28T08:00:10.541401+00:00",
     "recipe": {
       "mechanical-components": 2,
-      "steel-spring": 3
+      "spring": 3
     },
     "recyclesInto": {
       "mechanical-components": 1,
-      "steel-spring": 1
+      "spring": 1
     }
   },
   {
@@ -3090,12 +3059,12 @@
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:23:52.643561+00:00",
     "recipe": {
-      "mod-components": 2,
-      "steel-spring": 5
+      "mod-components": 1,
+      "spring": 6
     },
     "recyclesInto": {
       "mod-components": 1,
-      "steel-spring": 2
+      "spring": 2
     }
   },
   {
@@ -3123,7 +3092,7 @@
     "updatedAt": "2026-06-29T16:23:53.007509+00:00",
     "recipe": {
       "plastic-parts": 6,
-      "steel-spring": 1
+      "spring": 1
     },
     "recyclesInto": {
       "plastic-parts": 6
@@ -3141,11 +3110,11 @@
     "updatedAt": "2026-06-29T16:23:53.11995+00:00",
     "recipe": {
       "mechanical-components": 2,
-      "steel-spring": 3
+      "spring": 3
     },
     "recyclesInto": {
       "mechanical-components": 1,
-      "steel-spring": 1
+      "spring": 1
     }
   },
   {
@@ -3169,15 +3138,15 @@
     "value": 5000,
     "weightKg": 0.75,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:53.232264+00:00",
     "recipe": {
-      "mod-components": 2,
-      "steel-spring": 5
+      "mod-components": 1,
+      "spring": 2
     },
     "recyclesInto": {
       "mod-components": 1,
-      "steel-spring": 2
+      "spring": 2
     }
   },
   {
@@ -3204,8 +3173,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:53.57274+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Workshop Gear Bench 1 (30x) Medical Lab 1 (50x)"
+    "recyclesInto": null
   },
   {
     "id": "faded-flush-aviator-color",
@@ -3258,11 +3226,11 @@
     "updatedAt": "2026-06-29T16:23:54.027946+00:00",
     "recipe": {
       "metal-parts": 5,
-      "rubber-parts": 2
+      "rubber-parts-recipe": 2
     },
     "recyclesInto": {
       "metal-parts": 2,
-      "rubber-parts": 1
+      "rubber-parts-recipe": 1
     }
   },
   {
@@ -3275,10 +3243,13 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:23:54.143535+00:00",
-    "recipe": null,
+    "recipe": {
+      "ferro-i": 1,
+      "metal-parts": 7
+    },
     "recyclesInto": {
       "metal-parts": 4,
-      "rubber-parts": 3
+      "rubber-parts-recipe": 3
     }
   },
   {
@@ -3291,7 +3262,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:23:54.255991+00:00",
-    "recipe": null,
+    "recipe": {
+      "ferro-ii": 1,
+      "metal-parts": 9,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "metal-parts": 6,
       "simple-gun-parts": 1
@@ -3307,7 +3282,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:23:54.368254+00:00",
-    "recipe": null,
+    "recipe": {
+      "ferro-iii": 1,
+      "mechanical-components": 1,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 1,
       "simple-gun-parts": 2
@@ -3324,9 +3303,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:54.480876+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "assorted-seeds": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "film-reel",
@@ -3381,8 +3358,7 @@
     "recyclesInto": {
       "arc-alloy": 1,
       "crude-explosives": 1
-    },
-    "wikiUses": "Workshop Refiner 2 (8x) Quests Test Case (1x)"
+    }
   },
   {
     "id": "firecracker",
@@ -3392,12 +3368,9 @@
     "value": 270,
     "weightKg": 0.05,
     "stackSize": 5,
-    "craftBench": "utility_bench",
+    "craftBench": null,
     "updatedAt": "2026-07-28T07:55:24.1457+00:00",
-    "recipe": {
-      "chemicals": 2,
-      "plastic-parts": 4
-    },
+    "recipe": null,
     "recyclesInto": {
       "plastic-parts": 3
     }
@@ -3416,8 +3389,7 @@
     "recyclesInto": {
       "arc-alloy": 2,
       "crude-explosives": 2
-    },
-    "wikiUses": "Quests Test Case (1x) Projects Expedition 3 (5x)"
+    }
   },
   {
     "id": "fireworks-box",
@@ -3427,7 +3399,7 @@
     "value": 2000,
     "weightKg": 0.5,
     "stackSize": 1,
-    "craftBench": "explosives_bench",
+    "craftBench": null,
     "updatedAt": "2026-07-28T08:06:33.69387+00:00",
     "recipe": {
       "explosive-compound": 1,
@@ -3458,16 +3430,13 @@
     "value": 640,
     "weightKg": 1,
     "stackSize": 1,
-    "craftBench": "in_raid",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:55.665431+00:00",
     "recipe": {
       "air-freshener": 1,
       "fireball-burner": 1
     },
-    "recyclesInto": {
-      "canister": 1,
-      "fireball-burner": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "flashy-duck",
@@ -3495,16 +3464,15 @@
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 1,
-      "sensors": 1
-    },
-    "wikiUses": "Quests Snap And Salvage (1x)"
+      "sensors-recipe": 1
+    }
   },
   {
     "id": "flushing-terminal-key",
     "name": "Flushing Terminal Key",
     "type": "Trinket",
     "rarity": "common",
-    "value": 100,
+    "value": 0,
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
@@ -3533,14 +3501,14 @@
     "type": "Augment",
     "rarity": "common",
     "value": 100,
-    "weightKg": 1,
+    "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:56.423446+00:00",
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 6,
-      "rubber-parts": 6
+      "rubber-parts-recipe": 6
     }
   },
   {
@@ -3557,8 +3525,7 @@
     "recyclesInto": {
       "advanced-electrical-components": 1,
       "speaker-component": 1
-    },
-    "wikiUses": "Projects Expedition 2 (5x)"
+    }
   },
   {
     "id": "fried-motherboard",
@@ -3574,8 +3541,7 @@
     "recyclesInto": {
       "electrical-components": 2,
       "plastic-parts": 5
-    },
-    "wikiUses": "Workshop Utility Station 3 (3x)"
+    }
   },
   {
     "id": "fruit-mix",
@@ -3583,13 +3549,13 @@
     "type": "Quick Use",
     "rarity": "uncommon",
     "value": 1800,
-    "weightKg": 0.3,
+    "weightKg": 0,
     "stackSize": 5,
-    "craftBench": "in_raid",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:56.765721+00:00",
     "recipe": {
-      "apricot": 1,
       "lemon": 1,
+      "apricot": 1,
       "prickly-pear": 1
     },
     "recyclesInto": null
@@ -3636,11 +3602,11 @@
     "updatedAt": "2026-06-29T16:23:57.134686+00:00",
     "recipe": {
       "chemicals": 4,
-      "rubber-parts": 2
+      "rubber-parts-recipe": 2
     },
     "recyclesInto": {
       "chemicals": 1,
-      "rubber-parts": 1
+      "rubber-parts-recipe": 1
     }
   },
   {
@@ -3651,15 +3617,9 @@
     "value": 300,
     "weightKg": 0.25,
     "stackSize": 1,
-    "craftBench": [
-      "in_raid",
-      "workbench"
-    ],
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:57.248737+00:00",
-    "recipe": {
-      "gas-grenade": 1,
-      "wires": 1
-    },
+    "recipe": null,
     "recyclesInto": null
   },
   {
@@ -3672,13 +3632,10 @@
     "stackSize": 3,
     "craftBench": "Explosives Bench I",
     "updatedAt": "2026-06-29T16:23:57.360283+00:00",
-    "recipe": {
-      "chemicals": 4,
-      "rubber-parts": 2
-    },
+    "recipe": null,
     "recyclesInto": {
       "chemicals": 1,
-      "rubber-parts": 1
+      "rubber-parts-recipe": 1
     }
   },
   {
@@ -3708,8 +3665,7 @@
     "recyclesInto": {
       "battery": 3,
       "exodus-modules": 1
-    },
-    "wikiUses": "Projects Trophy Display (3x)"
+    }
   },
   {
     "id": "gentle-duck",
@@ -3763,8 +3719,7 @@
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 2
-    },
-    "wikiUses": "Quests Doctor's Orders (1x)"
+    }
   },
   {
     "id": "green-light-stick",
@@ -3774,11 +3729,9 @@
     "value": 150,
     "weightKg": 0.15,
     "stackSize": 5,
-    "craftBench": "utility_bench",
+    "craftBench": null,
     "updatedAt": "2026-07-28T07:56:41.680985+00:00",
-    "recipe": {
-      "chemicals": 3
-    },
+    "recipe": null,
     "recyclesInto": {
       "chemicals": 1
     }
@@ -3812,7 +3765,7 @@
     },
     "recyclesInto": {
       "metal-parts": 2,
-      "rubber-parts": 1
+      "rubber-parts-recipe": 1
     }
   },
   {
@@ -3825,10 +3778,13 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:23:58.516655+00:00",
-    "recipe": null,
+    "recipe": {
+      "hairpin-i": 1,
+      "metal-parts": 8
+    },
     "recyclesInto": {
       "metal-parts": 4,
-      "rubber-parts": 3
+      "rubber-parts-recipe": 4
     }
   },
   {
@@ -3841,7 +3797,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:23:58.630045+00:00",
-    "recipe": null,
+    "recipe": {
+      "hairpin-ii": 1,
+      "metal-parts": 9,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "metal-parts": 6,
       "simple-gun-parts": 1
@@ -3857,10 +3817,14 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:23:58.742839+00:00",
-    "recipe": null,
+    "recipe": {
+      "hairpin-iii": 1,
+      "mechanical-components": 1,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 1,
-      "simple-gun-parts": 2
+      "simple-gun-parts": 1
     }
   },
   {
@@ -3888,7 +3852,7 @@
     "updatedAt": "2026-06-29T16:23:58.970867+00:00",
     "recipe": null,
     "recyclesInto": {
-      "rubber-parts": 7,
+      "rubber-parts-recipe": 7,
       "speaker-component": 1
     }
   },
@@ -3903,8 +3867,8 @@
     "craftBench": "Workbench",
     "updatedAt": "2026-06-29T16:23:59.082531+00:00",
     "recipe": {
-      "chemicals": 2,
-      "metal-parts": 3
+      "metal-parts": 3,
+      "chemicals": 2
     },
     "recyclesInto": null
   },
@@ -3919,12 +3883,12 @@
     "craftBench": "Explosives Bench",
     "updatedAt": "2026-06-29T16:23:59.196019+00:00",
     "recipe": {
-      "canister": 2,
-      "explosive-compound": 1
+      "explosive-compound": 1,
+      "canister": 2
     },
     "recyclesInto": {
       "oil": 1,
-      "rubber-parts": 2
+      "rubber-parts-recipe": 2
     }
   },
   {
@@ -3935,7 +3899,7 @@
     "value": 700,
     "weightKg": 0.5,
     "stackSize": 5,
-    "craftBench": "refiner",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:23:59.307097+00:00",
     "recipe": {
       "simple-gun-parts": 4
@@ -3954,7 +3918,9 @@
     "stackSize": 1,
     "craftBench": "Refiner II",
     "updatedAt": "2026-06-29T16:23:59.419034+00:00",
-    "recipe": null,
+    "recipe": {
+      "simple-gun-parts": 4
+    },
     "recyclesInto": null
   },
   {
@@ -4001,7 +3967,7 @@
     "updatedAt": "2026-06-29T16:23:59.753781+00:00",
     "recipe": {
       "durable-cloth": 1,
-      "great-mullein": 1
+      "great-muullein": 1
     },
     "recyclesInto": {
       "assorted-seeds": 2,
@@ -4020,8 +3986,8 @@
     "updatedAt": "2026-06-29T16:23:59.879005+00:00",
     "recipe": null,
     "recyclesInto": {
-      "duct-tape": 2,
-      "mod-components": 1
+      "mod-components": 1,
+      "duct-tape-recipe": 2
     }
   },
   {
@@ -4036,10 +4002,9 @@
     "updatedAt": "2026-06-29T16:23:59.990521+00:00",
     "recipe": null,
     "recyclesInto": {
-      "arc-alloy": 1,
-      "electrical-components": 1
-    },
-    "wikiUses": "Workshop Gear Bench 2 (5x) Quests Test Case (1x) The Trifecta (2x) Projects Trophy Display (15x)"
+      "arc-alloy": 2,
+      "electrical-components": 2
+    }
   },
   {
     "id": "household-cleaner",
@@ -4080,9 +4045,9 @@
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:24:00.33277+00:00",
     "recipe": {
-      "exodus-modules": 1,
+      "magnetic-accelerator": 1,
       "heavy-gun-parts": 3,
-      "magnetic-accelerator": 1
+      "exodus-modules": 1
     },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -4099,7 +4064,10 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:24:00.443332+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 1,
+      "heavy-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "heavy-gun-parts": 3
@@ -4115,7 +4083,10 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:24:00.554973+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 2,
+      "heavy-gun-parts": 1
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "heavy-gun-parts": 4
@@ -4131,7 +4102,10 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:24:00.667065+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 2,
+      "heavy-gun-parts": 3
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 4,
       "heavy-gun-parts": 5
@@ -4150,9 +4124,8 @@
     "recipe": null,
     "recyclesInto": {
       "canister": 2,
-      "wires": 2
-    },
-    "wikiUses": "Projects Expedition 1 (5x)"
+      "wires-recipe": 2
+    }
   },
   {
     "id": "ice-cream-scooper",
@@ -4209,9 +4182,13 @@
     "value": 7000,
     "weightKg": 8,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:01.120115+00:00",
-    "recipe": null,
+    "recipe": {
+      "il-toro-i": 1,
+      "mechanical-components": 3,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 3,
       "simple-gun-parts": 3
@@ -4227,7 +4204,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:24:01.232077+00:00",
-    "recipe": null,
+    "recipe": {
+      "il-toro-ii": 1,
+      "mechanical-components": 4,
+      "heavy-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 4,
       "simple-gun-parts": 4
@@ -4243,7 +4224,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:24:01.344129+00:00",
-    "recipe": null,
+    "recipe": {
+      "il-toro-iiii": 1,
+      "mechanical-components": 4,
+      "heavy-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 5,
       "simple-gun-parts": 5
@@ -4278,8 +4263,7 @@
     "recyclesInto": {
       "battery": 2,
       "chemicals": 7
-    },
-    "wikiUses": "Workshop Gear Bench 3 (3x)"
+    }
   },
   {
     "id": "industrial-charger",
@@ -4295,8 +4279,7 @@
     "recyclesInto": {
       "metal-parts": 5,
       "voltage-converter": 1
-    },
-    "wikiUses": "Projects Expedition 3 (3x) Expedition 4 (3x)"
+    }
   },
   {
     "id": "industrial-magnet",
@@ -4328,8 +4311,7 @@
     "recyclesInto": {
       "exodus-modules": 1,
       "voltage-converter": 4
-    },
-    "wikiUses": "Quests With A View (1x) Projects Expedition 2 (3x)"
+    }
   },
   {
     "id": "jolt-mine",
@@ -4342,13 +4324,10 @@
     "craftBench": "Explosives Bench II",
     "updatedAt": "2026-06-29T16:24:02.16115+00:00",
     "recipe": {
-      "battery": 1,
-      "electrical-components": 1
+      "electrical-components": 1,
+      "battery": 1
     },
-    "recyclesInto": {
-      "battery": 1,
-      "plastic-parts": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "jolt-mine-recipe",
@@ -4387,14 +4366,11 @@
     "craftBench": "Weapon Bench 3",
     "updatedAt": "2026-06-29T16:24:02.514188+00:00",
     "recipe": {
-      "complex-gun-parts": 3,
+      "queen-reactor": 1,
       "magnetic-accelerator": 3,
-      "queen-reactor": 1
+      "complex-gun-parts": 3
     },
-    "recyclesInto": {
-      "complex-gun-parts": 1,
-      "magnetic-accelerator": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "jupiter-i-recipe",
@@ -4420,12 +4396,12 @@
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:24:02.739921+00:00",
     "recipe": {
-      "metal-parts": 6,
-      "rubber-parts": 8
+      "rubber-parts-recipe": 8,
+      "metal-parts": 6
     },
     "recyclesInto": {
       "metal-parts": 3,
-      "rubber-parts": 2
+      "rubber-parts-recipe": 2
     }
   },
   {
@@ -4438,10 +4414,14 @@
     "stackSize": 1,
     "craftBench": "Gunsmith I",
     "updatedAt": "2026-06-29T16:24:02.853071+00:00",
-    "recipe": null,
+    "recipe": {
+      "kettle-i": 1,
+      "metal-parts": 8,
+      "plastic-parts": 10
+    },
     "recyclesInto": {
       "metal-parts": 6,
-      "rubber-parts": 6
+      "rubber-parts-recipe": 6
     }
   },
   {
@@ -4452,9 +4432,13 @@
     "value": 3000,
     "weightKg": 7,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:02.966441+00:00",
-    "recipe": null,
+    "recipe": {
+      "kettle-ii": 1,
+      "metal-parts": 10,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "metal-parts": 12,
       "simple-gun-parts": 1
@@ -4470,7 +4454,11 @@
     "stackSize": 1,
     "craftBench": "Gunsmith I",
     "updatedAt": "2026-06-29T16:24:03.119205+00:00",
-    "recipe": null,
+    "recipe": {
+      "kettle-iii": 1,
+      "mechanical-components": 3,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 2,
       "simple-gun-parts": 2
@@ -4488,8 +4476,8 @@
     "updatedAt": "2026-06-29T16:24:03.235+00:00",
     "recipe": null,
     "recyclesInto": {
-      "duct-tape": 2,
-      "mod-components": 1
+      "mod-components": 1,
+      "duct-tape-recipe": 2
     }
   },
   {
@@ -4506,8 +4494,7 @@
     "recyclesInto": {
       "chemicals": 16,
       "crude-explosives": 3
-    },
-    "wikiUses": "Workshop Explosives Station 3 (3x)"
+    }
   },
   {
     "id": "lances-mixtape-5th-edition",
@@ -4520,8 +4507,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:03.462366+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Expedition 5 (3x)"
+    "recyclesInto": null
   },
   {
     "id": "laser-trap-lure-recipe",
@@ -4563,11 +4549,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:04.100451+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "arc-alloy": 3
-    },
-    "wikiUses": "Workshop Utility Station 3 (4x) Quests Into The Fray (1x) Projects Expedition 1 (3x) Expedition 2 (3x) Trophy Display (10x)"
+    "recyclesInto": null
   },
   {
     "id": "lemon",
@@ -4582,8 +4564,7 @@
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 3
-    },
-    "wikiUses": "Workshop Scrappy 3 (3x)"
+    }
   },
   {
     "id": "leviathans-crown-ship-model",
@@ -4603,7 +4584,7 @@
     "name": "Lidar Scanner",
     "type": "Trinket",
     "rarity": "common",
-    "value": 100,
+    "value": 0,
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
@@ -4622,8 +4603,8 @@
     "craftBench": "Workbench",
     "updatedAt": "2026-06-29T16:24:04.559999+00:00",
     "recipe": {
-      "chemicals": 2,
-      "metal-parts": 3
+      "metal-parts": 3,
+      "chemicals": 2
     },
     "recyclesInto": null
   },
@@ -4638,8 +4619,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:04.676111+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Expedition 1 (5x) Expedition 2 (4x)"
+    "recyclesInto": null
   },
   {
     "id": "light-gun-parts",
@@ -4649,10 +4629,11 @@
     "value": 700,
     "weightKg": 0.3,
     "stackSize": 5,
-    "craftBench": "refiner",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:04.792062+00:00",
     "recipe": {
-      "simple-gun-parts": 4
+      "simple-gun-parts": 2,
+      "rubber-parts-recipe": 8
     },
     "recyclesInto": {
       "simple-gun-parts": 2
@@ -4682,8 +4663,8 @@
     "craftBench": "Explosive Bench 1 or Basic Bench",
     "updatedAt": "2026-06-29T16:24:05.035201+00:00",
     "recipe": {
-      "chemicals": 3,
-      "plastic-parts": 2
+      "plastic-parts": 2,
+      "chemicals": 3
     },
     "recyclesInto": {
       "chemicals": 1,
@@ -4716,14 +4697,14 @@
     "value": 5000,
     "weightKg": 0.25,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:05.158266+00:00",
     "recipe": {
-      "duct-tape": 5,
-      "mod-components": 2
+      "mod-components": 2,
+      "duct-tape-recipe": 5
     },
     "recyclesInto": {
-      "duct-tape": 1,
+      "duct-tape-recipe": 1,
       "mod-components": 1
     }
   },
@@ -4767,18 +4748,15 @@
     "value": 640,
     "weightKg": 1,
     "stackSize": 1,
-    "craftBench": [
-      "equipment_bench",
-      "workbench"
-    ],
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:05.506351+00:00",
     "recipe": {
       "plastic-parts": 6,
-      "rubber-parts": 6
+      "rubber-parts-recipe": 6
     },
     "recyclesInto": {
       "plastic-parts": 3,
-      "rubber-parts": 3
+      "rubber-parts-recipe": 3
     }
   },
   {
@@ -4792,8 +4770,8 @@
     "craftBench": "Equipment Bench",
     "updatedAt": "2026-07-28T08:06:08.429806+00:00",
     "recipe": {
-      "electrical-components": 2,
-      "magnet": 3
+      "electrical-components": 3,
+      "magnet": 2
     },
     "recyclesInto": {
       "electrical-components": 1,
@@ -4814,10 +4792,7 @@
       "advanced-electrical-components": 2,
       "processor": 3
     },
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "processor": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "looting-mk-3-safekeeper",
@@ -4827,16 +4802,13 @@
     "value": 5000,
     "weightKg": 5,
     "stackSize": 1,
-    "craftBench": "equipment_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:05.855889+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
       "processor": 3
     },
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "processor": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "looting-mk-3-safekeeper-blueprint",
@@ -4859,7 +4831,7 @@
     "value": 5000,
     "weightKg": 4,
     "stackSize": 1,
-    "craftBench": "equipment_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:06.093683+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
@@ -4894,8 +4866,8 @@
     "craftBench": "Utility Bench 2",
     "updatedAt": "2026-06-29T16:24:06.324881+00:00",
     "recipe": {
-      "electrical-components": 1,
-      "speaker-component": 1
+      "speaker-component": 2,
+      "plastic-parts": 2
     },
     "recyclesInto": {
       "speaker-component": 1
@@ -4922,16 +4894,12 @@
     "value": 1000,
     "weightKg": 0.25,
     "stackSize": 3,
-    "craftBench": [
-      "in_raid",
-      "workbench"
-    ],
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:06.559843+00:00",
-    "recipe": {
-      "lure-grenade": 1,
-      "wires": 1
-    },
-    "recyclesInto": null
+    "recipe": null,
+    "recyclesInto": {
+      "speaker-component": 1
+    }
   },
   {
     "id": "magnet",
@@ -4946,8 +4914,7 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 2
-    },
-    "wikiUses": "Projects Expedition 5 (15x)"
+    }
   },
   {
     "id": "magnetic-accelerator",
@@ -4966,8 +4933,7 @@
     "recyclesInto": {
       "advanced-mechanical-components": 1,
       "arc-motion-core": 1
-    },
-    "wikiUses": "Projects Expedition 1 (3x) Expedition 5 (3x) Trophy Display (10x)"
+    }
   },
   {
     "id": "magnetron",
@@ -4982,9 +4948,8 @@
     "recipe": null,
     "recyclesInto": {
       "magnetic-accelerator": 1,
-      "steel-spring": 1
-    },
-    "wikiUses": "Quests Snap And Salvage (1x)"
+      "spring": 1
+    }
   },
   {
     "id": "marano-market-buisness-card",
@@ -5024,10 +4989,9 @@
     "updatedAt": "2026-06-29T16:24:07.173526+00:00",
     "recipe": null,
     "recyclesInto": {
-      "magnetic-accelerator": 1,
-      "power-rod": 1
-    },
-    "wikiUses": "Projects Trophy Display (3x)"
+      "power-rod": 1,
+      "magnetic-accelerator": 1
+    }
   },
   {
     "id": "mechanical-components",
@@ -5041,13 +5005,12 @@
     "updatedAt": "2026-06-29T16:24:07.289384+00:00",
     "recipe": {
       "metal-parts": 7,
-      "rubber-parts": 3
+      "rubber-parts-recipe": 3
     },
     "recyclesInto": {
       "metal-parts": 3,
-      "rubber-parts": 2
-    },
-    "wikiUses": "Workshop Gunsmith 2 (5x) Projects Expedition 5 (20x)"
+      "rubber-parts-recipe": 2
+    }
   },
   {
     "id": "medium-ammo",
@@ -5060,8 +5023,8 @@
     "craftBench": "Workbench",
     "updatedAt": "2026-06-29T16:24:07.403726+00:00",
     "recipe": {
-      "chemicals": 2,
-      "metal-parts": 3
+      "metal-parts": 3,
+      "chemicals": 2
     },
     "recyclesInto": null
   },
@@ -5073,11 +5036,9 @@
     "value": 700,
     "weightKg": 0.4,
     "stackSize": 5,
-    "craftBench": "refiner",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:07.51859+00:00",
-    "recipe": {
-      "simple-gun-parts": 4
-    },
+    "recipe": null,
     "recyclesInto": {
       "simple-gun-parts": 2
     }
@@ -5139,8 +5100,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:07.868988+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Workshop Gunsmith 1 (20x) Refiner 1 (60x) Projects Expedition 1 (150x) Expedition 2 (150x) Expedition 3 (150x) Expedition 4 (150x) Expedition 5 (150x)"
+    "recyclesInto": null
   },
   {
     "id": "microscope",
@@ -5186,11 +5146,11 @@
     "updatedAt": "2026-06-29T16:24:08.270188+00:00",
     "recipe": {
       "mechanical-components": 2,
-      "steel-spring": 2
+      "spring": 2
     },
     "recyclesInto": {
       "mechanical-components": 1,
-      "steel-spring": 1
+      "spring": 1
     }
   },
   {
@@ -5222,8 +5182,7 @@
     "recyclesInto": {
       "mechanical-components": 2,
       "oil": 2
-    },
-    "wikiUses": "Workshop Refiner 3 (3x)"
+    }
   },
   {
     "id": "mushroom",
@@ -5236,8 +5195,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:08.619024+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Workshop Mushroom 5 (12x)"
+    "recyclesInto": null
   },
   {
     "id": "music-album",
@@ -5277,7 +5235,7 @@
     "updatedAt": "2026-06-29T16:24:08.968899+00:00",
     "recipe": {
       "metal-parts": 6,
-      "wires": 1
+      "wires-recipe": 1
     },
     "recyclesInto": {
       "metal-parts": 5
@@ -5291,15 +5249,15 @@
     "value": 2000,
     "weightKg": 0.5,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:09.082879+00:00",
     "recipe": {
       "mechanical-components": 2,
-      "wires": 4
+      "wires-recipe": 4
     },
     "recyclesInto": {
       "mechanical-components": 1,
-      "wires": 1
+      "wires-recipe": 1
     }
   },
   {
@@ -5323,15 +5281,15 @@
     "value": 5000,
     "weightKg": 0.75,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:09.199092+00:00",
     "recipe": {
       "mod-components": 2,
-      "wires": 8
+      "wires-recipe": 8
     },
     "recyclesInto": {
       "mod-components": 1,
-      "wires": 2
+      "wires-recipe": 2
     }
   },
   {
@@ -5355,12 +5313,9 @@
     "value": 640,
     "weightKg": 0.3,
     "stackSize": 3,
-    "craftBench": "in_raid",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:09.544269+00:00",
-    "recipe": {
-      "plastic-parts": 2,
-      "speaker-component": 1
-    },
+    "recipe": null,
     "recyclesInto": {
       "speaker-component": 1
     }
@@ -5393,8 +5348,7 @@
     "recipe": null,
     "recyclesInto": {
       "chemicals": 3
-    },
-    "wikiUses": "Projects Expedition 4 (25x)"
+    }
   },
   {
     "id": "olives",
@@ -5407,9 +5361,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:09.888136+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "assorted-seeds": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "orange-camo-origin-outfit",
@@ -5450,7 +5402,7 @@
     "recipe": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 3,
-      "wires": 7
+      "wires-recipe": 7
     },
     "recyclesInto": {
       "advanced-mechanical-components": 1,
@@ -5467,9 +5419,13 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:24:10.269095+00:00",
-    "recipe": null,
+    "recipe": {
+      "osprey-i": 1,
+      "advanced-mechanical-components": 1,
+      "medium-gun-parts": 2
+    },
     "recyclesInto": {
-      "advanced-mechanical-components": 2,
+      "advanced-mechanical-components": 1,
       "medium-gun-parts": 2
     }
   },
@@ -5483,7 +5439,11 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:24:10.38651+00:00",
-    "recipe": null,
+    "recipe": {
+      "osprey-ii": 1,
+      "advanced-mechanical-components": 1,
+      "medium-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 3
@@ -5499,7 +5459,11 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:24:10.504275+00:00",
-    "recipe": null,
+    "recipe": {
+      "osprey-iii": 1,
+      "advanced-mechanical-components": 2,
+      "medium-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "medium-gun-parts": 3
@@ -5516,12 +5480,12 @@
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:24:10.746507+00:00",
     "recipe": {
-      "duct-tape": 5,
-      "mod-components": 2
+      "mod-components": 2,
+      "duct-tape-recipe": 5
     },
     "recyclesInto": {
-      "duct-tape": 1,
-      "mod-components": 1
+      "mod-components": 1,
+      "duct-tape-recipe": 1
     }
   },
   {
@@ -5613,7 +5577,7 @@
     "name": "Pilgrim's Peak Security Code",
     "type": "Key",
     "rarity": "common",
-    "value": 100,
+    "value": 0,
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
@@ -5632,8 +5596,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:11.674514+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Workshop Gear Bench 1 (25x) Utility Station 1 (50x) Projects Expedition 2 (200x) Expedition 5 (100x)"
+    "recyclesInto": null
   },
   {
     "id": "playing-cards",
@@ -5676,10 +5639,9 @@
     "updatedAt": "2026-06-29T16:24:12.023458+00:00",
     "recipe": null,
     "recyclesInto": {
-      "arc-alloy": 1,
-      "crude-explosives": 1
-    },
-    "wikiUses": "Workshop Explosives Station 2 (5x) Projects Trophy Display (15x)"
+      "crude-explosives": 1,
+      "arc-alloy": 1
+    }
   },
   {
     "id": "portable-television",
@@ -5694,9 +5656,8 @@
     "recipe": null,
     "recyclesInto": {
       "battery": 2,
-      "wires": 6
-    },
-    "wikiUses": "Quests Movie Night (1x) Projects Expedition 4 (1x)"
+      "wires-recipe": 6
+    }
   },
   {
     "id": "poster-natural-wonder",
@@ -5737,7 +5698,7 @@
     "recipe": null,
     "recyclesInto": {
       "battery": 2,
-      "wires": 2
+      "wires-recipe": 2
     }
   },
   {
@@ -5752,9 +5713,8 @@
     "updatedAt": "2026-06-29T16:24:12.671002+00:00",
     "recipe": null,
     "recyclesInto": {
-      "wires": 4
-    },
-    "wikiUses": "Workshop Gear Bench 2 (3x)"
+      "wires-recipe": 4
+    }
   },
   {
     "id": "powered-descender",
@@ -5764,12 +5724,9 @@
     "value": 10000,
     "weightKg": 5,
     "stackSize": 1,
-    "craftBench": "utility_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:12.787052+00:00",
-    "recipe": {
-      "power-rod": 1,
-      "turbine-compressor": 1
-    },
+    "recipe": null,
     "recyclesInto": {
       "advanced-electrical-components": 1,
       "arc-circuitry": 2
@@ -5799,14 +5756,13 @@
     "craftBench": "Refiner",
     "updatedAt": "2026-06-29T16:24:13.032421+00:00",
     "recipe": {
-      "advanced-electrical-components": 2,
-      "arc-circuitry": 2
+      "arc-circuitry": 2,
+      "advanced-electrical-components": 2
     },
     "recyclesInto": {
       "advanced-electrical-components": 1,
       "arc-circuitry": 1
-    },
-    "wikiUses": "Quests Tribute To Toledo (1x)"
+    }
   },
   {
     "id": "prickly-pear",
@@ -5836,7 +5792,7 @@
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 1,
-      "wires": 1
+      "wires-recipe": 1
     }
   },
   {
@@ -5852,7 +5808,7 @@
     "recipe": null,
     "recyclesInto": {
       "processor": 1,
-      "wires": 2
+      "wires-recipe": 2
     }
   },
   {
@@ -5863,12 +5819,9 @@
     "value": 470,
     "weightKg": 0.25,
     "stackSize": 3,
-    "craftBench": "explosives_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:13.496096+00:00",
-    "recipe": {
-      "crude-explosives": 1,
-      "wires": 1
-    },
+    "recipe": null,
     "recyclesInto": {
       "chemicals": 6
     }
@@ -5900,8 +5853,7 @@
     "recyclesInto": {
       "magnetic-accelerator": 1,
       "power-rod": 1
-    },
-    "wikiUses": "Projects Trophy Display (3x)"
+    }
   },
   {
     "id": "radio",
@@ -5915,10 +5867,9 @@
     "updatedAt": "2026-06-29T16:24:13.850639+00:00",
     "recipe": null,
     "recyclesInto": {
-      "sensors": 1,
+      "sensors-recipe": 1,
       "speaker-component": 1
-    },
-    "wikiUses": "Projects Expedition 5 (2x)"
+    }
   },
   {
     "id": "radio-relay",
@@ -5932,7 +5883,7 @@
     "updatedAt": "2026-06-29T16:24:13.979366+00:00",
     "recipe": null,
     "recyclesInto": {
-      "sensors": 2,
+      "sensors-recipe": 2,
       "speaker-component": 2
     }
   },
@@ -5957,14 +5908,11 @@
     "value": 2000,
     "weightKg": 0.01,
     "stackSize": 1,
-    "craftBench": [
-      "in_raid",
-      "utility_bench"
-    ],
+    "craftBench": null,
     "updatedAt": "2026-07-28T08:02:52.934198+00:00",
     "recipe": {
       "advanced-electrical-components": 1,
-      "sensors": 3
+      "sensors-recipe": 3
     },
     "recyclesInto": null
   },
@@ -5973,7 +5921,7 @@
     "name": "Raider's Refuge Security Code",
     "type": "Key",
     "rarity": "common",
-    "value": 100,
+    "value": 0,
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
@@ -6004,8 +5952,15 @@
     "stackSize": 1,
     "craftBench": "Gunsmith II",
     "updatedAt": "2026-06-29T16:24:14.679203+00:00",
-    "recipe": null,
-    "recyclesInto": null
+    "recipe": {
+      "advanced-mechanical-components": 2,
+      "heavy-gun-parts": 3,
+      "canister": 5
+    },
+    "recyclesInto": {
+      "advanced-mechanical-components": 1,
+      "heavy-gun-parts": 2
+    }
   },
   {
     "id": "rascal-blueprint",
@@ -6025,12 +5980,15 @@
     "name": "Rascal II ",
     "type": "Weapon",
     "rarity": "rare",
-    "value": 10000,
+    "value": 0,
     "weightKg": 4,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-08-01T09:15:44.29521+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 1,
+      "heavy-gun-parts": 1
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "heavy-gun-parts": 2
@@ -6041,12 +5999,15 @@
     "name": "Rascal III",
     "type": "Weapon",
     "rarity": "rare",
-    "value": 13000,
+    "value": 0,
     "weightKg": 4,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-08-01T09:16:27.798974+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 1,
+      "heavy-gun-parts": 1
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "heavy-gun-parts": 3
@@ -6057,29 +6018,19 @@
     "name": "Rascal IV",
     "type": "Weapon",
     "rarity": "rare",
-    "value": 17000,
+    "value": 0,
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "Gunsmith II",
     "updatedAt": "2026-08-01T09:17:04.17509+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 2,
+      "heavy-gun-parts": 1
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "heavy-gun-parts": 3
     }
-  },
-  {
-    "id": "rattler-blueprint",
-    "name": "Rattler Blueprint",
-    "type": "Blueprint",
-    "rarity": "legendary",
-    "value": 5000,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "2026-08-01T09:01:19.718164+00:00",
-    "recipe": null,
-    "recyclesInto": null
   },
   {
     "id": "rattler-i",
@@ -6093,7 +6044,7 @@
     "updatedAt": "2026-06-29T16:24:15.273343+00:00",
     "recipe": {
       "metal-parts": 16,
-      "rubber-parts": 12
+      "rubber-parts-recipe": 12
     },
     "recyclesInto": {
       "metal-parts": 8
@@ -6109,7 +6060,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:24:15.387492+00:00",
-    "recipe": null,
+    "recipe": {
+      "rattler-i": 1,
+      "metal-parts": 10,
+      "rubber-parts-recipe": 10
+    },
     "recyclesInto": {
       "metal-parts": 12
     }
@@ -6124,7 +6079,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:24:15.503846+00:00",
-    "recipe": null,
+    "recipe": {
+      "rattler-ii": 1,
+      "mechanical-components": 3,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 3,
       "simple-gun-parts": 1
@@ -6140,7 +6099,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:24:15.618866+00:00",
-    "recipe": null,
+    "recipe": {
+      "mechanical-components": 3,
+      "simple-gun-parts": 1,
+      "rattler-iii": 1
+    },
     "recyclesInto": {
       "mechanical-components": 4,
       "simple-gun-parts": 2
@@ -6182,11 +6145,9 @@
     "value": 150,
     "weightKg": 0.15,
     "stackSize": 5,
-    "craftBench": "utility_bench",
+    "craftBench": null,
     "updatedAt": "2026-07-28T07:57:14.336194+00:00",
-    "recipe": {
-      "chemicals": 3
-    },
+    "recipe": null,
     "recyclesInto": {
       "chemicals": 1
     }
@@ -6222,7 +6183,7 @@
     "name": "Reinforced Reception Security Code",
     "type": "Key",
     "rarity": "common",
-    "value": 100,
+    "value": 0,
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
@@ -6243,7 +6204,7 @@
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 7,
-      "sensors": 1
+      "sensors-recipe": 1
     }
   },
   {
@@ -6254,15 +6215,12 @@
     "value": 270,
     "weightKg": 0.2,
     "stackSize": 3,
-    "craftBench": "utility_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:16.550827+00:00",
-    "recipe": {
-      "chemicals": 2,
-      "rubber-parts": 4
-    },
+    "recipe": null,
     "recyclesInto": {
       "chemicals": 1,
-      "rubber-parts": 1
+      "rubber-parts-recipe": 1
     }
   },
   {
@@ -6308,7 +6266,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:24:16.901126+00:00",
-    "recipe": null,
+    "recipe": {
+      "renegade-i": 1,
+      "advanced-mechanical-components": 1,
+      "medium-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 2
@@ -6324,10 +6286,14 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:24:17.018171+00:00",
-    "recipe": null,
+    "recipe": {
+      "renegade-ii": 1,
+      "advanced-mechanical-components": 1,
+      "medium-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
-      "medium-gun-parts": 3
+      "medium-gun-parts": 2
     }
   },
   {
@@ -6340,7 +6306,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:24:17.136832+00:00",
-    "recipe": null,
+    "recipe": {
+      "renegade-iii": 1,
+      "advanced-mechanical-components": 2,
+      "medium-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "medium-gun-parts": 3
@@ -6517,10 +6487,9 @@
     "updatedAt": "2026-06-29T16:24:18.688712+00:00",
     "recipe": null,
     "recyclesInto": {
-      "advanced-electrical-components": 1,
+      "advanced-electrical-components": 2,
       "arc-alloy": 3
-    },
-    "wikiUses": "Workshop Explosives Station 3 (3x) Quests Out of the Shadows (1x) Projects Expedition 5 (3x) Trophy Display (8x)"
+    }
   },
   {
     "id": "rocket-thruster",
@@ -6534,8 +6503,8 @@
     "updatedAt": "2026-06-29T16:24:18.803976+00:00",
     "recipe": null,
     "recyclesInto": {
-      "metal-parts": 6,
-      "synthesized-fuel": 2
+      "synthesized-fuel": 2,
+      "metal-parts": 6
     }
   },
   {
@@ -6595,8 +6564,7 @@
     "recyclesInto": {
       "electrical-components": 2,
       "processor": 2
-    },
-    "wikiUses": "Quests With A View (1x)"
+    }
   },
   {
     "id": "rubber-duck",
@@ -6623,7 +6591,7 @@
     "updatedAt": "2026-06-29T16:24:19.51052+00:00",
     "recipe": null,
     "recyclesInto": {
-      "rubber-parts": 18
+      "rubber-parts-recipe": 18
     }
   },
   {
@@ -6637,8 +6605,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-17T13:44:28.794007+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Workshop Gunsmith 1 (30x) Projects Expedition 1 (200x)"
+    "recyclesInto": null
   },
   {
     "id": "ruined-accordion",
@@ -6652,8 +6619,8 @@
     "updatedAt": "2026-06-29T16:24:19.628504+00:00",
     "recipe": null,
     "recyclesInto": {
-      "rubber-parts": 18,
-      "steel-spring": 3
+      "rubber-parts-recipe": 18,
+      "spring": 3
     }
   },
   {
@@ -6667,10 +6634,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:19.744491+00:00",
     "recipe": null,
-    "recyclesInto": {
-      "plastic-parts": 2,
-      "rubber-parts": 2
-    }
+    "recyclesInto": null
   },
   {
     "id": "ruined-baton",
@@ -6685,7 +6649,7 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 6,
-      "rubber-parts": 3
+      "rubber-parts-recipe": 3
     }
   },
   {
@@ -6731,7 +6695,7 @@
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 10,
-      "rubber-parts": 6
+      "rubber-parts-recipe": 6
     }
   },
   {
@@ -6763,8 +6727,7 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 8
-    },
-    "wikiUses": "Projects Trophy Display (3x)"
+    }
   },
   {
     "id": "rusted-gear",
@@ -6780,8 +6743,7 @@
     "recyclesInto": {
       "mechanical-components": 2,
       "metal-parts": 4
-    },
-    "wikiUses": "Workshop Gunsmith 3 (3x)"
+    }
   },
   {
     "id": "rusted-shut-medical-kit",
@@ -6797,8 +6759,7 @@
     "recyclesInto": {
       "antiseptic": 1,
       "syringe": 2
-    },
-    "wikiUses": "Workshop Medical Lab 3 (3x)"
+    }
   },
   {
     "id": "rusted-tools",
@@ -6813,9 +6774,8 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 8,
-      "steel-spring": 1
-    },
-    "wikiUses": "Workshop Gunsmith 2 (3x)"
+      "spring": 1
+    }
   },
   {
     "id": "rusty-arc-steel",
@@ -6858,10 +6818,7 @@
     "stackSize": 1,
     "craftBench": "Explosives Bench I",
     "updatedAt": "2026-06-29T16:24:21.18012+00:00",
-    "recipe": {
-      "arc-alloy": 2,
-      "crude-explosives": 1
-    },
+    "recipe": null,
     "recyclesInto": {
       "crude-explosives": 1
     }
@@ -6892,9 +6849,8 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 1,
-      "wires": 1
-    },
-    "wikiUses": "Projects Expedition 1 (20x)"
+      "wires-recipe": 1
+    }
   },
   {
     "id": "sentinel-part",
@@ -6909,9 +6865,8 @@
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 2,
-      "mechanical-components": 2
-    },
-    "wikiUses": "Workshop Gunsmith 3 (4x)"
+      "mechanical-components": 3
+    }
   },
   {
     "id": "sextant",
@@ -6934,12 +6889,9 @@
     "value": 1000,
     "weightKg": 0.2,
     "stackSize": 1,
-    "craftBench": "in_raid",
+    "craftBench": null,
     "updatedAt": "2026-07-28T07:58:38.404863+00:00",
-    "recipe": {
-      "assorted-seeds": 7,
-      "canister": 1
-    },
+    "recipe": null,
     "recyclesInto": {
       "plastic-parts": 10
     }
@@ -6955,11 +6907,11 @@
     "craftBench": "Equipment Bench",
     "updatedAt": "2026-06-17T13:42:26.115797+00:00",
     "recipe": {
-      "arc-powercell": 1,
-      "rubber-parts": 5
+      "rubber-parts-recipe": 5,
+      "arc-powercell": 1
     },
     "recyclesInto": {
-      "rubber-parts": 4
+      "rubber-parts-recipe": 4
     }
   },
   {
@@ -6973,8 +6925,8 @@
     "craftBench": "Workbench",
     "updatedAt": "2026-06-29T16:24:21.768644+00:00",
     "recipe": {
-      "chemicals": 2,
-      "metal-parts": 3
+      "metal-parts": 3,
+      "chemicals": 2
     },
     "recyclesInto": null
   },
@@ -6990,7 +6942,7 @@
     "updatedAt": "2026-06-29T16:24:21.887365+00:00",
     "recipe": {
       "metal-parts": 6,
-      "wires": 1
+      "wires-recipe": 1
     },
     "recyclesInto": {
       "metal-parts": 5
@@ -7004,15 +6956,15 @@
     "value": 2000,
     "weightKg": 0.5,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:22.012067+00:00",
     "recipe": {
       "mechanical-components": 2,
-      "wires": 4
+      "wires-recipe": 4
     },
     "recyclesInto": {
       "mechanical-components": 1,
-      "wires": 1
+      "wires-recipe": 1
     }
   },
   {
@@ -7036,15 +6988,15 @@
     "value": 5000,
     "weightKg": 0.75,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:22.131257+00:00",
     "recipe": {
       "mod-components": 2,
-      "wires": 8
+      "wires-recipe": 8
     },
     "recyclesInto": {
       "mod-components": 1,
-      "wires": 2
+      "wires-recipe": 2
     }
   },
   {
@@ -7070,7 +7022,9 @@
     "stackSize": 5,
     "craftBench": null,
     "updatedAt": "2026-08-01T09:18:36.768295+00:00",
-    "recipe": null,
+    "recipe": {
+      "simple-gun-parts": 2
+    },
     "recyclesInto": null
   },
   {
@@ -7081,15 +7035,15 @@
     "value": 5000,
     "weightKg": 0.5,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:22.59267+00:00",
     "recipe": {
-      "mod-components": 2,
-      "wires": 8
+      "mod-components": 1,
+      "wires-recipe": 9
     },
     "recyclesInto": {
       "mod-components": 1,
-      "wires": 1
+      "wires-recipe": 1
     }
   },
   {
@@ -7121,8 +7075,8 @@
       "voltage-converter": 1
     },
     "recyclesInto": {
-      "electrical-components": 1,
-      "voltage-converter": 1
+      "battery": 2,
+      "electrical-components": 1
     }
   },
   {
@@ -7150,7 +7104,7 @@
     "updatedAt": "2026-06-29T16:24:23.061528+00:00",
     "recipe": {
       "crude-explosives": 1,
-      "steel-spring": 2
+      "spring": 2
     },
     "recyclesInto": {
       "crude-explosives": 1,
@@ -7169,10 +7123,9 @@
     "updatedAt": "2026-06-29T16:24:23.181539+00:00",
     "recipe": null,
     "recyclesInto": {
-      "arc-alloy": 2,
-      "mechanical-components": 2
-    },
-    "wikiUses": "Projects Expedition 2 (10x) Trophy Display (5x)"
+      "arc-alloy": 3,
+      "mechanical-components": 3
+    }
   },
   {
     "id": "signal-amplifier",
@@ -7201,13 +7154,10 @@
     "craftBench": "Gunsmith I",
     "updatedAt": "2026-07-28T07:59:17.329513+00:00",
     "recipe": {
-      "mechanical-components": 2,
-      "wires": 4
+      "wires-recipe": 4,
+      "mechanical-components": 2
     },
-    "recyclesInto": {
-      "mechanical-components": 1,
-      "wires": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "silencer-i-recipe",
@@ -7230,15 +7180,15 @@
     "value": 5000,
     "weightKg": 0.5,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:23.532067+00:00",
     "recipe": {
       "mod-components": 2,
-      "wires": 8
+      "wires-recipe": 8
     },
     "recyclesInto": {
       "mod-components": 1,
-      "wires": 2
+      "wires-recipe": 2
     }
   },
   {
@@ -7267,7 +7217,7 @@
     "recipe": null,
     "recyclesInto": {
       "mod-components": 1,
-      "wires": 3
+      "wires-recipe": 3
     }
   },
   {
@@ -7309,8 +7259,7 @@
     "craftBench": null,
     "updatedAt": "2026-08-01T09:09:12.4705+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Projects Expedition 4 (2x)"
+    "recyclesInto": null
   },
   {
     "id": "smoke-grenade",
@@ -7323,8 +7272,8 @@
     "craftBench": "Utility Bench 1 or Basic Bench",
     "updatedAt": "2026-06-29T16:24:24.349586+00:00",
     "recipe": {
-      "canister": 1,
-      "chemicals": 14
+      "chemicals": 14,
+      "canister": 1
     },
     "recyclesInto": {
       "canister": 1,
@@ -7352,14 +7301,11 @@
     "value": 640,
     "weightKg": 0.5,
     "stackSize": 3,
-    "craftBench": [
-      "in_raid",
-      "workbench"
-    ],
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:03.690581+00:00",
     "recipe": {
       "smoke-grenade": 1,
-      "wires": 1
+      "wires-recipe": 1
     },
     "recyclesInto": null
   },
@@ -7393,9 +7339,9 @@
     "craftBench": "Utility Bench 3",
     "updatedAt": "2026-06-29T16:24:24.890999+00:00",
     "recipe": {
-      "exodus-modules": 1,
+      "rope": 3,
       "power-rod": 2,
-      "rope": 3
+      "exodus-modules": 1
     },
     "recyclesInto": {
       "power-rod": 1,
@@ -7428,9 +7374,8 @@
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 1,
-      "electrical-components": 1
-    },
-    "wikiUses": "Workshop Utility Station 2 (6x) Quests The Trifecta (2x)"
+      "electrical-components": 2
+    }
   },
   {
     "id": "snowball",
@@ -7510,9 +7455,8 @@
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 2,
-      "rubber-parts": 3
-    },
-    "wikiUses": "Projects Expedition 4 (15x) Expedition 5 (15x)"
+      "rubber-parts-recipe": 3
+    }
   },
   {
     "id": "spectrometer",
@@ -7527,7 +7471,7 @@
     "recipe": null,
     "recyclesInto": {
       "advanced-electrical-components": 1,
-      "sensors": 1
+      "sensors-recipe": 1
     }
   },
   {
@@ -7543,7 +7487,7 @@
     "recipe": null,
     "recyclesInto": {
       "exodus-modules": 1,
-      "sensors": 1
+      "sensors-recipe": 1
     }
   },
   {
@@ -7559,9 +7503,8 @@
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 1,
-      "electrical-components": 1
-    },
-    "wikiUses": "Projects Trophy Display (10x)"
+      "electrical-components": 2
+    }
   },
   {
     "id": "spring-cushion",
@@ -7576,7 +7519,7 @@
     "recipe": null,
     "recyclesInto": {
       "durable-cloth": 2,
-      "steel-spring": 2
+      "spring": 2
     }
   },
   {
@@ -7590,11 +7533,11 @@
     "craftBench": "Gunsmith",
     "updatedAt": "2026-06-29T16:24:26.780624+00:00",
     "recipe": {
-      "duct-tape": 1,
-      "rubber-parts": 7
+      "rubber-parts-recipe": 7,
+      "duct-tape-recipe": 1
     },
     "recyclesInto": {
-      "rubber-parts": 6
+      "rubber-parts-recipe": 6
     }
   },
   {
@@ -7605,14 +7548,14 @@
     "value": 2000,
     "weightKg": 0.5,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-07-28T08:00:40.450962+00:00",
     "recipe": {
-      "duct-tape": 3,
-      "mechanical-components": 2
+      "mechanical-components": 2,
+      "duct-tape-recipe": 3
     },
     "recyclesInto": {
-      "duct-tape": 1,
+      "duct-tape-recipe": 1,
       "mechanical-components": 1
     }
   },
@@ -7637,14 +7580,14 @@
     "value": 5000,
     "weightKg": 0.75,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:27.034621+00:00",
     "recipe": {
-      "duct-tape": 5,
-      "mod-components": 2
+      "mod-components": 2,
+      "duct-tape-recipe": 5
     },
     "recyclesInto": {
-      "duct-tape": 2,
+      "duct-tape-recipe": 2,
       "mod-components": 1
     }
   },
@@ -7666,7 +7609,7 @@
     "name": "Stack of Movie Tapes",
     "type": "Quest Item",
     "rarity": "common",
-    "value": 100,
+    "value": 0,
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
@@ -7700,8 +7643,7 @@
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 2
-    },
-    "wikiUses": "Projects Expedition 1 (15x) Expedition 2 (15x) Expedition 3 (15x)"
+    }
   },
   {
     "id": "stella-montis-archives-key",
@@ -7786,11 +7728,11 @@
     "updatedAt": "2026-06-29T16:24:28.269474+00:00",
     "recipe": {
       "metal-parts": 8,
-      "rubber-parts": 4
+      "rubber-parts-recipe": 4
     },
     "recyclesInto": {
       "metal-parts": 3,
-      "rubber-parts": 2
+      "rubber-parts-recipe": 2
     }
   },
   {
@@ -7803,10 +7745,14 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:24:28.400455+00:00",
-    "recipe": null,
+    "recipe": {
+      "stitcher-i": 1,
+      "metal-parts": 8,
+      "rubber-parts-recipe": 12
+    },
     "recyclesInto": {
       "metal-parts": 6,
-      "rubber-parts": 6
+      "rubber-parts-recipe": 6
     }
   },
   {
@@ -7819,7 +7765,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:24:28.516276+00:00",
-    "recipe": null,
+    "recipe": {
+      "stitcher-ii": 1,
+      "metal-parts": 10,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "metal-parts": 12,
       "simple-gun-parts": 1
@@ -7835,7 +7785,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:24:28.646225+00:00",
-    "recipe": null,
+    "recipe": {
+      "stitcher-iii": 1,
+      "mechanical-components": 3,
+      "simple-gun-parts": 1
+    },
     "recyclesInto": {
       "mechanical-components": 2,
       "simple-gun-parts": 2
@@ -7859,20 +7813,17 @@
     "name": "Surge Coil",
     "type": "Deployable",
     "rarity": "rare",
-    "value": 2100,
+    "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": "Explosives Bench III",
     "updatedAt": "2026-06-29T16:24:28.884158+00:00",
     "recipe": {
       "electrical-components": 1,
-      "hornet-driver": 1,
-      "sensors": 1
+      "sensors-recipe": 1,
+      "hornet-driver": 1
     },
-    "recyclesInto": {
-      "electrical-components": 1,
-      "sensors": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "surge-coil-blueprint",
@@ -7898,8 +7849,8 @@
     "craftBench": "Medical Lab II",
     "updatedAt": "2026-07-28T08:03:57.192374+00:00",
     "recipe": {
-      "advanced-arc-powercell": 1,
-      "electrical-components": 1
+      "electrical-components": 1,
+      "advanced-arc-powercell": 1
     },
     "recyclesInto": {
       "electrical-components": 1
@@ -7917,10 +7868,9 @@
     "updatedAt": "2026-06-29T16:24:29.11516+00:00",
     "recipe": null,
     "recyclesInto": {
-      "arc-alloy": 1,
-      "mechanical-components": 1
-    },
-    "wikiUses": "Workshop Medical Lab 3 (5x) Quests Mixed Signals (1x) Projects Trophy Display (5x)"
+      "arc-alloy": 2,
+      "mechanical-components": 2
+    }
   },
   {
     "id": "synthesized-fuel",
@@ -7934,10 +7884,9 @@
     "updatedAt": "2026-06-29T16:24:29.233006+00:00",
     "recipe": null,
     "recyclesInto": {
-      "chemicals": 1,
-      "oil": 1
-    },
-    "wikiUses": "Workshop Explosives Station 2 (3x)"
+      "oil": 1,
+      "plastic-parts": 1
+    }
   },
   {
     "id": "syringe",
@@ -7953,8 +7902,7 @@
     "recyclesInto": {
       "chemicals": 2,
       "plastic-parts": 3
-    },
-    "wikiUses": "Quests Doctor's Orders (1x)"
+    }
   },
   {
     "id": "tactical-mk-1",
@@ -7968,11 +7916,11 @@
     "updatedAt": "2026-06-29T16:24:29.586864+00:00",
     "recipe": {
       "plastic-parts": 6,
-      "rubber-parts": 6
+      "rubber-parts-recipe": 6
     },
     "recyclesInto": {
       "plastic-parts": 3,
-      "rubber-parts": 3
+      "rubber-parts-recipe": 3
     }
   },
   {
@@ -8008,10 +7956,7 @@
       "advanced-electrical-components": 2,
       "processor": 3
     },
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "processor": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "tactical-mk3-defensive-blueprint",
@@ -8066,16 +8011,13 @@
     "value": 5000,
     "weightKg": 3,
     "stackSize": 1,
-    "craftBench": "equipment_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:30.289457+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
       "processor": 3
     },
-    "recyclesInto": {
-      "advanced-electrical-components": 1,
-      "processor": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "tactical-mk-3-revival-blueprint",
@@ -8098,7 +8040,7 @@
     "value": 5000,
     "weightKg": 4,
     "stackSize": 1,
-    "craftBench": "equipment_bench",
+    "craftBench": null,
     "updatedAt": "2026-08-01T09:15:02.669937+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
@@ -8134,11 +8076,11 @@
     "updatedAt": "2026-06-29T16:24:30.730387+00:00",
     "recipe": {
       "electrical-components": 1,
-      "sensors": 1
+      "sensors-recipe": 1
     },
     "recyclesInto": {
       "plastic-parts": 1,
-      "sensors": 1
+      "sensors-recipe": 1
     }
   },
   {
@@ -8218,7 +8160,7 @@
     "name": "Tellurion",
     "type": "Trinket",
     "rarity": "epic",
-    "value": 7000,
+    "value": 0,
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
@@ -8250,9 +8192,9 @@
     "craftBench": "Weapon Bench 3",
     "updatedAt": "2026-06-29T16:24:31.634427+00:00",
     "recipe": {
-      "exodus-modules": 2,
       "magnetic-accelerator": 1,
-      "medium-gun-parts": 3
+      "medium-gun-parts": 3,
+      "exodus-modules": 2
     },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -8269,7 +8211,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:24:31.771946+00:00",
-    "recipe": null,
+    "recipe": {
+      "tempest-i": 1,
+      "advanced-mechanical-components": 2,
+      "medium-gun-parts": 1
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "medium-gun-parts": 3
@@ -8285,7 +8231,11 @@
     "stackSize": 1,
     "craftBench": "Weapon bench I",
     "updatedAt": "2026-06-29T16:24:31.900596+00:00",
-    "recipe": null,
+    "recipe": {
+      "tempest-ii": 1,
+      "advanced-mechanical-components": 2,
+      "medium-gun-parts": 3
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 4,
       "medium-gun-parts": 4
@@ -8301,7 +8251,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:24:32.235169+00:00",
-    "recipe": null,
+    "recipe": {
+      "tempest-iii": 1,
+      "advanced-mechanical-components": 2,
+      "medium-gun-parts": 3
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 5,
       "medium-gun-parts": 4
@@ -8319,8 +8273,8 @@
     "updatedAt": "2026-06-29T16:24:32.351912+00:00",
     "recipe": null,
     "recyclesInto": {
-      "rubber-parts": 7,
-      "sensors": 1
+      "rubber-parts-recipe": 7,
+      "sensors-recipe": 1
     }
   },
   {
@@ -8337,8 +8291,7 @@
     "recyclesInto": {
       "arc-alloy": 2,
       "chemicals": 2
-    },
-    "wikiUses": "Workshop Medical Lab 2 (8x) Projects Trophy Display (15x)"
+    }
   },
   {
     "id": "toaster",
@@ -8353,9 +8306,8 @@
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 5,
-      "wires": 3
-    },
-    "wikiUses": "Workshop Refiner 2 (3x)"
+      "wires-recipe": 3
+    }
   },
   {
     "id": "torch-ginger",
@@ -8368,7 +8320,9 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:32.726868+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": {
+      "chemicals": 3
+    }
   },
   {
     "id": "torn-blanket",
@@ -8424,7 +8378,7 @@
     "recipe": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 3,
-      "steel-spring": 6
+      "spring": 6
     },
     "recyclesInto": {
       "advanced-mechanical-components": 1,
@@ -8441,7 +8395,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:24:33.20577+00:00",
-    "recipe": null,
+    "recipe": {
+      "torrente-i": 1,
+      "advanced-mechanical-components": 1,
+      "medium-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 2
@@ -8457,7 +8415,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:24:33.32448+00:00",
-    "recipe": null,
+    "recipe": {
+      "torrente-ii": 1,
+      "advanced-mechanical-components": 1,
+      "medium-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 3
@@ -8473,7 +8435,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
     "updatedAt": "2026-06-29T16:24:33.454967+00:00",
-    "recipe": null,
+    "recipe": {
+      "medium-gun-parts": 2,
+      "torrente-iii": 1,
+      "advanced-mechanical-components": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "medium-gun-parts": 3
@@ -8489,8 +8455,14 @@
     "stackSize": 1,
     "craftBench": "Explosives Bench II",
     "updatedAt": "2026-06-29T16:24:33.700898+00:00",
-    "recipe": null,
-    "recyclesInto": null
+    "recipe": {
+      "synthesized-fuel": 1,
+      "crude-explosives": 2,
+      "firefly-burner": 1
+    },
+    "recyclesInto": {
+      "crude-explosives": 2
+    }
   },
   {
     "id": "trailblazer-grenade-blueprint",
@@ -8526,16 +8498,13 @@
     "value": 1000,
     "weightKg": 0.4,
     "stackSize": 3,
-    "craftBench": "explosives_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:33.932625+00:00",
     "recipe": {
       "crude-explosives": 2,
       "processor": 1
     },
-    "recyclesInto": {
-      "chemicals": 1,
-      "processor": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "trigger-nade-recipe",
@@ -8577,8 +8546,7 @@
     "recyclesInto": {
       "arc-circuitry": 1,
       "arc-motion-core": 1
-    },
-    "wikiUses": "Projects Expedition 4 (5x)"
+    }
   },
   {
     "id": "turbo-pump",
@@ -8639,8 +8607,7 @@
     "recyclesInto": {
       "advanced-electrical-components": 1,
       "arc-circuitry": 2
-    },
-    "wikiUses": "Projects Expedition 4 (3x)"
+    }
   },
   {
     "id": "vase",
@@ -8711,11 +8678,12 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:24:35.430216+00:00",
-    "recipe": null,
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 2
-    }
+    "recipe": {
+      "advanced-mechanical-components": 1,
+      "medium-gun-parts": 2,
+      "venator-i": 1
+    },
+    "recyclesInto": null
   },
   {
     "id": "venator-iii",
@@ -8727,11 +8695,12 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:24:35.550224+00:00",
-    "recipe": null,
-    "recyclesInto": {
-      "advanced-mechanical-components": 2,
-      "medium-gun-parts": 3
-    }
+    "recipe": {
+      "venator-ii": 1,
+      "advanced-mechanical-components": 1,
+      "medium-gun-parts": 2
+    },
+    "recyclesInto": null
   },
   {
     "id": "venator-iv",
@@ -8743,7 +8712,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:24:35.666609+00:00",
-    "recipe": null,
+    "recipe": {
+      "venator-iii": 1,
+      "advanced-mechanical-components": 1,
+      "medium-gun-parts": 2
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "medium-gun-parts": 3
@@ -8760,8 +8733,8 @@
     "craftBench": "Gunsmith 1",
     "updatedAt": "2026-06-29T16:24:35.923996+00:00",
     "recipe": {
-      "duct-tape": 1,
-      "plastic-parts": 6
+      "plastic-parts": 6,
+      "duct-tape-recipe": 1
     },
     "recyclesInto": {
       "plastic-parts": 6
@@ -8775,14 +8748,14 @@
     "value": 2000,
     "weightKg": 0.5,
     "stackSize": 1,
-    "craftBench": "weapon_bench",
+    "craftBench": null,
     "updatedAt": "2026-06-29T16:24:36.039972+00:00",
     "recipe": {
-      "duct-tape": 3,
-      "mechanical-components": 2
+      "mechanical-components": 2,
+      "duct-tape-recipe": 3
     },
     "recyclesInto": {
-      "duct-tape": 1,
+      "duct-tape-recipe": 1,
       "mechanical-components": 1
     }
   },
@@ -8810,12 +8783,12 @@
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:24:36.155574+00:00",
     "recipe": {
-      "duct-tape": 5,
-      "mod-components": 2
+      "mod-components": 2,
+      "duct-tape-recipe": 5
     },
     "recyclesInto": {
-      "duct-tape": 2,
-      "mechanical-components": 2
+      "mechanical-components": 2,
+      "duct-tape-recipe": 2
     }
   },
   {
@@ -8842,8 +8815,7 @@
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:36.500981+00:00",
     "recipe": null,
-    "recyclesInto": null,
-    "wikiUses": "Workshop Very Comfortable Pillow 5 (12x)"
+    "recyclesInto": null
   },
   {
     "id": "vintage-steering-wheel",
@@ -8901,14 +8873,11 @@
     "craftBench": "Med Station",
     "updatedAt": "2026-06-29T16:24:36.863567+00:00",
     "recipe": {
-      "antiseptic": 3,
       "canister": 1,
-      "tick-pod": 1
+      "tick-pod": 1,
+      "antiseptic": 3
     },
-    "recyclesInto": {
-      "antiseptic": 1,
-      "canister": 1
-    }
+    "recyclesInto": null
   },
   {
     "id": "vita-spray-recipe",
@@ -8948,10 +8917,9 @@
     "updatedAt": "2026-06-29T16:24:37.215875+00:00",
     "recipe": null,
     "recyclesInto": {
-      "rubber-parts": 1,
-      "wires": 1
-    },
-    "wikiUses": "Projects Expedition 5 (10x)"
+      "rubber-parts-recipe": 1,
+      "wires-recipe": 1
+    }
   },
   {
     "id": "vulcano-blueprint",
@@ -8977,9 +8945,9 @@
     "craftBench": "Weapon Bench 3",
     "updatedAt": "2026-06-29T16:24:37.451467+00:00",
     "recipe": {
-      "exodus-modules": 1,
+      "magnetic-accelerator": 1,
       "heavy-gun-parts": 3,
-      "magnetic-accelerator": 1
+      "exodus-modules": 1
     },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -8996,7 +8964,11 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:24:37.569583+00:00",
-    "recipe": null,
+    "recipe": {
+      "advanced-mechanical-components": 1,
+      "heavy-gun-parts": 2,
+      "vulcano-i": 1
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 2,
       "heavy-gun-parts": 3
@@ -9012,7 +8984,11 @@
     "stackSize": 1,
     "craftBench": "Weapon Bench",
     "updatedAt": "2026-06-29T16:24:37.684782+00:00",
-    "recipe": null,
+    "recipe": {
+      "vulcano-ii": 1,
+      "advanced-mechanical-components": 2,
+      "heavy-gun-parts": 1
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 3,
       "heavy-gun-parts": 4
@@ -9028,7 +9004,11 @@
     "stackSize": 1,
     "craftBench": "Gunsmith III",
     "updatedAt": "2026-06-29T16:24:37.800235+00:00",
-    "recipe": null,
+    "recipe": {
+      "vulcano-iii": 1,
+      "advanced-mechanical-components": 2,
+      "heavy-gun-parts": 3
+    },
     "recyclesInto": {
       "advanced-mechanical-components": 4,
       "heavy-gun-parts": 5
@@ -9059,9 +9039,9 @@
     "updatedAt": "2026-06-29T16:24:38.031698+00:00",
     "recipe": null,
     "recyclesInto": {
-      "arc-alloy": 2
-    },
-    "wikiUses": "Workshop Gunsmith 2 (8x) Quests The Trifecta (2x) Projects Trophy Display (20x)"
+      "arc-alloy": 1,
+      "electrical-components": 1
+    }
   },
   {
     "id": "water-filter",
@@ -9076,7 +9056,7 @@
     "recipe": null,
     "recyclesInto": {
       "canister": 3,
-      "rubber-parts": 2
+      "rubber-parts-recipe": 2
     }
   },
   {
@@ -9165,9 +9145,8 @@
     "updatedAt": "2026-06-29T16:24:38.876578+00:00",
     "recipe": null,
     "recyclesInto": {
-      "rubber-parts": 2
-    },
-    "wikiUses": "Quests After Rain Comes (5x) Clamoring for Attention (3x) Eyes On The Prize (3x) Trash Into Treasure (6x) Projects Expedition 1 (30x) Expedition 2 (25x) Expedition 3 (25x)"
+      "rubber-parts-recipe": 2
+    }
   },
   {
     "id": "wolfpack",
@@ -9182,7 +9161,7 @@
     "recipe": {
       "arc-motion-core": 2,
       "explosive-compound": 1,
-      "rocketeer-driver": 1
+      "rocketeer-part": 1
     },
     "recyclesInto": {
       "arc-motion-core": 1,
@@ -9210,11 +9189,9 @@
     "value": 150,
     "weightKg": 0.15,
     "stackSize": 5,
-    "craftBench": "utility_bench",
+    "craftBench": null,
     "updatedAt": "2026-07-28T07:57:37.777066+00:00",
-    "recipe": {
-      "chemicals": 3
-    },
+    "recipe": null,
     "recyclesInto": {
       "chemicals": 1
     }
@@ -9256,487 +9233,12 @@
     "craftBench": "Utility Station II",
     "updatedAt": "2026-06-29T16:24:39.599111+00:00",
     "recipe": {
-      "mechanical-components": 1,
-      "rope": 1
+      "rope": 1,
+      "mechanical-components": 1
     },
     "recyclesInto": {
       "metal-parts": 1,
       "rope": 1
     }
-  },
-  {
-    "id": "aphelion",
-    "name": "Aphelion",
-    "type": "Special",
-    "rarity": "legendary",
-    "value": 27500,
-    "weightKg": 14,
-    "stackSize": 1,
-    "craftBench": "weapon_bench",
-    "updatedAt": "01/13/2026",
-    "recipe": {
-      "complex-gun-parts": 3,
-      "magnetic-accelerator": 3,
-      "matriarch-reactor": 1
-    },
-    "recyclesInto": {
-      "complex-gun-parts": 1,
-      "magnetic-accelerator": 2
-    }
-  },
-  {
-    "id": "aphelion-blueprint",
-    "name": "Aphelion Blueprint",
-    "type": "Blueprint",
-    "rarity": "common",
-    "value": 5000,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "01/13/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "celeste-journal",
-    "name": "Celeste's Journal",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "06/03/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "colorful-shoes-green",
-    "name": "Colorful Shoes (Green)",
-    "type": "Trinket",
-    "rarity": "epic",
-    "value": 7000,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "06/17/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "colorful-shoes-red",
-    "name": "Colorful Shoes (Red)",
-    "type": "Trinket",
-    "rarity": "rare",
-    "value": 3000,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "06/17/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "colorful-shoes-silver",
-    "name": "Colorful Shoes (Silver)",
-    "type": "Trinket",
-    "rarity": "legendary",
-    "value": 10000,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "06/17/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "damaged-snitch-scanner",
-    "name": "Damaged Snitch Scanner",
-    "type": "Recyclable",
-    "rarity": "common",
-    "value": 659,
-    "weightKg": 0.25,
-    "stackSize": 3,
-    "craftBench": null,
-    "updatedAt": "01/13/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "dodgers-note",
-    "name": "Dodger's Note",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "dusty-film-reel",
-    "name": "Dusty Film Reel",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "06/03/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "espresso-machine-parts",
-    "name": "Espresso Machine Parts",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "experimental-seed-sample",
-    "name": "Experimental Seed Sample",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "expired-security-code",
-    "name": "Expired Security Code",
-    "type": "Key",
-    "rarity": "common",
-    "value": 10,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "05/04/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "first-wave-compass",
-    "name": "First Wave Compass",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "first-wave-rations",
-    "name": "First Wave Rations",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "first-wave-tape",
-    "name": "First Wave Tape",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "hidden-bunker-key",
-    "name": "Hidden Bunker Key",
-    "type": "Key",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "05/04/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "library-book",
-    "name": "Book",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "major-aivas-mementos",
-    "name": "Major Aiva's Mementos",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "major-aivas-patch",
-    "name": "Major Aiva's Patch",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "06/03/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "moisture-meter",
-    "name": "Moisture Meter",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "nutrient-meter",
-    "name": "Nutrient Meter",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "official-shutdown-documentation",
-    "name": "Official Shutdown Documentation",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "old-world-books",
-    "name": "Old World Books",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "06/03/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "possibly-toxic-plant",
-    "name": "Possibly Toxic Plant",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "poster-of-natural-wonders",
-    "name": "Poster of Natural Wonders",
-    "type": "Trinket",
-    "rarity": "uncommon",
-    "value": 2000,
-    "weightKg": 0.3,
-    "stackSize": 3,
-    "craftBench": null,
-    "updatedAt": "11/01/2025",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "precision-gimbal",
-    "name": "Precision Gimbal",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/28/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "project-heartwood-blueprints",
-    "name": "Project Heartwood Blueprints",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "06/03/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "raider-flag",
-    "name": "Raider Flag",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "05/23/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "rascal-i",
-    "name": "Rascal I",
-    "type": "Special",
-    "rarity": "rare",
-    "value": 7000,
-    "weightKg": 4,
-    "stackSize": 1,
-    "craftBench": "weapon_bench",
-    "updatedAt": "05/19/2026",
-    "recipe": {
-      "advanced-mechanical-components": 2,
-      "canister": 5,
-      "heavy-gun-parts": 3
-    },
-    "recyclesInto": {
-      "advanced-mechanical-components": 1,
-      "heavy-gun-parts": 2
-    }
-  },
-  {
-    "id": "riven-tides-classified-records-keycard",
-    "name": "Riven Tides Classified Records Keycard",
-    "type": "Key",
-    "rarity": "uncommon",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "05/02/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "scout-patrol-note",
-    "name": "Scout Patrol Note",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "secret-meeting-info",
-    "name": "Secret Meeting Info",
-    "type": "Trinket",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.5,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "04/14/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "seed-vault-box-key",
-    "name": "Seed Vault Box Key",
-    "type": "Key",
-    "rarity": "common",
-    "value": 100,
-    "weightKg": 0.25,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "05/04/2026",
-    "recipe": null,
-    "recyclesInto": null
-  },
-  {
-    "id": "trailblazer",
-    "name": "Trailblazer",
-    "type": "Quick Use",
-    "rarity": "rare",
-    "value": 2200,
-    "weightKg": 1,
-    "stackSize": 3,
-    "craftBench": "explosives_bench",
-    "updatedAt": "03/22/2026",
-    "recipe": {
-      "crude-explosives": 2,
-      "firefly-burner": 1,
-      "synthesized-fuel": 1
-    },
-    "recyclesInto": {
-      "crude-explosives": 2
-    }
-  },
-  {
-    "id": "trailblazer-blueprint",
-    "name": "Trailblazer Blueprint",
-    "type": "Blueprint",
-    "rarity": "common",
-    "value": 5000,
-    "weightKg": 0,
-    "stackSize": 1,
-    "craftBench": null,
-    "updatedAt": "01/13/2026",
-    "recipe": null,
-    "recyclesInto": null
   }
 ]
