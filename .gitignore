@@ -229,6 +229,6 @@ artifacts/
 .token-pilot/
 .kilocode/package-lock.json
 memory/
-.codemogger/
 .serena/
 !.serenal/project.yml
+.codegraph/
