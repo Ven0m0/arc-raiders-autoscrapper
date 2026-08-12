@@ -232,3 +232,4 @@ memory/
 .serena/
 !.serenal/project.yml
 .codegraph/
+.omc/
