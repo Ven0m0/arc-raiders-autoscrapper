@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 4
 requires-python = "==3.13.*"
 resolution-markers = [
     "platform_machine == 'AMD64' and sys_platform == 'win32'",
@@ -73,8 +73,8 @@ dependencies = [
     { name = "rapidfuzz" },
     { name = "rich" },
     { name = "tessdata-fast-eng" },
-    { name = "tesserocr", version = "2.10.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'linux'" },
     { name = "tesserocr", version = "2.10.0", source = { url = "https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp313-cp313-win_amd64.whl" }, marker = "platform_machine == 'AMD64' and sys_platform == 'win32'" },
+    { name = "tesserocr", version = "2.11.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'linux'" },
     { name = "textual" },
     { name = "uvloop" },
 ]
@@ -114,59 +114,6 @@ dev = [
     { name = "ty" },
     { name = "types-pynput" },
     { name = "vulture" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "basedpyright", marker = "extra == 'dev'", specifier = ">=1.39.3" },
-    { name = "beautifulsoup4", specifier = ">=4.14.3" },
-    { name = "beautifulsoup4", marker = "extra == 'scraper'", specifier = ">=4.14.3" },
-    { name = "deadcode", marker = "extra == 'dev'", specifier = ">=2.4.1" },
-    { name = "httpx", marker = "extra == 'scraper'", specifier = ">=0.28.1" },
-    { name = "httpx", extras = ["http2"], specifier = ">=0.28.1" },
-    { name = "keyring", specifier = ">=25.7.0" },
-    { name = "mss", specifier = ">=10.2.0" },
-    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.20.2" },
-    { name = "numpy", specifier = ">=2.4.4" },
-    { name = "opencv-python-headless", specifier = ">=4.13.0.92" },
-    { name = "opencv-stubs", marker = "extra == 'dev'", specifier = ">=0.1.3" },
-    { name = "orjson", specifier = ">=3.11.8" },
-    { name = "pillow", specifier = ">=12.2.0" },
-    { name = "prek", marker = "extra == 'dev'", specifier = ">=0.4.11" },
-    { name = "pydantic", specifier = ">=2.13.3" },
-    { name = "pydirectinput-rgx", marker = "sys_platform == 'win32'", specifier = ">=2.1.3" },
-    { name = "pynput", marker = "sys_platform == 'linux'", specifier = ">=1.8.1" },
-    { name = "pynput", marker = "sys_platform == 'linux' and extra == 'linux-input'" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.1.1" },
-    { name = "pywinctl", specifier = ">=0.4.1" },
-    { name = "rapidfuzz", specifier = ">=3.14.5" },
-    { name = "rich", specifier = ">=15.0.0" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.16.1" },
-    { name = "tessdata-fast-eng", specifier = ">=1.0.0" },
-    { name = "tesserocr", marker = "sys_platform == 'linux'", specifier = "==2.10.0" },
-    { name = "tesserocr", marker = "python_full_version == '3.13.*' and platform_machine == 'AMD64' and sys_platform == 'win32'", url = "https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp313-cp313-win_amd64.whl" },
-    { name = "textual", specifier = ">=8.2.5" },
-    { name = "tombi", marker = "extra == 'dev'", specifier = ">=1.2.6" },
-    { name = "ty", marker = "extra == 'dev'", specifier = ">=0.0.65" },
-    { name = "types-pynput", marker = "extra == 'dev'", specifier = ">=1.8.1.20260408" },
-    { name = "uvloop", specifier = ">=0.22.1" },
-    { name = "vulture", marker = "extra == 'dev'", specifier = ">=2.16" },
-]
-provides-extras = ["dev", "linux-input", "scraper"]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "basedpyright", specifier = ">=1.39.3" },
-    { name = "deadcode", specifier = ">=2.4.1" },
-    { name = "mypy", specifier = ">=1.20.2" },
-    { name = "opencv-stubs", specifier = ">=0.1.3" },
-    { name = "prek", specifier = ">=0.4.11" },
-    { name = "pytest", specifier = ">=9.1.1" },
-    { name = "ruff", specifier = ">=0.16.1" },
-    { name = "tombi", specifier = ">=1.2.6" },
-    { name = "ty", specifier = ">=0.0.65" },
-    { name = "types-pynput", specifier = ">=1.8.1.20260408" },
-    { name = "vulture", specifier = ">=2.16" },
 ]
 
 [[package]]
@@ -316,15 +263,15 @@ wheels = [
 
 [[package]]
 name = "h2"
-version = "4.3.0"
+version = "4.4.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "hpack" },
     { name = "hyperframe" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1d/17/afa56379f94ad0fe8defd37d6eb3f89a25404ffc71d4d848893d270325fc/h2-4.3.0.tar.gz", hash = "sha256:6c59efe4323fa18b47a632221a1888bd7fde6249819beda254aeca909f221bf1", size = 2152026, upload-time = "2025-08-23T18:12:19.778Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e7/85/7c366e69d84c17bb778fe41419e1fbcce3033d5b7ce29bbffff0a98b859f/h2-4.4.1.tar.gz", hash = "sha256:4e866ffb1a869ae14dd9b5e6beb5c24a13da0495ad72b65925ded182521c1516", size = 2157281, upload-time = "2026-08-03T11:45:09.509Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/69/b2/119f6e6dcbd96f9069ce9a2665e0146588dc9f88f29549711853645e736a/h2-4.3.0-py3-none-any.whl", hash = "sha256:c438f029a25f7945c69e0ccf0fb951dc3f73a5f6412981daee861431b70e2bdd", size = 61779, upload-time = "2025-08-23T18:12:17.779Z" },
+    { url = "https://files.pythonhosted.org/packages/7e/22/e85faf23bd72a92d1921e37d674ca56eb298a3c8be31fdecef0ff2b3aaac/h2-4.4.1-py3-none-any.whl", hash = "sha256:0e25f1462b23c9cb82d9eb02e28bc706dac2a68cb457c6a0d74d63c8a2a5d0e6", size = 62636, upload-time = "2026-08-03T11:44:59.164Z" },
 ]
 
 [[package]]
@@ -3449,6 +3396,17 @@ wheels = [
 [[package]]
 name = "tesserocr"
 version = "2.10.0"
+source = { url = "https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp313-cp313-win_amd64.whl" }
+resolution-markers = [
+    "platform_machine == 'AMD64' and sys_platform == 'win32'",
+]
+wheels = [
+    { url = "https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp313-cp313-win_amd64.whl", hash = "sha256:a7f1a56f2c70095d108304e2e76fd6aebd06a42712cb87b8976d52d1e7faf6d8" },
+]
+
+[[package]]
+name = "tesserocr"
+version = "2.11.0"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "sys_platform == 'linux'",
@@ -3456,22 +3414,11 @@ resolution-markers = [
 dependencies = [
     { name = "cysignals" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ee/af/7d4040c7390cd42410628408fbdea2067c8e5ca3a45d2bffd26c1ffddae4/tesserocr-2.10.0.tar.gz", hash = "sha256:439c7a9f0fd0f6a298aaa746d5f2ccd4eba50db3ebccf500c89a6aa0d59d2999", size = 75915, upload-time = "2026-02-12T11:10:35.752Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/11/33/0d74c9cfc525779bb761a474cd958bbbda057654fec686c05e7a82b8c51b/tesserocr-2.11.0.tar.gz", hash = "sha256:1c1ae89c589fddf3a25dbcc21031aea18bd82259e42ef491c43a44f2bef811b3", size = 76094, upload-time = "2026-08-04T12:26:09.763Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6d/43/25e9aa8ac3bd5af6be0bc0bb83b8b0eba3f13853f925e0b9395be56d2981/tesserocr-2.10.0-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a0e36fd9d0307cc1415e321ac8facb5d00a455a7c37e8e8a086731b406e5c3f8", size = 5187734, upload-time = "2026-02-12T11:10:08.792Z" },
-    { url = "https://files.pythonhosted.org/packages/c1/c7/aef50f5d979ba731378f3b5215e3d8bbdb203835763c5e7ab73679c9ebb8/tesserocr-2.10.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:f5f6a92740c999b03c5b73d83b5e8cb967b82654a90224cccdf9dbf4e5bba566", size = 5488023, upload-time = "2026-02-12T11:10:10.779Z" },
-    { url = "https://files.pythonhosted.org/packages/80/84/a081aae4dc0d24edd26df26d30181f26e291a5594b9db07da73cb9b67010/tesserocr-2.10.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:95144cdb129384fc6e515bef9a89cd4e5b36beb7deeea857741c78336cfc536c", size = 6866179, upload-time = "2026-02-12T11:10:13.505Z" },
-]
-
-[[package]]
-name = "tesserocr"
-version = "2.10.0"
-source = { url = "https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp313-cp313-win_amd64.whl" }
-resolution-markers = [
-    "platform_machine == 'AMD64' and sys_platform == 'win32'",
-]
-wheels = [
-    { url = "https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.10.0-tesseract-5.5.2/tesserocr-2.10.0-cp313-cp313-win_amd64.whl", hash = "sha256:a7f1a56f2c70095d108304e2e76fd6aebd06a42712cb87b8976d52d1e7faf6d8" },
+    { url = "https://files.pythonhosted.org/packages/f5/10/760c4df94727192bca0b39e456e183720ccdae342537263d56b309c7ca6c/tesserocr-2.11.0-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:2276b8eaf4011ba4be3b1890bd9a0e6a9dc707b31adcdb76586079f75b3bd553", size = 5189952, upload-time = "2026-08-04T12:25:45.071Z" },
+    { url = "https://files.pythonhosted.org/packages/70/b7/6b0041a865a42817a63a8667fecd13fd5645bea7444475fe40934b7ddb8b/tesserocr-2.11.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:f6d316b371b1bf9fbd6e3bd43de14974650761e8d0f43b0aeb5f0bceb2e729af", size = 5490246, upload-time = "2026-08-04T12:25:46.832Z" },
+    { url = "https://files.pythonhosted.org/packages/08/8a/689f4c81cece978f257c48e147b5432119bd424e46da68d6413e2810d93f/tesserocr-2.11.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:ed89fde24fc18252efba988a17ec459018174c1deef2efa3f7759a08b7d1b77b", size = 6869246, upload-time = "2026-08-04T12:25:48.574Z" },
 ]
 
 [[package]]
