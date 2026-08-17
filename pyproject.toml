@@ -8,7 +8,7 @@ version = "0.2.0"
 description = "Arc Raiders inventory autoscrapper"
 readme = "README.md"
 keywords = ["ocr", "arc-raiders", "tesseract", "text-recognition"]
-requires-python = ">=3.13,<3.14"
+requires-python = ">=3.14,<3.15"
 dependencies = [
   "mss>=10.2.0",
   "numpy>=2.4.4",
@@ -94,7 +94,7 @@ autoscrapper = [
 [tool.ruff]
 extend-exclude = ["scripts/setup-linux.sh", "scripts/setup-windows.ps1"]
 line-length = 120
-target-version = "py313"
+target-version = "py314"
 fix = true
 show-fixes = true
 src = ["src", "tests", "scripts"]
@@ -122,7 +122,7 @@ addopts = "-v --tb=short"
 log_level = "WARNING"
 
 [tool.basedpyright]
-pythonVersion = "3.13"
+pythonVersion = "3.14"
 typeCheckingMode = "standard"
 reportMissingImports = false
 reportMissingTypeStubs = false
