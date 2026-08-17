@@ -11,7 +11,6 @@
     ":ignoreModulesAndTests",
     "docker:enableMajor",
     "preview:dockerCompose",
-    ":enablePreCommit",
     ":preserveSemverRanges"
   ],
   "automerge": true,
@@ -51,9 +50,6 @@
   "pipenv": {
     "enabled": false
   },
-  "npm": {
-    "managerFilePatterns": ["/.kilo/package.json/"]
-  },
   "postUpdateOptions": ["uvLockUpdate"],
   "packageRules": [
     {
@@ -61,26 +57,26 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["python"],
       "pinDigests": false,
-      "allowedVersions": ">=3.13 <3.14"
+      "allowedVersions": ">=3.14 <3.15"
     },
     {
       "description": "Allow any Python version >=3.13 but exclude 3.14.x series",
       "matchManagers": ["pep621"],
       "matchPackageNames": ["python"],
       "matchDepTypes": ["requires-python"],
-      "allowedVersions": "<3.14"
+      "allowedVersions": "<3.15"
     },
     {
       "description": "Restrict mise Python to 3.13.x, exclude 3.14+",
       "matchManagers": ["mise"],
       "matchPackageNames": ["python"],
-      "allowedVersions": "3.13.x"
+      "allowedVersions": "3.14.x"
     },
     {
       "description": "Restrict Python version to exclude 3.14+ for pyenv, pep723 and custom managers",
       "matchManagers": ["pyenv", "pep723", "custom.regex", "mise"],
       "matchPackageNames": ["python"],
-      "allowedVersions": "<3.14"
+      "allowedVersions": "<3.15"
     },
     {
       "description": "Disable Docker digest pinning",
