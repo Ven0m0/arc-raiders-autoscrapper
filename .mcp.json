@@ -24,13 +24,6 @@
         "LOG": "false"
       }
     },
-    "ast-grep": {
-      "type": "stdio",
-      "command": "bunx",
-      "args": [
-        "@notprolands/ast-grep-mcp@latest"
-      ]
-    },
     "serena": {
       "type": "stdio",
       "command": "uvx",
