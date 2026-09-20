@@ -30,7 +30,7 @@ jobs:
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
         with:
-          version: "2.4.11"
+          version: "2.5.14"
       - name: Run Biome check
         run: biome check --write .
       - name: Check for unexpected changes
