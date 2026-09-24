@@ -723,6 +723,32 @@
     }
   },
   {
+    "id": "banjo",
+    "name": "Banjo",
+    "type": "Gadget",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 1,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-09-23T18:45:33.956932+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "bantam",
+    "name": "Bantam",
+    "type": "Weapon",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 1,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-09-23T20:16:15.812458+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "barricade-kit",
     "name": "Barricade Kit",
     "type": "Quick Use",
@@ -1511,6 +1537,19 @@
     "stackSize": 16,
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:41.966608+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "camera",
+    "name": "Camera",
+    "type": "Gadget",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 1,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-09-23T18:44:17.514635+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3832,6 +3871,19 @@
     "recyclesInto": null
   },
   {
+    "id": "grappling-hook",
+    "name": "Grappling Hook",
+    "type": "Gadget",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 1,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-09-23T20:14:01.056912+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "great-muullein",
     "name": "Great Mullein",
     "type": "Topside Material",
@@ -3954,6 +4006,19 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-06-29T16:23:58.855775+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "harmonica",
+    "name": "Harmonica",
+    "type": "Gadget",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 1,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-09-23T20:08:33.979631+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7848,6 +7913,19 @@
     }
   },
   {
+    "id": "stiletto",
+    "name": "Stiletto",
+    "type": "Weapon",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 1,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-09-23T20:16:56.826041+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "stitcher-i",
     "name": "Stitcher I",
     "type": "Weapon",
@@ -8379,6 +8457,19 @@
       "advanced-mechanical-components": 5,
       "medium-gun-parts": 4
     }
+  },
+  {
+    "id": "tether-launcher",
+    "name": "Tether Launcher",
+    "type": "Gadget",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 1,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-09-23T20:19:56.710814+00:00",
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "thermostat",
@@ -9272,6 +9363,19 @@
     "stackSize": 1,
     "craftBench": null,
     "updatedAt": "2026-06-29T16:24:39.12024+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "yank-grenade",
+    "name": "Yank Grenade",
+    "type": "Gadget",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 1,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-09-23T20:19:31.434873+00:00",
     "recipe": null,
     "recyclesInto": null
   },
