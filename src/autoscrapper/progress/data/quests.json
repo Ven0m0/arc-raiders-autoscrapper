@@ -268,86 +268,6 @@
     "sortOrder": 6137.914214694764
   },
   {
-    "id": "after-rain-comes",
-    "name": "After Rain Comes",
-    "objectives": [
-      "Find the flooded solar panels nearby the Grandioso Apartments",
-      "Repair the solar panels"
-    ],
-    "requirements": [
-      {
-        "id": "8e3a9f13-e8a5-40fc-8b65-0e547cf02061",
-        "item": {
-          "id": "wires-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/wires.webp",
-          "name": "Wires",
-          "rarity": "Uncommon",
-          "item_type": "Topside Material"
-        },
-        "item_id": "wires-recipe",
-        "quantity": 5
-      },
-      {
-        "id": "765988cf-a001-4480-b790-c07466ef4ce9",
-        "item": {
-          "id": "battery",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/battery.webp",
-          "name": "Battery",
-          "rarity": "Uncommon",
-          "item_type": "Topside Material"
-        },
-        "item_id": "battery",
-        "quantity": 2
-      }
-    ],
-    "rewardItemIds": [
-      "antiseptic",
-      "durable-cloth",
-      "blue-light-stick"
-    ],
-    "rewards": [
-      {
-        "id": "b42d4c9b-fbd2-4111-9088-4c7577b22d42",
-        "item": {
-          "id": "antiseptic",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/antiseptic.webp",
-          "name": "Antiseptic",
-          "rarity": "Rare",
-          "item_type": "Refined Material"
-        },
-        "item_id": "antiseptic",
-        "quantity": "3"
-      },
-      {
-        "id": "87628dc0-3f52-4d61-b394-2800300c42d6",
-        "item": {
-          "id": "durable-cloth",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/durable-cloth.webp",
-          "name": "Durable Cloth",
-          "rarity": "Uncommon",
-          "item_type": "Refined Material"
-        },
-        "item_id": "durable-cloth",
-        "quantity": "5"
-      },
-      {
-        "id": "5ee96ac8-8012-45f4-9dcc-8c85422bd916",
-        "item": {
-          "id": "blue-light-stick",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/blue-light-stick.webp",
-          "name": "Blue Light Stick",
-          "rarity": "Common",
-          "item_type": "Quick Use"
-        },
-        "item_id": "blue-light-stick",
-        "quantity": "5"
-      }
-    ],
-    "trader": "Celeste",
-    "xp": 0,
-    "sortOrder": 3001.204857358231
-  },
-  {
     "id": "a-lay-of-the-land",
     "name": "A Lay of the Land",
     "objectives": [
@@ -604,63 +524,6 @@
     "sortOrder": 6051.075499459809
   },
   {
-    "id": "armored-transports",
-    "name": "Armored Transports",
-    "objectives": [
-      "Reach the Checkpoint",
-      "Search the Guard huts for a Armored Patrol Key Card",
-      "Reach the Traffic Tunnel near the Blue Gate Checkpoint",
-      "Find and unlock the rear door of an armored patrol car"
-    ],
-    "requirements": [],
-    "rewardItemIds": [
-      "blue-yellow-aviator-color",
-      "defibrillator",
-      "smoke-grenade"
-    ],
-    "rewards": [
-      {
-        "id": "f2186917-7e65-40fd-a6ea-509d9eb0ab5d",
-        "item": {
-          "id": "blue-yellow-aviator-color",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/blue-yellow-aviator-color.webp",
-          "name": "Blue Yellow (Aviator Color)",
-          "rarity": "Common",
-          "item_type": "Misc"
-        },
-        "item_id": "blue-yellow-aviator-color",
-        "quantity": "1"
-      },
-      {
-        "id": "8e9b4b7c-54ee-4937-9c4c-cd86c6ee933e",
-        "item": {
-          "id": "defibrillator",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/defibrillator.webp",
-          "name": "Defibrillator",
-          "rarity": "Rare",
-          "item_type": "Quick Use"
-        },
-        "item_id": "defibrillator",
-        "quantity": "3"
-      },
-      {
-        "id": "51abfb82-d24a-48d7-acc8-316d8b550f2c",
-        "item": {
-          "id": "smoke-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/smoke-grenade.webp",
-          "name": "Smoke Grenade",
-          "rarity": "Rare",
-          "item_type": "Recyclable"
-        },
-        "item_id": "smoke-grenade",
-        "quantity": "3"
-      }
-    ],
-    "trader": "TianWen",
-    "xp": 0,
-    "sortOrder": 6970.490569947188
-  },
-  {
     "id": "a-symbol-of-unification",
     "name": "A Symbol of Unification",
     "objectives": [
@@ -910,6 +773,143 @@
     "trader": "Celeste",
     "xp": 0,
     "sortOrder": 7482.376892077519
+  },
+  {
+    "id": "after-rain-comes",
+    "name": "After Rain Comes",
+    "objectives": [
+      "Find the flooded solar panels nearby the Grandioso Apartments",
+      "Repair the solar panels"
+    ],
+    "requirements": [
+      {
+        "id": "8e3a9f13-e8a5-40fc-8b65-0e547cf02061",
+        "item": {
+          "id": "wires-recipe",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/wires.webp",
+          "name": "Wires",
+          "rarity": "Uncommon",
+          "item_type": "Topside Material"
+        },
+        "item_id": "wires-recipe",
+        "quantity": 5
+      },
+      {
+        "id": "765988cf-a001-4480-b790-c07466ef4ce9",
+        "item": {
+          "id": "battery",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/battery.webp",
+          "name": "Battery",
+          "rarity": "Uncommon",
+          "item_type": "Topside Material"
+        },
+        "item_id": "battery",
+        "quantity": 2
+      }
+    ],
+    "rewardItemIds": [
+      "antiseptic",
+      "durable-cloth",
+      "blue-light-stick"
+    ],
+    "rewards": [
+      {
+        "id": "b42d4c9b-fbd2-4111-9088-4c7577b22d42",
+        "item": {
+          "id": "antiseptic",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/antiseptic.webp",
+          "name": "Antiseptic",
+          "rarity": "Rare",
+          "item_type": "Refined Material"
+        },
+        "item_id": "antiseptic",
+        "quantity": "3"
+      },
+      {
+        "id": "87628dc0-3f52-4d61-b394-2800300c42d6",
+        "item": {
+          "id": "durable-cloth",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/durable-cloth.webp",
+          "name": "Durable Cloth",
+          "rarity": "Uncommon",
+          "item_type": "Refined Material"
+        },
+        "item_id": "durable-cloth",
+        "quantity": "5"
+      },
+      {
+        "id": "5ee96ac8-8012-45f4-9dcc-8c85422bd916",
+        "item": {
+          "id": "blue-light-stick",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/blue-light-stick.webp",
+          "name": "Blue Light Stick",
+          "rarity": "Common",
+          "item_type": "Quick Use"
+        },
+        "item_id": "blue-light-stick",
+        "quantity": "5"
+      }
+    ],
+    "trader": "Celeste",
+    "xp": 0,
+    "sortOrder": 3001.204857358231
+  },
+  {
+    "id": "armored-transports",
+    "name": "Armored Transports",
+    "objectives": [
+      "Reach the Checkpoint",
+      "Search the Guard huts for a Armored Patrol Key Card",
+      "Reach the Traffic Tunnel near the Blue Gate Checkpoint",
+      "Find and unlock the rear door of an armored patrol car"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "blue-yellow-aviator-color",
+      "defibrillator",
+      "smoke-grenade"
+    ],
+    "rewards": [
+      {
+        "id": "f2186917-7e65-40fd-a6ea-509d9eb0ab5d",
+        "item": {
+          "id": "blue-yellow-aviator-color",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/blue-yellow-aviator-color.webp",
+          "name": "Blue Yellow (Aviator Color)",
+          "rarity": "Common",
+          "item_type": "Misc"
+        },
+        "item_id": "blue-yellow-aviator-color",
+        "quantity": "1"
+      },
+      {
+        "id": "8e9b4b7c-54ee-4937-9c4c-cd86c6ee933e",
+        "item": {
+          "id": "defibrillator",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/defibrillator.webp",
+          "name": "Defibrillator",
+          "rarity": "Rare",
+          "item_type": "Quick Use"
+        },
+        "item_id": "defibrillator",
+        "quantity": "3"
+      },
+      {
+        "id": "51abfb82-d24a-48d7-acc8-316d8b550f2c",
+        "item": {
+          "id": "smoke-grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/smoke-grenade.webp",
+          "name": "Smoke Grenade",
+          "rarity": "Rare",
+          "item_type": "Recyclable"
+        },
+        "item_id": "smoke-grenade",
+        "quantity": "3"
+      }
+    ],
+    "trader": "TianWen",
+    "xp": 0,
+    "sortOrder": 6970.490569947188
   },
   {
     "id": "back-on-top",
@@ -2441,6 +2441,48 @@
     "sortOrder": 1036.91801992278
   },
   {
+    "id": "in-my-image",
+    "name": "In My Image",
+    "objectives": [
+      "Deploy into Stella Montis",
+      "Find and search 3 Androids"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "green-light-stick",
+      "looting-mk-2"
+    ],
+    "rewards": [
+      {
+        "id": "de6c3d8e-49b8-4f2d-8d14-2c4d89d15460",
+        "item": {
+          "id": "green-light-stick",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/green-light-stick.webp",
+          "name": "Green Light Stick",
+          "rarity": "Common",
+          "item_type": "Quick Use"
+        },
+        "item_id": "green-light-stick",
+        "quantity": "5"
+      },
+      {
+        "id": "86fbf4dd-4106-45e0-9ed6-8b77b61c1af2",
+        "item": {
+          "id": "looting-mk-2",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/looting-mk-2.webp",
+          "name": "Looting Mk. 2",
+          "rarity": "Rare",
+          "item_type": "Augment"
+        },
+        "item_id": "looting-mk-2",
+        "quantity": "1"
+      }
+    ],
+    "trader": "Lance",
+    "xp": 0,
+    "sortOrder": 1039.5769392581892
+  },
+  {
     "id": "industrial-espionage",
     "name": "Industrial Espionage",
     "objectives": [
@@ -2508,48 +2550,6 @@
     "trader": "TianWen",
     "xp": 0,
     "sortOrder": 3162.932222187488
-  },
-  {
-    "id": "in-my-image",
-    "name": "In My Image",
-    "objectives": [
-      "Deploy into Stella Montis",
-      "Find and search 3 Androids"
-    ],
-    "requirements": [],
-    "rewardItemIds": [
-      "green-light-stick",
-      "looting-mk-2"
-    ],
-    "rewards": [
-      {
-        "id": "de6c3d8e-49b8-4f2d-8d14-2c4d89d15460",
-        "item": {
-          "id": "green-light-stick",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/green-light-stick.webp",
-          "name": "Green Light Stick",
-          "rarity": "Common",
-          "item_type": "Quick Use"
-        },
-        "item_id": "green-light-stick",
-        "quantity": "5"
-      },
-      {
-        "id": "86fbf4dd-4106-45e0-9ed6-8b77b61c1af2",
-        "item": {
-          "id": "looting-mk-2",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/looting-mk-2.webp",
-          "name": "Looting Mk. 2",
-          "rarity": "Rare",
-          "item_type": "Augment"
-        },
-        "item_id": "looting-mk-2",
-        "quantity": "1"
-      }
-    ],
-    "trader": "Lance",
-    "xp": 0,
-    "sortOrder": 1039.5769392581892
   },
   {
     "id": "into-the-fray",
@@ -5238,7 +5238,7 @@
         "item": {
           "id": "tactical-mk-3-revival",
           "icon": "https://static.metaforge.app/arc-raiders/icons/tactical-mk-3-revival.webp",
-          "name": "Tactical MK. 3 (Revival)",
+          "name": "Tactical Mk. 3 (Revival)",
           "rarity": "Epic",
           "item_type": "Augment"
         },

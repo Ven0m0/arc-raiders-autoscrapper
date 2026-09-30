@@ -1368,6 +1368,19 @@
     }
   },
   {
+    "id": "bronze-statuette",
+    "name": "Bronze Statuette",
+    "type": "Trinket",
+    "rarity": "legendary",
+    "value": 10000,
+    "weightKg": 0.5,
+    "stackSize": 25,
+    "craftBench": null,
+    "updatedAt": "2026-09-29T16:30:54.155241+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "burgerboy-backpack-charm",
     "name": "Burgerboy (Backpack Charm)",
     "type": "Misc",
@@ -1777,15 +1790,15 @@
     "recyclesInto": null
   },
   {
-    "id": "colorful-shoes-rare",
+    "id": "colorful-shoes",
     "name": "Colorful Shoes",
     "type": "Trinket",
-    "rarity": "rare",
-    "value": 3000,
+    "rarity": "legendary",
+    "value": 10000,
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-16T19:36:15.848196+00:00",
+    "updatedAt": "2026-06-16T19:36:55.874323+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1803,15 +1816,15 @@
     "recyclesInto": null
   },
   {
-    "id": "colorful-shoes",
+    "id": "colorful-shoes-rare",
     "name": "Colorful Shoes",
     "type": "Trinket",
-    "rarity": "legendary",
-    "value": 10000,
+    "rarity": "rare",
+    "value": 3000,
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-16T19:36:55.874323+00:00",
+    "updatedAt": "2026-06-16T19:36:15.848196+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1874,7 +1887,7 @@
   },
   {
     "id": "combat-mk3-aggressive-blueprint",
-    "name": "Combat Mk.3 (Aggressive) Blueprint",
+    "name": "Combat Mk. 3 (Aggressive) Blueprint",
     "type": "Blueprint",
     "rarity": "legendary",
     "value": 5000,
@@ -1887,7 +1900,7 @@
   },
   {
     "id": "combat-mk3-flanking",
-    "name": "Combat Mk.3 (Flanking) ",
+    "name": "Combat Mk. 3 (Flanking) ",
     "type": "Augment",
     "rarity": "epic",
     "value": 5000,
@@ -2699,11 +2712,11 @@
     "name": "Elephant Obelisk",
     "type": "Trinket",
     "rarity": "legendary",
-    "value": 9996,
+    "value": 10000,
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-16T19:34:27.65139+00:00",
+    "updatedAt": "2026-09-27T14:32:37.715317+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2834,7 +2847,7 @@
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:23:50.994734+00:00",
+    "updatedAt": "2026-09-26T06:22:01.016752+00:00",
     "recipe": null,
     "recyclesInto": {
       "fabric": 4,
@@ -3230,7 +3243,7 @@
     "weightKg": 0.1,
     "stackSize": 50,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:23:53.57274+00:00",
+    "updatedAt": "2026-09-26T06:22:10.907124+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Workshop Gear Bench 1 (30x) Medical Lab 1 (50x)"
@@ -3560,11 +3573,11 @@
     "name": "Free Loadout Augment",
     "type": "Augment",
     "rarity": "common",
-    "value": 100,
+    "value": 660,
     "weightKg": 1,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:23:56.423446+00:00",
+    "updatedAt": "2026-09-27T14:57:28.956589+00:00",
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 6,
@@ -4180,7 +4193,7 @@
     "weightKg": 0.75,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:23:59.990521+00:00",
+    "updatedAt": "2026-09-27T14:54:27.921601+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 1,
@@ -4814,7 +4827,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": "Refiner",
-    "updatedAt": "2026-06-29T16:24:04.916327+00:00",
+    "updatedAt": "2026-09-26T06:21:37.793096+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4949,7 +4962,7 @@
   },
   {
     "id": "looting-mk-3-cautious",
-    "name": "Looting MK. 3 (Cautious)",
+    "name": "Looting Mk. 3 (Cautious)",
     "type": "Augment",
     "rarity": "epic",
     "value": 5000,
@@ -4968,7 +4981,7 @@
   },
   {
     "id": "looting-mk-3-safekeeper",
-    "name": "Looting MK. 3 (Safekeeper)",
+    "name": "Looting Mk. 3 (Safekeeper)",
     "type": "Augment",
     "rarity": "epic",
     "value": 5000,
@@ -4987,7 +5000,7 @@
   },
   {
     "id": "looting-mk-3-safekeeper-blueprint",
-    "name": "Looting MK. 3 (Safekeeper) Blueprint",
+    "name": "Looting Mk. 3 (Safekeeper) Blueprint",
     "type": "Blueprint",
     "rarity": "legendary",
     "value": 5000,
@@ -5000,7 +5013,7 @@
   },
   {
     "id": "looting-mk-3-survivor",
-    "name": "Looting MK. 3 (Survivor)",
+    "name": "Looting Mk. 3 (Survivor)",
     "type": "Augment",
     "rarity": "epic",
     "value": 5000,
@@ -5019,7 +5032,7 @@
   },
   {
     "id": "looting-mk-3-survivor-blueprint",
-    "name": "Looting MK. 3 (Survivor) Blueprint",
+    "name": "Looting Mk. 3 (Survivor) Blueprint",
     "type": "Blueprint",
     "rarity": "legendary",
     "value": 5000,
@@ -5791,7 +5804,7 @@
     "weightKg": 0.1,
     "stackSize": 50,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:11.674514+00:00",
+    "updatedAt": "2026-09-26T06:22:18.732974+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Workshop Gear Bench 1 (25x) Utility Station 1 (50x) Projects Expedition 2 (200x) Expedition 5 (100x)"
@@ -5954,11 +5967,11 @@
     "name": "Power Rod",
     "type": "Advanced Material",
     "rarity": "epic",
-    "value": 4997,
+    "value": 5000,
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": "Refiner",
-    "updatedAt": "2026-06-29T16:24:13.032421+00:00",
+    "updatedAt": "2026-09-27T14:33:14.956413+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
       "arc-circuitry": 2
@@ -7056,7 +7069,7 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:21.534988+00:00",
+    "updatedAt": "2026-09-27T14:51:28.694232+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 2,
@@ -7693,7 +7706,7 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:26.425276+00:00",
+    "updatedAt": "2026-09-27T14:56:47.382456+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 1,
@@ -8065,7 +8078,7 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-06-29T16:24:29.11516+00:00",
+    "updatedAt": "2026-09-27T14:56:01.390263+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 1,
@@ -8147,7 +8160,7 @@
   },
   {
     "id": "tactical-mk3-defensive",
-    "name": "Tactical Mk.3 (Defensive)",
+    "name": "Tactical Mk. 3 (Defensive)",
     "type": "Augment",
     "rarity": "epic",
     "value": 5000,
@@ -8166,7 +8179,7 @@
   },
   {
     "id": "tactical-mk3-defensive-blueprint",
-    "name": "Tactical MK.3 (Defensive) Blueprint",
+    "name": "Tactical Mk. 3 (Defensive) Blueprint",
     "type": "Blueprint",
     "rarity": "legendary",
     "value": 5000,
@@ -8198,7 +8211,7 @@
   },
   {
     "id": "tacical-mk3-healing-blueprint",
-    "name": "Tactical MK.3 (Healing) Blueprint",
+    "name": "Tactical Mk. 3 (Healing) Blueprint",
     "type": "Blueprint",
     "rarity": "legendary",
     "value": 5000,
@@ -8211,7 +8224,7 @@
   },
   {
     "id": "tactical-mk-3-revival",
-    "name": "Tactical MK. 3 (Revival)",
+    "name": "Tactical Mk. 3 (Revival)",
     "type": "Augment",
     "rarity": "epic",
     "value": 5000,
@@ -8262,7 +8275,7 @@
   },
   {
     "id": "utility-augment-t3-smoke-blueprint",
-    "name": "Tactical MK.3 (Smoke) Blueprint",
+    "name": "Tactical Mk. 3 (Smoke) Blueprint",
     "type": "Blueprint",
     "rarity": "legendary",
     "value": 5000,
