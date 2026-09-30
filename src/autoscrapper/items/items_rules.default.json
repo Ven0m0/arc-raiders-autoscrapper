@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "generatedAt": "2026-09-24T14:02:37.243378Z",
+    "generatedAt": "2026-09-30T14:02:43.668277Z",
     "data": {
-      "lastUpdated": "2026-09-24T14:02:37.232531Z",
+      "lastUpdated": "2026-09-30T14:02:43.656235Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
-      "itemCount": 642,
+      "itemCount": 643,
       "questCount": 100,
       "dataSources": {
         "items": {
@@ -124,7 +124,7 @@
       },
       "hasPriceOverrides": false
     },
-    "itemCount": 642,
+    "itemCount": 643,
     "allQuestsCompleted": true
   },
   "items": [
@@ -1084,6 +1084,16 @@
       ]
     },
     {
+      "id": "bronze-statuette",
+      "name": "Bronze Statuette",
+      "value": 10000,
+      "action": "keep",
+      "analysis": [
+        "Legendary rarity - extremely valuable",
+        "Keep all legendaries"
+      ]
+    },
+    {
       "id": "burgerboy-backpack-charm",
       "name": "Burgerboy (Backpack Charm)",
       "value": 0,
@@ -1496,7 +1506,7 @@
     },
     {
       "id": "combat-mk3-aggressive-blueprint",
-      "name": "Combat Mk.3 (Aggressive) Blueprint",
+      "name": "Combat Mk. 3 (Aggressive) Blueprint",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -1506,7 +1516,7 @@
     },
     {
       "id": "combat-mk3-flanking",
-      "name": "Combat Mk.3 (Flanking) ",
+      "name": "Combat Mk. 3 (Flanking) ",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -2061,7 +2071,7 @@
     {
       "id": "elephant-obelisk",
       "name": "Elephant Obelisk",
-      "value": 9996,
+      "value": 10000,
       "action": "keep",
       "analysis": [
         "Legendary rarity - extremely valuable",
@@ -2706,11 +2716,11 @@
     {
       "id": "free-loadout-augment",
       "name": "Free Loadout Augment",
-      "value": 100,
-      "action": "recycle",
+      "value": 660,
+      "action": "sell",
       "analysis": [
         "Recycles into: 6x Plastic Parts",
-        "Recycle value: Components (360 coins) worth MORE than Item (100 coins)"
+        "Recycle value: Components (360 coins) worth less than Item (660 coins)"
       ]
     },
     {
@@ -3652,7 +3662,7 @@
     },
     {
       "id": "looting-mk-3-cautious",
-      "name": "Looting MK. 3 (Cautious)",
+      "name": "Looting Mk. 3 (Cautious)",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -3663,7 +3673,7 @@
     },
     {
       "id": "looting-mk-3-safekeeper",
-      "name": "Looting MK. 3 (Safekeeper)",
+      "name": "Looting Mk. 3 (Safekeeper)",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -3674,7 +3684,7 @@
     },
     {
       "id": "looting-mk-3-safekeeper-blueprint",
-      "name": "Looting MK. 3 (Safekeeper) Blueprint",
+      "name": "Looting Mk. 3 (Safekeeper) Blueprint",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -3684,7 +3694,7 @@
     },
     {
       "id": "looting-mk-3-survivor",
-      "name": "Looting MK. 3 (Survivor)",
+      "name": "Looting Mk. 3 (Survivor)",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -3695,7 +3705,7 @@
     },
     {
       "id": "looting-mk-3-survivor-blueprint",
-      "name": "Looting MK. 3 (Survivor) Blueprint",
+      "name": "Looting Mk. 3 (Survivor) Blueprint",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -4377,7 +4387,7 @@
     {
       "id": "power-rod",
       "name": "Power Rod",
-      "value": 4997,
+      "value": 5000,
       "action": "keep",
       "analysis": [
         "Used in 3 crafting recipes",
@@ -5947,7 +5957,7 @@
     },
     {
       "id": "tacical-mk3-healing-blueprint",
-      "name": "Tactical MK.3 (Healing) Blueprint",
+      "name": "Tactical Mk. 3 (Healing) Blueprint",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -5989,7 +5999,7 @@
     },
     {
       "id": "tactical-mk-3-revival",
-      "name": "Tactical MK. 3 (Revival)",
+      "name": "Tactical Mk. 3 (Revival)",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -6021,7 +6031,7 @@
     },
     {
       "id": "tactical-mk3-defensive",
-      "name": "Tactical Mk.3 (Defensive)",
+      "name": "Tactical Mk. 3 (Defensive)",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -6032,7 +6042,7 @@
     },
     {
       "id": "tactical-mk3-defensive-blueprint",
-      "name": "Tactical MK.3 (Defensive) Blueprint",
+      "name": "Tactical Mk. 3 (Defensive) Blueprint",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -6423,7 +6433,7 @@
     },
     {
       "id": "utility-augment-t3-smoke-blueprint",
-      "name": "Tactical MK.3 (Smoke) Blueprint",
+      "name": "Tactical Mk. 3 (Smoke) Blueprint",
       "value": 5000,
       "action": "keep",
       "analysis": [
