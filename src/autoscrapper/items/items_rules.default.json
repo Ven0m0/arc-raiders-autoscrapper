@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "generatedAt": "2026-09-30T14:02:43.668277Z",
+    "generatedAt": "2026-10-03T14:48:50.219690Z",
     "data": {
-      "lastUpdated": "2026-09-30T14:02:43.656235Z",
+      "lastUpdated": "2026-10-03T14:48:50.208291Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
-      "itemCount": 643,
+      "itemCount": 638,
       "questCount": 100,
       "dataSources": {
         "items": {
@@ -18,7 +18,7 @@
           "fallback": {
             "repository": "https://github.com/RaidTheory/arcraiders-data",
             "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
-            "supplementalCount": 35,
+            "supplementalCount": 30,
             "error": null
           },
           "arctrackerEnrichment": {
@@ -29,7 +29,7 @@
           },
           "fieldLevelMerge": {
             "enabled": true,
-            "entriesEnriched": 378,
+            "entriesEnriched": 379,
             "sources": [
               "raidtheory-fallback",
               "arctracker"
@@ -124,7 +124,7 @@
       },
       "hasPriceOverrides": false
     },
-    "itemCount": 643,
+    "itemCount": 638,
     "allQuestsCompleted": true
   },
   "items": [
@@ -192,10 +192,11 @@
       "id": "agave-juice",
       "name": "Agave Juice",
       "value": 1800,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -383,17 +384,6 @@
       ]
     },
     {
-      "id": "aphelion-blueprint",
-      "name": "Aphelion Blueprint",
-      "value": 5000,
-      "action": "keep",
-      "analysis": [
-        "Blueprint - valuable for unlocking crafting recipes",
-        "Review carefully before selling or recycling",
-        "Override: treat 'Your Call' as Keep"
-      ]
-    },
-    {
       "id": "aphelion-rifle",
       "name": "Aphelion Rifle",
       "value": 27500,
@@ -405,7 +395,7 @@
     },
     {
       "id": "aphelion-rifle-blueprint",
-      "name": "Aphelion Rifle Blueprint",
+      "name": "Aphelion Blueprint",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -760,10 +750,11 @@
       "id": "binoculars",
       "name": "Binoculars",
       "value": 640,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -813,8 +804,8 @@
       "value": 1600,
       "action": "keep",
       "analysis": [
-        "Used in 1 crafting recipes",
-        "Rare crafting material",
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -1216,7 +1207,7 @@
     },
     {
       "id": "burnt-out-candles",
-      "name": "Burnt-Out Candles",
+      "name": "Burnt-out Candles",
       "value": 640,
       "action": "sell",
       "analysis": [
@@ -1516,7 +1507,7 @@
     },
     {
       "id": "combat-mk3-flanking",
-      "name": "Combat Mk. 3 (Flanking) ",
+      "name": "Combat Mk. 3 (Flanking)",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -1952,12 +1943,13 @@
     },
     {
       "id": "dockmasters-detector",
-      "name": "Dockmaster’s Detector",
+      "name": "Dockmaster's Detector",
       "value": 1000,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -2243,13 +2235,13 @@
     },
     {
       "id": "extended-barrel-i",
-      "name": "Extended Barrel I ",
+      "name": "Extended Barrel I",
       "value": 1000,
       "action": "keep",
       "analysis": [
         "Tier 1 variant - review based on your current loadout",
         "Consider tier and your play style",
-        "Base weapon: Extended Barrel I",
+        "Base weapon: Extended Barrel",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -3456,7 +3448,7 @@
     },
     {
       "id": "lances-mixtape-5th-edition",
-      "name": "Lance's Mixtape (5th Edition)",
+      "name": "Lance's Mixtape (5th edition)",
       "value": 10000,
       "action": "sell",
       "analysis": [
@@ -3517,7 +3509,7 @@
     },
     {
       "id": "leviathans-crown-ship-model",
-      "name": "\"Leviathan's Crown\" Ship Model",
+      "name": "“Leviathan's Crown” Ship Model",
       "value": 10000,
       "action": "keep",
       "analysis": [
@@ -3537,7 +3529,7 @@
     },
     {
       "id": "lidar-scanner",
-      "name": "Lidar Scanner",
+      "name": "LiDAR Scanner",
       "value": 100,
       "action": "sell",
       "analysis": [
@@ -4336,16 +4328,6 @@
     },
     {
       "id": "poster-natural-wonder",
-      "name": "Poster of Natural Wonder",
-      "value": 2000,
-      "action": "sell",
-      "analysis": [
-        "High value (2000 coins)",
-        "No crafting or upgrade use"
-      ]
-    },
-    {
-      "id": "poster-of-natural-wonders",
       "name": "Poster of Natural Wonders",
       "value": 2000,
       "action": "sell",
@@ -4401,8 +4383,8 @@
       "value": 10000,
       "action": "keep",
       "analysis": [
-        "Epic rarity",
-        "May have future use - review carefully",
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -4854,17 +4836,6 @@
     },
     {
       "id": "riven-tides-classifed-records-keycard",
-      "name": "Riven Tides Classifed Records Keycard",
-      "value": 100,
-      "action": "keep",
-      "analysis": [
-        "Key - opens locked areas and containers",
-        "Review based on areas you want to access",
-        "Override: treat 'Your Call' as Keep"
-      ]
-    },
-    {
-      "id": "riven-tides-classified-records-keycard",
       "name": "Riven Tides Classified Records Keycard",
       "value": 100,
       "action": "keep",
@@ -5385,10 +5356,11 @@
       "id": "showstopper",
       "name": "Showstopper",
       "value": 2100,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "Recycles into: 1x Electrical Components, 1x Voltage Converter",
-        "Recycle value: Components (1140 coins) worth less than Item (2100 coins)"
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -5405,10 +5377,11 @@
       "id": "shrapnel-grenade",
       "name": "Shrapnel Grenade",
       "value": 800,
-      "action": "sell",
+      "action": "keep",
       "analysis": [
-        "No immediate use found",
-        "Safe to sell or recycle"
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
+        "Override: treat 'Your Call' as Keep"
       ]
     },
     {
@@ -5525,8 +5498,8 @@
       "value": 1000,
       "action": "keep",
       "analysis": [
-        "Used in 1 crafting recipes",
-        "Rare crafting material",
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -5900,8 +5873,8 @@
       "value": 2100,
       "action": "keep",
       "analysis": [
-        "Rare rarity",
-        "May have future use - review carefully",
+        "Consumable item - grenades, healing items, etc.",
+        "Review based on your current inventory needs",
         "Override: treat 'Your Call' as Keep"
       ]
     },
@@ -6307,7 +6280,7 @@
       ]
     },
     {
-      "id": "trailblazer",
+      "id": "trailblazer-grenade",
       "name": "Trailblazer",
       "value": 2200,
       "action": "keep",
@@ -6318,30 +6291,8 @@
       ]
     },
     {
-      "id": "trailblazer-blueprint",
-      "name": "Trailblazer Blueprint",
-      "value": 5000,
-      "action": "keep",
-      "analysis": [
-        "Blueprint - valuable for unlocking crafting recipes",
-        "Review carefully before selling or recycling",
-        "Override: treat 'Your Call' as Keep"
-      ]
-    },
-    {
-      "id": "trailblazer-grenade",
-      "name": "Trailblazer Grenade",
-      "value": 2200,
-      "action": "keep",
-      "analysis": [
-        "Consumable item - grenades, healing items, etc.",
-        "Review based on your current inventory needs",
-        "Override: treat 'Your Call' as Keep"
-      ]
-    },
-    {
       "id": "trailblazer-grenade-blueprint",
-      "name": "Trailblazer Grenade Blueprint",
+      "name": "Trailblazer Blueprint",
       "value": 5000,
       "action": "keep",
       "analysis": [
@@ -6361,7 +6312,7 @@
     },
     {
       "id": "trigger-nade",
-      "name": "Trigger Nade",
+      "name": "Trigger 'Nade",
       "value": 1000,
       "action": "keep",
       "analysis": [
