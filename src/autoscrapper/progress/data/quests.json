@@ -13,11 +13,11 @@
     ],
     "rewards": [
       {
-        "id": "2c4f3602-baf3-4c8e-a166-22d9c9c07f4c",
+        "id": 0,
         "item": {
           "id": "duct-tape-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/duct-tape.webp",
           "name": "Duct Tape",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/7f3b02ebf62b0090609ba464137f3092b91ba7f3f44b7aa8d8f8769e2f68a393.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -25,11 +25,11 @@
         "quantity": "5"
       },
       {
-        "id": "1bb17890-2c5b-43be-87d6-0a7a4021454c",
+        "id": 1,
         "item": {
           "id": "spring",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/spring.webp",
           "name": "Steel Spring",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/96c07fa1c6e5e42b342a54f86f3258cf69c1d5c3f27bf49ccc79d511fccc38bf.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -37,11 +37,11 @@
         "quantity": "5"
       },
       {
-        "id": "8493c2be-1ebe-48fa-b75f-5bcf046d3ce3",
+        "id": 2,
         "item": {
           "id": "metal-parts",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/metal-parts.webp",
           "name": "Metal Parts",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/5f3d81d62f671bc094dc3b5ac755f60d2c7ff6fbd38ebfe0ab71d626d846729c.png",
           "rarity": "Common",
           "item_type": "Basic Material"
         },
@@ -70,23 +70,23 @@
     ],
     "rewards": [
       {
-        "id": "48ba0f87-b088-4986-bf01-8ab9c8f989e2",
+        "id": 0,
         "item": {
           "id": "advanced-mechanical-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/advanced-mechanical-components.webp",
           "name": "Advanced Mechanical Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f4c5d01a6dd5e4e637a8914dff7b43ed34507a105b829baed5960967461fab0d.png",
           "rarity": "Rare",
-          "item_type": "Advanced Material"
+          "item_type": "Refined Material"
         },
         "item_id": "advanced-mechanical-components",
         "quantity": "3"
       },
       {
-        "id": "804fbd79-f700-4772-8e4d-5ee517c48978",
+        "id": 1,
         "item": {
           "id": "spring",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/spring.webp",
           "name": "Steel Spring",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/96c07fa1c6e5e42b342a54f86f3258cf69c1d5c3f27bf49ccc79d511fccc38bf.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -94,11 +94,11 @@
         "quantity": "10"
       },
       {
-        "id": "e70a65c6-aed4-4042-864c-4d80d865c846",
+        "id": 2,
         "item": {
           "id": "medium-gun-parts",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/medium-gun-parts.webp",
           "name": "Medium Gun Parts",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/40186d5a2191a5a8c06242c8a8465a03abe3133ab1c12739beeaa2be79e870b7.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -125,11 +125,11 @@
     ],
     "rewards": [
       {
-        "id": "f41f3c11-b8b0-4b35-98cb-c6453d19954d",
+        "id": 0,
         "item": {
           "id": "stable-stock-i",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/stable-stock-i.webp",
           "name": "Stable Stock I",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/bf206d74bba78cbe7e4739fe9827f1831cb22ddb1de267bbd6e8ae60c9f972d6.png",
           "rarity": "Common",
           "item_type": "Modification"
         },
@@ -137,11 +137,11 @@
         "quantity": "1"
       },
       {
-        "id": "1be0ffa9-d1b3-4b24-b41e-6f23fcd697ad",
+        "id": 1,
         "item": {
           "id": "extended-light-mag-i",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/extended-light-mag-i.webp",
           "name": "Extended Light Mag I",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/90b6f6fca9bb0be802577e36523dd0e9a622d4cd1b677d7e99f3cf6dea03052f.png",
           "rarity": "Common",
           "item_type": "Modification"
         },
@@ -149,11 +149,11 @@
         "quantity": "1"
       },
       {
-        "id": "6814cc5e-5d70-42c1-9dc4-9b1d1bb6e4af",
+        "id": 2,
         "item": {
           "id": "muzzle-brake-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/muzzle-brake-ii.webp",
           "name": "Muzzle Brake II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/e3ce53319076513a3879386aab647eb59231401929fd27341a30ca2b918841ec.png",
           "rarity": "Uncommon",
           "item_type": "Modification"
         },
@@ -182,23 +182,23 @@
     ],
     "rewards": [
       {
-        "id": "afbea550-a188-4784-b459-1f801b912d36",
+        "id": 0,
         "item": {
           "id": "patchwork-warden-color",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/patchwork-warden-color.webp",
           "name": "Patchwork (Warden Color)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/patchwork-warden-color.webp",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "patchwork-warden-color",
         "quantity": "1"
       },
       {
-        "id": "e30a2278-d2a7-4187-8c47-3f2b5cfc2930",
+        "id": 1,
         "item": {
           "id": "coins",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/coins.webp",
           "name": "Coins",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/coins.webp",
           "rarity": "Common",
           "item_type": "Misc"
         },
@@ -227,11 +227,11 @@
     ],
     "rewards": [
       {
-        "id": "e11f919c-d454-49f0-8654-be84fd2a4471",
+        "id": 0,
         "item": {
           "id": "heavy-fuze-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/heavy-fuze-grenade.webp",
           "name": "Heavy Fuze Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c796c3f134a51ab984cdf1d425d55bcb4af05ee6222dbf842de77621d423be20.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -239,23 +239,23 @@
         "quantity": "3"
       },
       {
-        "id": "81a4d546-de6d-4864-b063-a7454f4bf69d",
+        "id": 1,
         "item": {
           "id": "shrapnel-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/shrapnel-grenade.webp",
           "name": "Shrapnel Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/04670c0362ee114e92db93e6cd99ab0cc7f66b74cbd882ce462af7265cdddeef.png",
           "rarity": "Uncommon",
-          "item_type": "Throwable"
+          "item_type": "Quick Use"
         },
         "item_id": "shrapnel-grenade",
         "quantity": "3"
       },
       {
-        "id": "f76d3f1d-0865-4877-aed7-61a6597ec7ae",
+        "id": 2,
         "item": {
           "id": "snap-blast-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/snap-blast-grenade.webp",
           "name": "Snap Blast Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/9b9e391f487918f4e189a378de15669b4e0ce4bb982acac55b230e1ccf40b92c.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -266,86 +266,6 @@
     "trader": "Apollo",
     "xp": 0,
     "sortOrder": 6137.914214694764
-  },
-  {
-    "id": "after-rain-comes",
-    "name": "After Rain Comes",
-    "objectives": [
-      "Find the flooded solar panels nearby the Grandioso Apartments",
-      "Repair the solar panels"
-    ],
-    "requirements": [
-      {
-        "id": "8e3a9f13-e8a5-40fc-8b65-0e547cf02061",
-        "item": {
-          "id": "wires-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/wires.webp",
-          "name": "Wires",
-          "rarity": "Uncommon",
-          "item_type": "Topside Material"
-        },
-        "item_id": "wires-recipe",
-        "quantity": 5
-      },
-      {
-        "id": "765988cf-a001-4480-b790-c07466ef4ce9",
-        "item": {
-          "id": "battery",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/battery.webp",
-          "name": "Battery",
-          "rarity": "Uncommon",
-          "item_type": "Topside Material"
-        },
-        "item_id": "battery",
-        "quantity": 2
-      }
-    ],
-    "rewardItemIds": [
-      "antiseptic",
-      "durable-cloth",
-      "blue-light-stick"
-    ],
-    "rewards": [
-      {
-        "id": "b42d4c9b-fbd2-4111-9088-4c7577b22d42",
-        "item": {
-          "id": "antiseptic",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/antiseptic.webp",
-          "name": "Antiseptic",
-          "rarity": "Rare",
-          "item_type": "Refined Material"
-        },
-        "item_id": "antiseptic",
-        "quantity": "3"
-      },
-      {
-        "id": "87628dc0-3f52-4d61-b394-2800300c42d6",
-        "item": {
-          "id": "durable-cloth",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/durable-cloth.webp",
-          "name": "Durable Cloth",
-          "rarity": "Uncommon",
-          "item_type": "Refined Material"
-        },
-        "item_id": "durable-cloth",
-        "quantity": "5"
-      },
-      {
-        "id": "5ee96ac8-8012-45f4-9dcc-8c85422bd916",
-        "item": {
-          "id": "blue-light-stick",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/blue-light-stick.webp",
-          "name": "Blue Light Stick",
-          "rarity": "Common",
-          "item_type": "Quick Use"
-        },
-        "item_id": "blue-light-stick",
-        "quantity": "5"
-      }
-    ],
-    "trader": "Celeste",
-    "xp": 0,
-    "sortOrder": 3001.204857358231
   },
   {
     "id": "a-lay-of-the-land",
@@ -365,23 +285,23 @@
     ],
     "rewards": [
       {
-        "id": "3701c5c3-49b9-463a-b934-77239b2847ab",
+        "id": 0,
         "item": {
           "id": "smoke-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/smoke-grenade.webp",
           "name": "Smoke Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/81b720e276f139362d59b6ffa79fc4470634a4d36662772b4dff421ca6d30719.png",
           "rarity": "Rare",
-          "item_type": "Recyclable"
+          "item_type": "Quick Use"
         },
         "item_id": "smoke-grenade",
         "quantity": "2"
       },
       {
-        "id": "e5daf2d5-8a22-4053-8eec-5ac40b598fb2",
+        "id": 1,
         "item": {
           "id": "zipline",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/zipline.webp",
           "name": "Zipline",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2676ef459d89de8b603111c30c7574d64623aeaa78571b3f6b8e77f476a45d81.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -389,11 +309,11 @@
         "quantity": "3"
       },
       {
-        "id": "f3b8b1b2-10e4-425c-b7e6-5aa9dea97c3a",
+        "id": 2,
         "item": {
           "id": "dam-testing-annex-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/dam-testing-annex-key.webp",
           "name": "Dam Testing Annex Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/15751c4b173b7dde5e1da76c76fbce79a459b3d55b94aea0a496f6ff4dc40899.png",
           "rarity": "Rare",
           "item_type": "Key"
         },
@@ -420,11 +340,11 @@
     ],
     "rewards": [
       {
-        "id": "09b44846-db2a-4908-9c09-ef5520b9948a",
+        "id": 0,
         "item": {
           "id": "vita-shot",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/vita-shot.webp",
           "name": "Vita Shot",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1844ef6c22fc27909cd5ccc4e5b3ec411b6e49098c6a32043aa585e9548b562f.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -432,11 +352,11 @@
         "quantity": "1"
       },
       {
-        "id": "16015f74-612a-4539-87bc-7e9d07a11cb7",
+        "id": 1,
         "item": {
           "id": "antiseptic",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/antiseptic.webp",
           "name": "Antiseptic",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c4d0c8aa01f64123e0b8b1ffee347026f9b839b1c177362f6c85b23d8b662738.png",
           "rarity": "Rare",
           "item_type": "Refined Material"
         },
@@ -462,11 +382,11 @@
     ],
     "rewards": [
       {
-        "id": "dae83aa7-2836-4dca-9862-9eaaf92de313",
+        "id": 0,
         "item": {
           "id": "patrol-car-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/patrol-car-key.webp",
           "name": "Patrol Car Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/44b285b2182df33ca85fb76712e553f8c1f7e543bbd913112ad7f6d6636da3d0.png",
           "rarity": "Uncommon",
           "item_type": "Key"
         },
@@ -474,11 +394,11 @@
         "quantity": "1"
       },
       {
-        "id": "9ba4a6b4-dee7-43ed-b4ef-1c2f3a4bc125",
+        "id": 1,
         "item": {
           "id": "door-blocker",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/door-blocker.webp",
           "name": "Door Blocker",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/ca2b4a3b43168542c95cb060092e4693d8b9da68b0752eb13eb3a1bd4259d739.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -504,11 +424,11 @@
     ],
     "rewards": [
       {
-        "id": "eb2b01df-83fc-4c83-ae59-a0d02a5f240a",
+        "id": 0,
         "item": {
           "id": "tactical-mk-3-healing",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/tactical-mk-3-healing.webp",
           "name": "Tactical Mk. 3 (Healing)",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/e6971c65fcfbdff43cc9008bd507c37d5dfd3c5f93ea360c7ea8f8f6391eb3be.png",
           "rarity": "Epic",
           "item_type": "Augment"
         },
@@ -516,11 +436,11 @@
         "quantity": "1"
       },
       {
-        "id": "f574c105-44b4-4b0f-ac66-357bb72c5c9f",
+        "id": 1,
         "item": {
           "id": "surge-shield-recharger",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/surge-shield-recharger.webp",
           "name": "Surge Shield Recharger",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/477345cf41f6fcddf7e8d8de18bf0cf4cf4eca3d73a41030b995ed3f38d6fb36.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -551,11 +471,11 @@
     ],
     "rewards": [
       {
-        "id": "6f40e2c4-cda5-4412-9371-1aa2c6bad557",
+        "id": 0,
         "item": {
           "id": "anvil-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/anvil-ii.webp",
           "name": "Anvil II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1b66f01227d5480212a81d6d7ef0d11cf0f6ee580668b87f6bb46557d4f749b9.png",
           "rarity": "Uncommon",
           "item_type": "Weapon"
         },
@@ -563,11 +483,11 @@
         "quantity": "1"
       },
       {
-        "id": "ed9f9686-3fd4-4659-adb9-d376f3c83d7e",
+        "id": 1,
         "item": {
           "id": "anvil-splitter",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/anvil-splitter.webp",
           "name": "Anvil Splitter",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/dcd53c40f47eaeeccfedb56b8b9d2fe4458fa14e59c32398bb377050689b9d8e.png",
           "rarity": "Legendary",
           "item_type": "Modification"
         },
@@ -575,11 +495,11 @@
         "quantity": "1"
       },
       {
-        "id": "5da94583-1123-4ec1-9cc2-994602efee5d",
+        "id": 2,
         "item": {
           "id": "extended-barrel",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/extended-barrel.webp",
           "name": "Extended Barrel III",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/b145aae2d954220de3ca426e3963d4775e17a5eac150a6455ca8a7b92414a2bc.png",
           "rarity": "Epic",
           "item_type": "Modification"
         },
@@ -587,11 +507,11 @@
         "quantity": "1"
       },
       {
-        "id": "d24f9804-ca0e-4298-a0c0-44b12b861f32",
+        "id": 3,
         "item": {
           "id": "heavy-ammo",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/heavy-ammo.webp",
           "name": "Heavy Ammo",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2b70c72608d811d0285e411a0ab4be1bf79bd301289a2b8010f5a6e95e4d5da9.png",
           "rarity": "Common",
           "item_type": "Ammunition"
         },
@@ -602,63 +522,6 @@
     "trader": "Celeste",
     "xp": 0,
     "sortOrder": 6051.075499459809
-  },
-  {
-    "id": "armored-transports",
-    "name": "Armored Transports",
-    "objectives": [
-      "Reach the Checkpoint",
-      "Search the Guard huts for a Armored Patrol Key Card",
-      "Reach the Traffic Tunnel near the Blue Gate Checkpoint",
-      "Find and unlock the rear door of an armored patrol car"
-    ],
-    "requirements": [],
-    "rewardItemIds": [
-      "blue-yellow-aviator-color",
-      "defibrillator",
-      "smoke-grenade"
-    ],
-    "rewards": [
-      {
-        "id": "f2186917-7e65-40fd-a6ea-509d9eb0ab5d",
-        "item": {
-          "id": "blue-yellow-aviator-color",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/blue-yellow-aviator-color.webp",
-          "name": "Blue Yellow (Aviator Color)",
-          "rarity": "Common",
-          "item_type": "Misc"
-        },
-        "item_id": "blue-yellow-aviator-color",
-        "quantity": "1"
-      },
-      {
-        "id": "8e9b4b7c-54ee-4937-9c4c-cd86c6ee933e",
-        "item": {
-          "id": "defibrillator",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/defibrillator.webp",
-          "name": "Defibrillator",
-          "rarity": "Rare",
-          "item_type": "Quick Use"
-        },
-        "item_id": "defibrillator",
-        "quantity": "3"
-      },
-      {
-        "id": "51abfb82-d24a-48d7-acc8-316d8b550f2c",
-        "item": {
-          "id": "smoke-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/smoke-grenade.webp",
-          "name": "Smoke Grenade",
-          "rarity": "Rare",
-          "item_type": "Recyclable"
-        },
-        "item_id": "smoke-grenade",
-        "quantity": "3"
-      }
-    ],
-    "trader": "TianWen",
-    "xp": 0,
-    "sortOrder": 6970.490569947188
   },
   {
     "id": "a-symbol-of-unification",
@@ -677,11 +540,11 @@
     ],
     "rewards": [
       {
-        "id": "323948bd-705f-4d95-ae86-91a0e150a953",
+        "id": 0,
         "item": {
           "id": "duct-tape-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/duct-tape.webp",
           "name": "Duct Tape",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/7f3b02ebf62b0090609ba464137f3092b91ba7f3f44b7aa8d8f8769e2f68a393.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -689,11 +552,11 @@
         "quantity": "5"
       },
       {
-        "id": "6b5ed8ac-3165-4d51-8700-360f0270a8d4",
+        "id": 1,
         "item": {
           "id": "mod-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/mod-components.webp",
           "name": "Mod Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/b89dcbc0cb98a02d4c84d0820dc64da7a24b04b8719ec6561bf0713133d05356.png",
           "rarity": "Rare",
           "item_type": "Refined Material"
         },
@@ -701,13 +564,13 @@
         "quantity": "3"
       },
       {
-        "id": "b5efb892-5933-4d4e-9aeb-602042e681f8",
+        "id": 2,
         "item": {
           "id": "aviator-outfit",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/aviator-outfit.webp",
           "name": "Aviator (Outfit)",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/82a8ca31894d6c748c2f822ac7a17257bcab31db953b6f9aa1cb23c243cdc526.png",
           "rarity": "",
-          "item_type": "Misc"
+          "item_type": "Outfits"
         },
         "item_id": "aviator-outfit",
         "quantity": "1"
@@ -735,11 +598,11 @@
     ],
     "rewards": [
       {
-        "id": "16739c15-5451-4a7f-b7d0-6d514c0dcbb5",
+        "id": 0,
         "item": {
           "id": "tactical-mk-2",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/tactical-mk-2.webp",
           "name": "Tactical Mk. 2",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/93daa92420665aade905500bab42cb7d84774f365131ac1e60e523294a3c8c74.png",
           "rarity": "Rare",
           "item_type": "Augment"
         },
@@ -747,11 +610,11 @@
         "quantity": "1"
       },
       {
-        "id": "5e384d59-e74b-4d6f-9d50-352d5f221a42",
+        "id": 1,
         "item": {
           "id": "pulse-mine",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/pulse-mine.webp",
           "name": "Pulse Mine",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d36042196f569ee41bdc9648e8dbd7b4ec3f8113cc7657141165fd4a3d31ddf0.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -759,11 +622,11 @@
         "quantity": "3"
       },
       {
-        "id": "419a318e-046f-4a07-8e9e-5bfb8a786961",
+        "id": 2,
         "item": {
           "id": "gas-mine",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/gas-mine.webp",
           "name": "Gas Mine",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/ed58f4a842dd36a2abf3b7e18e24170f2bdaad057c047b8bc7bb808d9567ad2e.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -771,11 +634,11 @@
         "quantity": "3"
       },
       {
-        "id": "26cb4f82-fec8-48ef-9535-41944c41d46c",
+        "id": 3,
         "item": {
           "id": "zipline",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/zipline.webp",
           "name": "Zipline",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2676ef459d89de8b603111c30c7574d64623aeaa78571b3f6b8e77f476a45d81.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -805,11 +668,11 @@
     ],
     "rewards": [
       {
-        "id": "7ae88050-9463-4c10-83b7-447749b48978",
+        "id": 0,
         "item": {
           "id": "blue-light-stick",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/blue-light-stick.webp",
           "name": "Blue Light Stick",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/ae0627b40d61747106b940cb528e9c9643c3f4eca78a74fecd0a9a4487bedbd0.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -817,11 +680,11 @@
         "quantity": "5"
       },
       {
-        "id": "d9121522-a11f-4ed8-b8b7-4aa9e09f7068",
+        "id": 1,
         "item": {
           "id": "rosary",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/rosary.webp",
           "name": "Rosary",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d8b14f1e7190a099674bd3c372e78f1361e7610d11fc93a8e6f17de9fd14a879.png",
           "rarity": "Rare",
           "item_type": "Trinket"
         },
@@ -829,11 +692,11 @@
         "quantity": "1"
       },
       {
-        "id": "e5a66093-5aa7-4de6-8048-27f0264dc085",
+        "id": 2,
         "item": {
           "id": "noisemaker",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/noisemaker.webp",
           "name": "Noisemaker",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/03f75855b5b4a68ad5d9bc3b2ea2f058b2b33bcbcb2dddb3fb3b46866bfdfa25.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -841,13 +704,13 @@
         "quantity": "3"
       },
       {
-        "id": "ef0d3cda-ad8a-4dca-909f-5525839b031b",
+        "id": 3,
         "item": {
           "id": "goggles-radio-renegade-variant",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/goggles-radio-renegade-variant.webp",
           "name": "Goggles (Radio Renegade Variant)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/goggles-radio-renegade-variant.webp",
           "rarity": "",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "goggles-radio-renegade-variant",
         "quantity": "1"
@@ -861,7 +724,8 @@
     "id": "a-wrench-in-the-works",
     "name": "A Wrench in the Works",
     "objectives": [
-      "Search the buses near the western gate"
+      "Search the buses near the western gate",
+      "Locate the stash of sabotage supplies hidden at the Water Towers"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -871,11 +735,11 @@
     ],
     "rewards": [
       {
-        "id": "6b658923-da8e-4329-94f2-bbb5c2583538",
+        "id": 0,
         "item": {
           "id": "mechanical-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/mechanical-components.webp",
           "name": "Mechanical Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/0f11ed5d54dcb6a2bac6f5dc99ba5a061e7e50424bfc1a22372f5245d4ec139b.png",
           "rarity": "Uncommon",
           "item_type": "Refined Material"
         },
@@ -883,11 +747,11 @@
         "quantity": "5"
       },
       {
-        "id": "f47a832b-377b-465f-b242-b601dc428920",
+        "id": 1,
         "item": {
           "id": "mod-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/mod-components.webp",
           "name": "Mod Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/b89dcbc0cb98a02d4c84d0820dc64da7a24b04b8719ec6561bf0713133d05356.png",
           "rarity": "Rare",
           "item_type": "Refined Material"
         },
@@ -895,13 +759,13 @@
         "quantity": "3"
       },
       {
-        "id": "265c7eb6-e6ac-44d4-9abf-87cfcc79ea09",
+        "id": 2,
         "item": {
           "id": "yellow-radio-renegade-color",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/yellow-radio-renegade-color.webp",
           "name": "Yellow (Radio Renegade Color)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/yellow-radio-renegade-color.webp",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "yellow-radio-renegade-color",
         "quantity": "1"
@@ -910,6 +774,143 @@
     "trader": "Celeste",
     "xp": 0,
     "sortOrder": 7482.376892077519
+  },
+  {
+    "id": "after-rain-comes",
+    "name": "After Rain Comes",
+    "objectives": [
+      "Find the flooded solar panels nearby the Grandioso Apartments",
+      "Repair the solar panels"
+    ],
+    "requirements": [
+      {
+        "id": 0,
+        "item": {
+          "id": "wires-recipe",
+          "name": "Wires",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/01e737231d5f4ed624d3883ea45234b0a75756a52bd1d0eb49c22b7f439aabbc.png",
+          "rarity": "Uncommon",
+          "item_type": "Topside Material"
+        },
+        "item_id": "wires-recipe",
+        "quantity": 5
+      },
+      {
+        "id": 1,
+        "item": {
+          "id": "battery",
+          "name": "Battery",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/5df6141a282776aa2c25d45278cc7d699ef96624886d743e3f8865bbef8d7bb5.png",
+          "rarity": "Uncommon",
+          "item_type": "Topside Material"
+        },
+        "item_id": "battery",
+        "quantity": 2
+      }
+    ],
+    "rewardItemIds": [
+      "antiseptic",
+      "durable-cloth",
+      "blue-light-stick"
+    ],
+    "rewards": [
+      {
+        "id": 0,
+        "item": {
+          "id": "antiseptic",
+          "name": "Antiseptic",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c4d0c8aa01f64123e0b8b1ffee347026f9b839b1c177362f6c85b23d8b662738.png",
+          "rarity": "Rare",
+          "item_type": "Refined Material"
+        },
+        "item_id": "antiseptic",
+        "quantity": "3"
+      },
+      {
+        "id": 1,
+        "item": {
+          "id": "durable-cloth",
+          "name": "Durable Cloth",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/049681d0266e546d501ce8a9ab3df88543faa87f39a291c381bdea3ea67afa78.png",
+          "rarity": "Uncommon",
+          "item_type": "Refined Material"
+        },
+        "item_id": "durable-cloth",
+        "quantity": "5"
+      },
+      {
+        "id": 2,
+        "item": {
+          "id": "blue-light-stick",
+          "name": "Blue Light Stick",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/ae0627b40d61747106b940cb528e9c9643c3f4eca78a74fecd0a9a4487bedbd0.png",
+          "rarity": "Common",
+          "item_type": "Quick Use"
+        },
+        "item_id": "blue-light-stick",
+        "quantity": "5"
+      }
+    ],
+    "trader": "Celeste",
+    "xp": 0,
+    "sortOrder": 3001.204857358231
+  },
+  {
+    "id": "armored-transports",
+    "name": "Armored Transports",
+    "objectives": [
+      "Reach the Checkpoint",
+      "Search the Guard huts for a Armored Patrol Key Card",
+      "Reach the Traffic Tunnel near the Blue Gate Checkpoint",
+      "Find and unlock the rear door of an armored patrol car"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "blue-yellow-aviator-color",
+      "defibrillator",
+      "smoke-grenade"
+    ],
+    "rewards": [
+      {
+        "id": 0,
+        "item": {
+          "id": "blue-yellow-aviator-color",
+          "name": "Blue Yellow (Aviator Color)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/blue-yellow-aviator-color.webp",
+          "rarity": "Common",
+          "item_type": "Cosmetic"
+        },
+        "item_id": "blue-yellow-aviator-color",
+        "quantity": "1"
+      },
+      {
+        "id": 1,
+        "item": {
+          "id": "defibrillator",
+          "name": "Defibrillator",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1aef07229aa99c8801612a889958b02f7faf5928905d6912bb6af480bbe403f1.png",
+          "rarity": "Rare",
+          "item_type": "Quick Use"
+        },
+        "item_id": "defibrillator",
+        "quantity": "3"
+      },
+      {
+        "id": 2,
+        "item": {
+          "id": "smoke-grenade",
+          "name": "Smoke Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/81b720e276f139362d59b6ffa79fc4470634a4d36662772b4dff421ca6d30719.png",
+          "rarity": "Rare",
+          "item_type": "Quick Use"
+        },
+        "item_id": "smoke-grenade",
+        "quantity": "3"
+      }
+    ],
+    "trader": "TianWen",
+    "xp": 0,
+    "sortOrder": 6970.490569947188
   },
   {
     "id": "back-on-top",
@@ -928,11 +929,11 @@
     ],
     "rewards": [
       {
-        "id": "6867b691-ce6d-4c52-81ac-d57d6cd5a116",
+        "id": 0,
         "item": {
           "id": "stable-stock-iii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/stable-stock-iii.webp",
           "name": "Stable Stock III",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/b898b53324aeafe90c32c522f175ccc9f3ef98c6cbe8a5ecab1eeaa87554730f.png",
           "rarity": "Rare",
           "item_type": "Modification"
         },
@@ -940,11 +941,11 @@
         "quantity": "1"
       },
       {
-        "id": "62adadc0-6c31-41c1-ae21-69d4fcea2536",
+        "id": 1,
         "item": {
           "id": "medium-ammo",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/medium-ammo.webp",
           "name": "Medium Ammo",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/a900849500f527683c2bf299aa81a181420da6c57f930b6ba648c25ee7776bc9.png",
           "rarity": "Common",
           "item_type": "Ammunition"
         },
@@ -952,11 +953,11 @@
         "quantity": "80"
       },
       {
-        "id": "61834a2e-37e5-4123-9638-bc945d4ebc61",
+        "id": 2,
         "item": {
           "id": "renegade-i",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/renegade-i.webp",
           "name": "Renegade I",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/b5e14eb05a013525e57114ccaf7e1d0a0248b10eec866e36965df7376350a7eb.png",
           "rarity": "Rare",
           "item_type": "Weapon"
         },
@@ -983,11 +984,11 @@
     ],
     "rewards": [
       {
-        "id": "aa1eb179-a537-4f7a-9bd9-0b221f171ed9",
+        "id": 0,
         "item": {
           "id": "laser-trap-smoke-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/laser-trap-smoke-recipe.webp",
           "name": "Smoke Grenade Trap",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/fcb29d93dcef8ee35f79dfa3453e00212339002a26081284a2526b0841d1ecab.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -995,11 +996,11 @@
         "quantity": "1"
       },
       {
-        "id": "694dd98e-2812-42b4-9f36-e10ce5a9c94f",
+        "id": 1,
         "item": {
           "id": "riven-tides-hotel-keycard-no-107",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/riven-tides-hotel-keycard-no-107.webp",
           "name": "Riven Tides Hotel Keycard No. 107",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/4c1aee3a3eb79adc104ee510c29e1caf09d7c0eb008b31b066ca75e64cef767a.png",
           "rarity": "Common",
           "item_type": "Key"
         },
@@ -1026,11 +1027,11 @@
     ],
     "rewards": [
       {
-        "id": "3810858b-2467-44a6-9b1e-03b72540a32c",
+        "id": 0,
         "item": {
           "id": "advanced-electrical-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/advanced-electrical-components.webp",
           "name": "Advanced Electrical Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2dba43ac8c214c291a168d1d3eca52e992527fce6319ffe5d71620c330666876.png",
           "rarity": "Rare",
           "item_type": "Refined Material"
         },
@@ -1038,11 +1039,11 @@
         "quantity": "1"
       },
       {
-        "id": "3ed1ea3e-6167-459b-8d10-9f6513e8ad8f",
+        "id": 1,
         "item": {
           "id": "sensors-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/sensors-recipe.webp",
           "name": "Sensors",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/8f716bdbcac8c0d1336a58c4f8b77a30d0512eda5efc7fa7c6e824be63ff1093.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -1053,6 +1054,76 @@
     "trader": "Celeste",
     "xp": 0,
     "sortOrder": 5219.252140564836
+  },
+  {
+    "id": "boarding-the-frigate",
+    "name": "Boarding the Frigate",
+    "objectives": [
+      "Find a way on top of the Frigate",
+      "- Damage a Hydra",
+      "- Damage a Vaporizer",
+      "- Damage a Rocketeer"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "snap-hook",
+      "wolfpack",
+      "rascal",
+      "launcher-ammo"
+    ],
+    "rewards": [
+      {
+        "id": 0,
+        "item": {
+          "id": "snap-hook",
+          "name": "Snap Hook",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/47b3fca0293a250f1ea89bc67025a2378f74e015fcf7ad6a4b781182f225e0ea.png",
+          "rarity": "Legendary",
+          "item_type": "Quick Use"
+        },
+        "item_id": "snap-hook",
+        "quantity": "1"
+      },
+      {
+        "id": 1,
+        "item": {
+          "id": "wolfpack",
+          "name": "Wolfpack",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/5049f52ab01f27e18bc938a171317b4ee69173612968aa43b914e90665b2a275.png",
+          "rarity": "Epic",
+          "item_type": "Quick Use"
+        },
+        "item_id": "wolfpack",
+        "quantity": "1"
+      },
+      {
+        "id": 2,
+        "item": {
+          "id": "rascal",
+          "name": "Rascal",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/0aabb8da784330210cdc35fd3e081f52e12790eb6ebfb2a1ddd1c94ff7e315fe.png",
+          "rarity": "Rare",
+          "item_type": "Weapon"
+        },
+        "item_id": "rascal",
+        "quantity": "1"
+      },
+      {
+        "id": 3,
+        "item": {
+          "id": "launcher-ammo",
+          "name": "Launcher Ammo",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/91687ed2ba3b3e1af1f3586f7b51caf4d45c57f614e92fe237eb2018e8a9105d.png",
+          "rarity": "Rare",
+          "item_type": "Ammunition"
+        },
+        "item_id": "launcher-ammo",
+        "quantity": "3"
+      }
+    ],
+    "trader": "Celeste",
+    "xp": 10000,
+    "sortOrder": 0
   },
   {
     "id": "bombing-run",
@@ -1068,23 +1139,23 @@
     ],
     "rewards": [
       {
-        "id": "2e92d563-15f7-4d91-89ef-2f6b62061e34",
+        "id": 0,
         "item": {
           "id": "finger-gun-single-shot-emote",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/finger-gun-single-shot-emote.webp",
           "name": "Finger Gun Single Shot (Emote)",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/81bca10dd1d8f5b29d7aaa7d49e13dd635dff4fb4fbd22a592b36ef5e73961ab.png",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "finger-gun-single-shot-emote",
         "quantity": "1"
       },
       {
-        "id": "c9ebdcf5-9596-46a4-8733-15760f18fa6a",
+        "id": 1,
         "item": {
           "id": "raider-tokens",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/raider-tokens.webp",
           "name": "Raider Tokens",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/raider-tokens.webp",
           "rarity": "Common",
           "item_type": "Misc"
         },
@@ -1117,11 +1188,11 @@
     ],
     "rewards": [
       {
-        "id": "38ee0ec0-8d68-439d-8b8f-a6335051fec1",
+        "id": 0,
         "item": {
           "id": "compensator-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/compensator-ii.webp",
           "name": "Compensator II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d7f730b4f4809fff3b1e2065e4856fc8bcf72176d59cde06a5c62c1f9986e910.png",
           "rarity": "Uncommon",
           "item_type": "Modification"
         },
@@ -1129,11 +1200,11 @@
         "quantity": "1"
       },
       {
-        "id": "592c9dba-5f28-41db-b696-8e318424debf",
+        "id": 1,
         "item": {
           "id": "medium-ammo",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/medium-ammo.webp",
           "name": "Medium Ammo",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/a900849500f527683c2bf299aa81a181420da6c57f930b6ba648c25ee7776bc9.png",
           "rarity": "Common",
           "item_type": "Ammunition"
         },
@@ -1141,11 +1212,11 @@
         "quantity": "80"
       },
       {
-        "id": "9962d79e-0d0f-4189-ae7f-03d6baccfbaa",
+        "id": 2,
         "item": {
           "id": "arpeggio-i",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/arpeggio-i.webp",
           "name": "Arpeggio I",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/dc3c4f9e8305eb41d5048c817029995c8197586441640c96f006e206f2ac95f2.png",
           "rarity": "Uncommon",
           "item_type": "Weapon"
         },
@@ -1175,11 +1246,11 @@
     ],
     "rewards": [
       {
-        "id": "24f8e064-5ce4-4ede-88f4-7f4c35191991",
+        "id": 0,
         "item": {
           "id": "explosive-mine",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/explosive-mine.webp",
           "name": "Explosive Mine",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/8f9763acaff22b5030b063a28f73f7b3bc97b30016cfd0a3d06437fa6a1b297e.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -1187,11 +1258,11 @@
         "quantity": "1"
       },
       {
-        "id": "27d4e6a0-4ca2-4b96-8f33-11aada0a7f27",
+        "id": 1,
         "item": {
           "id": "jolt-mine",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/jolt-mine.webp",
           "name": "Jolt Mine",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2666019a2bd9bf9cc0bb76b8791dab4da5c58adffb3d6b59434538d6ed0a07bb.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -1199,11 +1270,11 @@
         "quantity": "1"
       },
       {
-        "id": "7e8da35a-fe82-417b-a44c-1d1901fb96cc",
+        "id": 2,
         "item": {
           "id": "heavy-fuze-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/heavy-fuze-grenade.webp",
           "name": "Heavy Fuze Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c796c3f134a51ab984cdf1d425d55bcb4af05ee6222dbf842de77621d423be20.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -1214,6 +1285,34 @@
     "trader": "Apollo",
     "xp": 0,
     "sortOrder": 6437.2338897110185
+  },
+  {
+    "id": "celestes-childhood-drawings",
+    "name": "Celeste's Childhood Drawings",
+    "objectives": [
+      "Find young Celeste's room in Hotel Panorama Azzurro"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "sterilized-bandage"
+    ],
+    "rewards": [
+      {
+        "id": 0,
+        "item": {
+          "id": "sterilized-bandage",
+          "name": "Sterilized Bandage",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/351ae673886bcb208d2b73344ecffade9e42b3234de6148bb09b09c851bc026b.png",
+          "rarity": "Rare",
+          "item_type": "Quick Use"
+        },
+        "item_id": "sterilized-bandage",
+        "quantity": "3"
+      }
+    ],
+    "trader": "Lance",
+    "xp": 5000,
+    "sortOrder": 0
   },
   {
     "id": "celestes-journals",
@@ -1231,11 +1330,11 @@
     ],
     "rewards": [
       {
-        "id": "23f60ae6-17bd-45cf-8cd9-d8da7d478181",
+        "id": 0,
         "item": {
           "id": "exodus-modules",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/exodus-modules.webp",
           "name": "Exodus Modules",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/07b7aa8f75375f582296702085751a2a164090aa994b4ec7ca083807cb13146b.png",
           "rarity": "Epic",
           "item_type": "Topside Material"
         },
@@ -1243,11 +1342,11 @@
         "quantity": "1"
       },
       {
-        "id": "2aefd057-53ce-4415-bb65-444329f21ddd",
+        "id": 1,
         "item": {
           "id": "heavy-gun-parts",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/heavy-gun-parts.webp",
           "name": "Heavy Gun Parts",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f2ede9fe29a567c0a343d6ada527f6e925ef2543920a4a750cc06fc2dd0bbb7d.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -1255,11 +1354,11 @@
         "quantity": "3"
       },
       {
-        "id": "94fad47c-d869-4272-b557-0b16b2f6de5e",
+        "id": 2,
         "item": {
           "id": "magnetic-accelerator",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/magnetic-accelerator.webp",
           "name": "Magnetic Accelerator",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/8a136a7596eb18e81f844b64438f59f51ea505f4f49963c48f6b80d11a232816.png",
           "rarity": "Epic",
           "item_type": "Refined Material"
         },
@@ -1281,11 +1380,11 @@
     ],
     "requirements": [
       {
-        "id": "ea793a15-e441-40bd-aeee-07cd7fe5d6f2",
+        "id": 0,
         "item": {
           "id": "wires-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/wires.webp",
           "name": "Wires",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/01e737231d5f4ed624d3883ea45234b0a75756a52bd1d0eb49c22b7f439aabbc.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -1293,11 +1392,11 @@
         "quantity": 3
       },
       {
-        "id": "4f90d953-260d-4ba8-8fbb-508ac0cdc92d",
+        "id": 1,
         "item": {
           "id": "battery",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/battery.webp",
           "name": "Battery",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/5df6141a282776aa2c25d45278cc7d699ef96624886d743e3f8865bbef8d7bb5.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -1312,11 +1411,11 @@
     ],
     "rewards": [
       {
-        "id": "ea4e7c86-730b-4956-b02f-48ce19b39a27",
+        "id": 0,
         "item": {
           "id": "lure-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/lure-grenade.webp",
           "name": "Lure Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/4c403880e106a69575813cb0c8052a335704bd3034f1580ca30d93b826a8f53b.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -1324,11 +1423,11 @@
         "quantity": "5"
       },
       {
-        "id": "a269bb08-7057-4d88-9698-838201ccdefa",
+        "id": 1,
         "item": {
           "id": "noisemaker",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/noisemaker.webp",
           "name": "Noisemaker",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/03f75855b5b4a68ad5d9bc3b2ea2f058b2b33bcbcb2dddb3fb3b46866bfdfa25.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -1336,11 +1435,11 @@
         "quantity": "5"
       },
       {
-        "id": "6d4269cd-06c8-45c9-93dc-1373699d8ea1",
+        "id": 2,
         "item": {
           "id": "tagging-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/tagging-grenade.webp",
           "name": "Tagging Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/4a3ce0cbe8fe87cf44cd051e675901a17af99ea46231fd15ac5bb485d264632d.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -1353,6 +1452,47 @@
     "sortOrder": 2053.0940659101884
   },
   {
+    "id": "clean-hands",
+    "name": "Clean Hands",
+    "objectives": [
+      "Find the Nomad Camp under the Railyard"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "shield-recharger",
+      "sextant"
+    ],
+    "rewards": [
+      {
+        "id": 0,
+        "item": {
+          "id": "shield-recharger",
+          "name": "Shield Recharger",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c7a1e1a11f54a48b5ac90625d1c765a3129c4272f27e2784565a82976cc6f6c9.png",
+          "rarity": "Uncommon",
+          "item_type": "Quick Use"
+        },
+        "item_id": "shield-recharger",
+        "quantity": "1"
+      },
+      {
+        "id": 1,
+        "item": {
+          "id": "sextant",
+          "name": "Sextant",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/712180e27cc304c26d151783a26643b1185abce00a61003f5939761d4d843af7.png",
+          "rarity": "Uncommon",
+          "item_type": "Trinket"
+        },
+        "item_id": "sextant",
+        "quantity": "1"
+      }
+    ],
+    "trader": "Unknown",
+    "xp": 5000,
+    "sortOrder": 0
+  },
+  {
     "id": "clearer-skies",
     "name": "Clearer Skies",
     "objectives": [
@@ -1361,11 +1501,11 @@
     ],
     "requirements": [
       {
-        "id": "dc69ffa8-bcbf-4e37-b599-f17f43d45046",
+        "id": 0,
         "item": {
           "id": "arc-alloy",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/arc-alloy.webp",
           "name": "ARC Alloy",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/723c893493ea1799d08c5f706ba6ffef500ac6f7dfd3778df811ee91600bb1a4.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -1380,11 +1520,11 @@
     ],
     "rewards": [
       {
-        "id": "0ed1e108-9b8d-491e-9ae4-980df4feb5bb",
+        "id": 0,
         "item": {
           "id": "sterilized-bandage",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/sterilized-bandage.webp",
           "name": "Sterilized Bandage",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/351ae673886bcb208d2b73344ecffade9e42b3234de6148bb09b09c851bc026b.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -1392,11 +1532,11 @@
         "quantity": "3"
       },
       {
-        "id": "5452401f-cdd3-4a32-8469-7813c2c44299",
+        "id": 1,
         "item": {
           "id": "light-shield",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/light-shield.webp",
           "name": "Light Shield",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/69a670f5c65d3de75ade59c44b33d3809570eea1b52b79a6acb62f5947df25b8.png",
           "rarity": "Uncommon",
           "item_type": "Shield"
         },
@@ -1404,13 +1544,13 @@
         "quantity": "1"
       },
       {
-        "id": "8d2b26f9-6f5d-4d43-b8c1-15b5631e1dcc",
+        "id": 2,
         "item": {
           "id": "black-hiker-colour",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/black-hiker-colour.webp",
           "name": "Black (Hiker Colour)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/black-hiker-colour.webp",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "black-hiker-colour",
         "quantity": "1"
@@ -1434,11 +1574,11 @@
     ],
     "rewards": [
       {
-        "id": "206fc685-bc2e-4072-91f8-99a24697a0c9",
+        "id": 0,
         "item": {
           "id": "raider-hatch-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/raider-hatch-key.webp",
           "name": "Raider Hatch Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/b74d87a841bb5b2cec8f0bc8212f3d32ec7c493ce4a675ca207b1bfc84264449.png",
           "rarity": "Rare",
           "item_type": "Key"
         },
@@ -1446,11 +1586,11 @@
         "quantity": "1"
       },
       {
-        "id": "5d7dd563-c5d5-4197-b968-d5ca28b9f697",
+        "id": 1,
         "item": {
           "id": "gas-mine",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/gas-mine.webp",
           "name": "Gas Mine",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/ed58f4a842dd36a2abf3b7e18e24170f2bdaad057c047b8bc7bb808d9567ad2e.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -1477,11 +1617,11 @@
     ],
     "rewards": [
       {
-        "id": "55a3e53b-c812-49c8-bc93-92f5a34810e5",
+        "id": 0,
         "item": {
           "id": "muzzle-brake-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/muzzle-brake-ii.webp",
           "name": "Muzzle Brake II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/e3ce53319076513a3879386aab647eb59231401929fd27341a30ca2b918841ec.png",
           "rarity": "Uncommon",
           "item_type": "Modification"
         },
@@ -1489,11 +1629,11 @@
         "quantity": "1"
       },
       {
-        "id": "8018d547-efa5-4816-ba95-502a0f17f13a",
+        "id": 1,
         "item": {
           "id": "canto",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/canto.webp",
           "name": "Canto I",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/98ca26be2da12d290d00b451ed6b738581335d77b2a36d9ba3317c160923c331.png",
           "rarity": "Rare",
           "item_type": "Weapon"
         },
@@ -1501,11 +1641,11 @@
         "quantity": "1"
       },
       {
-        "id": "950e7132-30ea-4068-ab5f-85e0a8eff17f",
+        "id": 2,
         "item": {
           "id": "extended-medium-mag-iii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/extended-medium-mag-iii.webp",
           "name": "Extended Medium Mag III",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/cd860795ceab3ce1b622a3583d12b44b44c81b2c6b739ae30d53d7a2cf0283b4.png",
           "rarity": "Rare",
           "item_type": "Modification"
         },
@@ -1535,11 +1675,11 @@
     ],
     "rewards": [
       {
-        "id": "f6aff188-a77b-4048-a1a6-81d1467cad51",
+        "id": 0,
         "item": {
           "id": "firecracker",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/firecracker.webp",
           "name": "Firecracker",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/0a12c668d633574b6f139c4a47a792e30babf3ba8250cb99541b0ea642703bd6.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -1547,11 +1687,11 @@
         "quantity": "5"
       },
       {
-        "id": "6afd16e1-7b3b-43f9-84cd-e257138944a7",
+        "id": 1,
         "item": {
           "id": "fireworks-box",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/fireworks-box.webp",
           "name": "Fireworks Box",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/fa7ca398b8d73c60cfb9583abc7e9935c0fda58f9d288011fac09a2f1204a34c.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -1559,13 +1699,13 @@
         "quantity": "1"
       },
       {
-        "id": "00f07165-60ea-46d8-9924-10e7bf281389",
+        "id": 2,
         "item": {
           "id": "red-radio-renegade-color",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/red-radio-renegade-color.webp",
           "name": "Red (Radio Renegade Color)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/red-radio-renegade-color.webp",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "red-radio-renegade-color",
         "quantity": "1"
@@ -1593,11 +1733,11 @@
     ],
     "rewards": [
       {
-        "id": "43fc1c42-bda8-47f6-bb81-31a8f15a2201",
+        "id": 0,
         "item": {
           "id": "anvil-iii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/anvil-iii.webp",
           "name": "Anvil III",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f9100304f28f764bd3cda141058f2304e836eade07083139c364e449446beb4d.png",
           "rarity": "Uncommon",
           "item_type": "Weapon"
         },
@@ -1605,11 +1745,11 @@
         "quantity": "1"
       },
       {
-        "id": "57d8bcc3-f8a2-46e4-a2f2-86caeef3917a",
+        "id": 1,
         "item": {
           "id": "heavy-ammo",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/heavy-ammo.webp",
           "name": "Heavy Ammo",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2b70c72608d811d0285e411a0ab4be1bf79bd301289a2b8010f5a6e95e4d5da9.png",
           "rarity": "Common",
           "item_type": "Ammunition"
         },
@@ -1617,11 +1757,11 @@
         "quantity": "40"
       },
       {
-        "id": "f4ff7650-1605-4a92-89b2-f6739d6caf5b",
+        "id": 2,
         "item": {
           "id": "crimson-racer-aviator-colour",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/crimson-racer-aviator-colour.webp",
           "name": "Crimson Racer (Aviator Colour)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/crimson-racer-aviator-colour.webp",
           "rarity": "Common",
           "item_type": "Misc"
         },
@@ -1648,11 +1788,11 @@
     ],
     "rewards": [
       {
-        "id": "6990a801-f165-472c-9d54-38ba24670d08",
+        "id": 0,
         "item": {
           "id": "trailblazer-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/trailblazer-grenade.webp",
-          "name": "Trailblazer Grenade",
+          "name": "Trailblazer",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/6d3a90c234d0786b4266c9aafab334af98e7fe995d504d9e6566adab25c4bda7.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -1660,11 +1800,11 @@
         "quantity": "3"
       },
       {
-        "id": "3ee440d7-1e0b-4758-bad4-f2001e5a7886",
+        "id": 1,
         "item": {
           "id": "defibrillator",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/defibrillator.webp",
           "name": "Defibrillator",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1aef07229aa99c8801612a889958b02f7faf5928905d6912bb6af480bbe403f1.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -1690,11 +1830,11 @@
     ],
     "rewards": [
       {
-        "id": "10a4860c-674e-42a5-bb3b-458ef544e895",
+        "id": 0,
         "item": {
           "id": "advanced-electrical-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/advanced-electrical-components.webp",
           "name": "Advanced Electrical Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2dba43ac8c214c291a168d1d3eca52e992527fce6319ffe5d71620c330666876.png",
           "rarity": "Rare",
           "item_type": "Refined Material"
         },
@@ -1702,11 +1842,11 @@
         "quantity": "2"
       },
       {
-        "id": "44b3b903-0e1f-4812-9223-b6b5f2a41a96",
+        "id": 1,
         "item": {
           "id": "speaker-component",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/speaker-component.webp",
           "name": "Speaker Component",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/be91b33ecf8ea9146bb672a4ebe48d976efb4c56e3ca5ec93d62746f864155db.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -1729,11 +1869,11 @@
     ],
     "requirements": [
       {
-        "id": "3ab5c8c2-0573-46c0-aedf-27526268ef34",
+        "id": 0,
         "item": {
           "id": "great-muullein",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/great-muullein.webp",
           "name": "Great Mullein",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/e1ff112417a46b0da11e7e3fd18a61e4b2c14a3c457f72ae796929307fc962a6.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -1741,11 +1881,11 @@
         "quantity": 1
       },
       {
-        "id": "311eb19c-c204-458a-90c9-9929bd106c1d",
+        "id": 1,
         "item": {
           "id": "syringe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/syringe.webp",
           "name": "Syringe",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/336fa84de207dc30117927e4b62a17d481451e8ae23bc51c9011689df8c46caa.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -1753,11 +1893,11 @@
         "quantity": 1
       },
       {
-        "id": "266b1c43-4be4-4b77-9142-2d06b416e2b9",
+        "id": 2,
         "item": {
           "id": "antiseptic",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/antiseptic.webp",
           "name": "Antiseptic",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c4d0c8aa01f64123e0b8b1ffee347026f9b839b1c177362f6c85b23d8b662738.png",
           "rarity": "Rare",
           "item_type": "Refined Material"
         },
@@ -1765,11 +1905,11 @@
         "quantity": 2
       },
       {
-        "id": "01735fad-e08c-49d0-b94f-42eb06be50be",
+        "id": 3,
         "item": {
           "id": "durable-cloth",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/durable-cloth.webp",
           "name": "Durable Cloth",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/049681d0266e546d501ce8a9ab3df88543faa87f39a291c381bdea3ea67afa78.png",
           "rarity": "Uncommon",
           "item_type": "Refined Material"
         },
@@ -1784,11 +1924,11 @@
     ],
     "rewards": [
       {
-        "id": "7e399c7b-a4f4-4847-888b-9ace1f8d25d4",
+        "id": 0,
         "item": {
           "id": "adrenaline-shot",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/adrenaline-shot.webp",
           "name": "Adrenaline Shot",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/9e21d8cae98c65d55483bf37c7cf06d9dbff738d2a3c645d4d2f7abd7fc83941.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -1796,11 +1936,11 @@
         "quantity": "3"
       },
       {
-        "id": "3a76b584-a865-4c46-a4bb-80befa64448f",
+        "id": 1,
         "item": {
           "id": "sterilized-bandage",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/sterilized-bandage.webp",
           "name": "Sterilized Bandage",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/351ae673886bcb208d2b73344ecffade9e42b3234de6148bb09b09c851bc026b.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -1808,11 +1948,11 @@
         "quantity": "3"
       },
       {
-        "id": "59b095ed-fefb-4423-9e01-151e2bbe2185",
+        "id": 2,
         "item": {
           "id": "surge-shield-recharger",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/surge-shield-recharger.webp",
           "name": "Surge Shield Recharger",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/477345cf41f6fcddf7e8d8de18bf0cf4cf4eca3d73a41030b995ed3f38d6fb36.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -1837,11 +1977,11 @@
     ],
     "rewards": [
       {
-        "id": "621a41a7-9d21-4bb2-a122-d9eda561accb",
+        "id": 0,
         "item": {
           "id": "door-blocker",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/door-blocker.webp",
           "name": "Door Blocker",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/ca2b4a3b43168542c95cb060092e4693d8b9da68b0752eb13eb3a1bd4259d739.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -1849,11 +1989,11 @@
         "quantity": "3"
       },
       {
-        "id": "ee9f0343-e19b-47c3-9b5c-b874f64001c8",
+        "id": 1,
         "item": {
           "id": "lil-smoke-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/lil-smoke-grenade.webp",
           "name": "Li'l Smoke Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/4c4b65c93497bafb3edaae716017990cb52589c9b9bbebc00ecf8d5d8260cb3f.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -1881,11 +2021,11 @@
     ],
     "rewards": [
       {
-        "id": "e9da39ae-d912-457c-b3fd-2754f5b6c316",
+        "id": 0,
         "item": {
           "id": "medium-shield",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/medium-shield.webp",
           "name": "Medium Shield",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/9090000bcb5da124d410c257b3fc865f61203b34931b0bcb2b56b7fc810e6e7b.png",
           "rarity": "Rare",
           "item_type": "Shield"
         },
@@ -1893,11 +2033,11 @@
         "quantity": "1"
       },
       {
-        "id": "898021a0-f0e0-4837-9516-b7de96ab5b52",
+        "id": 1,
         "item": {
           "id": "combat-mk-1",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/combat-mk-1.webp",
           "name": "Combat Mk. 1",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d412eeea0c8bfeb131a25573c1674618c094db3b45a4f1dc0ad9f5838cf7ea32.png",
           "rarity": "Uncommon",
           "item_type": "Augment"
         },
@@ -1944,11 +2084,11 @@
     ],
     "rewards": [
       {
-        "id": "3a9f2caa-a869-49cc-bd38-86c5e0f0ea9f",
+        "id": 0,
         "item": {
           "id": "crude-explosives",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/crude-explosives.webp",
           "name": "Crude Explosives",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d961698dc4b1742ecdd18954510264d62944166710cb027e992bbbabb20b855e.png",
           "rarity": "Uncommon",
           "item_type": "Refined Material"
         },
@@ -1956,11 +2096,11 @@
         "quantity": "6"
       },
       {
-        "id": "43c011ec-4e49-410d-b1ef-93ef90080f79",
+        "id": 1,
         "item": {
           "id": "music-box",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/music-box.webp",
           "name": "Music Box",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/99e2208eb41a50e561aeb380611173a132f4d85a64029bd118b1b18c43cc5bf2.png",
           "rarity": "Rare",
           "item_type": "Trinket"
         },
@@ -1968,11 +2108,11 @@
         "quantity": "1"
       },
       {
-        "id": "fa082260-c092-4c8f-8136-8fb449147c72",
+        "id": 2,
         "item": {
           "id": "processor",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/processor.webp",
           "name": "Processor",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/64167940ac8cd97144ef720a2979e1b6af99ff241ecc0ee4adb3463d4bd32f33.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -1999,11 +2139,11 @@
     ],
     "rewards": [
       {
-        "id": "2218412f-4404-4d93-a617-7bf45c5801e5",
+        "id": 0,
         "item": {
           "id": "coffee-pot",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/coffee-pot.webp",
           "name": "Coffee Pot",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/349be143eaa480f8d4631a4772d469d7d22d9ed1823be6d7e0c12b445f45e765.png",
           "rarity": "Common",
           "item_type": "Trinket"
         },
@@ -2011,11 +2151,11 @@
         "quantity": "1"
       },
       {
-        "id": "ab53a82d-12fe-4512-8575-966194451693",
+        "id": 1,
         "item": {
           "id": "adrenaline-shot",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/adrenaline-shot.webp",
           "name": "Adrenaline Shot",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/9e21d8cae98c65d55483bf37c7cf06d9dbff738d2a3c645d4d2f7abd7fc83941.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -2026,6 +2166,76 @@
     "trader": "Apollo",
     "xp": 0,
     "sortOrder": 5459.252140564836
+  },
+  {
+    "id": "exploring-pendola-pass",
+    "name": "Exploring Pendola Pass",
+    "objectives": [
+      "Destroy 20 ARC Enemies",
+      "Search the control room at the Cielo Sereno Observatory for power",
+      "Use 1 Wire to patch into the antenna on top of the tallest tower in the Railyard",
+      "Search 3 containers inside the Commissary Supermarket"
+    ],
+    "requirements": [
+      {
+        "id": 0,
+        "item": {
+          "id": "zipline",
+          "name": "Zipline",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2676ef459d89de8b603111c30c7574d64623aeaa78571b3f6b8e77f476a45d81.png",
+          "rarity": "Rare",
+          "item_type": "Quick Use"
+        },
+        "item_id": "zipline",
+        "quantity": 3
+      }
+    ],
+    "rewardItemIds": [
+      "breathtaking-snow-globe",
+      "medium-shield",
+      "osprey-i"
+    ],
+    "rewards": [
+      {
+        "id": 0,
+        "item": {
+          "id": "breathtaking-snow-globe",
+          "name": "Breathtaking Snow Globe",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/6d739cddfeee277a4771c0571d6c966bf18f624a0cd8d0fce8dec4dece2d2357.png",
+          "rarity": "Epic",
+          "item_type": "Trinket"
+        },
+        "item_id": "breathtaking-snow-globe",
+        "quantity": "1"
+      },
+      {
+        "id": 1,
+        "item": {
+          "id": "medium-shield",
+          "name": "Medium Shield",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/9090000bcb5da124d410c257b3fc865f61203b34931b0bcb2b56b7fc810e6e7b.png",
+          "rarity": "Rare",
+          "item_type": "Shield"
+        },
+        "item_id": "medium-shield",
+        "quantity": "1"
+      },
+      {
+        "id": 2,
+        "item": {
+          "id": "osprey-i",
+          "name": "Osprey I",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/49875185a4588aee78100ca9c47e525183ed257ca1b4d988efc2f649e5f62e82.png",
+          "rarity": "Rare",
+          "item_type": "Weapon"
+        },
+        "item_id": "osprey-i",
+        "quantity": "1"
+      }
+    ],
+    "trader": "Celeste",
+    "xp": 5000,
+    "sortOrder": 0
   },
   {
     "id": "eyes-in-the-sky",
@@ -2043,11 +2253,11 @@
     ],
     "rewards": [
       {
-        "id": "23cbf8f0-aeb3-4e89-904a-5a0f5dd86c95",
+        "id": 0,
         "item": {
           "id": "tagging-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/tagging-grenade.webp",
           "name": "Tagging Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/4a3ce0cbe8fe87cf44cd051e675901a17af99ea46231fd15ac5bb485d264632d.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -2055,11 +2265,11 @@
         "quantity": "3"
       },
       {
-        "id": "bedeb4b1-e9ce-40be-a680-e9070c1cfc4c",
+        "id": 1,
         "item": {
           "id": "vita-spray",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/vita-spray.webp",
           "name": "Vita Spray",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/0f36b9acf8cb90ab29bbc3cc360bacbf3d6577dca0b093797b42f324ecd0f71a.png",
           "rarity": "Epic",
           "item_type": "Quick Use"
         },
@@ -2067,11 +2277,11 @@
         "quantity": "1"
       },
       {
-        "id": "e4580528-04a8-435a-a881-5f4b08290205",
+        "id": 2,
         "item": {
           "id": "yellow-light-stick",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/yellow-light-stick.webp",
           "name": "Yellow Light Stick",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/57070f06e3814e72e7a47695f5b193501bca7c2193471b17518536ec2bfc1e0f.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -2092,11 +2302,11 @@
     ],
     "requirements": [
       {
-        "id": "a1d3004d-c190-4355-b5d7-e17d241b4ffb",
+        "id": 0,
         "item": {
           "id": "wires-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/wires.webp",
           "name": "Wires",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/01e737231d5f4ed624d3883ea45234b0a75756a52bd1d0eb49c22b7f439aabbc.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -2110,11 +2320,11 @@
     ],
     "rewards": [
       {
-        "id": "b43904df-2d96-4ae0-afe7-3036773def99",
+        "id": 0,
         "item": {
           "id": "extended-shotgun-mag-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/extended-shotgun-mag-ii.webp",
           "name": "Extended Shotgun Mag II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/418e6b3b8b3c99f38da5a7ffdb669f97ef26c80b490619105434964101cca2a5.png",
           "rarity": "Uncommon",
           "item_type": "Modification"
         },
@@ -2122,11 +2332,11 @@
         "quantity": "1"
       },
       {
-        "id": "a5e71c75-9876-4dae-98de-523dd4da89ea",
+        "id": 1,
         "item": {
           "id": "extended-medium-mag-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/extended-medium-mag-ii.webp",
           "name": "Extended Medium Mag II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f119f93a0345d1e7c439f2c4262401d9d364422f74a17435541895d2bd5cb834.png",
           "rarity": "Uncommon",
           "item_type": "Modification"
         },
@@ -2150,11 +2360,11 @@
     ],
     "requirements": [
       {
-        "id": "e377a016-400a-4a71-9b0a-fe1deeb46c1b",
+        "id": 0,
         "item": {
           "id": "wires-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/wires.webp",
           "name": "Wires",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/01e737231d5f4ed624d3883ea45234b0a75756a52bd1d0eb49c22b7f439aabbc.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -2169,11 +2379,11 @@
     ],
     "rewards": [
       {
-        "id": "46f48ad2-c610-4afc-b5dc-99906a3caed3",
+        "id": 0,
         "item": {
           "id": "medium-gun-parts",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/medium-gun-parts.webp",
           "name": "Medium Gun Parts",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/40186d5a2191a5a8c06242c8a8465a03abe3133ab1c12739beeaa2be79e870b7.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -2181,25 +2391,25 @@
         "quantity": "5"
       },
       {
-        "id": "75f13447-69a8-4fca-874a-5e86bb540988",
+        "id": 1,
         "item": {
           "id": "advanced-mechanical-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/advanced-mechanical-components.webp",
           "name": "Advanced Mechanical Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f4c5d01a6dd5e4e637a8914dff7b43ed34507a105b829baed5960967461fab0d.png",
           "rarity": "Rare",
-          "item_type": "Advanced Material"
+          "item_type": "Refined Material"
         },
         "item_id": "advanced-mechanical-components",
         "quantity": "3"
       },
       {
-        "id": "93925b74-4a0a-4d49-830e-beb831ed0fbb",
+        "id": 2,
         "item": {
           "id": "helmet-radio-renegade-variant",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/helmet-radio-renegade-variant.webp",
           "name": "Helmet (Radio Renegade Variant)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/helmet-radio-renegade-variant.webp",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "helmet-radio-renegade-variant",
         "quantity": "1"
@@ -2224,23 +2434,23 @@
     ],
     "rewards": [
       {
-        "id": "3b17dee4-c4a2-4756-aebe-86db2ea6dbe4",
+        "id": 0,
         "item": {
           "id": "showstopper",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/showstopper.webp",
           "name": "Showstopper",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1eff7156ed2d249410b310dc0bee59917ced50e41db9adaba18ea0a84414e755.png",
           "rarity": "Rare",
-          "item_type": "Throwable"
+          "item_type": "Quick Use"
         },
         "item_id": "showstopper",
         "quantity": "3"
       },
       {
-        "id": "c3000fc9-475a-4a26-afe8-0b16642e3083",
+        "id": 1,
         "item": {
           "id": "trailblazer-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/trailblazer-grenade.webp",
-          "name": "Trailblazer Grenade",
+          "name": "Trailblazer",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/6d3a90c234d0786b4266c9aafab334af98e7fe995d504d9e6566adab25c4bda7.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -2270,11 +2480,11 @@
     ],
     "rewards": [
       {
-        "id": "87ae969b-1271-436b-ba78-e6bcd8b22f5e",
+        "id": 0,
         "item": {
           "id": "aphelion-rifle",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/aphelion-rifle.webp",
           "name": "Aphelion Rifle",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c1c59f3cf0cd556bd66aeacc32db364e8db92fc8da6986f5f4fd60c1a3476ec2.png",
           "rarity": "Legendary",
           "item_type": "Weapon"
         },
@@ -2282,11 +2492,11 @@
         "quantity": "1"
       },
       {
-        "id": "165d5c1e-3816-409c-86e4-55164c58e0a0",
+        "id": 1,
         "item": {
           "id": "energy-ammo",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/energy-ammo.webp",
           "name": "Energy Clip",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/6c4eddf8f45fd4270d5557cf747b5319d08705259047cd1f823d326e1dfd76e5.png",
           "rarity": "Rare",
           "item_type": "Ammunition"
         },
@@ -2314,11 +2524,11 @@
     ],
     "rewards": [
       {
-        "id": "53605f51-3e3b-4cf6-8cdc-9f67c103f0e5",
+        "id": 0,
         "item": {
           "id": "speaker-component",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/speaker-component.webp",
           "name": "Speaker Component",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/be91b33ecf8ea9146bb672a4ebe48d976efb4c56e3ca5ec93d62746f864155db.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -2326,11 +2536,11 @@
         "quantity": "3"
       },
       {
-        "id": "5070a66e-d224-45c9-a99b-a3fef1e26a62",
+        "id": 1,
         "item": {
           "id": "lure-grenade-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/lure-grenade.webp",
           "name": "Lure Grenade Blueprint",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/4c403880e106a69575813cb0c8052a335704bd3034f1580ca30d93b826a8f53b.png",
           "rarity": "Legendary",
           "item_type": "Blueprint"
         },
@@ -2338,11 +2548,11 @@
         "quantity": "1"
       },
       {
-        "id": "7cb48ebd-d83f-4b8b-af22-a737cb2fe65f",
+        "id": 2,
         "item": {
           "id": "electrical-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/electrical-components.webp",
           "name": "Electrical Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/fad1fc9afe8ec6e2891303dde253b015cc415ee1757f47a90b7f1f4aa62e067f.png",
           "rarity": "Uncommon",
           "item_type": "Refined Material"
         },
@@ -2370,25 +2580,25 @@
     ],
     "rewards": [
       {
-        "id": "c6b3e43e-5f79-450e-9017-0e2f00179a84",
+        "id": 0,
         "item": {
           "id": "tangerine-warden-color",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/tangerine-warden-color.webp",
           "name": "Tangerine (Warden Color)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/tangerine-warden-color.webp",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "tangerine-warden-color",
         "quantity": "1"
       },
       {
-        "id": "db483c8e-71d0-4b79-9ae2-c62a5fa3ebc4",
+        "id": 1,
         "item": {
           "id": "power-rod",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/power-rod.webp",
           "name": "Power Rod",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/e4ff63d3b3654582854cc9e53964fca9cabb9e975542074e718e5d7c914ff62e.png",
           "rarity": "Epic",
-          "item_type": "Advanced Material"
+          "item_type": "Refined Material"
         },
         "item_id": "power-rod",
         "quantity": "1"
@@ -2412,11 +2622,11 @@
     ],
     "rewards": [
       {
-        "id": "b0369ea8-1686-4bb5-815c-06492fbb6138",
+        "id": 0,
         "item": {
           "id": "raider-hatch-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/raider-hatch-key.webp",
           "name": "Raider Hatch Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/b74d87a841bb5b2cec8f0bc8212f3d32ec7c493ce4a675ca207b1bfc84264449.png",
           "rarity": "Rare",
           "item_type": "Key"
         },
@@ -2424,13 +2634,13 @@
         "quantity": "1"
       },
       {
-        "id": "106b5c6c-7ed5-42f7-afd3-540169f79103",
+        "id": 1,
         "item": {
           "id": "binoculars",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/binoculars.webp",
           "name": "Binoculars",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/70ffa91f9aaea31533394802e9b232de7240ac4e0c116eb3d2880817201b2df0.png",
           "rarity": "Common",
-          "item_type": "Gadget"
+          "item_type": "Quick Use"
         },
         "item_id": "binoculars",
         "quantity": "1"
@@ -2441,73 +2651,65 @@
     "sortOrder": 1036.91801992278
   },
   {
-    "id": "industrial-espionage",
-    "name": "Industrial Espionage",
+    "id": "home-to-roost",
+    "name": "Home To Roost",
     "objectives": [
-      "Find Tian Wen's weapon cache near the Gas Station in the Outskirts",
-      "Deliver the Burletta to the rival weapon cache",
-      "Plant a bug on the weapon cache"
+      "Reach the back of the Blue Gate tunnels",
+      "Scan any Android in the back of the Traffic Tunnels",
+      "Head to the MANTIKOR locker room",
+      "Search the locker room for any clues",
+      "Read the last vehicle weighing logs",
+      "(Optional) Find the hidden key",
+      "Enter the Confiscation Room",
+      "Transmit MANTIKOR's security last recordings to Shani"
     ],
-    "requirements": [
-      {
-        "id": "bc50c6b8-a30f-4688-9ca7-b29b5404093b",
-        "item": {
-          "id": "burletta-i",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/burletta-i.webp",
-          "name": "Burletta I",
-          "rarity": "Uncommon",
-          "item_type": "Weapon"
-        },
-        "item_id": "burletta-i",
-        "quantity": 1
-      }
-    ],
+    "requirements": [],
     "rewardItemIds": [
-      "mechanical-components",
-      "simple-gun-parts",
-      "burltetta-recipe"
+      "surge-shield-recharger",
+      "sterilized-bandage",
+      "antiseptic"
     ],
     "rewards": [
       {
-        "id": "3e9ca817-41f9-4b57-b375-75905bdef44c",
+        "id": 0,
         "item": {
-          "id": "mechanical-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/mechanical-components.webp",
-          "name": "Mechanical Components",
-          "rarity": "Uncommon",
+          "id": "surge-shield-recharger",
+          "name": "Surge Shield Recharger",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/477345cf41f6fcddf7e8d8de18bf0cf4cf4eca3d73a41030b995ed3f38d6fb36.png",
+          "rarity": "Rare",
+          "item_type": "Quick Use"
+        },
+        "item_id": "surge-shield-recharger",
+        "quantity": "1"
+      },
+      {
+        "id": 1,
+        "item": {
+          "id": "sterilized-bandage",
+          "name": "Sterilized Bandage",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/351ae673886bcb208d2b73344ecffade9e42b3234de6148bb09b09c851bc026b.png",
+          "rarity": "Rare",
+          "item_type": "Quick Use"
+        },
+        "item_id": "sterilized-bandage",
+        "quantity": "2"
+      },
+      {
+        "id": 2,
+        "item": {
+          "id": "antiseptic",
+          "name": "Antiseptic",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c4d0c8aa01f64123e0b8b1ffee347026f9b839b1c177362f6c85b23d8b662738.png",
+          "rarity": "Rare",
           "item_type": "Refined Material"
         },
-        "item_id": "mechanical-components",
-        "quantity": "3"
-      },
-      {
-        "id": "48572c2b-28b2-4533-9cf3-26debbfdf9b3",
-        "item": {
-          "id": "simple-gun-parts",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/simple-gun-parts.webp",
-          "name": "Simple Gun Parts",
-          "rarity": "Uncommon",
-          "item_type": "Topside Material"
-        },
-        "item_id": "simple-gun-parts",
-        "quantity": "3"
-      },
-      {
-        "id": "97a928e9-f9d0-4578-a1cd-225960c3bfd5",
-        "item": {
-          "id": "burltetta-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/burltetta-recipe.webp",
-          "name": "Burletta Blueprint",
-          "rarity": "Legendary",
-          "item_type": "Blueprint"
-        },
-        "item_id": "burltetta-recipe",
-        "quantity": "1"
+        "item_id": "antiseptic",
+        "quantity": "2"
       }
     ],
-    "trader": "TianWen",
-    "xp": 0,
-    "sortOrder": 3162.932222187488
+    "trader": "Shani",
+    "xp": 5000,
+    "sortOrder": 0
   },
   {
     "id": "in-my-image",
@@ -2523,11 +2725,11 @@
     ],
     "rewards": [
       {
-        "id": "de6c3d8e-49b8-4f2d-8d14-2c4d89d15460",
+        "id": 0,
         "item": {
           "id": "green-light-stick",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/green-light-stick.webp",
           "name": "Green Light Stick",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d48dfae88f2a33d6b20c7022cfbfcbeb4ea79a19f60eeb74251929b9b473a022.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -2535,11 +2737,11 @@
         "quantity": "5"
       },
       {
-        "id": "86fbf4dd-4106-45e0-9ed6-8b77b61c1af2",
+        "id": 1,
         "item": {
           "id": "looting-mk-2",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/looting-mk-2.webp",
           "name": "Looting Mk. 2",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/e582ebf209d8d98b93ebc6dadd3053c016cb13e550000e7afb2e5eb21eeb5da6.png",
           "rarity": "Rare",
           "item_type": "Augment"
         },
@@ -2552,6 +2754,75 @@
     "sortOrder": 1039.5769392581892
   },
   {
+    "id": "industrial-espionage",
+    "name": "Industrial Espionage",
+    "objectives": [
+      "Find Tian Wen's weapon cache near the Gas Station in the Outskirts",
+      "Deliver the Burletta to the rival weapon cache",
+      "Plant a bug on the weapon cache"
+    ],
+    "requirements": [
+      {
+        "id": 0,
+        "item": {
+          "id": "burletta-i",
+          "name": "Burletta I",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/9ecca70d1bb2420829cdcf6cc7a868dc14b70c1217ae689863f5b3a9adaf35f2.png",
+          "rarity": "Uncommon",
+          "item_type": "Weapon"
+        },
+        "item_id": "burletta-i",
+        "quantity": 1
+      }
+    ],
+    "rewardItemIds": [
+      "mechanical-components",
+      "simple-gun-parts",
+      "burltetta-recipe"
+    ],
+    "rewards": [
+      {
+        "id": 0,
+        "item": {
+          "id": "mechanical-components",
+          "name": "Mechanical Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/0f11ed5d54dcb6a2bac6f5dc99ba5a061e7e50424bfc1a22372f5245d4ec139b.png",
+          "rarity": "Uncommon",
+          "item_type": "Refined Material"
+        },
+        "item_id": "mechanical-components",
+        "quantity": "3"
+      },
+      {
+        "id": 1,
+        "item": {
+          "id": "simple-gun-parts",
+          "name": "Simple Gun Parts",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d7863422618bbbe86222bca6b7bc32617122229625025fca48017a29e770ec6c.png",
+          "rarity": "Uncommon",
+          "item_type": "Topside Material"
+        },
+        "item_id": "simple-gun-parts",
+        "quantity": "3"
+      },
+      {
+        "id": 2,
+        "item": {
+          "id": "burltetta-recipe",
+          "name": "Burletta Blueprint",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/9ecca70d1bb2420829cdcf6cc7a868dc14b70c1217ae689863f5b3a9adaf35f2.png",
+          "rarity": "Legendary",
+          "item_type": "Blueprint"
+        },
+        "item_id": "burltetta-recipe",
+        "quantity": "1"
+      }
+    ],
+    "trader": "TianWen",
+    "xp": 0,
+    "sortOrder": 3162.932222187488
+  },
+  {
     "id": "into-the-fray",
     "name": "Into the Fray",
     "objectives": [
@@ -2560,13 +2831,13 @@
     ],
     "requirements": [
       {
-        "id": "78ce6f9c-0410-436e-b108-afa97f44039c",
+        "id": 0,
         "item": {
           "id": "leaper-pulse-unit",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/leaper-pulse-unit.webp",
           "name": "Leaper Pulse Unit",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/a6bb7b994fbb89af1af900abb7cabd8f2faede6b751a4e4fde311c7d20cfadc5.png",
           "rarity": "Epic",
-          "item_type": "Throwable"
+          "item_type": "Recyclable"
         },
         "item_id": "leaper-pulse-unit",
         "quantity": 1
@@ -2580,23 +2851,23 @@
     ],
     "rewards": [
       {
-        "id": "9c5e8089-447a-4f8c-8dbe-c9ee2691dff6",
+        "id": 0,
         "item": {
           "id": "burgerboy-backpack-charm",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/burgerboy-backpack-charm.webp",
           "name": "Burgerboy (Backpack Charm)",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/3abbbe12ac7c1206350107bd68991ba861b03800523fd4180165bb070cee2647.png",
           "rarity": "",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "burgerboy-backpack-charm",
         "quantity": "1"
       },
       {
-        "id": "9e36d889-dc42-4553-bf37-b8d774f10a79",
+        "id": 1,
         "item": {
           "id": "vulcano-iii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/vulcano-iii.webp",
           "name": "Vulcano III",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/22e7c8063b7d935075a3d5a698ae0e4145da330da08cf68449b3d7661c1a922f.png",
           "rarity": "Epic",
           "item_type": "Weapon"
         },
@@ -2604,23 +2875,23 @@
         "quantity": "1"
       },
       {
-        "id": "c70a8152-d177-47e9-b6d5-6985b76c3f29",
+        "id": 2,
         "item": {
           "id": "radio-renegade-outfit",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/radio-renegade-outfit.webp",
           "name": "Radio Renegade (Outfit)",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/432a46ab0d09f590131e7f180267a8fb64a0f31b118c2d54467d0da125740509.png",
           "rarity": "",
-          "item_type": "Misc"
+          "item_type": "Outfits"
         },
         "item_id": "radio-renegade-outfit",
         "quantity": "1"
       },
       {
-        "id": "f4dbec19-edbc-40dc-b569-c19517b3bcaa",
+        "id": 3,
         "item": {
           "id": "shotgun-ammo",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/shotgun-ammo.webp",
           "name": "Shotgun Ammo",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/59ddc33962a91be44f8bcece80aa24dea68115606b3f0a9194556ac21212bbc4.png",
           "rarity": "Common",
           "item_type": "Ammunition"
         },
@@ -2646,11 +2917,11 @@
     ],
     "rewards": [
       {
-        "id": "215b16a8-060a-4cc9-b860-d6fc2c5019d2",
+        "id": 0,
         "item": {
           "id": "pulse-mine",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/pulse-mine.webp",
           "name": "Pulse Mine",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d36042196f569ee41bdc9648e8dbd7b4ec3f8113cc7657141165fd4a3d31ddf0.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -2658,11 +2929,11 @@
         "quantity": "5"
       },
       {
-        "id": "0dfe5487-2f30-4900-bc41-a64eece04469",
+        "id": 1,
         "item": {
           "id": "flame-spray",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/flame-spray.webp",
           "name": "Flame Spray",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f3c9c5d54a3742462333a149311fc77febd063f059ead3dda53640a827550657.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -2691,11 +2962,11 @@
     ],
     "rewards": [
       {
-        "id": "3fd923b5-1e87-4edc-8be6-41934582dec8",
+        "id": 0,
         "item": {
           "id": "duct-tape-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/duct-tape.webp",
           "name": "Duct Tape",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/7f3b02ebf62b0090609ba464137f3092b91ba7f3f44b7aa8d8f8769e2f68a393.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -2703,11 +2974,11 @@
         "quantity": "5"
       },
       {
-        "id": "a8f1322f-0d90-4962-b5fb-387e916e9b9a",
+        "id": 1,
         "item": {
           "id": "magnet",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/magnet.webp",
           "name": "Magnet",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/edb7bb27d21a8ef8bf4fd5cf08c913f86def24ee0249b809c4fd06d7a392bb9b.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -2715,11 +2986,11 @@
         "quantity": "5"
       },
       {
-        "id": "dbbba6f9-7856-4ece-ab2a-65cdbe332885",
+        "id": 2,
         "item": {
           "id": "simple-gun-parts",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/simple-gun-parts.webp",
           "name": "Simple Gun Parts",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d7863422618bbbe86222bca6b7bc32617122229625025fca48017a29e770ec6c.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -2749,11 +3020,11 @@
     ],
     "rewards": [
       {
-        "id": "c7149989-fdc6-4e00-a401-82ab2a98574a",
+        "id": 0,
         "item": {
           "id": "yellow-light-stick-blueprint",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/yellow-light-stick-blueprint.webp",
           "name": "Yellow Light Stick Blueprint",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/57070f06e3814e72e7a47695f5b193501bca7c2193471b17518536ec2bfc1e0f.png",
           "rarity": "Legendary",
           "item_type": "Blueprint"
         },
@@ -2761,13 +3032,13 @@
         "quantity": "1"
       },
       {
-        "id": "79f3ed10-07bb-45d9-91d8-828871057ade",
+        "id": 1,
         "item": {
           "id": "white-indigo-warden-color",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/white-indigo-warden-color.webp",
           "name": "White Indigo (Warden Color)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/white-indigo-warden-color.webp",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "white-indigo-warden-color",
         "quantity": "1"
@@ -2795,11 +3066,11 @@
     ],
     "rewards": [
       {
-        "id": "49f51118-8d22-4276-bf95-621f68bab2ab",
+        "id": 0,
         "item": {
           "id": "defibrillator",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/defibrillator.webp",
           "name": "Defibrillator",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1aef07229aa99c8801612a889958b02f7faf5928905d6912bb6af480bbe403f1.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -2807,11 +3078,11 @@
         "quantity": "1"
       },
       {
-        "id": "b98e3c05-77d5-417b-9902-5a25afaa35ae",
+        "id": 1,
         "item": {
           "id": "surge-shield-recharger",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/surge-shield-recharger.webp",
           "name": "Surge Shield Recharger",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/477345cf41f6fcddf7e8d8de18bf0cf4cf4eca3d73a41030b995ed3f38d6fb36.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -2819,11 +3090,11 @@
         "quantity": "1"
       },
       {
-        "id": "bf8a95e1-1f4c-4fae-8974-973c2071a9ef",
+        "id": 2,
         "item": {
           "id": "sterilized-bandage",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/sterilized-bandage.webp",
           "name": "Sterilized Bandage",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/351ae673886bcb208d2b73344ecffade9e42b3234de6148bb09b09c851bc026b.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -2852,11 +3123,11 @@
     ],
     "rewards": [
       {
-        "id": "7054ca76-6c34-496b-bd22-313e522b0091",
+        "id": 0,
         "item": {
           "id": "exodus-modules",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/exodus-modules.webp",
           "name": "Exodus Modules",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/07b7aa8f75375f582296702085751a2a164090aa994b4ec7ca083807cb13146b.png",
           "rarity": "Epic",
           "item_type": "Topside Material"
         },
@@ -2864,11 +3135,11 @@
         "quantity": "2"
       },
       {
-        "id": "0d9fbdfc-6886-495f-ab3f-64031ff8e4f7",
+        "id": 1,
         "item": {
           "id": "magnetic-accelerator",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/magnetic-accelerator.webp",
           "name": "Magnetic Accelerator",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/8a136a7596eb18e81f844b64438f59f51ea505f4f49963c48f6b80d11a232816.png",
           "rarity": "Epic",
           "item_type": "Refined Material"
         },
@@ -2876,11 +3147,11 @@
         "quantity": "2"
       },
       {
-        "id": "a111e09c-452f-40b7-80e6-08a48cf5a013",
+        "id": 2,
         "item": {
           "id": "magnetron",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/magnetron.webp",
           "name": "Magnetron",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/8c3a644056ea6a9544ebc336325606e2a4edad3a2ff2a1d446f32f4a66cc63de.png",
           "rarity": "Epic",
           "item_type": "Recyclable"
         },
@@ -2907,11 +3178,11 @@
     ],
     "rewards": [
       {
-        "id": "b054a81a-08c4-4a46-bb7c-2c992b595697",
+        "id": 0,
         "item": {
           "id": "snap-hook",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/snap-hook.webp",
           "name": "Snap Hook",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/47b3fca0293a250f1ea89bc67025a2378f74e015fcf7ad6a4b781182f225e0ea.png",
           "rarity": "Legendary",
           "item_type": "Quick Use"
         },
@@ -2938,11 +3209,11 @@
     ],
     "rewards": [
       {
-        "id": "7d492de5-0a15-4a03-ba62-98756e4590b0",
+        "id": 0,
         "item": {
           "id": "angled-grip-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/angled-grip-ii.webp",
           "name": "Angled Grip II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/ca9c7e950391d0bd2178e314d76a2a2416cc5e157873b8093f543fd6a8b69944.png",
           "rarity": "Uncommon",
           "item_type": "Modification"
         },
@@ -2950,11 +3221,11 @@
         "quantity": "1"
       },
       {
-        "id": "f08e7df9-a883-4f59-bbb5-eebe9113ae13",
+        "id": 1,
         "item": {
           "id": "shotgun-choke-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/shotgun-choke-ii.webp",
           "name": "Shotgun Choke II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/93a51965b523f0599e50ab631e220b2961065f9fc5252483acc0fb9959c3bc65.png",
           "rarity": "Uncommon",
           "item_type": "Modification"
         },
@@ -2982,11 +3253,11 @@
     ],
     "rewards": [
       {
-        "id": "1f668ea9-4dac-48f1-afd3-aca099719d27",
+        "id": 0,
         "item": {
           "id": "compensator-i",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/compensator-i.webp",
           "name": "Compensator I",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/7f27cc00f01c0aecd85eef304a5d441f7bd465824f53b615d6b0d04340baefdd.png",
           "rarity": "Common",
           "item_type": "Modification"
         },
@@ -2994,11 +3265,11 @@
         "quantity": "1"
       },
       {
-        "id": "50cf9552-9c47-43bc-9fa6-7b97f83e522d",
+        "id": 1,
         "item": {
           "id": "extended-light-mag-i",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/extended-light-mag-i.webp",
           "name": "Extended Light Mag I",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/90b6f6fca9bb0be802577e36523dd0e9a622d4cd1b677d7e99f3cf6dea03052f.png",
           "rarity": "Common",
           "item_type": "Modification"
         },
@@ -3006,11 +3277,11 @@
         "quantity": "1"
       },
       {
-        "id": "f4a58696-615f-46cf-89e4-fdc4932f831e",
+        "id": 2,
         "item": {
           "id": "silencer-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/silencer-ii.webp",
           "name": "Silencer II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/3ef02e9b50b103ef4fab56063981ce8beb6b4748cafb3f87fa637fc1ea811a1c.png",
           "rarity": "Rare",
           "item_type": "Modification"
         },
@@ -3038,11 +3309,11 @@
     ],
     "rewards": [
       {
-        "id": "69fbfd5e-8ae5-4b9e-a122-cb57882c274f",
+        "id": 0,
         "item": {
           "id": "defibrillator",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/defibrillator.webp",
           "name": "Defibrillator",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1aef07229aa99c8801612a889958b02f7faf5928905d6912bb6af480bbe403f1.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -3050,11 +3321,11 @@
         "quantity": "3"
       },
       {
-        "id": "7539a21b-b2c9-46d9-82d4-803f06dcc06f",
+        "id": 1,
         "item": {
           "id": "vita-shot",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/vita-shot.webp",
           "name": "Vita Shot",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1844ef6c22fc27909cd5ccc4e5b3ec411b6e49098c6a32043aa585e9548b562f.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -3062,13 +3333,13 @@
         "quantity": "2"
       },
       {
-        "id": "d46d3728-9b99-4d38-9a94-bb5385329762",
+        "id": 2,
         "item": {
           "id": "banana-backpack-charm",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/banana-backpack-charm.webp",
           "name": "Banana (Backpack Charm)",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/7d205fd3d3278a2c18b52c5dccf13cc3a9062b8780c8039b588545b518431e6c.png",
           "rarity": "",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "banana-backpack-charm",
         "quantity": "1"
@@ -3087,11 +3358,11 @@
     ],
     "requirements": [
       {
-        "id": "231279c0-568e-4d7c-9854-60716126c483",
+        "id": 0,
         "item": {
           "id": "surveyor-vault",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/surveyor-vault.webp",
           "name": "Surveyor Vault",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/5fe2a22c4a7233cb230cf109f52f12efdc34ec0d7a3ac8f410f776f360e21af0.png",
           "rarity": "Rare",
           "item_type": "Recyclable"
         },
@@ -3105,11 +3376,11 @@
     ],
     "rewards": [
       {
-        "id": "41344032-88b4-4992-ac12-05dc8329688a",
+        "id": 0,
         "item": {
           "id": "photoelectric-cloak",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/photoelectric-cloak.webp",
           "name": "Photoelectric Cloak",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/639d21fa0d5a93e251c286c3ad793b66e386cde43c17c58b1361a03612328a61.png",
           "rarity": "Epic",
           "item_type": "Quick Use"
         },
@@ -3117,11 +3388,11 @@
         "quantity": "1"
       },
       {
-        "id": "ff8c4743-8c8a-4e0b-8088-5ecbdc2d7cae",
+        "id": 1,
         "item": {
           "id": "raider-hatch-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/raider-hatch-key.webp",
           "name": "Raider Hatch Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/b74d87a841bb5b2cec8f0bc8212f3d32ec7c493ce4a675ca207b1bfc84264449.png",
           "rarity": "Rare",
           "item_type": "Key"
         },
@@ -3143,11 +3414,11 @@
     ],
     "requirements": [
       {
-        "id": "bf31f64d-8078-4842-aa74-b649c8922e15",
+        "id": 0,
         "item": {
           "id": "portable-television",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/portable-television.webp",
           "name": "Portable TV",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/28fd2d3759fd40f986cdd2dc573c072d1a835a8cc9471c39ff4b2f718d6aae43.png",
           "rarity": "Rare",
           "item_type": "Recyclable"
         },
@@ -3162,35 +3433,35 @@
     ],
     "rewards": [
       {
-        "id": "122c7f26-ce55-4181-aebf-47c6171ab5f5",
+        "id": 0,
         "item": {
           "id": "showstopper",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/showstopper.webp",
           "name": "Showstopper",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1eff7156ed2d249410b310dc0bee59917ced50e41db9adaba18ea0a84414e755.png",
           "rarity": "Rare",
-          "item_type": "Throwable"
+          "item_type": "Quick Use"
         },
         "item_id": "showstopper",
         "quantity": "3"
       },
       {
-        "id": "b0184793-6903-4050-9876-38c31d7f6da1",
+        "id": 1,
         "item": {
           "id": "smoke-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/smoke-grenade.webp",
           "name": "Smoke Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/81b720e276f139362d59b6ffa79fc4470634a4d36662772b4dff421ca6d30719.png",
           "rarity": "Rare",
-          "item_type": "Recyclable"
+          "item_type": "Quick Use"
         },
         "item_id": "smoke-grenade",
         "quantity": "3"
       },
       {
-        "id": "7696b2fd-9d8d-41c2-a6b2-cb9952b85ef8",
+        "id": 2,
         "item": {
           "id": "fireworks-box",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/fireworks-box.webp",
           "name": "Fireworks Box",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/fa7ca398b8d73c60cfb9583abc7e9935c0fda58f9d288011fac09a2f1204a34c.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -3216,23 +3487,23 @@
     ],
     "rewards": [
       {
-        "id": "fcaa005e-4687-42ae-ac62-65bc57f2a4c8",
+        "id": 0,
         "item": {
           "id": "black-and-white-origin-color",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/black-and-white-origin-color.webp",
           "name": "Black & White (Origin Color)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/black-and-white-origin-color.webp",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "black-and-white-origin-color",
         "quantity": "1"
       },
       {
-        "id": "2cef69a3-4fef-4508-a46a-46b24d010075",
+        "id": 1,
         "item": {
           "id": "defibrillator",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/defibrillator.webp",
           "name": "Defibrillator",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1aef07229aa99c8801612a889958b02f7faf5928905d6912bb6af480bbe403f1.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -3248,7 +3519,9 @@
     "id": "on-deaf-ears",
     "name": "On Deaf Ears",
     "objectives": [
-      "Find the researcher's guest logs on the reception computers"
+      "Find the researcher's guest logs on the reception computers",
+      "Find where the researcher held their lecture, and access their notes",
+      "Find information about the prototypes on the Medical Research computers"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -3257,11 +3530,11 @@
     ],
     "rewards": [
       {
-        "id": "4b4f06fe-c5aa-4ff1-ad51-f2267a3c8016",
+        "id": 0,
         "item": {
           "id": "lure-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/lure-grenade.webp",
           "name": "Lure Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/4c403880e106a69575813cb0c8052a335704bd3034f1580ca30d93b826a8f53b.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -3269,11 +3542,11 @@
         "quantity": "1"
       },
       {
-        "id": "a8051d8c-7814-45d4-b53d-f82532337307",
+        "id": 1,
         "item": {
           "id": "noisemaker",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/noisemaker.webp",
           "name": "Noisemaker",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/03f75855b5b4a68ad5d9bc3b2ea2f058b2b33bcbcb2dddb3fb3b46866bfdfa25.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -3303,11 +3576,11 @@
     ],
     "rewards": [
       {
-        "id": "ff9b5eae-436b-4ca8-8133-a192252e0c3a",
+        "id": 0,
         "item": {
           "id": "sterilized-bandage",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/sterilized-bandage.webp",
           "name": "Sterilized Bandage",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/351ae673886bcb208d2b73344ecffade9e42b3234de6148bb09b09c851bc026b.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -3315,11 +3588,11 @@
         "quantity": "3"
       },
       {
-        "id": "bbd60c4b-7b6f-4a40-a796-8c3f2a5f1208",
+        "id": 1,
         "item": {
           "id": "surge-shield-recharger",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/surge-shield-recharger.webp",
           "name": "Surge Shield Recharger",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/477345cf41f6fcddf7e8d8de18bf0cf4cf4eca3d73a41030b995ed3f38d6fb36.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -3327,11 +3600,11 @@
         "quantity": "3"
       },
       {
-        "id": "7cd9035a-f894-4af8-9611-4b78c103a4ad",
+        "id": 2,
         "item": {
           "id": "tactical-mk-3-healing",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/tactical-mk-3-healing.webp",
           "name": "Tactical Mk. 3 (Healing)",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/e6971c65fcfbdff43cc9008bd507c37d5dfd3c5f93ea360c7ea8f8f6391eb3be.png",
           "rarity": "Epic",
           "item_type": "Augment"
         },
@@ -3359,11 +3632,11 @@
     ],
     "rewards": [
       {
-        "id": "28533e49-45c6-41bd-bb5a-2576486d23bb",
+        "id": 0,
         "item": {
           "id": "jolt-mine",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/jolt-mine.webp",
           "name": "Jolt Mine",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2666019a2bd9bf9cc0bb76b8791dab4da5c58adffb3d6b59434538d6ed0a07bb.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -3371,11 +3644,11 @@
         "quantity": "3"
       },
       {
-        "id": "aeba52c3-68a8-42f4-88ce-02627b4c5c5c",
+        "id": 1,
         "item": {
           "id": "raider-hatch-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/raider-hatch-key.webp",
           "name": "Raider Hatch Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/b74d87a841bb5b2cec8f0bc8212f3d32ec7c493ce4a675ca207b1bfc84264449.png",
           "rarity": "Rare",
           "item_type": "Key"
         },
@@ -3383,11 +3656,11 @@
         "quantity": "1"
       },
       {
-        "id": "eb230d4a-c2f5-4fc4-bdf0-043ad650c544",
+        "id": 2,
         "item": {
           "id": "buried-city-town-hall-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/buried-city-town-hall-key.webp",
           "name": "Buried City Town Hall Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/cce7ada0a17b10c668600d5b24ffe9fddac1924b6379c742118c540946fabce9.png",
           "rarity": "Epic",
           "item_type": "Key"
         },
@@ -3408,11 +3681,11 @@
     ],
     "requirements": [
       {
-        "id": "04662365-f4a1-4fd9-a967-4f381fc55271",
+        "id": 0,
         "item": {
           "id": "rocketeer-part",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/rocketeer-part.webp",
           "name": "Rocketeer Driver",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/edce8880f66f1740c1b57ed0ee1090ec249b9c4eb7ae29f6280120da743ca0cd.png",
           "rarity": "Epic",
           "item_type": "Recyclable"
         },
@@ -3426,11 +3699,11 @@
     ],
     "rewards": [
       {
-        "id": "afcfd0d9-bc75-4a01-990a-024739195659",
+        "id": 0,
         "item": {
           "id": "surge-shield-recharger",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/surge-shield-recharger.webp",
           "name": "Surge Shield Recharger",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/477345cf41f6fcddf7e8d8de18bf0cf4cf4eca3d73a41030b995ed3f38d6fb36.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -3438,11 +3711,11 @@
         "quantity": "3"
       },
       {
-        "id": "cfd05728-9dd4-493e-9d11-a4ba35894017",
+        "id": 1,
         "item": {
           "id": "wolfpack",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/wolfpack.webp",
           "name": "Wolfpack",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/5049f52ab01f27e18bc938a171317b4ee69173612968aa43b914e90665b2a275.png",
           "rarity": "Epic",
           "item_type": "Quick Use"
         },
@@ -3471,11 +3744,11 @@
     ],
     "rewards": [
       {
-        "id": "166011a2-9723-453c-9052-4f9bb31437dd",
+        "id": 0,
         "item": {
           "id": "extended-medium-mag-iii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/extended-medium-mag-iii.webp",
           "name": "Extended Medium Mag III",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/cd860795ceab3ce1b622a3583d12b44b44c81b2c6b739ae30d53d7a2cf0283b4.png",
           "rarity": "Rare",
           "item_type": "Modification"
         },
@@ -3483,11 +3756,11 @@
         "quantity": "1"
       },
       {
-        "id": "5bb3721c-3407-4b93-8315-2822fe3773d5",
+        "id": 1,
         "item": {
           "id": "silencer-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/silencer-ii.webp",
           "name": "Silencer II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/3ef02e9b50b103ef4fab56063981ce8beb6b4748cafb3f87fa637fc1ea811a1c.png",
           "rarity": "Rare",
           "item_type": "Modification"
         },
@@ -3495,13 +3768,13 @@
         "quantity": "1"
       },
       {
-        "id": "6ad2e0a0-d1cd-4d0a-acde-9ef1e7380443",
+        "id": 2,
         "item": {
           "id": "gothic-graffiti-aviator-color",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/gothic-graffiti-aviator-color.webp",
           "name": "Gothic Graffiti (Aviator Color)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/gothic-graffiti-aviator-color.webp",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "gothic-graffiti-aviator-color",
         "quantity": "1"
@@ -3528,11 +3801,11 @@
     ],
     "rewards": [
       {
-        "id": "cec0b70c-7c36-4314-b7c0-65544371f6a5",
+        "id": 0,
         "item": {
           "id": "advanced-electrical-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/advanced-electrical-components.webp",
           "name": "Advanced Electrical Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2dba43ac8c214c291a168d1d3eca52e992527fce6319ffe5d71620c330666876.png",
           "rarity": "Rare",
           "item_type": "Refined Material"
         },
@@ -3540,11 +3813,11 @@
         "quantity": "1"
       },
       {
-        "id": "f4d0e18c-332b-4c45-869b-03f58ec8711a",
+        "id": 1,
         "item": {
           "id": "seeker-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/seeker-grenade.webp",
           "name": "Seeker Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/336cef5ecc82b2f0a3f51e4bcd554a52cf2e8c9627b6a7a9726d5deb18716575.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -3552,11 +3825,11 @@
         "quantity": "3"
       },
       {
-        "id": "a30b25c4-1350-4be6-b25e-108bf463a283",
+        "id": 2,
         "item": {
           "id": "raider-hatch-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/raider-hatch-key.webp",
           "name": "Raider Hatch Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/b74d87a841bb5b2cec8f0bc8212f3d32ec7c493ce4a675ca207b1bfc84264449.png",
           "rarity": "Rare",
           "item_type": "Key"
         },
@@ -3582,11 +3855,11 @@
     ],
     "rewards": [
       {
-        "id": "aa25320f-59c9-4c85-8295-b1feaf2bb1b6",
+        "id": 0,
         "item": {
           "id": "medium-ammo",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/medium-ammo.webp",
           "name": "Medium Ammo",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/a900849500f527683c2bf299aa81a181420da6c57f930b6ba648c25ee7776bc9.png",
           "rarity": "Common",
           "item_type": "Ammunition"
         },
@@ -3594,11 +3867,11 @@
         "quantity": "80"
       },
       {
-        "id": "b5eece94-9ca4-4344-8bf0-cacf72191d63",
+        "id": 1,
         "item": {
           "id": "rattler-iii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/rattler-iii.webp",
           "name": "Rattler III",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/4dc8f4476f93fa84a22eefaf6f468f0acbd7fa4a416390f767e6de703340c152.png",
           "rarity": "Common",
           "item_type": "Weapon"
         },
@@ -3628,11 +3901,11 @@
     ],
     "rewards": [
       {
-        "id": "3ce10e27-1702-4964-af97-539902352fb1",
+        "id": 0,
         "item": {
           "id": "explosive-compound",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/explosive-compound.webp",
           "name": "Explosive Compound",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/7a1a45b8c5aeddcdf7d539e3c2facd2d1b98aa5df7f1c74e84a150f35c7bfe28.png",
           "rarity": "Rare",
           "item_type": "Refined Material"
         },
@@ -3640,11 +3913,11 @@
         "quantity": "5"
       },
       {
-        "id": "82243ee1-7602-492c-9546-88c51ca923c9",
+        "id": 1,
         "item": {
           "id": "oil",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/oil.webp",
           "name": "Oil",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/8ee49b53aaa79db3dcf6ab8e1519cc6acb568d53ae2ed2ded72d5c22c8d5f1fb.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -3652,23 +3925,23 @@
         "quantity": "5"
       },
       {
-        "id": "997473a3-6f4d-4799-ad4f-fe8d3a257f5f",
+        "id": 2,
         "item": {
           "id": "bag-radio-renegade-variant",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/bag-radio-renegade-variant.webp",
           "name": "Bag (Radio Renegade Variant)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/bag-radio-renegade-variant.webp",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "bag-radio-renegade-variant",
         "quantity": "1"
       },
       {
-        "id": "aea9afad-0d15-41cb-93ce-50c125d541f8",
+        "id": 3,
         "item": {
           "id": "wires-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/wires.webp",
           "name": "Wires",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/01e737231d5f4ed624d3883ea45234b0a75756a52bd1d0eb49c22b7f439aabbc.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -3696,11 +3969,11 @@
     ],
     "rewards": [
       {
-        "id": "76b34db8-c579-42cd-9c4b-330712233896",
+        "id": 0,
         "item": {
           "id": "adrenaline-shot",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/adrenaline-shot.webp",
           "name": "Adrenaline Shot",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/9e21d8cae98c65d55483bf37c7cf06d9dbff738d2a3c645d4d2f7abd7fc83941.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -3708,11 +3981,11 @@
         "quantity": "3"
       },
       {
-        "id": "79ddb231-5842-4c06-b48b-eb94a5c1196e",
+        "id": 1,
         "item": {
           "id": "tactical-mk-3-healing",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/tactical-mk-3-healing.webp",
           "name": "Tactical Mk. 3 (Healing)",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/e6971c65fcfbdff43cc9008bd507c37d5dfd3c5f93ea360c7ea8f8f6391eb3be.png",
           "rarity": "Epic",
           "item_type": "Augment"
         },
@@ -3720,11 +3993,11 @@
         "quantity": "1"
       },
       {
-        "id": "870b9d8f-859e-443c-90ec-0d7d0854d183",
+        "id": 2,
         "item": {
           "id": "heavy-shield",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/heavy-shield.webp",
           "name": "Heavy Shield",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/e2112dd94fda71e137a147a9e336c9e10feb7cb8b5a304de1830f732ac800efe.png",
           "rarity": "Epic",
           "item_type": "Shield"
         },
@@ -3753,11 +4026,11 @@
     ],
     "rewards": [
       {
-        "id": "ac099244-b8ae-4b95-897f-578bef215dc9",
+        "id": 0,
         "item": {
           "id": "door-blocker",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/door-blocker.webp",
           "name": "Door Blocker",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/ca2b4a3b43168542c95cb060092e4693d8b9da68b0752eb13eb3a1bd4259d739.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -3765,11 +4038,11 @@
         "quantity": "3"
       },
       {
-        "id": "18fe53e0-e098-45c0-a926-2b7f38e22492",
+        "id": 1,
         "item": {
           "id": "zipline",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/zipline.webp",
           "name": "Zipline",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2676ef459d89de8b603111c30c7574d64623aeaa78571b3f6b8e77f476a45d81.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -3777,11 +4050,11 @@
         "quantity": "1"
       },
       {
-        "id": "3eee235f-26d7-49d1-b672-917cbb9f89d5",
+        "id": 2,
         "item": {
           "id": "barricade-kit",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/barricade-kit.webp",
           "name": "Barricade Kit",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/ba60825f710a56390176a874af212a413552a4a7a458d7a0ff55ae75f547a911.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -3811,23 +4084,23 @@
     ],
     "rewards": [
       {
-        "id": "8caf84ec-d251-4e38-857d-6e78ee249228",
+        "id": 0,
         "item": {
           "id": "surge-coil",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/surge-coil.webp",
           "name": "Surge Coil",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/8d3eb5bd13f02e1bf83416336d5e7bef5b8523cb157927eefceca758c5e9f51a.png",
           "rarity": "Rare",
-          "item_type": "Deployable"
+          "item_type": "Quick Use"
         },
         "item_id": "surge-coil",
         "quantity": "1"
       },
       {
-        "id": "dc3eb192-8511-4288-a0d9-dfcaecbc2b04",
+        "id": 1,
         "item": {
           "id": "heavy-gun-parts",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/heavy-gun-parts.webp",
           "name": "Heavy Gun Parts",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f2ede9fe29a567c0a343d6ada527f6e925ef2543920a4a750cc06fc2dd0bbb7d.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -3835,11 +4108,11 @@
         "quantity": "1"
       },
       {
-        "id": "f6adc178-c7d7-43fd-85a4-824a3017bbd5",
+        "id": 2,
         "item": {
           "id": "horizontal-grip",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/horizontal-grip.webp",
           "name": "Horizontal Grip",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2739ccfc9d37bb54f76e7ec96d78b812be6fe59c2b29fd72e6399871599566dc.png",
           "rarity": "Epic",
           "item_type": "Modification"
         },
@@ -3865,23 +4138,23 @@
     ],
     "rewards": [
       {
-        "id": "b057ba9b-ac12-4285-b23b-bbb5ee36373b",
+        "id": 0,
         "item": {
           "id": "shrapnel-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/shrapnel-grenade.webp",
           "name": "Shrapnel Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/04670c0362ee114e92db93e6cd99ab0cc7f66b74cbd882ce462af7265cdddeef.png",
           "rarity": "Uncommon",
-          "item_type": "Throwable"
+          "item_type": "Quick Use"
         },
         "item_id": "shrapnel-grenade",
         "quantity": "3"
       },
       {
-        "id": "50758a68-b117-46bf-be8b-9673204e3af8",
+        "id": 1,
         "item": {
           "id": "lil-smoke-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/lil-smoke-grenade.webp",
           "name": "Li'l Smoke Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/4c4b65c93497bafb3edaae716017990cb52589c9b9bbebc00ecf8d5d8260cb3f.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -3889,11 +4162,11 @@
         "quantity": "5"
       },
       {
-        "id": "1d7684a8-3e0b-4274-9687-3616e5957701",
+        "id": 2,
         "item": {
           "id": "barricade-kit",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/barricade-kit.webp",
           "name": "Barricade Kit",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/ba60825f710a56390176a874af212a413552a4a7a458d7a0ff55ae75f547a911.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -3918,11 +4191,11 @@
     ],
     "rewards": [
       {
-        "id": "15aad7e7-1f3f-4f21-80c2-f3bf07baebd6",
+        "id": 0,
         "item": {
           "id": "raider-tokens",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/raider-tokens.webp",
           "name": "Raider Tokens",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/raider-tokens.webp",
           "rarity": "Common",
           "item_type": "Misc"
         },
@@ -3951,11 +4224,11 @@
     ],
     "rewards": [
       {
-        "id": "aad4da31-b844-4872-a247-dff0fc77512f",
+        "id": 0,
         "item": {
           "id": "barricade-kit",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/barricade-kit.webp",
           "name": "Barricade Kit",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/ba60825f710a56390176a874af212a413552a4a7a458d7a0ff55ae75f547a911.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -3963,11 +4236,11 @@
         "quantity": "3"
       },
       {
-        "id": "bf159ec5-7953-4bb9-9797-ba64cc58d09d",
+        "id": 1,
         "item": {
           "id": "lure-grenade-trap",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/lure-grenade-trap.webp",
           "name": "Lure Grenade Trap",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/151b793720810e28494218332282e13d50d8d9763f359616687ae2e941b82a5e.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -3975,11 +4248,11 @@
         "quantity": "3"
       },
       {
-        "id": "780b6b52-3ff3-484d-b6c0-8767ceae311a",
+        "id": 2,
         "item": {
           "id": "seeker-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/seeker-grenade.webp",
           "name": "Seeker Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/336cef5ecc82b2f0a3f51e4bcd554a52cf2e8c9627b6a7a9726d5deb18716575.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -3992,6 +4265,79 @@
     "sortOrder": 422.07582107905125
   },
   {
+    "id": "sizing-things-up",
+    "name": "Sizing Things Up",
+    "objectives": [
+      "COMPLETE 2",
+      "Take a photo of the Emperor's leg by the bridge outside Old Town",
+      "IN ONE ROUND:",
+      "- (Optional) Break open the crashed probe by the Emperor's leg near Almatera Station",
+      "- Inspect the Circuitry in the probe",
+      "--------------------------",
+      "Analyze the exposed area on top of the Emperor's leg near Railroad Junction"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "adrenaline-shot",
+      "exodus-technical-handbook",
+      "bettina-i",
+      "heavy-ammo"
+    ],
+    "rewards": [
+      {
+        "id": 0,
+        "item": {
+          "id": "adrenaline-shot",
+          "name": "Adrenaline Shot",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/9e21d8cae98c65d55483bf37c7cf06d9dbff738d2a3c645d4d2f7abd7fc83941.png",
+          "rarity": "Common",
+          "item_type": "Quick Use"
+        },
+        "item_id": "adrenaline-shot",
+        "quantity": "3"
+      },
+      {
+        "id": 1,
+        "item": {
+          "id": "exodus-technical-handbook",
+          "name": "Exodus Technical Handbook",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20261007/c3b6027377050866ec228b7ed22c9b6e405264f07758f977abf6c5bd29d6ad79.png",
+          "rarity": "Rare",
+          "item_type": "Research Item"
+        },
+        "item_id": "exodus-technical-handbook",
+        "quantity": "1"
+      },
+      {
+        "id": 2,
+        "item": {
+          "id": "bettina-i",
+          "name": "Bettina I",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/06d8b439ec8641b72149d65110cb898fd16164349ed124f14c9391810d56e526.png",
+          "rarity": "Epic",
+          "item_type": "Weapon"
+        },
+        "item_id": "bettina-i",
+        "quantity": "1"
+      },
+      {
+        "id": 3,
+        "item": {
+          "id": "heavy-ammo",
+          "name": "Heavy Ammo",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2b70c72608d811d0285e411a0ab4be1bf79bd301289a2b8010f5a6e95e4d5da9.png",
+          "rarity": "Common",
+          "item_type": "Ammunition"
+        },
+        "item_id": "heavy-ammo",
+        "quantity": "60"
+      }
+    ],
+    "trader": "Celeste",
+    "xp": 5000,
+    "sortOrder": 0
+  },
+  {
     "id": "snap-and-salvage",
     "name": "Snap and Salvage",
     "objectives": [
@@ -4002,11 +4348,11 @@
     ],
     "requirements": [
       {
-        "id": "097e24dd-82bc-4733-9d15-42fc6dc712bf",
+        "id": 0,
         "item": {
           "id": "magnetron",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/magnetron.webp",
           "name": "Magnetron",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/8c3a644056ea6a9544ebc336325606e2a4edad3a2ff2a1d446f32f4a66cc63de.png",
           "rarity": "Epic",
           "item_type": "Recyclable"
         },
@@ -4014,11 +4360,11 @@
         "quantity": 1
       },
       {
-        "id": "1acd2461-d4a9-4d1c-ba2e-1e0ebc03c1c9",
+        "id": 1,
         "item": {
           "id": "flow-controller",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/flow-controller.webp",
           "name": "Flow Controller",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/58530431cc886403c5eddaf93b11b6c0cf612fe3f22fcdf34719374186694f52.png",
           "rarity": "Rare",
           "item_type": "Recyclable"
         },
@@ -4034,11 +4380,11 @@
     ],
     "rewards": [
       {
-        "id": "27aa790d-0d6a-4c38-bb96-3f64e8f6a04a",
+        "id": 0,
         "item": {
           "id": "light-ammo",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/light-ammo.webp",
           "name": "Light Ammo",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/0349d310ba52801cd54474d20d28224dacc8d721e0113609ef9724178de9ddad.png",
           "rarity": "Common",
           "item_type": "Ammunition"
         },
@@ -4046,11 +4392,11 @@
         "quantity": "100"
       },
       {
-        "id": "5a65a037-d1a5-41a9-adbc-3ddf97798a28",
+        "id": 1,
         "item": {
           "id": "extended-light-mag-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/extended-light-mag-ii.webp",
           "name": "Extended Light Mag II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2c3769fa21cd983c0803ddd5b2db2cd07ce3962a3a676acafcecc7258f503930.png",
           "rarity": "Uncommon",
           "item_type": "Modification"
         },
@@ -4058,11 +4404,11 @@
         "quantity": "1"
       },
       {
-        "id": "818b2491-b371-42a6-baa9-ecc7ab9ccdfb",
+        "id": 2,
         "item": {
           "id": "silencer-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/silencer-ii.webp",
           "name": "Silencer II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/3ef02e9b50b103ef4fab56063981ce8beb6b4748cafb3f87fa637fc1ea811a1c.png",
           "rarity": "Rare",
           "item_type": "Modification"
         },
@@ -4070,11 +4416,11 @@
         "quantity": "1"
       },
       {
-        "id": "b663452d-5280-4baf-979e-e21b3ade377c",
+        "id": 3,
         "item": {
           "id": "burletta-iiii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/burletta-iiii.webp",
           "name": "Burletta III",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c4628ed26c28ea339b0c10eb1bc6133a81115c04f3bac2dbbb3019b8857e705e.png",
           "rarity": "Uncommon",
           "item_type": "Weapon"
         },
@@ -4085,6 +4431,60 @@
     "trader": "TianWen",
     "xp": 0,
     "sortOrder": 1519.5769392581892
+  },
+  {
+    "id": "someone-elses-shoes",
+    "name": "Someone Else's Shoes",
+    "objectives": [
+      "Scan any Android on Stella Montis"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "stella-montis-medical-storage-key",
+      "herbal-bandage",
+      "shield-recharger"
+    ],
+    "rewards": [
+      {
+        "id": 0,
+        "item": {
+          "id": "stella-montis-medical-storage-key",
+          "name": "Stella Montis Medical Storage Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c227c6594326f7f473e78f9b44b2986c2e93437fb78ddc897ea54833aed8428c.png",
+          "rarity": "Uncommon",
+          "item_type": "Key"
+        },
+        "item_id": "stella-montis-medical-storage-key",
+        "quantity": "1"
+      },
+      {
+        "id": 1,
+        "item": {
+          "id": "herbal-bandage",
+          "name": "Herbal Bandage",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/8b633a2d39efcb5342abd95c934f9590ada792dedf9c61fead906bc80e606050.png",
+          "rarity": "Uncommon",
+          "item_type": "Quick Use"
+        },
+        "item_id": "herbal-bandage",
+        "quantity": "3"
+      },
+      {
+        "id": 2,
+        "item": {
+          "id": "shield-recharger",
+          "name": "Shield Recharger",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c7a1e1a11f54a48b5ac90625d1c765a3129c4272f27e2784565a82976cc6f6c9.png",
+          "rarity": "Uncommon",
+          "item_type": "Quick Use"
+        },
+        "item_id": "shield-recharger",
+        "quantity": "2"
+      }
+    ],
+    "trader": "Celeste",
+    "xp": 5000,
+    "sortOrder": 0
   },
   {
     "id": "source-of-the-contamination",
@@ -4102,11 +4502,11 @@
     ],
     "rewards": [
       {
-        "id": "ef00e0ac-9ef0-4d78-88e4-b2ba392ee331",
+        "id": 0,
         "item": {
           "id": "spring",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/spring.webp",
           "name": "Steel Spring",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/96c07fa1c6e5e42b342a54f86f3258cf69c1d5c3f27bf49ccc79d511fccc38bf.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -4114,11 +4514,11 @@
         "quantity": "5"
       },
       {
-        "id": "f49ecfbd-1acf-4883-9e45-8663a99f0c7d",
+        "id": 1,
         "item": {
           "id": "mod-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/mod-components.webp",
           "name": "Mod Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/b89dcbc0cb98a02d4c84d0820dc64da7a24b04b8719ec6561bf0713133d05356.png",
           "rarity": "Rare",
           "item_type": "Refined Material"
         },
@@ -4126,11 +4526,11 @@
         "quantity": "1"
       },
       {
-        "id": "f9ac0a82-03f5-4caf-8e3c-234d5e463c0c",
+        "id": 2,
         "item": {
           "id": "duct-tape-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/duct-tape.webp",
           "name": "Duct Tape",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/7f3b02ebf62b0090609ba464137f3092b91ba7f3f44b7aa8d8f8769e2f68a393.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -4156,11 +4556,11 @@
     ],
     "rewards": [
       {
-        "id": "2e349990-8fce-4ca5-b727-3a61c897ba54",
+        "id": 0,
         "item": {
           "id": "processor",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/processor.webp",
           "name": "Processor",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/64167940ac8cd97144ef720a2979e1b6af99ff241ecc0ee4adb3463d4bd32f33.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -4168,11 +4568,11 @@
         "quantity": "2"
       },
       {
-        "id": "9ffb0502-deb7-4294-9c44-474fd01bcbe1",
+        "id": 1,
         "item": {
           "id": "trigger-nade-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/trigger-nade.webp",
           "name": "Trigger Nade Blueprint",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d0a7d586ba65a83857a075ab8bccbeaaa682b14b9366e2eef2965fc418f01984.png",
           "rarity": "Legendary",
           "item_type": "Blueprint"
         },
@@ -4180,11 +4580,11 @@
         "quantity": "1"
       },
       {
-        "id": "ad39d222-1375-4fa9-83f1-df06a6c17039",
+        "id": 2,
         "item": {
           "id": "crude-explosives",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/crude-explosives.webp",
           "name": "Crude Explosives",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d961698dc4b1742ecdd18954510264d62944166710cb027e992bbbabb20b855e.png",
           "rarity": "Uncommon",
           "item_type": "Refined Material"
         },
@@ -4216,11 +4616,11 @@
     ],
     "rewards": [
       {
-        "id": "08422ac9-e96a-48a1-9336-31472a051868",
+        "id": 0,
         "item": {
           "id": "seeker-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/seeker-grenade.webp",
           "name": "Seeker Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/336cef5ecc82b2f0a3f51e4bcd554a52cf2e8c9627b6a7a9726d5deb18716575.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -4228,11 +4628,11 @@
         "quantity": "5"
       },
       {
-        "id": "724c7fb7-7b4f-4716-8471-f7be63949fb1",
+        "id": 1,
         "item": {
           "id": "lure-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/lure-grenade.webp",
           "name": "Lure Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/4c403880e106a69575813cb0c8052a335704bd3034f1580ca30d93b826a8f53b.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -4240,11 +4640,11 @@
         "quantity": "5"
       },
       {
-        "id": "cf3477e8-b88a-429c-8d27-84ec2525f639",
+        "id": 2,
         "item": {
           "id": "snap-hook",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/snap-hook.webp",
           "name": "Snap Hook",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/47b3fca0293a250f1ea89bc67025a2378f74e015fcf7ad6a4b781182f225e0ea.png",
           "rarity": "Legendary",
           "item_type": "Quick Use"
         },
@@ -4274,23 +4674,23 @@
     ],
     "rewards": [
       {
-        "id": "92122893-7311-473d-8a4f-cbf3a52fa527",
+        "id": 0,
         "item": {
           "id": "advanced-mechanical-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/advanced-mechanical-components.webp",
           "name": "Advanced Mechanical Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f4c5d01a6dd5e4e637a8914dff7b43ed34507a105b829baed5960967461fab0d.png",
           "rarity": "Rare",
-          "item_type": "Advanced Material"
+          "item_type": "Refined Material"
         },
         "item_id": "advanced-mechanical-components",
         "quantity": "3"
       },
       {
-        "id": "a591e158-19e2-4eff-8385-49653bcd9a70",
+        "id": 1,
         "item": {
           "id": "medium-gun-parts",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/medium-gun-parts.webp",
           "name": "Medium Gun Parts",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/40186d5a2191a5a8c06242c8a8465a03abe3133ab1c12739beeaa2be79e870b7.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -4317,11 +4717,11 @@
     ],
     "rewards": [
       {
-        "id": "55f335d9-fe29-40df-b278-5938be8fdba7",
+        "id": 0,
         "item": {
           "id": "synthesized-fuel",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/synthesized-fuel.webp",
           "name": "Synthesized Fuel",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d1a549568d9b25ca7d96f773485cd029adb40a7a955c38904acea7233757d1d6.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -4329,11 +4729,11 @@
         "quantity": "3"
       },
       {
-        "id": "7a842682-44d9-4b1c-93d8-cfbfbc5e52e6",
+        "id": 1,
         "item": {
           "id": "spaceport-trench-tower-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/spaceport-trench-tower-key.webp",
           "name": "Spaceport Trench Tower Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d671da7fd8b9546ac6c05fe905b963f037bf4efc646d0fae4e7451342c547d24.png",
           "rarity": "Uncommon",
           "item_type": "Key"
         },
@@ -4341,13 +4741,13 @@
         "quantity": "1"
       },
       {
-        "id": "dfcf10cd-0883-4c5b-86da-89ac900cfd80",
+        "id": 2,
         "item": {
           "id": "blue-radio-renegade-color",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/blue-radio-renegade-color.webp",
           "name": "Blue (Radio Renegade Color)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/blue-radio-renegade-color.webp",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "blue-radio-renegade-color",
         "quantity": "1"
@@ -4374,11 +4774,11 @@
     ],
     "rewards": [
       {
-        "id": "37d1654a-9004-4dd4-b6f4-f488869b2ee3",
+        "id": 0,
         "item": {
           "id": "fireworks-box-blueprint",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/fireworks-box-blueprint.webp",
           "name": "Fireworks Box Blueprint",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/fa7ca398b8d73c60cfb9583abc7e9935c0fda58f9d288011fac09a2f1204a34c.png",
           "rarity": "Legendary",
           "item_type": "Blueprint"
         },
@@ -4386,11 +4786,11 @@
         "quantity": "1"
       },
       {
-        "id": "36f25393-9593-4f0f-a22d-406c40f022e7",
+        "id": 1,
         "item": {
           "id": "seeker-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/seeker-grenade.webp",
           "name": "Seeker Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/336cef5ecc82b2f0a3f51e4bcd554a52cf2e8c9627b6a7a9726d5deb18716575.png",
           "rarity": "Uncommon",
           "item_type": "Quick Use"
         },
@@ -4398,13 +4798,13 @@
         "quantity": "3"
       },
       {
-        "id": "1ab9d052-f933-4cba-a226-d86e3e1ea4af",
+        "id": 2,
         "item": {
           "id": "blaze-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/blaze-grenade.webp",
           "name": "Blaze Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/04aa543b63dda602e46d32d16f106e30cdde922af601538981bf3d9c68247da2.png",
           "rarity": "Rare",
-          "item_type": "Throwable"
+          "item_type": "Quick Use"
         },
         "item_id": "blaze-grenade",
         "quantity": "3"
@@ -4432,11 +4832,11 @@
     ],
     "rewards": [
       {
-        "id": "cb44140d-776e-4f45-8473-8973205605aa",
+        "id": 0,
         "item": {
           "id": "heavy-fuze-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/heavy-fuze-grenade.webp",
           "name": "Heavy Fuze Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c796c3f134a51ab984cdf1d425d55bcb4af05ee6222dbf842de77621d423be20.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -4444,11 +4844,11 @@
         "quantity": "3"
       },
       {
-        "id": "07efd196-4f99-436b-b8c9-80fb5d736f40",
+        "id": 1,
         "item": {
           "id": "deadline",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/deadline.webp",
           "name": "Deadline",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/8af3c45402fe1d383e6eeb175d17b566b7622c0488543f3dccc8479724307410.png",
           "rarity": "Epic",
           "item_type": "Quick Use"
         },
@@ -4456,13 +4856,13 @@
         "quantity": "1"
       },
       {
-        "id": "2e507298-810c-4dbb-ac24-6e7f9e0c71c7",
+        "id": 2,
         "item": {
           "id": "showstopper",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/showstopper.webp",
           "name": "Showstopper",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1eff7156ed2d249410b310dc0bee59917ced50e41db9adaba18ea0a84414e755.png",
           "rarity": "Rare",
-          "item_type": "Throwable"
+          "item_type": "Quick Use"
         },
         "item_id": "showstopper",
         "quantity": "3"
@@ -4483,11 +4883,11 @@
     ],
     "requirements": [
       {
-        "id": "99908b54-5aed-4821-aa78-ccf90f8a073d",
+        "id": 0,
         "item": {
           "id": "bicycle-pump",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/bicycle-pump.webp",
           "name": "Bicycle Pump",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/22b9b6db5c83fc8b7935a2fd9be3dd7c9901c0514190c6ae0b3ca0b49a1a14e5.png",
           "rarity": "Rare",
           "item_type": "Recyclable"
         },
@@ -4495,11 +4895,11 @@
         "quantity": 1
       },
       {
-        "id": "a1b1aab0-0c5e-44db-bd5e-89f4fc2ebfd7",
+        "id": 1,
         "item": {
           "id": "deflated-football",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/deflated-football.webp",
           "name": "Deflated Football",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d5b3ec4db0c330d2687b146d57524627b49bd3bd29a902c6bdac9edd74c18d78.png",
           "rarity": "Uncommon",
           "item_type": "Recyclable"
         },
@@ -4514,11 +4914,11 @@
     ],
     "rewards": [
       {
-        "id": "2273098e-31cc-484b-8b9f-895c0a12e3c2",
+        "id": 0,
         "item": {
           "id": "tagging-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/tagging-grenade.webp",
           "name": "Tagging Grenade",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/4a3ce0cbe8fe87cf44cd051e675901a17af99ea46231fd15ac5bb485d264632d.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -4526,11 +4926,11 @@
         "quantity": "5"
       },
       {
-        "id": "4c26ab3f-8407-49ea-96c8-f09740ae9098",
+        "id": 1,
         "item": {
           "id": "firecracker",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/firecracker.webp",
           "name": "Firecracker",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/0a12c668d633574b6f139c4a47a792e30babf3ba8250cb99541b0ea642703bd6.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -4538,13 +4938,13 @@
         "quantity": "5"
       },
       {
-        "id": "dcdddc17-36f3-4c3a-b191-cefe886b4dee",
+        "id": 2,
         "item": {
           "id": "faded-flush-aviator-color",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/.webp",
           "name": "Faded Flush (Aviator Color)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/.webp",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "faded-flush-aviator-color",
         "quantity": "1"
@@ -4568,11 +4968,11 @@
     ],
     "rewards": [
       {
-        "id": "b10dfc87-5cc0-4c33-8ba1-8a36866680db",
+        "id": 0,
         "item": {
           "id": "hullcracker-blueprint",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/hullcracker.webp",
           "name": "Hullcracker Blueprint",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/bb34cb6de72f17249fa398720b89d5cdcdce713cc258b24f5bb88cc315908418.png",
           "rarity": "Legendary",
           "item_type": "Blueprint"
         },
@@ -4600,11 +5000,11 @@
     ],
     "rewards": [
       {
-        "id": "44472bab-b2d1-4c96-9538-c6dd1ea97d6b",
+        "id": 0,
         "item": {
           "id": "stitcher-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/stitcher-ii.webp",
           "name": "Stitcher II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/886d6f5b235b674b1e595d6c15b841b9c3dd2ffaa94700e6eac9300541b16545.png",
           "rarity": "Common",
           "item_type": "Weapon"
         },
@@ -4612,23 +5012,23 @@
         "quantity": "1"
       },
       {
-        "id": "ca9d47c5-c03f-464f-89c8-7fd37812faa8",
+        "id": 1,
         "item": {
           "id": "cheer-emote",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/cheer-emote.webp",
           "name": "Cheer (Emote)",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/789cedefe24ca6bd1465317a37e473c07cd79bed77c89e5d765476095f91f304.png",
           "rarity": "",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "cheer-emote",
         "quantity": "1"
       },
       {
-        "id": "72c896ac-a11d-4c13-9231-169396a3f8d1",
+        "id": 2,
         "item": {
           "id": "extended-light-mag-i",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/extended-light-mag-i.webp",
           "name": "Extended Light Mag I",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/90b6f6fca9bb0be802577e36523dd0e9a622d4cd1b677d7e99f3cf6dea03052f.png",
           "rarity": "Common",
           "item_type": "Modification"
         },
@@ -4654,23 +5054,23 @@
     ],
     "rewards": [
       {
-        "id": "64e14f95-582f-4aa8-a267-be1a039906a3",
+        "id": 0,
         "item": {
           "id": "succulent-backpack-charm",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/succulent-backpack-charm.webp",
           "name": "Succulent (Backpack Charm)",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/603425b97960e7ce30c35413820503f06fba4687dd7e554401aff2db59f3cccf.png",
           "rarity": "",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "succulent-backpack-charm",
         "quantity": "1"
       },
       {
-        "id": "5a99ca44-fd4a-47fa-ba72-47e4816c5f71",
+        "id": 1,
         "item": {
           "id": "coins",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/coins.webp",
           "name": "Coins",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/coins.webp",
           "rarity": "Common",
           "item_type": "Misc"
         },
@@ -4695,11 +5095,11 @@
     ],
     "requirements": [
       {
-        "id": "73ad56e1-195d-4507-bc13-10d3efa56e5c",
+        "id": 0,
         "item": {
           "id": "flushing-terminal-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/flushing-terminal-key.webp",
           "name": "Flushing Terminal Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1ddd2ac4608c201c04a59115887be0746c4666ef2a8c21252ddf5b337104aed8.png",
           "rarity": "Common",
           "item_type": "Trinket"
         },
@@ -4715,11 +5115,11 @@
     ],
     "rewards": [
       {
-        "id": "5ca484af-c912-433e-870f-c0a2175d0d5f",
+        "id": 0,
         "item": {
           "id": "air-freshener",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/air-freshener.webp",
           "name": "Air Freshener",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/e81c90c2af1a940ea5c3390cb919ce81a8c665ce9d68be102025474c4f971437.png",
           "rarity": "Uncommon",
           "item_type": "Trinket"
         },
@@ -4727,11 +5127,11 @@
         "quantity": "1"
       },
       {
-        "id": "e5391e33-5a4b-4ce6-837e-e4632a025e56",
+        "id": 1,
         "item": {
           "id": "noisemaker",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/noisemaker.webp",
           "name": "Noisemaker",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/03f75855b5b4a68ad5d9bc3b2ea2f058b2b33bcbcb2dddb3fb3b46866bfdfa25.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -4739,23 +5139,23 @@
         "quantity": "3"
       },
       {
-        "id": "03fbbd31-e3cf-4d45-802c-f4297a8fe2f1",
+        "id": 2,
         "item": {
           "id": "warden-outfit",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/warden-outfit.webp",
           "name": "Warden (Outfit)",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/2fa449cc20966598d82e29b0603aa99d9e58aa84bb504f2050c10a7a5a288899.png",
           "rarity": "Common",
-          "item_type": "Misc"
+          "item_type": "Outfits"
         },
         "item_id": "warden-outfit",
         "quantity": "1"
       },
       {
-        "id": "6941481f-5e5b-48ca-8c78-3eb15478bd46",
+        "id": 3,
         "item": {
           "id": "dam-staff-room-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/dam-staff-room-key.webp",
           "name": "Dam Staff Room Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/7143dc8e609dc30720329c2f30b9300fe5ff9413eb6dc2b7933c40e7612f54fa.png",
           "rarity": "Uncommon",
           "item_type": "Key"
         },
@@ -4780,11 +5180,11 @@
     ],
     "requirements": [
       {
-        "id": "b83da1f7-aa96-4e94-bf29-a6b68232937e",
+        "id": 0,
         "item": {
           "id": "snitch-scanner",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/snitch-scanner.webp",
           "name": "Snitch Scanner",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/33043fac86aad0e7e5da70d3c8f1b32b3eaf90465fe1c6c637cf98f4b3be4670.png",
           "rarity": "Uncommon",
           "item_type": "Recyclable"
         },
@@ -4792,11 +5192,11 @@
         "quantity": 2
       },
       {
-        "id": "af0091d5-36f5-4bb1-92d9-2ff238902ad6",
+        "id": 1,
         "item": {
           "id": "wasp-driver",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/wasp-driver.webp",
           "name": "Wasp Driver",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/6c4825f3b5911795421c1764532f072972cade677679f4972da5c929c7611840.png",
           "rarity": "Rare",
           "item_type": "Recyclable"
         },
@@ -4804,11 +5204,11 @@
         "quantity": 2
       },
       {
-        "id": "5f39b631-f465-47e5-b357-145be6c12fe1",
+        "id": 2,
         "item": {
           "id": "hornet-driver",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/hornet-driver.webp",
           "name": "Hornet Driver",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/95daafc88d936d778cf46dbb1c960dbd1926b6d0c4fcdaf71eaa354c6a82300f.png",
           "rarity": "Rare",
           "item_type": "Recyclable"
         },
@@ -4824,11 +5224,11 @@
     ],
     "rewards": [
       {
-        "id": "5e0f3d95-2b66-4067-83b1-8ec61b23d9ce",
+        "id": 0,
         "item": {
           "id": "defibrillator",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/defibrillator.webp",
           "name": "Defibrillator",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1aef07229aa99c8801612a889958b02f7faf5928905d6912bb6af480bbe403f1.png",
           "rarity": "Rare",
           "item_type": "Quick Use"
         },
@@ -4836,11 +5236,11 @@
         "quantity": "2"
       },
       {
-        "id": "826e45df-6481-4eb6-b837-d900fe88e1a5",
+        "id": 1,
         "item": {
           "id": "dam-control-center-tower-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/dam-control-center-tower-key.webp",
           "name": "Dam Control Tower Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/9c7bfdd8eb77b2c8d4d90a1ff0ce79c8899e0b115e6c8a1cce70648d584a73a3.png",
           "rarity": "Epic",
           "item_type": "Key"
         },
@@ -4848,23 +5248,23 @@
         "quantity": "1"
       },
       {
-        "id": "e3c38f91-ea26-4dbe-ae52-2ed297da45d3",
+        "id": 2,
         "item": {
           "id": "orange-camo-origin-outfit",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/orange-camo-origin-outfit.webp",
           "name": "Orange Camo (Origin Outfit)",
+          "icon": "https://static.metaforge.app/arc-raiders/icons/orange-camo-origin-outfit.webp",
           "rarity": "",
-          "item_type": "Misc"
+          "item_type": "Cosmetic"
         },
         "item_id": "orange-camo-origin-outfit",
         "quantity": "1"
       },
       {
-        "id": "cee8d2df-e969-4dad-8919-2b7b46701dcf",
+        "id": 3,
         "item": {
           "id": "raider-hatch-key",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/raider-hatch-key.webp",
           "name": "Raider Hatch Key",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/b74d87a841bb5b2cec8f0bc8212f3d32ec7c493ce4a675ca207b1bfc84264449.png",
           "rarity": "Rare",
           "item_type": "Key"
         },
@@ -4877,6 +5277,61 @@
     "sortOrder": 1516.91801992278
   },
   {
+    "id": "to-the-skies",
+    "name": "To the Skies",
+    "objectives": [
+      "Scan any Crashed ARC Probe",
+      "Scan any ARC Courier"
+    ],
+    "requirements": [],
+    "rewardItemIds": [
+      "arc-performance-steel",
+      "arc-thermo-lining",
+      "arc-synthetic-resin"
+    ],
+    "rewards": [
+      {
+        "id": 0,
+        "item": {
+          "id": "arc-performance-steel",
+          "name": "ARC Performance Steel",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/5f44f0fef46cc87758607a419ef3b590f4048418c4e17f0976db6cfbdfe5e344.png",
+          "rarity": "Rare",
+          "item_type": "Recyclable"
+        },
+        "item_id": "arc-performance-steel",
+        "quantity": "3"
+      },
+      {
+        "id": 1,
+        "item": {
+          "id": "arc-thermo-lining",
+          "name": "ARC Thermo Lining",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f6cfa0b7e2c90849ea32acc3ffeb9e03e8b992ce1765af8b241ef6595880b498.png",
+          "rarity": "Rare",
+          "item_type": "Recyclable"
+        },
+        "item_id": "arc-thermo-lining",
+        "quantity": "3"
+      },
+      {
+        "id": 2,
+        "item": {
+          "id": "arc-synthetic-resin",
+          "name": "ARC Synthetic Resin",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/54fd52d1fc2b677d6788f07df6008c7e95166bf2ade5d514ec5eda77af85d83d.png",
+          "rarity": "Rare",
+          "item_type": "Recyclable"
+        },
+        "item_id": "arc-synthetic-resin",
+        "quantity": "3"
+      }
+    ],
+    "trader": "Apollo",
+    "xp": 8000,
+    "sortOrder": 0
+  },
+  {
     "id": "trash-into-treasure",
     "name": "Trash Into Treasure",
     "objectives": [
@@ -4885,11 +5340,11 @@
     ],
     "requirements": [
       {
-        "id": "a3e0d7e1-3c85-49dc-825e-f90725c4b426",
+        "id": 0,
         "item": {
           "id": "wires-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/wires.webp",
           "name": "Wires",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/01e737231d5f4ed624d3883ea45234b0a75756a52bd1d0eb49c22b7f439aabbc.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -4897,11 +5352,11 @@
         "quantity": 6
       },
       {
-        "id": "3b8f4923-ace3-4551-81ec-1eea86d9298f",
+        "id": 1,
         "item": {
           "id": "battery",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/battery.webp",
           "name": "Battery",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/5df6141a282776aa2c25d45278cc7d699ef96624886d743e3f8865bbef8d7bb5.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -4915,11 +5370,11 @@
     ],
     "rewards": [
       {
-        "id": "fb7b5b5d-dfee-4080-bb8a-f5f2353f46f4",
+        "id": 0,
         "item": {
           "id": "tactical-mk-1",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/tactical-mk-1.webp",
           "name": "Tactical Mk. 1",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/c21464b72f80d0da4a0e75f2d4d0e67ba13437661e9b9b87c946256adc71c10a.png",
           "rarity": "Uncommon",
           "item_type": "Augment"
         },
@@ -4927,11 +5382,11 @@
         "quantity": "1"
       },
       {
-        "id": "74dacbe6-4e33-47b1-b97e-fe86fb227e78",
+        "id": 1,
         "item": {
           "id": "adrenaline-shot",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/adrenaline-shot.webp",
           "name": "Adrenaline Shot",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/9e21d8cae98c65d55483bf37c7cf06d9dbff738d2a3c645d4d2f7abd7fc83941.png",
           "rarity": "Common",
           "item_type": "Quick Use"
         },
@@ -4951,13 +5406,13 @@
     ],
     "requirements": [
       {
-        "id": "f1a604e7-4b19-4d8f-a859-0abf9676c838",
+        "id": 0,
         "item": {
           "id": "power-rod",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/power-rod.webp",
           "name": "Power Rod",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/e4ff63d3b3654582854cc9e53964fca9cabb9e975542074e718e5d7c914ff62e.png",
           "rarity": "Epic",
-          "item_type": "Advanced Material"
+          "item_type": "Refined Material"
         },
         "item_id": "power-rod",
         "quantity": 1
@@ -4970,23 +5425,23 @@
     ],
     "rewards": [
       {
-        "id": "b5e6ce57-7803-4984-b809-cd2ae8583824",
+        "id": 0,
         "item": {
           "id": "advanced-mechanical-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/advanced-mechanical-components.webp",
           "name": "Advanced Mechanical Components",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f4c5d01a6dd5e4e637a8914dff7b43ed34507a105b829baed5960967461fab0d.png",
           "rarity": "Rare",
-          "item_type": "Advanced Material"
+          "item_type": "Refined Material"
         },
         "item_id": "advanced-mechanical-components",
         "quantity": "2"
       },
       {
-        "id": "d6d05a09-3aa4-4c10-8e9b-ff53ec15cd1b",
+        "id": 1,
         "item": {
           "id": "magnet",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/magnet.webp",
           "name": "Magnet",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/edb7bb27d21a8ef8bf4fd5cf08c913f86def24ee0249b809c4fd06d7a392bb9b.png",
           "rarity": "Uncommon",
           "item_type": "Topside Material"
         },
@@ -4994,11 +5449,11 @@
         "quantity": "5"
       },
       {
-        "id": "e597821d-a421-4d0f-9f70-00059ab2d421",
+        "id": 2,
         "item": {
           "id": "synthesized-fuel",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/synthesized-fuel.webp",
           "name": "Synthesized Fuel",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/d1a549568d9b25ca7d96f773485cd029adb40a7a955c38904acea7233757d1d6.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -5024,11 +5479,11 @@
     ],
     "rewards": [
       {
-        "id": "36dfa2f5-e34a-4eea-9d51-ef1783cd84da",
+        "id": 0,
         "item": {
           "id": "heavy-gun-parts",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/heavy-gun-parts.webp",
           "name": "Heavy Gun Parts",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f2ede9fe29a567c0a343d6ada527f6e925ef2543920a4a750cc06fc2dd0bbb7d.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -5036,11 +5491,11 @@
         "quantity": "2"
       },
       {
-        "id": "51b5ea58-9919-4946-ac01-4293fe99d8cd",
+        "id": 1,
         "item": {
           "id": "medium-gun-parts",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/medium-gun-parts.webp",
           "name": "Medium Gun Parts",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/40186d5a2191a5a8c06242c8a8465a03abe3133ab1c12739beeaa2be79e870b7.png",
           "rarity": "Rare",
           "item_type": "Topside Material"
         },
@@ -5066,11 +5521,11 @@
     ],
     "requirements": [
       {
-        "id": "959356ad-e436-4cc8-a483-45d856e73689",
+        "id": 0,
         "item": {
           "id": "water-pump",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/water-pump.webp",
           "name": "Water Pump",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/06568b133e33eee0615cc90ebf58ccb401bd44c93d72e1f20a7153cd6ae888fe.png",
           "rarity": "Rare",
           "item_type": "Recyclable"
         },
@@ -5078,12 +5533,12 @@
         "quantity": 1
       },
       {
-        "id": "f19bea42-64b5-45e5-9ebb-3b1341c1f96c",
+        "id": 1,
         "item": {
           "id": "fertilizer",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/fertilizer.webp",
           "name": "Fertilizer",
-          "rarity": "Common",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/6aa8c273d4dfa82e12d9788cc13589aa386d876ca31e8477baca79d9fc34f255.png",
+          "rarity": "Uncommon",
           "item_type": "Nature"
         },
         "item_id": "fertilizer",
@@ -5097,11 +5552,11 @@
     ],
     "rewards": [
       {
-        "id": "0ee5f3f3-a1c1-411e-b3e4-dbf0bd3f91ae",
+        "id": 0,
         "item": {
           "id": "il-toro-i",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/il%20Toro-i.webp",
           "name": "Il Toro I",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/07b56ac03f97e123f766b771a6757aa30d66fd7517af99130accf95d63414ec6.png",
           "rarity": "Uncommon",
           "item_type": "Weapon"
         },
@@ -5109,11 +5564,11 @@
         "quantity": "1"
       },
       {
-        "id": "7b613402-d182-4436-8d75-d318acb9a9a6",
+        "id": 1,
         "item": {
           "id": "shotgun-choke-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/shotgun-choke-ii.webp",
           "name": "Shotgun Choke II",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/93a51965b523f0599e50ab631e220b2961065f9fc5252483acc0fb9959c3bc65.png",
           "rarity": "Uncommon",
           "item_type": "Modification"
         },
@@ -5121,11 +5576,11 @@
         "quantity": "1"
       },
       {
-        "id": "fc486f16-e16e-45cc-9ecd-e20163055504",
+        "id": 2,
         "item": {
           "id": "shotgun-ammo",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/shotgun-ammo.webp",
           "name": "Shotgun Ammo",
+          "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/59ddc33962a91be44f8bcece80aa24dea68115606b3f0a9194556ac21212bbc4.png",
           "rarity": "Common",
           "item_type": "Ammunition"
         },
@@ -5136,445 +5591,5 @@
     "trader": "TianWen",
     "xp": 0,
     "sortOrder": 3406.951187812034
-  },
-  {
-    "id": "untended-garden",
-    "name": "Untended Garden",
-    "objectives": [
-      "In One Round:",
-      "Go to the Hydroponic Dome Complex",
-      "Access the data archive in one of the domes",
-      "Upload the data to the computer terminal in any Field Depot"
-    ],
-    "requirements": [],
-    "rewardItemIds": [
-      "advanced-mechanical-components",
-      "canister",
-      "heavy-gun-parts"
-    ],
-    "rewards": [
-      {
-        "id": "301ddd29-01ba-419e-bd78-1cbcbbf329e3",
-        "item": {
-          "id": "advanced-mechanical-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/advanced-mechanical-components.webp",
-          "name": "Advanced Mechanical Components",
-          "rarity": "Rare",
-          "item_type": "Advanced Material"
-        },
-        "item_id": "advanced-mechanical-components",
-        "quantity": "3"
-      },
-      {
-        "id": "9355c84f-43af-40cc-8222-31d506d3a7d3",
-        "item": {
-          "id": "canister",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/canister.webp",
-          "name": "Canister",
-          "rarity": "Uncommon",
-          "item_type": "Topside Material"
-        },
-        "item_id": "canister",
-        "quantity": "5"
-      },
-      {
-        "id": "ad042cbb-22cd-493c-b82b-c48e881e056f",
-        "item": {
-          "id": "heavy-gun-parts",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/heavy-gun-parts.webp",
-          "name": "Heavy Gun Parts",
-          "rarity": "Rare",
-          "item_type": "Topside Material"
-        },
-        "item_id": "heavy-gun-parts",
-        "quantity": "3"
-      }
-    ],
-    "trader": "Celeste",
-    "xp": 0,
-    "sortOrder": 3028.4876761730225
-  },
-  {
-    "id": "waking-the-grid",
-    "name": "Waking The Grid",
-    "objectives": [
-      "Activate the security sensors in one of the Guard Towers",
-      "Start the Security Control Center in the Departure Building",
-      "Search for any traces of a security breach in the Arrival Building Data Office"
-    ],
-    "requirements": [],
-    "rewardItemIds": [
-      "vita-shot",
-      "surge-shield-recharger",
-      "tactical-mk-3-revival"
-    ],
-    "rewards": [
-      {
-        "id": "efa11c09-9799-4e0e-80ec-f4ceaaeb3412",
-        "item": {
-          "id": "vita-shot",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/vita-shot.webp",
-          "name": "Vita Shot",
-          "rarity": "Rare",
-          "item_type": "Quick Use"
-        },
-        "item_id": "vita-shot",
-        "quantity": "3"
-      },
-      {
-        "id": "ad52d7f7-5ea0-45d8-ac5a-669c9a50c357",
-        "item": {
-          "id": "surge-shield-recharger",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/surge-shield-recharger.webp",
-          "name": "Surge Shield Recharger",
-          "rarity": "Rare",
-          "item_type": "Quick Use"
-        },
-        "item_id": "surge-shield-recharger",
-        "quantity": "5"
-      },
-      {
-        "id": "d2ba747f-f848-4971-9006-db2ba147310a",
-        "item": {
-          "id": "tactical-mk-3-revival",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/tactical-mk-3-revival.webp",
-          "name": "Tactical MK. 3 (Revival)",
-          "rarity": "Epic",
-          "item_type": "Augment"
-        },
-        "item_id": "tactical-mk-3-revival",
-        "quantity": "1"
-      }
-    ],
-    "trader": "Shani",
-    "xp": 0,
-    "sortOrder": 2052.3286401577184
-  },
-  {
-    "id": "water-troubles",
-    "name": "Water Troubles",
-    "objectives": [
-      "In one round: Locate the Flood Access Tunnel under the Red Lake Berm",
-      "Find the intake to the District's Water Supply",
-      "Sample the water"
-    ],
-    "requirements": [],
-    "rewardItemIds": [
-      "simple-gun-parts",
-      "mechanical-components",
-      "spring"
-    ],
-    "rewards": [
-      {
-        "id": "544ff8e0-aeb5-4706-a359-8566bc237648",
-        "item": {
-          "id": "simple-gun-parts",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/simple-gun-parts.webp",
-          "name": "Simple Gun Parts",
-          "rarity": "Uncommon",
-          "item_type": "Topside Material"
-        },
-        "item_id": "simple-gun-parts",
-        "quantity": "3"
-      },
-      {
-        "id": "77ce5b26-1d01-4808-8368-df3713eb6316",
-        "item": {
-          "id": "mechanical-components",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/mechanical-components.webp",
-          "name": "Mechanical Components",
-          "rarity": "Uncommon",
-          "item_type": "Refined Material"
-        },
-        "item_id": "mechanical-components",
-        "quantity": "3"
-      },
-      {
-        "id": "99a79d3f-bdfd-4910-abc6-604d417095d3",
-        "item": {
-          "id": "spring",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/spring.webp",
-          "name": "Steel Spring",
-          "rarity": "Uncommon",
-          "item_type": "Topside Material"
-        },
-        "item_id": "spring",
-        "quantity": "3"
-      }
-    ],
-    "trader": "Celeste",
-    "xp": 0,
-    "sortOrder": 3539.252140564836
-  },
-  {
-    "id": "what-goes-around",
-    "name": "What Goes Around",
-    "objectives": [
-      "Destroy any ARC enemy using a Fireball Burner"
-    ],
-    "requirements": [
-      {
-        "id": "f043986a-97d5-4b82-889a-b98080f7cf1b",
-        "item": {
-          "id": "fireball-burner",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/fireball-burner.webp",
-          "name": "Fireball Burner",
-          "rarity": "Uncommon",
-          "item_type": "Recyclable"
-        },
-        "item_id": "fireball-burner",
-        "quantity": 1
-      }
-    ],
-    "rewardItemIds": [
-      "noisemaker",
-      "blaze-grenade",
-      "cans-backpack-attachment"
-    ],
-    "rewards": [
-      {
-        "id": "948cbbdc-d3ac-4093-89a5-c9a5184c1758",
-        "item": {
-          "id": "noisemaker",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/noisemaker.webp",
-          "name": "Noisemaker",
-          "rarity": "Common",
-          "item_type": "Quick Use"
-        },
-        "item_id": "noisemaker",
-        "quantity": "2"
-      },
-      {
-        "id": "9df8e47f-7232-44cc-ae9f-5d6c63afa949",
-        "item": {
-          "id": "blaze-grenade",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/blaze-grenade.webp",
-          "name": "Blaze Grenade",
-          "rarity": "Rare",
-          "item_type": "Throwable"
-        },
-        "item_id": "blaze-grenade",
-        "quantity": "3"
-      },
-      {
-        "id": "5c40e5b8-54c0-4b60-8a59-bcd11d7a3e8e",
-        "item": {
-          "id": "cans-backpack-attachment",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/cans-backpack-attachment.webp",
-          "name": "Cans (Backpack Attachment)",
-          "rarity": "Common",
-          "item_type": "Cosmetic"
-        },
-        "item_id": "cans-backpack-attachment",
-        "quantity": "1"
-      }
-    ],
-    "trader": "Apollo",
-    "xp": 0,
-    "sortOrder": 1279.9397757882718
-  },
-  {
-    "id": "what-we-left-behind",
-    "name": "What We Left Behind",
-    "objectives": [
-      "On Buried City, search 2 containers in the Raider Camp beneath the Parking Garage",
-      "On Dam Battlegrounds, search for anything significant in the South Swamp Outpost",
-      "On Spaceport, search for anything significant in Bilguun's Hideout, next to the Container Storage"
-    ],
-    "requirements": [],
-    "rewardItemIds": [
-      "vertical-grip-ii",
-      "stable-stock-ii",
-      "muzzle-brake-ii"
-    ],
-    "rewards": [
-      {
-        "id": "459242ca-6f7b-4e7e-b4bb-f7c3c395eadc",
-        "item": {
-          "id": "vertical-grip-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/vertical-grip-ii.webp",
-          "name": "Vertical Grip II",
-          "rarity": "Uncommon",
-          "item_type": "Modification"
-        },
-        "item_id": "vertical-grip-ii",
-        "quantity": "1"
-      },
-      {
-        "id": "7caedc87-fb08-4d30-95e9-f2984d75eb6c",
-        "item": {
-          "id": "stable-stock-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/stable-stock-ii.webp",
-          "name": "Stable Stock II",
-          "rarity": "Uncommon",
-          "item_type": "Modification"
-        },
-        "item_id": "stable-stock-ii",
-        "quantity": "1"
-      },
-      {
-        "id": "e5d39aa5-be09-49b0-b02e-383ec5bedba8",
-        "item": {
-          "id": "muzzle-brake-ii",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/muzzle-brake-ii.webp",
-          "name": "Muzzle Brake II",
-          "rarity": "Uncommon",
-          "item_type": "Modification"
-        },
-        "item_id": "muzzle-brake-ii",
-        "quantity": "1"
-      }
-    ],
-    "trader": "TianWen",
-    "xp": 0,
-    "sortOrder": 2048.8797708209436
-  },
-  {
-    "id": "with-a-trace",
-    "name": "With a Trace",
-    "objectives": [
-      "Reach the Barren Clearing",
-      "Find signs of who brought down the ARC machines",
-      "Inspect the Adorned Wreckage",
-      "Inspect the communications device"
-    ],
-    "requirements": [],
-    "rewardItemIds": [
-      "medium-shield",
-      "looting-mk-2"
-    ],
-    "rewards": [
-      {
-        "id": "5b20c967-2032-4cdd-b0b9-c260e3f5a3e7",
-        "item": {
-          "id": "medium-shield",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/medium-shield.webp",
-          "name": "Medium Shield",
-          "rarity": "Rare",
-          "item_type": "Shield"
-        },
-        "item_id": "medium-shield",
-        "quantity": "1"
-      },
-      {
-        "id": "a046e3fd-f04a-4ccc-b6b5-518024c8e569",
-        "item": {
-          "id": "looting-mk-2",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/looting-mk-2.webp",
-          "name": "Looting Mk. 2",
-          "rarity": "Rare",
-          "item_type": "Augment"
-        },
-        "item_id": "looting-mk-2",
-        "quantity": "1"
-      }
-    ],
-    "trader": "Shani",
-    "xp": 0,
-    "sortOrder": 6617.914214694764
-  },
-  {
-    "id": "with-a-view",
-    "name": "With a View",
-    "objectives": [
-      "Obtain a Rotary Encoder",
-      "Visit any of the Control Rooms near the Assembly Line",
-      "Use the Rotary Encoder to activate the server switch",
-      "Interact with a nearby computer to help identify the correct parts",
-      "Deliver an Ion Sputter to Shani"
-    ],
-    "requirements": [
-      {
-        "id": "b8162c56-58d3-4be8-a9ba-e3921b945852",
-        "item": {
-          "id": "rotary-encoder",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/rotary-encoder.webp",
-          "name": "Rotary Encoder",
-          "rarity": "Rare",
-          "item_type": "Recyclable"
-        },
-        "item_id": "rotary-encoder",
-        "quantity": 1
-      }
-    ],
-    "rewardItemIds": [
-      "spring",
-      "wires-recipe",
-      "tactical-mk-2"
-    ],
-    "rewards": [
-      {
-        "id": "e742de30-20e6-47a2-93cc-d853cae22290",
-        "item": {
-          "id": "spring",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/spring.webp",
-          "name": "Steel Spring",
-          "rarity": "Uncommon",
-          "item_type": "Topside Material"
-        },
-        "item_id": "spring",
-        "quantity": "5"
-      },
-      {
-        "id": "9cb23590-789c-4985-9140-a53096056840",
-        "item": {
-          "id": "wires-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/wires.webp",
-          "name": "Wires",
-          "rarity": "Uncommon",
-          "item_type": "Topside Material"
-        },
-        "item_id": "wires-recipe",
-        "quantity": "5"
-      },
-      {
-        "id": "cbf7ae36-20b1-461e-9b7d-929786f0b42f",
-        "item": {
-          "id": "tactical-mk-2",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/tactical-mk-2.webp",
-          "name": "Tactical Mk. 2",
-          "rarity": "Rare",
-          "item_type": "Augment"
-        },
-        "item_id": "tactical-mk-2",
-        "quantity": "1"
-      }
-    ],
-    "trader": "Shani",
-    "xp": 0,
-    "sortOrder": 1755.3865742269231
-  },
-  {
-    "id": "worth-your-salt",
-    "name": "Worth Your Salt",
-    "objectives": [
-      "In One Round:",
-      "Go to the Rocket Assembly",
-      "Search for the hidden Battery Prototype in a high place",
-      "Bring the Battery Prototype to the Industrial Recharger",
-      "Use the machinery to charge the battery",
-      "Deliver the Charged Battery to the drop-off point in the corner"
-    ],
-    "requirements": [],
-    "rewardItemIds": [
-      "vita-spray-recipe"
-    ],
-    "rewards": [
-      {
-        "id": "0bab6773-e29c-4bab-a3fe-b08011ef3f42",
-        "item": {
-          "id": "vita-spray-recipe",
-          "icon": "https://static.metaforge.app/arc-raiders/icons/vita-spray.webp",
-          "name": "Vita Spray Blueprint",
-          "rarity": "Legendary",
-          "item_type": "Blueprint"
-        },
-        "item_id": "vita-spray-recipe",
-        "quantity": "1"
-      }
-    ],
-    "trader": "Celeste",
-    "xp": 0,
-    "sortOrder": 5982.195038200216
   }
 ]
