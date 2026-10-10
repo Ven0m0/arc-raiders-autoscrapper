@@ -415,7 +415,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1586.7082627044035
   },
   {
     "id": "a-prime-specimen",
@@ -528,7 +528,7 @@
           "id": "anvil-ii",
           "name": "Anvil II",
           "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1b66f01227d5480212a81d6d7ef0d11cf0f6ee580668b87f6bb46557d4f749b9.png",
-          "rarity": "Uncommon",
+          "rarity": "Rare",
           "item_type": "Weapon"
         }
       },
@@ -541,7 +541,7 @@
           "name": "Anvil Splitter",
           "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/dcd53c40f47eaeeccfedb56b8b9d2fe4458fa14e59c32398bb377050689b9d8e.png",
           "rarity": "Legendary",
-          "item_type": "Modification"
+          "item_type": "Misc"
         }
       },
       {
@@ -833,7 +833,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1533.927946273488
   },
   {
     "id": "after-rain-comes",
@@ -1066,7 +1066,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1519.083482277293
   },
   {
     "id": "battening-down",
@@ -1120,7 +1120,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -113.67874248827982
   },
   {
     "id": "bees",
@@ -1227,7 +1227,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -560.8151296088471
   },
   {
     "id": "boarding-the-frigate",
@@ -1292,7 +1292,7 @@
     ],
     "trader": "Celeste",
     "xp": 10000,
-    "sortOrder": 0
+    "sortOrder": -1227.7304188734222
   },
   {
     "id": "bombing-run",
@@ -1450,7 +1450,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -333.45764463228744
   },
   {
     "id": "celestes-childhood-drawings",
@@ -1476,7 +1476,7 @@
     ],
     "trader": "Lance",
     "xp": 5000,
-    "sortOrder": 0
+    "sortOrder": -901.8513570736866
   },
   {
     "id": "celestes-journals",
@@ -1571,7 +1571,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -606.2866266041591
   },
   {
     "id": "clamoring-for-attention",
@@ -1704,7 +1704,7 @@
     ],
     "trader": "Unknown",
     "xp": 5000,
-    "sortOrder": 0
+    "sortOrder": -98.52157682317583
   },
   {
     "id": "clearer-skies",
@@ -1953,7 +1953,7 @@
           "id": "anvil-iii",
           "name": "Anvil III",
           "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f9100304f28f764bd3cda141058f2304e836eade07083139c364e449446beb4d.png",
-          "rarity": "Uncommon",
+          "rarity": "Rare",
           "item_type": "Weapon"
         }
       },
@@ -1983,7 +1983,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -424.40063862291134
   },
   {
     "id": "deciphering-the-data",
@@ -2094,7 +2094,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1295.93766436639
   },
   {
     "id": "doctors-orders",
@@ -2369,7 +2369,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1007.9515167294144
   },
   {
     "id": "empathetic-prototypes",
@@ -2408,7 +2408,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -629.022375101815
   },
   {
     "id": "espresso",
@@ -2515,7 +2515,7 @@
     ],
     "trader": "Celeste",
     "xp": 5000,
-    "sortOrder": 0
+    "sortOrder": -1280.780498701286
   },
   {
     "id": "extended-burst-cycles",
@@ -2526,7 +2526,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -886.6941914085826
   },
   {
     "id": "eyes-in-the-sky",
@@ -3008,7 +3008,7 @@
     ],
     "trader": "Shani",
     "xp": 5000,
-    "sortOrder": 0
+    "sortOrder": -318.3004789671835
   },
   {
     "id": "in-my-image",
@@ -3486,7 +3486,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -575.9722952739511
   },
   {
     "id": "marked-for-death",
@@ -3816,7 +3816,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1326.2519956965978
   },
   {
     "id": "nothing-ventured",
@@ -3855,7 +3855,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1303.516247198942
   },
   {
     "id": "off-the-raider",
@@ -4512,7 +4512,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1288.3590815338382
   },
   {
     "id": "safe-harbor",
@@ -4648,7 +4648,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1235.309001705974
   },
   {
     "id": "shoring-up-defenses",
@@ -4770,7 +4770,7 @@
     ],
     "trader": "Celeste",
     "xp": 5000,
-    "sortOrder": 0
+    "sortOrder": -970.0586025666545
   },
   {
     "id": "snap-and-salvage",
@@ -4876,7 +4876,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -947.3228540689985
   },
   {
     "id": "someone-elses-shoes",
@@ -4928,7 +4928,7 @@
     ],
     "trader": "Celeste",
     "xp": 5000,
-    "sortOrder": 0
+    "sortOrder": -939.7442712364466
   },
   {
     "id": "source-of-the-contamination",
@@ -5049,7 +5049,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -879.1156085760306
   },
   {
     "id": "stable-housing",
@@ -5249,7 +5249,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": 22.735748497655962
   },
   {
     "id": "targeted-component-trial",
@@ -5260,7 +5260,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -272.8289819718716
   },
   {
     "id": "test-case",
@@ -5427,7 +5427,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -545.6579639437432
   },
   {
     "id": "the-league",
@@ -5828,7 +5828,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -583.5508781065031
   },
   {
     "id": "to-the-skies",
@@ -5880,7 +5880,7 @@
     ],
     "trader": "Apollo",
     "xp": 8000,
-    "sortOrder": 0
+    "sortOrder": -575.9722952739511
   },
   {
     "id": "top-mounted-optics-retrofittings",
@@ -5891,7 +5891,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -570.2883581495371
   },
   {
     "id": "tracks-of-the-beast",
@@ -5930,7 +5930,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": 7.578582832551987
   },
   {
     "id": "trash-into-treasure",
@@ -6075,7 +6075,7 @@
     "rewards": [],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -272.8289819718716
   },
   {
     "id": "turnabout",
@@ -6557,7 +6557,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -37.89291416275995
   },
   {
     "id": "wires-crossed",
@@ -6622,7 +6622,7 @@
     ],
     "trader": "Unknown",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -227.35748497655965
   },
   {
     "id": "with-a-trace",
