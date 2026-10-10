@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-09-30T14:02:43.656235Z",
+  "lastUpdated": "2026-10-09T14:02:55.843859Z",
   "source": "https://metaforge.app/arc-raiders/api",
   "version": "autoscrapper-data-1",
-  "itemCount": 643,
-  "questCount": 100,
+  "itemCount": 1008,
+  "questCount": 137,
   "dataSources": {
     "items": {
       "provider": "metaforge+raidtheory",
@@ -15,7 +15,7 @@
       "fallback": {
         "repository": "https://github.com/RaidTheory/arcraiders-data",
         "archive": "https://github.com/RaidTheory/arcraiders-data/archive/refs/heads/main.zip",
-        "supplementalCount": 35,
+        "supplementalCount": 5,
         "error": null
       },
       "arctrackerEnrichment": {
@@ -26,7 +26,7 @@
       },
       "fieldLevelMerge": {
         "enabled": true,
-        "entriesEnriched": 378,
+        "entriesEnriched": 397,
         "sources": [
           "raidtheory-fallback",
           "arctracker"
@@ -84,7 +84,7 @@
       },
       "fieldLevelMerge": {
         "enabled": true,
-        "entriesEnriched": 0,
+        "entriesEnriched": 98,
         "sources": [
           "raidtheory-fallback",
           "arctracker"
