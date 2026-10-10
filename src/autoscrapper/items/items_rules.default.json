@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "generatedAt": "2026-10-09T14:02:55.904503Z",
+    "generatedAt": "2026-10-10T14:02:01.958727Z",
     "data": {
-      "lastUpdated": "2026-10-09T14:02:55.843859Z",
+      "lastUpdated": "2026-10-10T14:02:01.940777Z",
       "source": "https://metaforge.app/arc-raiders/api",
       "version": "autoscrapper-data-1",
       "itemCount": 1008,
@@ -7735,11 +7735,10 @@
       "id": "rope",
       "name": "Rope",
       "value": 300,
-      "action": "keep",
+      "action": "sell",
       "analysis": [
-        "Used in 2 crafting recipes",
-        "Rare crafting material",
-        "Override: treat 'Your Call' as Keep"
+        "Recycles into: 5x Fabric",
+        "Recycle value: Components (250 coins) worth less than Item (300 coins)"
       ]
     },
     {
@@ -7837,7 +7836,7 @@
     {
       "id": "ruined-emperor-beacon",
       "name": "Ruined Emperor Beacon",
-      "value": 0,
+      "value": 1000,
       "action": "sell",
       "analysis": [
         "No immediate use found",
@@ -7944,7 +7943,7 @@
     {
       "id": "sacrifice-stencil",
       "name": "Sacrifice Stencil",
-      "value": 0,
+      "value": 5000,
       "action": "keep",
       "analysis": [
         "Epic rarity",
@@ -8084,7 +8083,7 @@
     {
       "id": "serac-stencil",
       "name": "Serac Stencil",
-      "value": 0,
+      "value": 5000,
       "action": "keep",
       "analysis": [
         "Legendary rarity - extremely valuable",

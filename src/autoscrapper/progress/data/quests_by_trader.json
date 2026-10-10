@@ -1,27 +1,27 @@
 {
-  "generatedAt": "2026-10-09T14:02:55.776176Z",
+  "generatedAt": "2026-10-10T14:02:01.940467Z",
   "source": "quests.json",
   "traders": {
     "Celeste": [
       {
-        "id": "boarding-the-frigate",
-        "name": "Boarding the Frigate",
-        "sortOrder": 0
-      },
-      {
         "id": "exploring-pendola-pass",
         "name": "Exploring Pendola Pass",
-        "sortOrder": 0
+        "sortOrder": -1280.780498701286
+      },
+      {
+        "id": "boarding-the-frigate",
+        "name": "Boarding the Frigate",
+        "sortOrder": -1227.7304188734222
       },
       {
         "id": "sizing-things-up",
         "name": "Sizing Things Up",
-        "sortOrder": 0
+        "sortOrder": -970.0586025666545
       },
       {
         "id": "someone-elses-shoes",
         "name": "Someone Else's Shoes",
-        "sortOrder": 0
+        "sortOrder": -939.7442712364466
       },
       {
         "id": "a-bad-feeling",
@@ -245,7 +245,7 @@
       {
         "id": "home-to-roost",
         "name": "Home to Roost",
-        "sortOrder": 0
+        "sortOrder": -318.3004789671835
       },
       {
         "id": "picking-up-the-pieces",
@@ -417,7 +417,7 @@
       {
         "id": "to-the-skies",
         "name": "To The Skies",
-        "sortOrder": 0
+        "sortOrder": -575.9722952739511
       },
       {
         "id": "shoring-up-defenses",
@@ -499,7 +499,7 @@
       {
         "id": "celestes-childhood-drawings",
         "name": "Celeste’s Childhood Drawings",
-        "sortOrder": 0
+        "sortOrder": -901.8513570736866
       },
       {
         "id": "in-my-image",
@@ -551,67 +551,137 @@
       {
         "id": "a-path-not-yours",
         "name": "A Path Not Yours",
-        "sortOrder": 0
+        "sortOrder": -1586.7082627044035
       },
       {
         "id": "action-economy",
         "name": "Action Economy",
-        "sortOrder": 0
+        "sortOrder": -1533.927946273488
       },
       {
         "id": "bait-fetch-blast",
         "name": "Bait, Fetch, Blast",
-        "sortOrder": 0
+        "sortOrder": -1519.083482277293
       },
       {
-        "id": "beam-resonance-tech",
-        "name": "Beam Resonance Tech",
-        "sortOrder": 0
+        "id": "nothing-gained",
+        "name": "Nothing Gained",
+        "sortOrder": -1326.2519956965978
       },
       {
-        "id": "belly-of-the-beast",
-        "name": "Belly of the Beast",
-        "sortOrder": 0
-      },
-      {
-        "id": "burst-assembly-recovery",
-        "name": "Burst Assembly Recovery",
-        "sortOrder": 0
-      },
-      {
-        "id": "celestes-teenage-rebellion",
-        "name": "Celeste's Teenage Rebellion",
-        "sortOrder": 0
-      },
-      {
-        "id": "clean-hands",
-        "name": "Clean Hands",
-        "sortOrder": 0
-      },
-      {
-        "id": "compact-combustion-charges",
-        "name": "Compact Combustion Charges",
-        "sortOrder": 0
+        "id": "nothing-ventured",
+        "name": "Nothing Ventured",
+        "sortOrder": -1303.516247198942
       },
       {
         "id": "disrupting-the-frigate",
         "name": "Disrupting the Frigate",
-        "sortOrder": 0
+        "sortOrder": -1295.93766436639
+      },
+      {
+        "id": "ruins-and-reverberations",
+        "name": "Ruins and Reverberations",
+        "sortOrder": -1288.3590815338382
+      },
+      {
+        "id": "shield-stress-testing",
+        "name": "Shield Stress Testing",
+        "sortOrder": -1235.309001705974
       },
       {
         "id": "embedded-blast-engineering",
         "name": "Embedded Blast Engineering",
-        "sortOrder": 0
+        "sortOrder": -1007.9515167294144
       },
       {
-        "id": "empathetic-prototypes",
-        "name": "Empathetic Prototypes",
-        "sortOrder": 0
+        "id": "solid-core-casting-tech",
+        "name": "Solid-Core Casting Tech",
+        "sortOrder": -947.3228540689985
       },
       {
         "id": "extended-burst-cycles",
         "name": "Extended Burst Cycles",
-        "sortOrder": 0
+        "sortOrder": -886.6941914085826
+      },
+      {
+        "id": "sprint-shooting",
+        "name": "Sprint Shooting",
+        "sortOrder": -879.1156085760306
+      },
+      {
+        "id": "empathetic-prototypes",
+        "name": "Empathetic Prototypes",
+        "sortOrder": -629.022375101815
+      },
+      {
+        "id": "celestes-teenage-rebellion",
+        "name": "Celeste's Teenage Rebellion",
+        "sortOrder": -606.2866266041591
+      },
+      {
+        "id": "thermite-tipped-rounds",
+        "name": "Thermite-Tipped Rounds",
+        "sortOrder": -583.5508781065031
+      },
+      {
+        "id": "magazine-geometry-101",
+        "name": "Magazine Geometry 101",
+        "sortOrder": -575.9722952739511
+      },
+      {
+        "id": "top-mounted-optics-retrofittings",
+        "name": "Top Mounted Optics Retrofittings",
+        "sortOrder": -570.2883581495371
+      },
+      {
+        "id": "belly-of-the-beast",
+        "name": "Belly of the Beast",
+        "sortOrder": -560.8151296088471
+      },
+      {
+        "id": "the-first-nomads",
+        "name": "The First Nomads",
+        "sortOrder": -545.6579639437432
+      },
+      {
+        "id": "compact-combustion-charges",
+        "name": "Compact Combustion Charges",
+        "sortOrder": -424.40063862291134
+      },
+      {
+        "id": "burst-assembly-recovery",
+        "name": "Burst Assembly Recovery",
+        "sortOrder": -333.45764463228744
+      },
+      {
+        "id": "targeted-component-trial",
+        "name": "Targeted Component Trial",
+        "sortOrder": -272.8289819718716
+      },
+      {
+        "id": "trigger-reset-systems",
+        "name": "Trigger Reset Systems",
+        "sortOrder": -272.8289819718716
+      },
+      {
+        "id": "wires-crossed",
+        "name": "Wires Crossed",
+        "sortOrder": -227.35748497655965
+      },
+      {
+        "id": "beam-resonance-tech",
+        "name": "Beam Resonance Tech",
+        "sortOrder": -113.67874248827982
+      },
+      {
+        "id": "clean-hands",
+        "name": "Clean Hands",
+        "sortOrder": -98.52157682317583
+      },
+      {
+        "id": "when-everything-falls",
+        "name": "When Everything Falls",
+        "sortOrder": -37.89291416275995
       },
       {
         "id": "high-voltage-exposure",
@@ -619,84 +689,14 @@
         "sortOrder": 0
       },
       {
-        "id": "magazine-geometry-101",
-        "name": "Magazine Geometry 101",
-        "sortOrder": 0
-      },
-      {
-        "id": "nothing-gained",
-        "name": "Nothing Gained",
-        "sortOrder": 0
-      },
-      {
-        "id": "nothing-ventured",
-        "name": "Nothing Ventured",
-        "sortOrder": 0
-      },
-      {
-        "id": "ruins-and-reverberations",
-        "name": "Ruins and Reverberations",
-        "sortOrder": 0
-      },
-      {
-        "id": "shield-stress-testing",
-        "name": "Shield Stress Testing",
-        "sortOrder": 0
-      },
-      {
-        "id": "solid-core-casting-tech",
-        "name": "Solid-Core Casting Tech",
-        "sortOrder": 0
-      },
-      {
-        "id": "sprint-shooting",
-        "name": "Sprint Shooting",
-        "sortOrder": 0
+        "id": "tracks-of-the-beast",
+        "name": "Tracks of the Beast",
+        "sortOrder": 7.578582832551987
       },
       {
         "id": "taking-stock",
         "name": "Taking Stock",
-        "sortOrder": 0
-      },
-      {
-        "id": "targeted-component-trial",
-        "name": "Targeted Component Trial",
-        "sortOrder": 0
-      },
-      {
-        "id": "the-first-nomads",
-        "name": "The First Nomads",
-        "sortOrder": 0
-      },
-      {
-        "id": "thermite-tipped-rounds",
-        "name": "Thermite-Tipped Rounds",
-        "sortOrder": 0
-      },
-      {
-        "id": "top-mounted-optics-retrofittings",
-        "name": "Top Mounted Optics Retrofittings",
-        "sortOrder": 0
-      },
-      {
-        "id": "tracks-of-the-beast",
-        "name": "Tracks of the Beast",
-        "sortOrder": 0
-      },
-      {
-        "id": "trigger-reset-systems",
-        "name": "Trigger Reset Systems",
-        "sortOrder": 0
-      },
-      {
-        "id": "when-everything-falls",
-        "name": "When Everything Falls",
-        "sortOrder": 0
-      },
-      {
-        "id": "wires-crossed",
-        "name": "Wires Crossed",
-        "sortOrder": 0
+        "sortOrder": 22.735748497655962
       }
     ]
   }
