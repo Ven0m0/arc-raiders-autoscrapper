@@ -58,8 +58,7 @@
     "name": "A Balanced Harvest",
     "objectives": [
       "Go to the Research & Administration building",
-      "Locate Lab 1 on the upper floor above the reception",
-      "Search for any traces of the agricultural research project"
+      "Locate Lab 1 on the upper floor above the reception"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -168,11 +167,7 @@
     "id": "a-dead-end",
     "name": "A Dead End",
     "objectives": [
-      "Find MANTIKOR's underground facilities",
-      "Find a way into into the locked room in the Security Wing",
-      "Search the locked room for any records on Project Heartwood",
-      "Find the Dusty Film Reel",
-      "Deliver the Dusty Film Reel to Shani"
+      "Find MANTIKOR's underground facilities"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -257,10 +252,7 @@
     "id": "a-lay-of-the-land",
     "name": "A Lay of the Land",
     "objectives": [
-      "Reach the Jiangsu Warehouse",
-      "Find the shipping notes in the foreman’s office",
-      "Locate the scanners in the Flight Control office of Control Tower A6",
-      "Deliver 1 LiDAR Scanners to Shani"
+      "Reach the Jiangsu Warehouse"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -314,8 +306,7 @@
     "id": "a-new-type-of-plant",
     "name": "A New Type of Plant",
     "objectives": [
-      "Search for the new plant near the Baron Husk in the Old Battleground",
-      "Deliver the Possibly Toxic Plant to Lance"
+      "Search for the new plant near the Baron Husk in the Old Battleground"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -355,7 +346,9 @@
   {
     "id": "a-path-not-yours",
     "name": "A Path Not Yours",
-    "objectives": [],
+    "objectives": [
+      "Find the start of the Nomad trail under the Highway Collapse"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "tellurion",
@@ -413,17 +406,16 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Cassio",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1586.7082627044035
   },
   {
     "id": "a-prime-specimen",
     "name": "A Prime Specimen",
     "objectives": [
       "Obtain 2 ARC Powercells",
-      "Interact with any ARC Deforester",
-      "Loot an ARC Deforester"
+      "Interact with any ARC Deforester"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -464,8 +456,7 @@
     "id": "esr-analyzer",
     "name": "A Reveal in Ruins",
     "objectives": [
-      "Search for an ESR Analyzer inside any pharmacy in Buried City",
-      "Deliver the ESR Analyzer to Lance"
+      "Search for an ESR Analyzer inside any pharmacy in Buried City"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -506,11 +497,7 @@
     "id": "a-rising-tide",
     "name": "A Rising Tide",
     "objectives": [
-      "On Buried City, find the foreman's barricaded apartment south of Piazza Roma",
-      "Access the foreman's digital logbook",
-      "On Dam Battlegrounds, reach the Power Generation Complex",
-      "Find a way into the Controlled Access Zone",
-      "Search the Controlled Access Zone for any clues about the foreman's reconstruction project"
+      "On Buried City, find the foreman's barricaded apartment south of Piazza Roma"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -528,7 +515,7 @@
           "id": "anvil-ii",
           "name": "Anvil II",
           "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/1b66f01227d5480212a81d6d7ef0d11cf0f6ee580668b87f6bb46557d4f749b9.png",
-          "rarity": "Uncommon",
+          "rarity": "Rare",
           "item_type": "Weapon"
         }
       },
@@ -541,7 +528,7 @@
           "name": "Anvil Splitter",
           "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/dcd53c40f47eaeeccfedb56b8b9d2fe4458fa14e59c32398bb377050689b9d8e.png",
           "rarity": "Legendary",
-          "item_type": "Modification"
+          "item_type": "Misc"
         }
       },
       {
@@ -577,9 +564,7 @@
     "id": "a-symbol-of-unification",
     "name": "A Symbol of Unification",
     "objectives": [
-      "Reach the Formicai Outpost in Dam Battlegrounds",
-      "Locate the flag at the Formicai Outpost",
-      "Hoist the flag on the small platform overlooking the Red Lake"
+      "Reach the Formicai Outpost in Dam Battlegrounds"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -633,10 +618,7 @@
     "id": "a-toxic-trail",
     "name": "A Toxic Trail",
     "objectives": [
-      "Return to the water intake below the Water Treatment Control building",
-      "Search the swamp for traces of the barrel's origins",
-      "Take a photo of the barrel truck",
-      "Search the truck for clues about the saboteur's identity"
+      "Return to the water intake below the Water Treatment Control building"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -704,9 +686,7 @@
     "name": "A Warm Place To Rest",
     "objectives": [
       "Locate the Abandoned Highway Camp",
-      "Search for any signs of survivors",
-      "Follow the red markers",
-      "Inspect the grave"
+      "Search for any signs of survivors"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -825,22 +805,10 @@
     "sortOrder": 7482.376892077519
   },
   {
-    "id": "action-economy",
-    "name": "Action Economy",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
-  },
-  {
     "id": "after-rain-comes",
     "name": "After Rain Comes",
     "objectives": [
-      "Find the flooded solar panels nearby the Grandioso Apartments",
-      "Repair the solar panels using 5 Wires and 2 Batteries"
+      "Find the flooded solar panels nearby the Grandioso Apartments"
     ],
     "requirements": [
       {
@@ -919,10 +887,7 @@
     "id": "armored-transports",
     "name": "Armored Transports",
     "objectives": [
-      "Reach the Checkpoint",
-      "Search the Guard huts for an Armored Patrol Key Card",
-      "Reach the Traffic Tunnel near the Blue Gate Checkpoint",
-      "Find and unlock the rear door of an armored patrol car"
+      "Reach the Checkpoint"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -1032,7 +997,12 @@
   {
     "id": "bait-fetch-blast",
     "name": "Bait, Fetch, Blast",
-    "objectives": [],
+    "objectives": [
+      "Destroy a Bully",
+      "Destroy the head of a Bully",
+      "Destroy 4 Bully legs",
+      "Deliver a Bully Fragmenter to Apollo"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "bully-fragmenter",
@@ -1064,9 +1034,9 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Apollo",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1519.083482277293
   },
   {
     "id": "battening-down",
@@ -1112,22 +1082,10 @@
     "sortOrder": 703.6805381957103
   },
   {
-    "id": "beam-resonance-tech",
-    "name": "Beam Resonance Tech",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
-  },
-  {
     "id": "bees",
     "name": "Bees!",
     "objectives": [
-      "Reach the Olive Grove in Blue Gate",
-      "Search for bee hives around the Olive Grove"
+      "Reach the Olive Grove in Blue Gate"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -1167,7 +1125,10 @@
   {
     "id": "belly-of-the-beast",
     "name": "Belly of the Beast",
-    "objectives": [],
+    "objectives": [
+      "Acquire an Emperor Gateway Conduit",
+      "Enter the Emperor"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "snap-hook",
@@ -1225,14 +1186,19 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Shani",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -560.8151296088471
   },
   {
     "id": "boarding-the-frigate",
     "name": "Boarding the Frigate",
-    "objectives": [],
+    "objectives": [
+      "Find a way on top of the Frigate",
+      "Damage a Hydra",
+      "Damage a Vaporizer",
+      "Damage a Rocketeer"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "snap-hook",
@@ -1292,7 +1258,7 @@
     ],
     "trader": "Celeste",
     "xp": 10000,
-    "sortOrder": 0
+    "sortOrder": -1227.7304188734222
   },
   {
     "id": "bombing-run",
@@ -1327,13 +1293,7 @@
     "id": "broken-monument",
     "name": "Broken Monument",
     "objectives": [
-      "Reach the hallowed grounds by the Scrap Yard",
-      "Search for a compass near the broken-down vehicles",
-      "Search for the video tape near the cylindrical containers",
-      "Search for the old field rations in the Raider camp",
-      "Deliver the First Wave Tape to Tian Wen",
-      "Deliver First Wave Compass to Tian Wen",
-      "Deliver First Wave Rations to Tian Wen"
+      "Reach the hallowed grounds by the Scrap Yard"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -1442,20 +1402,11 @@
     "sortOrder": 6437.2338897110185
   },
   {
-    "id": "burst-assembly-recovery",
-    "name": "Burst Assembly Recovery",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
-  },
-  {
     "id": "celestes-childhood-drawings",
     "name": "Celeste’s Childhood Drawings",
-    "objectives": [],
+    "objectives": [
+      "Find young Celeste’s room in Hotel Panorama Azzurro"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "sterilized-bandage"
@@ -1476,15 +1427,14 @@
     ],
     "trader": "Lance",
     "xp": 5000,
-    "sortOrder": 0
+    "sortOrder": -901.8513570736866
   },
   {
     "id": "celestes-journals",
     "name": "Celeste’s Journals",
     "objectives": [
       "Retrieve Celeste’s Journals from the South Swamp Outpost",
-      "Retrieve Celeste’s Journals from Raider Outpost East",
-      "Deliver 2 Journals to Celeste"
+      "Retrieve Celeste’s Journals from Raider Outpost East"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -1537,7 +1487,10 @@
   {
     "id": "celestes-teenage-rebellion",
     "name": "Celeste's Teenage Rebellion",
-    "objectives": [],
+    "objectives": [
+      "Reach the lookout tower on Mulatierra Hill",
+      "Reach the old Raider Camp near the hotel, overlooking the beach"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "heavy-shield",
@@ -1569,9 +1522,9 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Celeste",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -606.2866266041591
   },
   {
     "id": "clamoring-for-attention",
@@ -1657,7 +1610,9 @@
   {
     "id": "clean-hands",
     "name": "Clean Hands",
-    "objectives": [],
+    "objectives": [
+      "Find the Nomad Camp under the Railyard"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "sextant",
@@ -1702,9 +1657,9 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Cassio",
     "xp": 5000,
-    "sortOrder": 0
+    "sortOrder": -98.52157682317583
   },
   {
     "id": "clearer-skies",
@@ -1778,8 +1733,7 @@
     "id": "cold-storage",
     "name": "Cold Storage",
     "objectives": [
-      "Search any J Kozma Ventures container",
-      "Deliver the Old World Books to Shani"
+      "Search any J Kozma Ventures container"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -1934,9 +1888,6 @@
     "name": "Communication Hideout",
     "objectives": [
       "Reach the Red Tower in Old Town",
-      "Find missing battery cell",
-      "Install the battery cell in the Generator",
-      "Enable the power on the Generator",
       "Boot the antenna terminal near the Red Tower"
     ],
     "requirements": [],
@@ -1953,7 +1904,7 @@
           "id": "anvil-iii",
           "name": "Anvil III",
           "icon": "https://static.metaforge.app/arc-raiders/preview/20260919/f9100304f28f764bd3cda141058f2304e836eade07083139c364e449446beb4d.png",
-          "rarity": "Uncommon",
+          "rarity": "Rare",
           "item_type": "Weapon"
         }
       },
@@ -1975,23 +1926,10 @@
     "sortOrder": 4916.473458081255
   },
   {
-    "id": "compact-combustion-charges",
-    "name": "Compact Combustion Charges",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
-  },
-  {
     "id": "deciphering-the-data",
     "name": "Deciphering The Data",
     "objectives": [
-      "Use the Magnetic Decryptor in the Fuel Control Building",
-      "Reach the Arrival Building in Spaceport",
-      "Use the Magnetic Decryptor on the top floor of the Arrival Building"
+      "Use the Magnetic Decryptor in the Fuel Control Building"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -2073,7 +2011,12 @@
   {
     "id": "disrupting-the-frigate",
     "name": "Disrupting the Frigate",
-    "objectives": [],
+    "objectives": [
+      "Destroy the Power Cores on top of the Frigate",
+      "Destroy a Hydra",
+      "Destroy 2 Rocketeers",
+      "Destroy 2 Vaporizers"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "hullcracker-i"
@@ -2092,9 +2035,9 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Celeste",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1295.93766436639
   },
   {
     "id": "doctors-orders",
@@ -2103,7 +2046,8 @@
       "Obtain 1 Syringe",
       "Obtain 2 Antiseptic",
       "Obtain 1 Durable Cloth",
-      "Obtain 1 Great Mullein"
+      "Obtain 1 Great Mullein",
+      "Heal any Raider"
     ],
     "requirements": [
       {
@@ -2290,12 +2234,7 @@
     "id": "dust-on-the-wires",
     "name": "Dust on the Wires",
     "objectives": [
-      "Visit any Field Depot on the eastern side of the Spaceport",
-      "Use the Field Radio to transmit the scout group’s last log to Shani",
-      "Interact with the terminal in the old Raider Tower north of the Maintenance Hangar",
-      "Find traces of the scout patrol near the Maintenance Hangar",
-      "Search the remains left by the scouts",
-      "Deliver the Scout Patrol Note to Shani"
+      "Visit any Field Depot on the eastern side of the Spaceport"
     ],
     "requirements": [],
     "rewardItemIds": [],
@@ -2308,9 +2247,7 @@
     "id": "echoes-of-victory-ridge",
     "name": "Echoes of Victory Ridge",
     "objectives": [
-      "Reach Victory Ridge",
-      "Retrieve the battle plans from the hideout under the broken highway",
-      "Deliver Major Aiva's Patch to Celeste"
+      "Reach Victory Ridge"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -2361,20 +2298,11 @@
     "sortOrder": 3162.736884149872
   },
   {
-    "id": "embedded-blast-engineering",
-    "name": "Embedded Blast Engineering",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
-  },
-  {
     "id": "empathetic-prototypes",
     "name": "Empathetic Prototypes",
-    "objectives": [],
+    "objectives": [
+      "Reach the Trench Towers in the Spaceport Trench"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "canto",
@@ -2406,16 +2334,15 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Lance",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -629.022375101815
   },
   {
     "id": "espresso",
     "name": "Espresso",
     "objectives": [
-      "Find an espresso machine to salvage for spare parts",
-      "Get the Espresso Machine Parts for Apollo"
+      "Find an espresso machine to salvage for spare parts"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -2455,7 +2382,12 @@
   {
     "id": "exploring-pendola-pass",
     "name": "Exploring Pendola Pass",
-    "objectives": [],
+    "objectives": [
+      "Destroy 20 ARC enemies",
+      "Search the control room at the Cielo Sereno Observatory for power",
+      "Use 1 Wire to patch into the antenna on top of the tallest tower in the Railyard",
+      "Search 3 containers inside the Commissary Supermarket"
+    ],
     "requirements": [
       {
         "id": 0,
@@ -2515,18 +2447,7 @@
     ],
     "trader": "Celeste",
     "xp": 5000,
-    "sortOrder": 0
-  },
-  {
-    "id": "extended-burst-cycles",
-    "name": "Extended Burst Cycles",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1280.780498701286
   },
   {
     "id": "eyes-in-the-sky",
@@ -2644,9 +2565,7 @@
     "name": "Flickering Threat",
     "objectives": [
       "Find the Generator Room",
-      "Repair the Generator using 4 Wires",
-      "Find the Ventilation Shaft",
-      "Enable the power via the power switch underneath the stairs"
+      "Repair the Generator using 4 Wires"
     ],
     "requirements": [
       {
@@ -2756,11 +2675,7 @@
     "id": "furtive-meetings",
     "name": "Furtive Meetings",
     "objectives": [
-      "Search for the secret meeting spot under a staircase in the Medical Research Area",
-      "Find the secret meeting spot near the ventilation shaft between Robotic Sandbox B and Seed Vault",
-      "Find the secret meeting spot at the bottom of the staircase connecting the Cultural Archives and Seed Vault",
-      "Search the meeting area",
-      "Bring the Secret Meeting Info to Shani"
+      "Search for the secret meeting spot under a staircase in the Medical Research Area"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -2857,10 +2772,7 @@
     "id": "groundbreaking",
     "name": "Groundbreaking",
     "objectives": [
-      "Enter the locked room at Pilgrim's Peak",
-      "Search the room for any construction research",
-      "Find the building pictured on the whiteboard",
-      "Photograph the abandoned housing project"
+      "Enter the locked room at Pilgrim's Peak"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -2939,17 +2851,6 @@
     "sortOrder": 1036.91801992278
   },
   {
-    "id": "high-voltage-exposure",
-    "name": "High-Voltage Exposure",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
-  },
-  {
     "id": "home-to-roost",
     "name": "Home to Roost",
     "objectives": [
@@ -3008,7 +2909,7 @@
     ],
     "trader": "Shani",
     "xp": 5000,
-    "sortOrder": 0
+    "sortOrder": -318.3004789671835
   },
   {
     "id": "in-my-image",
@@ -3057,8 +2958,7 @@
     "name": "Industrial Espionage",
     "objectives": [
       "Find Tian Wen's weapon cache near the Gas Station in the Outskirts",
-      "Deliver the Burletta to the rival weapon cache",
-      "Plant a bug on the weapon cache"
+      "Deliver the Burletta to the rival weapon cache"
     ],
     "requirements": [
       {
@@ -3126,6 +3026,7 @@
     "name": "Into the Fray",
     "objectives": [
       "Destroy a Leaper",
+      "Destroy 4 Leaper legs",
       "Obtain a Leaper Pulse Unit"
     ],
     "requirements": [
@@ -3193,8 +3094,7 @@
     "id": "keeping-an-eye-out",
     "name": "Keeping an Eye Out",
     "objectives": [
-      "Locate the collapsed highway by the southern edge of the Barren Clearing",
-      "Find Bilguun's shelter, and search for any clues of his presence"
+      "Locate the collapsed highway by the southern edge of the Barren Clearing"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -3235,9 +3135,7 @@
     "id": "keeping-the-memory",
     "name": "Keeping the Memory",
     "objectives": [
-      "Reach the wreckage in the Formicai Hills",
-      "Search for the missing helmet",
-      "Return the helmet to the memorial"
+      "Reach the wreckage in the Formicai Hills"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -3291,11 +3189,7 @@
     "id": "last-entry",
     "name": "Last Entry",
     "objectives": [
-      "Find and access the right work station in the Seed Vault for clues",
-      "Search for the hidden key in the adjacent room",
-      "Search the Seed Vault and unlock the seed deposit box",
-      "Search the seed deposit box",
-      "Bring the Official Shutdown Documentation to Shani"
+      "Find and access the right work station in the Seed Vault for clues"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -3336,11 +3230,7 @@
     "id": "life-of-a-pharmacist",
     "name": "Life of a Pharmacist",
     "objectives": [
-      "Find the Arbusto Farmacia by the collapsed highway",
-      "Document the pharmacist’s hobbies",
-      "Document the pharmacist’s family",
-      "Document the pharmacist’s taste",
-      "Document the pharmacist’s skills"
+      "Find the Arbusto Farmacia by the collapsed highway"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -3394,10 +3284,7 @@
     "id": "line-in-the-sand",
     "name": "Line in the Sand",
     "objectives": [
-      "Find out why the train never reached Marano Station",
-      "Find out who orchestrated the robbery",
-      "Find out where the thruster valves were stashed",
-      "Search the basement of the merchant’s nearby apartment"
+      "Find out why the train never reached Marano Station"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -3451,9 +3338,7 @@
     "id": "lost-in-transmission",
     "name": "Lost in Transmission",
     "objectives": [
-      "Visit Control Tower A6",
-      "Reach the top of Control Tower A6",
-      "Establish a connection from the terminal"
+      "Visit Control Tower A6"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -3478,23 +3363,10 @@
     "sortOrder": 4676.473458081255
   },
   {
-    "id": "magazine-geometry-101",
-    "name": "Magazine Geometry 101",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
-  },
-  {
     "id": "marked-for-death",
     "name": "Marked for Death",
     "objectives": [
-      "Reach the Su Durante Warehouses in the Outskirts in Buried City",
-      "Search for Tian Wen's cache near the Warehouses",
-      "Follow the clues"
+      "Reach the Su Durante Warehouses in the Outskirts in Buried City"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -3535,8 +3407,7 @@
     "id": "market-correction",
     "name": "Market Correction",
     "objectives": [
-      "Locate the cache near Marano Station",
-      "Sabotage the cache"
+      "Locate the cache near Marano Station"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -3769,7 +3640,12 @@
   {
     "id": "nothing-gained",
     "name": "Nothing Gained",
-    "objectives": [],
+    "objectives": [
+      "Destroy a Matriarch",
+      "Destroy a Queen",
+      "Deliver a Queen Reactor to Apollo",
+      "Deliver a Matriarch Reactor to Apollo"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "queen-reactor",
@@ -3814,14 +3690,24 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Apollo",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1326.2519956965978
   },
   {
     "id": "nothing-ventured",
     "name": "Nothing Ventured",
-    "objectives": [],
+    "objectives": [
+      "Destroy 3 Comets",
+      "Destroy 5 Rocketeers",
+      "Destroy 2 Sentinels",
+      "Deliver 3 Comet Igniters to Apollo",
+      "Deliver 3 Rocketeer Drivers to Apollo",
+      "Deliver 6 ARC Circuitry to Apollo",
+      "Deliver 6 ARC Motion Cores to Apollo",
+      "Destroy a Bombardier on Buried City",
+      "Destroy a Bastion on Stella Montis"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "deadline",
@@ -3853,9 +3739,9 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Apollo",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1303.516247198942
   },
   {
     "id": "off-the-raider",
@@ -3946,11 +3832,7 @@
     "id": "on-the-map",
     "name": "On The Map",
     "objectives": [
-      "Head to where the Fuel Lines snapped, and transmit your location",
-      "Head to the antenna near the Fuel Control, and transmit your location",
-      "Head to the cactus patch in the wall breach, and transmit your location",
-      "Transmit your location from the roof of the Container Storage building",
-      "Find the container covered in tarp, and mark it"
+      "Head to where the Fuel Lines snapped, and transmit your location"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -4004,9 +3886,7 @@
     "id": "our-presence-up-there",
     "name": "Our Presence up There",
     "objectives": [
-      "Visit the Pattern House in The Dam",
-      "Find and flip the power switch",
-      "Complete the antenna installation on the roof"
+      "Visit the Pattern House in The Dam"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -4115,9 +3995,7 @@
     "id": "outstanding-balance",
     "name": "Outstanding Balance",
     "objectives": [
-      "Search for Dodger's stash inside the Traffic Tunnel",
-      "Search Dodger's deal spot by the Pilgrim's Peak antenna",
-      "Deliver Dodger's Note to Tian Wen"
+      "Search for Dodger's stash inside the Traffic Tunnel"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -4171,10 +4049,7 @@
     "id": "paving-the-way",
     "name": "Paving the Way",
     "objectives": [
-      "Go to any ENELICA building",
-      "Search for a notice board with a note from the researcher",
-      "On Buried City, reach the top floor above the Convinio in Piazza Roma",
-      "Find the researcher's flat and search for any research data"
+      "Go to any ENELICA building"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -4228,8 +4103,7 @@
     "id": "picking-up-the-pieces",
     "name": "Picking Up The Pieces",
     "objectives": [
-      "Visit any area on your map with a loot category icon",
-      "Loot 3 containers"
+      "Visit any area on your map with a loot category icon"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -4271,9 +4145,7 @@
     "name": "Power Out",
     "objectives": [
       "Find the Electrical Substation south of the Spaceport",
-      "Find any sign of the missing engineer",
-      "Install the fuse",
-      "Restore the power"
+      "Find any sign of the missing engineer"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -4396,10 +4268,7 @@
     "id": "reduced-to-rubble",
     "name": "Reduced to Rubble",
     "objectives": [
-      "Take a photo of the Collapsed Highway",
-      "Go to the Broken Earth",
-      "Follow the trail of destruction through the Broken Earth",
-      "Investigate the unknown ARC machines"
+      "Take a photo of the Collapsed Highway"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -4510,18 +4379,15 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Celeste",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -1288.3590815338382
   },
   {
     "id": "safe-harbor",
     "name": "Safe Harbor",
     "objectives": [
-      "Find the clue left by the restaurant kitchen staff",
-      "Find the area portrayed in the sketch",
-      "Dig up the buried part",
-      "Deliver the Precision Gimbal to Tian Wen"
+      "Find the clue left by the restaurant kitchen staff"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -4640,17 +4506,6 @@
     "sortOrder": 7431.071956110197
   },
   {
-    "id": "shield-stress-testing",
-    "name": "Shield Stress Testing",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
-  },
-  {
     "id": "shoring-up-defenses",
     "name": "Shoring Up Defenses",
     "objectives": [
@@ -4710,7 +4565,15 @@
   {
     "id": "sizing-things-up",
     "name": "Sizing Things Up",
-    "objectives": [],
+    "objectives": [
+      "COMPLETE 2",
+      "Take a photo of the Emperor's leg by the bridge outside Old Town",
+      "IN ONE ROUND:",
+      "- (Optional) Break open the crashed probe by the Emperor's leg near Almatera Station",
+      "- Inspect the Circuitry in the probe",
+      "--------------------------",
+      "Analyze the exposed area on top of the Emperor's leg near Railroad Junction"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "adrenaline-shot",
@@ -4770,7 +4633,7 @@
     ],
     "trader": "Celeste",
     "xp": 5000,
-    "sortOrder": 0
+    "sortOrder": -970.0586025666545
   },
   {
     "id": "snap-and-salvage",
@@ -4868,20 +4731,11 @@
     "sortOrder": 1519.5769392581892
   },
   {
-    "id": "solid-core-casting-tech",
-    "name": "Solid-Core Casting Tech",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
-  },
-  {
     "id": "someone-elses-shoes",
     "name": "Someone Else's Shoes",
-    "objectives": [],
+    "objectives": [
+      "Scan any Android on Stella Montis"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "stella-montis-medical-storage-key",
@@ -4928,15 +4782,14 @@
     ],
     "trader": "Celeste",
     "xp": 5000,
-    "sortOrder": 0
+    "sortOrder": -939.7442712364466
   },
   {
     "id": "source-of-the-contamination",
     "name": "Source of the Contamination",
     "objectives": [
       "Reach the Water Treatment Building in The Dam",
-      "Search for the Flood Spill Intake near the Swamp",
-      "Investigate any suspicious objects"
+      "Search for the Flood Spill Intake near the Swamp"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -4990,6 +4843,7 @@
     "id": "sparks-fly",
     "name": "Sparks Fly",
     "objectives": [
+      "Destroy a Hornet using any Grenade",
       "Destroy a Hornet with a Trigger 'Nade or Snap Blast"
     ],
     "requirements": [],
@@ -5041,27 +4895,10 @@
     "sortOrder": 1519.9397757882718
   },
   {
-    "id": "sprint-shooting",
-    "name": "Sprint Shooting",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
-  },
-  {
     "id": "stable-housing",
     "name": "Stable Housing",
     "objectives": [
-      "Go to the Security Bridge",
-      "Search for the safe in the side room by the third-floor staircases",
-      "Head upstairs to the fourth-floor control room",
-      "Use the Access Card Printer to print a key to the safe",
-      "Search for alternate ways into the safe",
-      "Retrieve the contents of the safe",
-      "Deliver the Project Heartwood Blueprints to Tian Wen"
+      "Go to the Security Bridge"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -5116,11 +4953,7 @@
     "name": "Straight Record",
     "objectives": [
       "Reach Victory Ridge",
-      "Find the old EMP trap",
-      "Disable the first power switch",
-      "Disable the second power switch",
-      "Disable the third power switch",
-      "Shut down the EMP trap"
+      "Find the old EMP trap"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -5161,8 +4994,7 @@
     "id": "switching-the-supply",
     "name": "Switching the Supply",
     "objectives": [
-      "Find the tunnels under the Spaceport",
-      "Find and turn the valve in the tunnels under Spaceport"
+      "Find the tunnels under the Spaceport"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -5215,7 +5047,13 @@
   {
     "id": "taking-stock",
     "name": "Taking Stock",
-    "objectives": [],
+    "objectives": [
+      "On Stella Montis, take a photo of the sculpture in the Atrium",
+      "On Spaceport, take a photo of a Baron Husk",
+      "On Dam Battlegrounds, ping a Bombardier",
+      "On Buried City, ping a Bastion",
+      "Deliver 3 Industrial Batteries to the Nomadic Envoy"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "jolt-mine",
@@ -5247,20 +5085,9 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Cassio",
     "xp": 0,
-    "sortOrder": 0
-  },
-  {
-    "id": "targeted-component-trial",
-    "name": "Targeted Component Trial",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
+    "sortOrder": 22.735748497655962
   },
   {
     "id": "test-case",
@@ -5323,11 +5150,7 @@
     "id": "the-clean-dream",
     "name": "The Clean Dream",
     "objectives": [
-      "On Spaceport, search 4 containers in the underground tunnels",
-      "Find and monitor any Filtration System in the tunnels",
-      "On The Blue Gate, visit the Maintenance Bunker",
-      "Monitor the Purification System in the bunker",
-      "Find and photograph the blueprints in the bunker"
+      "On Spaceport, find the underground tunnels"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -5380,7 +5203,10 @@
   {
     "id": "the-first-nomads",
     "name": "The First Nomads",
-    "objectives": [],
+    "objectives": [
+      "Reach the Security Wing in Blue Gate",
+      "Reach the Antenna at Pilgrim's Peak"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "bobcat-i",
@@ -5425,9 +5251,9 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Shani",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -545.6579639437432
   },
   {
     "id": "the-league",
@@ -5515,8 +5341,7 @@
     "id": "the-majors-footlocker",
     "name": "The Major’s Footlocker",
     "objectives": [
-      "Search for Major Aiva's mementos in the apartments northwest of The Dam",
-      "Deliver Major Aiva's Mementos to Tian Wen"
+      "Search for Major Aiva's mementos in the apartments northwest of The Dam"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -5601,8 +5426,7 @@
     "name": "The Root of the Matter",
     "objectives": [
       "Go to the Research Building",
-      "Search for the seed vault in the \"room with a great view\"",
-      "Deliver the Experimental Seed Sample to Celeste"
+      "Search for the seed vault in the \"room with a great view\""
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -5630,11 +5454,7 @@
     "id": "the-stench-of-corruption",
     "name": "The Stench of Corruption",
     "objectives": [
-      "Reach the southwest lobby of the Departure Building",
-      "Find the staff locker room",
-      "Search the room for any clues of the saboteur's identity",
-      "Reach the tunnels below the Spaceport",
-      "Use the key on any Flushing Terminal to override the bypass protocol"
+      "Reach the southwest lobby of the Departure Building"
     ],
     "requirements": [
       {
@@ -5714,12 +5534,12 @@
     "id": "the-trifecta",
     "name": "The Trifecta",
     "objectives": [
-      "Destroy a Wasp",
-      "Get a Wasp Driver for Shani",
-      "Destroy a Hornet",
-      "Get a Hornet Driver for Shani",
-      "Destroy a Snitch",
-      "Get a Snitch Scanner for Shani"
+      "Destroy 2 Snitches",
+      "Destroy 2 Wasps",
+      "Destroy 2 Hornets",
+      "Destroy 2 Wasp thrusters",
+      "Destroy 4 Hornet thrusters",
+      "Destroy a Firefly fuel tank"
     ],
     "requirements": [
       {
@@ -5820,20 +5640,12 @@
     "sortOrder": 1516.91801992278
   },
   {
-    "id": "thermite-tipped-rounds",
-    "name": "Thermite-Tipped Rounds",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
-  },
-  {
     "id": "to-the-skies",
     "name": "To The Skies",
-    "objectives": [],
+    "objectives": [
+      "Scan any Crashed ARC Probe",
+      "Scan any ARC Courier"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "arc-performance-steel",
@@ -5880,23 +5692,19 @@
     ],
     "trader": "Apollo",
     "xp": 8000,
-    "sortOrder": 0
-  },
-  {
-    "id": "top-mounted-optics-retrofittings",
-    "name": "Top Mounted Optics Retrofittings",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -575.9722952739511
   },
   {
     "id": "tracks-of-the-beast",
     "name": "Tracks of the Beast",
-    "objectives": [],
+    "objectives": [
+      "On Pendola Pass, head to the Northern Tracks",
+      "Find the destroyed station at the end of the tracks",
+      "Ping a Bully",
+      "Ping a Skulker",
+      "Destroy 3 Skulkers",
+      "Deliver a Skulker Targeter to Shani"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "showstopper",
@@ -5928,9 +5736,9 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Shani",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": 7.578582832551987
   },
   {
     "id": "trash-into-treasure",
@@ -6067,22 +5875,10 @@
     "sortOrder": 5939.252140564836
   },
   {
-    "id": "trigger-reset-systems",
-    "name": "Trigger Reset Systems",
-    "objectives": [],
-    "requirements": [],
-    "rewardItemIds": [],
-    "rewards": [],
-    "trader": "Unknown",
-    "xp": 0,
-    "sortOrder": 0
-  },
-  {
     "id": "turnabout",
     "name": "Turnabout",
     "objectives": [
-      "Go to the North Trench Tower",
-      "Locate and upload the blackmail files to Celeste"
+      "Go to the North Trench Tower"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -6208,8 +6004,7 @@
     "name": "Untended Garden",
     "objectives": [
       "Go to the Hydroponic Dome Complex",
-      "Access the data archive in one of the domes",
-      "Upload the data to the computer terminal in any Field Depot"
+      "Access the data archive in one of the domes"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -6263,9 +6058,7 @@
     "id": "waking-the-grid",
     "name": "Waking the Grid",
     "objectives": [
-      "Activate the security sensors in one of the Guard Towers",
-      "Start the Security Control Center in the Departure Building",
-      "Search for any traces of a security breach in the Arrival Building Data Office"
+      "Activate the security sensors in one of the Guard Towers"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -6320,8 +6113,7 @@
     "name": "Water Troubles",
     "objectives": [
       "Locate the Flood Access Tunnel under the Red Lake Balcony",
-      "Find the intake to the District's Water Supply",
-      "Sample the water"
+      "Find the intake to the District's Water Supply"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -6443,7 +6235,7 @@
     "name": "What We Left Behind",
     "objectives": [
       "On Buried City, search 2 containers in the Raider Camp beneath the Parking Garage",
-      "On Dam Battlegrounds, search for anything significant in the South Swamp Outpost ",
+      "On Dam Battlegrounds, search for anything significant in the South Swamp Outpost",
       "On Spaceport, search for anything significant in Bilguun's Hideout, next to the Container Storage"
     ],
     "requirements": [],
@@ -6497,7 +6289,9 @@
   {
     "id": "when-everything-falls",
     "name": "When Everything Falls",
-    "objectives": [],
+    "objectives": [
+      "Go to the Water Towers"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "stiletto",
@@ -6555,14 +6349,18 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Shani",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -37.89291416275995
   },
   {
     "id": "wires-crossed",
     "name": "Wires Crossed",
-    "objectives": [],
+    "objectives": [
+      "On The Blue Gate, attach a Snitch Scanner to the antenna at Pilgrim’s Peak",
+      "On Spaceport, attach a Surveyor Vault to the antenna on top of the Launch Towers",
+      "On Buried City, attach a Sentinel Firing Core to the antenna at the roof of the Grandioso Apartments"
+    ],
     "requirements": [],
     "rewardItemIds": [
       "electrical-components",
@@ -6620,18 +6418,16 @@
         }
       }
     ],
-    "trader": "Unknown",
+    "trader": "Celeste",
     "xp": 0,
-    "sortOrder": 0
+    "sortOrder": -227.35748497655965
   },
   {
     "id": "with-a-trace",
     "name": "With A Trace",
     "objectives": [
       "Reach the Barren Clearing",
-      "Find signs of who brought down the ARC machines",
-      "Inspect the Adorned Wreckage",
-      "Inspect the communications device"
+      "Find signs of who brought down the ARC machines"
     ],
     "requirements": [],
     "rewardItemIds": [
@@ -6672,11 +6468,7 @@
     "id": "with-a-view",
     "name": "With a View",
     "objectives": [
-      "Obtain a Rotary Encoder",
-      "Visit any of the Control Rooms near the Assembly Line",
-      "Use the Rotary Encoder to activate the server switch",
-      "Interact with a nearby computer to help identify the correct parts",
-      "Deliver an Ion Sputter to Shani"
+      "Obtain a Rotary Encoder"
     ],
     "requirements": [
       {
@@ -6743,11 +6535,7 @@
     "id": "worth-your-salt",
     "name": "Worth Your Salt",
     "objectives": [
-      "Go to the Rocket Assembly",
-      "Search for the hidden Battery Prototype in a high place",
-      "Bring the Battery Prototype to the Industrial Recharger",
-      "Use the machinery to charge the battery",
-      "Deliver the Charged Battery to the drop-off point in the corner"
+      "Go to the Rocket Assembly"
     ],
     "requirements": [],
     "rewardItemIds": [

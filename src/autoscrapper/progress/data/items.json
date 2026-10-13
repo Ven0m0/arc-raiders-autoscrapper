@@ -29,6 +29,19 @@
     }
   },
   {
+    "id": "action-economy",
+    "name": "Action Economy",
+    "type": "Research",
+    "rarity": null,
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "adrenaline-shot",
     "name": "Adrenaline Shot",
     "type": "Quick Use",
@@ -79,12 +92,12 @@
     "id": "advanced-camera-blueprint",
     "name": "Advanced Camera Blueprint",
     "type": "Blueprint",
-    "rarity": null,
+    "rarity": "legendary",
     "value": 5000,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -150,7 +163,7 @@
     "weightKg": 0.2,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 3
@@ -165,7 +178,7 @@
     "weightKg": 0.2,
     "stackSize": 5,
     "craftBench": "in_raid",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "agave": 1,
       "empty-wine-bottle": 1
@@ -210,7 +223,7 @@
     "weightKg": 0.3,
     "stackSize": 15,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -218,12 +231,12 @@
     "id": "alpine-wardrobe",
     "name": "Alpine Wardrobe",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -236,7 +249,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -319,15 +332,28 @@
     "recyclesInto": null
   },
   {
-    "id": "amplified-anvil",
-    "name": "Amplified Anvil",
+    "id": "amplified-anvil-projectile-splitter",
+    "name": "Amplified Anvil (Anvil Splitter)",
     "type": "Weapon",
     "rarity": "amplified",
     "value": 20800,
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-anvil-x-rounds",
+    "name": "Amplified Anvil (X-Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 5,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -340,7 +366,150 @@
     "weightKg": 10,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-aphelion-bigger-mag",
+    "name": "Amplified Aphelion (Bigger Mag)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-aphelion-bigger-mag-charged-burst",
+    "name": "Amplified Aphelion (Bigger Mag, Charged Burst)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-aphelion-bigger-mag-charged-burst-incendiary-rounds",
+    "name": "Amplified Aphelion (Bigger Mag, Charged Burst, Incendiary Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-aphelion-bigger-mag-charged-burst-increased-burst",
+    "name": "Amplified Aphelion (Bigger Mag, Charged Burst, Increased Burst)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-aphelion-bigger-mag-charged-burst-increased-burst-incendiary-rounds",
+    "name": "Amplified Aphelion (Bigger Mag, Charged Burst, Increased Burst, Incendiary Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-aphelion-bigger-mag-incendiary-rounds",
+    "name": "Amplified Aphelion (Bigger Mag, Incendiary Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-aphelion-charged-burst",
+    "name": "Amplified Aphelion (Charged Burst)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-aphelion-charged-burst-incendiary-rounds",
+    "name": "Amplified Aphelion (Charged Burst, Incendiary Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-aphelion-charged-burst-increased-burst",
+    "name": "Amplified Aphelion (Charged Burst, Increased Burst)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-aphelion-charged-burst-increased-burst-incendiary-rounds",
+    "name": "Amplified Aphelion (Charged Burst, Increased Burst, Incendiary Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-aphelion-incendiary-rounds",
+    "name": "Amplified Aphelion (Incendiary Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -353,7 +522,46 @@
     "weightKg": 11,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-bettina-bigger-mag",
+    "name": "Amplified Bettina (Bigger Mag)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 27200,
+    "weightKg": 11,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-bettina-semi-auto",
+    "name": "Amplified Bettina (Semi-Auto)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 27200,
+    "weightKg": 11,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-bettina-semi-auto-x-rounds",
+    "name": "Amplified Bettina (Semi-Auto, X-Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 27200,
+    "weightKg": 11,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -366,7 +574,98 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-burletta-burst",
+    "name": "Amplified Burletta (Burst Fire)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 16000,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-burletta-burst-increased-burst",
+    "name": "Amplified Burletta (Burst Fire, Increased Burst)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 16000,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-burletta-burst-increased-burst-sprint-shooting",
+    "name": "Amplified Burletta (Burst Fire, Increased Burst, Sprint Shooting)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 16000,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-burletta-burst-sprint-shooting",
+    "name": "Amplified Burletta (Burst Fire, Sprint Shooting)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 16000,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-burletta-full-auto",
+    "name": "Amplified Burletta (Full-Auto)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 16000,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-burletta-full-auto-sprint-shooting",
+    "name": "Amplified Burletta (Full-Auto, Sprint Shooting)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 16000,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-burletta-sprint-shooting",
+    "name": "Amplified Burletta (Sprint Shooting)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 16000,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -379,7 +678,72 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-canto-carbine",
+    "name": "Amplified Canto (Carbine Conversion)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-canto-incendiary-rounds",
+    "name": "Amplified Canto (Incendiary Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-canto-incendiary-rounds-carbine",
+    "name": "Amplified Canto (Incendiary Rounds, Carbine Conversion)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-canto-incendiary-rounds-sprint-shooting",
+    "name": "Amplified Canto (Incendiary Rounds, Sprint Shooting)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-canto-sprint-shooting",
+    "name": "Amplified Canto (Sprint Shooting)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -392,7 +756,72 @@
     "weightKg": 14,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-equalizer-anti-weak-point",
+    "name": "Amplified Equalizer (Anti-Weak Point)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 14,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-equalizer-anti-weak-point-bigger-mag",
+    "name": "Amplified Equalizer (Anti-Weak Point, Bigger Mag)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 14,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-equalizer-bigger-mag",
+    "name": "Amplified Equalizer (Bigger Mag)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 14,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-equalizer-ramping-damage",
+    "name": "Amplified Equalizer (Ramping Damage)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 14,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-equalizer-ramping-damage-bigger-mag",
+    "name": "Amplified Equalizer (Ramping Damage, Bigger Mag)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 14,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -418,7 +847,59 @@
     "weightKg": 3,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-hairpin-incendiary-rounds",
+    "name": "Amplified Hairpin (Incendiary Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 3,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-hairpin-semi-auto",
+    "name": "Amplified Hairpin (Semi-Auto)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 3,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-hairpin-semi-auto-sprint-shooting",
+    "name": "Amplified Hairpin (Semi-Auto, Sprint Shooting)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 3,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-hairpin-tracker-rounds",
+    "name": "Amplified Hairpin (Tracker Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 3,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -431,7 +912,46 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-hullcracker-incendiary-rounds",
+    "name": "Amplified Hullcracker (Incendiary Grenades)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 27200,
+    "weightKg": 7,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-hullcracker-incendiary-rounds-mag-reload",
+    "name": "Amplified Hullcracker (Incendiary Grenades, Mag Reload)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 27200,
+    "weightKg": 7,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-hullcracker-mag-reload",
+    "name": "Amplified Hullcracker (Mag Reload)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 27200,
+    "weightKg": 7,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -444,7 +964,46 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-il-toro-more-reload",
+    "name": "Amplified Il Toro (More Reload)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 16000,
+    "weightKg": 8,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-il-toro-more-reload-slug-rounds",
+    "name": "Amplified Il Toro (More Reload, Slug Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 16000,
+    "weightKg": 8,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-il-toro-slug-rounds",
+    "name": "Amplified Il Toro (Slug Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 16000,
+    "weightKg": 8,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -457,7 +1016,98 @@
     "weightKg": 9,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-jupiter-bigger-mag",
+    "name": "Amplified Jupiter (Bigger Mag)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 9,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-jupiter-bigger-mag-straight-bolt",
+    "name": "Amplified Jupiter (Bigger Mag, Ergonomic Bolt)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 9,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-jupiter-bigger-mag-scoped",
+    "name": "Amplified Jupiter (Bigger Mag, Scoped)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 9,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-jupiter-bigger-mag-scoped-straight-bolt",
+    "name": "Amplified Jupiter (Bigger Mag, Scoped, Ergonomic Bolt)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 9,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-jupiter-straight-bolt",
+    "name": "Amplified Jupiter (Ergonomic Bolt)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 9,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-jupiter-scoped",
+    "name": "Amplified Jupiter (Scoped)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 9,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-jupiter-scoped-straight-bolt",
+    "name": "Amplified Jupiter (Scoped, Ergonomic Bolt)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 35200,
+    "weightKg": 9,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -470,7 +1120,59 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-kettle-anti-shield",
+    "name": "Amplified Kettle (Anti-Shield)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 7,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-kettle-anti-shield-full-auto",
+    "name": "Amplified Kettle (Anti-Shield, Full-Auto)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 7,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-kettle-full-auto",
+    "name": "Amplified Kettle (Full-Auto)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 7,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-kettle-x-rounds",
+    "name": "Amplified Kettle (X-Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 7,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -483,7 +1185,72 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-osprey-anti-weak-point",
+    "name": "Amplified Osprey (Anti-Weak Point)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 7,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-osprey-straight-bolt",
+    "name": "Amplified Osprey (Ergonomic Bolt)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 7,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-osprey-straight-bolt-anti-weak-point",
+    "name": "Amplified Osprey (Ergonomic Bolt, Anti-Weak Point)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 7,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-osprey-tracker-rounds",
+    "name": "Amplified Osprey (Tracker Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 7,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-osprey-tracker-rounds-straight-bolt",
+    "name": "Amplified Osprey (Tracker Rounds, Ergonomic Bolt)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 7,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -496,7 +1263,98 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-rascal-high-velocity",
+    "name": "Amplified Rascal (High Velocity)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-rascal-high-velocity-incendiary-rounds",
+    "name": "Amplified Rascal (High Velocity, Incendiary Grenades)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-rascal-high-velocity-sprint-shooting",
+    "name": "Amplified Rascal (High Velocity, Sprint Shooting)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-rascal-high-velocity-sprint-shooting-incendiary-rounds",
+    "name": "Amplified Rascal (High Velocity, Sprint Shooting, Incendiary Grenades)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-rascal-incendiary-rounds",
+    "name": "Amplified Rascal (Incendiary Grenades)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-rascal-sprint-shooting",
+    "name": "Amplified Rascal (Sprint Shooting)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-rascal-sprint-shooting-incendiary-rounds",
+    "name": "Amplified Rascal (Sprint Shooting, Incendiary Grenades)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 4,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -509,7 +1367,72 @@
     "weightKg": 6,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-rattler-incendiary-rounds",
+    "name": "Amplified Rattler (Incendiary Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 6,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-rattler-more-reload",
+    "name": "Amplified Rattler (More Reload)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 6,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-rattler-more-reload-drum-mag",
+    "name": "Amplified Rattler (More Reload, Drum Mag)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 6,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-rattler-more-reload-drum-mag-incendiary-rounds",
+    "name": "Amplified Rattler (More Reload, Drum Mag, Incendiary Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 6,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-rattler-more-reload-incendiary-rounds",
+    "name": "Amplified Rattler (More Reload, Incendiary Rounds)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 11200,
+    "weightKg": 6,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -522,7 +1445,46 @@
     "weightKg": 10,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-renegade-more-reload",
+    "name": "Amplified Renegade (More Reload)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-renegade-more-reload-scoped",
+    "name": "Amplified Renegade (More Reload, Scoped)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "amplified-renegade-scoped",
+    "name": "Amplified Renegade (Scoped)",
+    "type": "Weapon",
+    "rarity": "amplified",
+    "value": 20800,
+    "weightKg": 10,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -561,7 +1523,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "duct-tape": 1,
       "plastic-parts": 6
@@ -579,7 +1541,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "duct-tape": 3,
       "mechanical-components": 2
@@ -611,7 +1573,7 @@
     "weightKg": 0.75,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "duct-tape": 5,
       "mod-components": 2
@@ -688,7 +1650,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Weapon Bench 2",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "mechanical-components": 5,
       "simple-gun-parts": 6
@@ -707,7 +1669,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Weapon Bench II",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 3,
@@ -723,7 +1685,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 4,
@@ -739,7 +1701,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 5,
@@ -784,7 +1746,7 @@
     "weightKg": 10,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -797,7 +1759,7 @@
     "weightKg": 0.2,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 3
@@ -862,7 +1824,8 @@
     "craftBench": null,
     "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Quests Sizing Things Up (1x)"
   },
   {
     "id": "arc-coolant",
@@ -890,7 +1853,8 @@
     "craftBench": null,
     "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Workshop Research Station 4 (3x)"
   },
   {
     "id": "arc-flex-rubber",
@@ -924,12 +1888,12 @@
     "id": "archive-floor-lamp",
     "name": "Archive Floor Lamp",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -942,7 +1906,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -991,7 +1955,7 @@
     "recyclesInto": {
       "metal-parts": 12
     },
-    "wikiUses": "Projects Trophy Display (10x)"
+    "wikiUses": "Quests To The Skies (1x) Projects Trophy Display (10x)"
   },
   {
     "id": "arc-plated-coupler",
@@ -1015,7 +1979,7 @@
     "weightKg": 0.5,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Workshop Refiner 1 (5x)"
@@ -1034,7 +1998,7 @@
     "recyclesInto": {
       "plastic-parts": 14
     },
-    "wikiUses": "Projects Trophy Display (10x)"
+    "wikiUses": "Quests To The Skies (1x) Projects Trophy Display (10x)"
   },
   {
     "id": "arc-thermo-lining",
@@ -1049,7 +2013,8 @@
     "recipe": null,
     "recyclesInto": {
       "fabric": 16
-    }
+    },
+    "wikiUses": "Quests To The Skies (1x)"
   },
   {
     "id": "arpeggio-i",
@@ -1060,7 +2025,7 @@
     "weightKg": 6,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "mechanical-components": 6,
       "simple-gun-parts": 6
@@ -1079,7 +2044,7 @@
     "weightKg": 6,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 3,
@@ -1095,7 +2060,7 @@
     "weightKg": 6,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 4,
@@ -1111,7 +2076,7 @@
     "weightKg": 6,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 5,
@@ -1246,12 +2211,12 @@
     "id": "banjo-blueprint",
     "name": "Banjo Blueprint",
     "type": "Blueprint",
-    "rarity": null,
+    "rarity": "legendary",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1272,12 +2237,12 @@
     "id": "bantam-blueprint",
     "name": "Bantam Blueprint",
     "type": "Blueprint",
-    "rarity": null,
+    "rarity": "legendary",
     "value": 5000,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1290,7 +2255,7 @@
     "weightKg": 3,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1303,7 +2268,7 @@
     "weightKg": 3,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1316,7 +2281,7 @@
     "weightKg": 3,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1329,7 +2294,7 @@
     "weightKg": 3,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1342,7 +2307,7 @@
     "weightKg": 0.4,
     "stackSize": 3,
     "craftBench": "Utility Bench 1",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "mechanical-components": 1
     },
@@ -1367,12 +2332,12 @@
     "id": "barstool",
     "name": "Barstool",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1385,7 +2350,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "bar-table",
+    "name": "Bar Table",
+    "type": "Furniture",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1398,7 +2376,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1436,12 +2414,12 @@
     "id": "battered-aviary-table",
     "name": "Battered Aviary Table",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1454,7 +2432,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "battered-bureau-chair",
+    "name": "Battered Bureau Chair",
+    "type": "Furniture",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1467,7 +2458,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1475,12 +2466,12 @@
     "id": "battered-bureau-sofa",
     "name": "Battered Bureau Sofa",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1493,7 +2484,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "battered-den-bed",
+    "name": "Battered Den Bed",
+    "type": "Furniture",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1506,7 +2510,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1514,12 +2518,12 @@
     "id": "battered-den-shelf",
     "name": "Battered Den Shelf",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1532,7 +2536,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "battered-diner-chair",
+    "name": "Battered Diner Chair",
+    "type": "Furniture",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1545,7 +2562,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "battered-faculty-table",
+    "name": "Battered Faculty Table",
+    "type": "Furniture",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1558,7 +2588,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1566,12 +2596,12 @@
     "id": "battered-lab-cabinet",
     "name": "Battered Lab Cabinet",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1584,7 +2614,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1592,12 +2622,12 @@
     "id": "battered-lab-cabinet-wide",
     "name": "Battered Lab Cabinet (Wide)",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1610,7 +2640,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "battered-lab-chair",
+    "name": "Battered Lab Chair",
+    "type": "Furniture",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1623,7 +2666,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1645,12 +2688,12 @@
     "id": "battered-shelf",
     "name": "Battered Shelf",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1663,7 +2706,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1671,12 +2714,12 @@
     "id": "battered-stash",
     "name": "Battered Stash",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1689,7 +2732,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1702,7 +2745,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1715,7 +2758,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -1783,7 +2826,7 @@
     "weightKg": 11,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "advanced-mechanical-components": 3,
       "canister": 3,
@@ -1803,7 +2846,7 @@
     "weightKg": 11,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -1819,7 +2862,7 @@
     "weightKg": 11,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -1835,7 +2878,7 @@
     "weightKg": 11,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
@@ -1974,7 +3017,7 @@
       "in_raid",
       "workbench"
     ],
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "blaze-grenade": 1,
       "wires": 1
@@ -2003,7 +3046,7 @@
     "weightKg": 0.2,
     "stackSize": 15,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2076,12 +3119,12 @@
     "id": "blue-lab-cabinet",
     "name": "Blue Lab Cabinet",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2094,7 +3137,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2107,7 +3150,7 @@
     "weightKg": 0.15,
     "stackSize": 5,
     "craftBench": "utility_bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "chemicals": 3
     },
@@ -2176,7 +3219,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Weapon Bench 3",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "exodus-modules": 2,
       "light-gun-parts": 3,
@@ -2196,7 +3239,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
@@ -2212,7 +3255,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 4,
@@ -2228,7 +3271,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 5,
@@ -2456,9 +3499,10 @@
     "weightKg": 0.4,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Workshop Research Station 3 (6x) Quests [[Bait Fetch Blast]] (1x)"
   },
   {
     "id": "bulwark-stencil",
@@ -2477,12 +3521,12 @@
     "id": "bureau-ceiling-lamp",
     "name": "Bureau Ceiling Lamp",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2495,7 +3539,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2599,7 +3643,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "Weapon Bench 2",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "mechanical-components": 3,
       "simple-gun-parts": 3
@@ -2618,7 +3662,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 2,
@@ -2634,7 +3678,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 3,
@@ -2650,7 +3694,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 4,
@@ -2712,6 +3756,19 @@
     "recyclesInto": null
   },
   {
+    "id": "cafeteria-table",
+    "name": "Cafeteria Table",
+    "type": "Furniture",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "cafeteria-table-design",
     "name": "Cafeteria Table Design",
     "type": "Design",
@@ -2720,7 +3777,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -2735,7 +3792,8 @@
     "craftBench": null,
     "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Workshop Research Station 2 (3x)"
   },
   {
     "id": "camera-lens",
@@ -2761,7 +3819,7 @@
     "weightKg": 0.5,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 2
@@ -2833,7 +3891,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "advanced-mechanical-components": 2,
       "magnet": 5,
@@ -2853,7 +3911,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -2869,7 +3927,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -2885,7 +3943,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
@@ -3001,12 +4059,12 @@
     "id": "chambers-lamp",
     "name": "Chambers Lamp",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3019,7 +4077,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3027,12 +4085,12 @@
     "id": "chambers-nightstand",
     "name": "Chambers Nightstand",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3045,7 +4103,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3058,7 +4116,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3071,7 +4129,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3079,12 +4137,12 @@
     "id": "chandelier",
     "name": "Chandelier",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "legendary",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3097,7 +4155,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3145,12 +4203,12 @@
     "id": "clinic-medical-cabinet",
     "name": "Clinic Medical Cabinet",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3163,7 +4221,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3344,7 +4402,7 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 2,
@@ -3374,7 +4432,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": "Gunsmith",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "metal-parts": 6,
       "wires": 1
@@ -3392,7 +4450,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "Gunsmith II",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "mechanical-components": 2,
       "wires": 4
@@ -3424,7 +4482,7 @@
     "weightKg": 0.75,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "mod-components": 2,
       "wires": 8
@@ -3483,12 +4541,12 @@
     "id": "console-chest",
     "name": "Console Chest",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3501,7 +4559,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -3607,7 +4665,7 @@
     "weightKg": 0.3,
     "stackSize": 5,
     "craftBench": "Utility Station II",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "durable-cloth": 1,
       "electrical-components": 1
@@ -3665,7 +4723,7 @@
     "weightKg": 0.5,
     "stackSize": 10,
     "craftBench": "Refiner",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "chemicals": 6
     },
@@ -3937,7 +4995,7 @@
     "weightKg": 1,
     "stackSize": 1,
     "craftBench": "Explosives Bench III",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "arc-circuitry": 2,
       "comet-igniter": 1,
@@ -4075,18 +5133,19 @@
     "craftBench": null,
     "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Workshop Research Station 3 (3x)"
   },
   {
     "id": "diner-ceiling-lamp",
     "name": "Diner Ceiling Lamp",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4099,7 +5158,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4107,12 +5166,12 @@
     "id": "diner-cupboard",
     "name": "Diner Cupboard",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4125,7 +5184,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4133,12 +5192,12 @@
     "id": "diner-shelf",
     "name": "Diner Shelf",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4151,7 +5210,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4159,12 +5218,12 @@
     "id": "diner-sofa",
     "name": "Diner Sofa",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4177,7 +5236,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4185,12 +5244,12 @@
     "id": "diner-stool",
     "name": "Diner Stool",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4203,7 +5262,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "diner-table",
+    "name": "Diner Table",
+    "type": "Furniture",
+    "rarity": "epic",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4216,7 +5288,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4287,7 +5359,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "magnetic-accelerator": 3,
       "shredder-gyro": 3,
@@ -4319,7 +5391,7 @@
     "weightKg": 0.3,
     "stackSize": 15,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4363,7 +5435,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4376,7 +5448,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4389,7 +5461,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4402,7 +5474,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4415,7 +5487,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4428,7 +5500,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4441,7 +5513,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4454,7 +5526,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4467,7 +5539,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4480,7 +5552,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4493,7 +5565,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4506,7 +5578,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4687,12 +5759,12 @@
     "id": "emperor-gateway-conduit-blueprint",
     "name": "Emperor Gateway Conduit Blueprint",
     "type": "Blueprint",
-    "rarity": null,
+    "rarity": "legendary",
     "value": 5000,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4707,7 +5779,8 @@
     "craftBench": null,
     "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Workshop Gunsmith 3 (1x)"
   },
   {
     "id": "empty-wine-bottle",
@@ -4773,7 +5846,7 @@
     "weightKg": 14,
     "stackSize": 1,
     "craftBench": "Weapon Bench 3",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "complex-gun-parts": 3,
       "magnetic-accelerator": 3,
@@ -4864,7 +5937,8 @@
     "craftBench": null,
     "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Workshop Research Station 3 (3x)"
   },
   {
     "id": "experimental-seed-sample",
@@ -4888,7 +5962,7 @@
     "weightKg": 0.1,
     "stackSize": 15,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -4982,7 +6056,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "metal-parts": 6,
       "wires": 3
@@ -5000,7 +6074,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "mechanical-components": 3,
       "wires": 6
@@ -5032,7 +6106,7 @@
     "weightKg": 0.75,
     "stackSize": 1,
     "craftBench": "Gunsmith I",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "mod-components": 2,
       "wires": 8
@@ -5323,7 +6397,7 @@
     "weightKg": 0.1,
     "stackSize": 50,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Workshop Gear Bench 1 (30x) Medical Lab 1 (50x)"
@@ -5332,12 +6406,12 @@
     "id": "faculty-closet",
     "name": "Faculty Closet",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -5350,7 +6424,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -5358,12 +6432,12 @@
     "id": "faculty-dresser",
     "name": "Faculty Dresser",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -5376,7 +6450,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -5415,7 +6489,7 @@
     "weightKg": 0.3,
     "stackSize": 15,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -5428,7 +6502,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "metal-parts": 5,
       "rubber-parts": 2
@@ -5447,7 +6521,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 4,
@@ -5463,7 +6537,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 6,
@@ -5479,7 +6553,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 1,
@@ -5562,7 +6636,7 @@
     "weightKg": 0.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 1,
@@ -5597,7 +6671,7 @@
     "weightKg": 0.75,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 2,
@@ -5703,7 +6777,7 @@
     "weightKg": 0.3,
     "stackSize": 15,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -5711,12 +6785,12 @@
     "id": "floor-lamp",
     "name": "Floor Lamp",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -5729,7 +6803,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -5891,7 +6965,8 @@
     "craftBench": null,
     "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Workshop Research Station 4 (1x)"
   },
   {
     "id": "frosty-duck",
@@ -5975,7 +7050,7 @@
     "weightKg": 0.2,
     "stackSize": 3,
     "craftBench": "Explosive Bench 1",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "chemicals": 4,
       "rubber-parts": 2
@@ -5997,7 +7072,7 @@
       "in_raid",
       "workbench"
     ],
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "gas-grenade": 1,
       "wires": 1
@@ -6013,7 +7088,7 @@
     "weightKg": 0.25,
     "stackSize": 3,
     "craftBench": "Explosives Bench I",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "chemicals": 4,
       "rubber-parts": 2
@@ -6075,7 +7150,20 @@
     "weightKg": 0.3,
     "stackSize": 15,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "geometric-fabric-chair",
+    "name": "Geometric Fabric Chair",
+    "type": "Furniture",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6088,7 +7176,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6096,12 +7184,12 @@
     "id": "glass-ceiling-lamp",
     "name": "Glass Ceiling Lamp",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6114,7 +7202,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6245,7 +7333,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6253,12 +7341,12 @@
     "id": "grappling-hook-blueprint",
     "name": "Grappling Hook Blueprint",
     "type": "Blueprint",
-    "rarity": null,
+    "rarity": "legendary",
     "value": 5000,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6279,6 +7367,19 @@
     "wikiUses": "Quests Doctor's Orders (1x)"
   },
   {
+    "id": "green-geometric-chair",
+    "name": "Green Geometric Chair",
+    "type": "Furniture",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "green-geometric-chair-design",
     "name": "Green Geometric Chair Design",
     "type": "Design",
@@ -6287,7 +7388,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "green-geometric-sofa",
+    "name": "Green Geometric Sofa",
+    "type": "Furniture",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6300,7 +7414,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "green-lab-sofa",
+    "name": "Green Lab Sofa",
+    "type": "Furniture",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6313,7 +7440,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6326,7 +7453,7 @@
     "weightKg": 0.15,
     "stackSize": 5,
     "craftBench": "utility_bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "chemicals": 3
     },
@@ -6369,7 +7496,7 @@
     "weightKg": 3,
     "stackSize": 1,
     "craftBench": "Weapon Bench 1 or Basic Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "metal-parts": 2,
       "plastic-parts": 5
@@ -6388,7 +7515,7 @@
     "weightKg": 3,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 4,
@@ -6404,7 +7531,7 @@
     "weightKg": 3,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 6,
@@ -6420,7 +7547,7 @@
     "weightKg": 3,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 1,
@@ -6654,12 +7781,12 @@
     "id": "holly-bush",
     "name": "Holly Bush",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6672,7 +7799,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6685,7 +7812,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "duct-tape": 2,
@@ -6701,7 +7828,7 @@
     "weightKg": 0.75,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 1,
@@ -6723,6 +7850,19 @@
     "recyclesInto": null
   },
   {
+    "id": "hotel-chair",
+    "name": "Hotel Chair",
+    "type": "Furniture",
+    "rarity": "uncommon",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "hotel-chair-design",
     "name": "Hotel Chair Design",
     "type": "Design",
@@ -6731,7 +7871,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -6772,7 +7912,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "exodus-modules": 1,
       "heavy-gun-parts": 3,
@@ -6792,7 +7932,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -6808,7 +7948,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
@@ -6824,7 +7964,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 4,
@@ -6924,7 +8064,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Weapon Bench 1",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "mechanical-components": 5,
       "simple-gun-parts": 6
@@ -6943,7 +8083,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 3,
@@ -6959,7 +8099,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 4,
@@ -6975,7 +8115,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 5,
@@ -7012,7 +8152,7 @@
       "battery": 2,
       "chemicals": 7
     },
-    "wikiUses": "Workshop Gear Bench 3 (3x)"
+    "wikiUses": "Workshop Gear Bench 3 (3x) Quests Taking Stock (3x)"
   },
   {
     "id": "industrial-charger",
@@ -7082,7 +8222,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7095,7 +8235,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7125,7 +8265,7 @@
     "weightKg": 0.2,
     "stackSize": 3,
     "craftBench": "Explosives Bench II",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "battery": 1,
       "electrical-components": 1
@@ -7183,7 +8323,7 @@
     "weightKg": 9,
     "stackSize": 1,
     "craftBench": "Weapon Bench 3",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "complex-gun-parts": 3,
       "magnetic-accelerator": 3,
@@ -7216,7 +8356,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "metal-parts": 6,
       "rubber-parts": 8
@@ -7235,7 +8375,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Gunsmith I",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 6,
@@ -7251,7 +8391,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 12,
@@ -7267,7 +8407,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Gunsmith I",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 2,
@@ -7283,7 +8423,7 @@
     "weightKg": 0.75,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "duct-tape": 2,
@@ -7294,12 +8434,12 @@
     "id": "lab-ceiling-light",
     "name": "Lab Ceiling Light",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7312,7 +8452,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7337,12 +8477,12 @@
     "id": "lab-stool",
     "name": "Lab Stool",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7355,7 +8495,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -7424,7 +8564,7 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 1,
@@ -7441,7 +8581,7 @@
     "weightKg": 0.2,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 3
@@ -7908,7 +9048,7 @@
       "advanced-mechanical-components": 1,
       "arc-motion-core": 1
     },
-    "wikiUses": "Projects Expedition 1 (3x) Expedition 5 (3x) Trophy Display (10x)"
+    "wikiUses": "Workshop Gunsmith 3 (3x) Projects Expedition 1 (3x) Expedition 5 (3x) Trophy Display (10x)"
   },
   {
     "id": "magnetron",
@@ -8274,7 +9414,7 @@
     "weightKg": 0.3,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 3
@@ -8324,6 +9464,19 @@
     "recyclesInto": null
   },
   {
+    "id": "multicolored-geometric-sofa",
+    "name": "Multicolored Geometric Sofa",
+    "type": "Furniture",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "multicolored-geometric-sofa-design",
     "name": "Multicolored Geometric Sofa Design",
     "type": "Design",
@@ -8332,7 +9485,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -8345,7 +9498,7 @@
     "weightKg": 0.2,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Workshop Scrappy 5 (12x)"
@@ -8385,7 +9538,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "metal-parts": 6,
       "wires": 1
@@ -8403,7 +9556,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "mechanical-components": 2,
       "wires": 4
@@ -8435,7 +9588,7 @@
     "weightKg": 0.75,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "mod-components": 2,
       "wires": 8
@@ -8480,7 +9633,7 @@
     "weightKg": 0.3,
     "stackSize": 3,
     "craftBench": "in_raid",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "plastic-parts": 2,
       "speaker-component": 1
@@ -8581,7 +9734,7 @@
     "weightKg": 0.2,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 2
@@ -8628,6 +9781,19 @@
     "recyclesInto": null
   },
   {
+    "id": "ornate-den-bed",
+    "name": "Ornate Den Bed",
+    "type": "Furniture",
+    "rarity": "epic",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "ornate-den-bed-design",
     "name": "Ornate Den Bed Design",
     "type": "Design",
@@ -8636,7 +9802,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -8644,12 +9810,12 @@
     "id": "ornate-den-shelf",
     "name": "Ornate Den Shelf",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -8662,7 +9828,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -8670,12 +9836,12 @@
     "id": "ornate-stash",
     "name": "Ornate Stash",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -8688,7 +9854,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -8696,12 +9862,12 @@
     "id": "ornate-wardrobe",
     "name": "Ornate Wardrobe",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -8714,7 +9880,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -8740,7 +9906,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Weapon Bench 2",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 3,
@@ -8760,7 +9926,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -8776,7 +9942,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -8792,7 +9958,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
@@ -8808,7 +9974,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "duct-tape": 5,
       "mod-components": 2
@@ -9048,6 +10214,19 @@
     "recyclesInto": null
   },
   {
+    "id": "polished-den-bed",
+    "name": "Polished Den Bed",
+    "type": "Furniture",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "polished-den-bed-design",
     "name": "Polished Den Bed Design",
     "type": "Design",
@@ -9056,7 +10235,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9064,12 +10243,12 @@
     "id": "polished-den-shelf",
     "name": "Polished Den Shelf",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9082,7 +10261,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "polished-diner-chair",
+    "name": "Polished Diner Chair",
+    "type": "Furniture",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9095,7 +10287,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "polished-faculty-chair",
+    "name": "Polished Faculty Chair",
+    "type": "Furniture",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9108,7 +10313,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "polished-faculty-table",
+    "name": "Polished Faculty Table",
+    "type": "Furniture",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9121,7 +10339,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9129,12 +10347,12 @@
     "id": "polished-round-sofa",
     "name": "Polished Round Sofa",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9147,7 +10365,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9155,12 +10373,12 @@
     "id": "polished-stash",
     "name": "Polished Stash",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9173,7 +10391,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9181,12 +10399,12 @@
     "id": "polished-study-sofa",
     "name": "Polished Study Sofa",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9199,7 +10417,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9207,12 +10425,12 @@
     "id": "polished-wardrobe",
     "name": "Polished Wardrobe",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9225,7 +10443,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9233,12 +10451,12 @@
     "id": "polished-weapon-rack",
     "name": "Polished Weapon Rack",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 150,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9251,7 +10469,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9280,13 +10498,13 @@
     "weightKg": 0.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 1,
       "crude-explosives": 1
     },
-    "wikiUses": "Workshop Explosives Station 2 (5x) Projects Trophy Display (15x)"
+    "wikiUses": "Workshop Explosives Station 2 (5x) Quests To The Skies (1x) Projects Trophy Display (15x)"
   },
   {
     "id": "portable-television",
@@ -9476,12 +10694,25 @@
     "weightKg": 0.2,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 3
     },
     "wikiUses": "Workshop Scrappy 4 (6x)"
+  },
+  {
+    "id": "printed-fabric-chair",
+    "name": "Printed Fabric Chair",
+    "type": "Furniture",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
   },
   {
     "id": "printed-fabric-chair-design",
@@ -9492,7 +10723,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "printed-lab-sofa",
+    "name": "Printed Lab Sofa",
+    "type": "Furniture",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9505,7 +10749,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9589,7 +10833,7 @@
     "weightKg": 0.25,
     "stackSize": 3,
     "craftBench": "explosives_bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "crude-explosives": 1,
       "wires": 1
@@ -9665,7 +10909,8 @@
     "craftBench": null,
     "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Workshop Gunsmith 3 (3x)"
   },
   {
     "id": "radio",
@@ -9756,7 +11001,8 @@
     "craftBench": null,
     "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Workshop Research Station 2 (3x)"
   },
   {
     "id": "raiders-refuge-security-code",
@@ -9793,7 +11039,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "Gunsmith II",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -9819,7 +11065,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -9835,7 +11081,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -9851,7 +11097,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "Gunsmith II",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
@@ -9867,7 +11113,7 @@
     "weightKg": 6,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "metal-parts": 16,
       "rubber-parts": 12
@@ -9885,7 +11131,7 @@
     "weightKg": 6,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 12
@@ -9900,7 +11146,7 @@
     "weightKg": 6,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 3,
@@ -9916,7 +11162,7 @@
     "weightKg": 6,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 4,
@@ -9986,7 +11232,7 @@
     "weightKg": 0.15,
     "stackSize": 5,
     "craftBench": "utility_bench",
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "chemicals": 3
     },
@@ -10024,12 +11270,12 @@
     "id": "red-study-sofa",
     "name": "Red Study Sofa",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10042,7 +11288,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10116,7 +11362,7 @@
     "weightKg": 10,
     "stackSize": 1,
     "craftBench": "Weapon Bench 2",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 3,
@@ -10136,7 +11382,7 @@
     "weightKg": 10,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -10152,7 +11398,7 @@
     "weightKg": 10,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -10168,7 +11414,7 @@
     "weightKg": 10,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
@@ -10189,6 +11435,19 @@
     "recyclesInto": null
   },
   {
+    "id": "research-points",
+    "name": "Research Points",
+    "type": "Misc",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 2000000000,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T14:00:13.978+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "resin",
     "name": "Resin",
     "type": "Nature",
@@ -10197,7 +11456,20 @@
     "weightKg": 0.4,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-09-21T03:50:33.704675+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "restaurant-table",
+    "name": "Restaurant Table",
+    "type": "Furniture",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10210,7 +11482,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10249,7 +11521,7 @@
     "weightKg": 0.8,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "durable-cloth": 1,
@@ -10265,7 +11537,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10278,7 +11550,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10291,7 +11563,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10304,7 +11576,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10317,7 +11589,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10330,7 +11602,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10343,7 +11615,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10356,7 +11628,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10369,7 +11641,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10382,7 +11654,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10408,7 +11680,7 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-06T11:03:01.350577+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-electrical-components": 1,
@@ -10425,7 +11697,7 @@
     "weightKg": 3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 6,
@@ -10441,7 +11713,7 @@
     "weightKg": 0.2,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 1
@@ -10451,12 +11723,12 @@
     "id": "rope",
     "name": "Rope",
     "type": "Topside Material",
-    "rarity": "rare",
+    "rarity": "uncommon",
     "value": 300,
     "weightKg": 0.3,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-10-06T11:04:34.563241+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
     "recyclesInto": {
       "fabric": 5
@@ -10471,7 +11743,7 @@
     "weightKg": 0.3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10484,7 +11756,7 @@
     "weightKg": 1.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
     "recyclesInto": {
       "electrical-components": 2,
@@ -10501,7 +11773,7 @@
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-01T12:31:58.238411+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10514,7 +11786,7 @@
     "weightKg": 0.3,
     "stackSize": 15,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10527,7 +11799,7 @@
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "rubber-parts": 18
@@ -10542,7 +11814,7 @@
     "weightKg": 0.1,
     "stackSize": 50,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Workshop Gunsmith 1 (30x) Projects Expedition 1 (200x)"
@@ -10556,7 +11828,7 @@
     "weightKg": 3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "rubber-parts": 18,
@@ -10572,7 +11844,7 @@
     "weightKg": 3,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 2,
@@ -10588,7 +11860,7 @@
     "weightKg": 0.8,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 6,
@@ -10600,11 +11872,11 @@
     "name": "Ruined Emperor Beacon",
     "type": "Recyclable",
     "rarity": null,
-    "value": 0,
+    "value": 1000,
     "weightKg": 0.5,
-    "stackSize": 1,
+    "stackSize": 8,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10617,7 +11889,7 @@
     "weightKg": 0.8,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 8
@@ -10632,7 +11904,7 @@
     "weightKg": 0.8,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "fabric": 10
@@ -10647,7 +11919,7 @@
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 10,
@@ -10663,7 +11935,7 @@
     "weightKg": 0.8,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "fabric": 5,
@@ -10679,7 +11951,7 @@
     "weightKg": 0.8,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 8
@@ -10695,7 +11967,7 @@
     "weightKg": 3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 2,
@@ -10712,7 +11984,7 @@
     "weightKg": 3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "antiseptic": 1,
@@ -10729,7 +12001,7 @@
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 8,
@@ -10746,7 +12018,7 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 8
@@ -10770,11 +12042,11 @@
     "name": "Sacrifice Stencil",
     "type": "Stencil",
     "rarity": "epic",
-    "value": 0,
+    "value": 5000,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10800,7 +12072,7 @@
     "weightKg": 1.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "assorted-seeds": 14,
@@ -10855,7 +12127,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-01T12:31:58.238411+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10868,7 +12140,20 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-01T12:31:58.238411+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "security-chair",
+    "name": "Security Chair",
+    "type": "Furniture",
+    "rarity": "uncommon",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10881,7 +12166,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10894,7 +12179,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-01T12:31:58.238411+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10907,7 +12192,7 @@
     "weightKg": 0.2,
     "stackSize": 5,
     "craftBench": "Explosives Bench I",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "arc-alloy": 2,
       "crude-explosives": 1
@@ -10925,7 +12210,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10938,7 +12223,7 @@
     "weightKg": 0.3,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 1,
@@ -10955,24 +12240,24 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-27T14:51:28.694232+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 2,
       "mechanical-components": 2
     },
-    "wikiUses": "Workshop Gunsmith 3 (4x)"
+    "wikiUses": "Workshop Gunsmith 3 (4x) Quests Wires Crossed (1x)"
   },
   {
     "id": "serac-stencil",
     "name": "Serac Stencil",
     "type": "Stencil",
     "rarity": "legendary",
-    "value": 0,
+    "value": 5000,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -10985,7 +12270,7 @@
     "weightKg": 0.5,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11011,7 +12296,7 @@
     "weightKg": 0.2,
     "stackSize": 1,
     "craftBench": "in_raid",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": {
       "assorted-seeds": 7,
       "canister": 1
@@ -11040,9 +12325,9 @@
     "rarity": "common",
     "value": 100,
     "weightKg": 0.1,
-    "stackSize": 1,
+    "stackSize": 50,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Projects Outpost (5x)"
@@ -11056,7 +12341,7 @@
     "weightKg": 0.15,
     "stackSize": 5,
     "craftBench": "Equipment Bench",
-    "updatedAt": "2026-09-21T03:50:33.581623+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "arc-powercell": 1,
       "rubber-parts": 5
@@ -11074,7 +12359,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11087,7 +12372,7 @@
     "weightKg": 0.085,
     "stackSize": 20,
     "craftBench": "Workbench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "chemicals": 2,
       "metal-parts": 3
@@ -11103,7 +12388,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": "Gunsmith 1",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "metal-parts": 6,
       "wires": 1
@@ -11121,7 +12406,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "mechanical-components": 2,
       "wires": 4
@@ -11140,7 +12425,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11153,7 +12438,7 @@
     "weightKg": 0.75,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "mod-components": 2,
       "wires": 8
@@ -11172,7 +12457,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11185,7 +12470,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "mod-components": 2,
       "wires": 8
@@ -11204,7 +12489,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11217,7 +12502,7 @@
     "weightKg": 0.4,
     "stackSize": 5,
     "craftBench": "Explosives Bench III",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "electrical-components": 1,
       "hornet-driver": 1,
@@ -11237,7 +12522,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11250,7 +12535,7 @@
     "weightKg": 0.15,
     "stackSize": 5,
     "craftBench": "Explosives Bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "crude-explosives": 1,
       "steel-spring": 2
@@ -11269,7 +12554,7 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-06T11:03:33.404402+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 2,
@@ -11286,7 +12571,7 @@
     "weightKg": 1.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "electrical-components": 2,
@@ -11302,7 +12587,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": "Gunsmith I",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "mechanical-components": 2,
       "wires": 4
@@ -11321,7 +12606,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11334,7 +12619,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "mod-components": 2,
       "wires": 8
@@ -11353,7 +12638,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11366,7 +12651,7 @@
     "weightKg": 0.75,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "mod-components": 1,
@@ -11382,7 +12667,7 @@
     "weightKg": 0.3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11395,7 +12680,7 @@
     "weightKg": 0.3,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 2
@@ -11410,7 +12695,7 @@
     "weightKg": 0.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Projects Expedition 4 (2x)"
@@ -11422,9 +12707,9 @@
     "rarity": "rare",
     "value": 1000,
     "weightKg": 0.6,
-    "stackSize": 1,
+    "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11435,11 +12720,12 @@
     "rarity": "uncommon",
     "value": 1000,
     "weightKg": 1,
-    "stackSize": 1,
+    "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Workshop Research Station 2 (5x)"
   },
   {
     "id": "slipstream-stencil",
@@ -11450,7 +12736,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11471,12 +12757,12 @@
     "id": "small-lab-cabinet",
     "name": "Small Lab Cabinet",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11489,7 +12775,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11502,7 +12788,7 @@
     "weightKg": 0.2,
     "stackSize": 5,
     "craftBench": "Utility Bench 1 or Basic Bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "canister": 1,
       "chemicals": 14
@@ -11521,7 +12807,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11537,7 +12823,7 @@
       "in_raid",
       "workbench"
     ],
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "smoke-grenade": 1,
       "wires": 1
@@ -11553,7 +12839,7 @@
     "weightKg": 0.2,
     "stackSize": 3,
     "craftBench": "Explosives Bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "crude-explosives": 2,
       "magnet": 1
@@ -11572,7 +12858,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Utility Bench 3",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "exodus-modules": 1,
       "power-rod": 2,
@@ -11592,7 +12878,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11605,13 +12891,13 @@
     "weightKg": 0.75,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-06T11:04:02.7235+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 1,
       "electrical-components": 1
     },
-    "wikiUses": "Workshop Utility Station 2 (6x) Quests The Trifecta (2x)"
+    "wikiUses": "Workshop Utility Station 2 (6x) Quests The Trifecta (2x) Wires Crossed (1x)"
   },
   {
     "id": "snowball",
@@ -11622,7 +12908,7 @@
     "weightKg": 0.2,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11648,7 +12934,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "solid-green-chair",
+    "name": "Solid Green Chair",
+    "type": "Furniture",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11661,7 +12960,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11674,7 +12973,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11687,7 +12986,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11700,7 +12999,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11713,7 +13012,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11726,7 +13025,7 @@
     "weightKg": 0.3,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 2,
@@ -11743,7 +13042,7 @@
     "weightKg": 1.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-electrical-components": 1,
@@ -11759,7 +13058,7 @@
     "weightKg": 1.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "exodus-modules": 1,
@@ -11775,13 +13074,13 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-27T14:56:47.382456+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 1,
       "electrical-components": 1
     },
-    "wikiUses": "Projects Trophy Display (10x)"
+    "wikiUses": "Quests Ruins And Reverberations (1x) Projects Trophy Display (10x)"
   },
   {
     "id": "spring-cushion",
@@ -11792,7 +13091,7 @@
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "durable-cloth": 2,
@@ -11808,7 +13107,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": "Gunsmith",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "duct-tape": 1,
       "rubber-parts": 7
@@ -11826,7 +13125,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "duct-tape": 3,
       "mechanical-components": 2
@@ -11845,7 +13144,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11858,7 +13157,7 @@
     "weightKg": 0.75,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "duct-tape": 5,
       "mod-components": 2
@@ -11877,7 +13176,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11890,7 +13189,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-06T11:06:43.743762+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11916,7 +13215,7 @@
     "weightKg": 0.3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11927,9 +13226,9 @@
     "rarity": "rare",
     "value": 270,
     "weightKg": 0.5,
-    "stackSize": 1,
+    "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11942,7 +13241,7 @@
     "weightKg": 0.25,
     "stackSize": 15,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 2
@@ -11958,7 +13257,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11971,7 +13270,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11984,7 +13283,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -11997,7 +13296,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12008,9 +13307,9 @@
     "rarity": "epic",
     "value": 1,
     "weightKg": 0.1,
-    "stackSize": 1,
+    "stackSize": 500,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12023,7 +13322,7 @@
     "weightKg": 0.2,
     "stackSize": 3,
     "craftBench": "Med Station 2",
-    "updatedAt": "2026-09-21T03:50:33.704675+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "antiseptic": 1,
       "durable-cloth": 2
@@ -12037,12 +13336,12 @@
     "id": "stiletto-blueprint",
     "name": "Stiletto Blueprint",
     "type": "Blueprint",
-    "rarity": null,
+    "rarity": "legendary",
     "value": 5000,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12055,7 +13354,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12068,7 +13367,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12081,7 +13380,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12094,7 +13393,7 @@
     "weightKg": 7,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12107,7 +13406,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "metal-parts": 8,
       "rubber-parts": 4
@@ -12126,7 +13425,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 6,
@@ -12142,7 +13441,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 12,
@@ -12158,7 +13457,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 2,
@@ -12182,12 +13481,25 @@
     "id": "study-armchair",
     "name": "Study Armchair",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "study-armchair-res-armchair-01-a",
+    "name": "Study Armchair",
+    "type": "Furniture",
+    "rarity": "legendary",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12200,7 +13512,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12213,7 +13525,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12221,12 +13533,12 @@
     "id": "study-ceiling-lamp",
     "name": "Study Ceiling Lamp",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "rare",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12239,7 +13551,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12247,12 +13559,12 @@
     "id": "study-piano",
     "name": "Study Piano",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "legendary",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12265,7 +13577,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12273,12 +13585,12 @@
     "id": "study-tv-stand",
     "name": "Study TV Stand",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12291,7 +13603,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12299,12 +13611,12 @@
     "id": "sturdy-aviary-table",
     "name": "Sturdy Aviary Table",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12317,7 +13629,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "sturdy-bureau-chair",
+    "name": "Sturdy Bureau Chair",
+    "type": "Furniture",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12330,7 +13655,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12338,12 +13663,12 @@
     "id": "sturdy-bureau-sofa",
     "name": "Sturdy Bureau Sofa",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12356,7 +13681,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "sturdy-den-bed",
+    "name": "Sturdy Den Bed",
+    "type": "Furniture",
+    "rarity": "uncommon",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12369,7 +13707,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12377,12 +13715,12 @@
     "id": "sturdy-den-shelf",
     "name": "Sturdy Den Shelf",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12395,7 +13733,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "sturdy-faculty-chair",
+    "name": "Sturdy Faculty Chair",
+    "type": "Furniture",
+    "rarity": "rare",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12408,7 +13759,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "sturdy-faculty-table",
+    "name": "Sturdy Faculty Table",
+    "type": "Furniture",
+    "rarity": "uncommon",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12421,7 +13785,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12429,12 +13793,12 @@
     "id": "sturdy-lab-cabinet",
     "name": "Sturdy Lab Cabinet",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12447,7 +13811,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12455,12 +13819,12 @@
     "id": "sturdy-lab-cabinet-wide",
     "name": "Sturdy Lab Cabinet (Wide)",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12473,7 +13837,20 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
+    "id": "sturdy-lab-chair",
+    "name": "Sturdy Lab Chair",
+    "type": "Furniture",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12486,7 +13863,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12494,12 +13871,12 @@
     "id": "sturdy-shelf",
     "name": "Sturdy Shelf",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12512,7 +13889,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12520,12 +13897,12 @@
     "id": "sturdy-stash",
     "name": "Sturdy Stash",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12538,7 +13915,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12546,12 +13923,12 @@
     "id": "sturdy-wardrobe",
     "name": "Sturdy Wardrobe",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12564,7 +13941,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12577,7 +13954,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12590,7 +13967,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12629,7 +14006,7 @@
     "weightKg": 0.4,
     "stackSize": 3,
     "craftBench": "Explosives Bench III",
-    "updatedAt": "2026-10-06T11:00:08.02248+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "electrical-components": 1,
       "hornet-driver": 1,
@@ -12649,7 +14026,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12675,7 +14052,7 @@
     "weightKg": 0.2,
     "stackSize": 5,
     "craftBench": "Medical Lab II",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "advanced-arc-powercell": 1,
       "electrical-components": 1
@@ -12693,13 +14070,13 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-27T14:56:01.390263+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 1,
       "mechanical-components": 1
     },
-    "wikiUses": "Workshop Medical Lab 3 (5x) Quests Mixed Signals (1x) Projects Trophy Display (5x)"
+    "wikiUses": "Workshop Medical Lab 3 (5x) Quests Mixed Signals (1x) Wires Crossed (1x) Projects Trophy Display (5x)"
   },
   {
     "id": "synthesized-fuel",
@@ -12710,7 +14087,7 @@
     "weightKg": 0.5,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "chemicals": 1,
@@ -12727,7 +14104,7 @@
     "weightKg": 0.3,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "chemicals": 2,
@@ -12744,7 +14121,7 @@
     "weightKg": 2,
     "stackSize": 1,
     "craftBench": "Equipment Bench",
-    "updatedAt": "2026-09-21T04:36:29.13371+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "plastic-parts": 6,
       "rubber-parts": 6
@@ -12763,7 +14140,7 @@
     "weightKg": 2,
     "stackSize": 1,
     "craftBench": "Equipment Bench",
-    "updatedAt": "2026-09-21T04:36:29.13371+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "electrical-components": 2,
       "magnet": 3
@@ -12782,7 +14159,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Gear Bench III",
-    "updatedAt": "2026-09-21T04:36:29.13371+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
       "processor": 3
@@ -12801,7 +14178,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12814,7 +14191,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "Gear Bench III",
-    "updatedAt": "2026-09-21T04:36:29.13371+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
       "processor": 3
@@ -12833,7 +14210,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12846,7 +14223,7 @@
     "weightKg": 3,
     "stackSize": 1,
     "craftBench": "equipment_bench",
-    "updatedAt": "2026-09-21T04:36:29.13371+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
       "processor": 3
@@ -12865,7 +14242,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12878,7 +14255,7 @@
     "weightKg": 4,
     "stackSize": 1,
     "craftBench": "equipment_bench",
-    "updatedAt": "2026-09-21T04:36:29.13371+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "advanced-electrical-components": 2,
       "processor": 3
@@ -12897,7 +14274,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12910,7 +14287,7 @@
     "weightKg": 0.4,
     "stackSize": 3,
     "craftBench": "Utility Bench 3",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "electrical-components": 1,
       "sensors": 1
@@ -12929,7 +14306,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12955,7 +14332,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -12968,7 +14345,7 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "fabric": 12
@@ -12983,7 +14360,7 @@
     "weightKg": 0.8,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "fabric": 11
@@ -12998,7 +14375,7 @@
     "weightKg": 1.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-electrical-components": 1,
@@ -13014,7 +14391,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-06T11:06:55.848695+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13027,7 +14404,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13040,7 +14417,7 @@
     "weightKg": 11,
     "stackSize": 1,
     "craftBench": "Weapon Bench 3",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "exodus-modules": 2,
       "magnetic-accelerator": 1,
@@ -13060,7 +14437,7 @@
     "weightKg": 11,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
@@ -13076,7 +14453,7 @@
     "weightKg": 11,
     "stackSize": 1,
     "craftBench": "Weapon bench I",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 4,
@@ -13092,7 +14469,7 @@
     "weightKg": 11,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 5,
@@ -13108,7 +14485,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13116,12 +14493,12 @@
     "id": "tether-launcher-blueprint",
     "name": "Tether Launcher Blueprint",
     "type": "Blueprint",
-    "rarity": null,
+    "rarity": "legendary",
     "value": 5000,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13132,11 +14509,12 @@
     "rarity": "epic",
     "value": 3000,
     "weightKg": 0.5,
-    "stackSize": 1,
+    "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
-    "recyclesInto": null
+    "recyclesInto": null,
+    "wikiUses": "Workshop Research Station 4 (3x)"
   },
   {
     "id": "thermite-tipped-rounds",
@@ -13147,7 +14525,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13160,7 +14538,7 @@
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "rubber-parts": 7,
@@ -13189,7 +14567,7 @@
     "weightKg": 0.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 2,
@@ -13206,7 +14584,7 @@
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "plastic-parts": 5,
@@ -13223,7 +14601,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13249,7 +14627,7 @@
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "fabric": 12
@@ -13264,7 +14642,7 @@
     "weightKg": 0.3,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13303,7 +14681,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": "Gunsmith II",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13316,7 +14694,7 @@
     "weightKg": 12,
     "stackSize": 1,
     "craftBench": "Weapon Bench 2",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "advanced-mechanical-components": 2,
       "medium-gun-parts": 3,
@@ -13336,7 +14714,7 @@
     "weightKg": 12,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -13352,7 +14730,7 @@
     "weightKg": 12,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -13368,7 +14746,7 @@
     "weightKg": 12,
     "stackSize": 1,
     "craftBench": "Weapon Bench I",
-    "updatedAt": "2026-10-06T11:08:17.265384+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
@@ -13384,7 +14762,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13397,7 +14775,7 @@
     "weightKg": 1,
     "stackSize": 3,
     "craftBench": "Explosives Bench II",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "crude-explosives": 2,
       "firefly-burner": 1,
@@ -13416,7 +14794,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13429,7 +14807,7 @@
     "weightKg": 0.5,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13442,7 +14820,7 @@
     "weightKg": 0.4,
     "stackSize": 3,
     "craftBench": "explosives_bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "crude-explosives": 2,
       "processor": 1
@@ -13461,7 +14839,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13474,7 +14852,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13500,7 +14878,7 @@
     "weightKg": 0.3,
     "stackSize": 15,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13508,12 +14886,12 @@
     "id": "tufted-sofa",
     "name": "Tufted Sofa",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13526,7 +14904,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13539,7 +14917,7 @@
     "weightKg": 0.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-circuitry": 1,
@@ -13556,7 +14934,7 @@
     "weightKg": 3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "mechanical-components": 1,
@@ -13572,7 +14950,7 @@
     "weightKg": 0.5,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13585,7 +14963,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13598,7 +14976,7 @@
     "weightKg": 3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 4,
@@ -13640,7 +15018,7 @@
     "weightKg": 0.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T13:13:58.52194+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-electrical-components": 1,
@@ -13657,7 +15035,7 @@
     "weightKg": 0.3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13683,7 +15061,7 @@
     "weightKg": 0.5,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13696,7 +15074,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": "Gunsmith II",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13709,7 +15087,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Weapon Bench 2",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "advanced-mechanical-components": 2,
       "magnet": 5,
@@ -13729,7 +15107,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -13745,7 +15123,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -13761,7 +15139,7 @@
     "weightKg": 5,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
@@ -13772,12 +15150,12 @@
     "id": "venetian-dresser",
     "name": "Venetian Dresser",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "epic",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13790,7 +15168,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13803,7 +15181,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13816,7 +15194,7 @@
     "weightKg": 0.25,
     "stackSize": 1,
     "craftBench": "Gunsmith 1",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "duct-tape": 1,
       "plastic-parts": 6
@@ -13834,7 +15212,7 @@
     "weightKg": 0.5,
     "stackSize": 1,
     "craftBench": "weapon_bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "duct-tape": 3,
       "mechanical-components": 2
@@ -13853,7 +15231,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13866,7 +15244,7 @@
     "weightKg": 0.75,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "duct-tape": 5,
       "mod-components": 2
@@ -13885,7 +15263,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13898,7 +15276,7 @@
     "weightKg": 0.3,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null,
     "wikiUses": "Workshop Scrappy 5 (12x)"
@@ -13912,7 +15290,7 @@
     "weightKg": 0.5,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13925,7 +15303,7 @@
     "weightKg": 0.4,
     "stackSize": 3,
     "craftBench": "Med Station 3",
-    "updatedAt": "2026-10-06T11:00:34.399638+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "antiseptic": 2,
       "syringe": 1
@@ -13944,7 +15322,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": "Med Station",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -13957,7 +15335,7 @@
     "weightKg": 1,
     "stackSize": 1,
     "craftBench": "Med Station",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "antiseptic": 3,
       "canister": 1,
@@ -13977,7 +15355,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14003,7 +15381,7 @@
     "weightKg": 0.5,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14016,7 +15394,7 @@
     "weightKg": 0.3,
     "stackSize": 5,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "rubber-parts": 1,
@@ -14059,7 +15437,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14072,7 +15450,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Weapon Bench 3",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "exodus-modules": 1,
       "heavy-gun-parts": 3,
@@ -14092,7 +15470,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 2,
@@ -14108,7 +15486,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Weapon Bench",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 3,
@@ -14124,7 +15502,7 @@
     "weightKg": 8,
     "stackSize": 1,
     "craftBench": "Gunsmith III",
-    "updatedAt": "2026-09-21T04:37:36.931187+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "advanced-mechanical-components": 4,
@@ -14145,6 +15523,19 @@
     "recyclesInto": null
   },
   {
+    "id": "warehouse-chair",
+    "name": "Warehouse Chair",
+    "type": "Furniture",
+    "rarity": "common",
+    "value": 0,
+    "weightKg": 0,
+    "stackSize": 1,
+    "craftBench": null,
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
+    "recipe": null,
+    "recyclesInto": null
+  },
+  {
     "id": "warehouse-chair-design",
     "name": "Warehouse Chair Design",
     "type": "Design",
@@ -14153,7 +15544,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14161,12 +15552,12 @@
     "id": "warehouse-desk",
     "name": "Warehouse Desk",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14179,7 +15570,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14187,12 +15578,12 @@
     "id": "warehouse-dresser",
     "name": "Warehouse Dresser",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14205,7 +15596,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14218,7 +15609,7 @@
     "weightKg": 0.6,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": {
       "arc-alloy": 2
@@ -14247,7 +15638,7 @@
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "canister": 3,
@@ -14263,7 +15654,7 @@
     "weightKg": 2,
     "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": {
       "metal-parts": 4,
@@ -14274,12 +15665,12 @@
     "id": "weather-station-chair",
     "name": "Weather Station Chair",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14292,7 +15683,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14300,12 +15691,12 @@
     "id": "weather-station-table",
     "name": "Weather Station Table",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14318,7 +15709,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14331,7 +15722,7 @@
     "weightKg": 0.2,
     "stackSize": 5,
     "craftBench": "Medical Lab I",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "fabric": 10,
       "plastic-parts": 3
@@ -14350,7 +15741,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14376,7 +15767,7 @@
     "weightKg": 0.5,
     "stackSize": 10,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14384,12 +15775,12 @@
     "id": "winter-table",
     "name": "Winter Table",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "uncommon",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14402,7 +15793,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14415,7 +15806,7 @@
     "weightKg": 0.25,
     "stackSize": 15,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-12T17:25:02.378043+00:00",
     "recipe": null,
     "recyclesInto": {
       "rubber-parts": 2
@@ -14431,7 +15822,7 @@
     "weightKg": 1,
     "stackSize": 1,
     "craftBench": "Explosives Bench III",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "arc-motion-core": 2,
       "explosive-compound": 1,
@@ -14451,7 +15842,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14459,12 +15850,12 @@
     "id": "work-light",
     "name": "Work Light",
     "type": "Furniture",
-    "rarity": null,
+    "rarity": "common",
     "value": 0,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14477,7 +15868,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-08T06:07:01.8912+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14501,9 +15892,9 @@
     "rarity": "uncommon",
     "value": 550,
     "weightKg": 0.35,
-    "stackSize": 1,
+    "stackSize": 3,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14511,12 +15902,12 @@
     "id": "yank-grenade-blueprint",
     "name": "Yank Grenade Blueprint",
     "type": "Blueprint",
-    "rarity": null,
+    "rarity": "legendary",
     "value": 5000,
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-10-07T20:03:07.390952+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14529,7 +15920,7 @@
     "weightKg": 0.15,
     "stackSize": 5,
     "craftBench": "utility_bench",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-10T13:53:02.568149+00:00",
     "recipe": {
       "chemicals": 3
     },
@@ -14546,7 +15937,7 @@
     "weightKg": 0,
     "stackSize": 1,
     "craftBench": null,
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": null,
     "recyclesInto": null
   },
@@ -14585,7 +15976,7 @@
     "weightKg": 0.4,
     "stackSize": 3,
     "craftBench": "Utility Station II",
-    "updatedAt": "2026-09-20T09:11:35.963865+00:00",
+    "updatedAt": "2026-10-09T09:06:05.083+00:00",
     "recipe": {
       "mechanical-components": 1,
       "rope": 1
