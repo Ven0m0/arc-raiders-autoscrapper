@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-10-09T14:02:55.843859Z",
+  "lastUpdated": "2026-10-13T14:05:00.234869Z",
   "source": "https://metaforge.app/arc-raiders/api",
   "version": "autoscrapper-data-1",
-  "itemCount": 1008,
-  "questCount": 137,
+  "itemCount": 1114,
+  "questCount": 122,
   "dataSources": {
     "items": {
       "provider": "metaforge+raidtheory",
@@ -51,7 +51,7 @@
       "wikiEnrichment": {
         "url": "https://arcraiders.wiki/wiki/Loot",
         "available": true,
-        "enrichedCount": 100,
+        "enrichedCount": 113,
         "error": null,
         "fields": [
           "wikiUses"
@@ -84,7 +84,7 @@
       },
       "fieldLevelMerge": {
         "enabled": true,
-        "entriesEnriched": 98,
+        "entriesEnriched": 0,
         "sources": [
           "raidtheory-fallback",
           "arctracker"
