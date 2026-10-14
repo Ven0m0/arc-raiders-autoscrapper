@@ -1,27 +1,47 @@
 {
-  "generatedAt": "2026-10-08T19:32:08.870628Z",
+  "generatedAt": "2026-10-14T18:11:56.869098Z",
   "source": "quests.json",
   "traders": {
     "Celeste": [
       {
-        "id": "boarding-the-frigate",
-        "name": "Boarding the Frigate",
-        "sortOrder": 0
+        "id": "disrupting-the-frigate",
+        "name": "Disrupting the Frigate",
+        "sortOrder": -1295.93766436639
+      },
+      {
+        "id": "ruins-and-reverberations",
+        "name": "Ruins and Reverberations",
+        "sortOrder": -1288.3590815338382
       },
       {
         "id": "exploring-pendola-pass",
         "name": "Exploring Pendola Pass",
-        "sortOrder": 0
+        "sortOrder": -1280.780498701286
+      },
+      {
+        "id": "boarding-the-frigate",
+        "name": "Boarding the Frigate",
+        "sortOrder": -1227.7304188734222
       },
       {
         "id": "sizing-things-up",
         "name": "Sizing Things Up",
-        "sortOrder": 0
+        "sortOrder": -970.0586025666545
       },
       {
         "id": "someone-elses-shoes",
         "name": "Someone Else's Shoes",
-        "sortOrder": 0
+        "sortOrder": -939.7442712364466
+      },
+      {
+        "id": "celestes-teenage-rebellion",
+        "name": "Celeste's Teenage Rebellion",
+        "sortOrder": -606.2866266041591
+      },
+      {
+        "id": "wires-crossed",
+        "name": "Wires Crossed",
+        "sortOrder": -227.35748497655965
       },
       {
         "id": "a-bad-feeling",
@@ -54,6 +74,11 @@
         "sortOrder": 3001.204857358231
       },
       {
+        "id": "untended-garden",
+        "name": "Untended Garden",
+        "sortOrder": 3028.4876761730225
+      },
+      {
         "id": "echoes-of-victory-ridge",
         "name": "Echoes of Victory Ridge",
         "sortOrder": 3162.736884149872
@@ -62,6 +87,11 @@
         "id": "the-root-of-the-matter",
         "name": "The Root of the Matter",
         "sortOrder": 3268.4876761730225
+      },
+      {
+        "id": "water-troubles",
+        "name": "Water Troubles",
+        "sortOrder": 3539.252140564836
       },
       {
         "id": "a-symbol-of-unification",
@@ -75,7 +105,7 @@
       },
       {
         "id": "celestes-journals",
-        "name": "Celeste's Journals",
+        "name": "Celeste\u2019s Journals",
         "sortOrder": 3891.485408941247
       },
       {
@@ -104,6 +134,11 @@
         "sortOrder": 5939.252140564836
       },
       {
+        "id": "worth-your-salt",
+        "name": "Worth Your Salt",
+        "sortOrder": 5982.195038200216
+      },
+      {
         "id": "a-rising-tide",
         "name": "A Rising Tide",
         "sortOrder": 6051.075499459809
@@ -125,7 +160,7 @@
       },
       {
         "id": "keeping-an-eye-out",
-        "name": "Keeping An Eye Out",
+        "name": "Keeping an Eye Out",
         "sortOrder": 7116.778716162711
       },
       {
@@ -161,6 +196,11 @@
         "sortOrder": 1989.4257131981285
       },
       {
+        "id": "what-we-left-behind",
+        "name": "What We Left Behind",
+        "sortOrder": 2048.8797708209436
+      },
+      {
         "id": "broken-monument",
         "name": "Broken Monument",
         "sortOrder": 2292.7044581548457
@@ -192,7 +232,7 @@
       },
       {
         "id": "the-majors-footlocker",
-        "name": "The Majors Footlocker",
+        "name": "The Major\u2019s Footlocker",
         "sortOrder": 3808.281728989622
       },
       {
@@ -223,9 +263,29 @@
     ],
     "Shani": [
       {
+        "id": "belly-of-the-beast",
+        "name": "Belly of the Beast",
+        "sortOrder": -560.8151296088471
+      },
+      {
+        "id": "the-first-nomads",
+        "name": "The First Nomads",
+        "sortOrder": -545.6579639437432
+      },
+      {
         "id": "home-to-roost",
-        "name": "Home To Roost",
-        "sortOrder": 0
+        "name": "Home to Roost",
+        "sortOrder": -318.3004789671835
+      },
+      {
+        "id": "when-everything-falls",
+        "name": "When Everything Falls",
+        "sortOrder": -37.89291416275995
+      },
+      {
+        "id": "tracks-of-the-beast",
+        "name": "Tracks of the Beast",
+        "sortOrder": 7.578582832551987
       },
       {
         "id": "picking-up-the-pieces",
@@ -254,7 +314,7 @@
       },
       {
         "id": "down-to-earth",
-        "name": "Down To Earth",
+        "name": "Down to Earth",
         "sortOrder": 1276.91801992278
       },
       {
@@ -268,8 +328,13 @@
         "sortOrder": 1516.91801992278
       },
       {
+        "id": "with-a-view",
+        "name": "With a View",
+        "sortOrder": 1755.3865742269231
+      },
+      {
         "id": "dust-on-the-wires",
-        "name": "Dust On The Wires",
+        "name": "Dust on the Wires",
         "sortOrder": 1813.5970609761523
       },
       {
@@ -283,8 +348,13 @@
         "sortOrder": 2043.3456234089904
       },
       {
+        "id": "waking-the-grid",
+        "name": "Waking the Grid",
+        "sortOrder": 2052.3286401577184
+      },
+      {
         "id": "clamoring-for-attention",
-        "name": "Clamoring For Attention",
+        "name": "Clamoring for Attention",
         "sortOrder": 2053.0940659101884
       },
       {
@@ -304,7 +374,7 @@
       },
       {
         "id": "our-presence-up-there",
-        "name": "Our Presence Up There",
+        "name": "Our Presence up There",
         "sortOrder": 4436.473458081255
       },
       {
@@ -344,7 +414,7 @@
       },
       {
         "id": "the-stench-of-corruption",
-        "name": "The Stench Of Corruption",
+        "name": "The Stench of Corruption",
         "sortOrder": 6030.633036499322
       },
       {
@@ -359,13 +429,18 @@
       },
       {
         "id": "reduced-to-rubble",
-        "name": "Reduced To Rubble",
+        "name": "Reduced to Rubble",
         "sortOrder": 6377.914214694764
       },
       {
         "id": "furtive-meetings",
         "name": "Furtive Meetings",
         "sortOrder": 6534.931660627215
+      },
+      {
+        "id": "with-a-trace",
+        "name": "With A Trace",
+        "sortOrder": 6617.914214694764
       },
       {
         "id": "last-entry",
@@ -380,13 +455,28 @@
     ],
     "Apollo": [
       {
+        "id": "bait-fetch-blast",
+        "name": "Bait, Fetch, Blast",
+        "sortOrder": -1519.083482277293
+      },
+      {
+        "id": "nothing-gained",
+        "name": "Nothing Gained",
+        "sortOrder": -1326.2519956965978
+      },
+      {
+        "id": "nothing-ventured",
+        "name": "Nothing Ventured",
+        "sortOrder": -1303.516247198942
+      },
+      {
         "id": "to-the-skies",
-        "name": "To the Skies",
-        "sortOrder": 0
+        "name": "To The Skies",
+        "sortOrder": -575.9722952739511
       },
       {
         "id": "shoring-up-defenses",
-        "name": "Shoring up Defenses",
+        "name": "Shoring Up Defenses",
         "sortOrder": 422.07582107905125
       },
       {
@@ -398,6 +488,11 @@
         "id": "safe-passage",
         "name": "Safe Passage",
         "sortOrder": 1039.9397757882718
+      },
+      {
+        "id": "what-goes-around",
+        "name": "What Goes Around",
+        "sortOrder": 1279.9397757882718
       },
       {
         "id": "sparks-fly",
@@ -421,7 +516,7 @@
       },
       {
         "id": "a-warm-place-to-rest",
-        "name": "A Warm Place to Rest",
+        "name": "A Warm Place To Rest",
         "sortOrder": 4259.252140564836
       },
       {
@@ -458,8 +553,13 @@
     "Lance": [
       {
         "id": "celestes-childhood-drawings",
-        "name": "Celeste's Childhood Drawings",
-        "sortOrder": 0
+        "name": "Celeste\u2019s Childhood Drawings",
+        "sortOrder": -901.8513570736866
+      },
+      {
+        "id": "empathetic-prototypes",
+        "name": "Empathetic Prototypes",
+        "sortOrder": -629.022375101815
       },
       {
         "id": "in-my-image",
@@ -507,11 +607,26 @@
         "sortOrder": 6677.2338897110185
       }
     ],
-    "Unknown": [
+    "Cassio": [
+      {
+        "id": "a-path-not-yours",
+        "name": "A Path Not Yours",
+        "sortOrder": -1586.7082627044035
+      },
       {
         "id": "clean-hands",
         "name": "Clean Hands",
+        "sortOrder": -98.52157682317583
+      },
+      {
+        "id": "divided",
+        "name": "Divided",
         "sortOrder": 0
+      },
+      {
+        "id": "taking-stock",
+        "name": "Taking Stock",
+        "sortOrder": 22.735748497655962
       }
     ]
   }
