@@ -41,7 +41,7 @@ TARGET_RELATIVE_FILES = (
     "src/autoscrapper/items/items_rules.default.json",
 )
 EXCLUDED_LEVEL2_IDS = {"stash", "workbench"}
-VOLATILE_TIMESTAMP_KEYS = {"generatedAt", "lastUpdated", "lastupdated"}
+VOLATILE_TIMESTAMP_KEYS = {"generatedAt", "lastUpdated", "lastupdated", "updatedAt"}
 
 
 def _load_workshop_level2_map(hideout_modules_path: Path) -> Dict[str, int]:
