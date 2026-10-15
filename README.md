@@ -23,7 +23,12 @@ Requires [Microsoft Visual C++ Redistributable (x64)](https://aka.ms/vc14/vc_red
 
 **From the repo root, run the setup script**
 
-`powershell -NoProfile -ExecutionPolicy Bypass -File scripts\setup-windows.ps1`
+In PowerShell:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+.\scripts\setup-windows.ps1
+```
 
 ### Linux
 **From the repo root, run the setup script**
