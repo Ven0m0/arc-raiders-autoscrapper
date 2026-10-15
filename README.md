@@ -23,15 +23,10 @@ From a terminal:
 
 `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\setup-windows.ps1`
 
-- **Use a different supported Python version**:
-  - `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\setup-windows.ps1 -PythonVersion 3.12`
-
 ### Linux
 **From the repo root, run the setup script**
 
 `bash scripts/setup-linux.sh`
-- **Use a different supported Python version**:
-  - `AUTOSCRAPPER_PYTHON_VERSION=3.12 bash scripts/setup-linux.sh`
 
 ## Usage
 
