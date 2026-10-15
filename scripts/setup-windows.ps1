@@ -1,8 +1,3 @@
-param(
-  [ValidateSet("3.10", "3.11", "3.12", "3.13")]
-  [string]$PythonVersion = "3.13"
-)
-
 $ErrorActionPreference = "Stop"
 
 function Confirm-Step {
@@ -155,25 +150,44 @@ if (-not $uvExe) {
   }
 }
 
-# 2) We recommend Python 3.13 but support Python 3.10 to 3.13
+$uvVersionOutput = & $uvExe --version
+if ($LASTEXITCODE -ne 0) {
+  throw "Couldn't check the uv version."
+}
+if ($uvVersionOutput -notmatch '^uv (\d+\.\d+\.\d+)(?:\s|$)' -or [version]$Matches[1] -lt [version]"0.9.8") {
+  throw "uv 0.9.8 or newer is required. Run uv self update (or update through your package manager), then re-run setup."
+}
+
+# 2) Install the supported Python version and architecture
+$PythonVersion = "3.14"
+$PythonRequest = "cpython-3.14-windows-x86_64-none"
 Confirm-OrAbort (Confirm-Step `
-  -Title "Step 2: Install Python $PythonVersion" `
-  -Commands @('& "' + $uvExe + '" python install ' + $PythonVersion) `
+  -Title "Step 2: Install Python $PythonVersion (64-bit)" `
+  -Commands @('& "' + $uvExe + '" python install ' + $PythonRequest) `
 )
-& $uvExe python install $PythonVersion
+& $uvExe python install $PythonRequest
+if ($LASTEXITCODE -ne 0) {
+  throw "Python installation failed."
+}
 
 Confirm-OrAbort (Confirm-Step `
   -Title "Step 3: Pin Python $PythonVersion" `
   -Commands @('& "' + $uvExe + '" python pin ' + $PythonVersion) `
 )
 & $uvExe python pin $PythonVersion
+if ($LASTEXITCODE -ne 0) {
+  throw "Python version pinning failed."
+}
 
 # 3) Install project dependencies with uv
 Confirm-OrAbort (Confirm-Step `
   -Title "Step 4: Install project dependencies" `
-  -Commands @('& "' + $uvExe + '" sync') `
+  -Commands @('& "' + $uvExe + '" sync --python ' + $PythonRequest) `
 )
-& $uvExe sync
+& $uvExe sync --python $PythonRequest
+if ($LASTEXITCODE -ne 0) {
+  throw "Dependency installation failed."
+}
 
 Write-Host "Setup finished. Run:"
 Write-Host "  uv run autoscrapper"

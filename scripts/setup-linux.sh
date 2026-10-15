@@ -108,21 +108,22 @@ if ! command -v uv >/dev/null 2>&1; then
   exit 1
 fi
 
-# 3) We recommend Python 3.13 but support Python 3.10 to 3.13
-PYTHON_VERSION="${AUTOSCRAPPER_PYTHON_VERSION:-3.13}"
-case "$PYTHON_VERSION" in
-  3.10|3.11|3.12|3.13) ;;
-  *)
-    echo "ERROR: Unsupported Python version: ${PYTHON_VERSION} (supported: 3.10–3.13; 3.14 is not supported)."
-    exit 1
-    ;;
-esac
+UV_VERSION="$(uv --version)"
+if [[ ! "$UV_VERSION" =~ ^uv[[:space:]]+([0-9]+)\.([0-9]+)\.([0-9]+)([[:space:]]|$) ]] ||
+  (( BASH_REMATCH[1] == 0 && (BASH_REMATCH[2] < 9 || (BASH_REMATCH[2] == 9 && BASH_REMATCH[3] < 8)) )); then
+  echo "ERROR: uv 0.9.8 or newer is required. Run uv self update (or update through your package manager), then re-run setup."
+  exit 1
+fi
+
+# 3) Install the supported Python version
+PYTHON_VERSION="3.14"
+PYTHON_REQUEST="cpython-3.14+gil"
 
 print_step "Step 3: Install and pin Python ${PYTHON_VERSION} (uv)"
 echo "Command to run:"
-echo "  uv python install \"${PYTHON_VERSION}\""
-confirm_or_abort "Run: uv python install \"${PYTHON_VERSION}\"?"
-uv python install "$PYTHON_VERSION"
+echo "  uv python install \"${PYTHON_REQUEST}\""
+confirm_or_abort "Run: uv python install \"${PYTHON_REQUEST}\"?"
+uv python install "$PYTHON_REQUEST"
 
 echo "Command to run:"
 echo "  uv python pin \"${PYTHON_VERSION}\""
@@ -132,9 +133,9 @@ uv python pin "$PYTHON_VERSION"
 # 4) Install project dependencies with uv
 print_step "Step 4: Install project dependencies (uv sync)"
 echo "Command to run:"
-echo "  uv sync"
+echo "  uv sync --python \"${PYTHON_REQUEST}\""
 confirm_or_abort "Proceed with Step 4?"
-uv sync
+uv sync --python "$PYTHON_REQUEST"
 
 echo "Setup finished. Run:"
 echo "  uv run autoscrapper"
