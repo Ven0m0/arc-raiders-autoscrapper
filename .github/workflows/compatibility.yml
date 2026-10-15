@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: "3.14"
           architecture: x64
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.3.0
         with:
           enable-cache: false
       - name: Check Linux setup syntax
