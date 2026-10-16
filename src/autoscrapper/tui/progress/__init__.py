@@ -11,13 +11,17 @@ from textual.widgets import Button, Footer, Input, OptionList, Static
 from textual.widgets.option_list import Option
 
 from ...config import has_saved_progress, load_progress_settings
-from ...core.item_actions import ITEM_RULES_CUSTOM_PATH
 from ...items.rules_diff import collect_rule_changes
-from ...items.rules_store import DEFAULT_RULES_PATH, load_rules
+from ...items.rules_store import (
+    DEFAULT_RULES_PATH,
+    legacy_rules_pending,
+    load_rules,
+    use_progress_rules,
+)
 from ...progress.data_loader import load_game_data
-from ...progress.rules_generator import generate_rules_from_active, write_rules
-from ..common import MessageScreen, update_inline_filter
+from ..common import MessageScreen, StripedOptionList, update_inline_filter
 from ..rules import RulesChangesScreen
+from ..rules_migration import RulesMigrationScreen
 from .base import ProgressScreen, pop_progress_stack
 from .review import ReviewQuestsScreen
 from .state import (
@@ -187,7 +191,7 @@ class ActiveQuestsScreen(ProgressScreen):
             )
             yield Button("Sort: Name A-Z", id="quest-sort", variant="primary")
         yield Static(id="quest-list-summary", classes="hint")
-        yield OptionList(id="quest-list")
+        yield StripedOptionList(id="quest-list")
         yield Static(id="quest-count", classes="hint")
         with Horizontal(id="quest-actions"):
             yield Button("Back", id="back")
@@ -422,7 +426,7 @@ class WorkshopLevelsScreen(ProgressScreen):
             "Use left/right or number keys to adjust the selected workshop.",
             classes="hint",
         )
-        yield OptionList(id="workshop-list")
+        yield StripedOptionList(id="workshop-list")
         yield Static(id="workshop-count", classes="hint")
         with Horizontal(id="workshop-actions"):
             yield Button("Back", id="back")
@@ -615,38 +619,30 @@ class ProgressSummaryScreen(ProgressScreen):
             self.app.push_screen(MessageScreen(str(exc)))
             return
 
-        progress_settings = persist_progress_settings(
-            all_quests_completed=(len(completed_ids) == len(self.state.quest_entries)),
+        persist_progress_settings(
+            all_quests_completed=all(
+                entry.id in completed_ids for entry in self.state.quest_entries
+            ),
             active_quests=list(self.state.active_ids),
             completed_quests=completed_ids,
             hideout_levels=self.state.hideout_levels,
         )
 
         try:
-            output = generate_rules_from_active(
-                progress_settings.active_quests,
-                progress_settings.hideout_levels,
-                all_quests_completed=progress_settings.all_quests_completed,
-                completed_quests_override=progress_settings.completed_quests,
-            )
-        except ValueError as exc:
+            if legacy_rules_pending():
+                migration = RulesMigrationScreen(base="progress")
+                pop_progress_stack(self.app)
+                self.app.push_screen(migration)
+                return
+            output = use_progress_rules()
+        except (OSError, ValueError) as exc:
             self.app.push_screen(MessageScreen(str(exc)))
             return
 
-        write_rules(output, ITEM_RULES_CUSTOM_PATH)
-        item_count = output.get("metadata", {}).get("itemCount", 0)
         default_payload = load_rules(DEFAULT_RULES_PATH)
         changes = collect_rule_changes(default_payload, output)
-        default_items = default_payload.get("items")
-        default_count = len(default_items) if isinstance(default_items, list) else 0
         pop_progress_stack(self.app)
-        self.app.push_screen(
-            RulesChangesScreen(
-                changes,
-                item_count=item_count,
-                default_count=default_count,
-            )
-        )
+        self.app.push_screen(RulesChangesScreen(changes))
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "back":
@@ -705,17 +701,14 @@ def launch_generate_rules(app) -> None:
         return
 
     try:
-        output = generate_rules_from_active(
-            settings.active_quests,
-            settings.hideout_levels,
-            all_quests_completed=settings.all_quests_completed,
-            completed_quests_override=settings.completed_quests,
-        )
-    except (FileNotFoundError, ValueError) as exc:
+        if legacy_rules_pending():
+            app.push_screen(RulesMigrationScreen(base="progress"))
+            return
+        output = use_progress_rules()
+    except (OSError, ValueError) as exc:
         app.push_screen(MessageScreen(str(exc)))
         return
 
-    write_rules(output, ITEM_RULES_CUSTOM_PATH)
     item_count = output.get("metadata", {}).get("itemCount", 0)
     app.push_screen(MessageScreen(f"Rules regenerated. Items: {item_count}."))
 
