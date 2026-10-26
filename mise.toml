@@ -17,7 +17,7 @@ uvx = true
 package_manager = "bun"
 
 [tools]
-python = "3.15.0"
+python = "3.15.1"
 uv = "latest"
 ruff = "latest"
 ty = "latest"
