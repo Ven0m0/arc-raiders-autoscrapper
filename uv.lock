@@ -273,22 +273,6 @@ wheels = [
 ]
 
 [[package]]
-name = "cysignals"
-version = "1.13.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/98/dd/9157e0e6138e395405c7ef56a55b0edcc292e2a9e7f8c90e8b2d912e9a1d/cysignals-1.13.1.tar.gz", hash = "sha256:6444b86ddd1f31c7b15e4f0a3dafb973507759676a00f2cc599f0d75062d9eb0", size = 77348, upload-time = "2026-10-02T19:22:05.285Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/0c/46/3aa68e7b1573e0cb4590efbcbe850e981d5bb578bedcb2207eb3067e280c/cysignals-1.13.1-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:fa5c0cdb142e77610fb445b01c6371747d935214092df24d8c460b011eb538b7", size = 266303, upload-time = "2026-10-02T19:21:26.875Z" },
-    { url = "https://files.pythonhosted.org/packages/bb/49/d77d163b0d6c870f4139b700d01005c77736521107fc13637c424fd1f075/cysignals-1.13.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:fff456cde34c90e1f4b632afbdb07da16e9d9f0c91b08ce1eccdd5c72f747d0c", size = 272057, upload-time = "2026-10-02T19:21:28.405Z" },
-    { url = "https://files.pythonhosted.org/packages/ff/f6/a676245aa2136136d6f6816acb9e0d6f61563255f1d0b7ebcb559fd8000e/cysignals-1.13.1-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:76a41614704af44fd671aa192c66070bd328b7437e2e5aab20d05f2d6f89a59d", size = 268881, upload-time = "2026-10-02T19:21:29.679Z" },
-    { url = "https://files.pythonhosted.org/packages/02/4f/f2a369bbafbfd38d968a2daaa9957e7bda062e1d00140327ac3e57bd5912/cysignals-1.13.1-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:a196ee3371fd0b516428e9060fd5de7636cdd2acd5f6a28c8b067e7d4f73b1bc", size = 275007, upload-time = "2026-10-02T19:21:30.968Z" },
-    { url = "https://files.pythonhosted.org/packages/1e/f6/c8a4dc1d8511da3bea7152ff197b664272ba5b4087f3ceed7088f2d139ae/cysignals-1.13.1-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:2cadae177711759f83b8f18a1671b17a93e224f79e360de9230cdc3de78a77aa", size = 277736, upload-time = "2026-10-02T19:21:36.787Z" },
-    { url = "https://files.pythonhosted.org/packages/aa/f7/6755570612df3250771a651ec1a646af38fd012a622a89b9a678b9eae597/cysignals-1.13.1-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:e66b2e7dbeb46f78c72f36df476012c6abaabb3afef505e7122cf5d2d2bb8027", size = 281929, upload-time = "2026-10-02T19:21:38.108Z" },
-    { url = "https://files.pythonhosted.org/packages/d5/bd/062cfba9242628d96ee8abdfe0b3152ca8883a5c21c2ec3b0aa335c9b367/cysignals-1.13.1-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:a429502f8fa79e2dae1e7430febb938265f1f83c4f1281cd3f2ec23208b0a4fb", size = 280355, upload-time = "2026-10-02T19:21:39.574Z" },
-    { url = "https://files.pythonhosted.org/packages/da/c2/61e7f5bf46ee99f171f4bdc6607585d2bb06bbe54df121c509c520abd919/cysignals-1.13.1-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:04d0267e5242b078f627beb5a5a72aa9289936fb85191c458888cedbfb92e351", size = 285672, upload-time = "2026-10-02T19:21:41.108Z" },
-]
-
-[[package]]
 name = "deadcode"
 version = "2.4.1"
 source = { registry = "https://pypi.org/simple" }
@@ -3528,19 +3512,16 @@ wheels = [
 
 [[package]]
 name = "tesserocr"
-version = "2.11.0"
+version = "2.12.0"
 source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "cysignals" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/11/33/0d74c9cfc525779bb761a474cd958bbbda057654fec686c05e7a82b8c51b/tesserocr-2.11.0.tar.gz", hash = "sha256:1c1ae89c589fddf3a25dbcc21031aea18bd82259e42ef491c43a44f2bef811b3", size = 76094, upload-time = "2026-08-04T12:26:09.763Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d4/7b/0f69766e3b54b9e2cd198afec65735a899878c692a7ee8a68860329070e5/tesserocr-2.12.0.tar.gz", hash = "sha256:362b5f7c2fd5bf3452a719829999f263ebca687bfe5da8c2eb1d77792264a4aa", size = 77288, upload-time = "2026-10-22T19:17:11.131Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4e/22/fd020163536126f907530331e69c664c713c443082d521d429ae7c2a0381/tesserocr-2.11.0-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:66d31c1f092a28dce946cd0d8feb9f313350ff13d837ca4667bf8b9f34454bee", size = 5184333, upload-time = "2026-08-04T12:25:54.158Z" },
-    { url = "https://files.pythonhosted.org/packages/51/45/c240342cf623f833e24b524522878a9baff5e69718bd2df758468e83b174/tesserocr-2.11.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:f83e4c7ad6beec5f8580237e256cc2232a1d0d1c3125382d332eef80a7d46366", size = 5472008, upload-time = "2026-08-04T12:25:56.478Z" },
-    { url = "https://files.pythonhosted.org/packages/c2/3f/981825964338cc2537a86cea474ba8a109be0cfd8c060382007c4e35530c/tesserocr-2.11.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:a88c0f32ea2d932f4d28820c61baa40fcab2fd691c83bce8a94ea9ef8e056d2f", size = 6858594, upload-time = "2026-08-04T12:25:58.68Z" },
-    { url = "https://files.pythonhosted.org/packages/2d/1d/c0d687e503849095465dbfe74170e79df5003b44c8e260af7fb1137ede82/tesserocr-2.11.0-cp314-cp314t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:15876614a89e035827422b2871dc1f706e5b14a309f8db690fee188c68302f4b", size = 5268279, upload-time = "2026-08-04T12:26:04.173Z" },
-    { url = "https://files.pythonhosted.org/packages/48/5b/3e3099ee68c31de0530428acb1df678ff2051eb00f8e53635cca2cc1ac91/tesserocr-2.11.0-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:045b1663e9b021efaa90919ad8692cbde6103e8f40a7c7b071aaefcd5685cab9", size = 5476593, upload-time = "2026-08-04T12:26:06.308Z" },
-    { url = "https://files.pythonhosted.org/packages/98/68/c240876961cb73eddf5e0c612fcb9b2ee585a54f70ff90977fe8c92618a4/tesserocr-2.11.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:c194d31b14d70278f05938762d155f956373347d4cd9b5612d2a425914f20da9", size = 6866315, upload-time = "2026-08-04T12:26:08.093Z" },
+    { url = "https://files.pythonhosted.org/packages/ae/3e/fc7efe6b217c0019e26dee9f79d5fcf7086d7b4bfb6dd2d8a4816c92f843/tesserocr-2.12.0-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:c84efa54fb5a099eeef604768d59529f74a8fc550a876754b97ae0ddd44f841a", size = 5267476, upload-time = "2026-10-22T19:16:14.931Z" },
+    { url = "https://files.pythonhosted.org/packages/a4/89/ad9fbce1a588630e32659023f7ee1d326a5e7c32ffa20f38e2523e208228/tesserocr-2.12.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:3d3dffeb30ca50322755af76bee98e37ed6c06a49568d3bc29f68a10cd8f70e1", size = 5586049, upload-time = "2026-10-22T19:16:17.355Z" },
+    { url = "https://files.pythonhosted.org/packages/db/32/f114ad9a374874c9d42e4d3474a006ba320f4818ef7c95ad0d2381d779a7/tesserocr-2.12.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:9cd7500f33da8853a8a2b38ca687d2cf9b69146acc2201bff9ed8f3af1f5b58f", size = 6943854, upload-time = "2026-10-22T19:16:19.351Z" },
+    { url = "https://files.pythonhosted.org/packages/40/55/2fbc22f0c61514c77f15eaff1dbf067af7911980036e6cb0368a078273f4/tesserocr-2.12.0-cp314-cp314t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:ee53e491f08943df452579fdb7ca36fef787ead3c3b652ccf8a2a043867a7537", size = 5325128, upload-time = "2026-10-22T19:16:29.606Z" },
+    { url = "https://files.pythonhosted.org/packages/42/1e/23a573b884cc9334ffab4e66b4186e93e2533c426232d2fcda25089332a2/tesserocr-2.12.0-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:5858300357a2dd01a01c38ac6134f7b3ed26d01ee420dfcfce3e3e2e6db0db85", size = 5581535, upload-time = "2026-10-22T19:16:31.539Z" },
+    { url = "https://files.pythonhosted.org/packages/6d/6e/06200aad6176b4c7506b38826646fb3579e924915bb77920814330120cb3/tesserocr-2.12.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:e9a045c0c1eb06ae215b6a5ebb1edba775d22f9749c6d52fce354bfcf56c903e", size = 6943880, upload-time = "2026-10-22T19:16:33.968Z" },
 ]
 
 [[package]]
