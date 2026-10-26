@@ -50,7 +50,6 @@
   "pipenv": {
     "enabled": false
   },
-  "postUpdateOptions": ["uvLockUpdate"],
   "packageRules": [
     {
       "description": "Allow Python Docker images >=3.13 but exclude 3.14.x series",
