@@ -3634,11 +3634,11 @@ wheels = [
 
 [[package]]
 name = "types-pynput"
-version = "1.8.1.20260712"
+version = "1.8.1.20261122"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/64/e3/9c440c4e96055259292bca0758ece072e73c7b75f95689470b8ddb03d38e/types_pynput-1.8.1.20260712.tar.gz", hash = "sha256:0eab69f49a3b626c3da117651ffd65291fffae6bf8559ff0e976fcf6762ff20a", size = 12543, upload-time = "2026-07-12T05:13:20.791Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/90/84/4ef27b0a2f1d21510ff8a1306fbf19f237281f548a773bf0b1fc660b59c0/types_pynput-1.8.1.20261122.tar.gz", hash = "sha256:ca61619646c53a91c7edfcd41923a6345b3876bf1246a485eba7465b3fefaa1c", size = 12760, upload-time = "2026-11-22T08:57:57.674Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3f/41/ede4d88cffc7cfc6d7bea308c029b29451dcbc3025e01581ce3a251ce063/types_pynput-1.8.1.20260712-py3-none-any.whl", hash = "sha256:b9d6369171a0c61eeaedc0b0330c1827d13a1265ed5821bcc88f3c71d548ec0c", size = 12313, upload-time = "2026-07-12T05:13:19.846Z" },
+    { url = "https://files.pythonhosted.org/packages/a7/fb/15c7aede73f51b2171458365bd17bdd8485eb48efc076a91af56dc2d00bd/types_pynput-1.8.1.20261122-py3-none-any.whl", hash = "sha256:7878f3034040a6bfd75a5334bfc823f4bc96846cf79b1abe98424adee91ea314", size = 12383, upload-time = "2026-11-22T08:57:56.765Z" },
 ]
 
 [[package]]
